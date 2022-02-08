@@ -1,0 +1,110 @@
+/*
+  font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
+*/
+
+body {
+  margin: 0;
+  background-image: url("/assets/ichigaya.jpg");
+  background-size: cover;
+  background-position: center;
+  font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+}
+
+#root {
+  height: 100vh;
+}
+
+#nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 12px 18px;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
+  font-weight: 200;
+  color: #ffffff;
+  filter: drop-shadow(0px 0px 4px #161616);
+}
+
+#nav>* {
+  line-height: 48px;
+}
+
+#nav h1 {
+  font-size: 36px;
+  font-weight: inherit;
+  color: inherit;
+  flex-grow: 3;
+}
+
+#nav h2 {
+  font-size: 22px;
+  font-weight: inherit;
+  color: inherit;
+  flex-grow: 1;
+  text-align: right;
+}
+
+#nav a {
+  text-decoration: none;
+}
+
+#main h1 {
+  font-size: 30px;
+  color: #353535;
+  margin-bottom: 12px;
+}
+
+#main h2 {
+  font-size: 24px;
+  color: #353535;
+  margin-top: 12px;
+}
+
+#main h2:first-child {
+  color: #353535;
+  margin-top: 0px;
+}
+
+#main {
+  font-size: 16px;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 16px rgba(27, 27, 27, 0.418);
+}
+
+#main p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  text-indent: 1em;
+}
+
+.blog-id {
+  color: #a7a7a7;
+  font-weight: lighter;
+}
+
+.blog-date {
+  color: #353535;
+  font-size: 18px;
+}
