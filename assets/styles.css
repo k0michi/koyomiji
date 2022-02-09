@@ -74,7 +74,7 @@ h2 {
 #main h2 {
   font-size: 24px;
   color: #353535;
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
 #main h2:first-child {
@@ -97,6 +97,33 @@ h2 {
   margin-top: 0px;
   margin-bottom: 0px;
   text-indent: 1em;
+}
+
+#main code {
+  font-family: "Courier", "Consolas", "Source Code Pro", "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
+  padding: 2px;
+  background-color: #eeeeee;
+  border-radius: 2px;
+}
+
+#main pre {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  background-color: #eeeeee;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border-radius: 2px;
+  padding: 8px;
+}
+
+#main pre code {
+  background-color: unset;
+  padding: 0px;
+  border-radius: 0px;
+}
+
+#main>*:last-child {
+  margin-bottom: 0px;
 }
 
 .blog-id {
