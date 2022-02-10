@@ -18,7 +18,7 @@
     <main id="main">
       <h1><span class="blog-id">#3</span> window.要素ID で要素を取得できる [豆知識] <span class="blog-date">2022-02-11</span></h1>
       <p>JavaScriptを触っていたところ、<code>document.getElementById("要素ID")</code>を使わずとも、<code>window.要素ID</code>で要素を取得できることに気づきました。さらに言うと、<code>window</code>はグローバルオブジェクトですから、単にグローバル変数<code>要素ID</code>から要素にアクセスできることになります。</p>
-      <p>互換性のための機能なのかと思いましたが、調べてみたところ、<a href="https://html.spec.whatwg.org/#named-access-on-the-window-object">そういう仕様</a>が存在しているみたいです。あえてこの書き方をする理由はないでしょうが、知っているとデバッグ等の役に立つかもしれません。現に私のコードで、<code>getElementById()</code>した変数が範囲外なのにも関わらず、要素にアクセスできていました。</p>
+      <p>互換性のための機能なのかと思いましたが、調べてみたところ、<a href="https://html.spec.whatwg.org/#named-access-on-the-window-object">そういう仕様</a>が存在しているみたいです。あえてこの書き方をする理由はないでしょうが、知っているとデバッグ等の役に立つかもしれません。現に私のコードで、<code>getElementById()</code>した変数が範囲外なのにも関わらず、要素にアクセスできていましたから。</p>
     </main>
   </div>
 </body>
