@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MacでGCCを使う | atelier暦路</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+
+<body>
+  <div id="root">
+    <nav id="nav">
+      <h1 id="site-title"><a href="/">atelier暦路</a></h1>
+      <h2><a href="/knowledge/">備忘録</a></h2>
+      <h2><a href="/blog/">日記帳</a></h2>
+    </nav>
+    <main id="main">
+      <h1><span class="blog-id">#5</span> MacでGCCを使う <span class="blog-date">2022-03-26</span></h1>
+      <p>Macの<code>gcc</code>はClangへのエイリアスとなっている。Homebrewで、本来のGCCをインストールできる。</p>
+      <pre><code>% brew install gcc</code></pre>
+      <p>これでGCCを使えるようになるが、<code>gcc-11</code>としてインストールされるので、<code>.zshrc</code>に以下のエイリアスを登録して、<code>gcc</code>で実行できるようにしておく。</p>
+      <pre><code>alias gcc='gcc-11'
+alias g++='g++-11'</code></pre>
+    </main>
+  </div>
+</body>
+
+</html>
