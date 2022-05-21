@@ -15,5 +15,8 @@
   },
   "devDependencies": {
     "serve": "^13.0.2"
+  },
+  "engines": {
+    "node": "16.7.0"
   }
 }
