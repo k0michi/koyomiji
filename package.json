@@ -1,0 +1,19 @@
+{
+  "name": "koyomiji",
+  "packageManager": "yarn@3.2.0",
+  "dependencies": {
+    "css-select": "^5.1.0",
+    "dom-serializer": "^2.0.0",
+    "domutils": "^3.0.1",
+    "ejs": "^3.1.8",
+    "htmlparser2": "^8.0.1"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "node --experimental-specifier-resolution=node main.js",
+    "serve": "serve dist"
+  },
+  "devDependencies": {
+    "serve": "^13.0.2"
+  }
+}
