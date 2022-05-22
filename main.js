@@ -38,7 +38,7 @@ function buildHTML(dom) {
   }
 
   const $body = CSSselect.selectOne('body', dom);
-  const body = render($body, { encodeEntities: 'utf8' });
+  const body = render($body.childNodes, { encodeEntities: 'utf8' });
   return ejs.render(indexTemplate, { main: body, title });
 }
 
