@@ -11,8 +11,7 @@ const contentRoot = './contents';
 const outRoot = './dist';
 let indexTemplate;
 
-// const kKoyomoji = '曆路';
-const kKoyomoji = 'atelier暦路';
+const kKoyomoji = '曆路堂';
 
 async function readText(path) {
   return await fs.readFile(path, { encoding: 'utf-8' });
