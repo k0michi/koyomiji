@@ -4,7 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
+  <title>
+    <%= title %>
+  </title>
   <link rel="stylesheet" href="/assets/styles.css">
 </head>
 
@@ -15,9 +17,11 @@
       <h2><a href="/knowledge/">備忘録</a></h2>
       <h2><a href="/blog/">日記帳</a></h2>
     </nav>
-    <main id="main">
-      <%- main %>
-    </main>
+    <div id="main-container">
+      <main id="main">
+        <%- main %>
+      </main>
+    </div>
   </div>
 </body>
 
