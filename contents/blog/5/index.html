@@ -2,10 +2,10 @@
 
 <head>
   <title>MacでGCCを使う</title>
+  <created>2022-03-26</created>
 </head>
 
 <body>
-  <h1><span class="blog-id">#5</span> MacでGCCを使う <span class="blog-date">2022-03-26</span></h1>
   <p>Macの<code>gcc</code>はClangへのエイリアスとなっている。Homebrewで、本来のGCCをインストールできる。</p>
   <pre><code>% brew install gcc</code></pre>
   <p>これでGCCを使えるようになるが、<code>gcc-11</code>としてインストールされるので、<code>.zshrc</code>に以下のエイリアスを登録して、<code>gcc</code>で実行できるようにしておく。

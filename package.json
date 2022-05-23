@@ -6,7 +6,8 @@
     "dom-serializer": "^2.0.0",
     "domutils": "^3.0.1",
     "ejs": "^3.1.8",
-    "htmlparser2": "^8.0.1"
+    "htmlparser2": "^8.0.1",
+    "path-to-regexp": "^6.2.1"
   },
   "type": "module",
   "scripts": {
