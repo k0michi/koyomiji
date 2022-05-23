@@ -49,6 +49,7 @@ h2 {
   font-weight: 200;
   color: #ffffff;
   filter: drop-shadow(0px 0px 4px #161616);
+  box-sizing: border-box;
 }
 
 #nav>* {
@@ -111,6 +112,7 @@ h2 {
   margin-top: 0px;
   margin-bottom: 0px;
   text-indent: 1em;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
 }
 
 #main code {
