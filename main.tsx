@@ -99,7 +99,7 @@ function parseDocument(content: string) {
   }
 
   const $head = $document.querySelector('head');
-  const title = getTextContent('title', $head)
+  const title = getTextContent('title', $head);
   const created = getTextContent('created', $head);
 
   const $body = $document.querySelector('body')!;
