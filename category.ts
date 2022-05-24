@@ -1,3 +1,4 @@
 export const categoryNames: any = {
-  'linux': 'Linux'
+  'linux': 'Linux',
+  'web': 'Web'
 };
