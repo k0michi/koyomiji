@@ -1,7 +1,7 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
 
-export async function* walk(dirPath) {
+export async function* walk(dirPath:string):AsyncIterable<string> {
   const dir = await fs.opendir(dirPath);
 
   for await (const dirent of dir) {

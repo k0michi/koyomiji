@@ -4,24 +4,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>
-    <%= title %>
-  </title>
+  <%- head.join('\n') %>
   <link rel="stylesheet" href="/assets/styles.css">
 </head>
 
 <body>
   <div id="root">
-    <nav id="nav">
-      <h1 id="site-title"><a href="/">曆路堂</a></h1>
-      <h2><a href="/knowledge/">備忘録</a></h2>
-      <h2><a href="/blog/">雑記帳</a></h2>
-    </nav>
-    <div id="main-container">
-      <main id="main">
-        <%- main %>
-      </main>
-    </div>
+    <%- body %>
+    <%- footer.join('\n') %>
   </div>
 </body>
 
