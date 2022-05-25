@@ -59,7 +59,7 @@ function render(children: any) {
           blogItems.push({ id, title, created });
 
           return (
-            <BlogPage title={title} created={created} id={id}>
+            <BlogPage title={title} created={new Date(created)} id={id}>
               {body}
             </BlogPage>
           );
@@ -74,7 +74,7 @@ function render(children: any) {
           knowledgeItems.push({ id, category, title, created });
 
           return (
-            <KnowledgePage title={title} created={created} id={id} category={category}>
+            <KnowledgePage title={title} created={new Date(created)} id={id} category={category}>
               {body}
             </KnowledgePage>
           );
