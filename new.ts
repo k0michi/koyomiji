@@ -16,7 +16,7 @@ function blankPage(date: Date) {
 
 <head>
   <title>Untitled</title>
-  <created>${dateFormat(date, masks.isoUtcDateTime)}</created>
+  <created>${dateFormat(date, "yyyy-mm-dd'T'HH:MM:ssp")}</created>
 </head>
 
 <body>
