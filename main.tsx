@@ -107,7 +107,7 @@ function parseDocument(content: string) {
   return { title, created, body };
 }
 
-function toElement(node: any): any {
+function toElement(node: Node | NodeList): any {
   const Node = jsdom.window.Node;
   const NodeList = jsdom.window.NodeList;
 
@@ -124,6 +124,7 @@ function toElement(node: any): any {
     if (node.nodeType == Node.DOCUMENT_NODE) {
       return toElement(node.childNodes);
     } else if (node.nodeType == Node.ELEMENT_NODE) {
+      const element = node as Element;
       const children = [];
       children.length = node.childNodes.length;
 
@@ -133,18 +134,19 @@ function toElement(node: any): any {
 
       const props: any = {};
 
-      for (let i = 0; i < node.attributes.length; i++) {
-        if (node.attributes[i].name == 'class') {
-          props['className'] = node.attributes[i].value;
+      for (let i = 0; i < element.attributes.length; i++) {
+        if (element.attributes[i].name == 'class') {
+          props['className'] = element.attributes[i].value;
         } else {
-          props[node.attributes[i].name] = node.attributes[i].value;
+          props[element.attributes[i].name] = element.attributes[i].value;
         }
       }
 
-      const tag = node.tagName.toLowerCase();
+      const tag = element.tagName.toLowerCase();
       return Nano.h(tag, props, ...children);
     } else if (node.nodeType == Node.TEXT_NODE) {
-      return node.data;
+      const text = node as Text;
+      return text.data;
     }
   }
 }
