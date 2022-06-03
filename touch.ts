@@ -24,8 +24,18 @@ const { Node } = jsdom.window;
     let indent = '';
 
     if ($created.previousSibling?.nodeType == Node.TEXT_NODE) {
-      if (indent.trim() == '') {
-        indent = ($created.previousSibling as Text).data;
+      const data = ($created.previousSibling as Text).data;
+
+      if (data.trim() == '') {
+        indent = data;
+      }
+    }
+
+    if ($head.lastChild?.nodeType == Node.TEXT_NODE) {
+      const data = ($head.lastChild as Text).data;
+
+      if (data == '\n') {
+        $head.removeChild($head.lastChild);
       }
     }
 
