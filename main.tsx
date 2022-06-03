@@ -89,7 +89,6 @@ function render(children: any) {
   await outText('index.html', render(<IndexPage />));
   await outText('blog/index.html', render(<BlogIndexPage items={blogItems} />));
   await outText('knowledge/index.html', render(<KnowledgeIndexPage items={knowledgeItems} />));
-  await fs.cp('assets', path.join(outRoot, 'assets'), { recursive: true });
 })();
 
 function parseDocument(content: string) {
