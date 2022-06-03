@@ -1,5 +1,6 @@
 {
   "name": "koyomiji",
+  "private": true,
   "packageManager": "yarn@3.2.0",
   "dependencies": {
     "dateformat": "^5.0.3",
