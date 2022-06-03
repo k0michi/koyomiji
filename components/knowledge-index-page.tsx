@@ -24,10 +24,10 @@ export default function KnowledgeIndexPage(props: Props) {
         <title>備忘録 | 曆路堂</title>
       </Nano.Helmet>
       <Frame>
-        {props.items.map(i => <>
-          <h2>{categoryNames[i.category]}</h2>
+        {Object.entries(map).map(([k, v]) => <>
+          <h2>{categoryNames[k]}</h2>
           <ul>
-            <li><a href={`/knowledge/${i.category}/${i.id}/`}>{i.title}</a></li>
+            {v.map(i => <li><a href={`/knowledge/${i.category}/${i.id}/`}>{i.title}</a></li>)}
           </ul>
         </>)}
       </Frame>
