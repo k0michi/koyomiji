@@ -10,7 +10,7 @@ html {
 body {
   height: 100%;
   margin: 0;
-  background-image: url("/assets/ichigaya.jpg");
+  background-image: url("ichigaya.jpg");
   background-size: cover;
   background-position: center;
   font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;

@@ -1,6 +1,5 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import * as ejs from "ejs";
 import { match } from "path-to-regexp";
 import { JSDOM } from "jsdom";
 import * as Nano from "nano-jsx";
@@ -35,11 +34,14 @@ async function outText(rPath: string, text: string) {
 function render(children: any) {
   const app = Nano.renderSSR(children);
   const { body, head, footer } = Nano.Helmet.SSR(app);
-  return ejs.render(indexTemplate, { body, head, footer });
+  return indexTemplate
+    .replace('<!--head-->', head.join('\n'))
+    .replace('<!--body-->', body)
+    .replace('<!--footer-->', footer.join('\n'));
 }
 
 (async () => {
-  indexTemplate = await readText('index.ejs');
+  indexTemplate = await readText('dist/index.html');
   const blogItems: BlogItem[] = [];
   const knowledgeItems: KnowledgeItem[] = [];
 
