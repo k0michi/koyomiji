@@ -144,7 +144,13 @@ function toElement(node: Node | NodeList): any {
         }
       }
 
-      const tag = element.tagName.toLowerCase();
+      let tag = element.tagName.toLowerCase();
+
+      if (tag == 'math') {
+        tag = 'div';
+        props.class = 'math-block';
+      }
+
       return Nano.h(tag, props, ...children);
     } else if (node.nodeType == Node.TEXT_NODE) {
       const text = node as Text;

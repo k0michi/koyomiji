@@ -1,10 +1,13 @@
 import katex from 'katex';
-import renderMathInElement from 'katex/contrib/auto-render';
 import prismjs from 'prismjs';
 import './assets/styles.css';
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
 window.addEventListener('load', () => {
-  renderMathInElement(document.body);
+  const mathElements = document.getElementsByClassName('math-block');
+
+  for (const mathElement of mathElements) {
+    katex.render(mathElement.textContent!, mathElement as any, { displayMode: true });
+  }
 });
