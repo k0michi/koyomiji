@@ -8,7 +8,12 @@ import dateFormat, { masks } from "dateformat";
   await fs.mkdir(pathToCreate, { recursive: true });
   pathToCreate = path.join(pathToCreate, 'index.html');
   const now = new Date();
-  await fs.writeFile(pathToCreate, blankPage(now));
+
+  try {
+    await fs.stat(pathToCreate);
+  } catch (e) {
+    await fs.writeFile(pathToCreate, blankPage(now));
+  }
 })();
 
 function blankPage(date: Date) {
@@ -16,11 +21,15 @@ function blankPage(date: Date) {
 
 <head>
   <title>Untitled</title>
-  <created>${dateFormat(date, "yyyy-mm-dd'T'HH:MM:ssp")}</created>
+  <created>${formatDate(date)}</created>
 </head>
 
 <body>
 </body>
 
 </html>`;
+}
+
+export function formatDate(date: Date) {
+  return dateFormat(date, "yyyy-mm-dd'T'HH:MM:ssp");
 }

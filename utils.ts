@@ -16,3 +16,7 @@ export async function* walk(dirPath:string):AsyncIterable<string> {
     }
   }
 }
+
+export async function readText(path: string) {
+  return await fs.readFile(path, { encoding: 'utf-8' });
+}

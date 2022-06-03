@@ -17,6 +17,7 @@
     "preview": "vite preview",
     "render": "ts-node --esm main.tsx",
     "new": "ts-node --esm new.ts",
+    "touch": "ts-node --esm touch.ts",
     "serve": "serve dist",
     "clean": "rm -rf dist"
   },

@@ -3,7 +3,7 @@ import * as path from 'path';
 import { match } from "path-to-regexp";
 import { JSDOM } from "jsdom";
 import * as Nano from "nano-jsx";
-import { walk } from './utils.js';
+import { walk, readText } from './utils.js';
 import BlogPage from './components/blog-page.js';
 import KnowledgePage from './components/knowledge-page.js';
 import IndexPage from './components/index-page.js';
@@ -19,10 +19,6 @@ const blogMatch = match("blog/:id/index.html", { decode: decodeURIComponent });
 const knowledgeMatch = match("knowledge/:category/:id/index.html", { decode: decodeURIComponent });
 
 const jsdom = new JSDOM();
-
-async function readText(path: string) {
-  return await fs.readFile(path, { encoding: 'utf-8' });
-}
 
 async function outText(rPath: string, text: string) {
   const joinedPath = path.join(outRoot, rPath);
