@@ -3,10 +3,12 @@ export interface KnowledgeItem {
   title: string;
   category: string;
   created: string;
+  description: string;
 }
 
 export interface BlogItem {
   id: string;
   title: string;
   created: string;
+  description: string;
 }

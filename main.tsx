@@ -57,11 +57,11 @@ function render(children: any) {
 
         // Workaround for 'document is not defined'
         await outText(rPath, render(() => {
-          const { title, created, body } = parseDocument(content);
-          blogItems.push({ id, title, created });
+          const { title, created, body, description } = parseDocument(content);
+          blogItems.push({ id, title, created, description });
 
           return (
-            <BlogPage title={title} created={new Date(created)} id={id}>
+            <BlogPage title={title} created={new Date(created)} id={id} description={description}>
               {body}
             </BlogPage>
           );
@@ -72,11 +72,11 @@ function render(children: any) {
         const category = (knowledgeResult.params as any)['category'];
 
         await outText(rPath, render(() => {
-          const { title, created, body } = parseDocument(content);
-          knowledgeItems.push({ id, category, title, created });
+          const { title, created, body, description } = parseDocument(content);
+          knowledgeItems.push({ id, category, title, created, description });
 
           return (
-            <KnowledgePage title={title} created={new Date(created)} id={id} category={category}>
+            <KnowledgePage title={title} created={new Date(created)} id={id} category={category} description={description}>
               {body}
             </KnowledgePage>
           );
@@ -105,7 +105,30 @@ function parseDocument(content: string) {
 
   const $body = $document.querySelector('body')!;
   const body = toElement($body.childNodes);
-  return { title, created, body };
+  const description = getDescription($body, 120);
+  return { title, created, body, description };
+}
+
+function getDescription(node: Node, limit: number) {
+  const Node = jsdom.window.Node;
+
+  if (node.nodeType == Node.TEXT_NODE) {
+    const text = node as Text;
+    return text.data;
+  } else {
+    let desc = '';
+
+    for (const childNode of node.childNodes) {
+      desc += getDescription(childNode, limit).trimStart();
+
+      if (desc.length > limit) {
+        desc = desc.substring(0, limit) + '…';
+        break;
+      }
+    }
+
+    return desc;
+  }
 }
 
 function toElement(node: Node | NodeList): any {
