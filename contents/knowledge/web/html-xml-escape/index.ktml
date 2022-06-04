@@ -1,4 +1,4 @@
-<html>
+<ktml version="0.1">
 
 <head>
   <title>HTML&amp;XML: 特殊文字のエスケープ</title>
@@ -17,4 +17,4 @@
   <p>正確には、XMLの場合には文字実体参照(character entity reference)ではなく、定義済み実体(predefined entity)という。</p>
 </body>
 
-</html>
+</ktml>

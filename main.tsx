@@ -15,8 +15,8 @@ const contentRoot = './contents';
 const outRoot = './dist';
 let indexTemplate: string;
 
-const blogMatch = match("blog/:id/index.html", { decode: decodeURIComponent });
-const knowledgeMatch = match("knowledge/:category/:id/index.html", { decode: decodeURIComponent });
+const blogMatch = match("blog/:id/index.ktml", { decode: decodeURIComponent });
+const knowledgeMatch = match("knowledge/:category/:id/index.ktml", { decode: decodeURIComponent });
 
 const jsdom = new JSDOM();
 
@@ -36,49 +36,50 @@ function render(children: any) {
     .replace('<!--footer-->', footer.join('\n'));
 }
 
+function replaceExt(rPath: string) {
+  return rPath.substring(0, rPath.indexOf('.')+1)+'html';
+}
+
 (async () => {
   indexTemplate = await readText('dist/index.html');
   const blogItems: BlogItem[] = [];
   const knowledgeItems: KnowledgeItem[] = [];
 
   for await (const e of walk(contentRoot)) {
-    if (e.endsWith('.html')) {
-      const content = await readText(e);
-      const rPath = path.relative(contentRoot, e);
-      const blogResult = blogMatch(rPath);
-      const knowledgeResult = knowledgeMatch(rPath);
+    const content = await readText(e);
+    const rPath = path.relative(contentRoot, e);
+    const blogResult = blogMatch(rPath);
+    const knowledgeResult = knowledgeMatch(rPath);
 
-      if (blogResult) {
-        const id = (blogResult.params as any)['id'];
+    if (blogResult) {
+      const id = (blogResult.params as any)['id'];
 
-        // Workaround for 'document is not defined'
-        await outText(rPath, render(() => {
-          const { title, created, body, description } = parseDocument(content);
-          blogItems.push({ id, title, created, description });
+      // Workaround for 'document is not defined'
+      await outText(replaceExt(rPath), render(() => {
+        const { title, created, body, description } = parseDocument(content);
+        blogItems.push({ id, title, created, description });
 
-          return (
-            <BlogPage title={title} created={new Date(created)} id={id} description={description}>
-              {body}
-            </BlogPage>
-          );
-        }));
+        return (
+          <BlogPage title={title} created={new Date(created)} id={id} description={description}>
+            {body}
+          </BlogPage>
+        );
+      }));
 
-      } else if (knowledgeResult) {
-        const id = (knowledgeResult.params as any)['id'];
-        const category = (knowledgeResult.params as any)['category'];
+    } else if (knowledgeResult) {
+      const id = (knowledgeResult.params as any)['id'];
+      const category = (knowledgeResult.params as any)['category'];
 
-        await outText(rPath, render(() => {
-          const { title, created, body, description } = parseDocument(content);
-          knowledgeItems.push({ id, category, title, created, description });
+      await outText(replaceExt(rPath), render(() => {
+        const { title, created, body, description } = parseDocument(content);
+        knowledgeItems.push({ id, category, title, created, description });
 
-          return (
-            <KnowledgePage title={title} created={new Date(created)} id={id} category={category} description={description}>
-              {body}
-            </KnowledgePage>
-          );
-        }));
-
-      }
+        return (
+          <KnowledgePage title={title} created={new Date(created)} id={id} category={category} description={description}>
+            {body}
+          </KnowledgePage>
+        );
+      }));
     }
   }
 

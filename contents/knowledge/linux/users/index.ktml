@@ -1,4 +1,4 @@
-<html>
+<ktml version="0.1">
 
 <head>
   <title>ユーザ管理</title>
@@ -19,4 +19,4 @@
   <code>$ sudo userdel (ユーザ名)</code>
 </body>
 
-</html>
+</ktml>

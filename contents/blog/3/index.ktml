@@ -1,4 +1,4 @@
-<html>
+<ktml version="0.1">
 
 <head>
   <title>window.要素ID で要素を取得できる [豆知識]</title>
@@ -15,4 +15,4 @@
   </p>
 </body>
 
-</html>
+</ktml>

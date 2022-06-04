@@ -1,4 +1,4 @@
-<html>
+<ktml version="0.1">
 
 <head>
   <title>JavaScript: 配列</title>
@@ -95,4 +95,4 @@ a19.unshift(7, 8);
 a19; // =&gt; [7, 8, 2, 3, 4, 5]</code>
 </body>
 
-</html>
+</ktml>

@@ -1,4 +1,4 @@
-<html>
+<ktml version="0.1">
 
   <head>
     <title>JavaScript: Mapの使い方</title>
@@ -49,4 +49,4 @@ for (const [key, value] of m8) {
 m8; // => { 'a' => 2, 'b' => 4, 'c' => 6 }</code>
   </body>
 
-</html>
+</ktml>

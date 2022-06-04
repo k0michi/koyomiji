@@ -1,4 +1,4 @@
-<html>
+<ktml version="0.1">
 
 <head>
   <title>数式表示テスト</title>
@@ -10,4 +10,4 @@
   <math>\sin x</math>
 </body>
 
-</html>
+</ktml>

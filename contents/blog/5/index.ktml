@@ -1,4 +1,4 @@
-<html>
+<ktml version="0.1">
 
 <head>
   <title>MacでGCCを使う</title>
@@ -14,4 +14,4 @@
 alias g++='g++-11'</code>
 </body>
 
-</html>
+</ktml>
