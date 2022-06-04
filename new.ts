@@ -6,7 +6,7 @@ import dateFormat, { masks } from "dateformat";
   let pathToCreate = process.argv[2];
 
   await fs.mkdir(pathToCreate, { recursive: true });
-  pathToCreate = path.join(pathToCreate, 'index.html');
+  pathToCreate = path.join(pathToCreate, 'index.ktml');
   const now = new Date();
 
   try {

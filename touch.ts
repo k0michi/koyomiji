@@ -10,7 +10,7 @@ const { Node } = jsdom.window;
 
 (async () => {
   let pathToTouch = process.argv[2];
-  pathToTouch = path.join(pathToTouch, 'index.html');
+  pathToTouch = path.join(pathToTouch, 'index.ktml');
 
   const parser = new jsdom.window.DOMParser();
   const content = await readText(pathToTouch);
