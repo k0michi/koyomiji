@@ -1,0 +1,13 @@
+<ktml version="0.1">
+
+<head>
+  <title>ソースコードのハイライトを実装</title>
+  <created>2022-06-04T17:58:15+09:00</created>
+</head>
+
+<body>
+  <p>Prism.jsを利用して、ソースコードのハイライトを実装してみました。綺麗なハイライトを簡単に実装できるので良いですね。テーマを自作してみても面白そうです。</p>
+  <code lang="js">console.log('Hello');</code>
+</body>
+
+</ktml>
