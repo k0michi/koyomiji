@@ -22,7 +22,7 @@ export default function BlogIndexPage(props: Props) {
         <meta name="twitter:site" content="@k0michi" />
       </Nano.Helmet>
       <Frame>
-        {props.items.map(i => <h2><a href={`/blog/${i.id}/`}><span class="blog-id">#{i.id}</span> {i.title}</a></h2>)}
+        {props.items.map(i => <h2><a href={`/blog/${i.id}`}><span class="blog-id">#{i.id}</span> {i.title}</a></h2>)}
       </Frame>
     </>
   );
