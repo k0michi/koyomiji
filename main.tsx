@@ -100,6 +100,8 @@ function parseDocument(content: string) {
   const created = getTextContent('created', $head);
 
   const $body = $document.querySelector('body')!;
+  transformMath($body);
+  transformCode($body);
   const body = toElement($body.childNodes);
   const description = getDescription($body, 120);
   return { title, created, body, description };
@@ -125,6 +127,46 @@ function getDescription(node: Node, limit: number) {
 
     return desc;
   }
+}
+
+function transformMath(element: Element) {
+  const document = element.ownerDocument!;
+
+  for (const math of element.querySelectorAll('math')) {
+    const mathDiv = document.createElement('div');
+    mathDiv.className = 'math-block';
+    mathDiv.textContent = math.textContent;
+    math.parentNode?.replaceChild(mathDiv, math);
+  }
+}
+
+function transformCode(element: Element) {
+  const document = element.ownerDocument!;
+
+  for (const code of element.querySelectorAll('code')) {
+    const parentTag = (code.parentNode as Element).tagName;
+    const lang = code.getAttribute('lang') ?? '';
+    code.removeAttribute('lang');
+
+    if (lang != null) {
+      code.className = `language-${lang}`;
+    }
+
+    if (isContainerBlock(parentTag)) {
+      const pre = document.createElement('pre');
+
+      if (lang != null) {
+        pre.className = `language-${lang}`;
+      }
+
+      code.parentNode?.replaceChild(pre, code);
+      pre.appendChild(code);
+    }
+  }
+}
+
+function isContainerBlock(tagName: string) {
+  return tagName == 'body';
 }
 
 function toElement(node: Node | NodeList): any {
@@ -156,18 +198,13 @@ function toElement(node: Node | NodeList): any {
 
       for (let i = 0; i < element.attributes.length; i++) {
         if (element.attributes[i].name == 'class') {
-          props['className'] = element.attributes[i].value;
+          props['class'] = element.attributes[i].value;
         } else {
           props[element.attributes[i].name] = element.attributes[i].value;
         }
       }
 
-      let tag = element.tagName.toLowerCase();
-
-      if (tag == 'math') {
-        tag = 'div';
-        props.class = 'math-block';
-      }
+      const tag = element.tagName.toLowerCase();
 
       return Nano.h(tag, props, ...children);
     } else if (node.nodeType == Node.TEXT_NODE) {

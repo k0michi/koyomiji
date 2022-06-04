@@ -115,16 +115,16 @@ h2 {
 }
 
 #main code {
-  font-family: "Courier", "Consolas", "Source Code Pro", "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
+  font-family: "Courier", "Consolas", "Source Code Pro", monospace;
   padding: 2px;
-  background-color: #eeeeee;
+  /* background-color: #eeeeee; */
   border-radius: 2px;
 }
 
 #main pre {
   margin-top: 0px;
   margin-bottom: 0px;
-  background-color: #eeeeee;
+  /* background-color: #eeeeee; */
   margin-top: 16px;
   margin-bottom: 16px;
   border-radius: 2px;

@@ -5,6 +5,8 @@ import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
 window.addEventListener('load', () => {
+  prismjs.highlightAll();
+
   const mathElements = document.getElementsByClassName('math-block');
 
   for (const mathElement of mathElements) {

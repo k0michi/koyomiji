@@ -7,46 +7,46 @@
 
   <body>
     <h2>生成</h2>
-    <pre><code>const m1 = new Map([['a', 1], ['b', 2], ['c', 3]]);
-// => { 'a' => 1, 'b' => 2, 'c' => 3 }</code></pre>
+    <code lang="js">const m1 = new Map([['a', 1], ['b', 2], ['c', 3]]);
+// => { 'a' => 1, 'b' => 2, 'c' => 3 }</code>
 
     <h2>要素数を取得</h2>
-    <pre><code>const m2 = new Map([['a', 1], ['b', 2], ['c', 3]]);
-m2.size; // => 3</code></pre>
+    <code lang="js">const m2 = new Map([['a', 1], ['b', 2], ['c', 3]]);
+m2.size; // => 3</code>
 
     <h2>値を取得</h2>
-    <pre><code>const m3 = new Map([['a', 1], ['b', 2], ['c', 3]]);
-m3.get('a'); // => 1</code></pre>
+    <code lang="js">const m3 = new Map([['a', 1], ['b', 2], ['c', 3]]);
+m3.get('a'); // => 1</code>
 
     <h2>値を設定</h2>
-    <pre><code>const m4 = new Map([['a', 1], ['b', 2], ['c', 3]]);
+    <code lang="js">const m4 = new Map([['a', 1], ['b', 2], ['c', 3]]);
 m4.set('d', 4);
 m4.set('e', 5);
-m4; // => { 'a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5 }</code></pre>
+m4; // => { 'a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5 }</code>
 
     <h2>要素の存在を調べる</h2>
-    <pre><code>const m5 = new Map([['a', 1], ['b', 2], ['c', 3]]);
+    <code lang="js">const m5 = new Map([['a', 1], ['b', 2], ['c', 3]]);
 m5.has('a'); // => true
-m5.has('d'); // => false</code></pre>
+m5.has('d'); // => false</code>
 
     <h2>要素を削除</h2>
-    <pre><code>const m6 = new Map([['a', 1], ['b', 2], ['c', 3]]);
+    <code lang="js">const m6 = new Map([['a', 1], ['b', 2], ['c', 3]]);
 m6.delete('b');
-m6; // => { 'a' => 1, 'c' => 3 }</code></pre>
+m6; // => { 'a' => 1, 'c' => 3 }</code>
 
     <h2>全ての要素を削除</h2>
-    <pre><code>const m7 = new Map([['a', 1], ['b', 2], ['c', 3]]);
+    <code lang="js">const m7 = new Map([['a', 1], ['b', 2], ['c', 3]]);
 m7.clear();
-m7; // => {}</code></pre>
+m7; // => {}</code>
 
     <h2>forによるイテレート</h2>
-    <pre><code>const m8 = new Map([['a', 1], ['b', 2], ['c', 3]]);
+    <code lang="js">const m8 = new Map([['a', 1], ['b', 2], ['c', 3]]);
 
 for (const [key, value] of m8) {
   m8.set(key, value * 2);
 }
 
-m8; // => { 'a' => 2, 'b' => 4, 'c' => 6 }</code></pre>
+m8; // => { 'a' => 2, 'b' => 4, 'c' => 6 }</code>
   </body>
 
 </html>
