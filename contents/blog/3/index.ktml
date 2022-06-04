@@ -1,17 +1,16 @@
 <ktml version="0.1">
 
 <head>
-  <title>window.要素ID で要素を取得できる [豆知識]</title>
+  <title>window.要素ID での要素取得</title>
   <created>2022-02-11T00:22:21+09:00</created>
-  <modified>2022-02-11T00:24:27+09:00</modified>
+  <modified>2022-06-04T18:14:49+09:00</modified>
 </head>
 
 <body>
   <p>
     JavaScriptを触っていたところ、<code>document.getElementById("要素ID")</code>を使わずとも、<code>window.要素ID</code>で要素を取得できることに気づきました。さらに言うと、<code>window</code>はグローバルオブジェクトですから、単にグローバル変数<code>要素ID</code>から要素にアクセスできることになります。
   </p>
-  <p>互換性のための機能なのかと思いましたが、調べてみたところ、<a
-      href="https://html.spec.whatwg.org/#named-access-on-the-window-object">そういう仕様</a>が存在しているみたいです。あえてこの書き方をする理由はないでしょうが、知っているとデバッグ等の役に立つかもしれません。現に私のコードで、<code>getElementById()</code>した変数が範囲外なのにも関わらず、要素にアクセスできていましたから。
+  <p>互換性のための機能なのかと思いましたが、調べてみたところ、<a href="https://html.spec.whatwg.org/#named-access-on-the-window-object">そういう仕様</a>が存在しているみたいです。あえてこの書き方をする理由はないでしょうが、知っているとデバッグ等の役に立つかもしれません。現に私のコードで、<code>getElementById()</code>した変数が範囲外なのにも関わらず、要素にアクセスできていましたから。
   </p>
 </body>
 
