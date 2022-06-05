@@ -17,7 +17,7 @@ import dateFormat, { masks } from "dateformat";
 })();
 
 function blankPage(date: Date) {
-  return `<html>
+  return `<ktml version="0.1">
 
 <head>
   <title>Untitled</title>
@@ -27,7 +27,7 @@ function blankPage(date: Date) {
 <body>
 </body>
 
-</html>`;
+</ktml>`;
 }
 
 export function formatDate(date: Date) {
