@@ -8,7 +8,7 @@ interface Props {
 
 export default function BlogIndexPage(props: Props) {
   const url = `https://koyomiji.com/blog/`;
-  props.items.sort((a, b) => b.id.localeCompare(a.id));
+  props.items.sort((a, b) => b.id.localeCompare(a.id, undefined, { numeric: true }));
 
   return (
     <>
