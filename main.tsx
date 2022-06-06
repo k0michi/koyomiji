@@ -37,7 +37,7 @@ function render(children: any) {
 }
 
 function replaceExt(rPath: string) {
-  return rPath.substring(0, rPath.indexOf('.')+1)+'html';
+  return rPath.substring(0, rPath.indexOf('.') + 1) + 'html';
 }
 
 (async () => {
@@ -89,13 +89,7 @@ function replaceExt(rPath: string) {
 })();
 
 function parseDocument(content: string) {
-  const parser = new jsdom.window.DOMParser();
-  const $document = parser.parseFromString(content, 'text/xml');
-
-  if (($document.firstChild as Element).tagName == 'parsererror') {
-    throw new Error('Failed to parse');
-  }
-
+  const $document = parseXML(content);
   const $head = $document.querySelector('head');
   const title = getTextContent('title', $head);
   const created = getTextContent('created', $head);
@@ -106,6 +100,17 @@ function parseDocument(content: string) {
   const body = toElement($body.childNodes);
   const description = getDescription($body, 120);
   return { title, created, body, description };
+}
+
+function parseXML(string: string) {
+  const parser = new jsdom.window.DOMParser();
+  const $document = parser.parseFromString(string, 'text/xml');
+
+  if (($document.firstChild as Element).tagName == 'parsererror') {
+    throw new Error('Failed to parse');
+  }
+
+  return $document;
 }
 
 function getDescription(node: Node, limit: number) {
