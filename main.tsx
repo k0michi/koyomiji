@@ -198,11 +198,7 @@ function toElement(node: Node | NodeList): any {
       const props: any = {};
 
       for (let i = 0; i < element.attributes.length; i++) {
-        if (element.attributes[i].name == 'class') {
-          props['class'] = element.attributes[i].value;
-        } else {
-          props[element.attributes[i].name] = element.attributes[i].value;
-        }
+        props[element.attributes[i].name] = element.attributes[i].value;
       }
 
       const tag = element.tagName.toLowerCase();
