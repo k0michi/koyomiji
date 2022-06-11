@@ -1,0 +1,94 @@
+<ktml version="0.1">
+
+<head>
+  <title>状態管理ライブラリを作ってみたよ</title>
+  <created>2022-06-12T00:50:38+09:00</created>
+</head>
+
+<body>
+  <p><a href="https://github.com/k0michi/kyoka">Kyoka</a>というReact向けの状態&amp;ロジック管理ライブラリを作ってみました。このライブラリを使うと、こんな感じでロジックを書けます。</p>
+  <code lang="tsx">import * as React from &apos;react&apos;;
+import * as ReactDOM from &apos;react-dom/client&apos;;
+import { ModelProvider, Observable, useModel, useObservable } from &apos;kyoka&apos;;
+
+class Model {
+  count = new Observable(0);
+
+  addCount() {
+    this.count.set(this.count.get() + 1);
+  }
+}
+
+function Counter() {
+  const model = useModel&lt;Model&gt;();
+  const value = useObservable(model.count);
+
+  return (
+    &lt;&gt;
+      {value}{&apos; &apos;}&lt;button onClick={model.addCount.bind(model)}&gt;Add count&lt;/button&gt;
+    &lt;/&gt;
+  );
+}
+
+const model = new Model();
+const root = ReactDOM.createRoot(document.getElementById(&apos;app&apos;)!);
+
+root.render(
+  &lt;ModelProvider model={model}&gt;
+    &lt;Counter /&gt;
+  &lt;/ModelProvider&gt;
+);</code>
+  <p>最低限のグローバルステート管理パターンをライブラリ化しただけです。Reactの状態管理ライブラリは色々ありますが、個人的にオブジェクト指向かつ最小限のライブラリが欲しかったのですが、見当たらなかったので作りました。この方法ならほぼボイラープレート要らずで、何よりホワイトボックスで直感的ではないでしょうか。</p>
+  <p>mutableなオブジェクトを扱うこともできるようになっています。</p>
+  <code lang="tsx">import * as React from &apos;react&apos;;
+import * as ReactDOM from &apos;react-dom/client&apos;;
+import { ModelProvider, Observable, useModel, useObservable } from &apos;kyoka&apos;;
+
+interface Todo {
+  date: Date;
+  text: string;
+  key: number;
+}
+
+class Model {
+  todos = new Observable&lt;Todo[]&gt;([]);
+  key = 0;
+
+  addTodo(text: string) {
+    const todos = this.todos.get();
+    const date = new Date();
+    todos.push({ date, text, key: this.key });
+    this.key++;
+    this.todos.set(todos);
+  }
+}
+
+function Todo() {
+  const model = useModel&lt;Model&gt;();
+  const todos = useObservable(model.todos);
+  const [todo, setTodo] = React.useState&lt;string&gt;(&apos;&apos;);
+
+  return (
+    &lt;&gt;
+      &lt;input type=&quot;text&quot; onChange={e =&gt; setTodo(e.target.value)}&gt;&lt;/input&gt;
+      &lt;button onClick={model.addTodo.bind(model, todo)}&gt;Add todo&lt;/button&gt;
+      {todos.map(t =&gt;
+        &lt;div key={t.key}&gt;{t.date.toLocaleTimeString()} {t.text}&lt;/div&gt;
+      )}
+    &lt;/&gt;
+  );
+};
+
+const model = new Model();
+const root = ReactDOM.createRoot(document.getElementById(&apos;app&apos;)!);
+
+root.render(
+  &lt;ModelProvider model={model}&gt;
+    &lt;Todo /&gt;
+  &lt;/ModelProvider&gt;
+);</code>
+  <p>Observableに同じ参照をsetすることで、明示的なアップデートを行なっています。</p>
+  <p>現状はReact18のuseSyncExternalStoreに頼りきりですが、気が向いたらReact17以前や他のJSXライブラリでも動くようにするつもりです。</p>
+</body>
+
+</ktml>
