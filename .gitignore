@@ -27,6 +27,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+
 # https://github.com/github/gitignore/blob/main/Global/Linux.gitignore
 *~
 
@@ -41,6 +42,7 @@ Temporary Items
 
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
+
 
 # https://github.com/github/gitignore/blob/main/Global/Windows.gitignore
 
@@ -68,6 +70,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
 
 # https://github.com/github/gitignore/blob/main/Node.gitignore
 
@@ -201,3 +204,7 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+# Koyomiji
+.yarn/

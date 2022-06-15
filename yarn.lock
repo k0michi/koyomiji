@@ -133,9 +133,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*, @types/node@npm:^17.0.35":
-  version: 17.0.42
-  resolution: "@types/node@npm:17.0.42"
-  checksum: a200cd87e4f12d4d5682a893ad6e1140720c6c074a2cd075f254b3b8306d6174f5a3630e5d2347efb5e9b80d420404b5fafc8fe3c7d4c81998cd914c50b19f75
+  version: 17.0.43
+  resolution: "@types/node@npm:17.0.43"
+  checksum: 7fd84b1e37dc406c1c73a1461ccd6a1a38a5a335563788dd25e0aa75476d6948f815d0e9e4c2201f785a36a72269e6aaf0d851ca75c1e44b92e3a9d504e04a1e
   languageName: node
   linkType: hard
 
@@ -2103,8 +2103,8 @@ __metadata:
   linkType: hard
 
 "rollup-plugin-license@npm:^2.8.0":
-  version: 2.8.0
-  resolution: "rollup-plugin-license@npm:2.8.0"
+  version: 2.8.1
+  resolution: "rollup-plugin-license@npm:2.8.1"
   dependencies:
     commenting: ~1.1.0
     glob: ~7.2.0
@@ -2117,7 +2117,7 @@ __metadata:
     spdx-satisfies: ~5.0.1
   peerDependencies:
     rollup: ^1.0.0 || ^2.0.0
-  checksum: 727610c519e69cc654bb453e5b2600f812ab01641cac85968fb44e9b83b2385b2f18a6eaf1126e744176e3c5e140482d04c3996bbd4e14cb2013594e1a8e5cab
+  checksum: cd13e6cf2f5ed3e502ef73025d5064f7c427cddef21f4ad31f932a054b5ea7e70ad38c697b5954d9e882ae9a5114a2273b98354af0c1b2289c6301de12c6d60d
   languageName: node
   linkType: hard
 
@@ -2545,11 +2545,11 @@ __metadata:
 
 "typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>":
   version: 4.7.3
-  resolution: "typescript@patch:typescript@npm%3A4.7.3#~builtin<compat/typescript>::version=4.7.3&hash=bda367"
+  resolution: "typescript@patch:typescript@npm%3A4.7.3#~builtin<compat/typescript>::version=4.7.3&hash=7ad353"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 8257ce7ecbbf9416da60045a76a99d473698ca9e973fa0ddab7137cacb1587255431176cbbcc801a650938c4dc8109ab88355774829a714fabe56a53a2fe4524
+  checksum: 137d18a77f52254a284960b16ab53d0619f57b69b5d585804b8413f798a1175ce3e774fb95e6a101868577aafe357d8fcfc9171f0dc9fc0c210e9ae59d107cc0
   languageName: node
   linkType: hard
 
