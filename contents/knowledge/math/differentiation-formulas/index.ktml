@@ -1,0 +1,25 @@
+<ktml version="0.1">
+
+<head>
+  <title>微分の公式集</title>
+  <created>2022-06-15T21:44:16+09:00</created>
+</head>
+
+<body>
+  <math>\frac{d}{dx} x^n = n x^{n-1}</math>
+  <math>\frac{d}{dx} e^x = e^x</math>
+  <math>\frac{d}{dx} e^{ax} = ae^{ax}</math>
+  <math>\frac{d}{dx} a^x = a^x \ln{a}</math>
+  <math>\frac{d}{dx} \sin{x} = \cos{x}</math>
+  <math>\frac{d}{dx} \cos{x} = -\sin{x}</math>
+  <math>\frac{d}{dx} \tan{x} = \frac{1}{\cos^2{x}}</math>
+  <math>\frac{d}{dx} \sinh{x} = \cosh{x}</math>
+  <math>\frac{d}{dx} \cosh{x} = \sinh{x}</math>
+  <math>\frac{d}{dx} \ln{x} = \frac{1}{x}</math>
+  <math>\frac{d}{dx} \log_a{x} = \frac{1}{x \ln{a}}</math>
+  <math>\frac{d}{dx} \arcsin{x} = \frac{1}{\sqrt{1-x^2}}</math>
+  <math>\frac{d}{dx} \arccos{x} = -\frac{1}{\sqrt{1-x^2}}</math>
+  <math>\frac{d}{dx} \arctan{x} = \frac{1}{1+x^2}</math>
+</body>
+
+</ktml>

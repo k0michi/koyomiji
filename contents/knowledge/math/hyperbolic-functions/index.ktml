@@ -1,0 +1,14 @@
+<ktml version="0.1">
+
+<head>
+  <title>双曲線関数</title>
+  <created>2022-06-16T11:16:54+09:00</created>
+</head>
+
+<body>
+  <math>\sinh{x} = \frac{1}{2}\left(e^x-e^{-x}\right)</math>
+  <math>\cosh{x}= \frac{1}{2}\left(e^x+e^{-x}\right)</math>
+  <math>\tanh{x} = \frac{e^x-e^{-x}}{e^x+e^{-x}}</math>
+</body>
+
+</ktml>

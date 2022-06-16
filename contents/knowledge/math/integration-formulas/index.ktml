@@ -1,0 +1,20 @@
+<ktml version="0.1">
+
+<head>
+  <title>積分の公式集</title>
+  <created>2022-06-16T11:02:28+09:00</created>
+</head>
+
+<body>
+  <math>\int{x^n}dx = \frac{1}{n+1} x^{n+1} + C \quad \left(n \neq -1\right)</math>
+  <math>\int{\frac{1}{x}}dx = \ln{\left|x\right|} + C</math>
+  <math>\int{e^x}dx = e^{x} + C</math>
+  <math>\int{e^{ax}}dx = \frac{1}{a} e^{ax} + C</math>
+  <math>\int{a^x}dx = \frac{a^x}{\ln{a}} + C</math>
+  <math>\int{\sin{x}}dx = -\cos{x} + C</math>
+  <math>\int{\cos{x}}dx = \sin{x} + C</math>
+  <math>\int{\frac{1}{\cos^2{x}}}dx = \tan{x} + C</math>
+  <math>\int{\tan{x}}dx = -\ln{\left|\cos{x}\right|} + C</math>
+</body>
+
+</ktml>

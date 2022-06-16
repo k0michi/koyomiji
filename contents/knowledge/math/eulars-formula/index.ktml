@@ -1,0 +1,14 @@
+<ktml version="0.1">
+
+<head>
+  <title>オイラーの公式</title>
+  <created>2022-06-16T12:11:41+09:00</created>
+</head>
+
+<body>
+  <math>e^{i\theta} = \cos{\theta} + i\sin{\theta}</math>
+  <math>\cos{\theta} = \frac{1}{2} \left(e^{i\theta} + e^{-i\theta}\right)</math>
+  <math>\sin{\theta} = \frac{1}{2i} \left(e^{i\theta} - e^{-i\theta}\right)</math>
+</body>
+
+</ktml>
