@@ -3,6 +3,7 @@
 <head>
   <title>Fisher-Yates shuffle</title>
   <created>2022-06-16T23:45:51+09:00</created>
+  <updated>2022-06-16T23:58:26+09:00</updated>
 </head>
 
 <body>
@@ -13,7 +14,7 @@
 const a = Array.from({ length: N }, (v, i) =&gt; i); // [0, 1, ..., 15]
 
 for (let i = N - 1; i &gt;= 1; i--) {
-  const j = Math.round(Math.random() * i);
+  const j = Math.floor(Math.random() * (i + 1));
   [a[j], a[i]] = [a[i], a[j]]; // Swap a[j] and a[i]
 }
 
