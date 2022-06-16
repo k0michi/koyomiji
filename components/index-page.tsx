@@ -23,11 +23,13 @@ export default function IndexPage() {
         <h2><a href="/blog">雑記帳</a></h2>
         <p>たわいもない話を書いています。</p>
         <h2><a href="https://twitter.com/k0michi">Twitter</a></h2>
-        <p>Follow me</p>
+        <p>フォローされると喜びます。</p>
         <h2><a href="https://github.com/k0michi">GitHub</a></h2>
         <p>開発したものとか。</p>
         <h2><a href="https://www.twitch.tv/k0michi">Twitch</a></h2>
         <p>超不定期配信。</p>
+        <h2><a href="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw">YouTube</a></h2>
+        <p>とりあえず作ったチャンネル。</p>
       </Frame>
     </>
   );
