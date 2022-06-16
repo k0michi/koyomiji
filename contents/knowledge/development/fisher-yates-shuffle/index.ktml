@@ -1,0 +1,24 @@
+<ktml version="0.1">
+
+<head>
+  <title>Fisher-Yates shuffle</title>
+  <created>2022-06-16T23:45:51+09:00</created>
+</head>
+
+<body>
+  <p>Fisher-Yates shuffleは、配列をシャッフルするためのアルゴリズムです。Knuth shuffleとも呼ばれるようです。</p>
+  <p>以下の実装では、計算量はO(n)です。</p>
+  <p>参考: <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher–Yates shuffle - Wikipedia</a></p>
+  <code lang="js">const N = 16;
+const a = Array.from({ length: N }, (v, i) =&gt; i); // [0, 1, ..., 15]
+
+for (let i = N - 1; i &gt;= 1; i--) {
+  const j = Math.round(Math.random() * i);
+  [a[j], a[i]] = [a[i], a[j]]; // Swap a[j] and a[i]
+}
+
+console.log(a);
+// [7, 15, 1, 8, 11, 5, 13, 0, 2, 4, 6, 3, 12, 14, 9, 10]</code>
+</body>
+
+</ktml>
