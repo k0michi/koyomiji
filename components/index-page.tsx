@@ -7,21 +7,27 @@ export default function IndexPage() {
   return (
     <>
       <Nano.Helmet>
-        <title>曆路堂</title>
+        <title>喫茶曆路</title>
         <meta name="description" content="" />
         <meta property="og:url" content={url} />
-        <meta property="og:title" content="曆路堂" />
+        <meta property="og:title" content="喫茶曆路" />
         <meta property="og:description" content="" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />
       </Nano.Helmet>
       <Frame>
-        曆路堂へようこそ。<br />
-        <h2><a href="/knowledge/">備忘録</a></h2>
-        <h2><a href="/blog/">雑記帳</a></h2>
+        <h2><a href="/about">プロフィール</a></h2>
+        <p>私は一体誰か。</p>
+        <h2><a href="/knowledge">備忘録</a></h2>
+        <p>覚書。</p>
+        <h2><a href="/blog">雑記帳</a></h2>
+        <p>たわいもない話を書いています。</p>
         <h2><a href="https://twitter.com/k0michi">Twitter</a></h2>
+        <p>Follow me</p>
         <h2><a href="https://github.com/k0michi">GitHub</a></h2>
+        <p>開発したものとか。</p>
         <h2><a href="https://www.twitch.tv/k0michi">Twitch</a></h2>
+        <p>超不定期配信。</p>
       </Frame>
     </>
   );

@@ -10,6 +10,7 @@ import IndexPage from './components/index-page.js';
 import BlogIndexPage from './components/blog-index-page.js';
 import KnowledgeIndexPage from './components/knowledge-index-page.js';
 import { BlogItem, KnowledgeItem } from './post.js';
+import AboutPage from './components/about-page.js';
 
 const contentRoot = './contents';
 const outRoot = './dist';
@@ -86,6 +87,7 @@ function replaceExt(rPath: string) {
   await outText('index.html', render(<IndexPage />));
   await outText('blog/index.html', render(<BlogIndexPage items={blogItems} />));
   await outText('knowledge/index.html', render(<KnowledgeIndexPage items={knowledgeItems} />));
+  await outText('about/index.html', render(<AboutPage />));
 })();
 
 function parseDocument(content: string) {

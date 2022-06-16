@@ -7,13 +7,13 @@ interface Props {
 }
 
 export default function BlogIndexPage(props: Props) {
-  const url = `https://koyomiji.com/blog/`;
+  const url = `https://koyomiji.com/blog`;
   props.items.sort((a, b) => b.id.localeCompare(a.id, undefined, { numeric: true }));
 
   return (
     <>
       <Nano.Helmet>
-        <title>雑記帳 | 曆路堂</title>
+        <title>雑記帳 | 喫茶曆路</title>
         <meta name="description" content="" />
         <meta property="og:url" content={url} />
         <meta property="og:title" content="雑記帳" />

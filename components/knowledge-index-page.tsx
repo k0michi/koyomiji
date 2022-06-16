@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function KnowledgeIndexPage(props: Props) {
-  const url = `https://koyomiji.com/knowledge/`;
+  const url = `https://koyomiji.com/knowledge`;
   const map: { [key: string]: KnowledgeItem[]; } = {};
 
   for (const item of props.items) {
@@ -22,7 +22,7 @@ export default function KnowledgeIndexPage(props: Props) {
   return (
     <>
       <Nano.Helmet>
-        <title>備忘録 | 曆路堂</title>
+        <title>備忘録 | 喫茶曆路</title>
         <meta name="description" content="" />
         <meta property="og:url" content={url} />
         <meta property="og:title" content="備忘録" />

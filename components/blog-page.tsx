@@ -16,7 +16,7 @@ export default function BlogPage(props: Props) {
   return (
     <>
       <Nano.Helmet>
-        <title>{props.title} | 曆路堂</title>
+        <title>{props.title} | 喫茶曆路</title>
         <meta name="description" content={props.description} />
         <meta property="og:url" content={url} />
         <meta property="og:title" content={props.title} />
