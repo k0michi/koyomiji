@@ -5,6 +5,8 @@
 
 html {
   height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
@@ -114,7 +116,7 @@ h2 {
 }
 
 #main code {
-  font-family: "Courier", "Consolas", "Source Code Pro", monospace;
+  font-family: "Monaco", "Consolas", "Source Code Pro", monospace;
   padding: 2px;
   /* background-color: #eeeeee; */
   border-radius: 2px;
@@ -134,6 +136,7 @@ h2 {
   background-color: unset;
   padding: 0px;
   border-radius: 0px;
+  font-size: 14px;
 }
 
 #main>*:last-child {
