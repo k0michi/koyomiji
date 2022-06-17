@@ -1,0 +1,42 @@
+<ktml version="0.1">
+
+<head>
+  <title>Quick sort</title>
+  <created>2022-06-17T20:38:03+09:00</created>
+</head>
+
+<body>
+  <p>平均計算時間: O(nlogn)</p>
+  <p>不安定ソート</p>
+  <h2>JavaScriptによる実装</h2>
+  <code lang="js">function partition(a, begin, end) {
+  let pValue = a[end - 1];
+  let pivot = begin;
+
+  for (let i = begin; i &lt; end - 1; i++) {
+    if (a[i] &lt;= pValue) {
+      [a[pivot], a[i]] = [a[i], a[pivot]];
+      pivot++;
+    }
+  }
+
+  [a[pivot], a[end - 1]] = [a[end - 1], a[pivot]];
+  return pivot;
+}
+
+function quickSort(a, begin = 0, end = a.length) {
+  if (begin &lt; end - 1) {
+    const pivot = partition(a, begin, end);
+    quickSort(a, begin, pivot);
+    quickSort(a, pivot, end);
+  }
+}
+
+const a = [7, 15, 1, 8, 11, 5, 13, 0, 2, 4, 6, 3, 12, 14, 9, 10];
+quickSort(a);
+
+console.log(a);
+// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]</code>
+</body>
+
+</ktml>

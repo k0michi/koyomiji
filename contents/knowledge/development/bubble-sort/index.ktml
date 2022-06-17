@@ -1,0 +1,38 @@
+<ktml version="0.1">
+
+<head>
+  <title>Bubble sort</title>
+  <created>2022-06-17T20:14:20+09:00</created>
+</head>
+
+<body>
+  <p>Bubble sortは最も単純なソートアルゴリズムの一つです。</p>
+  <p>平均計算時間: O(n^2)</p>
+  <p>安定ソート</p>
+  <h2>JavaScriptによる実装</h2>
+  <code lang="js">function bubbleSort(a) {
+  let n = a.length;
+
+  do {
+    let newN = 0;
+  
+    for (let i = 1; i &lt;= n - 1; i++) {
+      if (a[i - 1] &gt; a[i]) {
+        [a[i - 1], a[i]] = [a[i], a[i - 1]];
+        newN = i;
+      }
+    }
+  
+    n = newN;
+  } while (n &gt; 1);
+}
+
+const a = [7, 15, 1, 8, 11, 5, 13, 0, 2, 4, 6, 3, 12, 14, 9, 10];
+bubbleSort(a);
+
+console.log(a);
+// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]</code>
+  <p>参考: <a href="https://en.wikipedia.org/wiki/Bubble_sort">Bubble sort - Wikipedia</a></p>
+</body>
+
+</ktml>

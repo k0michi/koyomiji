@@ -1,0 +1,50 @@
+<ktml version="0.1">
+
+<head>
+  <title>Merge sort</title>
+  <created>2022-06-17T20:42:05+09:00</created>
+</head>
+
+<body>
+  <p>平均計算時間: O(nlogn)</p>
+  <p>安定ソート</p>
+  <h2>JavaScriptによる実装</h2>
+  <code lang="js">function merge(a, left, mid, right) {
+  const aLeft = a.slice(left, mid);
+  const aRight = a.slice(mid, right);
+  let i = 0, j = 0;
+
+  for (let k = left; k &lt; right; k++) {
+    if (i &gt;= mid - left) {
+      a[k] = aRight[j];
+      j++;
+    } else if (j &gt;= right - mid) {
+      a[k] = aLeft[i];
+      i++;
+    } else if (aLeft[i] &lt;= aRight[j]) {
+      a[k] = aLeft[i];
+      i++;
+    } else {
+      a[k] = aRight[j];
+      j++;
+    }
+  }
+}
+
+function mergeSort(a, left = 0, right = a.length) {
+  if (left + 1 &lt; right) {
+    const mid = (left + right) / 2;
+    mergeSort(a, left, mid);
+    mergeSort(a, mid, right);
+    merge(a, left, mid, right);
+  }
+}
+
+const a = [7, 15, 1, 8, 11, 5, 13, 0, 2, 4, 6, 3, 12, 14, 9, 10];
+mergeSort(a);
+
+console.log(a);
+// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]</code>
+</body>
+
+</ktml>

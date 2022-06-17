@@ -1,0 +1,33 @@
+<ktml version="0.1">
+
+<head>
+  <title>Insertion sort</title>
+  <created>2022-06-17T20:46:01+09:00</created>
+</head>
+
+<body>
+  <p>平均計算時間: O(n^2)</p>
+  <p>安定ソート</p>
+  <h2>JavaScriptによる実装</h2>
+  <code lang="js">function insertionSort(a) {
+  for (let i = 1; i &lt; a.length; i++) {
+    let x = a[i];
+    let j = i - 1;
+  
+    while (j &gt;= 0 &amp;&amp; a[j] &gt; x) {
+      a[j + 1] = a[j];
+      j--;
+    }
+  
+    a[j + 1] = x;
+  }
+}
+
+const a = [7, 15, 1, 8, 11, 5, 13, 0, 2, 4, 6, 3, 12, 14, 9, 10];
+insertionSort(a);
+
+console.log(a);
+// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]</code>
+</body>
+
+</ktml>
