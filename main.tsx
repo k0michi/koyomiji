@@ -141,10 +141,19 @@ function transformMath(element: Element) {
   const document = element.ownerDocument!;
 
   for (const math of element.querySelectorAll('math')) {
-    const mathDiv = document.createElement('div');
-    mathDiv.className = 'math-block';
-    mathDiv.textContent = math.textContent;
-    math.parentNode?.replaceChild(mathDiv, math);
+    const parentTag = (math.parentNode as Element).tagName;
+
+    if (isContainerBlock(parentTag)) {
+      const mathDiv = document.createElement('div');
+      mathDiv.className = 'math-block';
+      mathDiv.textContent = math.textContent;
+      math.parentNode?.replaceChild(mathDiv, math);
+    } else {
+      const mathSpan = document.createElement('span');
+      mathSpan.className = 'math-inline';
+      mathSpan.textContent = math.textContent;
+      math.parentNode?.replaceChild(mathSpan, math);
+    }
   }
 }
 

@@ -3,6 +3,7 @@
 <head>
   <title>積分の公式集</title>
   <created>2022-06-16T11:02:28+09:00</created>
+  <modified>2022-06-18T01:36:34+09:00</modified>
 </head>
 
 <body>
@@ -15,6 +16,15 @@
   <math>\int{\cos{x}}dx = \sin{x} + C</math>
   <math>\int{\frac{1}{\cos^2{x}}}dx = \tan{x} + C</math>
   <math>\int{\tan{x}}dx = -\ln{\left|\cos{x}\right|} + C</math>
+  <h2>部分積分 (integration by parts)</h2>
+  <math>\int f(x)g^{\prime}(x) = f(x)g(x) - \int f^{\prime}(x)g(x)dx</math>
+  <math>\int_a^b f(x)g^{\prime}(x) = \left[f(x)g(x)\right]_a^b - \int_a^b f^{\prime}(x)g(x)dx</math>
+  <h2>置換積分 (integration by substitution)</h2>
+  <p><math>x = g(t)</math>とおくと</p>
+  <math>\int f(x)dx = \int f(g(t))\frac{dx}{dt}dt</math>
+  <p><math>x = g(t)</math>とおくと</p>
+  <math>\int_a^b f(x)dx = \int_c^d f(g(t))\frac{dx}{dt}dt</math>
+  <p>ただし、<math>a = g(c), b = g(d)</math></p>
 </body>
 
 </ktml>

@@ -10,13 +10,18 @@ window.addEventListener('load', async () => {
     prismjs.highlightAll();
   }
 
-  const mathElements = document.getElementsByClassName('math-block');
+  const mathBlocks = document.getElementsByClassName('math-block');
+  const mathInlines = document.getElementsByClassName('math-inline');
 
-  if (mathElements.length > 0) {
+  if ((mathBlocks.length + mathInlines.length) > 0) {
     const katex = (await import('katex')).default;
 
-    for (const mathElement of mathElements) {
-      katex.render(mathElement.textContent!, mathElement as any, { displayMode: true });
+    for (const mathBlock of mathBlocks) {
+      katex.render(mathBlock.textContent!, mathBlock as any, { displayMode: true });
+    }
+
+    for(const mathInline of mathInlines){
+      katex.render(mathInline.textContent!, mathInline as any);
     }
   }
 });
