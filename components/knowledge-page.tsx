@@ -19,7 +19,7 @@ export default function KnowledgePage(props: Props) {
   return (
     <>
       <Nano.Helmet>
-        <title>[{categoryName}] {props.title} | 喫茶曆路</title>
+        <title>[{categoryName}] {props.title} | 曆路喫茶館</title>
         <meta property="og:url" content={url} />
         <meta property="og:title" content={props.title} />
         <meta property="og:description" content={props.description} />

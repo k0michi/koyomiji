@@ -4,7 +4,7 @@ export default function Frame(props: any) {
   return (
     <>
       <nav id="nav">
-        <h1 id="site-title"><a href="/">喫茶曆路</a></h1>
+        <h1 id="site-title"><a href="/">曆路喫茶館</a></h1>
         <h2><a href="/knowledge/">備忘録</a></h2>
         <h2><a href="/blog/">雑記帳</a></h2>
       </nav>

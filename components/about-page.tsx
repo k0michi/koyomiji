@@ -7,7 +7,7 @@ export default function AboutPage() {
   return (
     <>
       <Nano.Helmet>
-        <title>プロフィール | 喫茶曆路</title>
+        <title>プロフィール | 曆路喫茶館</title>
         <meta name="description" content="" />
         <meta property="og:url" content={url} />
         <meta property="og:title" content="プロフィール" />

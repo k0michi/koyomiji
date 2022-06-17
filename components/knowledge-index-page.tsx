@@ -22,7 +22,7 @@ export default function KnowledgeIndexPage(props: Props) {
   return (
     <>
       <Nano.Helmet>
-        <title>備忘録 | 喫茶曆路</title>
+        <title>備忘録 | 曆路喫茶館</title>
         <meta name="description" content="" />
         <meta property="og:url" content={url} />
         <meta property="og:title" content="備忘録" />

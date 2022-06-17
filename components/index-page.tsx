@@ -7,10 +7,10 @@ export default function IndexPage() {
   return (
     <>
       <Nano.Helmet>
-        <title>喫茶曆路</title>
+        <title>曆路喫茶館</title>
         <meta name="description" content="" />
         <meta property="og:url" content={url} />
-        <meta property="og:title" content="喫茶曆路" />
+        <meta property="og:title" content="曆路喫茶館" />
         <meta property="og:description" content="" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />
