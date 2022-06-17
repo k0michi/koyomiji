@@ -1,0 +1,47 @@
+<ktml version="0.1">
+
+<head>
+  <title>JavaScript: Date</title>
+  <created>2022-06-17T21:14:28+09:00</created>
+</head>
+
+<body>
+  <h2>文字列化</h2>
+  <p>Dateを文字列化するメソッドと結果の一覧。Node.js 18.3.0にて実行。</p>
+  <code lang="js">const date = new Date();
+
+console.log(date.toDateString());
+// &quot;Fri Jun 17 2022&quot;
+
+console.log(date.toISOString());
+// 2022-06-17T12:08:02.356Z
+
+console.log(date.toLocaleDateString());
+// 6/17/2022
+
+console.log(date.toLocaleDateString(&apos;ja-JP&apos;));
+// 2022/6/17
+
+console.log(date.toLocaleString());
+// 6/17/2022, 9:08:02 PM
+
+console.log(date.toLocaleString(&apos;ja-JP&apos;));
+// 2022/6/17 21:13:36
+
+console.log(date.toLocaleTimeString());
+// 9:08:02 PM
+
+console.log(date.toLocaleTimeString(&apos;ja-JP&apos;));
+// 21:13:36
+
+console.log(date.toString());
+// Fri Jun 17 2022 21:08:02 GMT+0900 (Japan Standard Time)
+
+console.log(date.toTimeString());
+// 21:08:02 GMT+0900 (Japan Standard Time)
+
+console.log(date.toUTCString());
+// Fri, 17 Jun 2022 12:08:02 GMT</code>
+</body>
+
+</ktml>
