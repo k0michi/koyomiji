@@ -47,7 +47,7 @@ h2 {
   font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
   font-weight: 200;
   color: #ffffff;
-  filter: drop-shadow(0px 0px 4px #161616);
+  filter: drop-shadow(0px 0.5px 0.75px #161616);
   box-sizing: border-box;
 }
 
@@ -80,7 +80,7 @@ h2 {
   font-size: 16px;
   background-color: white;
   padding: 24px;
-  box-shadow: 0px 0px 16px rgba(27, 27, 27, 0.418);
+  box-shadow: 0 0px 2.5px #1b1b1b7a;
   box-sizing: border-box;
 }
 
