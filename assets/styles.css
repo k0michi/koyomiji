@@ -49,7 +49,7 @@ h2 {
   font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
   font-weight: 200;
   color: #ffffff;
-  filter: drop-shadow(0px 0.5px 0.75px #161616);
+  filter: drop-shadow(0px 1px 0.75px #161616);
   box-sizing: border-box;
 }
 
