@@ -1,0 +1,17 @@
+<ktml version="0.1">
+
+<head>
+  <title>Python: Hello, world</title>
+  <created>2022-06-18T13:21:45+09:00</created>
+</head>
+
+<body>
+  <p><code lang="python">print</code>関数で文字列を標準出力する。<code lang="python">#</code>以降はコメントとなる。</p>
+  <code lang="python"># Hello
+print("Hello, world")</code>
+  <code>% python3 hello.py
+Hello, world
+</code>
+</body>
+
+</ktml>
