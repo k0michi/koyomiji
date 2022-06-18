@@ -28,6 +28,11 @@ async function outText(rPath: string, text: string) {
   console.log(`Built: ${rPath}`);
 }
 
+async function copy(src:string, dest:string) {
+  const joinedPath = path.join(outRoot, dest);
+  await fs.copyFile(src, joinedPath);
+}
+
 function render(children: any) {
   const app = Nano.renderSSR(children);
   const { body, head, footer } = Nano.Helmet.SSR(app);
@@ -88,6 +93,7 @@ function replaceExt(rPath: string) {
   await outText('blog/index.html', render(<BlogIndexPage items={blogItems} />));
   await outText('knowledge/index.html', render(<KnowledgeIndexPage items={knowledgeItems} />));
   await outText('about/index.html', render(<AboutPage />));
+  await copy('assets/favicon.ico', 'favicon.ico');
 })();
 
 function parseDocument(content: string) {
