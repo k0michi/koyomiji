@@ -33,19 +33,23 @@ h2 {
 #root {
   height: 100%;
   display: flex;
-  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  #root {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 768px) {
+  #root {
+    flex-direction: row;
+  }
 }
 
 #nav {
   flex-grow: 0;
-  width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  max-width: 960px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 12px 18px;
   font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
   font-weight: 200;
   color: #ffffff;
@@ -53,8 +57,35 @@ h2 {
   box-sizing: border-box;
 }
 
+@media (max-width: 768px) {
+  #nav {
+    flex-direction: row;
+    width: 100%;
+    padding: 0 18px;
+    margin-left: auto;
+    margin-right: auto;
+    flex-basis: 72px;
+    flex-shrink: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  #nav {
+    flex-direction: column;
+    padding: 24px 0;
+    flex-basis: 72px;
+    flex-shrink: 0;
+  }
+
+  #nav>* {
+    writing-mode: vertical-rl;
+  }
+}
+
 #nav>* {
-  line-height: 48px;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
 }
 
 #nav h1 {
@@ -69,7 +100,7 @@ h2 {
   font-weight: inherit;
   color: inherit;
   flex-grow: 1;
-  text-align: right;
+  text-align: center;
 }
 
 #nav a {
@@ -78,7 +109,6 @@ h2 {
 
 #main-container {
   flex-grow: 1;
-  width: 100%;
   font-size: 16px;
   background-color: white;
   padding: 24px;
@@ -86,10 +116,22 @@ h2 {
   box-sizing: border-box;
 }
 
+@media (max-width: 768px) {
+  #main-container {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  #main-container {
+    overflow-y: auto;
+  }
+}
+
 #main {
   margin-left: auto;
   margin-right: auto;
-  max-width: 960px;
+  max-width: 768px;
 }
 
 #main h1 {
