@@ -3,11 +3,12 @@
 <head>
   <title>対数</title>
   <created>2022-06-18T10:40:54+09:00</created>
+  <modified>2022-06-18T11:10:52+09:00</modified>
 </head>
 
 <body>
   <h2>定義</h2>
-  <math>a^y = x \quad (a > 0, a \ne 1, x > 0)</math>
+  <math>a^y = x \quad (a &gt; 0, a \ne 1, x &gt; 0)</math>
   <p>を満たす<math>y</math>を</p>
   <math>y = \log_a{x}</math>
   <p>と書く。この値を<math>a</math>を底(base)とする<math>x</math>の対数(logarithm)といい、<math>x</math>をaを底とする対数<math>y</math>の真数(antilogarithm)という。</p>
@@ -16,7 +17,7 @@
   <math>\log_a{\frac{m}{n}} = \log_a{m} - \log_a{n}</math>
   <math>\log_a{m^n} = n \log_a{m}</math>
   <h2>底の変換公式</h2>
-  <math>\log_a{b} = \frac{\log_c{b}}{\log_c{a}}</math>
+  <math>\log_a{b} = \frac{\log_c{b}}{\log_c{a}} \quad (a \ne 1, b \ne 1, c \ne 1)</math>
 </body>
 
 </ktml>
