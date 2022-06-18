@@ -9,6 +9,15 @@ interface Props {
 
 export default function KnowledgeIndexPage(props: Props) {
   const url = `https://koyomiji.com/knowledge`;
+
+  props.items.sort((a, b) => {
+    if (a.category == b.category) {
+      return a.id.localeCompare(b.id);
+    } else {
+      return a.category.localeCompare(b.category);
+    }
+  });
+
   const map: { [key: string]: KnowledgeItem[]; } = {};
 
   for (const item of props.items) {
