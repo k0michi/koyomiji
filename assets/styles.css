@@ -74,7 +74,7 @@ ul {
   font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
   font-weight: 200;
   color: #ffffff;
-  filter: drop-shadow(0px 1px 0.75px #161616);
+  filter: drop-shadow(0px 1px 0.75px #1a1a1a94);
   box-sizing: border-box;
 }
 
@@ -132,8 +132,9 @@ ul {
   flex-grow: 1;
   font-size: 16px;
   background-color: white;
+  color: #353535;
   padding: 24px;
-  box-shadow: 0 0px 2.5px #1b1b1b7a;
+  box-shadow: 0 0px 2.5px #1a1a1a94;
   box-sizing: border-box;
 }
 
@@ -153,7 +154,6 @@ ul {
   margin-left: auto;
   margin-right: auto;
   max-width: 768px;
-  color: #353535;
 }
 
 #main h1 {
