@@ -159,11 +159,13 @@ ul {
 #main h1 {
   font-size: 30px;
   margin-bottom: 12px;
+  font-weight: 500;
 }
 
 #main h2 {
-  font-size: 24px;
+  font-size: 22px;
   margin-top: 16px;
+  font-weight: 500;
 }
 
 #main h2:first-child {
@@ -211,7 +213,6 @@ ul {
 
 .blog-id {
   color: #a7a7a7;
-  font-weight: lighter;
 }
 
 .blog-date {
