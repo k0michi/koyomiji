@@ -27,14 +27,14 @@ Math.log(Math.E ** 2) // 2 </code>
   <code lang="js">Math.log10(10) // 1
 Math.log10(123) // 2.089905111439398
 Math.log2(128) // 7 </code>
-  <p>任意の実数<math>a</math>を底とした対数<math>\log_a x</math>は、底の変換公式を用いて計算できる。</p>
-  <math>\log_a x = \frac{\ln x}{\ln a}</math>
-  <code lang="js">function loga(a, x) {
-  return Math.log(x) / Math.log(a);
+  <p>任意の実数<math>b</math>を底とした対数<math>\log_b x</math>は、底の変換公式を用いて計算できる。</p>
+  <math>\log_b x = \frac{\ln x}{\ln b}</math>
+  <code lang="js">function logb(b, x) {
+  return Math.log(x) / Math.log(b);
 }
 
-loga(5, 5) // 1
-loga(5, 25) // 2</code>
+logb(5, 5) // 1
+logb(5, 25) // 2</code>
 
   <h2>三角関数</h2>
   <p><math>\sin x</math>, <math>\cos x</math>, <math>\tan x</math>は<code lang="js">Math.sin(x)</code>, <code lang="js">Math.cos(x)</code>, <code lang="js">Math.tan(x)</code>で求められる。ただし、引数はラジアンであることに注意する。<math>\pi</math>は<code lang="js">Math.PI</code>で取得できる。</p>
