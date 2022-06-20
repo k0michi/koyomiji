@@ -1,0 +1,56 @@
+<ktml version="0.1">
+
+<head>
+  <title>ギリシャ文字</title>
+  <created>2022-06-20T00:13:27+09:00</created>
+</head>
+
+<body>
+  <table>
+    <thead>
+      <tr><td>大文字</td><td>小文字</td><td>大文字(TeX)</td><td></td><td>小文字(TeX)</td><td></td><td>読み</td><td>英表記</td></tr>
+    </thead>
+    <tbody>
+      <tr><td>Α</td><td>α</td><td><math>A</math></td><td><code>A</code></td><td><math>\alpha</math></td><td><code>\alpha</code></td><td>アルファ</td><td>alpha</td></tr>
+      <tr><td>Β</td><td>α</td><td><math>B</math></td><td><code>B</code></td><td><math>\beta</math></td><td><code>\beta</code></td><td>ベータ</td><td>beta</td></tr>
+      <tr><td>Γ</td><td>γ</td><td><math>\Gamma</math></td><td><code>\Gamma</code></td><td><math>\gamma</math></td><td><code>\gamma</code></td><td>ガンマ</td><td>gamma</td></tr>
+      <tr><td></td><td></td><td><math>\varGamma</math></td><td><code>\varGamma</code></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Δ</td><td>δ</td><td><math>\Delta</math></td><td><code>\Delta</code></td><td><math>\delta</math></td><td><code>\delta</code></td><td>デルタ</td><td>delta</td></tr>
+      <tr><td></td><td></td><td><math>\varDelta</math></td><td><code>\varDelta</code></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Ε</td><td>ε</td><td><math>E</math></td><td><code>E</code></td><td><math>\epsilon</math></td><td><code>\epsilon</code></td><td>イプシロン</td><td>epsilon</td></tr>
+      <tr><td></td><td></td><td></td><td></td><td><math>\varepsilon</math></td><td><code>\varepsilon</code></td><td></td><td></td></tr>
+      <tr><td>Ζ</td><td>ζ</td><td><math>Z</math></td><td><code>Z</code></td><td><math>\zeta</math></td><td><code>\zeta</code></td><td>ゼータ</td><td>zeta</td></tr>
+      <tr><td>Η</td><td>η</td><td><math>H</math></td><td><code>H</code></td><td><math>\eta</math></td><td><code>\eta</code></td><td>イータ</td><td>eta</td></tr>
+      <tr><td>Θ</td><td>θ</td><td><math>\Theta</math></td><td><code>\Theta</code></td><td><math>\theta</math></td><td><code>\theta</code></td><td>シータ</td><td>theta</td></tr>
+      <tr><td></td><td></td><td><math>\varTheta</math></td><td><code>\varTheta</code></td><td><math>\vartheta</math></td><td><code>\vartheta</code></td><td></td><td></td></tr>
+      <tr><td>Ι</td><td>ι</td><td><math>I</math></td><td><code>I</code></td><td><math>\iota</math></td><td><code>\iota</code></td><td>イオタ</td><td>iota</td></tr>
+      <tr><td>Κ</td><td>κ</td><td><math>K</math></td><td><code>K</code></td><td><math>\kappa</math></td><td><code>\kappa</code></td><td>カッパ</td><td>kappa</td></tr>
+      <tr><td></td><td></td><td></td><td></td><td><math>\varkappa</math></td><td><code>\varkappa</code></td><td></td><td></td></tr>
+      <tr><td>Λ</td><td>λ</td><td><math>\Lambda</math></td><td><code>\Lambda</code></td><td><math>\lambda</math></td><td><code>\lambda</code></td><td>ラムダ</td><td>lambda</td></tr>
+      <tr><td></td><td></td><td><math>\varLambda</math></td><td><code>\varLambda</code></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Μ</td><td>μ</td><td><math>M</math></td><td><code>M</code></td><td><math>\mu</math></td><td><code>\mu</code></td><td>ミュー</td><td>mu</td></tr>
+      <tr><td>Ν</td><td>ν</td><td><math>N</math></td><td><code>N</code></td><td><math>\nu</math></td><td><code>\nu</code></td><td>ニュー</td><td>nu</td></tr>
+      <tr><td>Ξ</td><td>ξ</td><td><math>\Xi</math></td><td><code>\Xi</code></td><td><math>\xi</math></td><td><code>\xi</code></td><td>クサイ</td><td>xi</td></tr>
+      <tr><td></td><td></td><td><math>\varXi</math></td><td><code>\varXi</code></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Ο</td><td>ο</td><td><math>O</math></td><td><code>O</code></td><td><math>o</math></td><td><code>o</code></td><td>オミクロン</td><td>omicron</td></tr>
+      <tr><td>Π</td><td>π</td><td><math>\Pi</math></td><td><code>\Pi</code></td><td><math>\pi</math></td><td><code>\pi</code></td><td>パイ</td><td>pi</td></tr>
+      <tr><td></td><td></td><td><math>\varPi</math></td><td><code>\varPi</code></td><td><math>\varpi</math></td><td><code>\varpi</code></td><td></td><td></td></tr>
+      <tr><td>Ρ</td><td>ρ</td><td><math>P</math></td><td><code>P</code></td><td><math>\rho</math></td><td><code>\rho</code></td><td>ロー</td><td>rho</td></tr>
+      <tr><td></td><td></td><td></td><td></td><td><math>\varrho</math></td><td><code>\varrho</code></td><td></td><td></td></tr>
+      <tr><td>Σ</td><td>σ</td><td><math>\Sigma</math></td><td><code>\Sigma</code></td><td><math>\sigma</math></td><td><code>\sigma</code></td><td>シグマ</td><td>sigma</td></tr>
+      <tr><td></td><td>ς</td><td><math>\varSigma</math></td><td><code>\varSigma</code></td><td><math>\varsigma</math></td><td><code>\varsigma</code></td><td></td><td></td></tr>
+      <tr><td>Τ</td><td>τ</td><td><math>T</math></td><td><code>T</code></td><td><math>\tau</math></td><td><code>\tau</code></td><td>タウ</td><td>tau</td></tr>
+      <tr><td>Υ</td><td>υ</td><td><math>\Upsilon</math></td><td><code>\Upsilon</code></td><td><math>\upsilon</math></td><td><code>\upsilon</code></td><td>ウプシロン</td><td>upsilon</td></tr>
+      <tr><td></td><td></td><td><math>\varUpsilon</math></td><td><code>\varUpsilon</code></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Φ</td><td>φ</td><td><math>\Phi</math></td><td><code>\Phi</code></td><td><math>\phi</math></td><td><code>\phi</code></td><td>ファイ</td><td>phi</td></tr>
+      <tr><td></td><td></td><td><math>\varPhi</math></td><td><code>\varPhi</code></td><td><math>\varphi</math></td><td><code>\varphi</code></td><td></td><td></td></tr>
+      <tr><td>Χ</td><td>χ</td><td><math>X</math></td><td><code>X</code></td><td><math>\chi</math></td><td><code>\chi</code></td><td>カイ</td><td>chi</td></tr>
+      <tr><td>Ψ</td><td>ψ</td><td><math>\Psi</math></td><td><code>\Psi</code></td><td><math>\psi</math></td><td><code>\psi</code></td><td>プサイ</td><td>psi</td></tr>
+      <tr><td></td><td></td><td><math>\varPsi</math></td><td><code>\varPsi</code></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Ω</td><td>ω</td><td><math>\Omega</math></td><td><code>\Omega</code></td><td><math>\omega</math></td><td><code>\omega</code></td><td>オメガ</td><td>omega</td></tr>
+      <tr><td></td><td></td><td><math>\varOmega</math></td><td><code>\varOmega</code></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+</body>
+
+</ktml>
