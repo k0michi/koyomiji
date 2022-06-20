@@ -1,0 +1,28 @@
+<ktml version="0.1">
+
+<head>
+  <title>JavaScript: 数学</title>
+  <created>2022-06-20T12:05:54+09:00</created>
+</head>
+
+<body>
+  <h2>対数</h2>
+  <p>自然対数<math>\ln x</math>を求めるには、<code lang="js">Math.log(x)</code>を用いる。また、自然対数の底<math>e</math>は<code lang="js">Math.E</code>で取得できる。</p>
+  <code lang="js">Math.log(1) // 0
+Math.log(Math.E) // 1
+Math.log(Math.E ** 2) // 2 </code>
+  <p>10を底とした常用対数<math>\log_{10} x</math>は、<code lang="js">Math.log10(x)</code>、2を底とした対数<math>\log_2 x</math>は、<code lang="js">Math.log2(x)</code>でそれぞれ求められる。</p>
+  <code lang="js">Math.log10(10) // 1
+Math.log10(123) // 2.089905111439398
+Math.log2(128) // 7 </code>
+  <p>任意の実数<math>a</math>を底とした対数<math>\log_a x</math>は、底の変換公式を用いて計算できる。</p>
+  <math>\log_a x = \frac{\ln x}{\ln a}</math>
+  <code lang="js">function loga(a, x) {
+  return Math.log(x) / Math.log(a);
+}
+
+loga(5, 5) // 1
+loga(5, 25) // 2</code>
+</body>
+
+</ktml>

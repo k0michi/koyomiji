@@ -201,11 +201,10 @@ ul {
   padding: 2px;
   /* background-color: #eeeeee; */
   border-radius: 2px;
+  font-size: 14px;
 }
 
 #main pre {
-  margin-top: 0px;
-  margin-bottom: 0px;
   /* background-color: #eeeeee; */
   margin-top: 16px;
   margin-bottom: 16px;
@@ -217,7 +216,6 @@ ul {
   background-color: unset;
   padding: 0px;
   border-radius: 0px;
-  font-size: 14px;
 }
 
 #main>*:last-child {
