@@ -3,11 +3,12 @@
 <head>
   <title>JavaScript/TypeScriptフロントエンドライブラリ一覧</title>
   <created>2022-05-24T22:44:06+09:00</created>
+  <modified>2022-06-20T21:16:12+09:00</modified>
 </head>
 
 <body>
+  <p>順不同。新しいのを見つけ次第順次追加。</p>
   <ul>
-    <p>順不同。新しいのを見つけ次第順次追加。</p>
     <li><a href="https://reactjs.org/">React</a></li>
     <li><a href="https://vuejs.org/">Vue</a></li>
     <li><a href="https://angular.io/">Angular</a></li>

@@ -3,12 +3,12 @@
 <head>
   <title>Fisher-Yates shuffle</title>
   <created>2022-06-16T23:45:51+09:00</created>
-  <updated>2022-06-16T23:58:26+09:00</updated>
+  <modified>2022-06-20T21:17:19+09:00</modified>
 </head>
 
 <body>
   <p>Fisher-Yates shuffleは、配列をシャッフルするためのアルゴリズムです。Knuth shuffleとも呼ばれるようです。</p>
-  <p>以下の実装では、計算量はO(n)です。</p>
+  <p>以下の実装では、計算量は<math>O(n)</math>です。</p>
   <p>参考: <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher–Yates shuffle - Wikipedia</a></p>
   <code lang="js">const N = 16;
 const a = Array.from({ length: N }, (v, i) =&gt; i); // [0, 1, ..., 15]
