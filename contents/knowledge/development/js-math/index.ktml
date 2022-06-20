@@ -3,9 +3,21 @@
 <head>
   <title>JavaScript: 数学</title>
   <created>2022-06-20T12:05:54+09:00</created>
+  <modified>2022-06-20T12:56:27+09:00</modified>
 </head>
 
 <body>
+  <h2>冪乗</h2>
+  <p>冪乗<math>b^x</math>を求めるには、<code lang="js">Math.pow(b, x)</code>を用いる。</p>
+  <code lang="js">Math.pow(2, 10) // 1024
+Math.pow(10, 3) // 1000</code>
+  <p>ECMAScript 2016以降では、冪乗演算子(exponentiation operator)<code lang="js">b ** x</code>でも同様の結果が得られる。</p>
+  <code lang="js">2 ** 10 // 1024
+10 ** 3 // 1000</code>
+  <p>冪乗演算子では、BigIntの冪乗も計算可能である。</p>
+  <code lang="js">2 ** 64 // 18446744073709552000
+2n ** 64n // 18446744073709551616n</code>
+
   <h2>対数</h2>
   <p>自然対数<math>\ln x</math>を求めるには、<code lang="js">Math.log(x)</code>を用いる。また、自然対数の底<math>e</math>は<code lang="js">Math.E</code>で取得できる。</p>
   <code lang="js">Math.log(1) // 0
@@ -23,6 +35,30 @@ Math.log2(128) // 7 </code>
 
 loga(5, 5) // 1
 loga(5, 25) // 2</code>
+
+  <h2>三角関数</h2>
+  <p><math>\sin x</math>, <math>\cos x</math>, <math>\tan x</math>は<code lang="js">Math.sin(x)</code>, <code lang="js">Math.cos(x)</code>, <code lang="js">Math.tan(x)</code>で求められる。ただし、引数はラジアンであることに注意する。<math>\pi</math>は<code lang="js">Math.PI</code>で取得できる。</p>
+  <code lang="js">Math.sin(Math.PI / 2) // 1
+Math.cos(Math.PI / 2) // 6.123233995736766e-17
+Math.tan(Math.PI / 4) // 0.9999999999999999</code>
+
+  <h2>度数法から弧度法に変換</h2>
+  <code lang="js">function degToRad(d) {
+  return d * (Math.PI / 180);
+}
+
+degToRad(180) // 3.141592653589793
+degToRad(45) // 0.7853981633974483
+</code>
+
+  <h2>弧度法から度数法に変換</h2>
+  <code lang="js">function radToDeg(r) {
+  return r * (180 / Math.PI);
+}
+
+radToDeg(Math.PI / 2) // 90
+radToDeg(Math.PI * (3 / 2)) // 270
+</code>
 </body>
 
 </ktml>
