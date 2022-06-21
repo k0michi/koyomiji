@@ -28,7 +28,7 @@ export default function KnowledgePage(props: Props) {
         <meta name="twitter:site" content="@k0michi" />
       </Nano.Helmet>
       <Frame>
-        <h1>[{categoryName}] {props.title} <span class="blog-date">{dateToString(props.created)}</span></h1>
+        <h1>[{categoryName}] {props.title} <span class="log-date">{dateToString(props.created)}</span></h1>
         {props.children}
       </Frame>
     </>

@@ -4,19 +4,19 @@ import { match } from "path-to-regexp";
 import { JSDOM } from "jsdom";
 import * as Nano from "nano-jsx";
 import { walk, readText } from './utils.js';
-import BlogPage from './components/blog-page.js';
+import LogPage from './components/log-page.js';
 import KnowledgePage from './components/knowledge-page.js';
 import IndexPage from './components/index-page.js';
-import BlogIndexPage from './components/blog-index-page.js';
+import LogIndexPage from './components/log-index-page.js';
 import KnowledgeIndexPage from './components/knowledge-index-page.js';
-import { BlogItem, KnowledgeItem } from './post.js';
+import { LogItem, KnowledgeItem } from './post.js';
 import AboutPage from './components/about-page.js';
 
 const contentRoot = './contents';
 const outRoot = './dist';
 let indexTemplate: string;
 
-const blogMatch = match("blog/:id/index.ktml", { decode: decodeURIComponent });
+const logMatch = match("log/:id/index.ktml", { decode: decodeURIComponent });
 const knowledgeMatch = match("knowledge/:category/:id/index.ktml", { decode: decodeURIComponent });
 
 const jsdom = new JSDOM();
@@ -48,27 +48,27 @@ function replaceExt(rPath: string) {
 
 (async () => {
   indexTemplate = await readText('dist/index.html');
-  const blogItems: BlogItem[] = [];
+  const logItems: LogItem[] = [];
   const knowledgeItems: KnowledgeItem[] = [];
 
   for await (const e of walk(contentRoot)) {
     const content = await readText(e);
     const rPath = path.relative(contentRoot, e);
-    const blogResult = blogMatch(rPath);
+    const logResult = logMatch(rPath);
     const knowledgeResult = knowledgeMatch(rPath);
 
-    if (blogResult) {
-      const id = (blogResult.params as any)['id'];
+    if (logResult) {
+      const id = (logResult.params as any)['id'];
 
       // Workaround for 'document is not defined'
       await outText(replaceExt(rPath), render(() => {
         const { title, created, body, description } = parseDocument(content);
-        blogItems.push({ id, title, created, description });
+        logItems.push({ id, title, created, description });
 
         return (
-          <BlogPage title={title} created={new Date(created)} id={id} description={description}>
+          <LogPage title={title} created={new Date(created)} id={id} description={description}>
             {body}
-          </BlogPage>
+          </LogPage>
         );
       }));
 
@@ -90,7 +90,7 @@ function replaceExt(rPath: string) {
   }
 
   await outText('index.html', render(<IndexPage />));
-  await outText('blog/index.html', render(<BlogIndexPage items={blogItems} />));
+  await outText('log/index.html', render(<LogIndexPage items={logItems} />));
   await outText('knowledge/index.html', render(<KnowledgeIndexPage items={knowledgeItems} />));
   await outText('about/index.html', render(<AboutPage />));
   await copy('assets/favicon.ico', 'favicon.ico');

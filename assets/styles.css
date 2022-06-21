@@ -238,22 +238,22 @@ p {
   margin-bottom: 0px;
 }
 
-.blog-id {
+.log-id {
   font-weight: 300;
 }
 
 @media (prefers-color-scheme: light) {
-  .blog-id {
+  .log-id {
     color: #a7a7a7;
   }
 }
 
 @media (prefers-color-scheme: dark) {
-  .blog-id {
+  .log-id {
     color: #666;
   }
 }
 
-.blog-date {
+.log-date {
   font-size: 18px;
 }

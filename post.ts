@@ -6,7 +6,7 @@ export interface KnowledgeItem {
   description: string;
 }
 
-export interface BlogItem {
+export interface LogItem {
   id: string;
   title: string;
   created: string;

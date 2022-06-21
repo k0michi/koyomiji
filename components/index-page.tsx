@@ -20,7 +20,7 @@ export default function IndexPage() {
         <p>私は一体誰か。</p>
         <h2><a href="/knowledge">備忘録</a></h2>
         <p>覚書。</p>
-        <h2><a href="/blog">雑記帳</a></h2>
+        <h2><a href="/log">雑記帳</a></h2>
         <p>たわいもない話を書いています。</p>
         <h2><a href="https://twitter.com/k0michi">Twitter</a></h2>
         <p>フォローされると喜びます。</p>

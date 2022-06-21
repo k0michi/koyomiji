@@ -10,8 +10,8 @@ interface Props {
   children: any;
 }
 
-export default function BlogPage(props: Props) {
-  const url = `https://koyomiji.com/blog/${props.id}`;
+export default function LogPage(props: Props) {
+  const url = `https://koyomiji.com/log/${props.id}`;
 
   return (
     <>
@@ -25,7 +25,7 @@ export default function BlogPage(props: Props) {
         <meta name="twitter:site" content="@k0michi" />
       </Nano.Helmet>
       <Frame>
-        <h1><span class="blog-id">#{props.id}</span> {props.title} <span class="blog-date">{dateToString(props.created)}</span></h1>
+        <h1><span class="log-id">#{props.id}</span> {props.title} <span class="log-date">{dateToString(props.created)}</span></h1>
         {props.children}
       </Frame>
     </>
