@@ -234,6 +234,10 @@ p {
   border-radius: 0px;
 }
 
+#main>* {
+  overflow-x: auto;
+}
+
 #main>*:last-child {
   margin-bottom: 0px;
 }
