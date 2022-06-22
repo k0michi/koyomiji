@@ -3,12 +3,13 @@
 <head>
   <title>テイラー展開とマクローリン展開</title>
   <created>2022-06-22T22:49:41+09:00</created>
+  <modified>2022-06-22T23:12:24+09:00</modified>
 </head>
 
 <body>
   <h2>テイラー展開</h2>
   <p>無限回微分可能な<math>f(x)</math>について、</p>
-  <math>f(x) = f(a) + f^{\prime}(a)\left(x-a\right) + \frac{1}{2!}f^{\prime\prime}(0)\left(x-a\right)^2 + \cdots = \sum_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}\left(x-a\right)^n</math>
+  <math>f(x) = f(a) + f^{\prime}(a)\left(x-a\right) + \frac{1}{2!}f^{\prime\prime}(a)\left(x-a\right)^2 + \cdots = \sum_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}\left(x-a\right)^n</math>
   <h2>マクローリン展開</h2>
   <p>テイラー展開の<math>a = 0</math>の場合、マクローリン展開という。</p>
   <p>無限回微分可能な<math>f(x)</math>について、</p>
