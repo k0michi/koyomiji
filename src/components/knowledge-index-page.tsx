@@ -1,10 +1,10 @@
 import * as Nano from "nano-jsx";
 import { categoryNames } from "../category.js";
-import { KnowledgeItem } from "../post.js";
+import { PostHead } from "../post.js";
 import Frame from "./frame.js";
 
 interface Props {
-  items: KnowledgeItem[];
+  items: PostHead[];
 }
 
 export default function KnowledgeIndexPage(props: Props) {
@@ -14,18 +14,18 @@ export default function KnowledgeIndexPage(props: Props) {
     if (a.category == b.category) {
       return a.id.localeCompare(b.id);
     } else {
-      return a.category.localeCompare(b.category);
+      return a.category!.localeCompare(b.category!);
     }
   });
 
-  const map: { [key: string]: KnowledgeItem[]; } = {};
+  const map: { [key: string]: PostHead[]; } = {};
 
   for (const item of props.items) {
-    if (map[item.category] == null) {
-      map[item.category] = [];
+    if (map[item.category!] == null) {
+      map[item.category!] = [];
     }
 
-    map[item.category].push(item);
+    map[item.category!].push(item);
   }
 
   return (

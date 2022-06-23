@@ -1,6 +1,4 @@
-import * as fs from 'fs/promises';
 import * as path from 'path';
-import { Match, match, MatchResult } from "path-to-regexp";
 import { JSDOM } from "jsdom";
 import * as Nano from "nano-jsx";
 import { walk, readText } from './utils.js';
@@ -9,19 +7,108 @@ import KnowledgePage from './components/knowledge-page.js';
 import IndexPage from './components/index-page.js';
 import LogIndexPage from './components/log-index-page.js';
 import KnowledgeIndexPage from './components/knowledge-index-page.js';
-import { LogItem, KnowledgeItem } from './post.js';
+import { Post } from './post.js';
 import AboutPage from './components/about-page.js';
 import glob from 'glob-promise';
+import { Renderer } from './renderer.js';
+
+interface Registry {
+  logItems: { [key: string]: Post };
+  knowledgeItems: { [key: string]: Post };
+}
 
 const contentRoot = './contents';
 const outRoot = './dist';
 let indexTemplate: string;
-
 const jsdom = new JSDOM();
+const registry: Registry = {
+  logItems: {},
+  knowledgeItems: {}
+};
 
-async function copy(src: string, dest: string) {
-  const joinedPath = path.join(outRoot, dest);
-  await fs.copyFile(src, joinedPath);
+(async () => {
+  indexTemplate = await readText('dist/index.html');
+  const renderer = createRenderer();
+
+  await renderer.render('/index.html');
+  await renderer.render('/about/index.html');
+
+  for (const p of await glob('log/*/index.ktml', { cwd: contentRoot })) {
+    const id = p.split('/')[1];
+    const content = await readText(path.join(contentRoot, p));
+    registry.logItems[[id].join('/')] = createPost(content, id);
+    const htmlPath = `/log/${id}/index.html`;
+    await renderer.render(htmlPath);
+  }
+
+  for (const p of await glob('knowledge/*/*/index.ktml', { cwd: contentRoot })) {
+    const category = p.split('/')[1];
+    const id = p.split('/')[2];
+    const content = await readText(path.join(contentRoot, p));
+    registry.knowledgeItems[[category, id].join('/')] = createPost(content, id, category);
+    const htmlPath = `/knowledge/${category}/${id}/index.html`;
+    await renderer.render(htmlPath);
+  }
+
+  await renderer.render('/log/index.html');
+  await renderer.render('/knowledge/index.html');
+})();
+
+function createRenderer() {
+  const renderer = new Renderer(outRoot);
+
+  renderer.use('/index.html', (ctx) => {
+    return render(<IndexPage />);
+  });
+
+  renderer.use('/about/index.html', (ctx) => {
+    return render(<AboutPage />);
+  });
+
+  renderer.use('/log/:id/index.html', async (ctx) => {
+    const params = ctx.params as any;
+    const id = params['id'] as string;
+    const post = registry.logItems[[id].join('/')];
+
+    return render(() => {
+      const { title, created, description } = post.head;
+      const body = toElement(post.body.childNodes);
+
+      return (
+        <LogPage title={title} created={new Date(created)} id={id} description={description}>
+          {body}
+        </LogPage>
+      );
+    })
+  });
+
+  renderer.use('/knowledge/:category/:id/index.html', async (ctx) => {
+    const params = ctx.params as any;
+    const id = params['id'] as string;
+    const category = params['category'] as string;
+    const post = registry.knowledgeItems[[category, id].join('/')];
+
+    return render(() => {
+      const { title, created, description } = post.head;
+      const body = toElement(post.body.childNodes);
+
+      return (
+        <KnowledgePage title={title} created={new Date(created)} id={id} category={category} description={description}>
+          {body}
+        </KnowledgePage>
+      );
+    });
+  });
+
+  renderer.use('/log/index.html', (ctx) => {
+    return render(<LogIndexPage items={Object.values(registry.logItems).map(p => p.head)} />);
+  });
+
+  renderer.use('/knowledge/index.html', (ctx) => {
+    return render(<KnowledgeIndexPage items={Object.values(registry.knowledgeItems).map(p => p.head)} />);
+  });
+
+  return renderer;
 }
 
 function render(children: any) {
@@ -33,130 +120,7 @@ function render(children: any) {
     .replace('<!--footer-->', footer.join('\n'));
 }
 
-interface Context {
-  params: object;
-}
-
-type Middleware = (ctx: Context) => string | Promise<string>;
-
-interface Route {
-  path:string;
-  middleware: Middleware;
-}
-
-class Renderer {
-  rootDir: string;
-  routes: Route[];
-
-  constructor(rootDir: string) {
-    this.rootDir = rootDir;
-    this.routes = [];
-  }
-
-  use(path: string, middleware: Middleware) {
-    const route = {path, middleware};
-    this.routes.push(route);
-  }
-
-  async render(pPath: string) {
-    for (const route of this.routes) {
-      const matchFunc = match(route.path);
-      const result = matchFunc(pPath);
-      const context: Context = {params:(result as MatchResult).params};
-
-      if (result) {
-        let content = route.middleware(context);
-
-        if (content instanceof Promise) {
-          content = await content;
-        }
-
-        await fs.mkdir(path.dirname(path.join(this.rootDir, pPath)), {recursive:true});
-        await fs.writeFile(path.join(this.rootDir, pPath), content);
-        console.log(path.join(this.rootDir, pPath))
-        break;
-      }
-    }
-  }
-}
-
-(async () => {
-  indexTemplate = await readText('dist/index.html');
-  const logItems: LogItem[] = [];
-  const knowledgeItems: KnowledgeItem[] = [];
-  const renderer = new Renderer(outRoot);
-
-  renderer.use('/index.html', (ctx)=>{
-    return render(<IndexPage />);
-  });
-
-  await renderer.render('/index.html');
-
-  renderer.use('/about/index.html', (ctx)=>{
-    return  render(<AboutPage />);
-  });
-
-  await renderer.render('/about/index.html');
-
-  renderer.use('/log/:id/index.html',  async (ctx)=>{
-    const id = (ctx.params as any)['id'];
-    const content = await readText(path.join(contentRoot, 'log',id,'index.ktml'));
-
-    // Workaround for 'document is not defined'
-    return render(() => {
-      const { title, created, body, description } = parseDocument(content);
-      logItems.push({ id, title, created, description });
-
-      return (
-        <LogPage title={title} created={new Date(created)} id={id} description={description}>
-          {body}
-        </LogPage>
-      );
-    })
-  });
-
-  for (const p of await glob('log/*/index.ktml', {cwd:contentRoot})) {
-    const htmlPath = `/${path.dirname(p)}/index.html`;
-    await renderer.render(htmlPath);
-  }
-
-  renderer.use('/knowledge/:category/:id/index.html',  async (ctx)=>{
-    const id = (ctx.params as any)['id'];
-    const category = (ctx.params as any)['category'];
-    const content = await readText(path.join(contentRoot, 'knowledge',category,id,'index.ktml'));
-
-    return render(() => {
-      const { title, created, body, description } = parseDocument(content);
-      knowledgeItems.push({ id, category, title, created, description });
-
-      return (
-        <KnowledgePage title={title} created={new Date(created)} id={id} category={category} description={description}>
-          {body}
-        </KnowledgePage>
-      );
-    });
-  });
-
-  for (const p of await glob('knowledge/*/*/index.ktml', {cwd:contentRoot})) {
-    const htmlPath = `/${path.dirname(p)}/index.html`;
-    await renderer.render(htmlPath);
-  }
-
-  renderer.use('/log/index.html', (ctx)=>{
-    return render(<LogIndexPage items={logItems} />);
-  });
-
-  await renderer.render('/log/index.html');
-
-  renderer.use('/knowledge/index.html', (ctx)=>{
-    return render(<KnowledgeIndexPage items={knowledgeItems} />);
-  });
-
-  await renderer.render('/knowledge/index.html');
-  await copy('src/assets/favicon.ico', 'favicon.ico');
-})();
-
-function parseDocument(content: string) {
+function createPost(content: string, id: string, category?: string): Post {
   const $document = parseXML(content);
   const $head = $document.querySelector('head');
   const title = getTextContent('title', $head);
@@ -165,9 +129,9 @@ function parseDocument(content: string) {
   const $body = $document.querySelector('body')!;
   transformMath($body);
   transformCode($body);
-  const body = toElement($body.childNodes);
   const description = getDescription($body, 120);
-  return { title, created, body, description };
+  const head = { title, created, description, id, category };
+  return { head, body: $body };
 }
 
 function parseXML(string: string) {

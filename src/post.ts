@@ -1,14 +1,12 @@
-export interface KnowledgeItem {
-  id: string;
+export interface PostHead {
   title: string;
-  category: string;
   created: string;
   description: string;
+  category?: string;
+  id: string;
 }
 
-export interface LogItem {
-  id: string;
-  title: string;
-  created: string;
-  description: string;
+export interface Post {
+  head: PostHead;
+  body: Element;
 }

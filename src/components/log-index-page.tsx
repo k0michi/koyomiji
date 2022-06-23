@@ -1,9 +1,9 @@
 import * as Nano from "nano-jsx";
-import { LogItem } from "../post.js";
+import { PostHead } from "../post.js";
 import Frame from "./frame.js";
 
 interface Props {
-  items: LogItem[];
+  items: PostHead[];
 }
 
 export default function LogIndexPage(props: Props) {
