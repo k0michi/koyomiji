@@ -153,7 +153,7 @@ class Renderer {
   });
 
   await renderer.render('/knowledge/index.html');
-  await copy('assets/favicon.ico', 'favicon.ico');
+  await copy('src/assets/favicon.ico', 'favicon.ico');
 })();
 
 function parseDocument(content: string) {

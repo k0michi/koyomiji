@@ -18,9 +18,9 @@
   "scripts": {
     "dev": "ts-node --esm dev-server",
     "build": "tsc && vite build",
-    "render": "ts-node --esm main.tsx",
-    "new": "ts-node --esm new.ts",
-    "touch": "ts-node --esm touch.ts",
+    "render": "ts-node --esm src/main.tsx",
+    "new": "ts-node --esm src/new.ts",
+    "touch": "ts-node --esm src/touch.ts",
     "serve": "serve dist",
     "clean": "rm -rf dist"
   },
