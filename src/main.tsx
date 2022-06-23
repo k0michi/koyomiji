@@ -1,5 +1,4 @@
 import * as path from 'path';
-import { JSDOM } from "jsdom";
 import * as Nano from "nano-jsx";
 import { walk, readText } from './utils.js';
 import LogPage from './components/log-page.js';
@@ -11,6 +10,7 @@ import { Post } from './post.js';
 import AboutPage from './components/about-page.js';
 import glob from 'glob-promise';
 import { Renderer } from './renderer.js';
+import * as ktml from './ktml.js';
 
 interface Registry {
   logItems: { [key: string]: Post };
@@ -20,7 +20,6 @@ interface Registry {
 const contentRoot = './contents';
 const outRoot = './dist';
 let indexTemplate: string;
-const jsdom = new JSDOM();
 const registry: Registry = {
   logItems: {},
   knowledgeItems: {}
@@ -72,7 +71,7 @@ function createRenderer() {
 
     return render(() => {
       const { title, created, description } = post.head;
-      const body = toElement(post.body.childNodes);
+      const body = ktml.toElement(post.body.childNodes);
 
       return (
         <LogPage title={title} created={new Date(created)} id={id} description={description}>
@@ -90,7 +89,7 @@ function createRenderer() {
 
     return render(() => {
       const { title, created, description } = post.head;
-      const body = toElement(post.body.childNodes);
+      const body = ktml.toElement(post.body.childNodes);
 
       return (
         <KnowledgePage title={title} created={new Date(created)} id={id} category={category} description={description}>
@@ -121,152 +120,15 @@ function render(children: any) {
 }
 
 function createPost(content: string, id: string, category?: string): Post {
-  const $document = parseXML(content);
+  const $document = ktml.parseXML(content);
   const $head = $document.querySelector('head');
-  const title = getTextContent('title', $head);
-  const created = getTextContent('created', $head);
+  const title = ktml.getTextContent('title', $head);
+  const created = ktml.getTextContent('created', $head);
 
   const $body = $document.querySelector('body')!;
-  transformMath($body);
-  transformCode($body);
-  const description = getDescription($body, 120);
+  ktml.transformMath($body);
+  ktml.transformCode($body);
+  const description = ktml.getDescription($body, 120);
   const head = { title, created, description, id, category };
   return { head, body: $body };
-}
-
-function parseXML(string: string) {
-  const parser = new jsdom.window.DOMParser();
-  const $document = parser.parseFromString(string, 'text/xml');
-
-  if (($document.firstChild as Element).tagName == 'parsererror') {
-    throw new Error('Failed to parse');
-  }
-
-  return $document;
-}
-
-function getDescription(node: Node, limit: number) {
-  const Node = jsdom.window.Node;
-
-  if (node.nodeType == Node.TEXT_NODE) {
-    const text = node as Text;
-    return text.data;
-  } else {
-    let desc = '';
-
-    for (const childNode of node.childNodes) {
-      desc += getDescription(childNode, limit).trimStart();
-
-      if (desc.length > limit) {
-        desc = desc.substring(0, limit) + '…';
-        break;
-      }
-    }
-
-    return desc;
-  }
-}
-
-function transformMath(element: Element) {
-  const document = element.ownerDocument!;
-
-  for (const math of element.querySelectorAll('math')) {
-    const parentTag = (math.parentNode as Element).tagName;
-
-    if (isContainerBlock(parentTag)) {
-      const mathDiv = document.createElement('div');
-      mathDiv.className = 'math-block';
-      mathDiv.textContent = math.textContent;
-      math.parentNode?.replaceChild(mathDiv, math);
-    } else {
-      const mathSpan = document.createElement('span');
-      mathSpan.className = 'math-inline';
-      mathSpan.textContent = math.textContent;
-      math.parentNode?.replaceChild(mathSpan, math);
-    }
-  }
-}
-
-function transformCode(element: Element) {
-  const document = element.ownerDocument!;
-
-  for (const code of element.querySelectorAll('code')) {
-    const parentTag = (code.parentNode as Element).tagName;
-    const lang = code.getAttribute('lang') ?? '';
-    code.removeAttribute('lang');
-
-    if (lang != null) {
-      code.className = `language-${lang}`;
-    }
-
-    if (isContainerBlock(parentTag)) {
-      const pre = document.createElement('pre');
-
-      if (lang != null) {
-        pre.className = `language-${lang}`;
-      }
-
-      code.parentNode?.replaceChild(pre, code);
-      pre.appendChild(code);
-    }
-  }
-}
-
-function isContainerBlock(tagName: string) {
-  return tagName == 'body';
-}
-
-function toElement(node: Node | NodeList): any {
-  const Node = jsdom.window.Node;
-  const NodeList = jsdom.window.NodeList;
-
-  if (node instanceof NodeList) {
-    const children = [];
-    children.length = node.length;
-
-    for (let i = 0; i < node.length; i++) {
-      children[i] = toElement(node[i]);
-    }
-
-    return Nano.h(Nano.Fragment, {}, ...children);
-  } else {
-    if (node.nodeType == Node.DOCUMENT_NODE) {
-      return toElement(node.childNodes);
-    } else if (node.nodeType == Node.ELEMENT_NODE) {
-      const element = node as Element;
-      const children = [];
-      children.length = node.childNodes.length;
-
-      for (let i = 0; i < node.childNodes.length; i++) {
-        children[i] = toElement(node.childNodes[i]);
-      }
-
-      const props: any = {};
-
-      for (let i = 0; i < element.attributes.length; i++) {
-        props[element.attributes[i].name] = element.attributes[i].value;
-      }
-
-      const tag = element.tagName.toLowerCase();
-
-      return Nano.h(tag, props, ...children);
-    } else if (node.nodeType == Node.TEXT_NODE) {
-      const text = node as Text;
-      return text.data;
-    }
-  }
-}
-
-function getTextContent(query: string, $element: any) {
-  if ($element == null) {
-    return null;
-  }
-
-  const $found = $element.querySelector(query, $element);
-
-  if ($found == null) {
-    return null;
-  }
-
-  return $found.textContent;
 }
