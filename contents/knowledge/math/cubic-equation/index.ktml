@@ -1,0 +1,16 @@
+<ktml version="0.1">
+
+<head>
+  <title>3次方程式</title>
+  <created>2022-06-25T22:36:51+09:00</created>
+</head>
+
+<body>
+  <h2>3次方程式の解と係数の関係</h2>
+  <p>3次方程式<math>ax^3+bx^2+cx+d=0</math>の3つの解を<math>\alpha</math>, <math>\beta</math>, <math>\gamma</math>とすると</p>
+  <math>\alpha+\beta+\gamma = -\frac{b}{a}</math>
+  <math>\alpha\beta+\beta\gamma+\gamma\alpha = \frac{c}{a}</math>
+  <math>\alpha\beta\gamma = -\frac{d}{a}</math>
+</body>
+
+</ktml>
