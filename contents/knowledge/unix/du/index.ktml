@@ -1,0 +1,19 @@
+<ktml version="0.1">
+
+<head>
+  <title>duコマンド</title>
+  <created>2022-06-25T12:08:52+09:00</created>
+</head>
+
+<body>
+  <p>ディレクトリの容量を調べるコマンド。Disk Usageの略。</p>
+
+  <h2>ブロックサイズ</h2>
+  <p>容量はブロックサイズの単位で表示されるが、既定のブロックサイズはOSや環境により異なるので、ブロックサイズを指定する。<code lang="bash">-k</code>で1kiB、<code lang="bash">-m</code>で1MiB、<code lang="bash">-g</code>で1GiBのブロックサイズを指定できる。または、<code lang="bash">-h</code>でHuman-readableな単位で表示できる。</p>
+
+  <h2>深さの制限</h2>
+  <p>デフォルトでは最も深いディレクトリまで表示される。深さを制限するには<code lang="bash">-d depth</code>で指定する。<code lang="bash">-s</code>は<code lang="bash">-d 0</code>と等価である。</p>
+  <code lang="bash">$ du -sh dir1 dir2</code>
+</body>
+
+</ktml>
