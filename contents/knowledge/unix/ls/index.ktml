@@ -1,0 +1,27 @@
+<ktml version="0.1">
+
+<head>
+  <title>lsコマンド</title>
+  <created>2022-06-25T11:51:57+09:00</created>
+</head>
+
+<body>
+  <p>ディレクトリ内のファイルを一覧表示するコマンド。</p>
+  <code lang="bash">$ ls
+$ ls dir</code>
+
+  <h2>詳細表示</h2>
+  <p><code lang="bash">-l</code>で詳細表示。Macでは<code lang="bash">-T</code>で詳細な時刻を表示できる。</p>
+  <code lang="bash">$ ls -l
+$ ls -lT</code>
+
+  <h2>再帰</h2>
+  <p><code lang="bash">-R</code>でディレクトリを再帰的に表示。</p>
+  <code lang="bash">$ ls -R dir</code>
+
+  <h2>隠しファイル</h2>
+  <p><code lang="bash">-a</code>で隠しファイルを表示する。</p>
+  <code lang="bash">$ ls -a</code>
+</body>
+
+</ktml>
