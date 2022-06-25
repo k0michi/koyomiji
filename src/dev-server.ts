@@ -37,11 +37,6 @@ async function createServer() {
     }
   });
 
-
-  setInterval(() => {
-    vite.ws.send({ type: 'full-reload' });
-  }, 10000)
-
   app.listen(3000, () => {
     console.log('listening')
   });

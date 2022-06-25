@@ -1,0 +1,37 @@
+<ktml version="0.1">
+
+<head>
+  <title>sftpコマンド</title>
+  <created>2022-06-25T11:05:26+09:00</created>
+</head>
+
+<body>
+  <h2>接続</h2>
+  <code lang="bash">$ sftp user@host</code>
+  
+  <h2>リモートの操作</h2>
+  <code lang="bash">> cd RemoteDir
+> ls
+> pwd
+> mkdir NewRemoteDir</code>
+
+  <h2>ローカルの操作</h2>
+  <p>コマンド名に接頭辞lをつけるとローカルでの操作になる。</p>
+  <code lang="bash">> lcd LocalDir
+> lls
+> lpwd
+> lmkdir NewLocalDir</code>
+
+  <h2>ファイルを取得</h2>
+  <p>ワイルドカード指定も可能。</p>
+  <code lang="bash">> get text.txt
+> get *.txt</code>
+  <p><code lang="bash">-r</code>でディレクトリを再帰的に取得する。<code lang="bash">-p</code>でパーミッションと日付を維持する。</p>
+  <code lang="bash">> get -p text.txt
+> get -r Dir</code>
+
+  <h2>切断</h2>
+  <code lang="bash">> exit</code>
+</body>
+
+</ktml>
