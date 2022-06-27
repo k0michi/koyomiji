@@ -20,6 +20,7 @@ body {
 
 a {
   color: inherit;
+  text-decoration-thickness: 1px;
 }
 
 h1 {
@@ -77,7 +78,7 @@ p {
   font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
   font-weight: 200;
   color: #ffffff;
-  filter: drop-shadow(0px 1px .75px #1c1c1cd6);
+  filter: drop-shadow(0px 0px 2px #1c1c1cd6);
   box-sizing: border-box;
   word-break: keep-all;
 }
@@ -89,7 +90,7 @@ p {
     padding: 0 18px;
     margin-left: auto;
     margin-right: auto;
-    flex-basis: 72px;
+    flex-basis: 84px;
     flex-shrink: 0;
   }
 }
@@ -98,7 +99,7 @@ p {
   #nav {
     flex-direction: column;
     padding: 18px 0;
-    flex-basis: 72px;
+    flex-basis: 124px;
     flex-shrink: 0;
   }
 
@@ -114,10 +115,30 @@ p {
 }
 
 #nav h1 {
-  font-size: 36px;
-  font-weight: inherit;
-  color: inherit;
+  font-size: 0px;
   flex-grow: 3;
+}
+
+@media (max-width: 768px) {
+  #logo-vt {
+    display: none;
+  }
+
+  #logo-hr {
+    display: inline;
+    height: 62px;
+  }
+}
+
+@media (min-width: 768px) {
+  #logo-hr {
+    display: none;
+  }
+
+  #logo-vt {
+    display: inline;
+    width: 72px;
+  }
 }
 
 #nav h2 {
@@ -242,6 +263,18 @@ p {
   margin-bottom: 0px;
 }
 
+#main ul {
+  padding-left: 24px;
+}
+
+#main li {
+  list-style: none;
+}
+
+#main li:before {
+  content: "- ";
+}
+
 .log-id {
   font-weight: 300;
 }
@@ -254,7 +287,7 @@ p {
 
 @media (prefers-color-scheme: dark) {
   .log-id {
-    color: #666;
+    color: #a7a7a7;
   }
 }
 

@@ -1,6 +1,7 @@
 import * as path from 'path';
 import license from 'rollup-plugin-license';
 import { defineConfig } from 'vite';
+import svgLoader from 'vite-svg-loader'
 
 export default defineConfig({
   plugins: [
@@ -16,5 +17,6 @@ export default defineConfig({
         },
       },
     }),
+    svgLoader()
   ],
 });
