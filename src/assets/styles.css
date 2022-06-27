@@ -12,9 +12,6 @@ html {
 body {
   height: 100%;
   margin: 0;
-  background-image: url("ichigaya.jpg");
-  background-size: cover;
-  background-position: center;
   font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
 }
 
@@ -78,9 +75,15 @@ p {
   font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
   font-weight: 200;
   color: #ffffff;
-  filter: drop-shadow(0px 0px 2px #1c1c1cd6);
   box-sizing: border-box;
   word-break: keep-all;
+  background-image: url("ichigaya.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+#nav>*{
+  filter: drop-shadow(0px 1px 1px #1c1c1cd6);
 }
 
 @media (max-width: 768px) {
