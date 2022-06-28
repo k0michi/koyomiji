@@ -3,11 +3,20 @@
 <head>
   <title>冪集合</title>
   <created>2022-06-28T18:30:00+09:00</created>
+  <modified>2022-06-28T19:27:01+09:00</modified>
 </head>
 
 <body>
   <p>ある集合<math>A</math>について、そのすべての部分集合からなる集合を<math>A</math>の冪集合といい、<math>\mathcal{P}(A)</math>と書く。</p>
+  <p><math>A</math>の冪集合は<math>\emptyset</math>と<math>A</math>自信を要素に持つ。</p>
+  <p>要素数が<math>n</math>の集合の冪集合の要素数は<math>2^n</math>である。</p>
   <h2>例</h2>
+  <p><math>A = \emptyset</math>のとき、</p>
+  <math>\mathcal{P}(A) = \{\emptyset\}</math>
+  <p><math>A = \{1\}</math>のとき、</p>
+  <math>\mathcal{P}(A) = \{\emptyset, \{1\}\}</math>
+  <p><math>A = \{1, 2\}</math>のとき、</p>
+  <math>\mathcal{P}(A) = \{\emptyset, \{1\}, \{2\}, \{1, 2\}\}</math>
   <p><math>A = \{1, 2, 3\}</math>のとき、</p>
   <math>\mathcal{P}(A) = \{\emptyset, \{1\}, \{2\}, \{3\}, \{1, 2\}, \{1, 3\}, \{2, 3\}, \{1, 2, 3\}\}</math>
 </body>
