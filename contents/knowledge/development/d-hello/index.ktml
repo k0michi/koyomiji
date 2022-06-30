@@ -3,6 +3,7 @@
 <head>
   <title>D言語: Hello, World</title>
   <created>2022-06-30T14:48:30+09:00</created>
+  <modified>2022-06-30T14:54:20+09:00</modified>
 </head>
 
 <body>
@@ -17,7 +18,7 @@ void main() {
   <p>LDCでコンパイルする場合。</p>
   <code lang="bash">% ldc2 hello.d</code>
   <p>実行。</p>
-  <code lang="bash">./hello 
+  <code lang="bash">% ./hello 
 Hello, World!</code>
 </body>
 
