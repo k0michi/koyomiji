@@ -1,0 +1,24 @@
+<ktml version="0.1">
+
+<head>
+  <title>D言語: Hello, World</title>
+  <created>2022-06-30T14:48:30+09:00</created>
+</head>
+
+<body>
+  <p><code lang="d">writeln</code>で標準出力から文字列を出力する。下記の内容をhello.dとして保存。</p>
+  <code lang="d">import std.stdio;
+
+void main() {
+  writeln("Hello, World!");
+}</code>
+  <p>DMDでコンパイルする場合。</p>
+  <code lang="bash">% dmd hello.d</code>
+  <p>LDCでコンパイルする場合。</p>
+  <code lang="bash">% ldc2 hello.d</code>
+  <p>実行。</p>
+  <code lang="bash">./hello 
+Hello, World!</code>
+</body>
+
+</ktml>
