@@ -8,7 +8,7 @@
 
 <body>
   <p>ある集合<math>A</math>について、そのすべての部分集合からなる集合を<math>A</math>の冪集合といい、<math>\mathcal{P}(A)</math>と書く。</p>
-  <p><math>A</math>の冪集合は<math>\emptyset</math>と<math>A</math>自信を要素に持つ。</p>
+  <p><math>A</math>の冪集合は<math>\emptyset</math>と<math>A</math>自身を要素に持つ。</p>
   <p>要素数が<math>n</math>の集合の冪集合の要素数は<math>2^n</math>である。</p>
   <h2>例</h2>
   <p><math>A = \emptyset</math>のとき、</p>
