@@ -1,0 +1,21 @@
+<ktml version="0.1">
+
+<head>
+  <title>数の種類</title>
+  <created>2022-07-01T21:30:40+09:00</created>
+</head>
+
+<body>
+  <p><math>\Bbb{N}</math>: 自然数全体</p>
+  <p>Natural numbersに由来。0を含む場合がある。例: 1, 2, 3</p>
+  <p><math>\Bbb{Z}</math>: 整数全体</p>
+  <p>ドイツ語Zahlenに由来。例: -2, -1, 0</p>
+  <p><math>\Bbb{Q}</math>: 有理数全体</p>
+  <p>イタリア語Quozienteに由来。例: -<math>\frac{1}{2}</math>, <math>\frac{3}{4}</math></p>
+  <p><math>\Bbb{R}</math>: 実数全体</p>
+  <p>Real numbersに由来。例: <math>\pi</math>, <math>e</math>, <math>\sqrt{2}</math></p>
+  <p><math>\Bbb{C}</math>: 複素数全体</p>
+  <p>Complex numbersに由来。例: <math>1 + i</math>, <math>-2 + 3i</math></p>
+</body>
+
+</ktml>
