@@ -1,0 +1,33 @@
+<ktml version="0.1">
+
+<head>
+  <title>集合</title>
+  <created>2022-07-01T22:03:37+09:00</created>
+</head>
+
+<body>
+  <h2>部分集合</h2>
+  <p>集合<math>B</math>の任意の要素が集合<math>A</math>の要素でもあるとき、<math>B</math>は<math>A</math>の<b>部分集合</b>である。</p>
+  <math>A \supset B</math>
+  <p><math>A \supset B</math>かつ<math>A \ne B</math>であるとき、<math>B</math>は<math>A</math>の<b>真部分集合</b>である。</p>
+  <math>A \supsetneq B</math>
+
+
+  <h2>和集合(Union)</h2>
+  <math>A \cup B</math>
+
+  <h2>積集合(共通部分, Intersection)</h2>
+  <math>A \cap B</math>
+  <p>集合<math>A</math>, <math>B</math>の共通部分が空集合であるとき、<math>A</math>と<math>B</math>は<b>互いに素</b>である。</p>
+
+  <h2>差集合(Difference)</h2>
+  <math>A \setminus B</math>
+  <p>または</p>
+  <math>A - B</math>
+
+  <h2>補集合</h2>
+  <p>普遍集合を<math>U</math>とすると</p>
+  <math>A^c = U - A</math>
+</body>
+
+</ktml>

@@ -286,6 +286,10 @@ p {
   overflow-x: auto;
 }
 
+#main>p {
+  overflow-x: visible;
+}
+
 #main>*:last-child {
   margin-bottom: 0px;
 }
