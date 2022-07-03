@@ -105,6 +105,12 @@ p {
     flex-shrink: 0;
   }
 
+  #nav.top {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+  }
+
   #nav>* {
     writing-mode: vertical-rl;
   }
@@ -130,6 +136,10 @@ p {
     display: inline;
     height: 62px;
   }
+
+  #logo-full {
+    height: 62px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -140,6 +150,10 @@ p {
   #logo-vt {
     display: inline;
     width: 72px;
+  }
+
+  #logo-full {
+    height: 72px;
   }
 }
 
@@ -157,6 +171,8 @@ p {
 
 #main-container {
   flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
   font-size: 16px;
   box-shadow: 0 0px 2.5px #1c1c1cd6;
   box-sizing: border-box;
