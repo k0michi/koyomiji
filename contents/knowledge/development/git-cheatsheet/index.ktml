@@ -1,0 +1,64 @@
+<ktml version="0.1">
+
+<head>
+  <title>Gitチートシート</title>
+  <created>2022-07-06T14:48:57+09:00</created>
+</head>
+
+<body>
+  <h2>Gitの設定</h2>
+  <code lang="bash">$ git config --global user.name "username"
+$ git config --global user.email "user@example.com"</code>
+
+  <h2>Gitの初期化</h2>
+  <code lang="bash">$ git init</code>
+  <p>ディレクトリを指定する場合</p>
+  <code lang="bash">$ git init directory</code>
+
+  <h2>ステージに追加</h2>
+  <code lang="bash">$ git add filename</code>
+  <p>カレントディレクトリ内の全てのファイルをステージに追加</p>
+  <code lang="bash">$ git add .</code>
+
+  <h2>コミット</h2>
+  <code lang="bash">$ git commit</code>
+  <p>コミットメッセージを指定する場合</p>
+  <code lang="bash">$ git commit -m "message"</code>
+
+  <h2>クローン</h2>
+  <code lang="bash">$ git clone "URL"</code>
+
+  <h2>プッシュ</h2>
+  <code lang="bash">$ git push</code>
+
+  <h2>ログ</h2>
+  <code lang="bash">$ git log</code>
+
+  <h2>diffを表示</h2>
+  <code lang="bash">$ git diff</code>
+
+  <h2>ブランチを表示</h2>
+  <code lang="bash">$ git branch</code>
+
+  <h2>ブランチを作成</h2>
+  <code lang="bash">$ git branch branchname</code>
+
+  <h2>ブランチの切り替え</h2>
+  <code lang="bash">$ git checkout branchname</code>
+  <p>-bオプションでブランチを作成してから切り替える。</p>
+  <code lang="bash">$ git checkout -b branchname</code>
+
+  <h2>マージ</h2>
+  <p>anotherbranchを現在のブランチにマージする。</p>
+  <code lang="bash">$ git merge anotherbranch</code>
+
+  <h2>remoteを追加</h2>
+  <code lang="bash">$ git remote add "name" "url"</code>
+  <p>nameは慣習的にoriginとする。</p>
+  <code lang="bash">$ git remote add origin "url"</code>
+
+  <h2>remoteを削除</h2>
+  <code lang="bash">$ git remote remove "name"</code>
+</body>
+
+</ktml>
