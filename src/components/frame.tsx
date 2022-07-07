@@ -10,7 +10,7 @@ export default function Frame(props: Props) {
     <>
       {props.top ?
         <nav id="nav" class="top">
-          <a href="/"><img alt="曆路喫茶館" id="logo-full" /></a>
+          <img alt="曆路喫茶館" id="logo-full" />
         </nav> :
         <nav id="nav">
           <h1 id="site-logo"><a href="/"><img alt="曆路" id="logo-hr" /><img alt="曆路" id="logo-vt" /></a></h1>
