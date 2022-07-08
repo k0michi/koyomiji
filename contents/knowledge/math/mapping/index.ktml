@@ -1,0 +1,15 @@
+<ktml version="0.1">
+
+<head>
+  <title>写像</title>
+  <created>2022-07-08T17:15:10+09:00</created>
+</head>
+
+<body>
+  <h2>写像の性質</h2>
+  <p>任意の<math>a_1, a_2 \in A</math>について、<math>f(a_1) = f(a_2) \implies a1 = a2</math>であるとき、写像<math>f</math>は<b>単射</b>(injective)であるという。</p>
+  <p>任意の<math>b \in B</math>について、適当な<math>a \in A</math>が存在して<math>f(a) = b</math>となるとき、写像<math>f</math>は<b>全射</b>(surjective)であるという。</p>
+  <p>写像<math>f</math>が単射かつ全射であるとき、<math>f</math>は<b>全単射</b>(bijective)であるという。</p>
+</body>
+
+</ktml>
