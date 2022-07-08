@@ -54,17 +54,21 @@ p {
 
 #root {
   height: 100%;
+}
+
+#root>div {
+  height: 100%;
   display: flex;
 }
 
 @media (max-width: 768px) {
-  #root {
+  #root>div {
     flex-direction: column;
   }
 }
 
 @media (min-width: 768px) {
-  #root {
+  #root>div {
     flex-direction: row;
   }
 }

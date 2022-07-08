@@ -1,16 +1,11 @@
 import * as path from 'path';
 import * as Nano from "nano-jsx";
 import { walk, readText } from './utils.js';
-import LogPage from './components/log-page.js';
-import KnowledgePage from './components/knowledge-page.js';
-import IndexPage from './components/index-page.js';
-import LogIndexPage from './components/log-index-page.js';
-import KnowledgeIndexPage from './components/knowledge-index-page.js';
 import { Post } from './post.js';
-import AboutPage from './components/about-page.js';
 import glob from 'glob-promise';
 import { Renderer } from './renderer.js';
 import * as ktml from './ktml.js';
+import { Root } from './components/root.js';
 
 interface Registry {
   logItems: { [key: string]: Post };
@@ -57,11 +52,11 @@ function createRenderer() {
   const renderer = new Renderer(outRoot);
 
   renderer.use('/index.html', (ctx) => {
-    return render(<IndexPage />);
+    return render(<Root />, '/');
   });
 
   renderer.use('/about/index.html', (ctx) => {
-    return render(<AboutPage />);
+    return render(<Root />, '/about');
   });
 
   renderer.use('/log/:id/index.html', async (ctx) => {
@@ -74,11 +69,11 @@ function createRenderer() {
       const body = ktml.toElement(post.body.childNodes);
 
       return (
-        <LogPage title={title} created={new Date(created)} id={id} description={description}>
+        <Root title={title} created={new Date(created)} id={id} description={description}>
           {body}
-        </LogPage>
+        </Root>
       );
-    })
+    }, `/log/${id}`)
   });
 
   renderer.use('/knowledge/:category/:id/index.html', async (ctx) => {
@@ -92,26 +87,26 @@ function createRenderer() {
       const body = ktml.toElement(post.body.childNodes);
 
       return (
-        <KnowledgePage title={title} created={new Date(created)} id={id} category={category} description={description}>
+        <Root title={title} created={new Date(created)} id={id} category={category} description={description}>
           {body}
-        </KnowledgePage>
+        </Root>
       );
-    });
+    }, `/knowledge/${category}/${id}`);
   });
 
   renderer.use('/log/index.html', (ctx) => {
-    return render(<LogIndexPage items={Object.values(registry.logItems).map(p => p.head)} />);
+    return render(<Root items={Object.values(registry.logItems).map(p => p.head)} />, '/log');
   });
 
   renderer.use('/knowledge/index.html', (ctx) => {
-    return render(<KnowledgeIndexPage items={Object.values(registry.knowledgeItems).map(p => p.head)} />);
+    return render(<Root items={Object.values(registry.knowledgeItems).map(p => p.head)} />, '/knowledge');
   });
 
   return renderer;
 }
 
-function render(children: any) {
-  const app = Nano.renderSSR(children);
+function render(children: any, pathname: string) {
+  const app = Nano.renderSSR(children, { pathname });
   const { body, head, footer } = Nano.Helmet.SSR(app);
   return indexTemplate
     .replace('<!--head-->', head.join('\n'))
