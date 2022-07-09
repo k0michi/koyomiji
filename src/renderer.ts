@@ -14,10 +14,10 @@ export interface Route {
 }
 
 export class Renderer {
-  rootDir: string;
+  rootDir: string | null;
   routes: Route[];
 
-  constructor(rootDir: string) {
+  constructor(rootDir: string|null) {
     this.rootDir = rootDir;
     this.routes = [];
   }
@@ -40,10 +40,23 @@ export class Renderer {
           content = await content;
         }
 
-        await fs.mkdir(path.dirname(path.join(this.rootDir, pPath)), { recursive: true });
-        await fs.writeFile(path.join(this.rootDir, pPath), content);
-        console.log(path.join(this.rootDir, pPath))
+        await fs.mkdir(path.dirname(path.join(this.rootDir!, pPath)), { recursive: true });
+        await fs.writeFile(path.join(this.rootDir!, pPath), content);
+        console.log(path.join(this.rootDir!, pPath))
         break;
+      }
+    }
+  }
+
+  renderToString(pPath: string) {
+    for (const route of this.routes) {
+      const matchFunc = match(route.path);
+      const result = matchFunc(pPath);
+      const context: Context = { params: (result as MatchResult).params };
+
+      if (result) {
+        let content = route.middleware(context);
+        return content;
       }
     }
   }

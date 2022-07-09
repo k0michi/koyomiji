@@ -9,7 +9,7 @@ export interface Registry {
   knowledgeItems: { [key: string]: Post };
 }
 
-export function createRenderer(outRoot: string, template: string, registry:Registry) {
+export function createRenderer(outRoot: string | null, template: string, registry: Registry) {
   const renderer = new Renderer(outRoot);
 
   renderer.use('/index.html', (ctx) => {
@@ -20,7 +20,7 @@ export function createRenderer(outRoot: string, template: string, registry:Regis
     return render(<Root />, template, '/about');
   });
 
-  renderer.use('/log/:id/index.html', async (ctx) => {
+  renderer.use('/log/:id/index.html', (ctx) => {
     const params = ctx.params as any;
     const id = params['id'] as string;
     const post = registry.logItems[[id].join('/')];
@@ -37,7 +37,7 @@ export function createRenderer(outRoot: string, template: string, registry:Regis
     }, template, `/log/${id}`)
   });
 
-  renderer.use('/knowledge/:category/:id/index.html', async (ctx) => {
+  renderer.use('/knowledge/:category/:id/index.html', (ctx) => {
     const params = ctx.params as any;
     const id = params['id'] as string;
     const category = params['category'] as string;

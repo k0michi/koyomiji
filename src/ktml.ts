@@ -87,18 +87,10 @@ export function isContainerBlock(tagName: string) {
 
 export function toElement(node: Node | NodeList): any {
   const Node = jsdom.window.Node;
-  const NodeList = jsdom.window.NodeList;
 
-  if (node instanceof NodeList) {
-    const children = [];
-    children.length = node.length;
+  if ((node as any).nodeType != null) {
+    node = node as Node;
 
-    for (let i = 0; i < node.length; i++) {
-      children[i] = toElement(node[i]);
-    }
-
-    return Nano.h(Nano.Fragment, {}, ...children);
-  } else {
     if (node.nodeType == Node.DOCUMENT_NODE) {
       return toElement(node.childNodes);
     } else if (node.nodeType == Node.ELEMENT_NODE) {
@@ -123,6 +115,16 @@ export function toElement(node: Node | NodeList): any {
       const text = node as Text;
       return text.data;
     }
+  } else {
+    node = node as NodeList;
+    const children = [];
+    children.length = node.length;
+
+    for (let i = 0; i < node.length; i++) {
+      children[i] = toElement(node[i]);
+    }
+
+    return Nano.h(Nano.Fragment, {}, ...children);
   }
 }
 
