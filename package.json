@@ -18,9 +18,9 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "ts-node --esm src/dev-server",
+    "dev": "ts-node --esm src/dev.server.ts",
     "build": "tsc && vite build",
-    "render": "ts-node --esm src/main.tsx",
+    "render": "ts-node --esm src/main.server.tsx",
     "new": "ts-node --esm src/new.ts",
     "touch": "ts-node --esm src/touch.ts",
     "serve": "serve dist",
