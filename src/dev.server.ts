@@ -8,6 +8,7 @@ import { createPost, Registry } from './main-renderer.js';
 import { walk, readText } from './utils.js';
 import * as chokidar from 'chokidar';
 import minimatch from 'minimatch';
+import { AddressInfo } from 'net';
 
 const contentRoot = './contents';
 
@@ -55,11 +56,31 @@ async function createServer() {
     }
   });
 
-  app.listen(3000, () => {
-    console.log('Listening 3000')
-  });
+  try{
+    await listen(app, 3000);
+  }catch (e) {
+    if ((e as any).code == 'EADDRINUSE') {
+      await listen(app, 0);
+    }
+  }
 
   return { vite, app };
+}
+
+async function listen(app: Koa, port: number) {
+  return new Promise((resolve, reject)=>{
+    const server = app.listen(port, () => {
+      const info = server.address() as AddressInfo;
+      const address = info.address == '::' ? 'localhost' : info.address;
+      const port = info.port;
+      console.log(`http://${address}:${port}`);
+      resolve(server);
+    });
+  
+    server.on('error',e=>{
+      reject(e);
+    })
+  });
 }
 
 async function prepare() {
