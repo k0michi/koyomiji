@@ -1,0 +1,33 @@
+<ktml version="0.1">
+
+<head>
+  <title>時間の設定</title>
+  <created>2022-07-15T17:58:28+09:00</created>
+</head>
+
+<body>
+  <h2>タイムゾーンの変更</h2>
+  <p><code lang="bash">timedatectl set-timezone</code>でタイムゾーンを変更する。タイムゾーンの一覧は<code lang="bash">timedatectl list-timezones</code>で得られる。</p>
+  <code lang="bash">$ timedatectl
+                Local time: Fri 2022-07-15 03:11:18 UTC
+            Universal time: Fri 2022-07-15 03:11:18 UTC
+                  RTC time: Fri 2022-07-15 03:11:19
+                Time zone: Etc/UTC (UTC, +0000)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+$ timedatectl list-timezones | grep -i tokyo
+Asia/Tokyo
+$ sudo timedatectl set-timezone Asia/Tokyo
+$ timedatectl
+                Local time: Fri 2022-07-15 12:12:24 JST
+            Universal time: Fri 2022-07-15 03:12:24 UTC
+                  RTC time: Fri 2022-07-15 03:12:25
+                Time zone: Asia/Tokyo (JST, +0900)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+</code>
+</body>
+
+</ktml>

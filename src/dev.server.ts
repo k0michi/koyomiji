@@ -106,7 +106,7 @@ function registerHandler(vite: ViteDevServer) {
         const content = await readText(path.join(contentRoot, p));
         registry.logItems[[id].join('/')] = createPost(content, id);
         vite.ws.send({ type: 'full-reload' });
-        console.log(event, p)
+        console.log(new Date(), event, p)
       }
 
       if (minimatch(p, 'knowledge/*/*/index.ktml')) {
@@ -115,7 +115,7 @@ function registerHandler(vite: ViteDevServer) {
         const content = await readText(path.join(contentRoot, p));
         registry.knowledgeItems[[category, id].join('/')] = createPost(content, id, category);
         vite.ws.send({ type: 'full-reload' });
-        console.log(event, p)
+        console.log(new Date(), event, p)
       }
     }
   });
