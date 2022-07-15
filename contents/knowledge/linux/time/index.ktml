@@ -1,11 +1,16 @@
 <ktml version="0.1">
 
 <head>
-  <title>時間の設定</title>
+  <title>日付と時間</title>
   <created>2022-07-15T17:58:28+09:00</created>
+  <modified>2022-07-15T18:07:21+09:00</modified>
 </head>
 
 <body>
+  <h2>日時を表示</h2>
+  <code lang="bash">$ date
+Fri Jul 15 18:05:00 JST 2022</code>
+
   <h2>タイムゾーンの変更</h2>
   <p><code lang="bash">timedatectl set-timezone</code>でタイムゾーンを変更する。タイムゾーンの一覧は<code lang="bash">timedatectl list-timezones</code>で得られる。</p>
   <code lang="bash">$ timedatectl
