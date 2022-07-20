@@ -22,7 +22,12 @@ export default function LogIndexPage(props: Props) {
         <meta name="twitter:site" content="@k0michi" />
       </Nano.Helmet>
       <Frame>
-        {props.items.map(i => <h2><span class="log-id">#{i.id}</span> <a href={`/log/${i.id}`}>{i.title}</a></h2>)}
+        {props.items.map(i =>
+          <>
+            <h2><span class="log-id">#{i.id}</span> <a href={`/log/${i.id}`}>{i.title}</a></h2>
+            {i.description}
+          </>
+        )}
       </Frame>
     </>
   );
