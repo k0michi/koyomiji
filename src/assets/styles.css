@@ -221,6 +221,7 @@ p {
   margin-left: auto;
   margin-right: auto;
   max-width: 768px;
+  font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
 }
 
 #main h1 {
@@ -236,7 +237,7 @@ p {
 #main h6 {
   margin-top: 16px;
   font-weight: 500;
-  font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
 }
 
 #main h2 {
@@ -266,12 +267,10 @@ p {
 #main>p {
   margin-top: 8px;
   margin-bottom: 0px;
-  font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
 }
 
 #main table {
   margin: auto;
-  font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
 }
 
 #main table thead {
