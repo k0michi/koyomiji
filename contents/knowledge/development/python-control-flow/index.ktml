@@ -1,0 +1,76 @@
+<ktml version="0.1">
+
+<head>
+  <title>Python: 制御構文</title>
+  <created>2022-07-22T18:29:55+09:00</created>
+</head>
+
+<body>
+  <h2>if文</h2>
+  <p>Pythonのif文は、C言語などと殆ど同じ。else ifではなくelifであることに注意。</p>
+  <code lang="python">x = 10
+
+if x &gt; 10:
+  print(&quot;x is greater than 10&quot;)
+elif x &lt; 10:
+  print(&quot;x is smaller than 10&quot;)
+else:
+  print(&quot;x equals 10&quot;)</code>
+  <p><code>x equals 10</code>を出力する。</p>
+
+  <h2>while文</h2>
+  <code lang="python">i = 0
+
+while i &lt; 10:
+  print(i)
+  i += 1</code>
+
+  <p>出力は</p>
+  <code>0
+1
+2
+3</code>
+
+  <p>while内ではbreakでループを抜けることができる。またcontinueでwhileの式の評価に戻る。</p>
+  <p>Pythonではwhile文の直後に、else文を加えることができる。このelse文は、whileループを抜けた後に実行される。</p>
+
+  <code lang="python">i = 0
+
+while i &lt; 4:
+  print(i)
+  i += 1
+else:
+  print(&quot;else&quot;)</code>
+
+  <p>出力:</p>
+  <code>0
+1
+2
+3
+else</code>
+
+  <p>しかし、以下のようにwhile内でbreakされた時には実行されない。</p>
+  <code lang="python">while True:
+  break
+else:
+  print(&quot;else&quot;)</code>
+
+  <h2>for文</h2>
+  <p>Pythonのfor文では、反復可能なオブジェクト(iterable object)のみ扱うことができる。</p>
+  <code lang="python">for i in range(4):
+  print(i)</code>
+  <p>whileと同じようにfor内で、break, continueすることができる。else文も同様に機能する。</p>
+
+  <code lang="python">for i in range(2):
+  print(i)
+else:
+  print(&quot;else&quot;)</code>
+
+  <p>文字列や配列を反復する例。</p>
+  <code lang="python">for i in [1, 2]:
+  print(i)</code>
+  <code lang="python">for c in &quot;abc&quot;:
+  print(c)</code>
+</body>
+
+</ktml>
