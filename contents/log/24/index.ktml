@@ -1,0 +1,12 @@
+<ktml version="0.1">
+
+<head>
+  <title>Carbonという新しい言語が誕生</title>
+  <created>2022-07-28T13:52:53+09:00</created>
+</head>
+
+<body>
+  <p>Googleが<a href="https://github.com/carbon-language/carbon-lang">Carbon</a>というC++の置き換えを狙った言語を発表したという。この言語はC++との相互運用性に注力しているようですが、C++を拡張するのはやめて、0から作り直そうというコンセプトみたいです。Rustに似ている気もしますが、何方かと言えばJavaに対するKotlinのポジションを目指しているようです。実際C++は機能が多すぎて、使いこなすのには相当な知識が必要なことは否めないので、こういった言語がC++を置き換えていくのは時間の問題なのではないかと思います。</p>
+</body>
+
+</ktml>
