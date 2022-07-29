@@ -1,0 +1,92 @@
+<ktml version="0.1">
+
+<head>
+  <title>GitHub ActionsからPagesに簡単にデプロイできるようになった</title>
+  <created>2022-07-29T18:47:02+09:00</created>
+</head>
+
+<body>
+  <p>GitHub Actionsというのは、GitHubで継続的インテグレーション/デリバリー(CI/CD)を実現するための機能です。これを使うことで、GitHub Pagesにサイトをデプロイすることは、今までもできたのですが、サードパーティのactionを使う方法が一般的だったようです。しかしつい最近実装された機能で、ActionsからPagesにサイトを簡単にデプロイ可能になりました。詳しくはGitHub公式の記事<a href="https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/">GitHub Pages: Custom GitHub Actions Workflows (beta)</a>を参照。</p>
+  <h2>Workflowを作る</h2>
+  <p>GitHub Actionsを使うためにはworkflowを作る必要があります。この記事では述べられていませんが、GitHubの<a href="https://github.com/actions/starter-workflows/tree/main/pages">starter-workflows</a>を見ると、Next.jsやHugoなどでPagesにデプロイするためのworkflowが既に用意されています。ですが私はViteを使いたかったので、Gatsbyのworkflowを多少アレンジしてみたのがこちらです。</p>
+  <code lang="yaml">name: Deploy Vite site to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+# Default to bash
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Detect package manager
+        id: detect-package-manager
+        run: |
+          if [ -f "${{ github.workspace }}/yarn.lock" ]; then
+            echo "::set-output name=manager::yarn"
+            echo "::set-output name=command::install"
+            exit 0
+          elif [ -f "${{ github.workspace }}/package.json" ]; then
+            echo "::set-output name=manager::npm"
+            echo "::set-output name=command::ci"
+            exit 0
+          else
+            echo "Unable to determine packager manager"
+            exit 1
+          fi
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: ${{ steps.detect-package-manager.outputs.manager }}
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v1
+      - name: Install dependencies
+        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+      - name: Build with Vite
+        run: ${{ steps.detect-package-manager.outputs.manager }} run build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./dist
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
+</code>
+  <p>こちらのworkflowはVite用に書きましたが、あくまで<code lang="bash">npm run build</code>して、生成された<code>dist</code>ディレクトリをGitHub Pagesで公開しているだけなので、Webpack等でも使えます。</p>
+</body>
+
+</ktml>
