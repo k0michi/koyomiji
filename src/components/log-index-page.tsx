@@ -25,7 +25,7 @@ export default function LogIndexPage(props: Props) {
         {props.items.map(i =>
           <>
             <h2><span class="log-id">#{i.id}</span> <a href={`/log/${i.id}`}>{i.title}</a></h2>
-            {i.description}
+            <p>{i.description}</p>
           </>
         )}
       </Frame>
