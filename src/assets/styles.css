@@ -267,6 +267,7 @@ p {
 #main>p {
   margin-top: 8px;
   margin-bottom: 0px;
+  line-height: 1.8;
 }
 
 #main table {
