@@ -276,20 +276,27 @@ p {
   overflow-x: auto;
 }
 
-#main h1 {
-  margin-top: 0;
-  font-size: 30px;
-}
-
 #main h1,
 #main h2,
 #main h3,
 #main h4,
 #main h5,
 #main h6 {
-  margin-top: 16px;
   font-weight: 500;
   font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
+}
+
+#main>h1,
+#main>h2,
+#main>h3,
+#main>h4,
+#main>h5,
+#main>h6 {
+  margin-top: 16px;
+}
+
+#main h1 {
+  font-size: 30px;
 }
 
 #main h2 {
@@ -312,12 +319,8 @@ p {
   font-size: 14px;
 }
 
-#main>*:first-child {
-  margin-top: 0px;
-}
-
 #main>p {
-  margin-top: 8px;
+  margin: 16px 0;
   margin-bottom: 0px;
   line-height: 1.9;
   text-align: justify;
@@ -390,6 +393,27 @@ p {
   }
 }
 
-.log-date {
-  font-size: 18px;
+#header {
+  margin-bottom: 16px;
+}
+
+.meta {
+  font-size: 15px;
+  color: #979797;
+  font-weight: 400;
+}
+
+.meta>div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#header svg {
+  width: 20px;
+  height: 20px;
+}
+
+#header svg {
+  stroke-width: 1.4px;
 }

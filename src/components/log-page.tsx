@@ -25,7 +25,12 @@ export default function LogPage(props: Props) {
         <meta name="twitter:site" content="@k0michi" />
       </Nano.Helmet>
       <Frame>
-        <h1><span class="log-id">#{props.id}</span> {props.title} <span class="log-date">{dateToString(props.created)}</span></h1>
+        <div id="header">
+          <h1>{props.title}</h1>
+          <div class="meta">
+            <div class="log-date"><div class="calender-icon"></div><div>{dateToString(props.created)}</div></div>
+          </div>
+        </div>
         {props.children}
       </Frame>
     </>

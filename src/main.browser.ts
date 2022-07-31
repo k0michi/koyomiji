@@ -8,6 +8,7 @@ import twitterIcon from '@tabler/icons/brand-twitter.svg?raw';
 import githubIcon from '@tabler/icons/brand-github.svg?raw';
 import youtubeIcon from '@tabler/icons/brand-youtube.svg?raw';
 import twitchIcon from '@tabler/icons/brand-twitch.svg?raw';
+import calenderIcon from '@tabler/icons/calendar-time.svg?raw';
 
 window.addEventListener('load', async () => {
   loadLogo();
@@ -27,7 +28,7 @@ function loadLogo() {
 
 function setIcon(className:string, svg:string) {
   for (const i of document.getElementsByClassName(className)) {
-    i.innerHTML = svg;
+    i.outerHTML = svg;
   }
 }
 
@@ -37,6 +38,7 @@ function loadIcons() {
   setIcon('github-icon', githubIcon);
   setIcon('youtube-icon', youtubeIcon);
   setIcon('twitch-icon', twitchIcon);
+  setIcon('calender-icon', calenderIcon);
 }
 
 async function loadHighlight() {
