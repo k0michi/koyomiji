@@ -229,7 +229,7 @@ p {
   margin-right: 6px;
 }
 
-#icons>li>svg {
+#icons>li svg {
   stroke-width: 1.4px;
   width: 26px;
   height: 26px;

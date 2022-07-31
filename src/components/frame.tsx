@@ -18,11 +18,11 @@ export default function Frame(props: Props) {
           <li class="asterisk"><a href="/knowledge">Knowledge</a></li>
           <li class="asterisk"><a href="/log">Logs</a></li>
           <li><ul id="icons">
-            <li class="mail-icon"></li>
-            <li class="twitter-icon"></li>
-            <li class="github-icon"></li>
-            <li class="youtube-icon"></li>
-            <li class="twitch-icon"></li>
+            <li><a href="mailto:k0michi@koyomi.co"><span class="mail-icon"></span></a></li>
+            <li><a href="https://twitter.com/k0michi"><span class="twitter-icon"></span></a></li>
+            <li><a href="https://github.com/k0michi"><span class="github-icon"></span></a></li>
+            <li><a href="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw"><span class="youtube-icon"></span></a></li>
+            <li><a href="https://www.twitch.tv/k0michi"><span class="twitch-icon"></span></a></li>
           </ul></li>
         </ul>
       </nav>
