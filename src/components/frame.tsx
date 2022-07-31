@@ -14,9 +14,9 @@ export default function Frame(props: Props) {
           </a>
         </div>
         <ul id="menu">
-          <li class="asterisk"><a href="/about">About</a></li>
-          <li class="asterisk"><a href="/knowledge">Knowledge</a></li>
-          <li class="asterisk"><a href="/log">Logs</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/knowledge">Knowledge</a></li>
+          <li><a href="/log">Logs</a></li>
           <li><ul id="icons">
             <li><a href="mailto:k0michi@koyomi.co"><span class="mail-icon"></span></a></li>
             <li><a href="https://twitter.com/k0michi"><span class="twitter-icon"></span></a></li>
