@@ -1,7 +1,6 @@
 import * as Nano from "nano-jsx";
 
 interface Props {
-  top?: boolean;
   children: any;
 }
 
@@ -15,9 +14,16 @@ export default function Frame(props: Props) {
           </a>
         </div>
         <ul id="menu">
-          <li class="menu-item"><a href="/about">About</a></li>
-          <li class="menu-item"><a href="/knowledge">Knowledge</a></li>
-          <li class="menu-item"><a href="/log">Logs</a></li>
+          <li class="asterisk"><a href="/about">About</a></li>
+          <li class="asterisk"><a href="/knowledge">Knowledge</a></li>
+          <li class="asterisk"><a href="/log">Logs</a></li>
+          <li><ul id="icons">
+            <li class="mail-icon"></li>
+            <li class="twitter-icon"></li>
+            <li class="github-icon"></li>
+            <li class="youtube-icon"></li>
+            <li class="twitch-icon"></li>
+          </ul></li>
         </ul>
       </nav>
       <main id="main">

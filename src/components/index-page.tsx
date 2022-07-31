@@ -15,7 +15,7 @@ export default function IndexPage() {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />
       </Nano.Helmet>
-      <Frame top={true}>
+      <Frame>
         <h2><a href="/about">プロフィール</a></h2>
         <p>私は一体誰か。</p>
         <h2><a href="/knowledge">備忘録</a></h2>
