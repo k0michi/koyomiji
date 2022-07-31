@@ -11,15 +11,15 @@
   --dark-color-1: #23232a;
   --dark-color-2: #f6f6ff;
   --dark-color-3: #8d8d9e;
-}
-
-html {
+  --font-sans: "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
+  --font-serif: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
+  --font-monospace: "Monaco", "Consolas", "Source Code Pro", monospace;
 }
 
 body {
   /*border-top: 4px solid black;*/
   margin: 0;
-  font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
+  font-family: var(--font-sans);
   font-feature-settings: "pwid";
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -94,7 +94,7 @@ p {
   flex-grow: 0;
   font-weight: 200;
   word-break: keep-all;
-  font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
+  font-family: var(--font-serif);
   height: fit-content;
   padding: 0 32px;
 }
@@ -162,9 +162,9 @@ p {
   font-size: 20px;
   font-weight: inherit;
 
-  --menu-color-1: rgb(183, 32, 32);
-  --menu-color-2: hsl(25, 85%, 44%);
-  --menu-color-3: hsl(50, 100%, 44%);
+  --menu-color-1: #b72020;
+  --menu-color-2: #d06011;
+  --menu-color-3: #e0bb00;
 }
 
 @media (prefers-color-scheme: light) {
@@ -232,7 +232,7 @@ p {
   z-index: -1;
   width: 100%;
   height: 0px;
-  background: #060606;
+  /* background: #060606; */
   transition: height .25s ease-in-out;
 }
 
@@ -344,7 +344,7 @@ p {
 #main h5,
 #main h6 {
   font-weight: 500;
-  font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
+  font-family: var(--font-serif)
 }
 
 #main>h1,
@@ -400,7 +400,7 @@ p {
 }
 
 #main code {
-  font-family: "Monaco", "Consolas", "Source Code Pro", monospace;
+  font-family: var(--font-monospace);
   padding: 2px;
   border-radius: 2px;
   font-size: 14px;
