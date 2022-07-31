@@ -2,8 +2,6 @@ import './assets/styles.css';
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
-import logoHr from './assets/koyomiji_hr.svg?url';
-import logoVt from './assets/koyomiji_vt.svg?url';
 import logoFull from './assets/koyomiji_full_hr.svg?url';
 
 window.addEventListener('load', async () => {
@@ -16,16 +14,8 @@ window.addEventListener('load', async () => {
 });
 
 function loadLogo() {
-  if (document.getElementById('logo-hr') != null) {
-    (document.getElementById('logo-hr') as HTMLImageElement).src = logoHr;
-  }
-
-  if (document.getElementById('logo-vt') != null) {
-    (document.getElementById('logo-vt') as HTMLImageElement).src = logoVt;
-  }
-
-  if (document.getElementById('logo-full') != null) {
-    (document.getElementById('logo-full') as HTMLImageElement).src = logoFull;
+  if (document.getElementById('logo') != null) {
+    (document.getElementById('logo') as HTMLImageElement).src = logoFull;
   }
 }
 

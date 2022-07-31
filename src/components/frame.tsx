@@ -8,20 +8,21 @@ interface Props {
 export default function Frame(props: Props) {
   return (
     <>
-      {props.top ?
-        <nav id="nav" class="top">
-          <img alt="曆路喫茶館" id="logo-full" />
-        </nav> :
-        <nav id="nav">
-          <h1 id="site-logo"><a href="/"><img alt="曆路" id="logo-hr" /><img alt="曆路" id="logo-vt" /></a></h1>
-          <h2><a href="/knowledge">備忘録</a></h2>
-          <h2><a href="/log">雑記帳</a></h2>
-        </nav>}
-      <div id="main-container">
-        <main id="main">
-          {props.children}
-        </main>
-      </div>
+      <nav id="nav">
+        <div id="logo-container">
+          <a href="/">
+            <img alt="曆路喫茶館" id="logo" />
+          </a>
+        </div>
+        <ul id="menu">
+          <li class="menu-item"><a href="/about">About</a></li>
+          <li class="menu-item"><a href="/knowledge">Knowledge</a></li>
+          <li class="menu-item"><a href="/log">Logs</a></li>
+        </ul>
+      </nav>
+      <main id="main">
+        {props.children}
+      </main>
     </>
   );
 }

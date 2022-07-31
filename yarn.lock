@@ -91,6 +91,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tabler/icons@npm:^1.78.1":
+  version: 1.78.1
+  resolution: "@tabler/icons@npm:1.78.1"
+  peerDependencies:
+    react: ^16.x || 17.x || 18.x
+    react-dom: ^16.x || 17.x || 18.x
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 3b8fe745adf66a211ea03e3a6e9a54393812733bafd7e46e51eaa8503df7836dcfeb56789ea18c661a8c866b6ee1a90d2031c05a9192c623414289fdfec7d181
+  languageName: node
+  linkType: hard
+
 "@tootallnate/once@npm:2":
   version: 2.0.0
   resolution: "@tootallnate/once@npm:2.0.0"
@@ -2161,6 +2176,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "koyomiji@workspace:."
   dependencies:
+    "@tabler/icons": ^1.78.1
     "@types/dateformat": ^5.0.0
     "@types/ejs": ^3.1.1
     "@types/jsdom": ^16.2.14
