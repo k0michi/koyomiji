@@ -9,10 +9,12 @@
   --light-color-2: #2f2a2a;
   --light-color-3: #9e8d8d;
   --light-color-4: #1d1a1a;
+  --light-color-5: #d4c6c6;
   --dark-color-1: #23232a;
   --dark-color-2: #f6f6ff;
   --dark-color-3: #8d8d9e;
   --dark-color-4: #111114;
+  --dark-color-5: #4c4c57;
   --font-sans: "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
   --font-serif: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
   --font-monospace: "Monaco", "Consolas", "Source Code Pro", monospace;
@@ -384,6 +386,10 @@ p {
   text-align: justify;
 }
 
+#main>.summary>* {
+  margin-bottom: 6px;
+}
+
 #main table {
   margin: auto;
 }
@@ -456,6 +462,24 @@ p {
   margin-top: 0;
 }
 
+#main hr {
+  border: 0;
+  height: 1px;
+  margin: 12px 0;
+}
+
+@media (prefers-color-scheme: light) {
+  #main hr {
+    background-color: var(--light-color-5);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  #main hr {
+    background-color: var(--dark-color-5);
+  }
+}
+
 
 /* Main - Header */
 
@@ -477,12 +501,9 @@ p {
   gap: 8px;
 }
 
-#header svg {
+.meta svg {
   width: 20px;
   height: 20px;
-}
-
-#header svg {
   stroke-width: 1.35px;
 }
 

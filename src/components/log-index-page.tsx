@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
+import dateToString from '../date-format.js';
 import { PostHead } from "../post.js";
 import Frame from "./frame.js";
 
@@ -24,8 +25,15 @@ export default function LogIndexPage(props: Props) {
       </Helmet>
       {props.items.map(i =>
         <>
-          <h2><span className="log-id">#{i.id}</span> <a href={`/log/${i.id}`}>{i.title}</a></h2>
-          <p>{i.description}</p>
+          <div className="summary">
+            <h2><a href={`/log/${i.id}`}>{i.title}</a></h2>
+            <div className="meta">
+              <div className="number">#{i.id}</div>
+              <div className="date"><div className="calender-icon"></div><div>{dateToString(new Date(i.created))}</div></div>
+            </div>
+            <p>{i.description}</p>
+          </div>
+          <hr />
         </>
       )}
     </>
