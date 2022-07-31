@@ -9,6 +9,7 @@ import githubIcon from '@tabler/icons/brand-github.svg?raw';
 import youtubeIcon from '@tabler/icons/brand-youtube.svg?raw';
 import twitchIcon from '@tabler/icons/brand-twitch.svg?raw';
 import calenderIcon from '@tabler/icons/calendar-time.svg?raw';
+import tagsIcon from '@tabler/icons/tags.svg?raw';
 
 window.addEventListener('load', async () => {
   loadLogo();
@@ -39,6 +40,7 @@ function loadIcons() {
   setIcon('youtube-icon', youtubeIcon);
   setIcon('twitch-icon', twitchIcon);
   setIcon('calender-icon', calenderIcon);
+  setIcon('tags-icon', tagsIcon);
 }
 
 async function loadHighlight() {

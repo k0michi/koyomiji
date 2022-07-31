@@ -405,12 +405,15 @@ p {
   font-size: 15px;
   color: #979797;
   font-weight: 400;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
 }
 
 .meta>div {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 #header svg {
