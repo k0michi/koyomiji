@@ -351,7 +351,7 @@ p {
 #main>h4,
 #main>h5,
 #main>h6 {
-  margin: 16px 0;
+  margin: 0 0 8px 0;
 }
 
 #main h1 {
@@ -379,7 +379,7 @@ p {
 }
 
 #main>p {
-  margin: 16px 0;
+  margin: 0 0 16px 0;
   line-height: 1.9;
   text-align: justify;
 }
@@ -405,8 +405,7 @@ p {
 }
 
 #main pre {
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin: 0 0 16px 0;
   border-radius: 0px;
   padding: 12px;
 }
@@ -455,22 +454,6 @@ p {
 
 #main>*:first-child {
   margin-top: 0;
-}
-
-.log-id {
-  font-weight: 300;
-}
-
-@media (prefers-color-scheme: light) {
-  .log-id {
-    color: var(--light-color-3);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .log-id {
-    color: var(--dark-color-3);
-  }
 }
 
 
