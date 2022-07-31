@@ -1,7 +1,4 @@
-/*
-  font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
-  font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
-*/
+/* Global */
 
 * {
   box-sizing: border-box;
@@ -11,11 +8,9 @@
 }
 
 html {
-  /*height: 100%;*/
 }
 
 body {
-  /*height: 100%;*/
   /*border-top: 4px solid black;*/
   margin: 0;
   font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
@@ -61,6 +56,9 @@ p {
   margin: 0;
 }
 
+
+/* Root */
+
 #root {
   height: 100%;
 }
@@ -82,6 +80,9 @@ p {
     flex-direction: row;
   }
 }
+
+
+/* Navigation */
 
 #nav {
   flex-grow: 0;
@@ -114,39 +115,8 @@ p {
   text-decoration: none;
 }
 
-/*
-#nav a:hover {
-  filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.619));
-}
-*/
 
-/*
-@media (max-width: 768px) {
-  #nav {
-    flex-direction: row;
-    width: 100%;
-    padding: 0 18px;
-    margin-left: auto;
-    margin-right: auto;
-    flex-basis: 84px;
-    flex-shrink: 0;
-  }
-}
-
-@media (min-width: 768px) {
-  #nav {
-    flex-direction: column;
-    padding: 18px 0;
-    flex-basis: 124px;
-    flex-shrink: 0;
-  }
-
-  #nav.top {
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 0;
-  }
-}*/
+/* Navigation - Logo */
 
 #logo-container svg {
   width: 196px;
@@ -177,6 +147,9 @@ p {
     color: #000000;
   }
 }
+
+
+/* Navigation - Menu */
 
 #menu {
   padding: 0;
@@ -301,6 +274,9 @@ p {
   background: var(--menu-color-3);
 }
 
+
+/* Navigation - Icons */
+
 #icons {
   padding: 0;
   display: flex;
@@ -330,6 +306,9 @@ p {
   width: 26px;
   height: 26px;
 }
+
+
+/* Main */
 
 @media (max-width: 768px) {
   #main {
@@ -417,13 +396,11 @@ p {
 #main code {
   font-family: "Monaco", "Consolas", "Source Code Pro", monospace;
   padding: 2px;
-  /* background-color: #eeeeee; */
   border-radius: 2px;
   font-size: 14px;
 }
 
 #main pre {
-  /* background-color: #eeeeee; */
   margin-top: 16px;
   margin-bottom: 16px;
   border-radius: 2px;
@@ -471,6 +448,9 @@ p {
     color: #a7a7a7;
   }
 }
+
+
+/* Main - Header */
 
 #header {
   margin-bottom: 16px;
