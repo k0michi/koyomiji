@@ -2,7 +2,7 @@ import './assets/styles.css';
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
-import logoFull from './assets/koyomiji_full_hr.svg?url';
+import logoFull from './assets/koyomiji_full_hr.svg?raw';
 import mailIcon from '@tabler/icons/mail.svg?raw';
 import twitterIcon from '@tabler/icons/brand-twitter.svg?raw';
 import githubIcon from '@tabler/icons/brand-github.svg?raw';
@@ -13,7 +13,6 @@ import tagsIcon from '@tabler/icons/tags.svg?raw';
 import asterisk from '/src/assets/asterisk.svg?raw';
 
 window.addEventListener('load', async () => {
-  loadLogo();
   loadIcons();
 
   await Promise.all([
@@ -22,14 +21,8 @@ window.addEventListener('load', async () => {
   ]);
 });
 
-function loadLogo() {
-  if (document.getElementById('logo') != null) {
-    (document.getElementById('logo') as HTMLImageElement).src = logoFull;
-  }
-}
-
-function setIcon(className:string, svg:string) {
-  const elements = Array.from(document.getElementsByClassName(className));
+function setIcon(query:string, svg:string) {
+  const elements = Array.from(document.querySelectorAll(query));
 
   for (const i of elements) {
     i.outerHTML = svg;
@@ -37,14 +30,15 @@ function setIcon(className:string, svg:string) {
 }
 
 function loadIcons() {
-  setIcon('mail-icon', mailIcon);
-  setIcon('twitter-icon', twitterIcon);
-  setIcon('github-icon', githubIcon);
-  setIcon('youtube-icon', youtubeIcon);
-  setIcon('twitch-icon', twitchIcon);
-  setIcon('calender-icon', calenderIcon);
-  setIcon('tags-icon', tagsIcon);
-  setIcon('asterisk', asterisk);
+  setIcon('.mail-icon', mailIcon);
+  setIcon('.twitter-icon', twitterIcon);
+  setIcon('.github-icon', githubIcon);
+  setIcon('.youtube-icon', youtubeIcon);
+  setIcon('.twitch-icon', twitchIcon);
+  setIcon('.calender-icon', calenderIcon);
+  setIcon('.tags-icon', tagsIcon);
+  setIcon('.asterisk', asterisk);
+  setIcon('#logo', logoFull);
 }
 
 async function loadHighlight() {

@@ -25,6 +25,20 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: white;
+    color: #353535;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #0f0f0f;
+    color: white;
+  }
+}
+
 a {
   color: inherit;
   text-decoration-thickness: 1px;
@@ -53,19 +67,18 @@ p {
 
 #root>div {
   height: 100%;
-  display: flex;
   max-width: 1480px;
   margin: 0 auto;
 }
 
 @media (max-width: 768px) {
   #root>div {
-    flex-direction: column;
   }
 }
 
 @media (min-width: 768px) {
   #root>div {
+    display: flex;
     flex-direction: row;
   }
 }
@@ -75,15 +88,30 @@ p {
   font-weight: 200;
   word-break: keep-all;
   font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
-  max-width: fit-content;
   height: fit-content;
   padding: 0 32px;
-  position: sticky;
-  top: 0;
+}
+
+@media (max-width: 768px) {
+  #nav {
+    width: 100%;
+  }
+
+  #nav>* {
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  #nav {
+    position: sticky;
+    top: 0;
+  }
 }
 
 #nav a {
   transition: filter 0.25s;
+  text-decoration: none;
 }
 
 /*
@@ -92,6 +120,7 @@ p {
 }
 */
 
+/*
 @media (max-width: 768px) {
   #nav {
     flex-direction: row;
@@ -104,7 +133,6 @@ p {
   }
 }
 
-/*
 @media (min-width: 768px) {
   #nav {
     flex-direction: column;
@@ -120,56 +148,73 @@ p {
   }
 }*/
 
-#logo {
+#logo-container svg {
   width: 196px;
 }
 
 #logo-container {
-  background-color: #0f0f0f;
   padding: 30px 18px 12px 18px;
+  width: fit-content;
+  margin: 0 auto;
 }
 
-/*
-@media (max-width: 768px) {
-  #logo-vt {
-    display: none;
+@media (prefers-color-scheme: light) {
+  #logo-container {
+    background-color: #0f0f0f;
   }
 
-  #logo-hr {
-    display: inline;
-    height: 62px;
-  }
-
-  #logo-full {
-    height: 62px;
+  #logo-container svg {
+    color: #eaeaea;
   }
 }
 
-@media (min-width: 768px) {
-  #logo-hr {
-    display: none;
+@media (prefers-color-scheme: dark) {
+  #logo-container {
+    background-color: #ffffff;
   }
 
-  #logo-vt {
-    display: inline;
-    width: 72px;
+  #logo-container svg {
+    color: #000000;
   }
-
-  #logo-full {
-    height: 72px;
-  }
-}*/
+}
 
 #menu {
-  margin: 100px 0 0 16px;
   padding: 0;
   font-size: 20px;
   font-weight: inherit;
-  color: #060606;
 
   --menu-color-1: hsl(0, 100%, 27%);
   --menu-color-2: hsl(25, 87%, 41%);
   --menu-color-3: hsl(50, 100%, 42%);
+}
+
+@media (prefers-color-scheme: light) {
+  #menu {
+    color: #060606;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  #menu {
+    color: #ffffff;
+  }
+}
+
+@media (max-width: 768px) {
+  #menu {
+    display: flex;
+    flex-direction: row;
+  }
+
+  #menu>li {
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  #menu {
+    margin: 100px 0 0 16px;
+  }
 }
 
 #menu>li {
@@ -240,11 +285,19 @@ p {
 }
 
 #icons {
-  margin: 16px 0 0 48px;
   padding: 0;
   display: flex;
   flex-direction: row;
   width: fit-content;
+}
+
+@media (max-width: 768px) {
+}
+
+@media (min-width: 768px) {
+  #icons {
+    margin: 16px 0 0 48px;
+  }
 }
 
 #icons>li {
@@ -257,25 +310,6 @@ p {
   width: 26px;
   height: 26px;
 }
-
-#nav a {
-  text-decoration: none;
-}
-
-/*
-@media (prefers-color-scheme: light) {
-  #main-container {
-    background-color: white;
-    color: #353535;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  #main-container {
-    background-color: #0f0f0f;
-    color: white;
-  }
-}*/
 
 @media (max-width: 768px) {
   #main {
