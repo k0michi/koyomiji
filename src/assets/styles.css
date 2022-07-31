@@ -204,6 +204,7 @@ p {
   #menu {
     display: flex;
     flex-direction: row;
+    margin-top: 12px;
   }
 
   #menu>li {
@@ -218,8 +219,16 @@ p {
 }
 
 #menu>li {
-  margin-top: 12px;
   list-style: none;
+}
+
+@media (max-width: 768px) {
+}
+
+@media (min-width: 768px) {
+  #menu>li {
+    margin-top: 12px;
+  }
 }
 
 #menu>li>a {
@@ -252,8 +261,16 @@ p {
   height: 100%;
 }
 
-#menu>li>a:hover, #menu>li>a:hover svg {
-  color: #ffffff;
+@media (prefers-color-scheme: light) {
+  #menu>li>a:hover, #menu>li>a:hover svg {
+    color: #ffffff;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  #menu>li>a:hover, #menu>li>a:hover svg {
+    color: #060606;
+  }
 }
 
 #menu>li svg {
@@ -292,6 +309,9 @@ p {
 }
 
 @media (max-width: 768px) {
+  #icons {
+    margin-top: 12px;
+  }
 }
 
 @media (min-width: 768px) {
