@@ -7,10 +7,10 @@ export default function AboutPage() {
   return (
     <>
       <Nano.Helmet>
-        <title>プロフィール | 曆路喫茶館</title>
+        <title>About | 曆路喫茶館</title>
         <meta name="description" content="" />
         <meta property="og:url" content={url} />
-        <meta property="og:title" content="プロフィール" />
+        <meta property="og:title" content="About" />
         <meta property="og:description" content="" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />

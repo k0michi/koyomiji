@@ -377,6 +377,10 @@ p {
   content: "- ";
 }
 
+#main>*:first-child {
+  margin-top: 0;
+}
+
 .log-id {
   font-weight: 300;
 }

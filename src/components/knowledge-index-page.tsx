@@ -31,10 +31,10 @@ export default function KnowledgeIndexPage(props: Props) {
   return (
     <>
       <Nano.Helmet>
-        <title>備忘録 | 曆路喫茶館</title>
+        <title>Knowledge | 曆路喫茶館</title>
         <meta name="description" content="" />
         <meta property="og:url" content={url} />
-        <meta property="og:title" content="備忘録" />
+        <meta property="og:title" content="Knowledge" />
         <meta property="og:description" content="" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />

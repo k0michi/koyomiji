@@ -13,10 +13,10 @@ export default function LogIndexPage(props: Props) {
   return (
     <>
       <Nano.Helmet>
-        <title>雑記帳 | 曆路喫茶館</title>
+        <title>Logs | 曆路喫茶館</title>
         <meta name="description" content="" />
         <meta property="og:url" content={url} />
-        <meta property="og:title" content="雑記帳" />
+        <meta property="og:title" content="Logs" />
         <meta property="og:description" content="" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />
