@@ -173,14 +173,11 @@ p {
 }*/
 
 #menu {
-  margin-top: 100px;
-  padding-left: 32px;
+  margin: 100px auto 0 auto;
+  padding: 0;
   font-size: 20px;
   font-weight: inherit;
   color: #060606;
-}
-
-#menu>li {
 }
 
 #menu>li>a {
@@ -190,6 +187,7 @@ p {
   display: inline-flex;
   flex-direction: row;
   align-items: center;
+  gap: 12px;
 }
 
 #menu>li>a::before {
@@ -223,14 +221,14 @@ p {
 
 #menu>li svg {
   width: 12px;
-  height: 12px;
 }
 
 #icons {
-  margin-top: 20px;
+  margin: 20px auto 0 auto;
   padding: 0;
   display: flex;
   flex-direction: row;
+  width: fit-content;
 }
 
 #icons>li {

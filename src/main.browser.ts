@@ -29,7 +29,9 @@ function loadLogo() {
 }
 
 function setIcon(className:string, svg:string) {
-  for (const i of document.getElementsByClassName(className)) {
+  const elements = Array.from(document.getElementsByClassName(className));
+
+  for (const i of elements) {
     i.outerHTML = svg;
   }
 }
