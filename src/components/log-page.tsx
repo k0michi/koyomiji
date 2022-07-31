@@ -28,6 +28,7 @@ export default function LogPage(props: Props) {
       <div id="header">
         <h1>{props.title}</h1>
         <div className="meta">
+          <div className="number">#{props.id}</div>
           <div className="date"><div className="calender-icon"></div><div>{dateToString(props.created)}</div></div>
         </div>
       </div>

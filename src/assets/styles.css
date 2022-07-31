@@ -8,9 +8,11 @@
   --light-color-1: #fff6f6;
   --light-color-2: #2f2a2a;
   --light-color-3: #9e8d8d;
+  --light-color-4: #1d1a1a;
   --dark-color-1: #23232a;
   --dark-color-2: #f6f6ff;
   --dark-color-3: #8d8d9e;
+  --dark-color-4: #111114;
   --font-sans: "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
   --font-serif: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
   --font-monospace: "Monaco", "Consolas", "Source Code Pro", monospace;
@@ -398,15 +400,35 @@ p {
 #main code {
   font-family: var(--font-monospace);
   padding: 2px;
-  border-radius: 2px;
+  border-radius: 0px;
   font-size: 14px;
 }
 
 #main pre {
   margin-top: 16px;
   margin-bottom: 16px;
-  border-radius: 2px;
-  padding: 8px;
+  border-radius: 0px;
+  padding: 12px;
+}
+
+@media (prefers-color-scheme: light) {
+  #main code {
+    background-color: var(--light-color-4);
+  }
+
+  #main pre {
+    background-color: var(--light-color-4);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  #main code {
+    background-color: var(--dark-color-4);
+  }
+  
+  #main pre {
+    background-color: var(--dark-color-4);
+  }
 }
 
 #main pre code {
