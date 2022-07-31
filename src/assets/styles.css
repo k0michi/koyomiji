@@ -5,6 +5,12 @@
 }
 
 :root {
+  --light-color-1: #fff;
+  --light-color-2: #23232a;
+  --light-color-3: #979797;
+  --dark-color-1: #23232a;
+  --dark-color-2: #ffffff;
+  --dark-color-3: #979797;
 }
 
 html {
@@ -22,15 +28,15 @@ body {
 
 @media (prefers-color-scheme: light) {
   body {
-    background-color: white;
-    color: #353535;
+    background-color: var(--light-color-1);
+    color: var(--light-color-2);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #0f0f0f;
-    color: white;
+    background-color: var(--dark-color-1);
+    color: var(--dark-color-2);
   }
 }
 
@@ -130,21 +136,21 @@ p {
 
 @media (prefers-color-scheme: light) {
   #logo-container {
-    background-color: #0f0f0f;
+    background-color: var(--light-color-2);
   }
 
   #logo-container svg {
-    color: #eaeaea;
+    color: var(--light-color-1);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   #logo-container {
-    background-color: #ffffff;
+    background-color: var(--dark-color-2);
   }
 
   #logo-container svg {
-    color: #000000;
+    color: var(--dark-color-1);
   }
 }
 
@@ -163,13 +169,13 @@ p {
 
 @media (prefers-color-scheme: light) {
   #menu {
-    color: #060606;
+    color: var(--light-color-2);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   #menu {
-    color: #ffffff;
+    color: var(--dark-color-2);
   }
 }
 
@@ -236,13 +242,13 @@ p {
 
 @media (prefers-color-scheme: light) {
   #menu>li>a:hover, #menu>li>a:hover svg {
-    color: #ffffff;
+    color: var(--light-color-1);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   #menu>li>a:hover, #menu>li>a:hover svg {
-    color: #060606;
+    color: var(--dark-color-1);
   }
 }
 
@@ -386,7 +392,7 @@ p {
 
 #main table thead {
   font-weight: bold;
-  border-bottom: 1px solid #353535;
+  /* border-bottom: 1px solid #353535; */
 }
 
 #main table td {
@@ -439,13 +445,13 @@ p {
 
 @media (prefers-color-scheme: light) {
   .log-id {
-    color: #a7a7a7;
+    color: var(--light-color-3);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   .log-id {
-    color: #a7a7a7;
+    color: var(--dark-color-3);
   }
 }
 
@@ -458,7 +464,6 @@ p {
 
 .meta {
   font-size: 15px;
-  color: #979797;
   font-weight: 400;
   display: flex;
   flex-direction: row;
@@ -478,4 +483,16 @@ p {
 
 #header svg {
   stroke-width: 1.35px;
+}
+
+@media (prefers-color-scheme: light) {
+  .meta {
+    color: var(--light-color-3);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .meta {
+    color: var(--dark-color-3);
+  }
 }
