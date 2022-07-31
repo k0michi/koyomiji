@@ -1,4 +1,7 @@
-import * as Nano from "nano-jsx";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom/server.js';
+import { Helmet } from 'react-helmet';
 import { Root } from "./components/root.js";
 import { Post } from "./post.js";
 import { Renderer } from "./renderer.js";
@@ -24,17 +27,14 @@ export function createRenderer(outRoot: string | null, template: string, registr
     const params = ctx.params as any;
     const id = params['id'] as string;
     const post = registry.logItems[[id].join('/')];
+    const { title, created, description } = post.head;
+    const body = ktml.toElement(post.body.childNodes);
 
-    return render(() => {
-      const { title, created, description } = post.head;
-      const body = ktml.toElement(post.body.childNodes);
-
-      return (
-        <Root title={title} created={new Date(created)} id={id} description={description}>
-          {body}
-        </Root>
-      );
-    }, template, `/log/${id}`)
+    return render(
+      <Root title={title} created={new Date(created)} id={id} description={description}>
+        {body}
+      </Root>
+      , template, `/log/${id}`)
   });
 
   renderer.use('/knowledge/:category/:id/index.html', (ctx) => {
@@ -42,17 +42,14 @@ export function createRenderer(outRoot: string | null, template: string, registr
     const id = params['id'] as string;
     const category = params['category'] as string;
     const post = registry.knowledgeItems[[category, id].join('/')];
+    const { title, created, description } = post.head;
+    const body = ktml.toElement(post.body.childNodes);
 
-    return render(() => {
-      const { title, created, description } = post.head;
-      const body = ktml.toElement(post.body.childNodes);
-
-      return (
-        <Root title={title} created={new Date(created)} id={id} category={category} description={description}>
-          {body}
-        </Root>
-      );
-    }, template, `/knowledge/${category}/${id}`);
+    return render(
+      <Root title={title} created={new Date(created)} id={id} category={category} description={description}>
+        {body}
+      </Root>
+      , template, `/knowledge/${category}/${id}`);
   });
 
   renderer.use('/log/index.html', (ctx) => {
@@ -67,12 +64,15 @@ export function createRenderer(outRoot: string | null, template: string, registr
 }
 
 export function render(children: any, template: string, pathname: string) {
-  const app = Nano.renderSSR(children, { pathname });
-  const { body, head, footer } = Nano.Helmet.SSR(app);
+  const app = ReactDOM.renderToString(
+    <StaticRouter location={pathname}>
+      {children}
+    </StaticRouter>
+  );
+  const helmet = Helmet.renderStatic();
   return template
-    .replace('<!--head-->', head.join('\n'))
-    .replace('<!--body-->', body)
-    .replace('<!--footer-->', footer.join('\n'));
+    .replace('<!--head-->', [helmet.title.toString(), helmet.meta.toString(), helmet.link.toString()].join('\n'))
+    .replace('<!--body-->', app);
 }
 
 export function createPost(content: string, id: string, category?: string): Post {

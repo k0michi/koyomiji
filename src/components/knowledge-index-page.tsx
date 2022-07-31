@@ -1,4 +1,5 @@
-import * as Nano from "nano-jsx";
+import * as React from 'react';
+import { Helmet } from 'react-helmet';
 import { categoryNames } from "../category.js";
 import { PostHead } from "../post.js";
 import Frame from "./frame.js";
@@ -30,7 +31,7 @@ export default function KnowledgeIndexPage(props: Props) {
 
   return (
     <>
-      <Nano.Helmet>
+      <Helmet>
         <title>Knowledge | 曆路喫茶館</title>
         <meta name="description" content="" />
         <meta property="og:url" content={url} />
@@ -38,15 +39,13 @@ export default function KnowledgeIndexPage(props: Props) {
         <meta property="og:description" content="" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />
-      </Nano.Helmet>
-      <Frame>
-        {Object.entries(map).map(([k, v]) => <>
-          <h2>{categoryNames[k]}</h2>
-          <ul>
-            {v.map(i => <li><a href={`/knowledge/${i.category}/${i.id}`}>{i.title}</a></li>)}
-          </ul>
-        </>)}
-      </Frame>
+      </Helmet>
+      {Object.entries(map).map(([k, v]) => <>
+        <h2>{categoryNames[k]}</h2>
+        <ul>
+          {v.map(i => <li><a href={`/knowledge/${i.category}/${i.id}`}>{i.title}</a></li>)}
+        </ul>
+      </>)}
     </>
   );
 }

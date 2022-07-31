@@ -1,5 +1,5 @@
 import { JSDOM } from "jsdom";
-import * as Nano from "nano-jsx";
+import * as React from 'react';
 
 const jsdom = new JSDOM();
 
@@ -110,7 +110,7 @@ export function toElement(node: Node | NodeList): any {
 
       const tag = element.tagName.toLowerCase();
 
-      return Nano.h(tag, props, ...children);
+      return React.createElement(tag, props, ...children);
     } else if (node.nodeType == Node.TEXT_NODE) {
       const text = node as Text;
       return text.data;
@@ -124,7 +124,7 @@ export function toElement(node: Node | NodeList): any {
       children[i] = toElement(node[i]);
     }
 
-    return Nano.h(Nano.Fragment, {}, ...children);
+    return React.createElement(React.Fragment, {}, ...children);
   }
 }
 
