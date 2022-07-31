@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Outlet } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
 
 export default function Frame() {
+  const path = useLocation().pathname;
+
   return (
     <>
       <nav id="nav">
@@ -11,9 +13,9 @@ export default function Frame() {
           </a>
         </div>
         <ul id="menu">
-          <li><a href="/about"><div className="asterisk" /><div>About</div></a></li>
-          <li><a href="/knowledge"><div className="asterisk" /><div>Knowledge</div></a></li>
-          <li><a href="/log"><div className="asterisk" /><div>Logs</div></a></li>
+          <li><a href="/about" className={path.startsWith('/about') ? 'active' : ''}><div className="asterisk" /><div>About</div></a></li>
+          <li><a href="/knowledge" className={path.startsWith('/knowledge') ? 'active' : ''}><div className="asterisk" /><div>Knowledge</div></a></li>
+          <li><a href="/log" className={path.startsWith('/log') ? 'active' : ''}><div className="asterisk" /><div>Logs</div></a></li>
         </ul>
         <ul id="icons">
           <li><a href="mailto:k0michi@koyomi.co"><span className="mail-icon"></span></a></li>

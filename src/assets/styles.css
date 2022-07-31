@@ -232,20 +232,8 @@ p {
   transition: height .25s ease-in-out;
 }
 
-#menu>li>a:hover::before {
+#menu>li>a:hover::before, #menu>li>a.active::before {
   height: 100%;
-}
-
-@media (prefers-color-scheme: light) {
-  #menu>li>a:hover, #menu>li>a:hover svg {
-    color: var(--light-color-1);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  #menu>li>a:hover, #menu>li>a:hover svg {
-    color: var(--dark-color-1);
-  }
 }
 
 #menu>li svg {
@@ -274,6 +262,18 @@ p {
 
 #menu>li:nth-child(3)>a::before {
   background: var(--menu-color-3);
+}
+
+@media (prefers-color-scheme: light) {
+  #menu>li>a:hover, #menu>li>a:hover svg, #menu>li>a.active, #menu>li>a.active svg {
+    color: var(--light-color-1);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  #menu>li>a:hover, #menu>li>a:hover svg, #menu>li>a.active, #menu>li>a.active svg {
+    color: var(--dark-color-1);
+  }
 }
 
 
