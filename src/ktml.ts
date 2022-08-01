@@ -115,7 +115,7 @@ export function toElement(node: Node | NodeList): any {
       const props: any = {};
 
       for (let i = 0; i < element.attributes.length; i++) {
-        if (props[element.attributes[i].name] == 'class') {
+        if (element.attributes[i].name == 'class') {
           props['className'] = element.attributes[i].value;
         } else {
           props[element.attributes[i].name] = element.attributes[i].value;
