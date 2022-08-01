@@ -1,4 +1,5 @@
 import * as fs from 'fs/promises';
+import * as fsn from 'fs';
 import * as path from 'path';
 import { Match, match, MatchResult } from "path-to-regexp";
 
@@ -6,7 +7,7 @@ export interface Context {
   params: object;
 }
 
-export type Middleware = (ctx: Context) => string | Promise<string>;
+export type Middleware = (ctx: Context) => string | Promise<string> | Buffer | Promise<Buffer>;
 
 export interface Route {
   path: string;
@@ -40,15 +41,22 @@ export class Renderer {
           content = await content;
         }
 
-        await fs.mkdir(path.dirname(path.join(this.rootDir!, pPath)), { recursive: true });
-        await fs.writeFile(path.join(this.rootDir!, pPath), content);
-        console.log(path.join(this.rootDir!, pPath))
-        break;
+        if (content instanceof Buffer) {
+          await fs.mkdir(path.dirname(path.join(this.rootDir!, pPath)), { recursive: true });
+          await fs.writeFile(path.join(this.rootDir!, pPath), content);
+          console.log(path.join(this.rootDir!, pPath))
+          break;
+        }else if (typeof content == 'string'){
+          await fs.mkdir(path.dirname(path.join(this.rootDir!, pPath)), { recursive: true });
+          await fs.writeFile(path.join(this.rootDir!, pPath), content);
+          console.log(path.join(this.rootDir!, pPath))
+          break;
+        }
       }
     }
   }
 
-  renderToString(pPath: string) {
+  async renderToString(pPath: string) {
     for (const route of this.routes) {
       const matchFunc = match(route.path);
       const result = matchFunc(pPath);
@@ -56,7 +64,18 @@ export class Renderer {
 
       if (result) {
         let content = route.middleware(context);
-        return content;
+
+        if (content instanceof Promise) {
+          content = await content;
+        }
+
+        if (content instanceof Buffer) {
+          return content;
+        }else if (typeof content == 'string'){
+          return content;
+        }
+
+        throw new Error('Unexpected');
       }
     }
   }

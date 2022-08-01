@@ -13,6 +13,7 @@ import { AddressInfo } from 'net';
 const contentRoot = './contents';
 
 const registry: Registry = {
+  rootDir:contentRoot,
   logItems: {},
   knowledgeItems: {}
 };
@@ -28,15 +29,8 @@ async function createServer() {
   app.use(async (ctx) => {
     let url = ctx.originalUrl;
 
-    if (url.endsWith('/')) {
-      url += 'index.html';
-    }
-
-    if (!url.endsWith('index.html')) {
-      url += '/index.html';
-    }
-
     try {
+      console.log(url)
       let template = await fs.readFile(
         path.resolve('index.html'),
         'utf-8'
@@ -46,7 +40,7 @@ async function createServer() {
 
       const { createRenderer } = await vite.ssrLoadModule('/src/main-renderer.tsx')
       const renderer = createRenderer(null, template, registry);
-      const html = renderer.renderToString(url);
+      const html = await renderer.renderToString(url);
 
       ctx.type = 'text/html';
       ctx.body = html;
@@ -56,9 +50,9 @@ async function createServer() {
     }
   });
 
-  try{
+  try {
     await listen(app, 3000);
-  }catch (e) {
+  } catch (e) {
     if ((e as any).code == 'EADDRINUSE') {
       await listen(app, 0);
     }
@@ -68,7 +62,7 @@ async function createServer() {
 }
 
 async function listen(app: Koa, port: number) {
-  return new Promise((resolve, reject)=>{
+  return new Promise((resolve, reject) => {
     const server = app.listen(port, () => {
       const info = server.address() as AddressInfo;
       const address = info.address == '::' ? 'localhost' : info.address;
@@ -76,8 +70,8 @@ async function listen(app: Koa, port: number) {
       console.log(`http://${address}:${port}`);
       resolve(server);
     });
-  
-    server.on('error',e=>{
+
+    server.on('error', e => {
       reject(e);
     })
   });
@@ -87,14 +81,14 @@ async function prepare() {
   for (const p of await glob('log/*/index.ktml', { cwd: contentRoot })) {
     const id = p.split('/')[1];
     const content = await readText(path.join(contentRoot, p));
-    registry.logItems[[id].join('/')] = createPost(content, id);
+    registry.logItems[[id].join('/')] = createPost(content, id, ['log', id]);
   }
 
   for (const p of await glob('knowledge/*/*/index.ktml', { cwd: contentRoot })) {
     const category = p.split('/')[1];
     const id = p.split('/')[2];
     const content = await readText(path.join(contentRoot, p));
-    registry.knowledgeItems[[category, id].join('/')] = createPost(content, id, category);
+    registry.knowledgeItems[[category, id].join('/')] = createPost(content, id, ['knowledge', category, id], category);
   }
 }
 
@@ -104,7 +98,7 @@ function registerHandler(vite: ViteDevServer) {
       if (minimatch(p, 'log/*/index.ktml')) {
         const id = p.split('/')[1];
         const content = await readText(path.join(contentRoot, p));
-        registry.logItems[[id].join('/')] = createPost(content, id);
+        registry.logItems[[id].join('/')] = createPost(content, id, ['log', id]);
         vite.ws.send({ type: 'full-reload' });
         console.log(new Date(), event, p)
       }
@@ -113,7 +107,7 @@ function registerHandler(vite: ViteDevServer) {
         const category = p.split('/')[1];
         const id = p.split('/')[2];
         const content = await readText(path.join(contentRoot, p));
-        registry.knowledgeItems[[category, id].join('/')] = createPost(content, id, category);
+        registry.knowledgeItems[[category, id].join('/')] = createPost(content, id, ['knowledge', category, id], category);
         vite.ws.send({ type: 'full-reload' });
         console.log(new Date(), event, p)
       }

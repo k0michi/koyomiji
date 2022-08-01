@@ -36,6 +36,16 @@ export function getDescription(node: Node, limit: number) {
   }
 }
 
+export function transformImg(element: Element, basePath: string[]) {
+  const document = element.ownerDocument!;
+
+  for (const img of element.querySelectorAll('img')) {
+    const relativeSrc = img.getAttribute('src');
+    const absoluteSrc = '/' + basePath.join('/') + '/' + relativeSrc;
+    img.setAttribute('src', absoluteSrc);
+  }
+}
+
 export function transformMath(element: Element) {
   const document = element.ownerDocument!;
 

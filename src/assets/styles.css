@@ -421,18 +421,18 @@ p {
   content: "- ";
 }
 
-#main>*:first-child {
-  margin-top: 0;
-}
-
 #main hr {
   border: 0;
   height: 1px;
   margin: 12px 0;
+  background-color: var(--color-5);
 }
 
-#main hr {
-  background-color: var(--color-5);
+#main>img {
+  display: block;
+  margin: 0 auto 16px auto;
+  width: 80%;
+  border: 1px solid #111114;
 }
 
 
