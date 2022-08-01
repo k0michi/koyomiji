@@ -15,6 +15,7 @@ function join(elements: JSX.Element[]) {
     newElements.push(elements[i]);
 
     if (i < elements.length - 1) {
+      // FIXME
       newElements.push(<hr />);
     }
   }
@@ -38,7 +39,7 @@ export default function LogIndexPage(props: Props) {
         <meta name="twitter:site" content="@k0michi" />
       </Helmet>
       {join(props.items.map(i =>
-        <div className="summary">
+        <div className="summary" key={i.id}>
           <h2><a href={`/log/${i.id}`}>{i.title}</a></h2>
           <div className="meta">
             <div className="number">#{i.id}</div>

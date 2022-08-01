@@ -40,12 +40,14 @@ export default function KnowledgeIndexPage(props: Props) {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />
       </Helmet>
-      {Object.entries(map).map(([k, v]) => <>
-        <h2>{categoryNames[k]}</h2>
-        <ul>
-          {v.map(i => <li><a href={`/knowledge/${i.category}/${i.id}`}>{i.title}</a></li>)}
-        </ul>
-      </>)}
+      {Object.entries(map).map(([k, v]) =>
+        <div className="category" key={k}>
+          <h2>{categoryNames[k]}</h2>
+          <ul>
+            {v.map(i => <li key={`${i.category}/${i.id}`}><a href={`/knowledge/${i.category}/${i.id}`}>{i.title}</a></li>)}
+          </ul>
+        </div>
+      )}
     </>
   );
 }
