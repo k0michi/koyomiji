@@ -432,13 +432,12 @@ p {
   display: block;
   margin: 0 auto 16px auto;
   width: 80%;
-  border: 1px solid #111114;
 }
 
 
 /* Main - Header */
 
-#header {
+#main header {
   margin-bottom: 16px;
 }
 
