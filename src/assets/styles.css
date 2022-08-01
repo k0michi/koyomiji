@@ -5,19 +5,29 @@
 }
 
 :root {
-  --light-color-1: #fff6f6;
-  --light-color-2: #2f2a2a;
-  --light-color-3: #9e8d8d;
-  --light-color-4: #2f2a2a;
-  --light-color-5: #d4c6c6;
-  --dark-color-1: #23232a;
-  --dark-color-2: #f6f6ff;
-  --dark-color-3: #8d8d9e;
-  --dark-color-4: #111114;
-  --dark-color-5: #4c4c57;
   --font-sans: "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
   --font-serif: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
   --font-monospace: "Monaco", "Consolas", "Source Code Pro", monospace;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-1: #fff6f6;
+    --color-2: #2f2a2a;
+    --color-3: #9e8d8d;
+    --color-4: #2f2a2a;
+    --color-5: #d4c6c6;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-1: #23232a;
+    --color-2: #f6f6ff;
+    --color-3: #8d8d9e;
+    --color-4: #111114;
+    --color-5: #4c4c57;
+  }
 }
 
 body {
@@ -30,18 +40,9 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-@media (prefers-color-scheme: light) {
-  body {
-    background-color: var(--light-color-1);
-    color: var(--light-color-2);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: var(--dark-color-1);
-    color: var(--dark-color-2);
-  }
+body {
+  background-color: var(--color-1);
+  color: var(--color-2);
 }
 
 a {
@@ -76,8 +77,7 @@ p {
 }
 
 @media (max-width: 768px) {
-  #root {
-  }
+  #root {}
 }
 
 @media (min-width: 768px) {
@@ -134,24 +134,12 @@ p {
   margin: 0 auto;
 }
 
-@media (prefers-color-scheme: light) {
-  #logo-container {
-    background-color: var(--light-color-2);
-  }
-
-  #logo-container svg {
-    color: var(--light-color-1);
-  }
+#logo-container {
+  background-color: var(--color-2);
 }
 
-@media (prefers-color-scheme: dark) {
-  #logo-container {
-    background-color: var(--dark-color-2);
-  }
-
-  #logo-container svg {
-    color: var(--dark-color-1);
-  }
+#logo-container svg {
+  color: var(--color-1);
 }
 
 
@@ -167,16 +155,8 @@ p {
   --menu-color-3: #e0bb00;
 }
 
-@media (prefers-color-scheme: light) {
-  #menu {
-    color: var(--light-color-2);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  #menu {
-    color: var(--dark-color-2);
-  }
+#menu {
+  color: var(--color-2);
 }
 
 @media (max-width: 768px) {
@@ -201,8 +181,7 @@ p {
   list-style: none;
 }
 
-@media (max-width: 768px) {
-}
+@media (max-width: 768px) {}
 
 @media (min-width: 768px) {
   #menu>li {
@@ -236,7 +215,8 @@ p {
   transition: height .25s ease-in-out;
 }
 
-#menu>li>a:hover::before, #menu>li>a.active::before {
+#menu>li>a:hover::before,
+#menu>li>a.active::before {
   height: 100%;
 }
 
@@ -268,16 +248,11 @@ p {
   background: var(--menu-color-3);
 }
 
-@media (prefers-color-scheme: light) {
-  #menu>li>a:hover, #menu>li>a:hover svg, #menu>li>a.active, #menu>li>a.active svg {
-    color: var(--light-color-1);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  #menu>li>a:hover, #menu>li>a:hover svg, #menu>li>a.active, #menu>li>a.active svg {
-    color: var(--dark-color-1);
-  }
+#menu>li>a:hover,
+#menu>li>a:hover svg,
+#menu>li>a.active,
+#menu>li>a.active svg {
+  color: var(--color-1);
 }
 
 
@@ -416,24 +391,12 @@ p {
   padding: 12px;
 }
 
-@media (prefers-color-scheme: light) {
-  #main code {
-    background-color: var(--light-color-4);
-  }
-
-  #main pre {
-    background-color: var(--light-color-4);
-  }
+#main code {
+  background-color: var(--color-4);
 }
 
-@media (prefers-color-scheme: dark) {
-  #main code {
-    background-color: var(--dark-color-4);
-  }
-  
-  #main pre {
-    background-color: var(--dark-color-4);
-  }
+#main pre {
+  background-color: var(--color-4);
 }
 
 #main pre code {
@@ -468,16 +431,8 @@ p {
   margin: 12px 0;
 }
 
-@media (prefers-color-scheme: light) {
-  #main hr {
-    background-color: var(--light-color-5);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  #main hr {
-    background-color: var(--dark-color-5);
-  }
+#main hr {
+  background-color: var(--color-5);
 }
 
 
@@ -507,14 +462,6 @@ p {
   stroke-width: 1.35px;
 }
 
-@media (prefers-color-scheme: light) {
-  .meta {
-    color: var(--light-color-3);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .meta {
-    color: var(--dark-color-3);
-  }
+.meta {
+  color: var(--color-3);
 }
