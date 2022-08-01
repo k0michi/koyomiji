@@ -8,6 +8,7 @@ import KnowledgePage from "./knowledge-page.js";
 import LogIndexPage from "./log-index-page.js";
 import LogPage from "./log-page.js";
 import NotFound from './not-found.js';
+import ProjectPage from './project-page.js';
 
 export function Root(props: any) {
   return (
@@ -15,6 +16,7 @@ export function Root(props: any) {
       <Route path="/" element={<Frame/>}>
         <Route index element={<IndexPage {...props} />}></Route>
         <Route path="about" element={<AboutPage {...props} />} />
+        <Route path="project" element={<ProjectPage {...props} />} />
         <Route path="knowledge/:category/:id" element={<KnowledgePage {...props} />} />
         <Route path="knowledge" element={<KnowledgeIndexPage {...props} />} />
         <Route path="log/:id" element={<LogPage {...props} />} />

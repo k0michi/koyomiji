@@ -14,6 +14,7 @@ export default function Frame() {
         </div>
         <ul id="menu">
           <li><a href="/about" className={path.startsWith('/about') ? 'active' : ''}><div className="asterisk" /><div>About</div></a></li>
+          <li><a href="/project" className={path.startsWith('/project') ? 'active' : ''}><div className="asterisk" /><div>Projects</div></a></li>
           <li><a href="/knowledge" className={path.startsWith('/knowledge') ? 'active' : ''}><div className="asterisk" /><div>Knowledge</div></a></li>
           <li><a href="/log" className={path.startsWith('/log') ? 'active' : ''}><div className="asterisk" /><div>Logs</div></a></li>
         </ul>

@@ -25,6 +25,10 @@ export function createRenderer(outRoot: string | null, template: string, registr
     return render(<Root />, template, '/about');
   });
 
+  renderer.use('/project/(index.html)?', (ctx) => {
+    return render(<Root />, template, '/project');
+  });
+
   renderer.use('/knowledge/(index.html)?', (ctx) => {
     return render(<Root items={Object.values(registry.knowledgeItems).map(p => p.head)} />, template, '/knowledge');
   });

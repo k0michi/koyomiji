@@ -150,9 +150,10 @@ p {
   font-size: 20px;
   font-weight: inherit;
 
-  --menu-color-1: #b72020;
-  --menu-color-2: #d06011;
-  --menu-color-3: #e0bb00;
+  --menu-color-1: hsl(0, 100%, 44%);
+  --menu-color-2: hsl(25, 100%, 44%);
+  --menu-color-3: hsl(50, 100%, 44%);
+  --menu-color-4: hsl(75, 100%, 44%);
 }
 
 #menu {
@@ -246,6 +247,14 @@ p {
 
 #menu>li:nth-child(3)>a::before {
   background: var(--menu-color-3);
+}
+
+#menu>li:nth-child(4) svg {
+  color: var(--menu-color-4);
+}
+
+#menu>li:nth-child(4)>a::before {
+  background: var(--menu-color-4);
 }
 
 #menu>li>a:hover,

@@ -29,7 +29,6 @@ export default function AboutPage() {
       <p>I'm currently practicing drawing pictures.</p>
       <h2>サイトについて</h2>
       <p>特段の明記がない限り、サイト上のコンテンツは<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>に準拠します。</p>
-      <p></p>
     </>
   );
 }
