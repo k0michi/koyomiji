@@ -29,7 +29,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
     return render(<Root items={Object.values(registry.knowledgeItems).map(p => p.head)} />, template, '/knowledge');
   });
 
-  renderer.use('/knowledge/:category/:id(/index.html)?', (ctx) => {
+  renderer.use('/knowledge/:category/:id/(index.html)?', (ctx) => {
     const params = ctx.params as any;
     const id = params['id'] as string;
     const category = params['category'] as string;
