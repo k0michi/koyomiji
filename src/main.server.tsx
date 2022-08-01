@@ -27,7 +27,7 @@ const registry: Registry = {
       const htmlPath = `/log/${id}/index.html`;
       await renderer.render(htmlPath);
     } else {
-      await renderer.render(p);
+      await renderer.render('/' + p);
     }
   }
 
@@ -40,7 +40,7 @@ const registry: Registry = {
       const htmlPath = `/knowledge/${category}/${id}/index.html`;
       await renderer.render(htmlPath);
     } else {
-      await renderer.render(p);
+      await renderer.render('/' + p);
     }
   }
 
