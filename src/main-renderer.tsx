@@ -73,7 +73,6 @@ export function createRenderer(outRoot: string | null, template: string, registr
     const params = ctx.params as any;
     const id = params['id'] as string;
     const post = registry.logItems[[id].join('/')];
-    console.log(ctx)
     const { title, created, description } = post.head;
     const body = ktml.toElement(post.body.childNodes);
 
