@@ -28,13 +28,13 @@ export default function KnowledgePage(props: Props) {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />
       </Helmet>
-      <div id="header">
+      <header>
         <h1>{props.title}</h1>
         <div className="meta">
           <div className="date"><div className="calender-icon"></div><div>{dateToString(props.created)}</div></div>
           <div className="tags"><div className="tags-icon"></div><div>{categoryNames[props.category]}</div></div>
         </div>
-      </div>
+      </header>
       {props.children}
     </>
   );
