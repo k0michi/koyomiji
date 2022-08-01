@@ -18,6 +18,7 @@ const registry: Registry = {
 
   await renderer.render('/index.html');
   await renderer.render('/about/index.html');
+  await renderer.render('/project/index.html');
 
   for (const p of await glob('log/*/*', { cwd: contentRoot })) {
     if (p.endsWith('index.ktml')) {
