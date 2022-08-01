@@ -17,28 +17,19 @@ export interface Registry {
 export function createRenderer(outRoot: string | null, template: string, registry: Registry) {
   const renderer = new Renderer(outRoot);
 
-  function indexPage(ctx: Context) {
+  renderer.use('/(index.html)?', (ctx) => {
     return render(<Root />, template, '/');
-  }
+  });
 
-  renderer.use('/index.html', indexPage);
-  renderer.use('/', indexPage);
-
-  function aboutPage(ctx: Context) {
+  renderer.use('/about/(index.html)?', (ctx) => {
     return render(<Root />, template, '/about');
-  }
+  });
 
-  renderer.use('/about/index.html', aboutPage);
-  renderer.use('/about', aboutPage);
-
-  function knowledgeIndexPage(ctx: Context) {
+  renderer.use('/knowledge/(index.html)?', (ctx) => {
     return render(<Root items={Object.values(registry.knowledgeItems).map(p => p.head)} />, template, '/knowledge');
-  }
+  });
 
-  renderer.use('/knowledge/index.html', knowledgeIndexPage);
-  renderer.use('/knowledge', knowledgeIndexPage);
-
-  function knowledgePage(ctx: Context) {
+  renderer.use('/knowledge/:category/:id(/index.html)?', (ctx) => {
     const params = ctx.params as any;
     const id = params['id'] as string;
     const category = params['category'] as string;
@@ -50,26 +41,20 @@ export function createRenderer(outRoot: string | null, template: string, registr
       <Root title={title} created={new Date(created)} id={id} category={category} description={description}>
         {body}
       </Root>
-      , template, `/knowledge/${category}/${id}`);
-
-  }
-
-  renderer.use('/knowledge/:category/:id/index.html', knowledgePage);
-  renderer.use('/knowledge/:category/:id', knowledgePage);
+      , template, `/knowledge/${category}/${id}`
+    );
+  });
 
   renderer.use('/knowledge/:id/:path*', (ctx) => {
     const params = ctx.params as any;
     return fs.readFile(`${registry.rootDir}/knowledge/${params.category}/${params.id}/${params.path.join('/')}`);
   });
 
-  function logIndexPage(ctx: Context) {
+  renderer.use('/log/(index.html)?', (ctx) => {
     return render(<Root items={Object.values(registry.logItems).map(p => p.head)} />, template, '/log');
-  }
+  });
 
-  renderer.use('/log/index.html', logIndexPage);
-  renderer.use('/log', logIndexPage);
-
-  function logPage(ctx: Context) {
+  renderer.use('/log/:id/(index.html)?', (ctx) => {
     const params = ctx.params as any;
     const id = params['id'] as string;
     const post = registry.logItems[[id].join('/')];
@@ -80,11 +65,9 @@ export function createRenderer(outRoot: string | null, template: string, registr
       <Root title={title} created={new Date(created)} id={id} description={description}>
         {body}
       </Root>
-      , template, `/log/${id}`)
-  }
-
-  renderer.use('/log/:id/index.html', logPage);
-  renderer.use('/log/:id', logPage);
+      , template, `/log/${id}`
+    );
+  });
 
   renderer.use('/log/:id/:path*', (ctx) => {
     const params = ctx.params as any;
