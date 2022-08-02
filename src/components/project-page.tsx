@@ -16,6 +16,8 @@ export default function ProjectPage() {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />
       </Helmet>
+      <h2><a href="https://k0michi.github.io/chronograph/">Chronograph</a></h2>
+      <p>時間を記録、可視化するためのツール。ボタンをクリックして現在時刻を記録し、時刻を一覧表示することができます。各時刻にはメモを残すことも可能です。</p>
       <h2><a href="https://k0michi.github.io/toolbox/">Toolbox</a></h2>
       <p>個人的に使うためのWebツール。</p>
       <h2><a href="https://github.com/k0michi/kyoka">Kyōka</a></h2>
