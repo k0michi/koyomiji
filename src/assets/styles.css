@@ -76,7 +76,7 @@ p {
   margin: 0 auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   #root {}
 }
 
@@ -99,7 +99,7 @@ p {
   padding: 0 32px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   #nav {
     width: 100%;
   }
@@ -160,7 +160,7 @@ p {
   color: var(--color-2);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   #menu {
     display: flex;
     flex-direction: row;
@@ -182,7 +182,7 @@ p {
   list-style: none;
 }
 
-@media (max-width: 768px) {}
+@media (max-width: 767px) {}
 
 @media (min-width: 768px) {
   #menu>li {
@@ -274,7 +274,7 @@ p {
   width: fit-content;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   #icons {
     margin-top: 12px;
   }
@@ -300,7 +300,7 @@ p {
 
 /* Main */
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   #main {
     width: 100%;
     padding: 12px;
