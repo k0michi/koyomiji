@@ -23,9 +23,13 @@ function join(elements: JSX.Element[]) {
   return newElements;
 }
 
+function getID(p: PostHead) {
+  return p.path[1];
+}
+
 export default function LogIndexPage(props: Props) {
   const url = `https://koyomiji.com/log`;
-  props.items.sort((a, b) => b.id.localeCompare(a.id, undefined, { numeric: true }));
+  props.items.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));
 
   return (
     <>
@@ -39,10 +43,10 @@ export default function LogIndexPage(props: Props) {
         <meta name="twitter:site" content="@k0michi" />
       </Helmet>
       {join(props.items.map(i =>
-        <div className="summary" key={i.id}>
-          <h2><a href={`/log/${i.id}`}>{i.title}</a></h2>
+        <div className="summary" key={getID(i)}>
+          <h2><a href={`/log/${getID(i)}`}>{i.title}</a></h2>
           <div className="meta">
-            <div className="number">#{i.id}</div>
+            <div className="number">#{getID(i)}</div>
             <div className="date"><div className="calender-icon"></div><div>{dateToString(new Date(i.created))}</div></div>
           </div>
           <p>{i.description}</p>

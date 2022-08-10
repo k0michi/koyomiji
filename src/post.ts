@@ -2,8 +2,7 @@ export interface PostHead {
   title: string;
   created: string;
   description: string;
-  category?: string;
-  id: string;
+  path: string[];
 }
 
 export interface Post {

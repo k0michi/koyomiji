@@ -10,8 +10,7 @@ import * as fs from 'fs/promises';
 
 export interface Registry {
   rootDir: string;
-  logItems: { [key: string]: Post };
-  knowledgeItems: { [key: string]: Post };
+  posts: { [key: string]: Post };
 }
 
 export function createRenderer(outRoot: string | null, template: string, registry: Registry) {
@@ -30,14 +29,20 @@ export function createRenderer(outRoot: string | null, template: string, registr
   });
 
   renderer.use('/knowledge/(index.html)?', (ctx) => {
-    return render(<Root items={Object.values(registry.knowledgeItems).map(p => p.head)} />, template, '/knowledge');
+    return render(<Root items={Object.values(registry.posts).filter(p => p.head.path[0] == 'knowledge').map(p => p.head)} />, template, '/knowledge');
   });
 
   renderer.use('/knowledge/:category/:id/(index.html)?', (ctx) => {
     const params = ctx.params as any;
     const id = params['id'] as string;
     const category = params['category'] as string;
-    const post = registry.knowledgeItems[[category, id].join('/')];
+    const path = ['knowledge', category, id];
+    const post = Object.values(registry.posts).find(p => compareArray(p.head.path, path));
+
+    if (post == undefined) {
+      throw new Error('Not found');
+    }
+
     const { title, created, description } = post.head;
     const body = ktml.toElement(post.body.childNodes);
 
@@ -49,19 +54,25 @@ export function createRenderer(outRoot: string | null, template: string, registr
     );
   });
 
-  renderer.use('/knowledge/:id/:path*', (ctx) => {
+  renderer.use('/knowledge/:category/:id/:path*', (ctx) => {
     const params = ctx.params as any;
     return fs.readFile(`${registry.rootDir}/knowledge/${params.category}/${params.id}/${params.path.join('/')}`);
   });
 
   renderer.use('/log/(index.html)?', (ctx) => {
-    return render(<Root items={Object.values(registry.logItems).map(p => p.head)} />, template, '/log');
+    return render(<Root items={Object.values(registry.posts).filter(p => p.head.path[0] == 'log').map(p => p.head)} />, template, '/log');
   });
 
   renderer.use('/log/:id/(index.html)?', (ctx) => {
     const params = ctx.params as any;
     const id = params['id'] as string;
-    const post = registry.logItems[[id].join('/')];
+    const path = ['log', id];
+    const post = Object.values(registry.posts).find(p => compareArray(p.head.path, path));
+
+    if (post == undefined) {
+      throw new Error('Not found');
+    }
+
     const { title, created, description } = post.head;
     const body = ktml.toElement(post.body.childNodes);
 
@@ -93,7 +104,7 @@ export function render(children: any, template: string, pathname: string) {
     .replace('<!--body-->', app);
 }
 
-export function createPost(content: string, id: string, basePath: string[], category?: string): Post {
+export function createPost(postPath: string[], content: string): Post {
   const $document = ktml.parseXML(content);
   const $head = $document.querySelector('head');
   const title = ktml.getTextContent('title', $head);
@@ -102,8 +113,12 @@ export function createPost(content: string, id: string, basePath: string[], cate
   const $body = $document.querySelector('body')!;
   ktml.transformMath($body);
   ktml.transformCode($body);
-  ktml.transformImg($body, basePath);
+  ktml.transformImg($body, postPath);
   const description = ktml.getDescription($body, 120);
-  const head = { title, created, description, id, category };
+  const head = { title, created, description, path: postPath };
   return { head, body: $body };
+}
+
+function compareArray<T>(a1: Array<T>, a2: Array<T>) {
+  return a1.every((v, i) => v == a2[i]);
 }

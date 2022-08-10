@@ -13,9 +13,8 @@ import { AddressInfo } from 'net';
 const contentRoot = './contents';
 
 const registry: Registry = {
-  rootDir:contentRoot,
-  logItems: {},
-  knowledgeItems: {}
+  rootDir: contentRoot,
+  posts: {}
 };
 
 async function createServer() {
@@ -78,36 +77,22 @@ async function listen(app: Koa, port: number) {
 }
 
 async function prepare() {
-  for (const p of await glob('log/*/index.ktml', { cwd: contentRoot })) {
-    const id = p.split('/')[1];
-    const content = await readText(path.join(contentRoot, p));
-    registry.logItems[[id].join('/')] = createPost(content, id, ['log', id]);
-  }
-
-  for (const p of await glob('knowledge/*/*/index.ktml', { cwd: contentRoot })) {
-    const category = p.split('/')[1];
-    const id = p.split('/')[2];
-    const content = await readText(path.join(contentRoot, p));
-    registry.knowledgeItems[[category, id].join('/')] = createPost(content, id, ['knowledge', category, id], category);
+  for (const p of await glob('**/*', { cwd: contentRoot, nodir: true })) {
+    if (p.endsWith('index.ktml')) {
+      const postPath = p.split('/').slice(0, -1);
+      const content = await readText(path.join(contentRoot, p));
+      registry.posts[p] = createPost(postPath, content);
+    }
   }
 }
 
 function registerHandler(vite: ViteDevServer) {
   chokidar.watch('.', { cwd: 'contents' }).on('all', async (event, p) => {
     if (event == 'change') {
-      if (minimatch(p, 'log/*/index.ktml')) {
-        const id = p.split('/')[1];
+      if (p.endsWith('index.ktml')) {
+        const postPath = p.split('/').slice(0, -1);
         const content = await readText(path.join(contentRoot, p));
-        registry.logItems[[id].join('/')] = createPost(content, id, ['log', id]);
-        vite.ws.send({ type: 'full-reload' });
-        console.log(new Date(), event, p)
-      }
-
-      if (minimatch(p, 'knowledge/*/*/index.ktml')) {
-        const category = p.split('/')[1];
-        const id = p.split('/')[2];
-        const content = await readText(path.join(contentRoot, p));
-        registry.knowledgeItems[[category, id].join('/')] = createPost(content, id, ['knowledge', category, id], category);
+        registry.posts[p] = createPost(postPath, content);
         vite.ws.send({ type: 'full-reload' });
         console.log(new Date(), event, p)
       }

@@ -8,25 +8,33 @@ interface Props {
   items: PostHead[];
 }
 
+function getCategory(p: PostHead) {
+  return p.path[1];
+}
+
+function getID(p: PostHead) {
+  return p.path[2];
+}
+
 export default function KnowledgeIndexPage(props: Props) {
   const url = `https://koyomiji.com/knowledge`;
 
   props.items.sort((a, b) => {
-    if (a.category == b.category) {
-      return a.id.localeCompare(b.id);
+    if (getCategory(a) == getCategory(b)) {
+      return getID(a).localeCompare(getID(b));
     } else {
-      return a.category!.localeCompare(b.category!);
+      return getCategory(a).localeCompare(getCategory(b));
     }
   });
 
   const map: { [key: string]: PostHead[]; } = {};
 
   for (const item of props.items) {
-    if (map[item.category!] == null) {
-      map[item.category!] = [];
+    if (map[getCategory(item)] == null) {
+      map[getCategory(item)] = [];
     }
 
-    map[item.category!].push(item);
+    map[getCategory(item)].push(item);
   }
 
   return (
@@ -44,7 +52,7 @@ export default function KnowledgeIndexPage(props: Props) {
         <div className="category" key={k}>
           <h2>{categoryNames[k]}</h2>
           <ul>
-            {v.map(i => <li key={`${i.category}/${i.id}`}><a href={`/knowledge/${i.category}/${i.id}`}>{i.title}</a></li>)}
+            {v.map(i => <li key={`${getCategory(i)}/${getID(i)}`}><a href={`/knowledge/${getCategory(i)}/${getID(i)}`}>{i.title}</a></li>)}
           </ul>
         </div>
       )}

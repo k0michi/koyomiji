@@ -8,8 +8,7 @@ const outRoot = './dist';
 
 const registry: Registry = {
   rootDir: contentRoot,
-  logItems: {},
-  knowledgeItems: {}
+  posts: {}
 };
 
 (async () => {
@@ -20,25 +19,12 @@ const registry: Registry = {
   await renderer.render('/about/index.html');
   await renderer.render('/project/index.html');
 
-  for (const p of await glob('log/*/*', { cwd: contentRoot })) {
+  for (const p of await glob('**/*', { cwd: contentRoot, nodir: true })) {
     if (p.endsWith('index.ktml')) {
-      const id = p.split('/')[1];
+      const postPath = p.split('/').slice(0, -1);
       const content = await readText(path.join(contentRoot, p));
-      registry.logItems[[id].join('/')] = createPost(content, id, ['log', id]);
-      const htmlPath = `/log/${id}/index.html`;
-      await renderer.render(htmlPath);
-    } else {
-      await renderer.render('/' + p);
-    }
-  }
-
-  for (const p of await glob('knowledge/*/*/*', { cwd: contentRoot })) {
-    if (p.endsWith('index.ktml')) {
-      const category = p.split('/')[1];
-      const id = p.split('/')[2];
-      const content = await readText(path.join(contentRoot, p));
-      registry.knowledgeItems[[category, id].join('/')] = createPost(content, id, ['knowledge', category, id], category);
-      const htmlPath = `/knowledge/${category}/${id}/index.html`;
+      registry.posts[p] = createPost(postPath, content);
+      const htmlPath = `/${postPath.join('/')}/index.html`;
       await renderer.render(htmlPath);
     } else {
       await renderer.render('/' + p);
