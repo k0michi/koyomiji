@@ -7,7 +7,6 @@ import glob from 'glob-promise';
 import { createPost, Registry } from './main-renderer.js';
 import { walk, readText } from './utils.js';
 import * as chokidar from 'chokidar';
-import minimatch from 'minimatch';
 import { AddressInfo } from 'net';
 
 const contentRoot = './contents';
