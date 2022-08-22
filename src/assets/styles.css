@@ -12,7 +12,7 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --color-1: #fff6f6;
+    --color-1: #fff8f8;
     --color-2: #2f2a2a;
     --color-3: #9e8d8d;
     --color-4: #2f2a2a;
@@ -22,7 +22,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-1: #23232a;
+    --color-1: #252529;
     --color-2: #f6f6ff;
     --color-3: #8d8d9e;
     --color-4: #111114;
