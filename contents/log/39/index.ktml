@@ -1,0 +1,34 @@
+<ktml version="0.1">
+
+<head>
+  <title>macOSでbgfxをビルドしてExampleを動かすまで</title>
+  <created>2022-08-22T08:54:55+09:00</created>
+</head>
+
+<body>
+  <p><a href="https://github.com/bkaradzic/bgfx">bgfx</a>は、OpenGLやDirect3D、Metalなどのプラットフォーム固有のAPIを触らずにレンダリングができるというライブラリです。ビルドの手順は公式サイトの<a href="https://bkaradzic.github.io/bgfx/build.html">Building</a>に載っているのですが、パスが異なっている箇所が一つありました。</p>
+  
+  <h2>1. コードをcloneする</h2>
+  <p>依存関係であるbxとbimgを一緒にcloneします。</p>
+  <code lang="bash">% git clone https://github.com/bkaradzic/bx.git
+% git clone https://github.com/bkaradzic/bimg.git
+% git clone https://github.com/bkaradzic/bgfx.git</code>
+
+  <h2>2. makeする</h2>
+  <code lang="bash">% cd bgfx
+% make</code>
+
+  <h2>3. ビルドする</h2>
+  <p>プラットフォームを指定してもう一度makeします。macOSの場合は<code lang="bash">osx-release</code>です。</p>
+  <code lang="bash">% make osx-release</code>
+  <p>ビルドにはしばらく時間がかかります。</p>
+
+  <h2>4. Exampleを開く</h2>
+  <p>公式のDocumentationでは、Exampleのパスは<code lang="bash">../../.build/osx64_clang/bin/examples.app/Contents/MacOS/examplesRelease</code>となっていますが、これとは異なるところに生成されていました。<code lang="bash">../../.build/</code>内には<code lang="bash">osx-arm64</code>と<code lang="bash">osx-x64</code>があるので、使っているマシンに応じて選びます。以下はApple Siliconの場合です。</p>
+  <code lang="bash">% cd examples/runtime
+% ../../.build/osx-arm64/bin/examples.app/Contents/MacOS/examplesRelease</code>
+  <p>ウィンドウが表示されて、描画できていればビルドに成功しています。</p>
+  <img src="bgfx.png" />
+</body>
+
+</ktml>
