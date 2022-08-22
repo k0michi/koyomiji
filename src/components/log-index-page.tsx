@@ -42,6 +42,7 @@ export default function LogIndexPage(props: Props) {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />
       </Helmet>
+      <h1>Logs</h1>
       {join(props.items.map(i =>
         <div className="summary" key={getID(i)}>
           <h2><a href={`/log/${getID(i)}`}>{i.title}</a></h2>
