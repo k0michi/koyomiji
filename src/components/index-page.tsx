@@ -22,8 +22,6 @@ export default function IndexPage() {
       <p>覚書。</p>
       <h2><a href="/log">雑記帳</a></h2>
       <p>たわいもない話を書いています。</p>
-      <h2><a href="https://twitter.com/k0michi">Twitter</a></h2>
-      <p>フォローされると喜びます。</p>
       <h2><a href="https://github.com/k0michi">GitHub</a></h2>
       <p>開発したものとか。</p>
       <h2><a href="https://www.twitch.tv/k0michi">Twitch</a></h2>

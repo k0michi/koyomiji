@@ -18,12 +18,12 @@ export default function AboutPage() {
       </Helmet>
       <h1>About</h1>
       <h2>管理人について</h2>
-      <p>管理人: Komichi* (<a href="https://twitter.com/k0michi">@k0michi</a>)</p>
+      <p>管理人: Komichi*</p>
       <p>情報技術や英語、数学を学んでいます。</p>
       <p>最近の趣味は読書です。シャーロックホームズなど、推理小説が好きです。</p>
       <p>主にWebサイト、デスクトップアプリ、ゲームを開発しています。</p>
       <p>お絵描き練習中です。</p>
-      <p>Administrator: Komichi* (<a href="https://twitter.com/k0michi">@k0michi</a>)</p>
+      <p>Administrator: Komichi*</p>
       <p>I'm a Japanese student and learning information technology, English and mathematics.</p>
       <p>My hobby is reading mysteries. I'm fond of Sherlock Holmes series.</p>
       <p>I mainly develop websites, desktop apps and games.</p>

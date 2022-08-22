@@ -20,7 +20,6 @@ export default function Frame() {
         </ul>
         <ul id="icons">
           <li><a href="mailto:k0michi@koyomi.co"><span className="mail-icon"></span></a></li>
-          <li><a href="https://twitter.com/k0michi"><span className="twitter-icon"></span></a></li>
           <li><a href="https://github.com/k0michi"><span className="github-icon"></span></a></li>
           <li><a href="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw"><span className="youtube-icon"></span></a></li>
           <li><a href="https://www.twitch.tv/k0michi"><span className="twitch-icon"></span></a></li>
