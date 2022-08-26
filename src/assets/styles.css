@@ -12,21 +12,21 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --color-1: #fff8f8;
-    --color-2: #2f2a2a;
-    --color-3: #9e8d8d;
-    --color-4: #2f2a2a;
-    --color-5: #d4c6c6;
+    --color-1: hsl(300, 100%, 99%);
+    --color-2: hsl(300, 6%, 17%);
+    --color-3: hsl(300, 8%, 59%);
+    --color-4: hsl(300, 6%, 17%);
+    --color-5: hsl(300, 14%, 80%);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-1: #252529;
-    --color-2: #f6f6ff;
-    --color-3: #8d8d9e;
-    --color-4: #111114;
-    --color-5: #4c4c57;
+    --color-1: hsl(300, 5%, 15%);
+    --color-2: hsl(300, 100%, 98%);
+    --color-3: hsl(300, 8%, 59%);
+    --color-4: hsl(300, 8%, 7%);
+    --color-5: hsl(300, 7%, 32%);
   }
 }
 
