@@ -72,7 +72,8 @@ p {
 
 #root {
   height: 100%;
-  max-width: 1480px;
+  /* max-width: 1480px; */
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -96,7 +97,6 @@ p {
   word-break: keep-all;
   font-family: var(--font-serif);
   height: fit-content;
-  padding: 0 32px;
 }
 
 @media (max-width: 767px) {
@@ -113,6 +113,7 @@ p {
   #nav {
     position: sticky;
     top: 0;
+    padding: 0 32px;
   }
 }
 
