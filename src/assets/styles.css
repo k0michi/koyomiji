@@ -118,7 +118,7 @@ p {
 }
 
 #nav a {
-  transition: filter 0.25s;
+  transition: filter 0.15s;
   text-decoration: none;
 }
 
@@ -192,29 +192,28 @@ p {
 }
 
 #menu>li>a {
-  transition: color .25s ease-in-out;
-  position: relative;
   padding: 0 10px;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
+  transition: color .25s ease;
+  position: relative;
 }
 
 #menu>li>a svg {
-  transition: color .25s ease-in-out;
+  transition: color .25s ease;
 }
 
 #menu>li>a::before {
   content: '';
   position: absolute;
   bottom: 0px;
-  left: 0;
+  left: 0px;
   z-index: -1;
   width: 100%;
   height: 0px;
-  /* background: #060606; */
-  transition: height .25s ease-in-out;
+  transition: height .25s ease;
 }
 
 #menu>li>a:hover::before,
