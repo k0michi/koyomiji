@@ -3,5 +3,5 @@ export interface Entry {
   created: string;
   description: string;
   path: string[];
-  content?: Element;
+  content?: string;
 }

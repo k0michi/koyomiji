@@ -6,7 +6,7 @@ import { useModel, useObservable } from 'kyoka';
 import { useLocation, useParams } from 'react-router';
 import { Model } from '../model.js';
 import { compareArray } from '../utils.js';
-import { toElement } from '../ktml.js';
+import { parseXML, toElement } from '../ktml.js';
 import * as ReactKTML from '../react-ktml.js';
 
 export default function KnowledgePage() {
@@ -18,7 +18,7 @@ export default function KnowledgePage() {
   const path = ['knowledge', params.category, params.id];
   const entry = entries.find(p => compareArray(p.path, path))!;
   const categoryName = categoryNames[params.category!];
-  const content = toElement(entry.content!.childNodes, ReactKTML.reactFactory);
+  const content = toElement(parseXML(entry.content!).childNodes, ReactKTML.reactFactory);
 
   return (
     <>

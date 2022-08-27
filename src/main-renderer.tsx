@@ -61,7 +61,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
       throw new Error('Not found');
     }
 
-    return JSON.stringify({ content: entry.content.outerHTML, ...entry });
+    return JSON.stringify(entry);
   });
 
   renderer.use('/knowledge/:category/:id/:path*', (ctx) => {
@@ -96,7 +96,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
       throw new Error('Not found');
     }
 
-    return JSON.stringify({ content: entry.content.outerHTML, ...entry });
+    return JSON.stringify(entry);
   });
 
   renderer.use('/log/:id/:path*', (ctx) => {
@@ -137,7 +137,7 @@ export function createEntry(entryPath: string[], content: string): Entry {
   ktml.transformCode($body);
   ktml.transformImg($body, entryPath);
   const description = ktml.getDescription($body, 120);
-  return { title, created, description, path: entryPath, content: $body };
+  return { title, created, description, path: entryPath, content: $body.outerHTML };
 }
 
 export function extractMeta(entry: Entry) {
