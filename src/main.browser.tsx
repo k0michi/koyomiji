@@ -20,7 +20,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ModelProvider } from 'kyoka';
 
 window.addEventListener('load', async () => {
-  const initialData = JSON.parse((document.getElementById('initial-data') as HTMLScriptElement).src) as InitialData;
+  const initialData = JSON.parse((document.getElementById('initial-data') as HTMLScriptElement).text) as InitialData;
   const model = new Model(initialData);
 /*
   const root = ReactDOM.hydrateRoot(
