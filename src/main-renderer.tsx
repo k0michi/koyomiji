@@ -7,6 +7,7 @@ import { Post } from "./post.js";
 import { Context, Renderer } from "./renderer.js";
 import * as ktml from './ktml.js';
 import * as fs from 'fs/promises';
+import * as ReactKTML from './react-ktml.js';
 
 export interface Registry {
   rootDir: string;
@@ -44,7 +45,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
     }
 
     const { title, created, description } = post.head;
-    const body = ktml.toElement(post.body.childNodes);
+    const body = ktml.toElement(post.body.childNodes, ReactKTML.reactFactory);
 
     return render(
       <Root title={title} created={new Date(created)} id={id} category={category} description={description}>
@@ -74,7 +75,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
     }
 
     const { title, created, description } = post.head;
-    const body = ktml.toElement(post.body.childNodes);
+    const body = ktml.toElement(post.body.childNodes, ReactKTML.reactFactory);
 
     return render(
       <Root title={title} created={new Date(created)} id={id} description={description}>
