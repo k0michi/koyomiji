@@ -55,6 +55,20 @@ export function createRenderer(outRoot: string | null, template: string, registr
     );
   });
 
+  renderer.use('/knowledge/:category/:id/post.json', (ctx) => {
+    const params = ctx.params as any;
+    const id = params['id'] as string;
+    const category = params['category'] as string;
+    const path = ['knowledge', category, id];
+    const post = Object.values(registry.posts).find(p => compareArray(p.head.path, path));
+
+    if (post == undefined) {
+      throw new Error('Not found');
+    }
+
+    return JSON.stringify({ content: post.body.outerHTML, ...post.head });
+  });
+
   renderer.use('/knowledge/:category/:id/:path*', (ctx) => {
     const params = ctx.params as any;
     return fs.readFile(`${registry.rootDir}/knowledge/${params.category}/${params.id}/${params.path.join('/')}`);
@@ -85,6 +99,19 @@ export function createRenderer(outRoot: string | null, template: string, registr
     );
   });
 
+  renderer.use('/log/:id/post.json', (ctx) => {
+    const params = ctx.params as any;
+    const id = params['id'] as string;
+    const path = ['log', id];
+    const post = Object.values(registry.posts).find(p => compareArray(p.head.path, path));
+
+    if (post == undefined) {
+      throw new Error('Not found');
+    }
+
+    return JSON.stringify({ content: post.body.outerHTML, ...post.head });
+  });
+
   renderer.use('/log/:id/:path*', (ctx) => {
     const params = ctx.params as any;
     return fs.readFile(`${registry.rootDir}/log/${params.id}/${params.path.join('/')}`);
@@ -99,10 +126,13 @@ export function render(children: any, template: string, pathname: string) {
       {children}
     </StaticRouter>
   );
+
   const helmet = Helmet.renderStatic();
+
   return template
     .replace('<!--head-->', [helmet.title.toString(), helmet.meta.toString(), helmet.link.toString()].join('\n'))
-    .replace('<!--body-->', app);
+    .replace('<!--body-->', app)
+    .replace('<!--hydration-data-->', JSON.stringify({ posts: [] }));
 }
 
 export function createPost(postPath: string[], content: string): Post {

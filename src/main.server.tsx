@@ -26,6 +26,8 @@ const registry: Registry = {
       registry.posts[p] = createPost(postPath, content);
       const htmlPath = `/${postPath.join('/')}/index.html`;
       await renderer.render(htmlPath);
+      const jsonPath = `/${postPath.join('/')}/post.json`;
+      await renderer.render(jsonPath);
     } else {
       await renderer.render('/' + p);
     }
