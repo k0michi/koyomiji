@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import dateToString from '../date-format.js';
-import { PostHead } from "../post.js";
+import { Entry } from "../entry.js";
 import Frame from "./frame.js";
 
 interface Props {
-  items: PostHead[];
+  items: Entry[];
 }
 
 function join(elements: JSX.Element[]) {
@@ -23,7 +23,7 @@ function join(elements: JSX.Element[]) {
   return newElements;
 }
 
-function getID(p: PostHead) {
+function getID(p: Entry) {
   return p.path[1];
 }
 

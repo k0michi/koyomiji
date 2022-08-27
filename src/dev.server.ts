@@ -4,7 +4,7 @@ import koaConnect from 'koa-connect';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import glob from 'glob-promise';
-import { createPost, Registry } from './main-renderer.js';
+import { createEntry, Registry } from './main-renderer.js';
 import { walk, readText } from './utils.js';
 import * as chokidar from 'chokidar';
 import { AddressInfo } from 'net';
@@ -13,7 +13,7 @@ const contentRoot = './contents';
 
 const registry: Registry = {
   rootDir: contentRoot,
-  posts: {}
+  entries: {}
 };
 
 async function createServer() {
@@ -78,9 +78,9 @@ async function listen(app: Koa, port: number) {
 async function prepare() {
   for (const p of await glob('**/*', { cwd: contentRoot, nodir: true })) {
     if (p.endsWith('index.ktml')) {
-      const postPath = p.split('/').slice(0, -1);
+      const entryPath = p.split('/').slice(0, -1);
       const content = await readText(path.join(contentRoot, p));
-      registry.posts[p] = createPost(postPath, content);
+      registry.entries[p] = createEntry(entryPath, content);
     }
   }
 }
@@ -89,9 +89,9 @@ function registerHandler(vite: ViteDevServer) {
   chokidar.watch('.', { cwd: 'contents' }).on('all', async (event, p) => {
     if (event == 'change') {
       if (p.endsWith('index.ktml')) {
-        const postPath = p.split('/').slice(0, -1);
+        const entryPath = p.split('/').slice(0, -1);
         const content = await readText(path.join(contentRoot, p));
-        registry.posts[p] = createPost(postPath, content);
+        registry.entries[p] = createEntry(entryPath, content);
         vite.ws.send({ type: 'full-reload' });
         console.log(new Date(), event, p)
       }

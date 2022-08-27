@@ -1,14 +1,14 @@
 import * as path from 'path';
 import { walk, readText } from './utils.js';
 import glob from 'glob-promise';
-import { createPost, createRenderer, Registry } from './main-renderer.js';
+import { createEntry, createRenderer, Registry } from './main-renderer.js';
 
 const contentRoot = './contents';
 const outRoot = './dist';
 
 const registry: Registry = {
   rootDir: contentRoot,
-  posts: {}
+  entries: {}
 };
 
 (async () => {
@@ -21,12 +21,12 @@ const registry: Registry = {
 
   for (const p of await glob('**/*', { cwd: contentRoot, nodir: true })) {
     if (p.endsWith('index.ktml')) {
-      const postPath = p.split('/').slice(0, -1);
+      const entryPath = p.split('/').slice(0, -1);
       const content = await readText(path.join(contentRoot, p));
-      registry.posts[p] = createPost(postPath, content);
-      const htmlPath = `/${postPath.join('/')}/index.html`;
+      registry.entries[p] = createEntry(entryPath, content);
+      const htmlPath = `/${entryPath.join('/')}/index.html`;
       await renderer.render(htmlPath);
-      const jsonPath = `/${postPath.join('/')}/post.json`;
+      const jsonPath = `/${entryPath.join('/')}/entry.json`;
       await renderer.render(jsonPath);
     } else {
       await renderer.render('/' + p);

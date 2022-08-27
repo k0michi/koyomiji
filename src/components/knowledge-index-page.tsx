@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { categoryNames } from "../category.js";
-import { PostHead } from "../post.js";
+import { Entry } from "../entry.js";
 import Frame from "./frame.js";
 
 interface Props {
-  items: PostHead[];
+  items: Entry[];
 }
 
-function getCategory(p: PostHead) {
+function getCategory(p: Entry) {
   return p.path[1];
 }
 
-function getID(p: PostHead) {
+function getID(p: Entry) {
   return p.path[2];
 }
 
@@ -27,7 +27,7 @@ export default function KnowledgeIndexPage(props: Props) {
     }
   });
 
-  const map: { [key: string]: PostHead[]; } = {};
+  const map: { [key: string]: Entry[]; } = {};
 
   for (const item of props.items) {
     if (map[getCategory(item)] == null) {
