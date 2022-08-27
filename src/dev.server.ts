@@ -75,12 +75,16 @@ async function listen(app: Koa, port: number) {
   });
 }
 
+async function readEntry(p: string) {
+  const entryPath = p.split('/').slice(0, -1);
+  const content = await readText(path.join(contentRoot, p));
+  return createEntry(entryPath, content);
+}
+
 async function prepare() {
   for (const p of await glob('**/*', { cwd: contentRoot, nodir: true })) {
     if (p.endsWith('index.ktml')) {
-      const entryPath = p.split('/').slice(0, -1);
-      const content = await readText(path.join(contentRoot, p));
-      registry.entries[p] = createEntry(entryPath, content);
+      registry.entries[p] = await readEntry(p);
     }
   }
 }
@@ -89,9 +93,7 @@ function registerHandler(vite: ViteDevServer) {
   chokidar.watch('.', { cwd: 'contents' }).on('all', async (event, p) => {
     if (event == 'change') {
       if (p.endsWith('index.ktml')) {
-        const entryPath = p.split('/').slice(0, -1);
-        const content = await readText(path.join(contentRoot, p));
-        registry.entries[p] = createEntry(entryPath, content);
+        registry.entries[p] = await readEntry(p);
         vite.ws.send({ type: 'full-reload' });
         console.log(new Date(), event, p)
       }
