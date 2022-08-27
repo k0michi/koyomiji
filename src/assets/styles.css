@@ -23,7 +23,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --color-1: hsl(300, 5%, 15%);
-    --color-2: hsl(300, 100%, 98%);
+    --color-2: hsl(300, 100%, 99%);
     --color-3: hsl(300, 8%, 59%);
     --color-4: hsl(300, 8%, 7%);
     --color-5: hsl(300, 7%, 32%);
