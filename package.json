@@ -12,6 +12,7 @@
     "katex": "^0.15.6",
     "koa": "^2.13.4",
     "koa-connect": "^2.1.0",
+    "kyoka": "^0.0.3",
     "path-to-regexp": "^6.2.1",
     "prismjs": "^1.28.0",
     "react": "^18.2.0",

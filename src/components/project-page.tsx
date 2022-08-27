@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
-import Frame from "./frame.js";
+import { useLocation } from 'react-router';
 
 export default function ProjectPage() {
-  const url = `https://koyomiji.com/project`;
+  const location = useLocation();
+  const url = `https://koyomiji.com${location.pathname}`;
 
   return (
     <>

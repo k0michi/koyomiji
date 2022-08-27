@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { walk, readText } from './utils.js';
+import { readText } from './utils.js';
 import glob from 'glob-promise';
 import { createEntry, createRenderer, Registry } from './main-renderer.js';
 

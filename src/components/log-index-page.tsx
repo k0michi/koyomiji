@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
+import { useModel, useObservable } from 'kyoka';
 import dateToString from '../date-format.js';
 import { Entry } from "../entry.js";
-import Frame from "./frame.js";
-
-interface Props {
-  items: Entry[];
-}
+import { Model } from '../model.js';
+import { useLocation } from 'react-router';
 
 function join(elements: JSX.Element[]) {
   const newElements = [];
@@ -27,9 +25,12 @@ function getID(p: Entry) {
   return p.path[1];
 }
 
-export default function LogIndexPage(props: Props) {
-  const url = `https://koyomiji.com/log`;
-  props.items.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));
+export default function LogIndexPage() {
+  const location = useLocation();
+  const url = `https://koyomiji.com${location.pathname}`;
+  const model = useModel<Model>();
+  const entries = useObservable(model.entries).slice();
+  entries.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));
 
   return (
     <>
@@ -43,7 +44,7 @@ export default function LogIndexPage(props: Props) {
         <meta name="twitter:site" content="@k0michi" />
       </Helmet>
       <h1>Logs</h1>
-      {join(props.items.map(i =>
+      {join(entries.map(i =>
         <div className="summary" key={getID(i)}>
           <h2><a href={`/log/${getID(i)}`}>{i.title}</a></h2>
           <div className="meta">

@@ -2,40 +2,43 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { categoryNames } from "../category.js";
 import dateToString from "../date-format.js";
-import Frame from "./frame.js";
+import { useModel, useObservable } from 'kyoka';
+import { useLocation, useParams } from 'react-router';
+import { Model } from '../model.js';
+import { compareArray } from '../utils.js';
+import { toElement } from '../ktml.js';
+import * as ReactKTML from '../react-ktml.js';
 
-interface Props {
-  title: string;
-  id: string;
-  category: string;
-  created: Date;
-  description: string;
-  children: any;
-}
-
-export default function KnowledgePage(props: Props) {
-  const categoryName = categoryNames[props.category];
-  const url = `https://koyomiji.com/knowledge/${props.category}/${props.id}`;
+export default function KnowledgePage() {
+  const location = useLocation();
+  const url = `https://koyomiji.com${location.pathname}`;
+  const params = useParams();
+  const model = useModel<Model>();
+  const entries = useObservable(model.entries);
+  const path = ['knowledge', params.category, params.id];
+  const entry = entries.find(p => compareArray(p.path, path))!;
+  const categoryName = categoryNames[params.category!];
+  const content = toElement(entry.content!.childNodes, ReactKTML.reactFactory);
 
   return (
     <>
       <Helmet>
-        <title>[{categoryName}] {props.title} | 曆路喫茶館</title>
-        <meta name="description" content={props.description} />
+        <title>[{categoryName}] {entry.title} | 曆路喫茶館</title>
+        <meta name="description" content={entry.description} />
         <meta property="og:url" content={url} />
-        <meta property="og:title" content={props.title} />
-        <meta property="og:description" content={props.description} />
+        <meta property="og:title" content={entry.title} />
+        <meta property="og:description" content={entry.description} />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />
       </Helmet>
       <header>
-        <h1>{props.title}</h1>
+        <h1>{entry.title}</h1>
         <div className="meta">
-          <div className="date"><div className="calender-icon"></div><div>{dateToString(props.created)}</div></div>
-          <div className="tags"><div className="tags-icon"></div><div>{categoryNames[props.category]}</div></div>
+          <div className="date"><div className="calender-icon"></div><div>{dateToString(new Date(entry.created))}</div></div>
+          <div className="tags"><div className="tags-icon"></div><div>{categoryName}</div></div>
         </div>
       </header>
-      {props.children}
+      {content}
     </>
   );
 }

@@ -2,12 +2,15 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server.js';
 import { Helmet } from 'react-helmet';
+import { ModelProvider } from 'kyoka';
 import { Root } from "./components/root.js";
 import { Entry } from "./entry.js";
 import { Renderer } from "./renderer.js";
 import * as ktml from './ktml.js';
 import * as fs from 'fs/promises';
 import * as ReactKTML from './react-ktml.js';
+import { InitialData, Model } from './model.js';
+import { compareArray } from './utils.js';
 
 export interface Registry {
   rootDir: string;
@@ -18,19 +21,19 @@ export function createRenderer(outRoot: string | null, template: string, registr
   const renderer = new Renderer(outRoot);
 
   renderer.use('/(index.html)?', (ctx) => {
-    return render(<Root />, template, '/');
+    return render(template, '/');
   });
 
   renderer.use('/about/(index.html)?', (ctx) => {
-    return render(<Root />, template, '/about');
+    return render(template, '/about');
   });
 
   renderer.use('/project/(index.html)?', (ctx) => {
-    return render(<Root />, template, '/project');
+    return render(template, '/project');
   });
 
   renderer.use('/knowledge/(index.html)?', (ctx) => {
-    return render(<Root items={Object.values(registry.entries).filter(p => p.path[0] == 'knowledge').map(p => extractMeta(p))} />, template, '/knowledge');
+    return render(template, '/knowledge', { entries: Object.values(registry.entries).filter(p => p.path[0] == 'knowledge').map(p => extractMeta(p)) });
   });
 
   renderer.use('/knowledge/:category/:id/(index.html)?', (ctx) => {
@@ -44,15 +47,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
       throw new Error('Not found');
     }
 
-    const { title, created, description } = entry;
-    const body = ktml.toElement(entry.content.childNodes, ReactKTML.reactFactory);
-
-    return render(
-      <Root title={title} created={new Date(created)} id={id} category={category} description={description}>
-        {body}
-      </Root>
-      , template, `/knowledge/${category}/${id}`
-    );
+    return render(template, `/knowledge/${category}/${id}`, { entries: [entry] });
   });
 
   renderer.use('/knowledge/:category/:id/entry.json', (ctx) => {
@@ -75,7 +70,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
   });
 
   renderer.use('/log/(index.html)?', (ctx) => {
-    return render(<Root items={Object.values(registry.entries).filter(p => p.path[0] == 'log').map(p => extractMeta(p))} />, template, '/log');
+    return render(template, '/log', { entries: Object.values(registry.entries).filter(p => p.path[0] == 'log').map(p => extractMeta(p)) });
   });
 
   renderer.use('/log/:id/(index.html)?', (ctx) => {
@@ -88,15 +83,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
       throw new Error('Not found');
     }
 
-    const { title, created, description } = entry;
-    const body = ktml.toElement(entry.content.childNodes, ReactKTML.reactFactory);
-
-    return render(
-      <Root title={title} created={new Date(created)} id={id} description={description}>
-        {body}
-      </Root>
-      , template, `/log/${id}`
-    );
+    return render(template, `/log/${id}`, { entries: [entry] });
   });
 
   renderer.use('/log/:id/entry.json', (ctx) => {
@@ -120,10 +107,14 @@ export function createRenderer(outRoot: string | null, template: string, registr
   return renderer;
 }
 
-export function render(children: any, template: string, pathname: string) {
+export function render(template: string, pathname: string, data: InitialData = { entries: [] }) {
+  const model = new Model(data);
+
   const app = ReactDOM.renderToString(
     <StaticRouter location={pathname}>
-      {children}
+      <ModelProvider model={model}>
+        <Root />
+      </ModelProvider>
     </StaticRouter>
   );
 
@@ -132,7 +123,7 @@ export function render(children: any, template: string, pathname: string) {
   return template
     .replace('<!--head-->', [helmet.title.toString(), helmet.meta.toString(), helmet.link.toString()].join('\n'))
     .replace('<!--body-->', app)
-    .replace('<!--hydration-data-->', JSON.stringify({ entries: [] }));
+    .replace('<!--initial-data-->', JSON.stringify(data));
 }
 
 export function createEntry(entryPath: string[], content: string): Entry {
@@ -149,11 +140,7 @@ export function createEntry(entryPath: string[], content: string): Entry {
   return { title, created, description, path: entryPath, content: $body };
 }
 
-function compareArray<T>(a1: Array<T>, a2: Array<T>) {
-  return a1.length == a2.length && a1.every((v, i) => v == a2[i]);
-}
-
-function extractMeta(entry: Entry) {
+export function extractMeta(entry: Entry) {
   const cloned = { ...entry };
   delete cloned.content;
   return cloned;

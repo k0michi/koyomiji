@@ -5,7 +5,7 @@ import * as fs from 'fs/promises';
 import * as path from 'path';
 import glob from 'glob-promise';
 import { createEntry, Registry } from './main-renderer.js';
-import { walk, readText } from './utils.js';
+import { readText } from './utils.js';
 import * as chokidar from 'chokidar';
 import { AddressInfo } from 'net';
 

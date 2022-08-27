@@ -2,11 +2,9 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { categoryNames } from "../category.js";
 import { Entry } from "../entry.js";
-import Frame from "./frame.js";
-
-interface Props {
-  items: Entry[];
-}
+import { useModel, useObservable } from 'kyoka';
+import { Model } from '../model.js';
+import { useLocation } from 'react-router';
 
 function getCategory(p: Entry) {
   return p.path[1];
@@ -16,10 +14,13 @@ function getID(p: Entry) {
   return p.path[2];
 }
 
-export default function KnowledgeIndexPage(props: Props) {
-  const url = `https://koyomiji.com/knowledge`;
+export default function KnowledgeIndexPage() {
+  const location = useLocation();
+  const url = `https://koyomiji.com${location.pathname}`;
+  const model = useModel<Model>();
+  const entries = useObservable(model.entries).slice();
 
-  props.items.sort((a, b) => {
+  entries.sort((a, b) => {
     if (getCategory(a) == getCategory(b)) {
       return getID(a).localeCompare(getID(b));
     } else {
@@ -29,7 +30,7 @@ export default function KnowledgeIndexPage(props: Props) {
 
   const map: { [key: string]: Entry[]; } = {};
 
-  for (const item of props.items) {
+  for (const item of entries) {
     if (map[getCategory(item)] == null) {
       map[getCategory(item)] = [];
     }
