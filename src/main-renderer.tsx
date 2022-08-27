@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server.js';
 import { Helmet } from 'react-helmet';
 import { ModelProvider } from 'kyoka';
-import { Root } from "./components/root.js";
+import Root from "./components/root.js";
 import { Entry } from "./entry.js";
 import { Renderer } from "./renderer.js";
 import * as ktml from './ktml.js';

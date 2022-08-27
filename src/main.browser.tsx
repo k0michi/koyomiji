@@ -1,3 +1,8 @@
+import * as React from 'react';
+import * as ReactDOM from 'react-dom/client'
+
+import Root from './components/root.js';
+
 import './assets/styles.css';
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
@@ -10,17 +15,25 @@ import twitchIcon from '@tabler/icons/brand-twitch.svg?raw';
 import calenderIcon from '@tabler/icons/calendar-time.svg?raw';
 import tagsIcon from '@tabler/icons/tags.svg?raw';
 import asterisk from '/src/assets/asterisk.svg?raw';
+import { InitialData, Model } from './model.js';
+import { BrowserRouter } from 'react-router-dom';
+import { ModelProvider } from 'kyoka';
 
 window.addEventListener('load', async () => {
-  loadIcons();
-
-  await Promise.all([
-    loadHighlight(),
-    loadMath()
-  ]);
+  const initialData = JSON.parse((document.getElementById('initial-data') as HTMLScriptElement).src) as InitialData;
+  const model = new Model(initialData);
+/*
+  const root = ReactDOM.hydrateRoot(
+    document.getElementById('root')!,
+    <BrowserRouter>
+      <ModelProvider model={model}>
+        <Root />
+      </ModelProvider>
+    </BrowserRouter>
+  );*/
 });
 
-function setIcon(query:string, svg:string) {
+function setIcon(query: string, svg: string) {
   const elements = Array.from(document.querySelectorAll(query));
 
   for (const i of elements) {
@@ -57,7 +70,7 @@ async function loadMath() {
       katex.render(mathBlock.textContent!, mathBlock as any, { displayMode: true });
     }
 
-    for(const mathInline of mathInlines){
+    for (const mathInline of mathInlines) {
       katex.render(mathInline.textContent!, mathInline as any);
     }
   }

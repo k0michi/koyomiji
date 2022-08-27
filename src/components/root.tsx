@@ -10,17 +10,17 @@ import LogPage from "./log-page.js";
 import NotFound from './not-found.js';
 import ProjectPage from './project-page.js';
 
-export function Root(props: any) {
+export default function Root(props: any) {
   return (
     <Routes>
       <Route path="/" element={<Frame/>}>
-        <Route index element={<IndexPage {...props} />}></Route>
-        <Route path="about" element={<AboutPage {...props} />} />
-        <Route path="project" element={<ProjectPage {...props} />} />
-        <Route path="knowledge/:category/:id" element={<KnowledgePage {...props} />} />
-        <Route path="knowledge" element={<KnowledgeIndexPage {...props} />} />
-        <Route path="log/:id" element={<LogPage {...props} />} />
-        <Route path="log" element={<LogIndexPage {...props} />} />
+        <Route index element={<IndexPage />}></Route>
+        <Route path="about" element={<AboutPage />} />
+        <Route path="project" element={<ProjectPage />} />
+        <Route path="knowledge/:category/:id" element={<KnowledgePage />} />
+        <Route path="knowledge" element={<KnowledgeIndexPage />} />
+        <Route path="log/:id" element={<LogPage />} />
+        <Route path="log" element={<LogIndexPage />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
