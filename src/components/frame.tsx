@@ -55,7 +55,7 @@ export default function Frame() {
       </nav>
       <main id="main" className={visible ? '' : 'invisible'}>
         <React.Suspense fallback={<p>Loading</p>}>
-          {showing}
+          {showing == null ? outlet : showing}
         </React.Suspense>
       </main>
     </>
