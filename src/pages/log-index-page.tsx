@@ -32,7 +32,10 @@ export default function LogIndexPage() {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />
       </Helmet>
-      <h1>Logs</h1>
+      <header>
+        <h1>Logs</h1>
+        <div className="meta">日記とかエッセイとか。</div>
+      </header>
       {entries.map(i =>
         <div className="summary" key={getID(i)}>
           <h2><Link href={`/log/${getID(i)}`}>{i.title}</Link></h2>

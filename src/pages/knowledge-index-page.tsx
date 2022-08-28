@@ -51,7 +51,10 @@ export default function KnowledgeIndexPage() {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />
       </Helmet>
-      <h1>Knowledge</h1>
+      <header>
+        <h1>Knowledge</h1>
+        <div className="meta">学んだことのメモ。</div>
+      </header>
       {Object.entries(map).map(([k, v]) =>
         <div className="category" key={k}>
           <h2>{categoryNames[k]}</h2>

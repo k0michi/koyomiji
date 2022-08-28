@@ -18,7 +18,10 @@ export default function AboutPage() {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />
       </Helmet>
-      <h1>About</h1>
+      <header>
+        <h1>About</h1>
+        <div className="meta">私は一体誰か。</div>
+      </header>
       <h2>管理人について</h2>
       <p>管理人: Komichi*</p>
       <p>情報技術や英語、数学を学んでいます。</p>
