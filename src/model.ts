@@ -51,14 +51,16 @@ export class Model {
 
   async fetchAssets() {
     const assets: { [key: string]: any } = {};
-    assets['logoFull'] = (await import('./assets/koyomiji_full_hr.svg?raw')).default;
-    assets['asterisk'] = (await import('./assets/asterisk.svg?raw')).default;
-    assets['mailIcon'] = (await import('@tabler/icons/mail.svg?raw')).default;
-    assets['githubIcon'] = (await import('@tabler/icons/brand-github.svg?raw')).default;
-    assets['youtubeIcon'] = (await import('@tabler/icons/brand-youtube.svg?raw')).default;
-    assets['twitchIcon'] = (await import('@tabler/icons/brand-twitch.svg?raw')).default;
-    assets['calenderIcon'] = (await import('@tabler/icons/calendar-time.svg?raw')).default;
-    assets['tagsIcon'] = (await import('@tabler/icons/tags.svg?raw')).default;
+    await Promise.all([
+      (async () => assets['logoFull'] = (await import('./assets/koyomiji_full_hr.svg?raw')).default)(),
+      (async () => assets['asterisk'] = (await import('./assets/asterisk.svg?raw')).default)(),
+      (async () => assets['mailIcon'] = (await import('@tabler/icons/mail.svg?raw')).default)(),
+      (async () => assets['githubIcon'] = (await import('@tabler/icons/brand-github.svg?raw')).default)(),
+      (async () => assets['youtubeIcon'] = (await import('@tabler/icons/brand-youtube.svg?raw')).default)(),
+      (async () => assets['twitchIcon'] = (await import('@tabler/icons/brand-twitch.svg?raw')).default)(),
+      (async () => assets['calenderIcon'] = (await import('@tabler/icons/calendar-time.svg?raw')).default)(),
+      (async () => assets['tagsIcon'] = (await import('@tabler/icons/tags.svg?raw')).default)()
+    ]);
     this.assets.set(assets);
   }
 }
