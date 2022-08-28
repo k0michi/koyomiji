@@ -23,6 +23,7 @@ export default function Frame() {
 
   return (
     <>
+      <div id="bar"></div>
       <nav id="nav">
         <div id="logo-container">
           <Link href="/">
