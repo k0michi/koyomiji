@@ -18,6 +18,7 @@ export default function LogIndexPage() {
   const entries = Object.values(useObservable(model.entries)).filter(e => e.path[0] == 'log');
   entries.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));
   const assets = useObservable(model.assets);
+  model.checkIfIndexComplete();
 
   return (
     <>

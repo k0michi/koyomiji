@@ -20,6 +20,7 @@ export default function KnowledgeIndexPage() {
   const url = `https://koyomiji.com${location.pathname}`;
   const model = useModel<Model>();
   const entries = Object.values(useObservable(model.entries)).filter(e=>e.path[0] == 'knowledge');
+  model.checkIfIndexComplete();
 
   entries.sort((a, b) => {
     if (getCategory(a) == getCategory(b)) {

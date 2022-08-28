@@ -44,7 +44,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
   });
 
   renderer.use('/knowledge/(index.html)?', (ctx) => {
-    return render(template, '/knowledge', { entries: getEntries() });
+    return render(template, '/knowledge', { entries: getEntries(), isIndexComplete: true });
   });
 
   renderer.use('/knowledge/:category/:id/(index.html)?', (ctx) => {
@@ -58,7 +58,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
       throw new Error('Not found');
     }
 
-    const initialData: InitialData = { entries: {} };
+    const initialData: InitialData = { entries: {}, isIndexComplete: false };
     initialData.entries[pathname] = entry;
     return render(template, `/knowledge/${category}/${id}`, initialData);
   });
@@ -83,7 +83,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
   });
 
   renderer.use('/log/(index.html)?', (ctx) => {
-    return render(template, '/log', { entries: getEntries() });
+    return render(template, '/log', { entries: getEntries(), isIndexComplete: true });
   });
 
   renderer.use('/log/:id/(index.html)?', (ctx) => {
@@ -96,7 +96,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
       throw new Error('Not found');
     }
 
-    const initialData: InitialData = { entries: {} };
+    const initialData: InitialData = { entries: {}, isIndexComplete: false };
     initialData.entries[pathname] = entry;
     return render(template, `/log/${id}`, initialData);
   });
@@ -126,7 +126,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
   return renderer;
 }
 
-export function render(template: string, pathname: string, data: InitialData = { entries: {} }) {
+export function render(template: string, pathname: string, data: InitialData = { entries: {}, isIndexComplete: false }) {
   const model = new Model(data);
 
   const app = ReactDOM.renderToString(

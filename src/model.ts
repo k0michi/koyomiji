@@ -4,15 +4,18 @@ import { compareArray, toPathname } from "./utils.js";
 
 export interface InitialData {
   entries: { [key: string]: Entry };
+  isIndexComplete: boolean;
 }
 
 export class Model {
   entries: Observable<{ [key: string]: Entry }>;
   assets: Observable<{ [key: string]: any }>;
+  isIndexComplete: Observable<boolean>;
 
   constructor(data: InitialData) {
     this.entries = new Observable(data.entries);
     this.assets = new Observable({});
+    this.isIndexComplete = new Observable<boolean>(data.isIndexComplete);
   }
 
   getEntry(path: string[]) {
@@ -28,6 +31,22 @@ export class Model {
       entries[pathname] = e;
       this.entries.set(this.entries.get());
     });
+  }
+
+  checkIfIndexComplete() {
+    if (!this.isIndexComplete.get()) {
+      throw fetch('/entries.json').then(r => r.json()).then(e => {
+        this.isIndexComplete.set(true);
+
+        for (const [key, value] of Object.entries(e)) {
+          const entries = this.entries.get();
+          console.log(value)
+          entries[key] = { ...entries[key], ...(value as any) };
+        }
+
+        this.entries.set(this.entries.get());
+      });
+    }
   }
 
   async fetchAssets() {
