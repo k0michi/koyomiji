@@ -18,7 +18,7 @@ export default function KnowledgePage() {
   const path = ['knowledge', params.category, params.id];
   const entry = entries.find(p => compareArray(p.path, path))!;
   const categoryName = categoryNames[params.category!];
-  const content = toElement(parseXML(entry.content!).childNodes, ReactKTML.reactFactory);
+  const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
 
   return (
     <>

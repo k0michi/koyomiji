@@ -1,10 +1,9 @@
-import { JSDOM } from "jsdom";
+import window from '@k0michi/isomorphic-dom';
 
-const jsdom = new JSDOM();
 export const Fragment = Symbol('Fragment');
 
 export function parseXML(string: string) {
-  const parser = new jsdom.window.DOMParser();
+  const parser = new window.DOMParser();
   const $document = parser.parseFromString(string, 'text/xml');
 
   if (($document.firstChild as Element).tagName == 'parsererror') {
@@ -15,7 +14,7 @@ export function parseXML(string: string) {
 }
 
 export function getDescription(node: Node, limit: number) {
-  const Node = jsdom.window.Node;
+  const Node = window.Node;
 
   if (node.nodeType == Node.TEXT_NODE) {
     const text = node as Text;
@@ -75,7 +74,7 @@ export function isContainerBlock(tagName: string) {
 }
 
 export function toElement<T>(node: Node | NodeList, factory: (type: any, props: any, ...children: any[]) => T): string | T {
-  const Node = jsdom.window.Node;
+  const Node = window.Node;
 
   if ((node as any).nodeType != null) {
     node = node as Node;

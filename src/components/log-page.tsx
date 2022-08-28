@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
-import { categoryNames } from "../category.js";
 import dateToString from "../date-format.js";
 import { useModel, useObservable } from 'kyoka';
 import { useLocation, useParams } from 'react-router';
@@ -17,7 +16,7 @@ export default function LogPage() {
   const entries = useObservable(model.entries);
   const path = ['log', params.id];
   const entry = entries.find(p => compareArray(p.path, path))!;
-  const content = toElement(parseXML(entry.content!).childNodes, ReactKTML.reactFactory);
+  const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
 
   return (
     <>
