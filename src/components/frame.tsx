@@ -24,14 +24,6 @@ export default function Frame() {
   }, [location.pathname]);
 
   React.useEffect(() => {
-    console.log('pathname')
-  }, [location.pathname]);
-
-  React.useEffect(() => {
-    console.log('outlet')
-  }, [outlet]);
-
-  React.useEffect(() => {
     (async () => {
       const assets: { [key: string]: any } = {};
       assets['logoFull'] = (await import('../assets/koyomiji_full_hr.svg?raw')).default;
@@ -68,7 +60,7 @@ export default function Frame() {
           <li><Link href="https://www.twitch.tv/k0michi"><span dangerouslySetInnerHTML={{ __html: assets['twitchIcon'] }} /></Link></li>
         </ul>
       </nav>
-      <main id="main" className={visible?'':'invisible'}>
+      <main id="main" className={visible ? '' : 'invisible'}>
         <React.Suspense fallback={<p>Loading</p>}>
           {showing}
         </React.Suspense>
