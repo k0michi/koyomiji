@@ -18,6 +18,7 @@ export default function IndexPage() {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />
       </Helmet>
+      <h1>Home</h1>
       <h2><Link href="/about">プロフィール</Link></h2>
       <p>私は一体誰か。</p>
       <h2><Link href="/knowledge">備忘録</Link></h2>
