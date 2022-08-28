@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router';
+import Link from './link.js';
 
 export default function AboutPage() {
   const location = useLocation();
@@ -32,7 +33,7 @@ export default function AboutPage() {
       <h2>サイトについて</h2>
       <p></p>
       <p><ruby>曆路<rp></rp><rt>こよみじ</rt><rp></rp></ruby>喫茶館といいます。</p>
-      <p>特段の明記がない限り、サイト上のコンテンツは<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>に準拠します。</p>
+      <p>特段の明記がない限り、サイト上のコンテンツは<Link href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</Link>に準拠します。</p>
     </>
   );
 }

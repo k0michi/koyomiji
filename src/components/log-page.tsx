@@ -13,9 +13,8 @@ export default function LogPage() {
   const url = `https://koyomiji.com${location.pathname}`;
   const params = useParams();
   const model = useModel<Model>();
-  const entries = useObservable(model.entries);
-  const path = ['log', params.id];
-  const entry = entries.find(p => compareArray(p.path, path))!;
+  const path = ['log', params.id!];
+  const entry = model.getEntry(path);
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
 
   return (

@@ -14,9 +14,8 @@ export default function KnowledgePage() {
   const url = `https://koyomiji.com${location.pathname}`;
   const params = useParams();
   const model = useModel<Model>();
-  const entries = useObservable(model.entries);
-  const path = ['knowledge', params.category, params.id];
-  const entry = entries.find(p => compareArray(p.path, path))!;
+  const path = ['knowledge', params.category!, params.id!];
+  const entry = model.getEntry(path);
   const categoryName = categoryNames[params.category!];
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
 

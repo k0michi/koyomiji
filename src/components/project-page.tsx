@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router';
+import Link from './link.js';
 
 export default function ProjectPage() {
   const location = useLocation();
@@ -18,13 +19,13 @@ export default function ProjectPage() {
         <meta name="twitter:site" content="@k0michi" />
       </Helmet>
       <h1>Projects</h1>
-      <h2><a href="https://k0michi.github.io/chronograph/">Chronograph</a></h2>
+      <h2><Link href="https://k0michi.github.io/chronograph/">Chronograph</Link></h2>
       <p>時間を記録、可視化するためのツール。ボタンをクリックして現在時刻を記録し、時刻を一覧表示することができます。各時刻にはメモを残すことも可能です。</p>
-      <h2><a href="https://k0michi.github.io/toolbox/">Toolbox</a></h2>
+      <h2><Link href="https://k0michi.github.io/toolbox/">Toolbox</Link></h2>
       <p>個人的に使うためのWebツール。</p>
-      <h2><a href="https://github.com/k0michi/kyoka">Kyōka</a></h2>
+      <h2><Link href="https://github.com/k0michi/kyoka">Kyōka</Link></h2>
       <p>React用のロジック、ステート管理ライブラリ。</p>
-      <h2><a href="https://github.com/k0michi/hipt">hipt (Hierarchically Indented Plain Text)</a></h2>
+      <h2><Link href="https://github.com/k0michi/hipt">hipt (Hierarchically Indented Plain Text)</Link></h2>
       <p>インデントされたテキストをパースするライブラリ。</p>
     </>
   );

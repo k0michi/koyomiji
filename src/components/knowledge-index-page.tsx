@@ -5,6 +5,7 @@ import { Entry } from "../entry.js";
 import { useModel, useObservable } from 'kyoka';
 import { Model } from '../model.js';
 import { useLocation } from 'react-router';
+import Link from './link.js';
 
 function getCategory(p: Entry) {
   return p.path[1];
@@ -18,7 +19,7 @@ export default function KnowledgeIndexPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
   const model = useModel<Model>();
-  const entries = useObservable(model.entries).slice();
+  const entries = useObservable(model.entries).slice().filter(e=>e.path[0] == 'knowledge');
 
   entries.sort((a, b) => {
     if (getCategory(a) == getCategory(b)) {
@@ -54,7 +55,7 @@ export default function KnowledgeIndexPage() {
         <div className="category" key={k}>
           <h2>{categoryNames[k]}</h2>
           <ul>
-            {v.map(i => <li key={`${getCategory(i)}/${getID(i)}`}><a href={`/knowledge/${getCategory(i)}/${getID(i)}`}>{i.title}</a></li>)}
+            {v.map(i => <li key={`${getCategory(i)}/${getID(i)}`}><Link href={`/knowledge/${getCategory(i)}/${getID(i)}`}>{i.title}</Link></li>)}
           </ul>
         </div>
       )}

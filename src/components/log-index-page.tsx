@@ -5,6 +5,7 @@ import dateToString from '../date-format.js';
 import { Entry } from "../entry.js";
 import { Model } from '../model.js';
 import { useLocation } from 'react-router';
+import Link from './link.js';
 
 function join(elements: JSX.Element[]) {
   const newElements = [];
@@ -29,7 +30,7 @@ export default function LogIndexPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
   const model = useModel<Model>();
-  const entries = useObservable(model.entries).slice();
+  const entries = useObservable(model.entries).slice().filter(e => e.path[0] == 'log');
   entries.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));
 
   return (
@@ -46,7 +47,7 @@ export default function LogIndexPage() {
       <h1>Logs</h1>
       {join(entries.map(i =>
         <div className="summary" key={getID(i)}>
-          <h2><a href={`/log/${getID(i)}`}>{i.title}</a></h2>
+          <h2><Link href={`/log/${getID(i)}`}>{i.title}</Link></h2>
           <div className="meta">
             <div className="number">#{getID(i)}</div>
             <div className="date"><div className="calender-icon"></div><div>{dateToString(new Date(i.created))}</div></div>
