@@ -32,6 +32,7 @@ export default function LogIndexPage() {
   const model = useModel<Model>();
   const entries = Object.values(useObservable(model.entries)).filter(e => e.path[0] == 'log');
   entries.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));
+  const assets = useObservable(model.assets);
 
   return (
     <>
@@ -50,7 +51,7 @@ export default function LogIndexPage() {
           <h2><Link href={`/log/${getID(i)}`}>{i.title}</Link></h2>
           <div className="meta">
             <div className="number">#{getID(i)}</div>
-            <div className="date"><div className="calender-icon"></div><div>{dateToString(new Date(i.created))}</div></div>
+            <div className="date"><div className="calender-icon" dangerouslySetInnerHTML={{ __html: assets['calenderIcon'] }} /><div>{dateToString(new Date(i.created))}</div></div>
           </div>
           <p>{i.description}</p>
         </div>
