@@ -53,7 +53,7 @@ export default function KnowledgeIndexPage() {
       </Helmet>
       <header>
         <h1>Knowledge</h1>
-        <div className="meta">学んだことのメモ。</div>
+        <div className="meta">学んだことの覚書。</div>
       </header>
       {Object.entries(map).map(([k, v]) =>
         <div className="category" key={k}>
