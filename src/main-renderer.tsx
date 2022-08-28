@@ -104,6 +104,12 @@ export function createRenderer(outRoot: string | null, template: string, registr
     return fs.readFile(`${registry.rootDir}/log/${params.id}/${params.path.join('/')}`);
   });
 
+  /*
+  renderer.use('/entries.json', (ctx) => {
+
+    return JSON.stringify();
+  });*/
+
   return renderer;
 }
 

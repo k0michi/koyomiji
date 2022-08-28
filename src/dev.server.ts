@@ -5,7 +5,7 @@ import * as fs from 'fs/promises';
 import * as path from 'path';
 import glob from 'glob-promise';
 import { createEntry, Registry } from './main-renderer.js';
-import { readText } from './utils.js';
+import { readText, toPathname } from './utils.js';
 import * as chokidar from 'chokidar';
 import { AddressInfo } from 'net';
 
@@ -84,7 +84,8 @@ async function readEntry(p: string) {
 async function prepare() {
   for (const p of await glob('**/*', { cwd: contentRoot, nodir: true })) {
     if (p.endsWith('index.ktml')) {
-      registry.entries[p] = await readEntry(p);
+      const entryPath = p.split('/').slice(0, -1);
+      registry.entries[toPathname(entryPath)] = await readEntry(p);
     }
   }
 }
@@ -93,7 +94,9 @@ function registerHandler(vite: ViteDevServer) {
   chokidar.watch('.', { cwd: 'contents' }).on('all', async (event, p) => {
     if (event == 'change') {
       if (p.endsWith('index.ktml')) {
-        registry.entries[p] = await readEntry(p);
+        const entryPath = p.split('/').slice(0, -1);
+        registry.entries[toPathname(entryPath)] = await readEntry(p);
+
         vite.ws.send({ type: 'full-reload' });
         console.log(new Date(), event, p)
       }

@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { readText } from './utils.js';
+import { readText, toPathname } from './utils.js';
 import glob from 'glob-promise';
 import { createEntry, createRenderer, Registry } from './main-renderer.js';
 
@@ -23,7 +23,7 @@ const registry: Registry = {
     if (p.endsWith('index.ktml')) {
       const entryPath = p.split('/').slice(0, -1);
       const content = await readText(path.join(contentRoot, p));
-      registry.entries[p] = createEntry(entryPath, content);
+      registry.entries[toPathname(entryPath)] = createEntry(entryPath, content);
       const htmlPath = `/${entryPath.join('/')}/index.html`;
       await renderer.render(htmlPath);
       const jsonPath = `/${entryPath.join('/')}/entry.json`;
