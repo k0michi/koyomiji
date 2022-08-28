@@ -7,6 +7,7 @@ import { Model } from '../model.js';
 import { compareArray } from '../utils.js';
 import { parseXML, toElement } from '../ktml.js';
 import * as ReactKTML from '../react-ktml.js';
+import Icon from './icon.js';
 
 export default function LogPage() {
   const location = useLocation();
@@ -33,7 +34,7 @@ export default function LogPage() {
         <h1>{entry.title}</h1>
         <div className="meta">
           <div className="number">#{params.id}</div>
-          <div className="date"><div dangerouslySetInnerHTML={{__html:assets['calenderIcon']}}></div><div>{dateToString(new Date(entry.created))}</div></div>
+          <div className="date"><Icon name="calenderIcon" /><div>{dateToString(new Date(entry.created))}</div></div>
         </div>
       </header>
       {content}

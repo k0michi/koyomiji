@@ -67,6 +67,14 @@ p {
   margin: 0;
 }
 
+.icon {
+  display: contents;
+}
+
+.icon>svg {
+  display: block;
+}
+
 
 /* Root */
 
@@ -401,7 +409,6 @@ p {
 
 #main table thead {
   font-weight: bold;
-  /* border-bottom: 1px solid #353535; */
 }
 
 #main table td {
@@ -480,16 +487,18 @@ p {
 }
 
 .meta {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 400;
   display: flex;
+  align-items: center;
   flex-direction: row;
   gap: 16px;
 }
 
 .meta>div {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  flex-direction: row;
   gap: 8px;
 }
 

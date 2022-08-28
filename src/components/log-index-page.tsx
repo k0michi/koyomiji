@@ -6,6 +6,7 @@ import { Entry } from "../entry.js";
 import { Model } from '../model.js';
 import { useLocation } from 'react-router';
 import Link from './link.js';
+import Icon from './icon.js';
 
 function getID(p: Entry) {
   return p.path[1];
@@ -37,7 +38,7 @@ export default function LogIndexPage() {
           <h2><Link href={`/log/${getID(i)}`}>{i.title}</Link></h2>
           <div className="meta">
             <div className="number">#{getID(i)}</div>
-            <div className="date"><div className="calender-icon" dangerouslySetInnerHTML={{ __html: assets['calenderIcon'] }} /><div>{dateToString(new Date(i.created))}</div></div>
+            <div className="date"><Icon name="calenderIcon" /><div>{dateToString(new Date(i.created))}</div></div>
           </div>
           <p>{i.description}</p>
           <hr />

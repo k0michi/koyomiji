@@ -8,6 +8,7 @@ import { Model } from '../model.js';
 import { compareArray } from '../utils.js';
 import { parseXML, toElement } from '../ktml.js';
 import * as ReactKTML from '../react-ktml.js';
+import Icon from './icon.js';
 
 export default function KnowledgePage() {
   const location = useLocation();
@@ -34,8 +35,8 @@ export default function KnowledgePage() {
       <header>
         <h1>{entry.title}</h1>
         <div className="meta">
-          <div className="date"><div dangerouslySetInnerHTML={{__html:assets['calenderIcon']}}></div><div>{dateToString(new Date(entry.created))}</div></div>
-          <div className="tags"><div dangerouslySetInnerHTML={{__html:assets['tagsIcon']}}></div><div>{categoryName}</div></div>
+          <div className="date"><Icon name="calenderIcon" /><div>{dateToString(new Date(entry.created))}</div></div>
+          <div className="tags"><Icon name="tagsIcon" /><div>{categoryName}</div></div>
         </div>
       </header>
       {content}
