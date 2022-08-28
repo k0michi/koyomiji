@@ -387,12 +387,12 @@ p {
   text-align: justify;
 }
 
-#main>.summary>* {
-  margin-bottom: 6px;
-}
-
 #main>.summary>h2 {
   margin-bottom: 0;
+}
+
+#main>.summary>p, #main>.summary>.meta {
+  margin-bottom: 6px;
 }
 
 #main table {

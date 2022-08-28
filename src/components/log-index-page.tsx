@@ -7,21 +7,6 @@ import { Model } from '../model.js';
 import { useLocation } from 'react-router';
 import Link from './link.js';
 
-function join(elements: JSX.Element[]) {
-  const newElements = [];
-
-  for (let i = 0; i < elements.length; i++) {
-    newElements.push(elements[i]);
-
-    if (i < elements.length - 1) {
-      // FIXME
-      newElements.push(<hr />);
-    }
-  }
-
-  return newElements;
-}
-
 function getID(p: Entry) {
   return p.path[1];
 }
@@ -46,7 +31,7 @@ export default function LogIndexPage() {
         <meta name="twitter:site" content="@k0michi" />
       </Helmet>
       <h1>Logs</h1>
-      {join(entries.map(i =>
+      {entries.map(i =>
         <div className="summary" key={getID(i)}>
           <h2><Link href={`/log/${getID(i)}`}>{i.title}</Link></h2>
           <div className="meta">
@@ -54,8 +39,9 @@ export default function LogIndexPage() {
             <div className="date"><div className="calender-icon" dangerouslySetInnerHTML={{ __html: assets['calenderIcon'] }} /><div>{dateToString(new Date(i.created))}</div></div>
           </div>
           <p>{i.description}</p>
+          <hr />
         </div>
-      ))}
+      )}
     </>
   );
 }
