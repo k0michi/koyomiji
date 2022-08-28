@@ -1998,6 +1998,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"immer@npm:^9.0.15":
+  version: 9.0.15
+  resolution: "immer@npm:9.0.15"
+  checksum: 92e3d63e810e3c3c2bb61b70c45443e37ef983ad12924e3edaf03725ae5979618f5b473439bb3bb4a8c4769f25132f18dec10ea15c40f0b20da5691ff96ff611
+  languageName: node
+  linkType: hard
+
 "imurmurhash@npm:^0.1.4":
   version: 0.1.4
   resolution: "imurmurhash@npm:0.1.4"
@@ -2343,6 +2350,7 @@ __metadata:
     dateformat: ^5.0.3
     glob: ^8.0.3
     glob-promise: ^4.2.2
+    immer: ^9.0.15
     jsdom: ^19.0.0
     katex: ^0.15.6
     koa: ^2.13.4

@@ -3,12 +3,13 @@ import * as ReactDOM from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server.js';
 import { Helmet } from 'react-helmet';
 import { ModelProvider } from 'kyoka';
+import * as fs from 'fs/promises';
+import produce from 'immer';
+
 import Root from "./components/root.js";
 import { Entry } from "./entry.js";
 import { Renderer } from "./renderer.js";
 import * as ktml from './ktml.js';
-import * as fs from 'fs/promises';
-import * as ReactKTML from './react-ktml.js';
 import { InitialData, Model } from './model.js';
 import { compareArray } from './utils.js';
 
@@ -104,11 +105,15 @@ export function createRenderer(outRoot: string | null, template: string, registr
     return fs.readFile(`${registry.rootDir}/log/${params.id}/${params.path.join('/')}`);
   });
 
-  /*
   renderer.use('/entries.json', (ctx) => {
+    const entries = produce(registry.entries, draft=>{
+      for (const entry of Object.values(draft)) {
+        delete entry.content;
+      }
+    });
 
-    return JSON.stringify();
-  });*/
+    return JSON.stringify(entries);
+  });
 
   return renderer;
 }
