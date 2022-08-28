@@ -14,6 +14,7 @@ export default function Frame() {
   const model = useModel<Model>();
   const assets = useObservable(model.assets);
 
+  /*
   React.useEffect(() => {
     if (showing != null) {
       setVisible(false);
@@ -26,6 +27,7 @@ export default function Frame() {
       setShowing(outlet);
     }
   }, [location.pathname]);
+  */
 
   React.useEffect(() => {
     model.fetchAssets();
