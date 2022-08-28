@@ -345,17 +345,17 @@ p {
   font-family: var(--font-serif)
 }
 
-#main>h1,
+#main h1 {
+  font-size: 30px;
+  margin: 0 0 12px 0;
+}
+
 #main>h2,
 #main>h3,
 #main>h4,
 #main>h5,
 #main>h6 {
   margin: 0 0 8px 0;
-}
-
-#main h1 {
-  font-size: 30px;
 }
 
 #main h2 {
