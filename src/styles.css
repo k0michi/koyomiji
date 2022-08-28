@@ -414,6 +414,7 @@ p {
   padding: 2px;
   border-radius: 0px;
   font-size: 14px;
+  word-break: break-all;
 }
 
 #main pre {
