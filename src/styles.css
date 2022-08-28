@@ -313,6 +313,15 @@ p {
 
 /* Main */
 
+#main {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  font-size: 16px;
+  overflow-x: hidden;
+  transition: opacity 0.25s ease;
+}
+
 @media (max-width: 767px) {
   #main {
     width: 100%;
@@ -324,14 +333,6 @@ p {
   #main {
     padding: 24px 32px;
   }
-}
-
-#main {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 0;
-  font-size: 16px;
-  overflow-x: hidden;
 }
 
 #main h1,
@@ -457,6 +458,10 @@ p {
 
 #main .math-block {
   overflow-x: auto;
+}
+
+#main.invisible {
+  opacity: 0;
 }
 
 

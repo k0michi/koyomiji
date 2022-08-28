@@ -1,10 +1,35 @@
 import * as React from 'react';
-import { Outlet, useLocation } from 'react-router';
+import { Outlet, useLocation, useOutlet } from 'react-router';
 import Link from './link.js';
 
 export default function Frame() {
   const path = useLocation().pathname;
   const [assets, setAssets] = React.useState<{ [key: string]: any }>({});
+  const [visible, setVisible] = React.useState<boolean>(true);
+  const [showing, setShowing] = React.useState<React.ReactElement | null>();
+  const outlet = useOutlet();
+  const location = useLocation();
+
+  React.useEffect(() => {
+    if (showing != null) {
+      setVisible(false);
+
+      setTimeout(() => {
+        setVisible(true);
+        setShowing(outlet);
+      }, 250);
+    } else {
+      setShowing(outlet);
+    }
+  }, [location.pathname]);
+
+  React.useEffect(() => {
+    console.log('pathname')
+  }, [location.pathname]);
+
+  React.useEffect(() => {
+    console.log('outlet')
+  }, [outlet]);
 
   React.useEffect(() => {
     (async () => {
@@ -43,9 +68,9 @@ export default function Frame() {
           <li><Link href="https://www.twitch.tv/k0michi"><span dangerouslySetInnerHTML={{ __html: assets['twitchIcon'] }} /></Link></li>
         </ul>
       </nav>
-      <main id="main">
-        <React.Suspense fallback={<>Loading</>}>
-          <Outlet />
+      <main id="main" className={visible?'':'invisible'}>
+        <React.Suspense fallback={<p>Loading</p>}>
+          {showing}
         </React.Suspense>
       </main>
     </>
