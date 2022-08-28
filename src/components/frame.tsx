@@ -6,21 +6,30 @@ export default function Frame() {
   const path = useLocation().pathname;
   const [assets, setAssets] = React.useState<{ [key: string]: any }>({});
   const [visible, setVisible] = React.useState<boolean>(true);
-  const [pending, setPending] = React.useState<React.ReactElement | null>();
+  const [showing, setShowing] = React.useState<React.ReactElement | null>();
   const outlet = useOutlet();
   const location = useLocation();
 
   React.useEffect(() => {
-    if (pending != null) {
+    if (showing != null) {
       setVisible(false);
 
       setTimeout(() => {
         setVisible(true);
+        setShowing(outlet);
       }, 250);
     } else {
-      setPending(outlet);
+      setShowing(outlet);
     }
   }, [location.pathname]);
+
+  React.useEffect(() => {
+    console.log('pathname')
+  }, [location.pathname]);
+
+  React.useEffect(() => {
+    console.log('outlet')
+  }, [outlet]);
 
   React.useEffect(() => {
     (async () => {
@@ -59,9 +68,9 @@ export default function Frame() {
           <li><Link href="https://www.twitch.tv/k0michi"><span dangerouslySetInnerHTML={{ __html: assets['twitchIcon'] }} /></Link></li>
         </ul>
       </nav>
-      <main id="main" className={visible ? '' : 'invisible'}>
+      <main id="main" className={visible?'':'invisible'}>
         <React.Suspense fallback={<p>Loading</p>}>
-          {visible ? outlet : pending}
+          {showing}
         </React.Suspense>
       </main>
     </>
