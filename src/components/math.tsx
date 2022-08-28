@@ -1,5 +1,4 @@
 import * as React from 'react';
-let Katex: typeof import('katex').default;
 
 interface MathProps {
   display: string;
@@ -10,11 +9,11 @@ export function Math(props: MathProps) {
   const [html, setHTML] = React.useState<string>();
 
   React.useEffect(() => {
-    import('katex').then(m => {
-      Katex = m.default;
+    (async () => {
+      const Katex = (await import('katex')).default;
       const html = Katex.renderToString(props.children, { displayMode: props.display == 'block' });
       setHTML(html);
-    })
+    })();
   }, []);
 
   return (props.display == 'block' ?

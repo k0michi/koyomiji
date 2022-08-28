@@ -12,7 +12,7 @@ export default function Code(props: CodeProps) {
 
   React.useEffect(() => {
     if (lang != undefined) {
-      (async()=>{
+      (async () => {
         const Prism = await import('prismjs');
         await import('../prism-languages.js');
         const html = Prism.highlight(props.children, Prism.languages[lang], lang);
