@@ -22,6 +22,8 @@ export default function ProjectPage() {
         <h1>Projects</h1>
         <div className="meta">開発したもの。</div>
       </header>
+      <h2><Link href="https://github.com/k0michi/isomorphic-dom">@k0michi/isomorphic-dom</Link></h2>
+      <p>jsdomとネイティブのDOM APIへのプロキシライブラリ。</p>
       <h2><Link href="https://k0michi.github.io/chronograph/">Chronograph</Link></h2>
       <p>時間を記録、可視化するためのツール。ボタンをクリックして現在時刻を記録し、時刻を一覧表示することができます。各時刻にはメモを残すことも可能です。</p>
       <h2><Link href="https://k0michi.github.io/toolbox/">Toolbox</Link></h2>
