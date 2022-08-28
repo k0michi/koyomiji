@@ -40,7 +40,6 @@ export class Model {
 
         for (const [key, value] of Object.entries(e)) {
           const entries = this.entries.get();
-          console.log(value)
           entries[key] = { ...entries[key], ...(value as any) };
         }
 
