@@ -13,7 +13,8 @@ export default function Code(props: CodeProps) {
   React.useEffect(() => {
     if (lang != undefined) {
       import('../prism.js').then(m => {
-        const html = globalThis.Prism.highlight(props.children, globalThis.Prism.languages[lang], lang);
+        const Prism = (globalThis as any);
+        const html = Prism.highlight(props.children, Prism.languages[lang], lang);
         setHTML(html);
       })
     }
