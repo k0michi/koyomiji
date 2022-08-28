@@ -446,11 +446,11 @@ p {
   padding-left: 24px;
 }
 
-#main li {
+#main ul li {
   list-style: none;
 }
 
-#main li:before {
+#main ul li:before {
   content: "- ";
 }
 
