@@ -16,6 +16,7 @@ export default function LogPage() {
   const path = ['log', params.id!];
   const entry = model.getEntry(path);
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
+  const assets = useObservable(model.assets);
 
   return (
     <>
@@ -32,7 +33,7 @@ export default function LogPage() {
         <h1>{entry.title}</h1>
         <div className="meta">
           <div className="number">#{params.id}</div>
-          <div className="date"><div className="calender-icon"></div><div>{dateToString(new Date(entry.created))}</div></div>
+          <div className="date"><div dangerouslySetInnerHTML={{__html:assets['calenderIcon']}}></div><div>{dateToString(new Date(entry.created))}</div></div>
         </div>
       </header>
       {content}

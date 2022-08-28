@@ -18,6 +18,7 @@ export default function KnowledgePage() {
   const entry = model.getEntry(path);
   const categoryName = categoryNames[params.category!];
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
+  const assets = useObservable(model.assets);
 
   return (
     <>
@@ -33,8 +34,8 @@ export default function KnowledgePage() {
       <header>
         <h1>{entry.title}</h1>
         <div className="meta">
-          <div className="date"><div className="calender-icon"></div><div>{dateToString(new Date(entry.created))}</div></div>
-          <div className="tags"><div className="tags-icon"></div><div>{categoryName}</div></div>
+          <div className="date"><div dangerouslySetInnerHTML={{__html:assets['calenderIcon']}}></div><div>{dateToString(new Date(entry.created))}</div></div>
+          <div className="tags"><div dangerouslySetInnerHTML={{__html:assets['tagsIcon']}}></div><div>{categoryName}</div></div>
         </div>
       </header>
       {content}

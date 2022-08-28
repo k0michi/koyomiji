@@ -1,14 +1,17 @@
+import { useModel, useObservable } from 'kyoka';
 import * as React from 'react';
 import { Outlet, useLocation, useOutlet } from 'react-router';
+import { Model } from '../model.js';
 import Link from './link.js';
 
 export default function Frame() {
   const path = useLocation().pathname;
-  const [assets, setAssets] = React.useState<{ [key: string]: any }>({});
   const [visible, setVisible] = React.useState<boolean>(true);
   const [showing, setShowing] = React.useState<React.ReactElement | null>();
   const outlet = useOutlet();
   const location = useLocation();
+  const model = useModel<Model>();
+  const assets = useObservable(model.assets);
 
   React.useEffect(() => {
     if (showing != null) {
@@ -24,18 +27,7 @@ export default function Frame() {
   }, [location.pathname]);
 
   React.useEffect(() => {
-    (async () => {
-      const assets: { [key: string]: any } = {};
-      assets['logoFull'] = (await import('../assets/koyomiji_full_hr.svg?raw')).default;
-      assets['asterisk'] = (await import('../assets/asterisk.svg?raw')).default;
-      assets['mailIcon'] = (await import('@tabler/icons/mail.svg?raw')).default;
-      assets['githubIcon'] = (await import('@tabler/icons/brand-github.svg?raw')).default;
-      assets['youtubeIcon'] = (await import('@tabler/icons/brand-youtube.svg?raw')).default;
-      assets['twitchIcon'] = (await import('@tabler/icons/brand-twitch.svg?raw')).default;
-      assets['calenderIcon'] = (await import('@tabler/icons/calendar-time.svg?raw')).default;
-      assets['tagsIcon'] = (await import('@tabler/icons/tags.svg?raw')).default;
-      setAssets(assets);
-    })();
+    model.fetchAssets();
   }, []);
 
   return (
