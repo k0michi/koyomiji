@@ -391,6 +391,10 @@ p {
   margin-bottom: 6px;
 }
 
+#main>.summary>h2 {
+  margin-bottom: 0;
+}
+
 #main table {
   margin: auto;
 }
