@@ -6,7 +6,7 @@ import { ModelProvider } from 'kyoka';
 import Root from './components/root.js';
 import { InitialData, Model } from './model.js';
 
-import './assets/styles.css';
+import './styles.css';
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
