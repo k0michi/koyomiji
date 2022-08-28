@@ -5,7 +5,7 @@ import { Entry } from "../entry.js";
 import { useModel, useObservable } from 'kyoka';
 import { Model } from '../model.js';
 import { useLocation } from 'react-router';
-import Link from './link.js';
+import Link from '../components/link.js';
 
 function getCategory(p: Entry) {
   return p.path[1];

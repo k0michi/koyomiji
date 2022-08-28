@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router';
-import Link from './link.js';
+import Link from '../components/link.js';
 
 export default function ProjectPage() {
   const location = useLocation();

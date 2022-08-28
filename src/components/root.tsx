@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Routes, Route } from 'react-router';
-import AboutPage from "./about-page.js";
+import AboutPage from "../pages/about-page.js";
 import Frame from './frame.js';
-import IndexPage from "./index-page.js";
-import KnowledgeIndexPage from "./knowledge-index-page.js";
-import KnowledgePage from "./knowledge-page.js";
-import LogIndexPage from "./log-index-page.js";
-import LogPage from "./log-page.js";
-import NotFound from './not-found.js';
-import ProjectPage from './project-page.js';
+import IndexPage from "../pages/index-page.js";
+import KnowledgeIndexPage from "../pages/knowledge-index-page.js";
+import KnowledgePage from "../pages/knowledge-page.js";
+import LogIndexPage from "../pages/log-index-page.js";
+import LogPage from "../pages/log-page.js";
+import NotFoundPage from '../pages/not-found-page.js';
+import ProjectPage from '../pages/project-page.js';
 
 export default function Root(props: any) {
   return (
@@ -22,7 +22,7 @@ export default function Root(props: any) {
         <Route path="log/:id" element={<LogPage />} />
         <Route path="log" element={<LogIndexPage />} />
       </Route>
-      <Route path="*" element={<NotFound />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }

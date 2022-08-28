@@ -5,8 +5,8 @@ import dateToString from '../date-format.js';
 import { Entry } from "../entry.js";
 import { Model } from '../model.js';
 import { useLocation } from 'react-router';
-import Link from './link.js';
-import Icon from './icon.js';
+import Link from '../components/link.js';
+import Icon from '../components/icon.js';
 
 function getID(p: Entry) {
   return p.path[1];

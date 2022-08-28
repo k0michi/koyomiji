@@ -5,10 +5,9 @@ import dateToString from "../date-format.js";
 import { useModel, useObservable } from 'kyoka';
 import { useLocation, useParams } from 'react-router';
 import { Model } from '../model.js';
-import { compareArray } from '../utils.js';
 import { parseXML, toElement } from '../ktml.js';
 import * as ReactKTML from '../react-ktml.js';
-import Icon from './icon.js';
+import Icon from '../components/icon.js';
 
 export default function KnowledgePage() {
   const location = useLocation();
