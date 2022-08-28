@@ -1,13 +1,13 @@
 import { Observable } from "kyoka";
 import { Entry } from "./entry.js";
-import { compareArray } from "./utils.js";
+import { compareArray, toPathname } from "./utils.js";
 
 export interface InitialData {
-  entries: Entry[];
+  entries: { [key: string]: Entry };
 }
 
 export class Model {
-  entries: Observable<Entry[]>;
+  entries: Observable<{ [key: string]: Entry }>;
   assets: Observable<{ [key: string]: any }>;
 
   constructor(data: InitialData) {
@@ -17,19 +17,15 @@ export class Model {
 
   getEntry(path: string[]) {
     const entries = this.entries.get();
-    const index = entries.findIndex(p => compareArray(p.path, path));
+    const pathname = toPathname(path);
+    const entry = entries[pathname];
 
-    if (entries[index]?.content != null) {
-      return entries[index];
+    if (entry?.content != null) {
+      return entry;
     }
 
     throw fetch('/' + path.join('/') + '/entry.json').then(e => e.json()).then(e => {
-      if (index != -1) {
-        this.entries.get()[index] = e;
-      } else {
-        this.entries.get().push(e);
-      }
-
+      entries[pathname] = e;
       this.entries.set(this.entries.get());
     });
   }

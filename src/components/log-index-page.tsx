@@ -30,7 +30,7 @@ export default function LogIndexPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
   const model = useModel<Model>();
-  const entries = useObservable(model.entries).slice().filter(e => e.path[0] == 'log');
+  const entries = Object.values(useObservable(model.entries)).filter(e => e.path[0] == 'log');
   entries.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));
 
   return (

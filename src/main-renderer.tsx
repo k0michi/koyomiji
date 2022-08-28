@@ -11,7 +11,7 @@ import { Entry } from "./entry.js";
 import { Renderer } from "./renderer.js";
 import * as ktml from './ktml.js';
 import { InitialData, Model } from './model.js';
-import { compareArray } from './utils.js';
+import { compareArray, toPathname } from './utils.js';
 
 export interface Registry {
   rootDir: string;
@@ -20,6 +20,16 @@ export interface Registry {
 
 export function createRenderer(outRoot: string | null, template: string, registry: Registry) {
   const renderer = new Renderer(outRoot);
+
+  function getEntries() {
+    const entries = produce(registry.entries, draft => {
+      for (const entry of Object.values(draft)) {
+        delete entry.content;
+      }
+    });
+
+    return entries;
+  }
 
   renderer.use('/(index.html)?', (ctx) => {
     return render(template, '/');
@@ -34,21 +44,23 @@ export function createRenderer(outRoot: string | null, template: string, registr
   });
 
   renderer.use('/knowledge/(index.html)?', (ctx) => {
-    return render(template, '/knowledge', { entries: Object.values(registry.entries).filter(p => p.path[0] == 'knowledge').map(p => extractMeta(p)) });
+    return render(template, '/knowledge', { entries: getEntries() });
   });
 
   renderer.use('/knowledge/:category/:id/(index.html)?', (ctx) => {
     const params = ctx.params as any;
     const id = params['id'] as string;
     const category = params['category'] as string;
-    const path = ['knowledge', category, id];
-    const entry = Object.values(registry.entries).find(p => compareArray(p.path, path));
+    const pathname = toPathname(['knowledge', category, id]);
+    const entry = registry.entries[pathname];
 
     if (entry == undefined || entry.content == null) {
       throw new Error('Not found');
     }
 
-    return render(template, `/knowledge/${category}/${id}`, { entries: [entry] });
+    const initialData: InitialData = { entries: {} };
+    initialData.entries[pathname] = entry;
+    return render(template, `/knowledge/${category}/${id}`, initialData);
   });
 
   renderer.use('/knowledge/:category/:id/entry.json', (ctx) => {
@@ -71,20 +83,22 @@ export function createRenderer(outRoot: string | null, template: string, registr
   });
 
   renderer.use('/log/(index.html)?', (ctx) => {
-    return render(template, '/log', { entries: Object.values(registry.entries).filter(p => p.path[0] == 'log').map(p => extractMeta(p)) });
+    return render(template, '/log', { entries: getEntries() });
   });
 
   renderer.use('/log/:id/(index.html)?', (ctx) => {
     const params = ctx.params as any;
     const id = params['id'] as string;
-    const path = ['log', id];
-    const entry = Object.values(registry.entries).find(p => compareArray(p.path, path));
+    const pathname = toPathname(['log', id]);
+    const entry = registry.entries[pathname];
 
     if (entry == undefined || entry.content == null) {
       throw new Error('Not found');
     }
 
-    return render(template, `/log/${id}`, { entries: [entry] });
+    const initialData: InitialData = { entries: {} };
+    initialData.entries[pathname] = entry;
+    return render(template, `/log/${id}`, initialData);
   });
 
   renderer.use('/log/:id/entry.json', (ctx) => {
@@ -106,19 +120,13 @@ export function createRenderer(outRoot: string | null, template: string, registr
   });
 
   renderer.use('/entries.json', (ctx) => {
-    const entries = produce(registry.entries, draft=>{
-      for (const entry of Object.values(draft)) {
-        delete entry.content;
-      }
-    });
-
-    return JSON.stringify(entries);
+    return JSON.stringify(getEntries());
   });
 
   return renderer;
 }
 
-export function render(template: string, pathname: string, data: InitialData = { entries: [] }) {
+export function render(template: string, pathname: string, data: InitialData = { entries: {} }) {
   const model = new Model(data);
 
   const app = ReactDOM.renderToString(
