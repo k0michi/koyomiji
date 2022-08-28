@@ -92,14 +92,18 @@ async function prepare() {
 
 function registerHandler(vite: ViteDevServer) {
   chokidar.watch('.', { cwd: 'contents' }).on('all', async (event, p) => {
-    if (event == 'change') {
-      if (p.endsWith('index.ktml')) {
-        const entryPath = p.split('/').slice(0, -1);
-        registry.entries[toPathname(entryPath)] = await readEntry(p);
+    try {
+      if (event == 'change') {
+        if (p.endsWith('index.ktml')) {
+          const entryPath = p.split('/').slice(0, -1);
+          registry.entries[toPathname(entryPath)] = await readEntry(p);
 
-        vite.ws.send({ type: 'full-reload' });
-        console.log(new Date(), event, p)
+          vite.ws.send({ type: 'full-reload' });
+          console.log(new Date(), event, p)
+        }
       }
+    } catch (e) {
+      console.log(e);
     }
   });
 }
