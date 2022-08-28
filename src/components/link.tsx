@@ -9,7 +9,7 @@ interface LinkProps {
 }
 
 export default function Link(props: LinkProps) {
-  const external = props.href.startsWith('http://') || props.href.startsWith('https://');
+  const external = props.href.includes(':');
   const [isPending, startTransition] = useTransition();
   const handleClick = ReactRouterDOM.useLinkClickHandler(props.href);
 
