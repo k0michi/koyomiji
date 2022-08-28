@@ -331,7 +331,7 @@ p {
   flex-shrink: 1;
   flex-basis: 0;
   font-size: 16px;
-  overflow-x: auto;
+  overflow-x: hidden;
 }
 
 #main h1,
@@ -401,6 +401,7 @@ p {
 }
 
 #main code {
+  background-color: var(--color-4);
   font-family: var(--font-monospace);
   padding: 2px;
   border-radius: 0px;
@@ -411,14 +412,8 @@ p {
   margin: 0 0 16px 0;
   border-radius: 0px;
   padding: 12px;
-}
-
-#main code {
   background-color: var(--color-4);
-}
-
-#main pre {
-  background-color: var(--color-4);
+  overflow-x: auto;
 }
 
 #main pre code {
@@ -458,6 +453,10 @@ p {
 
 #main>.category {
   margin-bottom: 16px;
+}
+
+#main .math-block {
+  overflow-x: auto;
 }
 
 
