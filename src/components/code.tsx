@@ -12,11 +12,12 @@ export default function Code(props: CodeProps) {
 
   React.useEffect(() => {
     if (lang != undefined) {
-      import('../prism.js').then(m => {
-        const Prism = (globalThis as any);
+      (async()=>{
+        const Prism = await import('prismjs');
+        await import('../prism-languages.js');
         const html = Prism.highlight(props.children, Prism.languages[lang], lang);
         setHTML(html);
-      })
+      })();
     }
   }, []);
 
