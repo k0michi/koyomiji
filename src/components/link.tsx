@@ -10,8 +10,8 @@ interface LinkProps {
 
 export default function Link(props: LinkProps) {
   const external = props.href.startsWith('http://') || props.href.startsWith('https://');
-  const navigate = ReactRouterDOM.useNavigate();
   const [isPending, startTransition] = useTransition();
+  const handleClick = ReactRouterDOM.useLinkClickHandler(props.href);
 
   return (external ?
     <a href={props.href} className={props.className}>{props.children}</a>
@@ -19,7 +19,7 @@ export default function Link(props: LinkProps) {
     <a href={props.href} className={props.className} onClick={e=>{
       e.preventDefault();
       startTransition(()=>{
-        navigate(props.href);
+        handleClick(e);
       });
     }}>{props.children}</a>
   );
