@@ -347,6 +347,9 @@ p {
 
 #main h1 {
   font-size: 30px;
+}
+
+#main>h1 {
   margin: 0 0 12px 0;
 }
 
