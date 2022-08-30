@@ -123,6 +123,14 @@ export function createRenderer(outRoot: string | null, template: string, registr
     return JSON.stringify(getEntries());
   });
 
+  renderer.use('/novel', (ctx) => {
+    return render(template, '/novel');
+  });
+
+  renderer.use('/artwork', (ctx) => {
+    return render(template, '/artwork');
+  });
+
   return renderer;
 }
 
