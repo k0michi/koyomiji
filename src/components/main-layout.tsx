@@ -1,5 +1,6 @@
 import { useModel, useObservable } from 'kyoka';
 import * as React from 'react';
+import { Helmet } from 'react-helmet';
 import { Outlet, useLocation, useOutlet } from 'react-router';
 import { Model } from '../model.js';
 import Icon from './icon.js';
@@ -37,7 +38,10 @@ export default function MainLayout() {
   */
 
   return (
-    <div id="main-layout">
+    <>
+      <Helmet>
+        <body className="main-layout" />
+      </Helmet>
       <div id="bar"></div>
       <nav id="nav">
         <div id="logo-container">
@@ -65,6 +69,6 @@ export default function MainLayout() {
           {showing == null ? outlet : showing}
         </React.Suspense>
       </main>
-    </div>
+    </>
   );
 }

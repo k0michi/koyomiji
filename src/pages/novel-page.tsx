@@ -33,15 +33,14 @@ export default function NovelPage() {
         <meta property="og:description" content="" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />
+        <body className="novel-layout" />
       </Helmet>
-      <div id="novel-layout">
-        <div id="novel-nav">
-          <Link href='/novel'><Icon name="xIcon" /></Link>
-        </div>
-        <main id="novel-main">
-          {content}
-        </main>
+      <div id="novel-nav">
+        <Link href='/novel'><Icon name="xIcon" /></Link>
       </div>
+      <main id="novel-main">
+        {content}
+      </main>
     </>
   );
 }

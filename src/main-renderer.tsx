@@ -154,6 +154,7 @@ export function render(template: string, pathname: string, data: InitialData = {
   const helmet = Helmet.renderStatic();
 
   return template
+    .replace('<body>', `<body ${helmet.bodyAttributes.toString()}>`)
     .replace('<!--head-->', [helmet.title.toString(), helmet.meta.toString(), helmet.link.toString()].join('\n'))
     .replace('<!--body-->', app)
     .replace('<!--initial-data-->', JSON.stringify(data));

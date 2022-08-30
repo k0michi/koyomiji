@@ -43,7 +43,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  height: 100%;
 }
 
 a {
@@ -86,18 +85,18 @@ p {
 
 /* Main Layout */
 
-#main-layout {
+body.main-layout {
   /* max-width: 1480px; */
   max-width: 1200px;
   margin: 0 auto;
 }
 
 @media (max-width: 767px) {
-  #main-layout {}
+  body.main-layout {}
 }
 
 @media (min-width: 768px) {
-  #main-layout {
+  body.main-layout {
     display: flex;
     flex-direction: row;
   }
@@ -542,13 +541,14 @@ p {
 
 /* Novel Layout */
 
-#novel-layout {
+body.novel-layout {
   text-align: right;
   height: 100%;
   overflow-y: hidden;
 }
 
 #novel-nav {
+  text-align: left;
   position: fixed;
   right: 0;
   top: 0;
