@@ -25,12 +25,16 @@ export default function NovelPage() {
 
   React.useEffect(() => {
     document.documentElement.scrollLeft = document.documentElement.scrollWidth;
-    window.addEventListener('wheel', e => {
+
+    const h = (e: any) => {
       if (e.deltaX == 0) {
         window.scrollBy(-e.deltaY, 0);
         e.preventDefault()
       }
-    }, { passive: false });
+    };
+
+    window.addEventListener('wheel', h, { passive: false });
+    return () => window.removeEventListener('wheel', h);
   }, []);
 
   return (
