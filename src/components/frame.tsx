@@ -5,14 +5,22 @@ import { Model } from '../model.js';
 import Icon from './icon.js';
 import Link from './link.js';
 
-export default function Frame() {
+interface MenuProps {
+  href: string;
+  children: string;
+}
+
+function Menu(props: MenuProps) {
   const path = useLocation().pathname;
+
+  return (<Link href={props.href} className={path.startsWith(props.href) ? 'active' : ''}><Icon name="asterisk" /><div>{props.children}</div></Link>);
+}
+
+export default function Frame() {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [showing, setShowing] = React.useState<React.ReactElement | null>();
   const outlet = useOutlet();
-  const location = useLocation();
   const model = useModel<Model>();
-  const assets = useObservable(model.assets);
 
   /*
   React.useEffect(() => {
@@ -43,12 +51,12 @@ export default function Frame() {
           </Link>
         </div>
         <ul id="menu">
-          <li><Link href="/about" className={path.startsWith('/about') ? 'active' : ''}><Icon name="asterisk" /><div>About</div></Link></li>
-          <li><Link href="/project" className={path.startsWith('/project') ? 'active' : ''}><Icon name="asterisk" /><div>Projects</div></Link></li>
-          <li><Link href="/knowledge" className={path.startsWith('/knowledge') ? 'active' : ''}><Icon name="asterisk" /><div>Knowledge</div></Link></li>
-          <li><Link href="/log" className={path.startsWith('/log') ? 'active' : ''}><Icon name="asterisk" /><div>Logs</div></Link></li>
-          <li><Link href="/novel" className={path.startsWith('/novel') ? 'active' : ''}><Icon name="asterisk" /><div>Novels</div></Link></li>
-          <li><Link href="/artwork" className={path.startsWith('/artwork') ? 'active' : ''}><Icon name="asterisk" /><div>Artworks</div></Link></li>
+          <li><Menu href="/about">About</Menu></li>
+          <li><Menu href="/project">Projects</Menu></li>
+          <li><Menu href="/knowledge">Knowledge</Menu></li>
+          <li><Menu href="/log">Logs</Menu></li>
+          <li><Menu href="/novel">Novels</Menu></li>
+          <li><Menu href="/artwork">Artworks</Menu></li>
         </ul>
         <ul id="icons">
           <li><Link href="mailto:k0michi@koyomi.co"><Icon name="mailIcon" /></Link></li>
