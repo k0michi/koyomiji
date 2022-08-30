@@ -47,6 +47,8 @@ export default function Frame() {
           <li><Link href="/project" className={path.startsWith('/project') ? 'active' : ''}><Icon name="asterisk" /><div>Projects</div></Link></li>
           <li><Link href="/knowledge" className={path.startsWith('/knowledge') ? 'active' : ''}><Icon name="asterisk" /><div>Knowledge</div></Link></li>
           <li><Link href="/log" className={path.startsWith('/log') ? 'active' : ''}><Icon name="asterisk" /><div>Logs</div></Link></li>
+          <li><Link href="/novel" className={path.startsWith('/novel') ? 'active' : ''}><Icon name="asterisk" /><div>Novels</div></Link></li>
+          <li><Link href="/artwork" className={path.startsWith('/artwork') ? 'active' : ''}><Icon name="asterisk" /><div>Artworks</div></Link></li>
         </ul>
         <ul id="icons">
           <li><Link href="mailto:k0michi@koyomi.co"><Icon name="mailIcon" /></Link></li>
