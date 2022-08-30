@@ -23,6 +23,10 @@ export default function NovelPage() {
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
   const assets = useObservable(model.assets);
 
+  React.useEffect(() => {
+    document.documentElement.scrollLeft = document.documentElement.scrollWidth;
+  }, []);
+
   return (
     <>
       <Helmet>
