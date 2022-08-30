@@ -78,6 +78,7 @@ async function listen(app: Koa, port: number) {
 async function readEntry(p: string) {
   const entryPath = p.split('/').slice(0, -1);
   const content = await readText(path.join(contentRoot, p));
+  console.log(entryPath);
   return createEntry(entryPath, content);
 }
 

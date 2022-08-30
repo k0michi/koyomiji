@@ -15,11 +15,21 @@ import { compareArray, toPathname } from './utils.js';
 
 export interface Registry {
   rootDir: string;
-  entries: { [key: string]: Entry };
+  entries: Record<string, Entry>;
 }
 
 export function createRenderer(outRoot: string | null, template: string, registry: Registry) {
   const renderer = new Renderer(outRoot);
+
+  function getEntry(pathname: string) {
+    const entry = registry.entries[pathname];
+
+    if (entry == undefined || entry.content == null) {
+      throw new Error('Not found');
+    }
+
+    return entry;
+  }
 
   function getEntries() {
     const entries = produce(registry.entries, draft => {
@@ -48,38 +58,23 @@ export function createRenderer(outRoot: string | null, template: string, registr
   });
 
   renderer.use('/knowledge/:category/:id/(index.html)?', (ctx) => {
-    const params = ctx.params as any;
-    const id = params['id'] as string;
-    const category = params['category'] as string;
-    const pathname = toPathname(['knowledge', category, id]);
-    const entry = registry.entries[pathname];
-
-    if (entry == undefined || entry.content == null) {
-      throw new Error('Not found');
-    }
+    const pathname = toPathname(['knowledge', ctx.params['category'], ctx.params['id']])
+    const entry = getEntry(pathname);
 
     const initialData: InitialData = { entries: {}, isIndexComplete: false };
     initialData.entries[pathname] = entry;
-    return render(template, `/knowledge/${category}/${id}`, initialData);
+    return render(template, pathname, initialData);
   });
 
   renderer.use('/knowledge/:category/:id/entry.json', (ctx) => {
-    const params = ctx.params as any;
-    const id = params['id'] as string;
-    const category = params['category'] as string;
-    const path = ['knowledge', category, id];
-    const entry = Object.values(registry.entries).find(p => compareArray(p.path, path));
-
-    if (entry == undefined || entry.content == null) {
-      throw new Error('Not found');
-    }
+    const pathname = toPathname(['knowledge', ctx.params['category'], ctx.params['id']])
+    const entry = getEntry(pathname);
 
     return JSON.stringify(entry);
   });
 
   renderer.use('/knowledge/:category/:id/:path*', (ctx) => {
-    const params = ctx.params as any;
-    return fs.readFile(`${registry.rootDir}/knowledge/${params.category}/${params.id}/${params.path.join('/')}`);
+    return fs.readFile(`${registry.rootDir}/knowledge/${ctx.params.category}/${ctx.params.id}/${ctx.params.path.join('/')}`);
   });
 
   renderer.use('/log/(index.html)?', (ctx) => {
@@ -87,9 +82,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
   });
 
   renderer.use('/log/:id/(index.html)?', (ctx) => {
-    const params = ctx.params as any;
-    const id = params['id'] as string;
-    const pathname = toPathname(['log', id]);
+    const pathname = toPathname(['log', ctx.params['id']]);
     const entry = registry.entries[pathname];
 
     if (entry == undefined || entry.content == null) {
@@ -98,14 +91,12 @@ export function createRenderer(outRoot: string | null, template: string, registr
 
     const initialData: InitialData = { entries: {}, isIndexComplete: false };
     initialData.entries[pathname] = entry;
-    return render(template, `/log/${id}`, initialData);
+    return render(template, pathname, initialData);
   });
 
   renderer.use('/log/:id/entry.json', (ctx) => {
-    const params = ctx.params as any;
-    const id = params['id'] as string;
-    const path = ['log', id];
-    const entry = Object.values(registry.entries).find(p => compareArray(p.path, path));
+    const pathname = toPathname(['log', ctx.params['id']]);
+    const entry = getEntry(pathname);
 
     if (entry == undefined || entry.content == null) {
       throw new Error('Not found');
@@ -115,8 +106,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
   });
 
   renderer.use('/log/:id/:path*', (ctx) => {
-    const params = ctx.params as any;
-    return fs.readFile(`${registry.rootDir}/log/${params.id}/${params.path.join('/')}`);
+    return fs.readFile(`${registry.rootDir}/log/${ctx.params.id}/${ctx.params.path.join('/')}`);
   });
 
   renderer.use('/entries.json', (ctx) => {
@@ -125,6 +115,22 @@ export function createRenderer(outRoot: string | null, template: string, registr
 
   renderer.use('/novel', (ctx) => {
     return render(template, '/novel');
+  });
+
+  renderer.use('/novel/:novel/:chapter/(index.html)?', (ctx) => {
+    const pathname = toPathname(['novel', ctx.params['novel'], ctx.params['chapter']]);
+    const entry = getEntry(pathname);
+
+    const initialData: InitialData = { entries: {}, isIndexComplete: false };
+    initialData.entries[pathname] = entry;
+    return render(template, pathname, initialData);
+  });
+
+  renderer.use('/novel/:novel/:chapter/entry.json', (ctx) => {
+    const pathname = toPathname(['novel', ctx.params['novel'], ctx.params['chapter']]);
+    const entry = getEntry(pathname);
+
+    return JSON.stringify(entry);
   });
 
   renderer.use('/artwork', (ctx) => {

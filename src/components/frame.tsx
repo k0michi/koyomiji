@@ -20,7 +20,6 @@ export default function Frame() {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [showing, setShowing] = React.useState<React.ReactElement | null>();
   const outlet = useOutlet();
-  const model = useModel<Model>();
 
   /*
   React.useEffect(() => {
@@ -36,10 +35,6 @@ export default function Frame() {
     }
   }, [location.pathname]);
   */
-
-  React.useEffect(() => {
-    model.fetchAssets();
-  }, []);
 
   return (
     <>

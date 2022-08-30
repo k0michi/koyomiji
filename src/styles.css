@@ -34,7 +34,6 @@ body {
   /*border-top: 4px solid black;*/
   margin: 0;
   font-family: var(--font-sans);
-  font-feature-settings: "pwid";
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -340,6 +339,7 @@ p {
 /* Main */
 
 #main {
+  font-feature-settings: "pwid";
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 0;
@@ -528,4 +528,36 @@ p {
 
 .meta {
   color: var(--color-3);
+}
+
+
+/* Novel */
+
+#novel-nav {
+  position: fixed;
+  right: 0;
+  top: 0;
+  padding: 12px;
+  width: 100%;
+  background-color: rgb(31, 33, 34);
+  z-index: 1;
+}
+
+#novel-nav svg {
+  stroke-width: 1.0px;
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+}
+
+#novel-main {
+  writing-mode: vertical-rl;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 2em;
+  text-indent: 1em;
+  padding: 32px 24px 24px 24px;
+  position: absolute;
+  right: 0;
+  overflow: auto;
 }

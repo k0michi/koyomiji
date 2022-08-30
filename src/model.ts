@@ -58,7 +58,8 @@ export class Model {
       (async () => assets['youtubeIcon'] = (await import('@tabler/icons/brand-youtube.svg?raw')).default)(),
       (async () => assets['twitchIcon'] = (await import('@tabler/icons/brand-twitch.svg?raw')).default)(),
       (async () => assets['calenderIcon'] = (await import('@tabler/icons/calendar-time.svg?raw')).default)(),
-      (async () => assets['tagsIcon'] = (await import('@tabler/icons/tags.svg?raw')).default)()
+      (async () => assets['tagsIcon'] = (await import('@tabler/icons/tags.svg?raw')).default)(),
+      (async () => assets['xIcon'] = (await import('feather-icons/dist/icons/x.svg?raw')).default)(),
     ]);
     this.assets.set(assets);
   }

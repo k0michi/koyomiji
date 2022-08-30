@@ -11,22 +11,34 @@ import NotFoundPage from '../pages/not-found-page.js';
 import ProjectPage from '../pages/project-page.js';
 import NovelIndexPage from '../pages/novel-index-page.js';
 import ArtworkIndexPage from '../pages/artwork-index-page.js';
+import NovelPage from '../pages/novel-page.js';
+import { useModel } from 'kyoka';
+import { Model } from '../model.js';
 
 export default function Root(props: any) {
+  const model = useModel<Model>();
+
+  React.useEffect(() => {
+    model.fetchAssets();
+  }, []);
+
   return (
-    <Routes>
-      <Route path="/" element={<Frame/>}>
-        <Route index element={<IndexPage />}></Route>
-        <Route path="about" element={<AboutPage />} />
-        <Route path="project" element={<ProjectPage />} />
-        <Route path="knowledge/:category/:id" element={<KnowledgePage />} />
-        <Route path="knowledge" element={<KnowledgeIndexPage />} />
-        <Route path="log/:id" element={<LogPage />} />
-        <Route path="log" element={<LogIndexPage />} />
-        <Route path="novel" element={<NovelIndexPage />} />
-        <Route path="artwork" element={<ArtworkIndexPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Route>
-    </Routes>
+    <React.Suspense fallback={<p>Loading</p>}>
+      <Routes>
+        <Route path="/" element={<Frame />}>
+          <Route index element={<IndexPage />}></Route>
+          <Route path="about" element={<AboutPage />} />
+          <Route path="project" element={<ProjectPage />} />
+          <Route path="knowledge/:category/:id" element={<KnowledgePage />} />
+          <Route path="knowledge" element={<KnowledgeIndexPage />} />
+          <Route path="log/:id" element={<LogPage />} />
+          <Route path="log" element={<LogIndexPage />} />
+          <Route path="novel" element={<NovelIndexPage />} />
+          <Route path="artwork" element={<ArtworkIndexPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+        <Route path="/novel/:novel/:chapter" element={<NovelPage />} />
+      </Routes>
+    </React.Suspense>
   );
 }

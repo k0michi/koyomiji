@@ -1,10 +1,10 @@
 import * as fs from 'fs/promises';
 import * as fsn from 'fs';
 import * as path from 'path';
-import { Match, match, MatchResult } from "path-to-regexp";
+import { pathToRegexp, Match, match, MatchResult } from "path-to-regexp";
 
 export interface Context {
-  params: object;
+  params: Record<string, any>;
 }
 
 export type Middleware = (ctx: Context) => string | Promise<string> | Buffer | Promise<Buffer>;
