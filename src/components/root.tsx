@@ -25,8 +25,8 @@ export default function Root(props: any) {
         <Route path="log" element={<LogIndexPage />} />
         <Route path="novel" element={<NovelIndexPage />} />
         <Route path="artwork" element={<ArtworkIndexPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
-      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }
