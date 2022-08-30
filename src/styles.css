@@ -172,12 +172,12 @@ p {
   font-size: 20px;
   font-weight: inherit;
 
-  --menu-color-1: hsl(5, 100%, 44%);
-  --menu-color-2: hsl(25, 100%, 44%);
-  --menu-color-3: hsl(50, 100%, 44%);
-  --menu-color-4: hsl(75, 100%, 44%);
-  --menu-color-5: hsl(160, 100%, 44%);
-  --menu-color-6: hsl(200, 100%, 44%);
+  --menu-color-1: hsl(0, 86%, 43%);
+  --menu-color-2: hsl(20, 86%, 43%);
+  --menu-color-3: hsl(50, 86%, 43%);
+  --menu-color-4: hsl(70, 86%, 43%);
+  --menu-color-5: hsl(170, 86%, 43%);
+  --menu-color-6: hsl(200, 86%, 43%);
 }
 
 #menu {
