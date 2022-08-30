@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Routes, Route } from 'react-router';
 import AboutPage from "../pages/about-page.js";
-import Frame from './frame.js';
+import MainLayout from './main-layout.js';
 import IndexPage from "../pages/index-page.js";
 import KnowledgeIndexPage from "../pages/knowledge-index-page.js";
 import KnowledgePage from "../pages/knowledge-page.js";
@@ -25,7 +25,7 @@ export default function Root(props: any) {
   return (
     <React.Suspense fallback={<p>Loading</p>}>
       <Routes>
-        <Route path="/" element={<Frame />}>
+        <Route path="/" element={<MainLayout />}>
           <Route index element={<IndexPage />}></Route>
           <Route path="about" element={<AboutPage />} />
           <Route path="project" element={<ProjectPage />} />

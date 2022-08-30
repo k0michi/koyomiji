@@ -16,7 +16,7 @@ function Menu(props: MenuProps) {
   return (<Link href={props.href} className={path.startsWith(props.href) ? 'active' : ''}><Icon name="asterisk" /><div>{props.children}</div></Link>);
 }
 
-export default function Frame() {
+export default function MainLayout() {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [showing, setShowing] = React.useState<React.ReactElement | null>();
   const outlet = useOutlet();
@@ -37,7 +37,7 @@ export default function Frame() {
   */
 
   return (
-    <>
+    <div id="main-layout">
       <div id="bar"></div>
       <nav id="nav">
         <div id="logo-container">
@@ -65,6 +65,6 @@ export default function Frame() {
           {showing == null ? outlet : showing}
         </React.Suspense>
       </main>
-    </>
+    </div>
   );
 }

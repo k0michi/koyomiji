@@ -34,12 +34,14 @@ export default function NovelPage() {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@k0michi" />
       </Helmet>
-      <div id="novel-nav">
-        <Link href='/novel'><Icon name="xIcon" /></Link>
+      <div id="novel-layout">
+        <div id="novel-nav">
+          <Link href='/novel'><Icon name="xIcon" /></Link>
+        </div>
+        <main id="novel-main">
+          {content}
+        </main>
       </div>
-      <main id="novel-main">
-        {content}
-      </main>
     </>
   );
 }
