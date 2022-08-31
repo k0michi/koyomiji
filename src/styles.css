@@ -621,6 +621,7 @@ body.novel-layout {
   padding: 32px 24px 24px 24px;
   text-align: justify;
   display: inline-block;
+  height: 100%;
 }
 
 
