@@ -8,19 +8,11 @@ import { useLocation } from 'react-router';
 import Link from '../components/link.js';
 import { toPathname } from '../utils.js';
 
-function getCategory(p: Entry) {
-  return p.path[1];
-}
-
-function getID(p: Entry) {
-  return p.path[2];
-}
-
 export default function KnowledgeIndexPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
   const model = useModel<Model>();
-  const entries = Object.values(useObservable(model.entries)).filter(e=>e.path[0] == 'knowledge');
+  const entries = Object.values(useObservable(model.entries)).filter(e => e.path[0] == 'knowledge');
   model.checkIfIndexComplete();
   const map = mapEntries(entries);
 

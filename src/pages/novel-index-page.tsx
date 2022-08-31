@@ -9,10 +9,6 @@ import Link from '../components/link.js';
 import Icon from '../components/icon.js';
 import { toPathname } from '../utils.js';
 
-function getID(p: Entry) {
-  return p.path[1];
-}
-
 export default function NovelIndexPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
