@@ -20,6 +20,7 @@ function Menu(props: MenuProps) {
 export default function MainLayout() {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [showing, setShowing] = React.useState<React.ReactElement | null>();
+  const [menuVisible, setMenuVisible] = React.useState<boolean>(false);
   const outlet = useOutlet();
 
   /*
@@ -44,12 +45,19 @@ export default function MainLayout() {
       </Helmet>
       <div id="bar"></div>
       <nav id="nav">
-        <div id="logo-container">
-          <Link href="/">
-            <Icon name="logoFull" />
-          </Link>
+        <div id="top-container">
+          <div id="logo-container">
+            <div id="logo-block">
+              <Link href="/">
+                <Icon name="logoFull" />
+              </Link>
+            </div>
+          </div>
+          <div id="menu-button-container"><div id="menu-button" onClick={e=>{
+            setMenuVisible(!menuVisible)
+          }}><Icon name="menu2" /></div></div>
         </div>
-        <div id="menu-container">
+        <div id="menu-container" className={menuVisible ? 'visible' : ''}>
           <ul id="menu">
             <li><Menu href="/about">About</Menu></li>
             <li><Menu href="/project">Projects</Menu></li>
