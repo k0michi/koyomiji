@@ -173,6 +173,10 @@ body.main-layout {
 
 /* Navigation - Menu */
 
+#menu-container {
+  width: 200px;
+}
+
 #menu {
   padding: 0;
   font-size: 20px;
@@ -192,13 +196,12 @@ body.main-layout {
 
 @media (max-width: 767px) {
   #menu {
-    display: flex;
-    flex-direction: row;
-    margin-top: 12px;
+    width: fit-content;
+    margin: 12px auto 0 auto;
   }
 
   #menu>li {
-    margin: 0 auto;
+    margin-top: 8px;
   }
 }
 
@@ -206,18 +209,14 @@ body.main-layout {
   #menu {
     margin: 100px 0 0 16px;
   }
+
+  #menu>li {
+    margin-top: 12px;
+  }
 }
 
 #menu>li {
   list-style: none;
-}
-
-@media (max-width: 767px) {}
-
-@media (min-width: 768px) {
-  #menu>li {
-    margin-top: 12px;
-  }
 }
 
 #menu>li>a {
@@ -321,7 +320,7 @@ body.main-layout {
 
 @media (max-width: 767px) {
   #icons {
-    margin-top: 12px;
+    margin: 12px auto 0 auto;
   }
 }
 

@@ -49,20 +49,22 @@ export default function MainLayout() {
             <Icon name="logoFull" />
           </Link>
         </div>
-        <ul id="menu">
-          <li><Menu href="/about">About</Menu></li>
-          <li><Menu href="/project">Projects</Menu></li>
-          <li><Menu href="/knowledge">Knowledge</Menu></li>
-          <li><Menu href="/log">Logs</Menu></li>
-          <li><Menu href="/novel">Novels</Menu></li>
-          <li><Menu href="/artwork">Artworks</Menu></li>
-        </ul>
-        <ul id="icons">
-          <li><Link href="mailto:k0michi@koyomi.co"><Icon name="mailIcon" /></Link></li>
-          <li><Link href="https://github.com/k0michi"><Icon name="githubIcon" /></Link></li>
-          <li><Link href="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw"><Icon name="youtubeIcon" /></Link></li>
-          <li><Link href="https://www.twitch.tv/k0michi"><Icon name="twitchIcon" /></Link></li>
-        </ul>
+        <div id="menu-container">
+          <ul id="menu">
+            <li><Menu href="/about">About</Menu></li>
+            <li><Menu href="/project">Projects</Menu></li>
+            <li><Menu href="/knowledge">Knowledge</Menu></li>
+            <li><Menu href="/log">Logs</Menu></li>
+            <li><Menu href="/novel">Novels</Menu></li>
+            <li><Menu href="/artwork">Artworks</Menu></li>
+          </ul>
+          <ul id="icons">
+            <li><Link href="mailto:k0michi@koyomi.co"><Icon name="mailIcon" /></Link></li>
+            <li><Link href="https://github.com/k0michi"><Icon name="githubIcon" /></Link></li>
+            <li><Link href="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw"><Icon name="youtubeIcon" /></Link></li>
+            <li><Link href="https://www.twitch.tv/k0michi"><Icon name="twitchIcon" /></Link></li>
+          </ul>
+        </div>
       </nav>
       <main id="main" className={visible ? '' : 'invisible'}>
         <React.Suspense fallback={<p>Loading</p>}>
