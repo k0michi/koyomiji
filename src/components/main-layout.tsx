@@ -22,6 +22,11 @@ export default function MainLayout() {
   const [showing, setShowing] = React.useState<React.ReactElement | null>();
   const [menuVisible, setMenuVisible] = React.useState<boolean>(false);
   const outlet = useOutlet();
+  const model = useModel<Model>();
+
+  React.useEffect(() => {
+    model.fetchAssets();
+  }, []);
 
   /*
   React.useEffect(() => {

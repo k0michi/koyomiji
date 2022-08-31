@@ -17,12 +17,6 @@ import { Model } from '../model.js';
 import ArtworkPage from '../pages/artwork-page.js';
 
 export default function Root(props: any) {
-  const model = useModel<Model>();
-
-  React.useEffect(() => {
-    model.fetchAssets();
-  }, []);
-
   return (
     <React.Suspense fallback={<p>Loading</p>}>
       <Routes>
