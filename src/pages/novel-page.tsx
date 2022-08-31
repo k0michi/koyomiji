@@ -21,7 +21,6 @@ export default function NovelPage() {
   const path = ['novel', params.novel!, params.chapter!];
   const entry = model.getEntry(path);
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
-  const assets = useObservable(model.assets);
 
   React.useEffect(() => {
     document.documentElement.scrollLeft = document.documentElement.scrollWidth;

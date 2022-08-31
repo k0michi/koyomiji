@@ -2,11 +2,12 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { useModel, useObservable } from 'kyoka';
 import dateToString from '../date-format.js';
-import { Entry } from "../entry.js";
+import { Entry, mapEntries } from "../entry.js";
 import { Model } from '../model.js';
 import { useLocation } from 'react-router';
 import Link from '../components/link.js';
 import Icon from '../components/icon.js';
+import { toPathname } from '../utils.js';
 
 function getID(p: Entry) {
   return p.path[1];
@@ -15,6 +16,10 @@ function getID(p: Entry) {
 export default function NovelIndexPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
+  const model = useModel<Model>();
+  const entries = Object.values(useObservable(model.entries)).filter(e => e.path[0] == 'novel');
+  model.checkIfIndexComplete();
+  const map = mapEntries(entries);
 
   return (
     <>
@@ -30,6 +35,14 @@ export default function NovelIndexPage() {
       <header>
         <h1>Novels</h1>
         <div className="meta"></div>
+        {Object.entries(map).map(([k, v]) =>
+          <div className="category" key={k}>
+            <h2>{k}</h2>
+            <ol>
+              {v.map(i => <li key={toPathname(i.path)}><Link href={toPathname(i.path)}>{i.title}</Link></li>)}
+            </ol>
+          </div>
+        )}
       </header>
     </>
   );

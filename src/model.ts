@@ -3,13 +3,13 @@ import { Entry } from "./entry.js";
 import { compareArray, toPathname } from "./utils.js";
 
 export interface InitialData {
-  entries: { [key: string]: Entry };
+  entries: Record<string, Entry>;
   isIndexComplete: boolean;
 }
 
 export class Model {
-  entries: Observable<{ [key: string]: Entry }>;
-  assets: Observable<{ [key: string]: any }>;
+  entries: Observable<Record<string, Entry>>;
+  assets: Observable<Record<string, any>>;
   isIndexComplete: Observable<boolean>;
 
   constructor(data: InitialData) {
@@ -49,7 +49,7 @@ export class Model {
   }
 
   async fetchAssets() {
-    const assets: { [key: string]: any } = {};
+    const assets: Record<string, any> = {};
     await Promise.all([
       (async () => assets['logoFull'] = (await import('./assets/koyomiji_full_hr.svg?raw')).default)(),
       (async () => assets['asterisk'] = (await import('./assets/asterisk.svg?raw')).default)(),

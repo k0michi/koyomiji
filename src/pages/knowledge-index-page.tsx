@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { categoryNames } from "../category.js";
-import { Entry } from "../entry.js";
+import { Entry, mapEntries } from "../entry.js";
 import { useModel, useObservable } from 'kyoka';
 import { Model } from '../model.js';
 import { useLocation } from 'react-router';
 import Link from '../components/link.js';
+import { toPathname } from '../utils.js';
 
 function getCategory(p: Entry) {
   return p.path[1];
@@ -21,24 +22,7 @@ export default function KnowledgeIndexPage() {
   const model = useModel<Model>();
   const entries = Object.values(useObservable(model.entries)).filter(e=>e.path[0] == 'knowledge');
   model.checkIfIndexComplete();
-
-  entries.sort((a, b) => {
-    if (getCategory(a) == getCategory(b)) {
-      return getID(a).localeCompare(getID(b));
-    } else {
-      return getCategory(a).localeCompare(getCategory(b));
-    }
-  });
-
-  const map: { [key: string]: Entry[]; } = {};
-
-  for (const item of entries) {
-    if (map[getCategory(item)] == null) {
-      map[getCategory(item)] = [];
-    }
-
-    map[getCategory(item)].push(item);
-  }
+  const map = mapEntries(entries);
 
   return (
     <>
@@ -59,7 +43,7 @@ export default function KnowledgeIndexPage() {
         <div className="category" key={k}>
           <h2>{categoryNames[k]}</h2>
           <ul>
-            {v.map(i => <li key={`${getCategory(i)}/${getID(i)}`}><Link href={`/knowledge/${getCategory(i)}/${getID(i)}`}>{i.title}</Link></li>)}
+            {v.map(i => <li key={toPathname(i.path)}><Link href={toPathname(i.path)}>{i.title}</Link></li>)}
           </ul>
         </div>
       )}
