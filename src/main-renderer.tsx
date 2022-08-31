@@ -137,6 +137,26 @@ export function createRenderer(outRoot: string | null, template: string, registr
     return render(template, '/artwork');
   });
 
+  renderer.use('/artwork/:id/(index.html)?', (ctx) => {
+    const pathname = toPathname(['artwork', ctx.params['id']]);
+    const entry = getEntry(pathname);
+
+    const initialData: InitialData = { entries: {}, isIndexComplete: false };
+    initialData.entries[pathname] = entry;
+    return render(template, pathname, initialData);
+  });
+
+  renderer.use('/artwork/:id/entry.json', (ctx) => {
+    const pathname = toPathname(['artwork', ctx.params['id']]);
+    const entry = getEntry(pathname);
+
+    return JSON.stringify(entry);
+  });
+
+  renderer.use('/artwork/:id/:path*', (ctx) => {
+    return fs.readFile(`${registry.rootDir}/artwork/${ctx.params.id}/${ctx.params.path.join('/')}`);
+  });
+
   return renderer;
 }
 
@@ -162,16 +182,21 @@ export function render(template: string, pathname: string, data: InitialData = {
 
 export function createEntry(entryPath: string[], content: string): Entry {
   const $document = ktml.parseXML(content);
-  const $head = $document.querySelector('head');
-  const title = ktml.getTextContent('title', $head);
-  const created = ktml.getTextContent('created', $head);
+  const $head = $document.querySelector('head') as Element;
+  const title = ktml.getTextContent('title', $head)!;
+  const created = ktml.getTextContent('created', $head)!;
+  let source = ktml.getTextContent('source', $head);
+
+  if (source != undefined) {
+    source = ktml.resolvePath(entryPath, source);
+  }
 
   const $body = $document.querySelector('body')!;
   ktml.transformMath($body);
   ktml.transformCode($body);
   ktml.transformImg($body, entryPath);
   const description = ktml.getDescription($body, 120);
-  return { title, created, description, path: entryPath, content: $body.outerHTML };
+  return { title, created, description, path: entryPath, source, content: $body.outerHTML };
 }
 
 export function extractMeta(entry: Entry) {

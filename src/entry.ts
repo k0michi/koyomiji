@@ -2,6 +2,7 @@ export interface Entry {
   title: string;
   created: string;
   description: string;
+  source?: string;
   path: string[];
   content?: string;
 }

@@ -7,6 +7,7 @@ import { Model } from '../model.js';
 import { useLocation } from 'react-router';
 import Link from '../components/link.js';
 import Icon from '../components/icon.js';
+import { toPathname } from '../utils.js';
 
 function getID(p: Entry) {
   return p.path[1];
@@ -15,6 +16,10 @@ function getID(p: Entry) {
 export default function ArtworkIndexPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
+  const model = useModel<Model>();
+  const entries = Object.values(useObservable(model.entries)).filter(e => e.path[0] == 'artwork');
+  entries.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));
+  model.checkIfIndexComplete();
 
   return (
     <>
@@ -31,6 +36,15 @@ export default function ArtworkIndexPage() {
         <h1>Artworks</h1>
         <div className="meta"></div>
       </header>
+      <div className="thumbnail-list">
+        {entries.map(i =>
+          <div className="thumbnail" key={toPathname(i.path)}>
+            <Link href={`/artwork/${getID(i)}`}>
+              <img src={i.source!} />
+            </Link>
+          </div>
+        )}
+      </div>
     </>
   );
 }

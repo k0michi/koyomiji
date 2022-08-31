@@ -14,6 +14,7 @@ import ArtworkIndexPage from '../pages/artwork-index-page.js';
 import NovelPage from '../pages/novel-page.js';
 import { useModel } from 'kyoka';
 import { Model } from '../model.js';
+import ArtworkPage from '../pages/artwork-page.js';
 
 export default function Root(props: any) {
   const model = useModel<Model>();
@@ -35,6 +36,7 @@ export default function Root(props: any) {
           <Route path="log" element={<LogIndexPage />} />
           <Route path="novel" element={<NovelIndexPage />} />
           <Route path="artwork" element={<ArtworkIndexPage />} />
+          <Route path="artwork/:id" element={<ArtworkPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
         <Route path="/novel/:novel/:chapter" element={<NovelPage />} />

@@ -40,9 +40,13 @@ export function transformImg(element: Element, basePath: string[]) {
 
   for (const img of element.querySelectorAll('img')) {
     const relativeSrc = img.getAttribute('src');
-    const absoluteSrc = '/' + basePath.join('/') + '/' + relativeSrc;
+    const absoluteSrc = resolvePath(basePath, relativeSrc!);
     img.setAttribute('src', absoluteSrc);
   }
+}
+
+export function resolvePath(p1: string[], p2: string) {
+  return '/' + p1.join('/') + '/' + p2;
 }
 
 export function transformMath(element: Element) {
@@ -122,16 +126,16 @@ export function toElement<T>(node: Node | NodeList, factory: (type: any, props: 
   }
 }
 
-export function getTextContent(query: string, $element: any) {
+export function getTextContent(query: string, $element: Element) {
   if ($element == null) {
-    return null;
+    return undefined;
   }
 
-  const $found = $element.querySelector(query, $element);
+  const $found = $element.querySelector(query);
 
   if ($found == null) {
-    return null;
+    return undefined;
   }
 
-  return $found.textContent;
+  return $found.textContent!;
 }

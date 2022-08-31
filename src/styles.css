@@ -577,3 +577,18 @@ body.novel-layout {
   text-align: justify;
   display: inline-block;
 }
+
+
+/* Artwork */
+
+.thumbnail-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.thumbnail img {
+  height: 192px;
+  border-radius: 2px;
+}
