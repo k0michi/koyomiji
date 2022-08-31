@@ -34,7 +34,7 @@ export default function ArtworkIndexPage() {
       </Helmet>
       <header>
         <h1>Artworks</h1>
-        <div className="meta"></div>
+        <div className="meta">🚧 工事中</div>
       </header>
       <div className="thumbnail-list">
         {entries.map(i =>

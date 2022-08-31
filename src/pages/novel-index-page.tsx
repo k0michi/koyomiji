@@ -30,7 +30,7 @@ export default function NovelIndexPage() {
       </Helmet>
       <header>
         <h1>Novels</h1>
-        <div className="meta"></div>
+        <div className="meta">🚧 工事中</div>
         {Object.entries(map).map(([k, v]) =>
           <div className="category" key={k}>
             <h2>{k}</h2>

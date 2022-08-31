@@ -121,7 +121,7 @@ export default function NovelPage() {
   return (
     <>
       <Helmet>
-        <title>Novels | 曆路喫茶館</title>
+        <title>{entry.title} | 曆路喫茶館</title>
         <meta name="description" content="" />
         <meta property="og:url" content={url} />
         <meta property="og:title" content="Novels" />
