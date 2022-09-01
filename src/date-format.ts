@@ -1,3 +1,5 @@
+import formatInTimeZone from 'date-fns-tz/esm/formatInTimeZone';
+
 export default function dateToString(date: Date) {
-  return `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
+  return formatInTimeZone(date, 'Asia/Tokyo', 'yyyy.M.d');
 }
