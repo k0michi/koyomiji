@@ -16,21 +16,21 @@ html {
 
 @media (prefers-color-scheme: light) {
   :root {
-    --color-1: hsl(300, 100%, 99%);
-    --color-2: hsl(300, 6%, 17%);
-    --color-3: hsl(300, 8%, 59%);
-    --color-4: hsl(300, 6%, 17%);
-    --color-5: hsl(300, 14%, 80%);
+    --color-1: #fffdff;
+    --color-2: #2e292e;
+    --color-3: #a093a0;
+    --color-4: #2e292e;
+    --color-5: #d3c5d3; 
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-1: hsl(300, 5%, 15%);
-    --color-2: hsl(300, 100%, 99%);
-    --color-3: hsl(300, 8%, 59%);
-    --color-4: hsl(300, 8%, 7%);
-    --color-5: hsl(300, 7%, 32%);
+    --color-1: #282428;
+    --color-2: #fffdff;
+    --color-3: #9f8e9f;
+    --color-4: #131013;
+    --color-5: #574c57;
   }
 }
 
