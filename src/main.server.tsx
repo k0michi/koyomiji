@@ -35,5 +35,7 @@ const registry: Registry = {
 
   await renderer.render('/log/index.html');
   await renderer.render('/knowledge/index.html');
+  await renderer.render('/novel/index.html');
+  await renderer.render('/artwork/index.html');
   await renderer.render('/entries.json');
 })();

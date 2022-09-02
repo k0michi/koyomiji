@@ -25,7 +25,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
     const entry = registry.entries[pathname];
 
     if (entry == undefined || entry.content == null) {
-      throw new Error('Not found');
+      throw new Error(`Not found: ${pathname}`);
     }
 
     return entry;
@@ -113,7 +113,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
     return JSON.stringify(getEntries());
   });
 
-  renderer.use('/novel', (ctx) => {
+  renderer.use('/novel/(index.html)?', (ctx) => {
     return render(template, '/novel');
   });
 
@@ -133,7 +133,7 @@ export function createRenderer(outRoot: string | null, template: string, registr
     return JSON.stringify(entry);
   });
 
-  renderer.use('/artwork', (ctx) => {
+  renderer.use('/artwork/(index.html)?', (ctx) => {
     return render(template, '/artwork');
   });
 
