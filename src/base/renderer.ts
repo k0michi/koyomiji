@@ -43,12 +43,10 @@ export class Renderer {
         if (content instanceof Buffer) {
           await fs.mkdir(path.dirname(path.join(this.rootDir!, pPath)), { recursive: true });
           await fs.writeFile(path.join(this.rootDir!, pPath), content);
-          console.log(path.join(this.rootDir!, pPath))
           break;
         }else if (typeof content == 'string'){
           await fs.mkdir(path.dirname(path.join(this.rootDir!, pPath)), { recursive: true });
           await fs.writeFile(path.join(this.rootDir!, pPath), content);
-          console.log(path.join(this.rootDir!, pPath))
           break;
         }
       }

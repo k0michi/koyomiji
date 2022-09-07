@@ -32,7 +32,6 @@ export class ServerModel {
   async readEntry(p: string) {
     const entryPath = p.split('/').slice(0, -1);
     const content = await readFileUTF8(path.join(this.rootDir, p));
-    console.log(entryPath);
     return preprocess(entryPath, content);
   }
 

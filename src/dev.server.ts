@@ -24,7 +24,6 @@ async function createServer() {
     let url = ctx.originalUrl;
 
     try {
-      console.log(url)
       let template = await fs.readFile(
         path.resolve('index.html'),
         'utf-8'
@@ -74,11 +73,9 @@ async function listen(app: Koa, port: number) {
 async function processFile(p: string) {
   if (p.endsWith('index.ktml')) {
     await model.loadEntry(p);
-    console.log(new Date(), p)
     return true;
   } else if (p.endsWith('index.kdml')) {
     await model.addDictionary(p);
-    console.log(new Date(), p)
     return true;
   }
 
