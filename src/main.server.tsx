@@ -1,7 +1,8 @@
 import * as path from 'path';
-import { readText, toPathname } from './utils.js';
+import { readFileUTF8, toPathname } from './utils.js';
 import glob from 'glob-promise';
-import { createEntry, createRenderer, Registry } from './main-renderer.js';
+import { createRenderer, Registry } from './main-renderer.js';
+import { preprocess } from './ktml.js';
 
 const contentRoot = './contents';
 const outRoot = './dist';
@@ -12,7 +13,7 @@ const registry: Registry = {
 };
 
 (async () => {
-  const indexTemplate = await readText('dist/index.html');
+  const indexTemplate = await readFileUTF8('dist/index.html');
   const renderer = createRenderer(outRoot, indexTemplate, registry);
 
   await renderer.render('/index.html');
@@ -22,8 +23,8 @@ const registry: Registry = {
   for (const p of await glob('**/*', { cwd: contentRoot, nodir: true })) {
     if (p.endsWith('index.ktml')) {
       const entryPath = p.split('/').slice(0, -1);
-      const content = await readText(path.join(contentRoot, p));
-      registry.entries[toPathname(entryPath)] = createEntry(entryPath, content);
+      const content = await readFileUTF8(path.join(contentRoot, p));
+      registry.entries[toPathname(entryPath)] = preprocess(entryPath, content);
       const htmlPath = `/${entryPath.join('/')}/index.html`;
       await renderer.render(htmlPath);
       const jsonPath = `/${entryPath.join('/')}/entry.json`;

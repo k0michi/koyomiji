@@ -179,28 +179,3 @@ export function render(template: string, pathname: string, data: InitialData = {
     .replace('<!--body-->', app)
     .replace('<!--initial-data-->', JSON.stringify(data));
 }
-
-export function createEntry(entryPath: string[], content: string): Entry {
-  const $document = ktml.parseXML(content);
-  const $head = $document.querySelector('head') as Element;
-  const title = ktml.getTextContent('title', $head)!;
-  const created = ktml.getTextContent('created', $head)!;
-  let source = ktml.getTextContent('source', $head);
-
-  if (source != undefined) {
-    source = ktml.resolvePath(entryPath, source);
-  }
-
-  const $body = $document.querySelector('body')!;
-  ktml.transformMath($body);
-  ktml.transformCode($body);
-  ktml.transformImg($body, entryPath);
-  const description = ktml.getDescription($body, 120);
-  return { title, created, description, path: entryPath, source, content: $body.outerHTML };
-}
-
-export function extractMeta(entry: Entry) {
-  const cloned = { ...entry };
-  delete cloned.content;
-  return cloned;
-}

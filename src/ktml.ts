@@ -1,4 +1,5 @@
 import window from '@k0michi/isomorphic-dom';
+import { Entry } from './entry';
 
 export const Fragment = Symbol('Fragment');
 
@@ -138,4 +139,23 @@ export function getTextContent(query: string, $element: Element) {
   }
 
   return $found.textContent!;
+}
+
+export function preprocess(entryPath: string[], content: string): Entry {
+  const $document = parseXML(content);
+  const $head = $document.querySelector('head') as Element;
+  const title = getTextContent('title', $head)!;
+  const created = getTextContent('created', $head)!;
+  let source = getTextContent('source', $head);
+
+  if (source != undefined) {
+    source = resolvePath(entryPath, source);
+  }
+
+  const $body = $document.querySelector('body')!;
+  transformMath($body);
+  transformCode($body);
+  transformImg($body, entryPath);
+  const description = getDescription($body, 120);
+  return { title, created, description, path: entryPath, source, content: $body.outerHTML };
 }

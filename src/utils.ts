@@ -1,7 +1,7 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
 
-export async function readText(path: string) {
+export async function readFileUTF8(path: string) {
   return await fs.readFile(path, { encoding: 'utf-8' });
 }
 

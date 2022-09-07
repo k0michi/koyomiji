@@ -4,10 +4,11 @@ import koaConnect from 'koa-connect';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import glob from 'glob-promise';
-import { createEntry, Registry } from './main-renderer.js';
-import { readText, toPathname } from './utils.js';
+import { Registry } from './main-renderer.js';
+import { readFileUTF8, toPathname } from './utils.js';
 import * as chokidar from 'chokidar';
 import { AddressInfo } from 'net';
+import { preprocess } from './ktml.js';
 
 const contentRoot = './contents';
 
@@ -75,19 +76,27 @@ async function listen(app: Koa, port: number) {
   });
 }
 
-async function readEntry(p: string) {
+async function processFile(p: string) {
+  if (p.endsWith('index.ktml')) {
+    const entryPath = p.split('/').slice(0, -1);
+    registry.entries[toPathname(entryPath)] = await readText(p);
+    console.log(new Date(), p)
+    return true;
+  }
+
+  return false;
+}
+
+async function readText(p: string) {
   const entryPath = p.split('/').slice(0, -1);
-  const content = await readText(path.join(contentRoot, p));
+  const content = await readFileUTF8(path.join(contentRoot, p));
   console.log(entryPath);
-  return createEntry(entryPath, content);
+  return preprocess(entryPath, content);
 }
 
 async function prepare() {
   for (const p of await glob('**/*', { cwd: contentRoot, nodir: true })) {
-    if (p.endsWith('index.ktml')) {
-      const entryPath = p.split('/').slice(0, -1);
-      registry.entries[toPathname(entryPath)] = await readEntry(p);
-    }
+    processFile(p);
   }
 }
 
@@ -95,12 +104,8 @@ function registerHandler(vite: ViteDevServer) {
   chokidar.watch('.', { cwd: 'contents' }).on('all', async (event, p) => {
     try {
       if (event == 'change') {
-        if (p.endsWith('index.ktml')) {
-          const entryPath = p.split('/').slice(0, -1);
-          registry.entries[toPathname(entryPath)] = await readEntry(p);
-
+        if (await processFile(p)) {
           vite.ws.send({ type: 'full-reload' });
-          console.log(new Date(), event, p)
         }
       }
     } catch (e) {
