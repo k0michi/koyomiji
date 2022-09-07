@@ -133,13 +133,13 @@ export function createRenderer(outRoot: string | null, template: string, model: 
     return fs.readFile(`${model.rootDir}/artwork/${ctx.params.id}/${ctx.params.path.join('/')}`);
   });
 
-  /*
-  renderer.use('/dictionary/(index.html)?', (ctx) =>{ 
+  renderer.use('/dictionary/(index.html)?', (ctx) =>{
+    return render(template, '/dictionary');
   });
 
-  renderer.use('/dictionary/entries.json', (ctx) =>{ 
+  renderer.use('/dictionary/data.json', (ctx) =>{
+    return JSON.stringify(model.dictionaries);
   });
-  */
 
   return renderer;
 }

@@ -1,8 +1,8 @@
 import * as React from "react";
 import Code from "./components/code.js";
 import Link from "./components/link.js";
-import { Math } from "./components/math.js";
-import { Fragment } from "./ktml.js";
+import Math from "./components/math.js";
+import { Fragment } from "./xml.js";
 
 export function reactFactory(type: string | Symbol, props: any, ...children: any[]) {
   if (type == Fragment) {

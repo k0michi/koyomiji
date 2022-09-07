@@ -5,7 +5,7 @@ interface MathProps {
   children: string;
 }
 
-export function Math(props: MathProps) {
+export default function Math(props: MathProps) {
   const [html, setHTML] = React.useState<string>();
 
   React.useEffect(() => {

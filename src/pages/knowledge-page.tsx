@@ -5,7 +5,7 @@ import dateToString from "../date-format.js";
 import { useModel, useObservable } from 'kyoka';
 import { useLocation, useParams } from 'react-router';
 import { Model } from '../model.js';
-import { toElement } from '../ktml.js';
+import { toElement } from '../xml.js';
 import { parseXML } from '../xml.js';
 import * as ReactKTML from '../react-ktml.js';
 import Icon from '../components/icon.js';

@@ -15,6 +15,7 @@ import NovelPage from '../pages/novel-page.js';
 import { useModel } from 'kyoka';
 import { Model } from '../model.js';
 import ArtworkPage from '../pages/artwork-page.js';
+import DictionaryPage from '../pages/dictionary-page.js';
 
 export default function Root(props: any) {
   return (
@@ -31,6 +32,7 @@ export default function Root(props: any) {
           <Route path="novel" element={<NovelIndexPage />} />
           <Route path="artwork" element={<ArtworkIndexPage />} />
           <Route path="artwork/:id" element={<ArtworkPage />} />
+          <Route path="dictionary" element={<DictionaryPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
         <Route path="/novel/:novel/:chapter" element={<NovelPage />} />

@@ -5,7 +5,7 @@ import { useModel, useObservable } from 'kyoka';
 import { useLocation, useParams } from 'react-router';
 import { Model } from '../model.js';
 import { compareArray } from '../utils.js';
-import { toElement } from '../ktml.js';
+import { toElement } from '../xml.js';
 import * as ReactKTML from '../react-ktml.js';
 import Icon from '../components/icon.js';
 import { parseXML } from '../xml.js';

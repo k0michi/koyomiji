@@ -75,7 +75,7 @@ async function processFile(p: string) {
     await model.loadEntry(p);
     return true;
   } else if (p.endsWith('index.kdml')) {
-    await model.addDictionary(p);
+    await model.loadDictionary(p);
     return true;
   }
 

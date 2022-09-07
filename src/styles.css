@@ -592,6 +592,21 @@ body.main-layout {
   color: var(--color-3);
 }
 
+/* Main - Dictionary */
+
+.dictionary-entry {
+  margin-bottom: 12px;
+}
+
+.dictionary-entry .pos {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.dictionary-entry .usage {
+  font-weight: 500;
+}
+
 
 /* Novel Layout */
 

@@ -1,12 +1,13 @@
 import path from "path";
-import { Entry } from "./entry.js";
+import { Dictionary, Entry } from "./entry.js";
 import { preprocess } from "./ktml.js";
+import * as KDML from "./kdml.js";
 import { readFileUTF8, toPathname } from "./utils.js";
 
 export class ServerModel {
   rootDir: string;
   entries: Record<string, Entry>;
-  dictionaries: Record<string, Entry>;
+  dictionaries: Record<string, Dictionary>;
 
   constructor(rootDir: string) {
     this.rootDir = rootDir;
@@ -26,16 +27,13 @@ export class ServerModel {
 
   async loadEntry(pathname: string) {
     const normalized = toPathname(pathname.split('/').slice(0, -1));
-    this.entries[normalized] = await this.readEntry(pathname);
+    const content = await readFileUTF8(path.join(this.rootDir, pathname));
+    this.entries[normalized] =  preprocess(pathname.split('/').slice(0, -1), content);
   }
 
-  async readEntry(p: string) {
-    const entryPath = p.split('/').slice(0, -1);
-    const content = await readFileUTF8(path.join(this.rootDir, p));
-    return preprocess(entryPath, content);
-  }
-
-  async addDictionary(pathname: string) {
-    //
+  async loadDictionary(pathname: string) {
+    const normalized = toPathname(pathname.split('/').slice(0, -1));
+    const content = await readFileUTF8(path.join(this.rootDir, pathname));
+    this.dictionaries[normalized] =  KDML.preprocess(pathname.split('/').slice(0, -1), content);
   }
 }
