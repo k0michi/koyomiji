@@ -37,7 +37,7 @@ async function createServer() {
 
       template = await vite.transformIndexHtml(url, template)
 
-      const { createRenderer } = await vite.ssrLoadModule('/src/main-renderer.tsx')
+      const { createRenderer } = await vite.ssrLoadModule('/src/renderer.tsx')
       const renderer = createRenderer(null, template, registry);
       const html = await renderer.renderToString(url);
 
