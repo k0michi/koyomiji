@@ -89,7 +89,7 @@ async function prepare() {
 }
 
 function registerHandler(vite: ViteDevServer) {
-  chokidar.watch('.', { cwd: 'contents' }).on('all', async (event, p) => {
+  chokidar.watch('.', { cwd: contentRoot }).on('all', async (event, p) => {
     try {
       if (event == 'change') {
         if (await processFile(p)) {
