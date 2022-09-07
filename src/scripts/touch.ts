@@ -2,7 +2,7 @@ import * as path from "path";
 import * as fs from "fs/promises";
 import { JSDOM } from "jsdom";
 
-import { readFileUTF8 } from './utils.js';
+import { readFileUTF8 } from '../utils.js';
 import { formatDate } from "./new.js";
 
 const jsdom = new JSDOM();

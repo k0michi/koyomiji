@@ -31,8 +31,8 @@
     "dev": "ts-node --esm src/dev.server.ts",
     "build": "tsc && vite build",
     "render": "ts-node --esm src/main.server.tsx",
-    "new": "ts-node --esm src/new.ts",
-    "touch": "ts-node --esm src/touch.ts",
+    "new": "ts-node --esm src/scripts/new.ts",
+    "touch": "ts-node --esm src/scripts/touch.ts",
     "serve": "serve dist",
     "clean": "rm -rf dist"
   },

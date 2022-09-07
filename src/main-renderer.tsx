@@ -8,7 +8,7 @@ import produce from 'immer';
 
 import Root from "./components/root.js";
 import { Entry } from "./entry.js";
-import { Renderer } from "./renderer.js";
+import { Renderer } from "./base/renderer.js";
 import * as ktml from './ktml.js';
 import { InitialData, Model } from './model.js';
 import { compareArray, toPathname } from './utils.js';

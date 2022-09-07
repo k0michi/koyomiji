@@ -1,7 +1,6 @@
 import * as fs from 'fs/promises';
-import * as fsn from 'fs';
 import * as path from 'path';
-import { pathToRegexp, Match, match, MatchResult } from "path-to-regexp";
+import { match, MatchResult } from "path-to-regexp";
 
 export interface Context {
   params: Record<string, any>;
