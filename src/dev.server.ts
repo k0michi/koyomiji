@@ -4,7 +4,7 @@ import koaConnect from 'koa-connect';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import glob from 'glob-promise';
-import { Registry } from './main-renderer.js';
+import { Registry } from './renderer.js';
 import { readFileUTF8, toPathname } from './utils.js';
 import * as chokidar from 'chokidar';
 import { AddressInfo } from 'net';

@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { readFileUTF8, toPathname } from './utils.js';
 import glob from 'glob-promise';
-import { createRenderer, Registry } from './main-renderer.js';
+import { createRenderer, Registry } from './renderer.js';
 import { preprocess } from './ktml.js';
 
 const contentRoot = './contents';
