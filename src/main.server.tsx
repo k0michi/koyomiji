@@ -1,20 +1,16 @@
-import * as path from 'path';
 import { readFileUTF8, toPathname } from './utils.js';
 import glob from 'glob-promise';
-import { createRenderer, Registry } from './renderer.js';
-import { preprocess } from './ktml.js';
+import { createRenderer } from './renderer.js';
+import { ServerModel } from './server-model.js';
 
 const contentRoot = './contents';
 const outRoot = './dist';
 
-const registry: Registry = {
-  rootDir: contentRoot,
-  entries: {}
-};
+const model = new ServerModel(contentRoot);
 
 (async () => {
   const indexTemplate = await readFileUTF8('dist/index.html');
-  const renderer = createRenderer(outRoot, indexTemplate, registry);
+  const renderer = createRenderer(outRoot, indexTemplate, model);
 
   await renderer.render('/index.html');
   await renderer.render('/about/index.html');
@@ -23,8 +19,7 @@ const registry: Registry = {
   for (const p of await glob('**/*', { cwd: contentRoot, nodir: true })) {
     if (p.endsWith('index.ktml')) {
       const entryPath = p.split('/').slice(0, -1);
-      const content = await readFileUTF8(path.join(contentRoot, p));
-      registry.entries[toPathname(entryPath)] = preprocess(entryPath, content);
+      await model.loadEntry(p);
       const htmlPath = `/${entryPath.join('/')}/index.html`;
       await renderer.render(htmlPath);
       const jsonPath = `/${entryPath.join('/')}/entry.json`;

@@ -4,18 +4,13 @@ import koaConnect from 'koa-connect';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import glob from 'glob-promise';
-import { Registry } from './renderer.js';
-import { readFileUTF8, toPathname } from './utils.js';
 import * as chokidar from 'chokidar';
 import { AddressInfo } from 'net';
-import { preprocess } from './ktml.js';
+import { ServerModel } from './server-model.js';
 
 const contentRoot = './contents';
 
-const registry: Registry = {
-  rootDir: contentRoot,
-  entries: {}
-};
+const model = new ServerModel(contentRoot);
 
 async function createServer() {
   const app = new Koa();
@@ -38,7 +33,7 @@ async function createServer() {
       template = await vite.transformIndexHtml(url, template)
 
       const { createRenderer } = await vite.ssrLoadModule('/src/renderer.tsx')
-      const renderer = createRenderer(null, template, registry);
+      const renderer = createRenderer(null, template, model);
       const html = await renderer.renderToString(url);
 
       ctx.type = 'text/html';
@@ -78,20 +73,16 @@ async function listen(app: Koa, port: number) {
 
 async function processFile(p: string) {
   if (p.endsWith('index.ktml')) {
-    const entryPath = p.split('/').slice(0, -1);
-    registry.entries[toPathname(entryPath)] = await readText(p);
+    await model.loadEntry(p);
+    console.log(new Date(), p)
+    return true;
+  } else if (p.endsWith('index.kdml')) {
+    await model.addDictionary(p);
     console.log(new Date(), p)
     return true;
   }
 
   return false;
-}
-
-async function readText(p: string) {
-  const entryPath = p.split('/').slice(0, -1);
-  const content = await readFileUTF8(path.join(contentRoot, p));
-  console.log(entryPath);
-  return preprocess(entryPath, content);
 }
 
 async function prepare() {

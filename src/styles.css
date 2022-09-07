@@ -234,6 +234,7 @@ body.main-layout {
   --menu-color-4: hsl(70, 86%, 43%);
   --menu-color-5: hsl(170, 86%, 43%);
   --menu-color-6: hsl(200, 86%, 43%);
+  --menu-color-7: hsl(240, 95%, 64%);
 }
 
 #menu {
@@ -345,6 +346,14 @@ body.main-layout {
 
 #menu>li:nth-child(6)>a::before {
   background: var(--menu-color-6);
+}
+
+#menu>li:nth-child(7) svg {
+  color: var(--menu-color-7);
+}
+
+#menu>li:nth-child(7)>a::before {
+  background: var(--menu-color-7);
 }
 
 #menu>li>a:hover,

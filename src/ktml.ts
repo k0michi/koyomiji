@@ -1,18 +1,8 @@
 import window from '@k0michi/isomorphic-dom';
 import { Entry } from './entry';
+import { getTextContent, parseXML } from './xml.js';
 
 export const Fragment = Symbol('Fragment');
-
-export function parseXML(string: string) {
-  const parser = new window.DOMParser();
-  const $document = parser.parseFromString(string, 'text/xml');
-
-  if (($document.firstChild as Element).tagName == 'parsererror') {
-    throw new Error('Failed to parse');
-  }
-
-  return $document;
-}
 
 export function getDescription(node: Node, limit: number) {
   const Node = window.Node;
@@ -125,20 +115,6 @@ export function toElement<T>(node: Node | NodeList, factory: (type: any, props: 
 
     return factory(Fragment, {}, ...children);
   }
-}
-
-export function getTextContent(query: string, $element: Element) {
-  if ($element == null) {
-    return undefined;
-  }
-
-  const $found = $element.querySelector(query);
-
-  if ($found == null) {
-    return undefined;
-  }
-
-  return $found.textContent!;
 }
 
 export function preprocess(entryPath: string[], content: string): Entry {
