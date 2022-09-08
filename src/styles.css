@@ -37,7 +37,6 @@ html {
 body {
   /*border-top: 4px solid black;*/
   margin: 0;
-  font-family: var(--font-sans);
   background-color: var(--color-1);
   color: var(--color-2);
   -moz-osx-font-smoothing: grayscale;
@@ -400,11 +399,12 @@ body.main-layout {
 /* Main */
 
 #main {
-  font-feature-settings: "pwid";
+  font-size: 16px;
+  font-family: var(--font-sans);
+  font-weight: 300;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 0;
-  font-size: 16px;
   overflow-x: hidden;
   transition: opacity 0.25s ease;
 }
@@ -481,6 +481,10 @@ body.main-layout {
 #main>.summary>p,
 #main>.summary>.meta {
   margin-bottom: 6px;
+}
+
+#main>.summary>p {
+  line-height: 1.6;
 }
 
 #main table {
