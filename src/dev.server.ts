@@ -4,17 +4,13 @@ import koaConnect from 'koa-connect';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import glob from 'glob-promise';
-import { createEntry, Registry } from './main-renderer.js';
-import { readText, toPathname } from './utils.js';
 import * as chokidar from 'chokidar';
 import { AddressInfo } from 'net';
+import { ServerModel } from './server-model.js';
 
 const contentRoot = './contents';
 
-const registry: Registry = {
-  rootDir: contentRoot,
-  entries: {}
-};
+const model = new ServerModel(contentRoot);
 
 async function createServer() {
   const app = new Koa();
@@ -28,7 +24,6 @@ async function createServer() {
     let url = ctx.originalUrl;
 
     try {
-      console.log(url)
       let template = await fs.readFile(
         path.resolve('index.html'),
         'utf-8'
@@ -36,8 +31,8 @@ async function createServer() {
 
       template = await vite.transformIndexHtml(url, template)
 
-      const { createRenderer } = await vite.ssrLoadModule('/src/main-renderer.tsx')
-      const renderer = createRenderer(null, template, registry);
+      const { createRenderer } = await vite.ssrLoadModule('/src/renderer.tsx')
+      const renderer = createRenderer(null, template, model);
       const html = await renderer.renderToString(url);
 
       ctx.type = 'text/html';
@@ -75,32 +70,30 @@ async function listen(app: Koa, port: number) {
   });
 }
 
-async function readEntry(p: string) {
-  const entryPath = p.split('/').slice(0, -1);
-  const content = await readText(path.join(contentRoot, p));
-  console.log(entryPath);
-  return createEntry(entryPath, content);
+async function processFile(p: string) {
+  if (p.endsWith('index.ktml')) {
+    await model.loadEntry(p);
+    return true;
+  } else if (p.endsWith('index.kdml')) {
+    await model.loadDictionary(p);
+    return true;
+  }
+
+  return false;
 }
 
 async function prepare() {
   for (const p of await glob('**/*', { cwd: contentRoot, nodir: true })) {
-    if (p.endsWith('index.ktml')) {
-      const entryPath = p.split('/').slice(0, -1);
-      registry.entries[toPathname(entryPath)] = await readEntry(p);
-    }
+    processFile(p);
   }
 }
 
 function registerHandler(vite: ViteDevServer) {
-  chokidar.watch('.', { cwd: 'contents' }).on('all', async (event, p) => {
+  chokidar.watch('.', { cwd: contentRoot }).on('all', async (event, p) => {
     try {
       if (event == 'change') {
-        if (p.endsWith('index.ktml')) {
-          const entryPath = p.split('/').slice(0, -1);
-          registry.entries[toPathname(entryPath)] = await readEntry(p);
-
+        if (await processFile(p)) {
           vite.ws.send({ type: 'full-reload' });
-          console.log(new Date(), event, p)
         }
       }
     } catch (e) {

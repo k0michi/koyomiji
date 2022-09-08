@@ -66,8 +66,9 @@ export default function MainLayout() {
           <ul id="menu">
             <li><Menu href="/about">About</Menu></li>
             <li><Menu href="/project">Projects</Menu></li>
-            <li><Menu href="/knowledge">Knowledge</Menu></li>
             <li><Menu href="/log">Logs</Menu></li>
+            <li><Menu href="/knowledge">Knowledge</Menu></li>
+            <li><Menu href="/dictionary">Dictionary</Menu></li>
             <li><Menu href="/novel">Novels</Menu></li>
             <li><Menu href="/artwork">Artworks</Menu></li>
           </ul>

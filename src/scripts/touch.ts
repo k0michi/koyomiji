@@ -2,7 +2,7 @@ import * as path from "path";
 import * as fs from "fs/promises";
 import { JSDOM } from "jsdom";
 
-import { readText } from './utils.js';
+import { readFileUTF8 } from '../utils.js';
 import { formatDate } from "./new.js";
 
 const jsdom = new JSDOM();
@@ -13,7 +13,7 @@ const { Node } = jsdom.window;
   pathToTouch = path.join(pathToTouch, 'index.ktml');
 
   const parser = new jsdom.window.DOMParser();
-  const content = await readText(pathToTouch);
+  const content = await readFileUTF8(pathToTouch);
   const $document = parser.parseFromString(content, 'text/xml');
 
   const $head = $document.querySelector('head')!;

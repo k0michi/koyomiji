@@ -1,5 +1,5 @@
 import { Observable } from "kyoka";
-import { Entry } from "./entry.js";
+import { Dictionary, Entry } from "./entry.js";
 import { compareArray, toPathname } from "./utils.js";
 
 export interface InitialData {
@@ -9,13 +9,15 @@ export interface InitialData {
 
 export class Model {
   entries: Observable<Record<string, Entry>>;
-  assets: Observable<Record<string, any>>;
   isIndexComplete: Observable<boolean>;
+  dictionaries: Observable<Record<string, Dictionary> | null>;
+  assets: Observable<Record<string, any>>;
 
   constructor(data: InitialData) {
     this.entries = new Observable(data.entries);
-    this.assets = new Observable({});
     this.isIndexComplete = new Observable<boolean>(data.isIndexComplete);
+    this.dictionaries = new Observable<Record<string, Dictionary>| null>(null);
+    this.assets = new Observable({});
   }
 
   getEntry(path: string[]) {
@@ -44,6 +46,14 @@ export class Model {
         }
 
         this.entries.set(this.entries.get());
+      });
+    }
+  }
+
+  fetchDictionary() {
+    if(this.dictionaries.get() == null) {
+      fetch('/dictionary/data.json').then(r => r.json()).then(e => {
+        this.dictionaries.set(e);
       });
     }
   }

@@ -7,6 +7,25 @@ export interface Entry {
   content?: string;
 }
 
+export interface Dictionary {
+  title: string;
+  created: string;
+  description: string;
+  path: string[];
+  content?: DictionaryEntry[];
+}
+
+export interface DictionaryEntry {
+  word: string;
+  senses: DictionarySense[];
+}
+
+export interface DictionarySense {
+  pos?: string;
+  usage?: string;
+  gloss: string;
+}
+
 export function mapEntries(entries: Entry[]) {
   entries.sort((a, b) => {
     if (a.path[1] == b.path[1]) {
