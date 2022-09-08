@@ -62,6 +62,10 @@ ul {
   margin: 0;
 }
 
+ol {
+  margin: 0;
+}
+
 p {
   margin: 0;
 }
@@ -445,7 +449,7 @@ body.main-layout {
 #main>h4,
 #main>h5,
 #main>h6 {
-  margin: 0 0 8px 0;
+  margin: 24px 0 8px 0;
 }
 
 #main h2 {
@@ -528,6 +532,12 @@ body.main-layout {
 
 #main ul {
   padding-left: 24px;
+  margin-bottom: 12px;
+}
+
+#main ol {
+  padding-left: 24px;
+  margin-bottom: 12px;
 }
 
 #main ul li {
