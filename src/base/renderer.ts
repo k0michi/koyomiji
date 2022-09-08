@@ -16,10 +16,12 @@ export interface Route {
 export class Renderer {
   rootDir: string | null;
   routes: Route[];
+  logging: boolean;
 
-  constructor(rootDir: string|null) {
+  constructor(rootDir: string | null, logging = true) {
     this.rootDir = rootDir;
     this.routes = [];
+    this.logging = logging;
   }
 
   use(path: string, middleware: Middleware) {
@@ -28,6 +30,10 @@ export class Renderer {
   }
 
   async render(pPath: string) {
+    if (this.logging) {
+      console.log(pPath);
+    }
+
     for (const route of this.routes) {
       const matchFunc = match(route.path);
       const result = matchFunc(pPath);
@@ -44,7 +50,7 @@ export class Renderer {
           await fs.mkdir(path.dirname(path.join(this.rootDir!, pPath)), { recursive: true });
           await fs.writeFile(path.join(this.rootDir!, pPath), content);
           break;
-        }else if (typeof content == 'string'){
+        } else if (typeof content == 'string') {
           await fs.mkdir(path.dirname(path.join(this.rootDir!, pPath)), { recursive: true });
           await fs.writeFile(path.join(this.rootDir!, pPath), content);
           break;
@@ -68,7 +74,7 @@ export class Renderer {
 
         if (content instanceof Buffer) {
           return content;
-        }else if (typeof content == 'string'){
+        } else if (typeof content == 'string') {
           return content;
         }
 
