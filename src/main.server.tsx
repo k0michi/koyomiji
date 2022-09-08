@@ -24,6 +24,8 @@ const model = new ServerModel(contentRoot);
       await renderer.render(htmlPath);
       const jsonPath = `/${entryPath.join('/')}/entry.json`;
       await renderer.render(jsonPath);
+    } else if (p.endsWith('index.kdml')) {
+      await model.loadDictionary(p);
     } else {
       await renderer.render('/' + p);
     }
@@ -33,5 +35,7 @@ const model = new ServerModel(contentRoot);
   await renderer.render('/knowledge/index.html');
   await renderer.render('/novel/index.html');
   await renderer.render('/artwork/index.html');
+  await renderer.render('/dictionary/index.html');
+  await renderer.render('/dictionary/data.json');
   await renderer.render('/entries.json');
 })();
