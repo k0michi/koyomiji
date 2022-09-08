@@ -22,21 +22,20 @@ export default function AboutPage() {
         <h1>About</h1>
         <div className="meta">私は一体誰か。</div>
       </header>
-      <h2>管理人について</h2>
-      <p>管理人: Komichi*</p>
-      <p>情報技術や英語、数学を学んでいます。</p>
-      <p>最近の趣味は読書です。シャーロックホームズなど、推理小説が好きです。</p>
-      <p>主にWebサイト、デスクトップアプリ、ゲームを開発しています。</p>
-      <p>お絵描き練習中です。</p>
-      <p>Administrator: Komichi*</p>
-      <p>I'm a Japanese student and learning information technology, English and mathematics.</p>
-      <p>My hobby is reading mysteries. I'm fond of Sherlock Holmes series.</p>
-      <p>I mainly develop websites, desktop apps and games.</p>
-      <p>I'm currently practicing drawing pictures.</p>
       <h2>サイトについて</h2>
-      <p></p>
-      <p><ruby>曆路<rp></rp><rt>こよみじ</rt><rp></rp></ruby>喫茶館といいます。</p>
+      <p>初めまして。このサイト <ruby>曆路<rp></rp><rt>こよみじ</rt><rp></rp></ruby>喫茶館 を運営している Komichi と申します。このサイトは、私が気まぐれに勉強したことを書いたり、日記を書いたり、創作したりするための場所です。プログラミングや英語、数学に関する内容が多いですが、これらに限定されません。</p>
       <p>特段の明記がない限り、サイト上のコンテンツは<Link href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</Link>に準拠します。</p>
+      <h2>サイト内のページについて</h2>
+      <ul>
+        <li><Link href="/project">Projects</Link>には、私が開発している(していた)いくつかのソフトウェアの紹介があります。</li>
+        <li><Link href="/log">Logs</Link>は、私のブログです。日記やエッセイなどを、形式に囚われず自由に書いています。</li>
+        <li><Link href="/knowledge">Knowledge</Link>は、私が学んだことの備忘録です。</li>
+        <li><Link href="/dictionary">Dictionary</Link>は、私が出逢った英単語をまとめた辞書です。</li>
+      </ul>
+      <h2>サイトの技術構成について</h2>
+      <p>このサイトは、既存の技術スタックに極力依存しないことを目標として作成されています。</p>
+      <p>全てのページは、Node.js上で動く自作の静的サイトジェネレータを使用して生成されています。フロントエンドフレームワークにはReactを採用し、モジュールバンドラにはViteを使用しています。サイトはVercel上でビルドされ、ホストされています。</p>
+      <p>サイト上のテキストは、XMLベースの独自フォーマットで記述されています。</p>
     </>
   );
 }
