@@ -4,7 +4,7 @@ import * as ReactRouterDOM from 'react-router-dom'
 
 interface LinkProps {
   href: string;
-  children: any;
+  children?: any;
   className?: any;
 }
 
