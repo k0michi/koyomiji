@@ -3,6 +3,7 @@
   "private": true,
   "packageManager": "yarn@3.2.1",
   "dependencies": {
+    "@fontsource/raleway": "^4.5.10",
     "@k0michi/isomorphic-dom": "^0.0.1",
     "@tabler/icons": "^1.78.1",
     "chokidar": "^3.5.3",

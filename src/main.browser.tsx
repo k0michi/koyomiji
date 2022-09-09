@@ -7,8 +7,9 @@ import Root from './components/root.js';
 import { InitialData, Model } from './model.js';
 
 import './styles.css';
-import 'prismjs/themes/prism-tomorrow.css'
-import 'katex/dist/katex.min.css'
+import 'prismjs/themes/prism-tomorrow.css';
+import 'katex/dist/katex.min.css';
+import '@fontsource/raleway';
 
 window.addEventListener('load', async () => {
   const initialData = JSON.parse((document.getElementById('initial-data') as HTMLScriptElement).text) as InitialData;

@@ -56,6 +56,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/raleway@npm:^4.5.10":
+  version: 4.5.10
+  resolution: "@fontsource/raleway@npm:4.5.10"
+  checksum: feb090a0a06554fd2e196eaa0e7dedd91c89322c77f5818862f07b5988a009c49c9a6f51f1dd969a0b90b77b5e25bbc1c637761729c250536304a3701ae163ca
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -2373,6 +2380,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "koyomiji@workspace:."
   dependencies:
+    "@fontsource/raleway": ^4.5.10
     "@k0michi/isomorphic-dom": ^0.0.1
     "@tabler/icons": ^1.78.1
     "@types/dateformat": ^5.0.0
