@@ -13,27 +13,39 @@ html {
   --font-sans-en: "Raleway", sans-serif;
   --font-serif: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
   --font-monospace: "Monaco", "Consolas", "Source Code Pro", monospace;
+  --bar-height: 6px;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     /* h = 20 */
     --color-1: #fffefe;
+    /* background */
     --color-2: #2e2a29;
+    /* foreground */
     --color-3: #9f9793;
+    /* additional */
     --color-4: #2e2a29;
-    --color-5: #d3cac5; 
+    /* background of code */
+    --color-5: #d3cac5;
+    /* horizontal rule */
+    --color-6: #2e2a29;
+    /* background of logo */
+    --color-7: var(--color-1);
+    /* foreground of logo */
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     /* h = 220 */
-    --color-1: #212226;
+    --color-1: #27282b;
     --color-2: #fdfeff;
     --color-3: #8e949f;
     --color-4: #101113;
     --color-5: #4c5057;
+    --color-6: #121212ac;
+    --color-7: var(--color-2);
   }
 }
 
@@ -115,10 +127,12 @@ body.common-layout {
   position: fixed;
   left: 0;
   top: 0;
-  background-color: var(--color-2);
+  background-color: var(--color-6);
   width: 100%;
-  height: 6px;
+  height: var(--bar-height);
   z-index: 1;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
 }
 
 
@@ -168,9 +182,11 @@ body.common-layout {
 }
 
 #logo-block {
-  padding: 30px 18px 12px 18px;
+  margin-top: var(--bar-height);
+  padding: 24px 18px 12px 18px;
   width: fit-content;
-  background-color: var(--color-2);
+  background-color: var(--color-6);
+  color: var(--color-7);
 }
 
 @media (max-width: 767px) {
@@ -181,7 +197,6 @@ body.common-layout {
 
 #logo-block svg {
   width: 196px;
-  color: var(--color-1);
 }
 
 #top-container>#menu-button-container {
