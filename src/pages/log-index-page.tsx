@@ -36,17 +36,19 @@ export default function LogIndexPage() {
         <h1>Logs</h1>
         <div className="meta">日記とかエッセイとか。</div>
       </header>
-      {entries.map(i =>
-        <div className="summary" key={getID(i)}>
-          <h2><Link href={`/log/${getID(i)}`}>{i.title}</Link></h2>
-          <div className="meta">
-            <div className="number">#{getID(i)}</div>
-            <div className="date"><Icon name="calenderIcon" /><div>{dateToString(new Date(i.created))}</div></div>
+      <div id="body">
+        {entries.map(i =>
+          <div className="summary" key={getID(i)}>
+            <h2><Link href={`/log/${getID(i)}`}>{i.title}</Link></h2>
+            <div className="meta">
+              <div className="number">#{getID(i)}</div>
+              <div className="date"><Icon name="calenderIcon" /><div>{dateToString(new Date(i.created))}</div></div>
+            </div>
+            <p>{i.description}</p>
+            <hr />
           </div>
-          <p>{i.description}</p>
-          <hr />
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 }

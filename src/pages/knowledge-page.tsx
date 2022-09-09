@@ -39,7 +39,9 @@ export default function KnowledgePage() {
           <div className="tags"><Icon name="tagsIcon" /><div>{categoryName}</div></div>
         </div>
       </header>
-      {content}
+      <div id="body">
+        {content}
+      </div>
     </>
   );
 }

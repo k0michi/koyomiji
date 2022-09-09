@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Routes, Route } from 'react-router';
 import AboutPage from "../pages/about-page.js";
-import MainLayout from './main-layout.js';
+import MainLayout from './common-layout.js';
 import IndexPage from "../pages/index-page.js";
 import KnowledgeIndexPage from "../pages/knowledge-index-page.js";
 import KnowledgePage from "../pages/knowledge-page.js";

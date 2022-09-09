@@ -33,18 +33,20 @@ export default function DictionaryPage() {
         <h1>Dictionary</h1>
         <div className="meta">私的な英単語帳。</div>
       </header>
-      {
-        entries.map(e =>
-          <div className='dictionary-entry'>
-            <h2>{e?.word}</h2>
-            {e?.senses.map(s => {
-              const usage = s.usage != null ? toElement(parseXML(s.usage).firstChild?.childNodes!, reactFactory) : null;
-              const gloss = s.gloss != null ? toElement(parseXML(s.gloss).firstChild?.childNodes!, reactFactory) : null;
-              return <div><span className='pos'>{s.pos}.</span> <span className='usage'>{usage}</span> <span className='gloss'>{gloss}</span></div>;
-            })}
-          </div>
-        )
-      }
+      <div id="body">
+        {
+          entries.map(e =>
+            <div className='dictionary-entry'>
+              <h2>{e?.word}</h2>
+              {e?.senses.map(s => {
+                const usage = s.usage != null ? toElement(parseXML(s.usage).firstChild?.childNodes!, reactFactory) : null;
+                const gloss = s.gloss != null ? toElement(parseXML(s.gloss).firstChild?.childNodes!, reactFactory) : null;
+                return <div><span className='pos'>{s.pos}.</span> <span className='usage'>{usage}</span> <span className='gloss'>{gloss}</span></div>;
+              })}
+            </div>
+          )
+        }
+      </div>
     </>
   );
 }

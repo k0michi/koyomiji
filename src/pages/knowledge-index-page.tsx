@@ -31,14 +31,16 @@ export default function KnowledgeIndexPage() {
         <h1>Knowledge</h1>
         <div className="meta">学んだことの覚書。</div>
       </header>
-      {Object.entries(map).map(([k, v]) =>
-        <div className="category" key={k}>
-          <h2>{categoryNames[k]}</h2>
-          <ul>
-            {v.map(i => <li key={toPathname(i.path)}><Link href={toPathname(i.path)}>{i.title}</Link></li>)}
-          </ul>
-        </div>
-      )}
+      <div id="body">
+        {Object.entries(map).map(([k, v]) =>
+          <div className="category" key={k}>
+            <h2>{categoryNames[k]}</h2>
+            <ul>
+              {v.map(i => <li key={toPathname(i.path)}><Link href={toPathname(i.path)}>{i.title}</Link></li>)}
+            </ul>
+          </div>
+        )}
+      </div>
     </>
   );
 }

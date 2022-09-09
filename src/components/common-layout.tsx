@@ -46,7 +46,7 @@ export default function MainLayout() {
   return (
     <>
       <Helmet>
-        <body className="main-layout" />
+        <body className="common-layout" />
       </Helmet>
       <div id="bar"></div>
       <nav id="nav">

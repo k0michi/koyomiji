@@ -31,6 +31,8 @@ export default function NovelIndexPage() {
       <header>
         <h1>Novels</h1>
         <div className="meta">🚧 工事中</div>
+      </header>
+      <div id="body">
         {Object.entries(map).map(([k, v]) =>
           <div className="category" key={k}>
             <h2>{k}</h2>
@@ -39,7 +41,7 @@ export default function NovelIndexPage() {
             </ol>
           </div>
         )}
-      </header>
+      </div>
     </>
   );
 }

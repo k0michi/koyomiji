@@ -22,16 +22,18 @@ export default function ProjectPage() {
         <h1>Projects</h1>
         <div className="meta">開発したもの。</div>
       </header>
-      <h2><Link href="https://github.com/k0michi/isomorphic-dom">@k0michi/isomorphic-dom</Link></h2>
-      <p>jsdomとネイティブのDOM APIへのプロキシライブラリ。</p>
-      <h2><Link href="https://k0michi.github.io/chronograph/">Chronograph</Link></h2>
-      <p>時間を記録、可視化するためのツール。ボタンをクリックして現在時刻を記録し、時刻を一覧表示することができます。各時刻にはメモを残すことも可能です。</p>
-      <h2><Link href="https://k0michi.github.io/toolbox/">Toolbox</Link></h2>
-      <p>個人的に使うためのWebツール。</p>
-      <h2><Link href="https://github.com/k0michi/kyoka">Kyōka</Link></h2>
-      <p>React用のロジック、ステート管理ライブラリ。</p>
-      <h2><Link href="https://github.com/k0michi/hipt">hipt (Hierarchically Indented Plain Text)</Link></h2>
-      <p>インデントされたテキストをパースするライブラリ。</p>
+      <div id="body">
+        <h2><Link href="https://github.com/k0michi/isomorphic-dom">@k0michi/isomorphic-dom</Link></h2>
+        <p>jsdomとネイティブのDOM APIへのプロキシライブラリ。</p>
+        <h2><Link href="https://k0michi.github.io/chronograph/">Chronograph</Link></h2>
+        <p>時間を記録、可視化するためのツール。ボタンをクリックして現在時刻を記録し、時刻を一覧表示することができます。各時刻にはメモを残すことも可能です。</p>
+        <h2><Link href="https://k0michi.github.io/toolbox/">Toolbox</Link></h2>
+        <p>個人的に使うためのWebツール。</p>
+        <h2><Link href="https://github.com/k0michi/kyoka">Kyōka</Link></h2>
+        <p>React用のロジック、ステート管理ライブラリ。</p>
+        <h2><Link href="https://github.com/k0michi/hipt">hipt (Hierarchically Indented Plain Text)</Link></h2>
+        <p>インデントされたテキストをパースするライブラリ。</p>
+      </div>
     </>
   );
 }

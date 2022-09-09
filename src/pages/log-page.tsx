@@ -37,7 +37,9 @@ export default function LogPage() {
           <div className="date"><Icon name="calenderIcon" /><div>{dateToString(new Date(entry.created))}</div></div>
         </div>
       </header>
-      {content}
+      <div id="body">
+        {content}
+      </div>
     </>
   );
 }

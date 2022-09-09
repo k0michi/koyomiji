@@ -36,14 +36,16 @@ export default function ArtworkIndexPage() {
         <h1>Artworks</h1>
         <div className="meta">🚧 工事中</div>
       </header>
-      <div className="thumbnail-list">
-        {entries.map(i =>
-          <div className="thumbnail" key={toPathname(i.path)}>
-            <Link href={`/artwork/${getID(i)}`}>
-              <img src={i.source!} />
-            </Link>
-          </div>
-        )}
+      <div id="body">
+        <div className="thumbnail-list">
+          {entries.map(i =>
+            <div className="thumbnail" key={toPathname(i.path)}>
+              <Link href={`/artwork/${getID(i)}`}>
+                <img src={i.source!} />
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

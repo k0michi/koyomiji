@@ -86,27 +86,27 @@ p {
 }
 
 
-/* Main Layout */
+/* Common Layout */
 
-body.main-layout {
+body.common-layout {
   /* max-width: 1480px; */
   max-width: 1200px;
   margin: 0 auto;
 }
 
 @media (max-width: 767px) {
-  body.main-layout {}
+  body.common-layout {}
 }
 
 @media (min-width: 768px) {
-  body.main-layout {
+  body.common-layout {
     display: flex;
     flex-direction: row;
   }
 }
 
 
-/* Bar */
+/* Common Layout - Bar */
 
 #bar {
   position: fixed;
@@ -119,7 +119,7 @@ body.main-layout {
 }
 
 
-/* Navigation */
+/* Common Layout - Navigation */
 
 #nav {
   flex-grow: 0;
@@ -158,7 +158,7 @@ body.main-layout {
 }
 
 
-/* Navigation - Logo */
+/* Common Layout - Navigation - Logo */
 
 #top-container>#logo-container {
   flex: auto;
@@ -210,7 +210,7 @@ body.main-layout {
   height: 32px;
 }
 
-/* Navigation - Menu */
+/* Common Layout - Navigation - Menu */
 
 #menu-container {
   width: 200px;
@@ -367,7 +367,7 @@ body.main-layout {
 }
 
 
-/* Navigation - Icons */
+/* Common Layout - Navigation - Icons */
 
 #icons {
   padding: 0;
@@ -400,7 +400,7 @@ body.main-layout {
 }
 
 
-/* Main */
+/* Common Layout - Main */
 
 #main {
   font-size: 16px;
@@ -433,23 +433,11 @@ body.main-layout {
 #main h5,
 #main h6 {
   font-weight: 500;
-  font-family: var(--font-serif)
+  font-family: var(--font-serif);
 }
 
 #main h1 {
   font-size: 30px;
-}
-
-#main>h1 {
-  margin: 0 0 12px 0;
-}
-
-#main>h2,
-#main>h3,
-#main>h4,
-#main>h5,
-#main>h6 {
-  margin: 24px 0 8px 0;
 }
 
 #main h2 {
@@ -470,25 +458,6 @@ body.main-layout {
 
 #main h6 {
   font-size: 14px;
-}
-
-#main>p {
-  margin: 0 0 16px 0;
-  line-height: 1.9;
-  text-align: justify;
-}
-
-#main>.summary>h2 {
-  margin-bottom: 0;
-}
-
-#main>.summary>p,
-#main>.summary>.meta {
-  margin-bottom: 6px;
-}
-
-#main>.summary>p {
-  line-height: 1.6;
 }
 
 #main table {
@@ -526,10 +495,6 @@ body.main-layout {
   border-radius: 0px;
 }
 
-#main>*:last-child {
-  margin-bottom: 0px;
-}
-
 #main ul {
   padding-left: 24px;
   margin-bottom: 12px;
@@ -555,14 +520,10 @@ body.main-layout {
   background-color: var(--color-5);
 }
 
-#main>img {
+#main img {
   display: block;
   margin: 0 auto 16px auto;
   width: 80%;
-}
-
-#main>.category {
-  margin-bottom: 16px;
 }
 
 #main .math-block {
@@ -574,7 +535,53 @@ body.main-layout {
 }
 
 
-/* Main - Header */
+/* Common Layout - Main - Knowledge */
+
+#main .summary h2 {
+  margin-bottom: 0;
+}
+
+#main .summary p,
+#main .summary .meta {
+  margin-bottom: 6px;
+}
+
+#main .summary p {
+  line-height: 1.6;
+}
+
+#main .category {
+  margin-bottom: 16px;
+}
+
+
+/* Common Layout - Main - Body */
+
+#body>h1,
+#body>h2,
+#body>h3,
+#body>h4,
+#body>h5,
+#body>h6 {
+  margin: 24px 0 8px 0;
+}
+
+#body>p {
+  margin: 0 0 16px 0;
+  line-height: 1.9;
+  text-align: justify;
+}
+
+#body>*:first-child {
+  margin-top: 0px;
+}
+
+#body>*:last-child {
+  margin-bottom: 0px;
+}
+
+
+/* Common Layout - Main - Header */
 
 #main header {
   margin-bottom: 16px;
@@ -606,7 +613,7 @@ body.main-layout {
   color: var(--color-3);
 }
 
-/* Main - Dictionary */
+/* Common Layout - Main - Dictionary */
 
 .dictionary-entry {
   margin-bottom: 12px;
@@ -619,6 +626,21 @@ body.main-layout {
 
 .dictionary-entry .usage {
   font-weight: 500;
+}
+
+
+/* Common Layout - Main - Artwork */
+
+.thumbnail-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.thumbnail img {
+  height: 192px;
+  border-radius: 2px;
 }
 
 
@@ -660,19 +682,4 @@ body.novel-layout {
   text-align: justify;
   display: inline-block;
   height: 100%;
-}
-
-
-/* Artwork */
-
-.thumbnail-list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.thumbnail img {
-  height: 192px;
-  border-radius: 2px;
 }
