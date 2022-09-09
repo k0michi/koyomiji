@@ -19,20 +19,20 @@ html {
 @media (prefers-color-scheme: light) {
   :root {
     /* h = 20 */
-    --color-1: #fffefe;
     /* background */
-    --color-2: #2e2a29;
+    --color-1: #fffefe;
     /* foreground */
-    --color-3: #9f9793;
+    --color-2: #2e2a29;
     /* additional */
-    --color-4: #2e2a29;
+    --color-3: #9f9793;
     /* background of code */
-    --color-5: #d3cac5;
+    --color-4: #2e2a29;
     /* horizontal rule */
-    --color-6: #2e2a29;
+    --color-5: #d3cac5;
     /* background of logo */
-    --color-7: var(--color-1);
+    --color-6: #2e2a29;
     /* foreground of logo */
+    --color-7: var(--color-1);
   }
 }
 
