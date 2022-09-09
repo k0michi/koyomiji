@@ -12,6 +12,7 @@ export default function DictionaryPage() {
   const model = useModel<Model>();
   const dictionaries = useObservable(model.dictionaries);
   const entries = dictionaries != null ? Object.values(dictionaries).flatMap(d => d.content) : [];
+  entries.reverse();
 
   React.useEffect(() => {
     model.fetchDictionary();
