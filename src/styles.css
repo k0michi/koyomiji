@@ -17,21 +17,23 @@ html {
 
 @media (prefers-color-scheme: light) {
   :root {
-    --color-1: #fffdff;
-    --color-2: #2e292e;
-    --color-3: #a093a0;
-    --color-4: #2e292e;
-    --color-5: #d3c5d3; 
+    /* h = 20 */
+    --color-1: #fffefe;
+    --color-2: #2e2a29;
+    --color-3: #9f9793;
+    --color-4: #2e2a29;
+    --color-5: #d3cac5; 
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-1: #282428;
-    --color-2: #fffdff;
-    --color-3: #9f8e9f;
-    --color-4: #131013;
-    --color-5: #574c57;
+    /* h = 220 */
+    --color-1: #1e1f22;
+    --color-2: #fdfeff;
+    --color-3: #8e949f;
+    --color-4: #101113;
+    --color-5: #4c5057;
   }
 }
 
