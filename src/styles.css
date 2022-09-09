@@ -29,7 +29,7 @@ html {
 @media (prefers-color-scheme: dark) {
   :root {
     /* h = 220 */
-    --color-1: #1e1f22;
+    --color-1: #212226;
     --color-2: #fdfeff;
     --color-3: #8e949f;
     --color-4: #101113;
