@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom';
 import { ModelProvider } from 'kyoka';
 
-import Root from './components/root.js';
+import Root from './root.js';
 import { InitialData, Model } from './model.js';
 
 import './styles.css';

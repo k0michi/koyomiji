@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
-import { Entry } from "../entry.js";
 import { useLocation, useParams } from 'react-router';
 import Link from '../components/link.js';
 import { useModel, useObservable } from 'kyoka';
@@ -9,6 +7,7 @@ import { toElement } from '../xml.js';
 import { parseXML } from '../xml.js';
 import * as ReactKTML from '../react-ktml.js';
 import Icon from '../components/icon.js';
+import Head from '../components/head.js';
 
 interface NovelStorage {
   locations: Record<string, number | undefined>;
@@ -121,16 +120,7 @@ export default function NovelPage() {
 
   return (
     <>
-      <Helmet>
-        <title>{entry.title} | 曆路喫茶館</title>
-        <meta name="description" content="" />
-        <meta property="og:url" content={url} />
-        <meta property="og:title" content="Novels" />
-        <meta property="og:description" content="" />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="@k0michi" />
-        <body className="novel-layout" />
-      </Helmet>
+      <Head url={url} title={entry.title} description="" type="article" published={entry.created} modified={entry.modified} />
       <div id="novel-nav">
         <Link href='/novel'><Icon name="xIcon" /></Link>
       </div>

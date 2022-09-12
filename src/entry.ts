@@ -1,6 +1,7 @@
 export interface Entry {
   title: string;
   created: string;
+  modified: string;
   description: string;
   source?: string;
   path: string[];

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router';
+import Head from '../components/head.js';
 import Link from '../components/link.js';
 
 export default function ProjectPage() {
@@ -9,15 +9,7 @@ export default function ProjectPage() {
 
   return (
     <>
-      <Helmet>
-        <title>Projects | 曆路喫茶館</title>
-        <meta name="description" content="" />
-        <meta property="og:url" content={url} />
-        <meta property="og:title" content="About" />
-        <meta property="og:description" content="" />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="@k0michi" />
-      </Helmet>
+      <Head url={url} title="Projects" description="開発したもの。" />
       <header>
         <h1>Projects</h1>
         <div className="meta">開発したもの。</div>

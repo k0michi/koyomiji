@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router';
 import Link from '../components/link.js';
+import Head from '../components/head.js';
 
 export default function AboutPage() {
   const location = useLocation();
@@ -9,15 +9,7 @@ export default function AboutPage() {
 
   return (
     <>
-      <Helmet>
-        <title>About | 曆路喫茶館</title>
-        <meta name="description" content="" />
-        <meta property="og:url" content={url} />
-        <meta property="og:title" content="About" />
-        <meta property="og:description" content="" />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="@k0michi" />
-      </Helmet>
+      <Head url={url} title="About" description="私は一体誰か。" />
       <header>
         <h1>About</h1>
         <div className="meta">私は一体誰か。</div>

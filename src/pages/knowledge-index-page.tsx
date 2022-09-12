@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
 import { categoryNames } from "../category.js";
 import { Entry, mapEntries } from "../entry.js";
 import { useModel, useObservable } from 'kyoka';
@@ -7,6 +6,7 @@ import { Model } from '../model.js';
 import { useLocation } from 'react-router';
 import Link from '../components/link.js';
 import { toPathname } from '../utils.js';
+import Head from '../components/head.js';
 
 export default function KnowledgeIndexPage() {
   const location = useLocation();
@@ -18,15 +18,7 @@ export default function KnowledgeIndexPage() {
 
   return (
     <>
-      <Helmet>
-        <title>Knowledge | 曆路喫茶館</title>
-        <meta name="description" content="" />
-        <meta property="og:url" content={url} />
-        <meta property="og:title" content="Knowledge" />
-        <meta property="og:description" content="" />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="@k0michi" />
-      </Helmet>
+      <Head url={url} title="Knowledge" description="学んだことの覚書。" />
       <header>
         <h1>Knowledge</h1>
         <div className="meta">学んだことの覚書。</div>

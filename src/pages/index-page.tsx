@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router';
+import Head from '../components/head.js';
 import Link from '../components/link.js';
 
 export default function IndexPage() {
@@ -9,15 +9,7 @@ export default function IndexPage() {
 
   return (
     <>
-      <Helmet>
-        <title>曆路喫茶館</title>
-        <meta name="description" content="" />
-        <meta property="og:url" content={url} />
-        <meta property="og:title" content="曆路喫茶館" />
-        <meta property="og:description" content="" />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="@k0michi" />
-      </Helmet>
+      <Head url={url} description="ようこそ。" />
       <header>
         <h1>Home</h1>
         <div className="meta">ようこそ。</div>

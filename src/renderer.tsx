@@ -6,7 +6,7 @@ import { ModelProvider } from 'kyoka';
 import * as fs from 'fs/promises';
 import produce from 'immer';
 
-import Root from "./components/root.js";
+import Root from "./root.js";
 import { Renderer } from "./base/renderer.js";
 import { InitialData, Model } from './model.js';
 import { toPathname } from './utils.js';

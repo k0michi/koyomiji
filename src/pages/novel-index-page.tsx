@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
 import { useModel, useObservable } from 'kyoka';
-import dateToString from '../date-format.js';
 import { Entry, mapEntries } from "../entry.js";
 import { Model } from '../model.js';
 import { useLocation } from 'react-router';
 import Link from '../components/link.js';
-import Icon from '../components/icon.js';
 import { toPathname } from '../utils.js';
+import Head from '../components/head.js';
 
 export default function NovelIndexPage() {
   const location = useLocation();
@@ -19,15 +17,7 @@ export default function NovelIndexPage() {
 
   return (
     <>
-      <Helmet>
-        <title>Novels | 曆路喫茶館</title>
-        <meta name="description" content="" />
-        <meta property="og:url" content={url} />
-        <meta property="og:title" content="Novels" />
-        <meta property="og:description" content="" />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="@k0michi" />
-      </Helmet>
+      <Head url={url} title="Novels" description="🚧 工事中" />
       <header>
         <h1>Novels</h1>
         <div className="meta">🚧 工事中</div>

@@ -71,6 +71,7 @@ export function preprocess(entryPath: string[], content: string): Entry {
   const $head = $document.querySelector('head') as Element;
   const title = getTextContent('title', $head)!;
   const created = getTextContent('created', $head)!;
+  const modified = getTextContent('modified', $head) ?? created;
   let source = getTextContent('source', $head);
 
   if (source != undefined) {
@@ -82,5 +83,5 @@ export function preprocess(entryPath: string[], content: string): Entry {
   transformCode($body);
   transformImg($body, entryPath);
   const description = getDescription($body, 120);
-  return { title, created, description, path: entryPath, source, content: $body.outerHTML };
+  return { title, created, modified, description, path: entryPath, source, content: $body.outerHTML };
 }
