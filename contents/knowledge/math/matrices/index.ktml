@@ -3,6 +3,7 @@
 <head>
   <title>行列</title>
   <created>2022-07-10T13:23:29+09:00</created>
+  <modified>2022-09-13T15:31:52+09:00</modified>
 </head>
 
 <body>
@@ -60,6 +61,15 @@
     d &amp; -b \\
     -c &amp; a
  \end{pmatrix}</math>
+
+ <h2>正則行列と逆行列</h2>
+ <p>正則行列<math>A</math>に対して、<math>XA = AX = E</math>を満たす正方行列<math>X</math>が存在するとき、<math>A</math>は正則行列であるといい、<math>X</math>は<math>A</math>の逆行列と呼ぶ。</p>
+
+ <h2>正則行列の性質</h2>
+ <p>1. 正則行列<math>A, B</math>について、</p>
+ <math>(AB)^{-1} = B^{-1} A^{-1}</math>
+ <p>2. 正則行列<math>A</math>について、</p>
+ <math>(A^{-1})^{-1} = A</math>
 </body>
 
 </ktml>
