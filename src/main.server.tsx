@@ -38,4 +38,5 @@ const model = new ServerModel(contentRoot);
   await renderer.render('/dictionary/index.html');
   await renderer.render('/dictionary/data.json');
   await renderer.render('/entries.json');
+  await renderer.render('/feed.xml');
 })();
