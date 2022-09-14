@@ -1,0 +1,67 @@
+<ktml version="0.1">
+
+<head>
+  <title>AtomでサイトのFeedを取得可能にした</title>
+  <id>1582cc34-d78a-473e-a387-d0ed953eeb96</id>
+  <created>2022-09-14T22:55:18+09:00</created>
+</head>
+
+<body>
+  <p>今日はサイトにAtomを実装してみました。これにより、RSSリーダーで更新情報を受け取れるようになりました。いまさらRSS、と思われるかもしれませんが、今現在まさに私がRSSリーダーの有用性を再認識している真っ最中なのです。当サイトのAtomフィードは、<a href="https://koyomiji.com/feed.xml">https://koyomiji.com/feed.xml</a>から取得することができます。</p>
+  <p>少し実装についてのお話をば。最初に、<a href="https://www.npmjs.com/package/feed">feed</a>というnpmパッケージを見つけました。これはAtomもRSSも出力できるライブラリなのですが、これだとHTMLのエスケープまわりがうまく扱えませんでした。ということで、jsdomを使ってプリミティブにDOMを作成して出力することにしました。Atomを自力で生成している例はあまり見当たりませんでしたが、<a href="https://www.futomi.com/lecture/japanese/rfc4287.html">RFC 4287の日本語訳</a>が非常に役立ちました。これを頼りに、なんとか<a href="https://validator.w3.org/feed/">W3CのFeed Validator</a>を通るAtomを生成することができました。このValidatorは要素名はもちろん、日付のフォーマットもきちんとチェックしてくれます。</p>
+  <p>Atomフィードの生成処理はこんな感じ。直接転用できるわけでは無いので、雰囲気だけ感じていただければ。</p>
+  <code lang="typescript">renderer.use(&apos;/feed.xml&apos;, (ctx) =&gt; {
+  const atomNS = &apos;http://www.w3.org/2005/Atom&apos;;
+  const document = window.document.implementation.createDocument(atomNS, &apos;feed&apos;);
+  const create = newElementCreator(document, atomNS);
+  const feed = document.firstChild! as Element;
+
+  feed.appendChild(create(&apos;title&apos;, {}, &apos;曆路喫茶館&apos;));
+  feed.appendChild(create(&apos;id&apos;, {}, &apos;urn:uuid:7e260dae-5479-45c2-bad8-0be227c48ab8&apos;));
+  feed.appendChild(create(&apos;link&apos;, { rel: &apos;self&apos;, href: &apos;https://koyomiji.com/feed.xml&apos; }));
+  feed.appendChild(create(&apos;link&apos;, { rel: &apos;alternate&apos;, href: &apos;https://koyomiji.com/&apos; }));
+  feed.appendChild(create(&apos;updated&apos;, {}, toISOStringJST(new Date())));
+  feed.appendChild(create(&apos;icon&apos;, {}, &apos;https://koyomiji.com/favicon.ico&apos;));
+
+  const author = create(&apos;author&apos;);
+  author.appendChild(create(&apos;name&apos;, {}, &apos;Komichi&apos;));
+  author.appendChild(create(&apos;email&apos;, {}, &apos;k0michi@koyomi.co&apos;));
+  feed.appendChild(author);
+
+  for (const e of Object.values(model.entries)) {
+    const entry = create(&apos;entry&apos;);
+    entry.appendChild(create(&apos;title&apos;, {}, e.title));
+    entry.appendChild(create(&apos;summary&apos;, {}, e.description));
+    entry.appendChild(create(&apos;id&apos;, {}, `urn:uuid:${e.id}`));
+    entry.appendChild(create(&apos;link&apos;, { rel: &apos;alternate&apos;, href: new URL(toPathname(e.path), &apos;https://koyomiji.com/&apos;).toString() }));
+    entry.appendChild(create(&apos;published&apos;, {}, e.created));
+    entry.appendChild(create(&apos;updated&apos;, {}, e.modified));
+    feed.appendChild(entry);
+  }
+
+  const serializer = new window.XMLSerializer();
+  return &apos;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;\n&apos; + serializer.serializeToString(feed);
+});</code>
+  <p>ちなみに、<code lang="typescript">newElementCreator</code>というのはこんな関数。</p>
+  <code lang="typescript">export function newElementCreator(document: Document, namespace: string) {
+  return (type: string, props: Record&lt;string, string&gt; = {}, children?: string) =&gt; {
+    const $elem = document.createElementNS(namespace, type);
+
+    for (const [key, value] of Object.entries(props)) {
+      $elem.setAttribute(key, value);
+    }
+
+    if (children != null) {
+      $elem.append(children);
+    }
+
+    return $elem;
+  };
+}</code>
+  <p>DocumentやElementを作成するときに、namespaceを指定するのがミソです。これが無いと生成後のXMLが正しくなりません。namespaceを指定するために、<code lang="typescript">createElementNS</code>で各要素を生成していきます。</p>
+  <p>&lt;id&gt;には、<a href="https://ja.wikipedia.org/wiki/Uniform_Resource_Name">URN</a>と呼ばれる識別子を指定します。直接UUIDを指定するのではなくて、<code>urn:uuid:</code>をUUIDの先頭にくっつけます。私はこのURNというものを今日初めて知りました。</p>
+  <p>当然ですがこれらのIDは毎回、同じentryに対して同じIDが維持されていなければなりません。今までそれぞれの投稿にIDを付与していなかったのですが、その必要性が生じたので全ての投稿に付与しておきました。</p>
+  <p>RSSやAtomは、比較的能動的に更新情報を取りに行く仕組みなので、個人的には好みです。情報の取捨選択がしやすいですし。みんなもRSSリーダーを使おう、という布教です。</p>
+</body>
+
+</ktml>
