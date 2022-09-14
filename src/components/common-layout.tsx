@@ -53,7 +53,7 @@ export default function MainLayout() {
         <div id="top-container">
           <div id="logo-container">
             <div id="logo-block">
-              <Link href="/">
+              <Link aria-label="曆路喫茶館" href="/">
                 <Icon name="logoFull" />
               </Link>
             </div>
@@ -73,10 +73,10 @@ export default function MainLayout() {
             <li><Menu href="/artwork">Artworks</Menu></li>
           </ul>
           <ul id="icons">
-            <li><Link href="mailto:k0michi@koyomi.co"><Icon name="mailIcon" /></Link></li>
-            <li><Link href="https://github.com/k0michi"><Icon name="githubIcon" /></Link></li>
-            <li><Link href="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw"><Icon name="youtubeIcon" /></Link></li>
-            <li><Link href="https://www.twitch.tv/k0michi"><Icon name="twitchIcon" /></Link></li>
+            <li><Link aria-label="Mail" href="mailto:k0michi@koyomi.co"><Icon name="mailIcon" /></Link></li>
+            <li><Link aria-label="GitHub" href="https://github.com/k0michi"><Icon name="githubIcon" /></Link></li>
+            <li><Link aria-label="YouTube" href="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw"><Icon name="youtubeIcon" /></Link></li>
+            <li><Link aria-label="Twitch" href="https://www.twitch.tv/k0michi"><Icon name="twitchIcon" /></Link></li>
           </ul>
         </div>
       </nav>
