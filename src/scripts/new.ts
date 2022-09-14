@@ -1,6 +1,7 @@
 import * as path from "path";
 import * as fs from "fs/promises";
-import dateFormat, { masks } from "dateformat";
+import crypto from "crypto";
+import { formatDate } from "./utils";
 
 (async () => {
   let pathToCreate = process.argv[2];
@@ -17,10 +18,13 @@ import dateFormat, { masks } from "dateformat";
 })();
 
 function blankPage(date: Date) {
+  const id = crypto.randomUUID();
+
   return `<ktml version="0.1">
 
 <head>
   <title>Untitled</title>
+  <id>${id}</id>
   <created>${formatDate(date)}</created>
 </head>
 
@@ -28,8 +32,4 @@ function blankPage(date: Date) {
 </body>
 
 </ktml>`;
-}
-
-export function formatDate(date: Date) {
-  return dateFormat(date, "yyyy-mm-dd'T'HH:MM:ssp");
 }
