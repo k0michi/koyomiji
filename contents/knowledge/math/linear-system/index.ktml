@@ -3,6 +3,7 @@
 <head>
   <title>連立1次方程式</title>
   <created>2022-09-13T15:33:58+09:00</created>
+  <modified>2022-09-14T09:24:20+09:00</modified>
 </head>
 
 <body>
@@ -77,6 +78,25 @@
     0 &amp; 0 &amp; 0 &amp; 1
     \end{bmatrix}</math>
   <p>任意の行列は、行基本変形を行うことで行簡約階段形に変形できる。このアルゴリズムは、掃き出し法(ガウスの消去法)と呼ばれる。</p>
+
+  <h2>行基本変形と連立1次方程式</h2>
+  <p>連立1次方程式<math>A \bm x = \bm b</math>を考える。<math>\begin{bmatrix}A \mid \bm b\end{bmatrix}</math>に行基本変形を行い、<math>\begin{bmatrix}B \mid \bm c\end{bmatrix}</math>が得られたとする。このとき、<math>A \bm x = \bm b</math>は<math>B \bm x = \bm c</math>と同値である。</p>
+  
+  <h2>行基本変形の解と自由度</h2>
+  <p>連立1次方程式<math>A \bm x = \bm b</math>を考える。<math>A</math>は<math>(m, n)</math>型行列である。<math>A \bm x = \bm b</math>が解をもつための必要十分条件は、</p>
+  <math>\rm rank\ A = \rm rank \begin{bmatrix}A \mid \bm b\end{bmatrix}</math>
+  <p>となることである。この等式が成り立つときの連立1次方程式の解の自由度(任意定数の個数)は</p>
+  <math>n - \rm rank\ A</math>
+  <p>である。</p>
+
+  <h2>同次(斉次)連立1次方程式</h2>
+  <p>連立1次方程式<math>A \bm x = \bm b</math>において、<math>\bm b = \bm 0</math>であるとき、同次(斉次)であるという。そうでないとき、非同次(非斉次)であるという。</p>
+  <p>同次連立1時方程式は必ず<math>\bm x = \bm 0</math>を解にもち、これを自明な解と呼ぶ。<math>\bm 0</math>以外の解は非自明な解と呼ばれる。</p>
+  <p><math>A</math>を<math>(m, n)</math>型行列とする。同次連立1次方程式<math>A \bm x = \bm 0</math>について、以下が成り立つ。</p>
+  <ol>
+    <li><math>\rm rank\ A = n</math>ならば、<math>A \bm x = \bm 0</math>は自明な解のみをもつ。</li>
+    <li><math>\rm rank\ A &lt; n</math>ならば、<math>A \bm x = \bm 0</math>は非自明な解をもつ。</li>
+  </ol>
 </body>
 
 </ktml>
