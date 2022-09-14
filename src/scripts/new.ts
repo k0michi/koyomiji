@@ -1,7 +1,7 @@
 import * as path from "path";
 import * as fs from "fs/promises";
 import crypto from "crypto";
-import { toISOStringJST } from "../date-format";
+import { toISOStringJST } from "../date-format.js";
 
 (async () => {
   let pathToCreate = process.argv[2];
