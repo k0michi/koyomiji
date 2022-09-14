@@ -2,6 +2,7 @@
 
 <head>
   <title>三角関数</title>
+  <id>c2d060b1-5205-44c3-b02c-191eb2abecd0</id>
   <created>2022-06-16T11:27:54+09:00</created>
 </head>
 
@@ -16,7 +17,7 @@
   <math>\tan{\theta} = \frac{\sin{\theta}}{\cos{\theta}}</math>
   <math>\sin^2{\theta} + \cos^2{\theta} = 1</math>
   <math>\tan^2{\theta} + 1 = \frac{1}{\cos^2{\theta}}</math>
-  <math></math>
+  <math/>
   <h2>加法定理</h2>
   <math>\sin{\left(x \pm y\right)} = \sin{x}\cos{y} \pm \cos{x}\sin{y}</math>
   <math>\cos{\left(x \pm y\right)} = \cos{x}\cos{y} \mp \sin{x}\sin{y}</math>

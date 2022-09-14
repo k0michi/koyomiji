@@ -2,31 +2,32 @@
 
 <head>
   <title>リコリス・リコイル7話に登場するソースコード</title>
+  <id>b5c86b31-55f3-4ee5-91e0-b09b2efa9836</id>
   <created>2022-09-01T14:53:33+09:00</created>
 </head>
 
 <body>
   <p>今期放送中のアニメ、「リコリス・リコイル」の7話冒頭に、"Internet Automatic Search Program"と題したソースコードが現れます。</p>
   <code lang="js">/*&lt;replacement&gt;*/
-var bufferShim = require(&apos;buffer-shims&apos;);
+var bufferShim = require('buffer-shims');
 /*&lt;/replacement&gt;*/
 
 /*&lt;replacement&gt;*/
-var util = require(&apos;core-util-is&apos;);
-util.inherits = require(&apos;inherits&apos;);
+var util = require('core-util-is');
+util.inherits = require('inherits');
 /*&lt;/replacement&gt;*/
 
 /*&lt;replacement&gt;*/
-var debugUtil = require(&apos;util&apos;);
+var debugUtil = require('util');
 var debug = void 0;
 if (debugUtil &amp;&amp; debugUtil.debuglog) {
-  debug = debugUtil.debuglog(&apos;stream&apos;);
+  debug = debugUtil.debuglog('stream');
 } else {
   debug = function () {};
 }
 /*&lt;/replacement&gt;*/
 
-var BufferList = require(&apos;./internal/streams/BufferList&apos;);
+var BufferList = require('./internal/streams/BufferList');
 var StringDecoder;
 
 util.inherits(Readable, Stream);

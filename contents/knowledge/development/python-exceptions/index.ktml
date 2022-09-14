@@ -2,13 +2,14 @@
 
 <head>
   <title>Python: 例外処理</title>
+  <id>dcd0eac0-4ffe-4ac2-bef5-e602b925745e</id>
   <created>2022-07-26T16:07:37+09:00</created>
 </head>
 
 <body>
   <p>raiseで例外を発生させることができる。投げられた例外はtry-exceptで捕捉することができる。</p>
   <code lang="python">try:
-  raise RuntimeError(&apos;Error occurred&apos;)
+  raise RuntimeError('Error occurred')
 except RuntimeError as e:
   print(e)</code>
 
@@ -23,15 +24,15 @@ except RuntimeError as e:
   raise RuntimeError("Exception 2") from e</code>
   <p>を実行すると、以下のようなTracebackが出力される。</p>
   <code>Traceback (most recent call last):
-  File &quot;/Users/k0michi/Repository/Development/misc/python/exception.py&quot;, line 2, in &lt;module&gt;
-    raise RuntimeError(&quot;Exception 1&quot;)
+  File "/Users/k0michi/Repository/Development/misc/python/exception.py", line 2, in &lt;module&gt;
+    raise RuntimeError("Exception 1")
 RuntimeError: Exception 1
 
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File &quot;/Users/k0michi/Repository/Development/misc/python/exception.py&quot;, line 4, in &lt;module&gt;
-    raise RuntimeError(&quot;Exception 2&quot;) from e
+  File "/Users/k0michi/Repository/Development/misc/python/exception.py", line 4, in &lt;module&gt;
+    raise RuntimeError("Exception 2") from e
 RuntimeError: Exception 2</code>
   <p>raiseに例外を指定しなかった場合は、捕捉中の例外がそのままreraiseされる。</p>
   <code lang="python">try:
@@ -39,12 +40,12 @@ RuntimeError: Exception 2</code>
 except RuntimeError as e:
   raise</code>
   <code>Traceback (most recent call last):
-  File &quot;/Users/k0michi/Repository/Development/misc/python/exception.py&quot;, line 2, in &lt;module&gt;
-    raise RuntimeError(&quot;Exception 1&quot;)
+  File "/Users/k0michi/Repository/Development/misc/python/exception.py", line 2, in &lt;module&gt;
+    raise RuntimeError("Exception 1")
 RuntimeError: Exception 1</code>
   <p>捕捉中の例外が存在しない場合は以下のような例外になる。</p>
   <code>Traceback (most recent call last):
-  File &quot;/Users/k0michi/Repository/Development/misc/python/exception.py&quot;, line 1, in &lt;module&gt;
+  File "/Users/k0michi/Repository/Development/misc/python/exception.py", line 1, in &lt;module&gt;
     raise
 RuntimeError: No active exception to reraise</code>
 

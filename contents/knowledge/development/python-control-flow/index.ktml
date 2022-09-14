@@ -2,6 +2,7 @@
 
 <head>
   <title>Python: 制御構文</title>
+  <id>e258a651-ea42-4ad6-ad93-c40f44064730</id>
   <created>2022-07-22T18:29:55+09:00</created>
 </head>
 
@@ -11,11 +12,11 @@
   <code lang="python">x = 10
 
 if x &gt; 10:
-  print(&quot;x is greater than 10&quot;)
+  print("x is greater than 10")
 elif x &lt; 10:
-  print(&quot;x is smaller than 10&quot;)
+  print("x is smaller than 10")
 else:
-  print(&quot;x equals 10&quot;)</code>
+  print("x equals 10")</code>
   <p><code>x equals 10</code>を出力する。</p>
 
   <h2>while文</h2>
@@ -40,7 +41,7 @@ while i &lt; 4:
   print(i)
   i += 1
 else:
-  print(&quot;else&quot;)</code>
+  print("else")</code>
 
   <p>出力:</p>
   <code>0
@@ -53,7 +54,7 @@ else</code>
   <code lang="python">while True:
   break
 else:
-  print(&quot;else&quot;)</code>
+  print("else")</code>
 
   <h2>for文</h2>
   <p>Pythonのfor文では、反復可能なオブジェクト(iterable object)のみ扱うことができる。</p>
@@ -64,12 +65,12 @@ else:
   <code lang="python">for i in range(2):
   print(i)
 else:
-  print(&quot;else&quot;)</code>
+  print("else")</code>
 
   <p>文字列や配列を反復する例。</p>
   <code lang="python">for i in [1, 2]:
   print(i)</code>
-  <code lang="python">for c in &quot;abc&quot;:
+  <code lang="python">for c in "abc":
   print(c)</code>
 </body>
 

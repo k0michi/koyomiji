@@ -2,14 +2,15 @@
 
 <head>
   <title>状態管理ライブラリを作ってみたよ</title>
+  <id>45908264-4a0e-4629-a691-712ac2c29938</id>
   <created>2022-06-12T00:50:38+09:00</created>
 </head>
 
 <body>
   <p><a href="https://github.com/k0michi/kyoka">Kyoka</a>というReact向けの状態&amp;ロジック管理ライブラリを作ってみました。このライブラリを使うと、こんな感じでロジックを書けます。</p>
-  <code lang="tsx">import * as React from &apos;react&apos;;
-import * as ReactDOM from &apos;react-dom/client&apos;;
-import { ModelProvider, Observable, useModel, useObservable } from &apos;kyoka&apos;;
+  <code lang="tsx">import * as React from 'react';
+import * as ReactDOM from 'react-dom/client';
+import { ModelProvider, Observable, useModel, useObservable } from 'kyoka';
 
 class Model {
   count = new Observable(0);
@@ -25,13 +26,13 @@ function Counter() {
 
   return (
     &lt;&gt;
-      {value}{&apos; &apos;}&lt;button onClick={model.addCount.bind(model)}&gt;Add count&lt;/button&gt;
+      {value}{' '}&lt;button onClick={model.addCount.bind(model)}&gt;Add count&lt;/button&gt;
     &lt;/&gt;
   );
 }
 
 const model = new Model();
-const root = ReactDOM.createRoot(document.getElementById(&apos;app&apos;)!);
+const root = ReactDOM.createRoot(document.getElementById('app')!);
 
 root.render(
   &lt;ModelProvider model={model}&gt;
@@ -40,9 +41,9 @@ root.render(
 );</code>
   <p>最低限のグローバルステート管理パターンをライブラリ化しただけです。Reactの状態管理ライブラリは色々ありますが、個人的にオブジェクト指向かつ最小限のライブラリが欲しかったのですが、見当たらなかったので作りました。この方法ならほぼボイラープレート要らずで、何よりホワイトボックスで直感的ではないでしょうか。</p>
   <p>mutableなオブジェクトを扱うこともできるようになっています。</p>
-  <code lang="tsx">import * as React from &apos;react&apos;;
-import * as ReactDOM from &apos;react-dom/client&apos;;
-import { ModelProvider, Observable, useModel, useObservable } from &apos;kyoka&apos;;
+  <code lang="tsx">import * as React from 'react';
+import * as ReactDOM from 'react-dom/client';
+import { ModelProvider, Observable, useModel, useObservable } from 'kyoka';
 
 interface Todo {
   date: Date;
@@ -66,11 +67,11 @@ class Model {
 function Todo() {
   const model = useModel&lt;Model&gt;();
   const todos = useObservable(model.todos);
-  const [todo, setTodo] = React.useState&lt;string&gt;(&apos;&apos;);
+  const [todo, setTodo] = React.useState&lt;string&gt;('');
 
   return (
     &lt;&gt;
-      &lt;input type=&quot;text&quot; onChange={e =&gt; setTodo(e.target.value)}&gt;&lt;/input&gt;
+      &lt;input type="text" onChange={e =&gt; setTodo(e.target.value)}&gt;&lt;/input&gt;
       &lt;button onClick={model.addTodo.bind(model, todo)}&gt;Add todo&lt;/button&gt;
       {todos.map(t =&gt;
         &lt;div key={t.key}&gt;{t.date.toLocaleTimeString()} {t.text}&lt;/div&gt;
@@ -80,7 +81,7 @@ function Todo() {
 };
 
 const model = new Model();
-const root = ReactDOM.createRoot(document.getElementById(&apos;app&apos;)!);
+const root = ReactDOM.createRoot(document.getElementById('app')!);
 
 root.render(
   &lt;ModelProvider model={model}&gt;

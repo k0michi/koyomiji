@@ -2,6 +2,7 @@
 
 <head>
   <title>JavaScript: Date</title>
+  <id>3db428a8-37be-4dee-bd51-762c387e3fba</id>
   <created>2022-06-17T21:14:28+09:00</created>
 </head>
 
@@ -11,7 +12,7 @@
   <code lang="js">const date = new Date();
 
 console.log(date.toDateString());
-// &quot;Fri Jun 17 2022&quot;
+// "Fri Jun 17 2022"
 
 console.log(date.toISOString());
 // 2022-06-17T12:08:02.356Z
@@ -19,19 +20,19 @@ console.log(date.toISOString());
 console.log(date.toLocaleDateString());
 // 6/17/2022
 
-console.log(date.toLocaleDateString(&apos;ja-JP&apos;));
+console.log(date.toLocaleDateString('ja-JP'));
 // 2022/6/17
 
 console.log(date.toLocaleString());
 // 6/17/2022, 9:08:02 PM
 
-console.log(date.toLocaleString(&apos;ja-JP&apos;));
+console.log(date.toLocaleString('ja-JP'));
 // 2022/6/17 21:13:36
 
 console.log(date.toLocaleTimeString());
 // 9:08:02 PM
 
-console.log(date.toLocaleTimeString(&apos;ja-JP&apos;));
+console.log(date.toLocaleTimeString('ja-JP'));
 // 21:13:36
 
 console.log(date.toString());

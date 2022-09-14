@@ -2,15 +2,16 @@
 
 <head>
   <title>HTML&amp;XML: 特殊文字のエスケープ</title>
+  <id>59d5800f-cc6e-4794-ad22-537dfdfd0a2a</id>
   <created>2022-06-03T11:12:57+09:00</created>
 </head>
 
 <body>
   <table>
     <tr><td>文字</td><td>コードポイント</td><td>文字実体参照</td></tr>
-    <tr><td>&quot;</td><td>U+0022</td><td>&amp;quot;</td></tr>
+    <tr><td>"</td><td>U+0022</td><td>&amp;quot;</td></tr>
     <tr><td>&amp;</td><td>U+0026</td><td>&amp;amp;</td></tr>
-    <tr><td>&apos;</td><td>U+0027</td><td>&amp;apos;</td></tr>
+    <tr><td>'</td><td>U+0027</td><td>&amp;apos;</td></tr>
     <tr><td>&lt;</td><td>U+003C</td><td>&amp;lt;</td></tr>
     <tr><td>&gt;</td><td>U+003E</td><td>&amp;gt;</td></tr>
   </table>
