@@ -1,7 +1,7 @@
 import formatInTimeZone from 'date-fns-tz/esm/formatInTimeZone';
 
 export function toISOStringJST(date: Date) {
-  return formatInTimeZone(date, 'Asia/Tokyo', "yyyy-mm-dd'T'HH:MM:ssXXX");
+  return formatInTimeZone(date, 'Asia/Tokyo', "yyyy-MM-dd'T'HH:mm:ssXXX");
 }
 
 export function toDisplayDateString(date: Date) {
