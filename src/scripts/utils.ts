@@ -1,5 +1,4 @@
 import window from "@k0michi/isomorphic-dom";
-import dateFormat, { masks } from "dateformat";
 
 export function getIndent($elem: Element) {
   const $first = $elem.firstChild!;
@@ -21,8 +20,4 @@ export function getElemAfter($elem: Element) {
   }
 
   return null;
-}
-
-export function formatDate(date: Date) {
-  return dateFormat(date, "yyyy-mm-dd'T'HH:MM:ssp");
 }

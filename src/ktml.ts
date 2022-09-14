@@ -70,6 +70,7 @@ export function preprocess(entryPath: string[], content: string): Entry {
   const $document = parseXML(content);
   const $head = $document.querySelector('head') as Element;
   const title = getTextContent('title', $head)!;
+  const id = getTextContent('id', $head)!;
   const created = getTextContent('created', $head)!;
   const modified = getTextContent('modified', $head) ?? created;
   let source = getTextContent('source', $head);
@@ -83,5 +84,5 @@ export function preprocess(entryPath: string[], content: string): Entry {
   transformCode($body);
   transformImg($body, entryPath);
   const description = getDescription($body, 120);
-  return { title, created, modified, description, path: entryPath, source, content: $body.outerHTML };
+  return { title, id, created, modified, description, path: entryPath, source, content: $body.outerHTML };
 }

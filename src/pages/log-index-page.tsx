@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useModel, useObservable } from 'kyoka';
-import dateToString from '../date-format.js';
 import { Entry } from "../entry.js";
 import { Model } from '../model.js';
 import { useLocation } from 'react-router';
 import Link from '../components/link.js';
 import Icon from '../components/icon.js';
 import Head from '../components/head.js';
+import { toDisplayDateString } from '../date-format.js';
 
 function getID(p: Entry) {
   return p.path[1];
@@ -34,7 +34,7 @@ export default function LogIndexPage() {
             <h2><Link href={`/log/${getID(i)}`}>{i.title}</Link></h2>
             <div className="meta">
               <div className="number">#{getID(i)}</div>
-              <div className="date"><Icon name="calenderIcon" /><div>{dateToString(new Date(i.created))}</div></div>
+              <div className="date"><Icon name="calenderIcon" /><div>{toDisplayDateString(new Date(i.created))}</div></div>
             </div>
             <p>{i.description}</p>
             <hr />

@@ -1,5 +1,6 @@
 export interface Entry {
   title: string;
+  id: string;
   created: string;
   modified: string;
   description: string;

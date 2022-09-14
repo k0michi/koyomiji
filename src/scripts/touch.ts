@@ -3,8 +3,8 @@ import * as fs from "fs/promises";
 import window from "@k0michi/isomorphic-dom";
 
 import { readFileUTF8 } from '../utils.js';
-import { formatDate } from "./utils.js";
 import { getElemAfter, getIndent } from "./utils.js";
+import { toISOStringJST } from "../date-format.js";
 
 function editModified($document: Document) {
   const $head = $document.querySelector('head')!;
@@ -19,7 +19,7 @@ function editModified($document: Document) {
   }
 
   const now = new Date();
-  $modified.textContent = formatDate(now);
+  $modified.textContent = toISOStringJST(now);
 }
 
 (async () => {

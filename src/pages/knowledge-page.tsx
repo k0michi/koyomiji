@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { categoryNames } from "../category.js";
-import dateToString from "../date-format.js";
 import { useModel, useObservable } from 'kyoka';
 import { useLocation, useParams } from 'react-router';
 import { Model } from '../model.js';
@@ -9,6 +8,7 @@ import { parseXML } from '../xml.js';
 import * as ReactKTML from '../react-ktml.js';
 import Icon from '../components/icon.js';
 import Head from '../components/head.js';
+import { toDisplayDateString } from '../date-format.js';
 
 export default function KnowledgePage() {
   const location = useLocation();
@@ -27,7 +27,7 @@ export default function KnowledgePage() {
       <header>
         <h1>{entry.title}</h1>
         <div className="meta">
-          <div className="date"><Icon name="calenderIcon" /><div>{dateToString(new Date(entry.created))}</div></div>
+          <div className="date"><Icon name="calenderIcon" /><div>{toDisplayDateString(new Date(entry.created))}</div></div>
           <div className="tags"><Icon name="tagsIcon" /><div>{categoryName}</div></div>
         </div>
       </header>

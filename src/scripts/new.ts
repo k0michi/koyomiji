@@ -1,7 +1,7 @@
 import * as path from "path";
 import * as fs from "fs/promises";
 import crypto from "crypto";
-import { formatDate } from "./utils";
+import { toISOStringJST } from "../date-format";
 
 (async () => {
   let pathToCreate = process.argv[2];
@@ -25,7 +25,7 @@ function blankPage(date: Date) {
 <head>
   <title>Untitled</title>
   <id>${id}</id>
-  <created>${formatDate(date)}</created>
+  <created>${toISOStringJST(date)}</created>
 </head>
 
 <body>
