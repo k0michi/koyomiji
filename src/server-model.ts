@@ -3,16 +3,20 @@ import { Dictionary, Entry } from "./entry.js";
 import { preprocess } from "./ktml.js";
 import * as KDML from "./kdml.js";
 import { readFileUTF8, toPathname } from "./utils.js";
+import Sitemap from "./sitemap.js";
 
 export class ServerModel {
   rootDir: string;
   entries: Record<string, Entry>;
   dictionaries: Record<string, Dictionary>;
 
+  sitemap: Sitemap;
+
   constructor(rootDir: string) {
     this.rootDir = rootDir;
     this.entries = {};
     this.dictionaries = {};
+    this.sitemap = new Sitemap();
   }
 
   getEntry(pathname: string) {

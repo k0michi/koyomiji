@@ -28,24 +28,29 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   }
 
   renderer.use('/(index.html)?', (ctx) => {
+    model.sitemap.add('/');
     return render(template, '/');
   });
 
   renderer.use('/about/(index.html)?', (ctx) => {
+    model.sitemap.add('/about');
     return render(template, '/about');
   });
 
   renderer.use('/project/(index.html)?', (ctx) => {
+    model.sitemap.add('/project');
     return render(template, '/project');
   });
 
   renderer.use('/knowledge/(index.html)?', (ctx) => {
+    model.sitemap.add('/knowledge');
     return render(template, '/knowledge', { entries: getEntries(), isIndexComplete: true });
   });
 
   renderer.use('/knowledge/:category/:id/(index.html)?', (ctx) => {
     const pathname = toPathname(['knowledge', ctx.params['category'], ctx.params['id']])
     const entry = model.getEntry(pathname);
+    model.sitemap.add(pathname, entry.modified);
 
     const initialData: InitialData = { entries: {}, isIndexComplete: false };
     initialData.entries[pathname] = entry;
@@ -64,12 +69,14 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   });
 
   renderer.use('/log/(index.html)?', (ctx) => {
+    model.sitemap.add('/log');
     return render(template, '/log', { entries: getEntries(), isIndexComplete: true });
   });
 
   renderer.use('/log/:id/(index.html)?', (ctx) => {
     const pathname = toPathname(['log', ctx.params['id']]);
     const entry = model.getEntry(pathname);
+    model.sitemap.add(pathname, entry.modified);
 
     const initialData: InitialData = { entries: {}, isIndexComplete: false };
     initialData.entries[pathname] = entry;
@@ -92,12 +99,14 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   });
 
   renderer.use('/novel/(index.html)?', (ctx) => {
+    model.sitemap.add('/novel');
     return render(template, '/novel');
   });
 
   renderer.use('/novel/:novel/:chapter/(index.html)?', (ctx) => {
     const pathname = toPathname(['novel', ctx.params['novel'], ctx.params['chapter']]);
     const entry = model.getEntry(pathname);
+    model.sitemap.add(pathname, entry.modified);
 
     const initialData: InitialData = { entries: {}, isIndexComplete: false };
     initialData.entries[pathname] = entry;
@@ -112,12 +121,14 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   });
 
   renderer.use('/artwork/(index.html)?', (ctx) => {
+    model.sitemap.add('/artwork');
     return render(template, '/artwork');
   });
 
   renderer.use('/artwork/:id/(index.html)?', (ctx) => {
     const pathname = toPathname(['artwork', ctx.params['id']]);
     const entry = model.getEntry(pathname);
+    model.sitemap.add(pathname, entry.modified);
 
     const initialData: InitialData = { entries: {}, isIndexComplete: false };
     initialData.entries[pathname] = entry;
@@ -136,6 +147,7 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   });
 
   renderer.use('/dictionary/(index.html)?', (ctx) => {
+    model.sitemap.add('/dictionary');
     return render(template, '/dictionary');
   });
 
@@ -174,6 +186,10 @@ export function createRenderer(outRoot: string | null, template: string, model: 
 
     const serializer = new window.XMLSerializer();
     return '<?xml version="1.0" encoding="UTF-8"?>\n' + serializer.serializeToString(feed);
+  });
+
+  renderer.use('/sitemap.xml', (ctx) => {
+    return model.sitemap.toXML();
   });
 
   return renderer;
