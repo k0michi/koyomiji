@@ -16,6 +16,7 @@ export default class Sitemap {
   }
 
   add(loc: string, lastMod?: string) {
+    loc = new URL(loc, 'https://koyomiji.com/').toString();
     this.map[loc] = { loc, lastMod };
   }
 
