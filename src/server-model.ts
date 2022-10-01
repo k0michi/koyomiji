@@ -38,6 +38,6 @@ export class ServerModel {
   async loadDictionary(pathname: string) {
     const normalized = toPathname(pathname.split('/').slice(0, -1));
     const content = await readFileUTF8(path.join(this.rootDir, pathname));
-    this.dictionaries[normalized] =  KDML.preprocess(pathname.split('/').slice(0, -1), content);
+    this.dictionaries[normalized] = KDML.preprocess(pathname.split('/').slice(0, -1), content);
   }
 }

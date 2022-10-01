@@ -10,6 +10,7 @@ export function preprocess(entryPath: string[], content: string): Dictionary {
 
   const $entries = $document.querySelector('entries')!;
   const entries: DictionaryEntry[] = [];
+  let number = 1;
 
   for (const $entry of $entries.children) {
     const word = $entry.querySelector('word')?.textContent;
@@ -45,7 +46,8 @@ export function preprocess(entryPath: string[], content: string): Dictionary {
       senses.push({ pos, usage, gloss });
     }
 
-    entries.push({ word, senses });
+    entries.push({ word, senses, number });
+    number++;
   }
 
   return { title, created, description, path: entryPath, content: entries };

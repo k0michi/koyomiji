@@ -20,6 +20,7 @@ export interface Dictionary {
 export interface DictionaryEntry {
   word: string;
   senses: DictionarySense[];
+  number: number;
 }
 
 export interface DictionarySense {

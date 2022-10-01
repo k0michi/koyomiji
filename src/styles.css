@@ -651,6 +651,12 @@ body.common-layout {
   font-weight: 500;
 }
 
+.dictionary-entry .head {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+}
+
 
 /* Common Layout - Main - Artwork */
 

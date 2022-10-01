@@ -29,7 +29,12 @@ export default function DictionaryPage() {
         {
           entries.map(e =>
             <div className='dictionary-entry'>
-              <h2>{e?.word}</h2>
+              <div className='head'>
+                <h2>{e?.word}</h2>
+                <div className="meta">
+                  #{e?.number}
+                </div>
+              </div>
               {e?.senses.map(s => {
                 const usage = s.usage != null ? toElement(parseXML(s.usage).firstChild?.childNodes!, reactFactory) : null;
                 const gloss = s.gloss != null ? toElement(parseXML(s.gloss).firstChild?.childNodes!, reactFactory) : null;
