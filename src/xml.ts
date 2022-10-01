@@ -6,7 +6,7 @@ export function parseXML(string: string) {
   const parser = new window.DOMParser();
   const $document = parser.parseFromString(string, 'text/xml');
 
-  if (($document.firstChild as Element).tagName == 'parsererror') {
+  if ($document.querySelector('parsererror') != null) {
     throw new Error('Failed to parse');
   }
 
