@@ -11299,7 +11299,7 @@
       <senses>
         <sense>
           <pos>nc</pos>
-          <gloss>同乗者</gloss>
+          <gloss>同情者</gloss>
         </sense>
       </senses>
       <tags>
@@ -12249,18 +12249,6 @@
         <sense>
           <pos>nc</pos>
           <gloss>パンフレット</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <word>conservative</word>
-      <senses>
-        <sense>
-          <pos>adj</pos>
-          <gloss>控えめな</gloss>
         </sense>
       </senses>
       <tags>
@@ -14366,7 +14354,7 @@
       <senses>
         <sense>
           <pos>nc</pos>
-          <usage>a host of ...</usage>
+          <usage>a handful of ...</usage>
           <gloss>わずかの...</gloss>
         </sense>
       </senses>
@@ -14505,8 +14493,8 @@
       <senses>
         <sense>
           <pos>vt</pos>
-          <usage>levy on/upon ...</usage>
-          <gloss>...を課する</gloss>
+          <usage>levy ... on/upon ...</usage>
+          <gloss>...に...を課する</gloss>
         </sense>
       </senses>
       <tags>
@@ -14518,8 +14506,8 @@
       <senses>
         <sense>
           <pos>vt</pos>
-          <usage>impose on/upon ...</usage>
-          <gloss>...を課する</gloss>
+          <usage>impose ... on/upon ...</usage>
+          <gloss>...に...を課する</gloss>
         </sense>
       </senses>
       <tags>
@@ -15420,18 +15408,6 @@
       </tags>
     </entry>
     <entry>
-      <word>embezzle</word>
-      <senses>
-        <sense>
-          <pos>vt</pos>
-          <gloss>...を横領する</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <word>revitalize</word>
       <senses>
         <sense>
@@ -15569,19 +15545,6 @@
         <sense>
           <pos>adj</pos>
           <gloss>悪質な</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <word>due</word>
-      <senses>
-        <sense>
-          <pos>adv</pos>
-          <usage>due ...</usage>
-          <gloss>(方角が)真...に</gloss>
         </sense>
       </senses>
       <tags>
@@ -16123,18 +16086,6 @@
         <sense>
           <pos>nc</pos>
           <gloss>行い</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <word>bribery</word>
-      <senses>
-        <sense>
-          <pos>nu</pos>
-          <gloss>贈賄行為</gloss>
         </sense>
       </senses>
       <tags>
