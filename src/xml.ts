@@ -30,7 +30,7 @@ export function getTextContent(query: string, $element: Element) {
 export function toElement<T>(node: Node | NodeList, factory: (type: any, props: any, ...children: any[]) => T): string | T {
   const Node = window.Node;
 
-  if ((node as any).nodeType != null) {
+  if (node instanceof Node) {
     node = node as Node;
 
     if (node.nodeType == Node.DOCUMENT_NODE) {
