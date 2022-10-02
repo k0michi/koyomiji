@@ -10,9 +10,10 @@ import window from '@k0michi/isomorphic-dom';
 import Root from "./root.js";
 import { Renderer } from "./base/renderer.js";
 import { InitialData, Model } from './model.js';
-import { newElementCreator, toPathname } from './utils.js';
+import { toPathname } from './utils.js';
 import { ServerModel } from './server-model.js';
 import { toISOStringJST } from './date-format.js';
+import { newElementCreator } from './xml.js';
 
 export function createRenderer(outRoot: string | null, template: string, model: ServerModel) {
   const renderer = new Renderer(outRoot);

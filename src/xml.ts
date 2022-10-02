@@ -75,3 +75,19 @@ export function toElement<T>(node: Node | NodeList, factory: (type: any, props: 
     return factory(Fragment, {}, ...children);
   }
 }
+
+export function newElementCreator(document: Document, namespace: string) {
+  return (type: string, props: Record<string, string> = {}, children?: string) => {
+    const $elem = document.createElementNS(namespace, type);
+
+    for (const [key, value] of Object.entries(props)) {
+      $elem.setAttribute(key, value);
+    }
+
+    if (children != null) {
+      $elem.append(children);
+    }
+
+    return $elem;
+  };
+}
