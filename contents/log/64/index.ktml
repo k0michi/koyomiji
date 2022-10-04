@@ -1,0 +1,38 @@
+<ktml version="0.1">
+
+<head>
+  <title>JSON.parse()で日付をパースするときの懸念点</title>
+  <id>f063ae02-7826-4856-bb3b-a58ce433339b</id>
+  <created>2022-10-04T12:37:53+09:00</created>
+</head>
+
+<body>
+  <p>JSONには日付を表現するための書き方が存在しない。多くの場合にはISO 8601で表現したものを文字列化して格納することが多いと思う。例えばこんな具合に。</p>
+  <code lang="json">{
+  "date": "2022-10-04T03:41:07.950Z"
+}</code>
+  <p>しかしこれを単純にJSON.parse()すると、得られるのは当然Stringになる。これをDateとしてパースしたいがために、JSON.parse()にreviverを与えて、こういうようなコードを書いてしまうことがある。</p>
+  <code lang="js">const timestampExp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
+
+function parseJSON(json) {
+  return JSON.parse(json, (key, value) =&gt; {
+    if (typeof value == &apos;string&apos; &amp;&amp; timestampExp.test(value)) {
+      return new Date(value);
+    } else {
+      return value;
+    }
+  });
+}</code>
+  <p>こうすれば確かに、2022-10-04T03:41:07.950ZのようなISO 8601の文字列をDateオブジェクトに変換することができる。</p>
+  <p>ただ、このコードは問題がある。次のようなJSONをパースすることを考えてみよう。</p>
+  <code lang="json">{
+  "title": "記事のタイトル",
+  "postedAt": "2022-10-04T03:41:07.950Z",
+  "content": "..."
+}</code>
+  <p>ここで、titleプロパティはユーザーが自由に入力できる文字列であるとする。もし仮にユーザーが、2022-10-04T03:41:07.950Zのような文字列をタイトルとして設定したらどうなるか。さっきの<code>parseJSON</code>でこのJSONをパースすると、titleがDateとしてパースされてしまうのだ。titleがStringであることを前提としたコードがあったら、これは確実にエラーを引き起こす。</p>
+  <p>この問題にどう対処すればよいか。ユーザーによる入力の段階で、日付と認識されるものを弾く、という方法も無くはない。だが根本的な問題はJSON.parseのreviverで、文字列の形式だけを見てパースする方法を変えていることだ。Dateが入るプロパティのkeyを判断した上でDateに変換するべきだろう。そうしないと、意図しないプロパティにDateが入ってしまう。</p>
+  <p>JSONをパースする段階では日付に対して何も処理を加えない、というのがよい方法かもしれない。そもそも、JavaScriptのDateはmutableであり、意図しない変更が発生する可能性が常に伴う。だから、日付は常にstringで保持し、必要に応じてDateに変換、というのもありだろう。</p>
+</body>
+
+</ktml>
