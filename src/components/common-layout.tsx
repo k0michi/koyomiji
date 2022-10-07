@@ -73,6 +73,7 @@ export default function MainLayout() {
             <li><Menu href="/artwork">Artworks</Menu></li>
           </ul>
           <ul id="icons">
+            <li><Link aria-label="RSS" href="https://koyomiji.com/feed.xml"><Icon name="rss" /></Link></li>
             <li><Link aria-label="Mail" href="mailto:k0michi@koyomi.co"><Icon name="mailIcon" /></Link></li>
             <li><Link aria-label="GitHub" href="https://github.com/k0michi"><Icon name="githubIcon" /></Link></li>
             <li><Link aria-label="YouTube" href="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw"><Icon name="youtubeIcon" /></Link></li>

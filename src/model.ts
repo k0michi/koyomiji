@@ -71,6 +71,7 @@ export class Model {
       (async () => assets['tagsIcon'] = (await import('@tabler/icons/tags.svg?raw')).default)(),
       (async () => assets['xIcon'] = (await import('feather-icons/dist/icons/x.svg?raw')).default)(),
       (async () => assets['menu2'] = (await import('@tabler/icons/menu-2.svg?raw')).default)(),
+      (async () => assets['rss'] = (await import('@tabler/icons/rss.svg?raw')).default)(),
     ]);
     this.assets.set(assets);
   }
