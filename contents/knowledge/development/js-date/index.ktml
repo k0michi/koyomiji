@@ -4,6 +4,7 @@
   <title>JavaScript: Date</title>
   <id>3db428a8-37be-4dee-bd51-762c387e3fba</id>
   <created>2022-06-17T21:14:28+09:00</created>
+  <modified>2022-10-07T11:11:33+09:00</modified>
 </head>
 
 <body>
@@ -43,6 +44,16 @@ console.log(date.toTimeString());
 
 console.log(date.toUTCString());
 // Fri, 17 Jun 2022 12:08:02 GMT</code>
+
+  <h2>コピー</h2>
+  <p>Dateオブジェクトはmutableなので、元の日付を弄らずに新しい日付を作るには、新しいオブジェクトを作成する。</p>
+  <code lang="js">const a = new Date();
+const b = new Date(a);
+
+console.log(a.toISOString());
+// 2022-10-07T02:07:35.845Z
+console.log(a.toISOString());
+// 2022-10-07T02:07:35.845Z</code>
 </body>
 
 </ktml>
