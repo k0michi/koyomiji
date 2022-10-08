@@ -183,7 +183,7 @@ body.common-layout {
 
 #logo-block {
   margin-top: var(--bar-height);
-  padding: 24px 16px 12px;
+  padding: 26px 16px 10px;
   width: fit-content;
   background-color: var(--color-6);
   color: var(--color-7);
