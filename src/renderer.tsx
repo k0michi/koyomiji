@@ -162,7 +162,7 @@ export function createRenderer(outRoot: string | null, template: string, model: 
     const create = newElementCreator(document, atomNS);
     const feed = document.firstChild! as Element;
 
-    feed.appendChild(create('title', {}, '曆路喫茶館'));
+    feed.appendChild(create('title', {}, '喫茶曆路'));
     feed.appendChild(create('id', {}, 'urn:uuid:7e260dae-5479-45c2-bad8-0be227c48ab8'));
     feed.appendChild(create('link', { rel: 'self', href: 'https://koyomiji.com/feed.xml' }));
     feed.appendChild(create('link', { rel: 'alternate', href: 'https://koyomiji.com/' }));

@@ -53,7 +53,7 @@ export default function MainLayout() {
         <div id="top-container">
           <div id="logo-container">
             <div id="logo-block">
-              <Link aria-label="曆路喫茶館" href="/">
+              <Link aria-label="喫茶曆路" href="/">
                 <Icon name="logoFull" />
               </Link>
             </div>
