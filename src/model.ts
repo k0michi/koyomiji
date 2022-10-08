@@ -61,7 +61,7 @@ export class Model {
   async fetchAssets() {
     const assets: Record<string, any> = {};
     await Promise.all([
-      (async () => assets['logoFull'] = (await import('./assets/koyomiji_full_hr.svg?raw')).default)(),
+      (async () => assets['logoFull'] = (await import('./assets/kissa_koyomiji.svg?raw')).default)(),
       (async () => assets['asterisk'] = (await import('./assets/asterisk.svg?raw')).default)(),
       (async () => assets['mailIcon'] = (await import('@tabler/icons/mail.svg?raw')).default)(),
       (async () => assets['githubIcon'] = (await import('@tabler/icons/brand-github.svg?raw')).default)(),
