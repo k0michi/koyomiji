@@ -183,7 +183,7 @@ body.common-layout {
 
 #logo-block {
   margin-top: var(--bar-height);
-  padding: 20px 14px 8px 14px;
+  padding: 24px 16px 12px;
   width: fit-content;
   background-color: var(--color-6);
   color: var(--color-7);
@@ -196,7 +196,7 @@ body.common-layout {
 }
 
 #logo-block svg {
-  width: 196px;
+  width: 160px;
 }
 
 #top-container>#menu-button-container {
