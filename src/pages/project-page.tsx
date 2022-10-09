@@ -15,6 +15,8 @@ export default function ProjectPage() {
         <div className="meta">開発したもの。</div>
       </header>
       <div id="body">
+        <h2><Link href="https://github.com/k0michi/kakisute">Kakisute</Link></h2>
+        <p>書き捨てるためのメモ帳。</p>
         <h2><Link href="https://github.com/k0michi/kotonoha">Kotonoha</Link></h2>
         <p>Ankiクローン。単語学習アプリ。</p>
         <h2><Link href="https://github.com/k0michi/isomorphic-dom">@k0michi/isomorphic-dom</Link></h2>
