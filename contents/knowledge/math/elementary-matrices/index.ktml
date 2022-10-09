@@ -3,11 +3,66 @@
 <head>
   <title>基本行列</title>
   <id>3fd65299-db81-45d5-845d-3af7234a4e15</id>
-  <created>2022-09-14T09:25:36+09:00</created>
+  <created>2022-10-09T15:24:43+09:00</created>
 </head>
 
 <body>
-  <math/>
+  <h2>基本行列 <math>P_{i,j}</math></h2>
+  <p><math>(n, n)</math>型単位行列の<math>i</math>行目と<math>j</math>行目を入れ替えた行列を<math>P_{i,j}</math>とする。</p>
+  <math>P_{i,j} = \begin{bmatrix}
+    1 &amp; &amp; &amp; &amp; &amp; &amp; \\
+     &amp; \ddots &amp; &amp; &amp; &amp; &amp; \\
+     &amp; &amp; 0 &amp; &amp; 1 &amp; &amp; \\
+     &amp; &amp; &amp; \ddots &amp; &amp; &amp; \\
+     &amp; &amp; 1 &amp; &amp; 0 &amp; &amp; \\
+     &amp; &amp; &amp; &amp; &amp; \ddots &amp; \\
+     &amp; &amp; &amp; &amp; &amp; &amp; 1
+ \end{bmatrix}</math>
+ <p>この行列をある<math>(m, n)</math>型行列に左から掛けると、<math>i</math>行目と<math>j</math>行目が入れ替わる。右から掛けると、<math>i</math>列目と<math>j</math>列目が入れ替わる。</p>
+
+ <h2>基本行列 <math>Q_{i,j}</math></h2>
+ <p><math>(n, n)</math>型単位行列の<math>(i, i)</math>成分を<math>c</math>とした行列を<math>Q_i(c)</math>とする。</p>
+ <math>Q_{i}(c) = \begin{bmatrix}
+   1 &amp; &amp; &amp; &amp; &amp; &amp; \\
+    &amp; \ddots &amp; &amp; &amp; &amp; &amp; \\
+    &amp; &amp; 1 &amp; &amp; &amp; &amp; \\
+    &amp; &amp; &amp; c &amp; &amp; &amp; \\
+    &amp; &amp; &amp; &amp; 1 &amp; &amp; \\
+    &amp; &amp; &amp; &amp; &amp; \ddots &amp; \\
+    &amp; &amp; &amp; &amp; &amp; &amp; 1
+\end{bmatrix}</math>
+  <p>この行列をある<math>(m, n)</math>型行列に左から掛けると、<math>i</math>行目が<math>c</math>倍される。右から掛けると、<math>i</math>列目が<math>c</math>倍される。</p>
+
+  <h2>基本行列 <math>R_{i,j}(c)</math></h2>
+  <p><math>(n, n)</math>型単位行列の<math>(i, j)</math>成分を<math>c</math>とした行列を<math>R_{i,j}(c)</math>とする。</p>
+  <math>R_{i,j}(c) = \begin{bmatrix}
+    1 &amp; &amp; &amp; &amp; &amp; &amp; \\
+    &amp; \ddots &amp; &amp; &amp; &amp; &amp; \\
+    &amp; &amp; 1 &amp; \cdots &amp; c &amp; &amp; \\
+    &amp; &amp; &amp; \ddots &amp; \vdots &amp; &amp; \\
+    &amp; &amp; &amp; &amp; 1 &amp; &amp; \\
+    &amp; &amp; &amp; &amp; &amp; \ddots &amp; \\
+    &amp; &amp; &amp; &amp; &amp; &amp; 1
+  \end{bmatrix}</math>
+  <p>この行列をある<math>(m, n)</math>型行列に左から掛けると、<math>i</math>行目に<math>j</math>行目の<math>c</math>倍が加わる。右から掛けると、<math>j</math>列目に<math>i</math>列目の<math>c</math>倍が加わる。</p>
+
+  <h2>基本行列の正則性</h2>
+  <p><math>P_{i,j}, Q_{i}(c), R_{i,j}(c)</math>は正則である。次が成り立つ。</p>
+  <math>P_{i,j}^{-1} = P_{i,j}</math>
+  <math>Q_{i}(c)^{-1} = Q_{i}(c^{-1})</math>
+  <math>R_{i,j}(c)^{-1} = R_{i,j}(-c)</math>
+
+  <h2>階数標準形</h2>
+  <p>任意の行列<math>A</math>は、行基本変形と列基本変形を施すことで、階数標準形に変形することができる。</p>
+  <math>\begin{bmatrix}
+    1 &amp; &amp; &amp; &amp; &amp; \\
+    &amp; \ddots &amp; &amp; &amp; &amp; \\
+    &amp; &amp; 1 &amp; &amp; &amp; \\
+    &amp; &amp; &amp; 0 &amp; &amp; \\
+    &amp; &amp; &amp; &amp; \ddots &amp; \\
+    &amp; &amp; &amp; &amp; &amp; 0 \\
+  \end{bmatrix}</math>
+  <p><math>rank\ A</math>個の対角成分が1であり、残りは0である。</p>
 </body>
 
 </ktml>
