@@ -183,6 +183,8 @@ body.common-layout {
 
 #logo-block {
   margin-top: var(--bar-height);
+  margin-left: auto;
+  margin-right: auto;
   padding: 26px 16px 10px;
   width: fit-content;
   background-color: var(--color-6);
@@ -196,7 +198,7 @@ body.common-layout {
 }
 
 #logo-block svg {
-  width: 160px;
+  width: 176px;
 }
 
 #top-container>#menu-button-container {
@@ -248,7 +250,7 @@ body.common-layout {
   padding: 0;
   font-size: 20px;
   font-weight: inherit;
-
+  color: var(--color-2);
   --menu-color-1: hsl(0, 86%, 43%);
   --menu-color-2: hsl(20, 86%, 43%);
   --menu-color-3: hsl(50, 86%, 43%);
@@ -256,10 +258,6 @@ body.common-layout {
   --menu-color-5: hsl(170, 86%, 43%);
   --menu-color-6: hsl(200, 86%, 43%);
   --menu-color-7: hsl(240, 95%, 64%);
-}
-
-#menu {
-  color: var(--color-2);
 }
 
 @media (max-width: 767px) {
@@ -275,7 +273,7 @@ body.common-layout {
 
 @media (min-width: 768px) {
   #menu {
-    margin: 100px 0 0 16px;
+    margin: 100px 0 0 8px;
   }
 
   #menu>li {
@@ -402,7 +400,7 @@ body.common-layout {
 
 @media (min-width: 768px) {
   #icons {
-    margin: 20px 0 0 48px;
+    margin: 24px 0 0 36px;
   }
 }
 
@@ -413,8 +411,8 @@ body.common-layout {
 
 #icons>li svg {
   stroke-width: 1.35px;
-  width: 26px;
-  height: 26px;
+  width: 25px;
+  height: 25px;
 }
 
 
