@@ -69,6 +69,10 @@
           <usage>be sheltered by ...</usage>
           <gloss>...に保護されている</gloss>
         </sense>
+        <sense>
+          <pos>nc</pos>
+          <gloss>避難所</gloss>
+        </sense>
       </senses>
       <tags>
         <tag>toeic</tag>
@@ -823,6 +827,11 @@
           <pos>nc</pos>
           <gloss>服装一式</gloss>
         </sense>
+        <sense>
+          <pos>vt</pos>
+          <usage>outfit ... with ...</usage>
+          <gloss>...に...を取り付ける</gloss>
+        </sense>
       </senses>
       <tags>
         <tag>toeic</tag>
@@ -955,6 +964,10 @@
         <sense>
           <pos>nu</pos>
           <gloss>報酬</gloss>
+        </sense>
+        <sense>
+          <pos>nu</pos>
+          <gloss>補償金</gloss>
         </sense>
       </senses>
       <tags>
@@ -1302,6 +1315,10 @@
         <sense>
           <pos>prep</pos>
           <gloss>...と共に</gloss>
+        </sense>
+        <sense>
+          <pos>prep</pos>
+          <gloss>...に並んで</gloss>
         </sense>
       </senses>
       <tags>
@@ -1896,6 +1913,11 @@
         <sense>
           <pos>adj</pos>
           <gloss>精巧な</gloss>
+        </sense>
+        <sense>
+          <pos>vi</pos>
+          <usage>elaborate on/upon ...</usage>
+          <gloss>...について詳しく述べる</gloss>
         </sense>
       </senses>
       <tags>
@@ -3256,20 +3278,6 @@
       </tags>
     </entry>
     <entry>
-      <id>bb4e2ed6-d081-4640-9ab3-21087f660ca6</id>
-      <word>outfit</word>
-      <senses>
-        <sense>
-          <pos>vt</pos>
-          <usage>outfit ... with ...</usage>
-          <gloss>...に...を取り付ける</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>b915de91-bdac-4fa0-93ca-edfcbe034923</id>
       <word>inception</word>
       <senses>
@@ -3471,19 +3479,6 @@
         <sense>
           <pos>adj</pos>
           <gloss>親を失った</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>799ceff8-bc07-41e5-b1c2-eebdfa674630</id>
-      <word>shelter</word>
-      <senses>
-        <sense>
-          <pos>nc</pos>
-          <gloss>避難所</gloss>
         </sense>
       </senses>
       <tags>
@@ -4244,7 +4239,7 @@
       <senses>
         <sense>
           <pos>nc</pos>
-          <gloss>給与支払簿</gloss>
+          <gloss>雇用者名簿</gloss>
         </sense>
       </senses>
       <tags>
@@ -4257,7 +4252,8 @@
       <senses>
         <sense>
           <pos>adj</pos>
-          <gloss>散らかった</gloss>
+          <usage>be cluttered with ...</usage>
+          <gloss>...で散らかった</gloss>
         </sense>
       </senses>
       <tags>
@@ -4284,6 +4280,10 @@
         <sense>
           <pos>adj</pos>
           <gloss>注意深い</gloss>
+        </sense>
+        <sense>
+          <pos>adj</pos>
+          <gloss>厳守する</gloss>
         </sense>
       </senses>
       <tags>
@@ -4436,6 +4436,10 @@
       <senses>
         <sense>
           <pos>nu</pos>
+          <gloss>総売上</gloss>
+        </sense>
+        <sense>
+          <pos>nu</pos>
           <gloss>離職率</gloss>
         </sense>
       </senses>
@@ -4447,6 +4451,10 @@
       <id>470d411b-6615-4496-bf62-bc369be19e18</id>
       <word>assess</word>
       <senses>
+        <sense>
+          <pos>vt</pos>
+          <gloss>...を評価する</gloss>
+        </sense>
         <sense>
           <pos>vt</pos>
           <usage>be assessed ...</usage>
@@ -5194,6 +5202,10 @@
           <pos>vt</pos>
           <gloss>...を支持する</gloss>
         </sense>
+        <sense>
+          <pos>nc</pos>
+          <gloss>支持者</gloss>
+        </sense>
       </senses>
       <tags>
         <tag>toeic</tag>
@@ -5572,19 +5584,6 @@
         <sense>
           <pos>adj</pos>
           <gloss>料理の</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>1c2f7b76-ab49-4b44-8d82-b032ea1f58ab</id>
-      <word>handiwork</word>
-      <senses>
-        <sense>
-          <pos>nu</pos>
-          <gloss>手仕事</gloss>
         </sense>
       </senses>
       <tags>
@@ -6216,20 +6215,6 @@
       </tags>
     </entry>
     <entry>
-      <id>50391b52-badd-4a73-8bac-c3050208b386</id>
-      <word>line</word>
-      <senses>
-        <sense>
-          <pos>vt</pos>
-          <usage>be lined with ...</usage>
-          <gloss>(道に)...が並べられている</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>529e19b4-d00d-431c-98ad-a513a0cd05b5</id>
       <word>face</word>
       <senses>
@@ -6342,6 +6327,11 @@
           <pos>adj</pos>
           <gloss>頭上の</gloss>
         </sense>
+        <sense>
+          <pos>nc</pos>
+          <usage>overheads</usage>
+          <gloss>諸経費</gloss>
+        </sense>
       </senses>
       <tags>
         <tag>toeic</tag>
@@ -6408,6 +6398,11 @@
           <pos>v</pos>
           <usage>be rolled up</usage>
           <gloss>(窓が)閉じられる</gloss>
+        </sense>
+        <sense>
+          <pos>v</pos>
+          <usage>roll ... up / roll up ...</usage>
+          <gloss>...をまくり上げる</gloss>
         </sense>
       </senses>
       <tags>
@@ -6654,20 +6649,6 @@
       </tags>
     </entry>
     <entry>
-      <id>1de25485-4241-4762-bb57-2921bdab35ca</id>
-      <word>cluttered</word>
-      <senses>
-        <sense>
-          <pos>adj</pos>
-          <usage>be cluttered with ...</usage>
-          <gloss>...で散らかった</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>90b9fac4-631a-48dc-9f20-f4b2b7779ccf</id>
       <word>off</word>
       <senses>
@@ -6735,6 +6716,10 @@
           <pos>vt</pos>
           <usage>drop ... off / drop off ...</usage>
           <gloss>...を乗り物から降ろす</gloss>
+        </sense>
+        <sense>
+          <pos>vt</pos>
+          <gloss>(手紙を)を送る</gloss>
         </sense>
       </senses>
       <tags>
@@ -6891,6 +6876,10 @@
           <pos>adj</pos>
           <usage>be clear of ...</usage>
           <gloss>...が全くない</gloss>
+        </sense>
+        <sense>
+          <pos>vt</pos>
+          <gloss>...を精算する</gloss>
         </sense>
       </senses>
       <tags>
@@ -7150,20 +7139,6 @@
       </tags>
     </entry>
     <entry>
-      <id>a7cbd748-6815-4bf7-8822-d16a1fff29d7</id>
-      <word>roll up</word>
-      <senses>
-        <sense>
-          <pos>v</pos>
-          <usage>roll ... up / roll up ...</usage>
-          <gloss>...をまくり上げる</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>24b2c664-967c-4bca-8da9-9fd96f6df2a6</id>
       <word>unbutton</word>
       <senses>
@@ -7317,8 +7292,8 @@
       <senses>
         <sense>
           <pos>vt</pos>
-          <usage>be stocked</usage>
-          <gloss>置かれている</gloss>
+          <usage>be stocked with ...</usage>
+          <gloss>...を置いている</gloss>
         </sense>
       </senses>
       <tags>
@@ -7608,18 +7583,10 @@
           <pos>nc</pos>
           <gloss>手紙</gloss>
         </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>156d9a38-31ac-46ee-a178-28db3d784dd2</id>
-      <word>drop</word>
-      <senses>
         <sense>
           <pos>vt</pos>
-          <gloss>(手紙を)を送る</gloss>
+          <usage>be lined with ...</usage>
+          <gloss>(道に)...が並べられている</gloss>
         </sense>
       </senses>
       <tags>
@@ -7686,6 +7653,11 @@
         <sense>
           <pos>nc</pos>
           <gloss>科目</gloss>
+        </sense>
+        <sense>
+          <pos>adj</pos>
+          <usage>be subject to ...</usage>
+          <gloss>...の影響を受けやすい</gloss>
         </sense>
       </senses>
       <tags>
@@ -8223,19 +8195,6 @@
       </tags>
     </entry>
     <entry>
-      <id>95228722-9240-43bb-9347-d4e06c0bb012</id>
-      <word>slowdown</word>
-      <senses>
-        <sense>
-          <pos>nc</pos>
-          <gloss>減退</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>adf6c93c-69be-4bd0-8825-141d42c67dfb</id>
       <word>you bet</word>
       <senses>
@@ -8346,19 +8305,6 @@
         <sense>
           <pos>phr</pos>
           <gloss>...で非常に忙しい</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>f8342c0b-be17-4b59-963c-58585b879a25</id>
-      <word>allocate</word>
-      <senses>
-        <sense>
-          <pos>vt</pos>
-          <gloss>...を割り当てる</gloss>
         </sense>
       </senses>
       <tags>
@@ -9226,19 +9172,6 @@
       </tags>
     </entry>
     <entry>
-      <id>585113f6-fd04-412a-81a3-33ec378f8f57</id>
-      <word>textile</word>
-      <senses>
-        <sense>
-          <pos>nc</pos>
-          <gloss>織物</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>1ffa1232-2a71-4bab-9824-6902b9f0b4c7</id>
       <word>meaningful</word>
       <senses>
@@ -9679,20 +9612,6 @@
       </tags>
     </entry>
     <entry>
-      <id>56c05abd-8685-4487-92d5-7a06a6cb052d</id>
-      <word>overhead</word>
-      <senses>
-        <sense>
-          <pos>nc</pos>
-          <usage>overheads</usage>
-          <gloss>諸経費</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>a31238a8-23f5-4ebf-81f6-d5ed249a91d9</id>
       <word>damages</word>
       <senses>
@@ -10099,19 +10018,6 @@
       </tags>
     </entry>
     <entry>
-      <id>666c2dfa-88ed-4772-bb75-e72ba87e6348</id>
-      <word>alongside</word>
-      <senses>
-        <sense>
-          <pos>prep</pos>
-          <gloss>...に並んで</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>52f8c472-f1d7-40f6-8661-80363767073a</id>
       <word>inward</word>
       <senses>
@@ -10131,19 +10037,6 @@
         <sense>
           <pos>phr</pos>
           <gloss>...という趣旨の</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>d747bd67-7793-4655-8ee1-cc61bca841a8</id>
-      <word>payroll</word>
-      <senses>
-        <sense>
-          <pos>nc</pos>
-          <gloss>雇用者名簿</gloss>
         </sense>
       </senses>
       <tags>
@@ -10249,19 +10142,6 @@
         <sense>
           <pos>vt</pos>
           <gloss>...を求める</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>c2ec16ec-2bd5-471a-be50-81d13d3037e0</id>
-      <word>compensation</word>
-      <senses>
-        <sense>
-          <pos>nu</pos>
-          <gloss>補償金</gloss>
         </sense>
       </senses>
       <tags>
@@ -10661,32 +10541,6 @@
       </tags>
     </entry>
     <entry>
-      <id>6a416084-962b-4d18-9d10-d30269ee6596</id>
-      <word>subsidiary</word>
-      <senses>
-        <sense>
-          <pos>nu</pos>
-          <gloss>子会社</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>0ea0e74c-52ca-4bc8-9f41-f036f9d5af16</id>
-      <word>subsidy</word>
-      <senses>
-        <sense>
-          <pos>nc</pos>
-          <gloss>補助金</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>9bc7e2cd-98f6-4d79-9a4e-de8a1013c603</id>
       <word>superintendent</word>
       <senses>
@@ -10762,23 +10616,6 @@
       </tags>
     </entry>
     <entry>
-      <id>23b637e3-5af3-4953-9624-3580e91c1256</id>
-      <word>turnover</word>
-      <senses>
-        <sense>
-          <pos>nu</pos>
-          <gloss>総売上</gloss>
-        </sense>
-        <sense>
-          <pos>nu</pos>
-          <gloss>転職率</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>f6cfc389-1ead-4e9b-9d7c-02ffb13a0794</id>
       <word>remittance</word>
       <senses>
@@ -10844,19 +10681,6 @@
       </tags>
     </entry>
     <entry>
-      <id>a83af37e-d428-4b6c-83bb-aeee08de1260</id>
-      <word>feasible</word>
-      <senses>
-        <sense>
-          <pos>adj</pos>
-          <gloss>実行可能な</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>4fffeb25-f2f7-400d-9edc-46bbebe385d3</id>
       <word>vocational</word>
       <senses>
@@ -10893,19 +10717,6 @@
         <sense>
           <pos>adv</pos>
           <gloss>抜本的に</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>3cbb0627-d86c-4100-b46c-db54e55e94a9</id>
-      <word>markedly</word>
-      <senses>
-        <sense>
-          <pos>adv</pos>
-          <gloss>著しく</gloss>
         </sense>
       </senses>
       <tags>
@@ -11042,20 +10853,6 @@
           <pos>vt</pos>
           <usage>ascribe ... to ...</usage>
           <gloss>...を...に帰する</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>483e0e73-07a5-4659-a771-7aa5dd3d20db</id>
-      <word>subject</word>
-      <senses>
-        <sense>
-          <pos>adj</pos>
-          <usage>be subject to ...</usage>
-          <gloss>...の影響を受けやすい</gloss>
         </sense>
       </senses>
       <tags>
@@ -11498,19 +11295,6 @@
       </tags>
     </entry>
     <entry>
-      <id>b4af93a0-9701-4804-8231-9bb4bc0953b9</id>
-      <word>remuneration</word>
-      <senses>
-        <sense>
-          <pos>nu</pos>
-          <gloss>報酬</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>f34c6e56-4cfb-43f3-a6b0-3ed247dc8079</id>
       <word>requisition</word>
       <senses>
@@ -11557,6 +11341,10 @@
           <pos>vt</pos>
           <gloss>...を支持する</gloss>
         </sense>
+        <sense>
+          <pos>vt</pos>
+          <gloss>...を被る</gloss>
+        </sense>
       </senses>
       <tags>
         <tag>toeic</tag>
@@ -11582,19 +11370,6 @@
         <sense>
           <pos>vt</pos>
           <gloss>...を改革する</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>24bdf3c8-47c8-4ed7-8184-1eb2ef893873</id>
-      <word>overtake</word>
-      <senses>
-        <sense>
-          <pos>vt</pos>
-          <gloss>...を追い越す</gloss>
         </sense>
       </senses>
       <tags>
@@ -11686,19 +11461,6 @@
         <sense>
           <pos>vt</pos>
           <gloss>...を受ける</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>7e8b5c06-cdd7-4668-b5d0-c195074127d1</id>
-      <word>beforehand</word>
-      <senses>
-        <sense>
-          <pos>adv</pos>
-          <gloss>前もって</gloss>
         </sense>
       </senses>
       <tags>
@@ -11814,23 +11576,6 @@
       </tags>
     </entry>
     <entry>
-      <id>16b1722e-daae-42dd-9182-421c95672b74</id>
-      <word>observant</word>
-      <senses>
-        <sense>
-          <pos>adj</pos>
-          <gloss>注意深い</gloss>
-        </sense>
-        <sense>
-          <pos>adj</pos>
-          <gloss>厳守する</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>98047f6a-9545-448e-8f75-85e3abdcc6e2</id>
       <word>observance</word>
       <senses>
@@ -11898,19 +11643,6 @@
     <entry>
       <id>bef40881-2fff-4130-8541-c18f016147f9</id>
       <word>service</word>
-      <senses>
-        <sense>
-          <pos>nu</pos>
-          <gloss>勤務</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>67668866-6be0-4bc7-80b3-1dcbc2773bed</id>
-      <word>commitment</word>
       <senses>
         <sense>
           <pos>nu</pos>
@@ -12308,19 +12040,6 @@
         <sense>
           <pos>adj</pos>
           <gloss>経営の</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>b5db7759-1dbc-4cfa-8c3e-3f7bb4eb306c</id>
-      <word>function</word>
-      <senses>
-        <sense>
-          <pos>nc</pos>
-          <gloss>行事</gloss>
         </sense>
       </senses>
       <tags>
@@ -12799,33 +12518,6 @@
       </tags>
     </entry>
     <entry>
-      <id>cdf8f039-386b-4da3-baa4-6f3885e46978</id>
-      <word>stock</word>
-      <senses>
-        <sense>
-          <pos>vt</pos>
-          <usage>be stocked with ...</usage>
-          <gloss>...を置いている</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>01593936-2629-4d31-bdea-64bce9ea9658</id>
-      <word>in keeping with ...</word>
-      <senses>
-        <sense>
-          <pos>phr</pos>
-          <gloss>...に沿って</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>fa396df5-45f0-430c-b52a-b28bc5d52543</id>
       <word>in compliance with ...</word>
       <senses>
@@ -13264,19 +12956,6 @@
       </tags>
     </entry>
     <entry>
-      <id>c71cf4c8-1ee3-43ea-b7db-356d21278624</id>
-      <word>susceptible</word>
-      <senses>
-        <sense>
-          <pos>adj</pos>
-          <gloss>影響を受けやすい</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>de27c687-1ff7-4305-a68b-f8ac5e8e1bd8</id>
       <word>forthcoming</word>
       <senses>
@@ -13374,19 +13053,6 @@
         <sense>
           <pos>n</pos>
           <gloss>下生え</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>29fa01cb-7feb-47f1-96d2-5f2292b25b7c</id>
-      <word>shrub</word>
-      <senses>
-        <sense>
-          <pos>nc</pos>
-          <gloss>低木</gloss>
         </sense>
       </senses>
       <tags>
@@ -13825,19 +13491,6 @@
       </tags>
     </entry>
     <entry>
-      <id>62b7fa55-1aa4-441e-8d47-523e1799ecbe</id>
-      <word>assess</word>
-      <senses>
-        <sense>
-          <pos>vt</pos>
-          <gloss>...を評価する</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>8cc1f49f-ba29-4c36-b0d2-e99dfba8a246</id>
       <word>pay off</word>
       <senses>
@@ -13865,38 +13518,12 @@
       </tags>
     </entry>
     <entry>
-      <id>c420702a-7601-4a61-829c-680357d5db92</id>
-      <word>clear</word>
-      <senses>
-        <sense>
-          <pos>vt</pos>
-          <gloss>...を精算する</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>297bcbed-c771-44b2-ad3f-5e4a2accccd2</id>
       <word>betray</word>
       <senses>
         <sense>
           <pos>vt</pos>
-          <gloss>(信念)を捨てる</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>a4f7dae3-db6c-45d4-bb07-3e5f5b1c195b</id>
-      <word>betray</word>
-      <senses>
-        <sense>
-          <pos>vt</pos>
-          <gloss>(規則)を曲げる</gloss>
+          <gloss>...に背く</gloss>
         </sense>
       </senses>
       <tags>
@@ -13953,19 +13580,6 @@
           <pos>vt</pos>
           <usage>empower ... to do</usage>
           <gloss>...に...する能力を与える</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>6da46f46-7050-48f9-8531-e257b46c964b</id>
-      <word>advocate</word>
-      <senses>
-        <sense>
-          <pos>nc</pos>
-          <gloss>支持者</gloss>
         </sense>
       </senses>
       <tags>
@@ -14097,6 +13711,14 @@
         <sense>
           <pos>vt</pos>
           <gloss>...に敬意を表する</gloss>
+        </sense>
+        <sense>
+          <pos>vt</pos>
+          <gloss>...を履行する</gloss>
+        </sense>
+        <sense>
+          <pos>vt</pos>
+          <gloss>...を受け取る</gloss>
         </sense>
       </senses>
       <tags>
@@ -15330,19 +14952,6 @@
       </tags>
     </entry>
     <entry>
-      <id>d895914c-39b0-436f-a726-e9695afebf7b</id>
-      <word>practitioner</word>
-      <senses>
-        <sense>
-          <pos>nc</pos>
-          <gloss>開業医</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>cc6a247c-a86d-415b-b92a-2d894bbfb613</id>
       <word>mint</word>
       <senses>
@@ -15357,20 +14966,6 @@
     </entry>
     <entry>
       <id>9a5f8b73-1187-490e-aa0e-8345d3d83252</id>
-      <word>amount</word>
-      <senses>
-        <sense>
-          <pos>vi</pos>
-          <usage>amount to ...</usage>
-          <gloss>...に達する</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>0943e435-ab52-4b14-b9d3-db3e2268d287</id>
       <word>amount</word>
       <senses>
         <sense>
@@ -15620,20 +15215,6 @@
           <pos>v</pos>
           <usage>fall back on/upon ...</usage>
           <gloss>...に頼る</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>442d3ebd-629e-413e-8aad-23834f9095ed</id>
-      <word>elaborate</word>
-      <senses>
-        <sense>
-          <pos>vi</pos>
-          <usage>elaborate on/upon ...</usage>
-          <gloss>...について詳しく述べる</gloss>
         </sense>
       </senses>
       <tags>
@@ -16120,23 +15701,6 @@
       </tags>
     </entry>
     <entry>
-      <id>57ce2cbe-910c-4e01-825a-c6953f002105</id>
-      <word>honor</word>
-      <senses>
-        <sense>
-          <pos>vt</pos>
-          <gloss>...を履行する</gloss>
-        </sense>
-        <sense>
-          <pos>vt</pos>
-          <gloss>...を受け取る</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
       <id>de827a77-d6bf-4bf0-b971-44140463b95f</id>
       <word>mediate</word>
       <senses>
@@ -16505,32 +16069,6 @@
         <sense>
           <pos>vt</pos>
           <gloss>...を用いる</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>acda1a08-cc88-46fb-a205-d3ab37585495</id>
-      <word>sustain</word>
-      <senses>
-        <sense>
-          <pos>vt</pos>
-          <gloss>...を被る</gloss>
-        </sense>
-      </senses>
-      <tags>
-        <tag>toeic</tag>
-      </tags>
-    </entry>
-    <entry>
-      <id>d36475e6-bb27-4ea6-beb1-5c4db766b814</id>
-      <word>doctor</word>
-      <senses>
-        <sense>
-          <pos>vt</pos>
-          <gloss>...を改竄する</gloss>
         </sense>
       </senses>
       <tags>
