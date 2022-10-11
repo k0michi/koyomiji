@@ -27,7 +27,7 @@ async function createServer() {
       let template = await fs.readFile(
         path.resolve('index.html'),
         'utf-8'
-      )
+      );
 
       template = await vite.transformIndexHtml(url, template)
 
@@ -60,7 +60,7 @@ async function listen(app: Koa, port: number) {
       const info = server.address() as AddressInfo;
       const address = info.address == '::' ? 'localhost' : info.address;
       const port = info.port;
-      console.log(`http://${address}:${port}`);
+      console.log(`Serving on http://${address}:${port}`);
       resolve(server);
     });
 
@@ -73,9 +73,11 @@ async function listen(app: Koa, port: number) {
 async function processFile(p: string) {
   if (p.endsWith('index.ktml')) {
     await model.loadEntry(p);
+    console.log(`'${p}' has been loaded`);
     return true;
   } else if (p.endsWith('index.kdml')) {
     await model.loadDictionary(p);
+    console.log(`'${p}' has been loaded`);
     return true;
   }
 
