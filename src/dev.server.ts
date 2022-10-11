@@ -15,7 +15,8 @@ const model = new ServerModel(contentRoot);
 async function createServer() {
   const app = new Koa();
   const vite = await createViteServer({
-    server: { middlewareMode: 'ssr' }
+    server: { middlewareMode: true },
+    appType: 'custom'
   })
 
   app.use(koaConnect(vite.middlewares));
