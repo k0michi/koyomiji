@@ -10,6 +10,7 @@ export function preprocess(entryPath: string[], content: string): Dictionary {
 
   const $entries = $document.querySelector('entries')!;
   const entries: DictionaryEntry[] = [];
+  const wordSet = new Set<string>();
   let number = 1;
 
   for (const $entry of $entries.children) {
@@ -20,6 +21,11 @@ export function preprocess(entryPath: string[], content: string): Dictionary {
       throw new Error("<entry> must have <word>");
     }
 
+    if(wordSet.has(word)) {
+      console.error(`Word '${word}' already exists`);
+    }
+
+    wordSet.add(word);
     const $senses = $entry.querySelector('senses');
 
     if ($senses == null) {
