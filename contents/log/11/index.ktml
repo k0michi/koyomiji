@@ -1,9 +1,10 @@
 <ktml version="0.1">
 
 <head>
-  <title>状態管理ライブラリを作ってみたよ</title>
+  <title>React向け状態管理ライブラリを作ってみた</title>
   <id>45908264-4a0e-4629-a691-712ac2c29938</id>
   <created>2022-06-12T00:50:38+09:00</created>
+  <modified>2022-10-13T19:15:52+09:00</modified>
 </head>
 
 <body>
