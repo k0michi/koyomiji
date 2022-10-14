@@ -41,14 +41,14 @@ html {
 @media (prefers-color-scheme: dark) {
   :root {
     /* h = 220 */
-    --color-1: hsl(220, 5%, 12%);
+    --color-1: #202122;
     --color-2: #fdfeff;
     --color-3: #8e949f;
     --color-4: #101113;
     --color-5: #4c5057;
-    --color-6: hsl(220, 6%, 20%);
+    --color-6: #2e3033;
     --color-7: var(--color-2);
-    --color-8: #4c5057;
+    --color-8: #595f68;
   }
 }
 
@@ -133,9 +133,9 @@ body.common-layout {
   background-color: var(--color-6);
   width: 100%;
   height: var(--bar-height);
+  border-bottom: 1px solid var(--color-8);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
-  border-bottom: 1px solid var(--color-8);
 }
 
 
