@@ -16,7 +16,7 @@ export default function IndexPage() {
   model.checkIfIndexComplete();
 
   const now = new Date();
-  const begin = subDays(now, 7 * 20);
+  const begin = subDays(now, 364);
 
   return (
     <>

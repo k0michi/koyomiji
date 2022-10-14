@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { differenceInDays, previousSaturday, nextSunday } from 'date-fns';
+import { previousSaturday, nextSunday, differenceInCalendarDays } from 'date-fns';
 import chroma from 'chroma-js';
 
 interface CalenderGraphProps {
@@ -12,40 +12,45 @@ export default function CalenderGraph(props: CalenderGraphProps) {
   const [counted, setCounted] = React.useState<number[]>([]);
 
   React.useEffect(() => {
-    const totalDays = differenceInDays(props.end, props.begin);
+    const totalDays = differenceInCalendarDays(props.end, props.begin);
     const counted = new Array<number>(totalDays + 1);
     counted.fill(0);
 
     for (const d of props.data) {
-      const diffDay = differenceInDays(d, props.begin);
+      const diffDay = differenceInCalendarDays(d, props.begin);
 
       if (diffDay >= 0 && diffDay < counted.length) {
         counted[diffDay]++;
       }
     }
 
-    console.log(counted)
     setCounted(counted);
   }, []);
 
-  const beginOffset = differenceInDays(previousSaturday(props.begin), props.begin);
-  const endOffset = differenceInDays(nextSunday(props.end), props.begin);
+  const beginOffset = differenceInCalendarDays(previousSaturday(props.begin), props.begin);
+  const endOffset = differenceInCalendarDays(nextSunday(props.end), props.begin);
 
   return (
     <table className="calender-graph">
       <tbody>
         {
-          range(0, 7, 1).map(i => <tr> {
+          range(0, 7, 1).map(i => <tr key={i}> {
             range(beginOffset, endOffset, 7).map(j => {
               const index = i + j;
               let color;
 
               if (index >= 0 && index < counted.length) {
-                color = chroma.scale('OrRd').domain([0, 10])(counted[index]);
+                const count = counted[index];
 
-                return <td className='cell' style={{ backgroundColor: color.css() }} />;
+                if (count == 0) {
+                  color = chroma('#444');
+                } else {
+                  color = chroma.scale('YlGn').domain([0, 10])(count);
+                }
+
+                return <td className='cell' key={j} style={{ backgroundColor: color.css() }} />;
               } else {
-                return <td className='cell' />;
+                return <td className='cell' key={j} />;
               }
             })}
           </tr>)

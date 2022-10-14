@@ -679,6 +679,7 @@ body.common-layout {
 
 /* Calender Graph */
 .calender-graph {
+  border-collapse: separate;
   border-spacing: 2px 2px;
 }
 
