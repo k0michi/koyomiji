@@ -8,6 +8,7 @@ import { parseXML } from '../xml.js';
 import * as ReactKTML from '../react-ktml.js';
 import Icon from '../components/icon.js';
 import Head from '../components/head.js';
+import { Helmet } from 'react-helmet';
 
 interface NovelStorage {
   locations: Record<string, number | undefined>;
@@ -121,6 +122,9 @@ export default function NovelPage() {
   return (
     <>
       <Head url={url} title={entry.title} description="" type="article" published={entry.created} modified={entry.modified} />
+      <Helmet>
+        <body className="novel-layout" />
+      </Helmet>
       <div id="novel-nav">
         <Link href='/novel'><Icon name="xIcon" /></Link>
       </div>
