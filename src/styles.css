@@ -26,26 +26,29 @@ html {
     /* additional */
     --color-3: #9f9793;
     /* background of code */
-    --color-4: #2e2a29;
+    --color-4: var(--color-2);
     /* horizontal rule */
     --color-5: #d3cac5;
     /* background of logo */
-    --color-6: #2e2a29;
+    --color-6: var(--color-2);
     /* foreground of logo */
     --color-7: var(--color-1);
+    /* border of logo */
+    --color-8: #705751;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     /* h = 220 */
-    --color-1: #27282b;
+    --color-1: hsl(220, 5%, 12%);
     --color-2: #fdfeff;
     --color-3: #8e949f;
     --color-4: #101113;
     --color-5: #4c5057;
-    --color-6: #121212ac;
+    --color-6: hsl(220, 6%, 20%);
     --color-7: var(--color-2);
+    --color-8: #4c5057;
   }
 }
 
@@ -130,9 +133,9 @@ body.common-layout {
   background-color: var(--color-6);
   width: 100%;
   height: var(--bar-height);
-  z-index: 1;
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
+  border-bottom: 1px solid var(--color-8);
 }
 
 
@@ -182,13 +185,16 @@ body.common-layout {
 }
 
 #logo-block {
-  margin-top: var(--bar-height);
+  margin-top: calc(var(--bar-height) - 1px);
   margin-left: auto;
   margin-right: auto;
   padding: 26px 16px 10px;
   width: fit-content;
   background-color: var(--color-6);
   color: var(--color-7);
+  border: 1px solid var(--color-8);
+  border-top: none;
+  z-index: 1;
 }
 
 @media (max-width: 767px) {
