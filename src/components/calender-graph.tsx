@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { previousSaturday, nextSunday, differenceInCalendarDays } from 'date-fns';
+import { nextSaturday, previousSunday, differenceInCalendarDays } from 'date-fns';
 import chroma from 'chroma-js';
 
 interface CalenderGraphProps {
@@ -27,16 +27,17 @@ export default function CalenderGraph(props: CalenderGraphProps) {
     setCounted(counted);
   }, []);
 
-  const beginOffset = differenceInCalendarDays(previousSaturday(props.begin), props.begin);
-  const endOffset = differenceInCalendarDays(nextSunday(props.end), props.begin);
+  const beginOffset = differenceInCalendarDays(previousSunday(props.begin), props.begin);
+  const endOffset = differenceInCalendarDays(nextSaturday(props.end), props.begin);
 
   return (
     <table className="calender-graph">
       <tbody>
         {
           range(0, 7, 1).map(i => <tr key={i}> {
-            range(beginOffset, endOffset, 7).map(j => {
+            range(beginOffset, endOffset + 1, 7).map(j => {
               const index = i + j;
+              console.log(index)
               let color;
 
               if (index >= 0 && index < counted.length) {
@@ -62,5 +63,5 @@ export default function CalenderGraph(props: CalenderGraphProps) {
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
 function range(start: number, stop: number, step: number) {
-  return Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + (i * step));
+  return Array.from({ length: (stop - start) / step }, (_, i) => start + (i * step));
 };
