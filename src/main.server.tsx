@@ -12,10 +12,6 @@ const model = new ServerModel(contentRoot);
   const indexTemplate = await readFileUTF8('dist/index.html');
   const renderer = createRenderer(outRoot, indexTemplate, model);
 
-  await renderer.render('/index.html');
-  await renderer.render('/about/index.html');
-  await renderer.render('/project/index.html');
-
   for (const p of await glob('**/*', { cwd: contentRoot, nodir: true })) {
     if (p.endsWith('index.ktml')) {
       const entryPath = p.split('/').slice(0, -1);
@@ -31,6 +27,9 @@ const model = new ServerModel(contentRoot);
     }
   }
 
+  await renderer.render('/index.html');
+  await renderer.render('/about/index.html');
+  await renderer.render('/project/index.html');
   await renderer.render('/log/index.html');
   await renderer.render('/knowledge/index.html');
   await renderer.render('/novel/index.html');
