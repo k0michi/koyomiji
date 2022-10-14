@@ -677,6 +677,17 @@ body.common-layout {
 }
 
 
+/* Calender Graph */
+.calender-graph {
+  border-spacing: 2px 2px;
+}
+
+.cell {
+  width: 14px;
+  height: 14px;
+}
+
+
 /* Novel Layout */
 
 body.novel-layout {

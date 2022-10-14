@@ -1,11 +1,22 @@
 import * as React from 'react';
 import { useLocation } from 'react-router';
+import CalenderGraph from '../components/calender-graph.js';
 import Head from '../components/head.js';
 import Link from '../components/link.js';
+import { subDays } from 'date-fns';
+import { useModel, useObservable } from 'kyoka';
+import { Model } from '../model.js';
+import { mapEntries } from '../entry.js';
 
 export default function IndexPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
+  const model = useModel<Model>();
+  const entries = Object.values(useObservable(model.entries));
+  model.checkIfIndexComplete();
+
+  const now = new Date();
+  const begin = subDays(now, 7 * 20);
 
   return (
     <>
@@ -15,6 +26,7 @@ export default function IndexPage() {
         <div className="meta">ようこそ。</div>
       </header>
       <div id="body">
+        <CalenderGraph begin={begin} end={now} data={entries.map(e => new Date(e.created))} />
         <h2><Link href="/about">プロフィール</Link></h2>
         <p>私は一体誰か。</p>
         <h2><Link href="/knowledge">備忘録</Link></h2>

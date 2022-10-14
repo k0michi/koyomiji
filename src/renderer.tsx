@@ -30,7 +30,7 @@ export function createRenderer(outRoot: string | null, template: string, model: 
 
   renderer.use('/(index.html)?', (ctx) => {
     model.sitemap.add('/');
-    return render(template, '/');
+    return render(template, '/', { entries: getEntries(), isIndexComplete: true });
   });
 
   renderer.use('/about/(index.html)?', (ctx) => {
