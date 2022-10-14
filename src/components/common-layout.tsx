@@ -18,8 +18,6 @@ function Menu(props: MenuProps) {
 }
 
 export default function MainLayout() {
-  const [visible, setVisible] = React.useState<boolean>(true);
-  const [showing, setShowing] = React.useState<React.ReactElement | null>();
   const [menuVisible, setMenuVisible] = React.useState<boolean>(false);
   const outlet = useOutlet();
   const model = useModel<Model>();
@@ -28,20 +26,11 @@ export default function MainLayout() {
     model.fetchAssets();
   }, []);
 
-  /*
   React.useEffect(() => {
-    if (showing != null) {
-      setVisible(false);
-
-      setTimeout(() => {
-        setVisible(true);
-        setShowing(outlet);
-      }, 250);
-    } else {
-      setShowing(outlet);
-    }
-  }, [location.pathname]);
-  */
+    window.addEventListener('scroll', e=>{
+      console.log(window.scrollY)
+    });
+  }, []);
 
   return (
     <>
@@ -49,43 +38,45 @@ export default function MainLayout() {
         <body className="common-layout" />
       </Helmet>
       <div id="bar"></div>
-      <nav id="nav">
-        <div id="top-container">
-          <div id="logo-container">
-            <div id="logo-block">
-              <Link aria-label="喫茶曆路" href="/">
-                <Icon name="logoFull" />
-              </Link>
+      <div id="wrapper">
+        <nav id="nav">
+          <div id="top-container">
+            <div id="logo-container">
+              <div id="logo-block">
+                <Link aria-label="喫茶曆路" href="/">
+                  <Icon name="logoFull" />
+                </Link>
+              </div>
             </div>
+            <div id="menu-button-container"><div id="menu-button" onClick={e => {
+              setMenuVisible(!menuVisible)
+            }}><Icon name="menu2" /></div></div>
           </div>
-          <div id="menu-button-container"><div id="menu-button" onClick={e=>{
-            setMenuVisible(!menuVisible)
-          }}><Icon name="menu2" /></div></div>
-        </div>
-        <div id="menu-container" className={menuVisible ? 'visible' : ''}>
-          <ul id="menu">
-            <li><Menu href="/about">About</Menu></li>
-            <li><Menu href="/project">Projects</Menu></li>
-            <li><Menu href="/log">Logs</Menu></li>
-            <li><Menu href="/knowledge">Knowledge</Menu></li>
-            <li><Menu href="/dictionary">Dictionary</Menu></li>
-            <li><Menu href="/novel">Novels</Menu></li>
-            <li><Menu href="/artwork">Artworks</Menu></li>
-          </ul>
-          <ul id="icons">
-            <li><Link aria-label="RSS" href="https://koyomiji.com/feed.xml"><Icon name="rss" /></Link></li>
-            <li><Link aria-label="Mail" href="mailto:k0michi@koyomi.co"><Icon name="mailIcon" /></Link></li>
-            <li><Link aria-label="GitHub" href="https://github.com/k0michi"><Icon name="githubIcon" /></Link></li>
-            <li><Link aria-label="YouTube" href="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw"><Icon name="youtubeIcon" /></Link></li>
-            <li><Link aria-label="Twitch" href="https://www.twitch.tv/k0michi"><Icon name="twitchIcon" /></Link></li>
-          </ul>
-        </div>
-      </nav>
-      <main id="main" className={visible ? '' : 'invisible'}>
-        <React.Suspense fallback={<p>Loading</p>}>
-          {showing == null ? outlet : showing}
-        </React.Suspense>
-      </main>
+          <div id="menu-container" className={menuVisible ? 'visible' : ''}>
+            <ul id="menu">
+              <li><Menu href="/about">About</Menu></li>
+              <li><Menu href="/project">Projects</Menu></li>
+              <li><Menu href="/log">Logs</Menu></li>
+              <li><Menu href="/knowledge">Knowledge</Menu></li>
+              <li><Menu href="/dictionary">Dictionary</Menu></li>
+              <li><Menu href="/novel">Novels</Menu></li>
+              <li><Menu href="/artwork">Artworks</Menu></li>
+            </ul>
+            <ul id="icons">
+              <li><Link aria-label="RSS" href="https://koyomiji.com/feed.xml"><Icon name="rss" /></Link></li>
+              <li><Link aria-label="Mail" href="mailto:k0michi@koyomi.co"><Icon name="mailIcon" /></Link></li>
+              <li><Link aria-label="GitHub" href="https://github.com/k0michi"><Icon name="githubIcon" /></Link></li>
+              <li><Link aria-label="YouTube" href="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw"><Icon name="youtubeIcon" /></Link></li>
+              <li><Link aria-label="Twitch" href="https://www.twitch.tv/k0michi"><Icon name="twitchIcon" /></Link></li>
+            </ul>
+          </div>
+        </nav>
+        <main id="main">
+          <React.Suspense fallback={<p>Loading</p>}>
+            {outlet}
+          </React.Suspense>
+        </main>
+      </div>
     </>
   );
 }

@@ -106,20 +106,21 @@ p {
 
 /* Common Layout */
 
-body.common-layout {
-  /* max-width: 1480px; */
-  max-width: 1200px;
-  margin: 0 auto;
-}
+body.common-layout {}
 
 @media (max-width: 767px) {
   body.common-layout {}
 }
 
 @media (min-width: 768px) {
-  body.common-layout {
+  body.common-layout {}
+
+  #wrapper {
     display: flex;
     flex-direction: row;
+    /* max-width: 1480px; */
+    max-width: 1200px;
+    margin: 0 auto;
   }
 }
 
@@ -127,21 +128,20 @@ body.common-layout {
 /* Common Layout - Bar */
 
 #bar {
-  position: fixed;
-  left: 0;
+  position: sticky;
   top: 0;
   background-color: var(--color-6);
   width: 100%;
+  min-width: 100%;
   height: var(--bar-height);
   border-bottom: 1px solid var(--color-8);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
 }
 
 
 /* Common Layout - Navigation */
 
 #nav {
+  margin-top: calc(-1 * var(--bar-height));
   flex-grow: 0;
   font-weight: 200;
   word-break: keep-all;
