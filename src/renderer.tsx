@@ -101,7 +101,7 @@ export function createRenderer(outRoot: string | null, template: string, model: 
 
   renderer.use('/novel/(index.html)?', (ctx) => {
     model.sitemap.add('/novel');
-    return render(template, '/novel');
+    return render(template, '/novel', { entries: getEntries(), isIndexComplete: true });
   });
 
   renderer.use('/novel/:novel/:chapter/(index.html)?', (ctx) => {
@@ -123,7 +123,7 @@ export function createRenderer(outRoot: string | null, template: string, model: 
 
   renderer.use('/artwork/(index.html)?', (ctx) => {
     model.sitemap.add('/artwork');
-    return render(template, '/artwork');
+    return render(template, '/artwork', { entries: getEntries(), isIndexComplete: true });
   });
 
   renderer.use('/artwork/:id/(index.html)?', (ctx) => {
