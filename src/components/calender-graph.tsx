@@ -37,7 +37,6 @@ export default function CalenderGraph(props: CalenderGraphProps) {
           range(0, 7, 1).map(i => <tr key={i}> {
             range(beginOffset, endOffset + 1, 7).map(j => {
               const index = i + j;
-              console.log(index)
               let color;
 
               if (index >= 0 && index < counted.length) {

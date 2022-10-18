@@ -23,12 +23,8 @@ export default function MainLayout() {
   const model = useModel<Model>();
 
   React.useEffect(() => {
-    model.fetchAssets();
-  }, []);
-
-  React.useEffect(() => {
-    window.addEventListener('scroll', e=>{
-      console.log(window.scrollY)
+    React.startTransition(() => {
+      model.fetchAssets();
     });
   }, []);
 

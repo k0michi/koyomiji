@@ -18,12 +18,6 @@ export interface HeadProps {
 
 export default function Head(props: HeadProps) {
   const type = props.type ?? 'website';
-  const [hydrated, setHydrated] = React.useState(false);
-
-  React.useEffect(() => {
-    // Suppress warning on server
-    setHydrated(true);
-  }, []);
 
   return (
     <>
@@ -50,7 +44,6 @@ export default function Head(props: HeadProps) {
         <meta name="twitter:site" content="@k0michi" />
         <meta name="twitter:creator" content="@k0michi" />
       </Helmet>
-      {hydrated ? <ScrollRestoration /> : null}
     </>
   );
 }
