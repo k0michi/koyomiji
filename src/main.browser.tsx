@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom/client'
 import { createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
 import { ModelProvider } from 'kyoka';
 
-import Root from './root.js';
+import { createRoutes } from './routes.js';
 import { InitialData, Model } from './model.js';
 
 import './styles.css';
@@ -15,7 +15,7 @@ window.addEventListener('load', async () => {
   const initialData = JSON.parse((document.getElementById('initial-data') as HTMLScriptElement).text) as InitialData;
   const model = new Model(initialData);
 
-  const router = createBrowserRouter(createRoutesFromElements(Root({})));
+  const router = createBrowserRouter(createRoutes(model));
 
   const root = ReactDOM.hydrateRoot(
     document.getElementById('root')!,

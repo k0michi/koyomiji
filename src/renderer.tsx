@@ -6,7 +6,6 @@ import * as fs from 'fs/promises';
 import produce from 'immer';
 import window from '@k0michi/isomorphic-dom';
 
-import Root from "./root.js";
 import { Renderer } from "./base/renderer.js";
 import { InitialData, Model } from './model.js';
 import { toPathname } from './utils.js';
@@ -14,6 +13,7 @@ import { ServerModel } from './server-model.js';
 import { toISOStringJST } from './date-format.js';
 import { newElementCreator } from './xml.js';
 import { createMemoryRouter, createRoutesFromElements, RouterProvider } from 'react-router';
+import { createRoutes } from './routes.js';
 
 export function createRenderer(outRoot: string | null, template: string, model: ServerModel) {
   const renderer = new Renderer(outRoot);
@@ -199,7 +199,7 @@ export function createRenderer(outRoot: string | null, template: string, model: 
 function render(template: string, pathname: string, data: InitialData = { entries: {}, isIndexComplete: false }) {
   const model = new Model(data);
 
-  const router = createMemoryRouter(createRoutesFromElements(Root({})), {
+  const router = createMemoryRouter(createRoutes(model), {
     initialEntries: [pathname],
     initialIndex: 0
   });
