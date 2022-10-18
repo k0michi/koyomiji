@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom/server.js';
 import { Helmet } from 'react-helmet';
 import { ModelProvider } from 'kyoka';
 import * as fs from 'fs/promises';
@@ -14,6 +13,7 @@ import { toPathname } from './utils.js';
 import { ServerModel } from './server-model.js';
 import { toISOStringJST } from './date-format.js';
 import { newElementCreator } from './xml.js';
+import { createMemoryRouter, createRoutesFromElements, RouterProvider } from 'react-router';
 
 export function createRenderer(outRoot: string | null, template: string, model: ServerModel) {
   const renderer = new Renderer(outRoot);
@@ -199,12 +199,15 @@ export function createRenderer(outRoot: string | null, template: string, model: 
 function render(template: string, pathname: string, data: InitialData = { entries: {}, isIndexComplete: false }) {
   const model = new Model(data);
 
+  const router = createMemoryRouter(createRoutesFromElements(Root({})), {
+    initialEntries: [pathname],
+    initialIndex: 0
+  });
+
   const app = ReactDOM.renderToString(
-    <StaticRouter location={pathname}>
-      <ModelProvider model={model}>
-        <Root />
-      </ModelProvider>
-    </StaticRouter>
+    <ModelProvider model={model}>
+      <RouterProvider router={router} />
+    </ModelProvider>
   );
 
   const helmet = Helmet.renderStatic();
