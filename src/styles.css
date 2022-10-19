@@ -35,6 +35,8 @@ html {
     --color-7: var(--color-1);
     /* border of logo */
     --color-8: #705751;
+    /* foreground of code */
+    --color-9: var(--color-1);
   }
 }
 
@@ -49,6 +51,7 @@ html {
     --color-6: #2e3033;
     --color-7: var(--color-2);
     --color-8: #595f68;
+    --color-9: var(--color-2);
   }
 }
 
@@ -495,7 +498,7 @@ body.common-layout {}
 
 #main code {
   background-color: var(--color-4);
-  color: var(--color-1);
+  color: var(--color-9);
   font-family: var(--font-monospace);
   padding: 2px;
   border-radius: 0px;
