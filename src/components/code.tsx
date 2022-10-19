@@ -21,7 +21,7 @@ export default function Code(props: CodeProps) {
     }
   }, []);
 
-  const className = lang != undefined ? `language-${lang}` : '';
+  const className = lang != undefined ? `language-${lang}` : 'language-none';
 
   return (props.display == 'block' ?
     html != undefined ?
