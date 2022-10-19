@@ -74,7 +74,7 @@ export default function CommonLayout() {
             <CSSTransition
               key={location.pathname}
               nodeRef={elementMap.current[location.pathname]}
-              timeout={300}
+              timeout={100}
               classNames="page"
               unmountOnExit>
               <div ref={elementMap.current[location.pathname]} className="page">
