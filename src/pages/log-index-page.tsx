@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useModel, useObservable } from 'kyoka';
 import { Entry } from "../entry.js";
 import { Model } from '../model.js';
-import { useLocation } from 'react-router';
+import { useLoaderData, useLocation } from 'react-router';
 import Link from '../components/link.js';
 import Icon from '../components/icon.js';
 import Head from '../components/head.js';
@@ -15,11 +15,11 @@ function getID(p: Entry) {
 export default function LogIndexPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
+  const data = useLoaderData() as Record<string, Entry>;
   const model = useModel<Model>();
-  const entries = Object.values(useObservable(model.entries)).filter(e => e.path[0] == 'log');
+  const entries = Object.values(data).filter(e => e.path[0] == 'log');
   entries.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));
   const assets = useObservable(model.assets);
-  model.checkIfIndexComplete();
 
   return (
     <>

@@ -2,6 +2,9 @@ import { readFileUTF8, toPathname } from './utils.js';
 import glob from 'glob-promise';
 import { createRenderer } from './renderer.js';
 import { ServerModel } from './server-model.js';
+import { installGlobals } from '@remix-run/node';
+
+installGlobals();
 
 const contentRoot = './contents';
 const outRoot = './dist';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useLocation, useParams } from 'react-router';
+import { useLoaderData, useLocation, useParams } from 'react-router';
 import Link from '../components/link.js';
 import { useModel, useObservable } from 'kyoka';
 import { Model } from '../model.js';
@@ -9,6 +9,7 @@ import * as ReactKTML from '../react-ktml.js';
 import Icon from '../components/icon.js';
 import Head from '../components/head.js';
 import { Helmet } from 'react-helmet';
+import { Entry } from '../entry.js';
 
 interface NovelStorage {
   locations: Record<string, number | undefined>;
@@ -48,10 +49,8 @@ function saveLocation(pathname: string, location: number) {
 export default function NovelPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
-  const params = useParams();
+  const entry = useLoaderData() as Entry;
   const model = useModel<Model>();
-  const path = ['novel', params.novel!, params.chapter!];
-  const entry = model.getEntry(path);
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
   const mainRef = React.useRef<HTMLElement>(null);
 

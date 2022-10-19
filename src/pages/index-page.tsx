@@ -13,7 +13,6 @@ export default function IndexPage() {
   const url = `https://koyomiji.com${location.pathname}`;
   const model = useModel<Model>();
   const entries = Object.values(useObservable(model.entries));
-  model.checkIfIndexComplete();
 
   const now = new Date();
   const begin = subDays(now, 364);

@@ -43,45 +43,79 @@ export function createRoutes(model: Model): RouteObject[] {
         {
           element: <MainLayout />, children: [
             {
-              index: true, element: <IndexPage />
+              index: true,
+              element: <IndexPage />,
+              loader: () => model.getIndex()
             },
             {
-              path: 'about', element: <AboutPage />
+              path: 'about',
+              element: <AboutPage />
             },
             {
-              path: 'project', element: <ProjectPage />
+              path: 'project',
+              element: <ProjectPage />
             },
             {
-              path: 'knowledge/:category/:id', element: <KnowledgePage />
+              path: 'knowledge/:category/:id',
+              element: <KnowledgePage />,
+              loader: ({ params }) => {
+                const path = ['knowledge', params.category!, params.id!];
+                return model.getEntry(path);
+              }
             },
             {
-              path: 'knowledge', element: <KnowledgeIndexPage />
+              path: 'knowledge',
+              element: <KnowledgeIndexPage />,
+              loader: () => model.getIndex()
             },
             {
-              path: 'log/:id', element: <LogPage />
+              path: 'log/:id',
+              element: <LogPage />,
+              loader: ({ params }) => {
+                const path = ['log', params.id!];
+                return model.getEntry(path);
+              }
             },
             {
-              path: 'log', element: <LogIndexPage />
+              path: 'log',
+              element: <LogIndexPage />,
+              loader: () => model.getIndex()
             },
             {
-              path: 'novel', element: <NovelIndexPage />
+              path: 'novel',
+              element: <NovelIndexPage />,
+              loader: () => model.getIndex()
             },
             {
-              path: 'artwork', element: <ArtworkIndexPage />
+              path: 'artwork',
+              element: <ArtworkIndexPage />,
+              loader: () => model.getIndex()
             },
             {
-              path: 'artwork/:id', element: <ArtworkPage />
+              path: 'artwork/:id',
+              element: <ArtworkPage />,
+              loader: ({ params }) => {
+                const path = ['artwork', params.id!];
+                return model.getEntry(path);
+              }
             },
             {
-              path: 'dictionary', element: <DictionaryPage />
+              path: 'dictionary',
+              element: <DictionaryPage />
             },
             {
-              path: '*', element: <NotFoundPage />
+              path: '*',
+              element: <NotFoundPage />
             },
           ]
         },
         {
-          path: 'novel/:novel/:chapter', element: <NovelPage />
+          path: 'novel/:novel/:chapter',
+          element: <NovelPage />,
+          loader: ({ params }) => {
+            const path = ['novel', params.novel!, params.chapter!];
+            return model.getEntry(path);
+          }
         }
       ]
     }

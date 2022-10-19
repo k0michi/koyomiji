@@ -16,7 +16,7 @@ export class Model {
   constructor(data: InitialData) {
     this.entries = new Observable(data.entries);
     this.isIndexComplete = new Observable<boolean>(data.isIndexComplete);
-    this.dictionaries = new Observable<Record<string, Dictionary>| null>(null);
+    this.dictionaries = new Observable<Record<string, Dictionary> | null>(null);
     this.assets = new Observable({});
   }
 
@@ -29,29 +29,33 @@ export class Model {
       return entry;
     }
 
-    throw fetch('/' + path.join('/') + '/entry.json').then(e => e.json()).then(e => {
+    return fetch('/' + path.join('/') + '/entry.json').then(e => e.json()).then(e => {
       entries[pathname] = e;
       this.entries.set(this.entries.get());
+      return e as Entry;
     });
   }
 
-  checkIfIndexComplete() {
-    if (!this.isIndexComplete.get()) {
-      throw fetch('/entries.json').then(r => r.json()).then(e => {
-        this.isIndexComplete.set(true);
-
-        for (const [key, value] of Object.entries(e)) {
-          const entries = this.entries.get();
-          entries[key] = { ...entries[key], ...(value as any) };
-        }
-
-        this.entries.set(this.entries.get());
-      });
+  getIndex() {
+    if (this.isIndexComplete.get()) {
+      return this.entries.get();
     }
+
+    return fetch('/entries.json').then(r => r.json()).then(e => {
+      this.isIndexComplete.set(true);
+
+      for (const [key, value] of Object.entries(e)) {
+        const entries = this.entries.get();
+        entries[key] = { ...entries[key], ...(value as any) };
+      }
+
+      this.entries.set(this.entries.get());
+      return this.entries.get();
+    });
   }
 
   fetchDictionary() {
-    if(this.dictionaries.get() == null) {
+    if (this.dictionaries.get() == null) {
       fetch('/dictionary/data.json').then(r => r.json()).then(e => {
         this.dictionaries.set(e);
       });

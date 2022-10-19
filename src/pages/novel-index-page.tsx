@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useModel, useObservable } from 'kyoka';
 import { Entry, mapEntries } from "../entry.js";
 import { Model } from '../model.js';
-import { useLocation } from 'react-router';
+import { useLoaderData, useLocation } from 'react-router';
 import Link from '../components/link.js';
 import { toPathname } from '../utils.js';
 import Head from '../components/head.js';
@@ -10,9 +10,9 @@ import Head from '../components/head.js';
 export default function NovelIndexPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
+  const data = useLoaderData() as Record<string, Entry>;
+  const entries = Object.values(data).filter(e => e.path[0] == 'novel');
   const model = useModel<Model>();
-  const entries = Object.values(useObservable(model.entries)).filter(e => e.path[0] == 'novel');
-  model.checkIfIndexComplete();
   const map = mapEntries(entries);
 
   return (

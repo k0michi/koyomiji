@@ -5,6 +5,7 @@
   "dependencies": {
     "@fontsource/raleway": "^4.5.10",
     "@k0michi/isomorphic-dom": "^0.0.1",
+    "@remix-run/node": "^1.7.2",
     "@tabler/icons": "^1.78.1",
     "chokidar": "^3.5.3",
     "chroma-js": "^2.4.2",
@@ -25,7 +26,8 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-router": "^6.4.2",
-    "react-router-dom": "^6.4.2"
+    "react-router-dom": "^6.4.2",
+    "react-transition-group": "^4.4.5"
   },
   "type": "module",
   "scripts": {

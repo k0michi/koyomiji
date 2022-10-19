@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useModel, useObservable } from 'kyoka';
-import { useLocation, useParams } from 'react-router';
+import { useLoaderData, useLocation, useParams } from 'react-router';
 import { Model } from '../model.js';
 import { toElement } from '../xml.js';
 import * as ReactKTML from '../react-ktml.js';
@@ -8,14 +8,14 @@ import Icon from '../components/icon.js';
 import { parseXML } from '../xml.js';
 import Head from '../components/head.js';
 import { toDisplayDateString } from '../date-format.js';
+import { Entry } from '../entry.js';
 
 export default function ArtworkPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
+  const entry = useLoaderData() as Entry;
   const params = useParams();
   const model = useModel<Model>();
-  const path = ['artwork', params.id!];
-  const entry = model.getEntry(path);
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
   const assets = useObservable(model.assets);
 

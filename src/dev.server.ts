@@ -7,6 +7,9 @@ import glob from 'glob-promise';
 import * as chokidar from 'chokidar';
 import { AddressInfo } from 'net';
 import { ServerModel } from './server-model.js';
+import { installGlobals } from '@remix-run/node';
+
+installGlobals();
 
 const contentRoot = './contents';
 
