@@ -233,6 +233,6 @@ function render(template: string, pathname: string, routeID: string, data: Data 
     .replace('<body>', `<body ${helmet.bodyAttributes.toString()}>`)
     .replace('<!--head-->', [helmet.title.toString(), helmet.meta.toString(), helmet.link.toString()].join('\n'))
     .replace('<!--body-->', app)
-    .replace('<!--initial-data-->', JSON.stringify(data))
+    .replace('<!--hydration-data-->', JSON.stringify(data))
     .replace('<!--route-id-->', routeID);
 }

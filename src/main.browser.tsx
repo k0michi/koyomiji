@@ -12,14 +12,15 @@ import 'katex/dist/katex.min.css';
 import '@fontsource/raleway';
 
 window.addEventListener('load', async () => {
-  const initialData = JSON.parse((document.getElementById('initial-data') as HTMLScriptElement).text) as Data;
-  const routeID = (document.getElementById('initial-data') as HTMLScriptElement).dataset['routeId'] as string;
-  const model = new Model(initialData);
+  const $hydrationData = document.getElementById('hydration-data') as HTMLScriptElement;
+  const hydrationData = JSON.parse($hydrationData.text) as Data;
+  const routeID = $hydrationData.dataset['routeId'] as string;
+  const model = new Model(hydrationData);
 
   const router = createBrowserRouter(createRoutes(model), {
     hydrationData: {
       loaderData: {
-        [routeID]: initialData
+        [routeID]: hydrationData
       }
     }
   });
