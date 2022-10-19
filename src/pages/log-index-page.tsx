@@ -14,8 +14,6 @@ function getID(p: Entry) {
 }
 
 export default function LogIndexPage() {
-  const location = useLocation();
-  const url = `https://koyomiji.com${location.pathname}`;
   const data = useBufferedData<Data>();
   const model = useModel<Model>();
   const entries = Object.values(data.entries).filter(e => e.path[0] == 'log');
@@ -24,7 +22,7 @@ export default function LogIndexPage() {
 
   return (
     <>
-      <Head url={url} title="Logs" description="日記とかエッセイとか。" />
+      <Head title="Logs" description="日記とかエッセイとか。" />
       <header>
         <h1>Logs</h1>
         <div className="meta">日記とかエッセイとか。</div>

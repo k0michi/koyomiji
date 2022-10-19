@@ -10,8 +10,6 @@ import { mapEntries } from '../entry.js';
 import { useBufferedData } from '../hooks.js';
 
 export default function IndexPage() {
-  const location = useLocation();
-  const url = `https://koyomiji.com${location.pathname}`;
   const data = useBufferedData<Data>();
   const entries = Object.values(data.entries);
 
@@ -20,7 +18,7 @@ export default function IndexPage() {
 
   return (
     <>
-      <Head url={url} description="ようこそ。" />
+      <Head description="ようこそ。" />
       <header>
         <h1>Home</h1>
         <div className="meta">ようこそ。</div>

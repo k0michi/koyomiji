@@ -4,12 +4,9 @@ import Link from '../components/link.js';
 import Head from '../components/head.js';
 
 export default function AboutPage() {
-  const location = useLocation();
-  const url = `https://koyomiji.com${location.pathname}`;
-
   return (
     <>
-      <Head url={url} title="About" description="このサイトは一体何か。" />
+      <Head title="About" description="このサイトは一体何か。" />
       <header>
         <h1>About</h1>
         <div className="meta">このサイトは一体何か。</div>

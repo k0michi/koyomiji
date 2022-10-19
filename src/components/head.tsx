@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
-import { ScrollRestoration } from 'react-router-dom';
+import { ScrollRestoration, useLocation } from 'react-router-dom';
 
 export interface ArticleType {
   publishedTime: string;
@@ -8,7 +8,6 @@ export interface ArticleType {
 }
 
 export interface HeadProps {
-  url: string;
   title?: string;
   description: string;
   type?: 'website' | 'article';
@@ -17,6 +16,8 @@ export interface HeadProps {
 }
 
 export default function Head(props: HeadProps) {
+  const location = useLocation();
+  const url = `https://koyomiji.com${location.pathname}`;
   const type = props.type ?? 'website';
 
   return (
@@ -24,11 +25,11 @@ export default function Head(props: HeadProps) {
       <Helmet>
         <title>{props.title == null ? "喫茶曆路" : `${props.title} | 喫茶曆路`}</title>
         <meta name="description" content={props.description} />
-        <link rel="canonical" href={props.url} />
+        <link rel="canonical" href={url} />
         <link rel="alternate" type="application/atom+xml" href="/feed.xml" />
         <meta property="og:locale" content="ja_JP" />
         <meta property="og:site_name" content="喫茶曆路" />
-        <meta property="og:url" content={props.url} />
+        <meta property="og:url" content={url} />
         <meta property="og:title" content={props.title} />
         <meta property="og:description" content={props.description} />
         <meta property="og:type" content={type} />

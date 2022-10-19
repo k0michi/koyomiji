@@ -7,8 +7,6 @@ import { reactFactory } from '../react-kdml.js';
 import Head from '../components/head.js';
 
 export default function DictionaryPage() {
-  const location = useLocation();
-  const url = `https://koyomiji.com${location.pathname}`;
   const model = useModel<Model>();
   const dictionaries = useObservable(model.dictionaries);
   const entries = dictionaries != null ? Object.values(dictionaries).flatMap(d => d.content) : [];
@@ -20,7 +18,7 @@ export default function DictionaryPage() {
 
   return (
     <>
-      <Head url={url} title="Dictionary" description="私的な英単語帳。" />
+      <Head title="Dictionary" description="私的な英単語帳。" />
       <header>
         <h1>Dictionary</h1>
         <div className="meta">私的な英単語帳。</div>

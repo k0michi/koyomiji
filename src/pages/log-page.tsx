@@ -13,8 +13,6 @@ import { toPathname } from '../utils.js';
 import { useBufferedData } from '../hooks.js';
 
 export default function LogPage() {
-  const location = useLocation();
-  const url = `https://koyomiji.com${location.pathname}`;
   const params = useParams();
   const path = ['log', params.id!];
   const data = useBufferedData<Data>();
@@ -25,7 +23,7 @@ export default function LogPage() {
 
   return (
     <>
-      <Head url={url} title={entry.title} description={entry.description} type="article" published={entry.created} modified={entry.modified} />
+      <Head title={entry.title} description={entry.description} type="article" published={entry.created} modified={entry.modified} />
       <header>
         <h1>{entry.title}</h1>
         <div className="meta">

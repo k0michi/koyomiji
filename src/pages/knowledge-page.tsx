@@ -14,8 +14,6 @@ import { toPathname } from '../utils.js';
 import { useBufferedData } from '../hooks.js';
 
 export default function KnowledgePage() {
-  const location = useLocation();
-  const url = `https://koyomiji.com${location.pathname}`;
   const params = useParams();
   const path = ['knowledge', params.category!, params.id!];
   const data = useBufferedData<Data>();
@@ -27,7 +25,7 @@ export default function KnowledgePage() {
 
   return (
     <>
-      <Head url={url} title={entry.title} description={entry.description} type="article" published={entry.created} modified={entry.modified} />
+      <Head title={entry.title} description={entry.description} type="article" published={entry.created} modified={entry.modified} />
       <header>
         <h1>{entry.title}</h1>
         <div className="meta">

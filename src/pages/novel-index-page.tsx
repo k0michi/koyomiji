@@ -9,8 +9,6 @@ import Head from '../components/head.js';
 import { useBufferedData } from '../hooks.js';
 
 export default function NovelIndexPage() {
-  const location = useLocation();
-  const url = `https://koyomiji.com${location.pathname}`;
   const data = useBufferedData<Data>();
   const entries = Object.values(data.entries).filter(e => e.path[0] == 'novel');
   const model = useModel<Model>();
@@ -18,7 +16,7 @@ export default function NovelIndexPage() {
 
   return (
     <>
-      <Head url={url} title="Novels" description="🚧 工事中" />
+      <Head title="Novels" description="🚧 工事中" />
       <header>
         <h1>Novels</h1>
         <div className="meta">🚧 工事中</div>

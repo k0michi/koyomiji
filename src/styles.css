@@ -678,6 +678,7 @@ body.common-layout {}
 
 
 /* Calender Graph */
+
 .calender-graph {
   border-collapse: separate;
   border-spacing: 2px 2px;
@@ -729,11 +730,8 @@ body.novel-layout {
   height: 100%;
 }
 
-.container {
-}
 
-.page {
-}
+/* React Transition Group */
 
 .page-enter {
   opacity: 0;

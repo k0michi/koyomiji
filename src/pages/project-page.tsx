@@ -4,12 +4,9 @@ import Head from '../components/head.js';
 import Link from '../components/link.js';
 
 export default function ProjectPage() {
-  const location = useLocation();
-  const url = `https://koyomiji.com${location.pathname}`;
-
   return (
     <>
-      <Head url={url} title="Projects" description="開発したもの。" />
+      <Head title="Projects" description="開発したもの。" />
       <header>
         <h1>Projects</h1>
         <div className="meta">開発したもの。</div>

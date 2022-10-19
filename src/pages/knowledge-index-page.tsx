@@ -10,15 +10,13 @@ import Head from '../components/head.js';
 import { useBufferedData } from '../hooks.js';
 
 export default function KnowledgeIndexPage() {
-  const location = useLocation();
-  const url = `https://koyomiji.com${location.pathname}`;
   const data = useBufferedData<Data>();
   const entries = Object.values(data.entries).filter(e => e.path[0] == 'knowledge');
   const map = mapEntries(entries);
 
   return (
     <>
-      <Head url={url} title="Knowledge" description="学んだことの覚書。" />
+      <Head title="Knowledge" description="学んだことの覚書。" />
       <header>
         <h1>Knowledge</h1>
         <div className="meta">学んだことの覚書。</div>

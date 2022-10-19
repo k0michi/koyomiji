@@ -13,8 +13,6 @@ import { toPathname } from '../utils.js';
 import { useBufferedData } from '../hooks.js';
 
 export default function ArtworkPage() {
-  const location = useLocation();
-  const url = `https://koyomiji.com${location.pathname}`;
   const params = useParams();
   const path = ['artwork', params.id!];
   const data = useBufferedData<Data>();
@@ -25,7 +23,7 @@ export default function ArtworkPage() {
 
   return (
     <>
-      <Head url={url} title={entry.title} description={entry.description} type="article" published={entry.created} modified={entry.modified} />
+      <Head title={entry.title} description={entry.description} type="article" published={entry.created} modified={entry.modified} />
       <img className="artwork" src={entry.source!} />
       <header>
         <h1>{entry.title}</h1>

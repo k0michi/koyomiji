@@ -49,8 +49,6 @@ function saveLocation(pathname: string, location: number) {
 }
 
 export default function NovelPage() {
-  const location = useLocation();
-  const url = `https://koyomiji.com${location.pathname}`;
   const params = useParams();
   const path = ['novel', params.novel!, params.chapter!];
   const data = useBufferedData<Data>();
@@ -125,7 +123,7 @@ export default function NovelPage() {
 
   return (
     <>
-      <Head url={url} title={entry.title} description="" type="article" published={entry.created} modified={entry.modified} />
+      <Head title={entry.title} description="" type="article" published={entry.created} modified={entry.modified} />
       <Helmet>
         <body className="novel-layout" />
       </Helmet>

@@ -13,8 +13,6 @@ function getID(p: Entry) {
 }
 
 export default function ArtworkIndexPage() {
-  const location = useLocation();
-  const url = `https://koyomiji.com${location.pathname}`;
   const data = useBufferedData<Data>();
   const entries = Object.values(data.entries).filter(e => e.path[0] == 'artwork');
   entries.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));
@@ -22,7 +20,7 @@ export default function ArtworkIndexPage() {
 
   return (
     <>
-      <Head url={url} title="Artworks" description="🚧 工事中" />
+      <Head title="Artworks" description="🚧 工事中" />
       <header>
         <h1>Artworks</h1>
         <div className="meta">🚧 工事中</div>
