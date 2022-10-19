@@ -5,7 +5,6 @@ import { Outlet, useLocation, useOutlet } from 'react-router';
 import { Model } from '../model.js';
 import Icon from './icon.js';
 import Link from './link.js';
-import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 interface MenuProps {
   href: string;
@@ -70,18 +69,7 @@ export default function CommonLayout() {
           </div>
         </nav>
         <main id="main">
-          <SwitchTransition>
-            <CSSTransition
-              key={location.pathname}
-              nodeRef={elementMap.current[location.pathname]}
-              timeout={100}
-              classNames="page"
-              unmountOnExit>
-              <div ref={elementMap.current[location.pathname]} className="page">
-                {outlet}
-              </div>
-              </CSSTransition>
-          </SwitchTransition>
+          {outlet}
         </main>
       </div>
     </>
