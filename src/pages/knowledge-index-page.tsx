@@ -2,7 +2,7 @@ import * as React from 'react';
 import { categoryNames } from "../category.js";
 import { Entry, mapEntries } from "../entry.js";
 import { useModel, useObservable } from 'kyoka';
-import { Model } from '../model.js';
+import { Data, Model } from '../model.js';
 import { useLoaderData, useLocation } from 'react-router';
 import Link from '../components/link.js';
 import { toPathname } from '../utils.js';
@@ -11,8 +11,8 @@ import Head from '../components/head.js';
 export default function KnowledgeIndexPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
-  const data = useLoaderData() as Record<string, Entry>;
-  const entries = Object.values(data).filter(e => e.path[0] == 'knowledge');
+  const data = useLoaderData() as Data;
+  const entries = Object.values(data.entries).filter(e => e.path[0] == 'knowledge');
   const map = mapEntries(entries);
 
   return (

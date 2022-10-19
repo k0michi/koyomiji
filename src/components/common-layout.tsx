@@ -17,15 +17,13 @@ function Menu(props: MenuProps) {
   return (<Link href={props.href} className={path.startsWith(props.href) ? 'active' : ''}><Icon name="asterisk" /><div>{props.children}</div></Link>);
 }
 
-export default function MainLayout() {
+export default function CommonLayout() {
   const [menuVisible, setMenuVisible] = React.useState<boolean>(false);
   const outlet = useOutlet();
   const model = useModel<Model>();
 
   React.useEffect(() => {
-    React.startTransition(() => {
-      model.fetchAssets();
-    });
+    model.fetchAssets();
   }, []);
 
   return (
@@ -68,9 +66,7 @@ export default function MainLayout() {
           </div>
         </nav>
         <main id="main">
-          <React.Suspense fallback={<p>Loading</p>}>
-            {outlet}
-          </React.Suspense>
+          {outlet}
         </main>
       </div>
     </>

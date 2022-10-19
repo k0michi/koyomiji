@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { useLocation } from 'react-router';
+import { useLoaderData, useLocation } from 'react-router';
 import CalenderGraph from '../components/calender-graph.js';
 import Head from '../components/head.js';
 import Link from '../components/link.js';
 import { subDays } from 'date-fns';
 import { useModel, useObservable } from 'kyoka';
-import { Model } from '../model.js';
+import { Data, Model } from '../model.js';
 import { mapEntries } from '../entry.js';
 
 export default function IndexPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
-  const model = useModel<Model>();
-  const entries = Object.values(useObservable(model.entries));
+  const data = useLoaderData() as Data;
+  const entries = Object.values(data.entries);
 
   const now = new Date();
   const begin = subDays(now, 364);

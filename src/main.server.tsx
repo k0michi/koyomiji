@@ -21,7 +21,7 @@ const model = new ServerModel(contentRoot);
       await model.loadEntry(p);
       const htmlPath = `/${entryPath.join('/')}/index.html`;
       await renderer.render(htmlPath);
-      const jsonPath = `/${entryPath.join('/')}/entry.json`;
+      const jsonPath = `/${entryPath.join('/')}/data.json`;
       await renderer.render(jsonPath);
     } else if (p.endsWith('index.kdml')) {
       await model.loadDictionary(p);
@@ -39,7 +39,7 @@ const model = new ServerModel(contentRoot);
   await renderer.render('/artwork/index.html');
   await renderer.render('/dictionary/index.html');
   await renderer.render('/dictionary/data.json');
-  await renderer.render('/entries.json');
+  await renderer.render('/data.json');
   await renderer.render('/feed.xml');
   await renderer.render('/sitemap.xml');
 })();

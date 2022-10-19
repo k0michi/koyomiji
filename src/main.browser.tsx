@@ -4,7 +4,7 @@ import { createBrowserRouter, createRoutesFromElements, RouterProvider } from 'r
 import { ModelProvider } from 'kyoka';
 
 import { createRoutes } from './routes.js';
-import { InitialData, Model } from './model.js';
+import { Data, Model } from './model.js';
 
 import './styles.css';
 import 'prismjs/themes/prism-tomorrow.css';
@@ -12,10 +12,17 @@ import 'katex/dist/katex.min.css';
 import '@fontsource/raleway';
 
 window.addEventListener('load', async () => {
-  const initialData = JSON.parse((document.getElementById('initial-data') as HTMLScriptElement).text) as InitialData;
+  const initialData = JSON.parse((document.getElementById('initial-data') as HTMLScriptElement).text) as Data;
+  const routeID = (document.getElementById('initial-data') as HTMLScriptElement).dataset['routeId'] as string;
   const model = new Model(initialData);
 
-  const router = createBrowserRouter(createRoutes(model));
+  const router = createBrowserRouter(createRoutes(model), {
+    hydrationData: {
+      loaderData: {
+        [routeID]: initialData
+      }
+    }
+  });
 
   const root = ReactDOM.hydrateRoot(
     document.getElementById('root')!,

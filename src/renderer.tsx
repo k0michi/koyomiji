@@ -7,7 +7,7 @@ import produce from 'immer';
 import window from '@k0michi/isomorphic-dom';
 
 import { Renderer } from "./base/renderer.js";
-import { InitialData, Model } from './model.js';
+import { Data, Model } from './model.js';
 import { toPathname } from './utils.js';
 import { ServerModel } from './server-model.js';
 import { toISOStringJST } from './date-format.js';
@@ -30,39 +30,42 @@ export function createRenderer(outRoot: string | null, template: string, model: 
 
   renderer.use('/(index.html)?', (ctx) => {
     model.sitemap.add('/');
-    return render(template, '/', { entries: getEntries(), isIndexComplete: true });
+    return render(template, '/', '/', { entries: getEntries(), isIndexComplete: true });
   });
 
   renderer.use('/about/(index.html)?', (ctx) => {
     model.sitemap.add('/about');
-    return render(template, '/about');
+    return render(template, '/about', '/about');
   });
 
   renderer.use('/project/(index.html)?', (ctx) => {
     model.sitemap.add('/project');
-    return render(template, '/project');
+    return render(template, '/project', '/project');
   });
 
   renderer.use('/knowledge/(index.html)?', (ctx) => {
     model.sitemap.add('/knowledge');
-    return render(template, '/knowledge', { entries: getEntries(), isIndexComplete: true });
+    return render(template, '/knowledge', '/knowledge', { entries: getEntries(), isIndexComplete: true });
   });
 
   renderer.use('/knowledge/:category/:id/(index.html)?', (ctx) => {
-    const pathname = toPathname(['knowledge', ctx.params['category'], ctx.params['id']])
+    const pathname = toPathname(['knowledge', ctx.params['category'], ctx.params['id']]);
     const entry = model.getEntry(pathname);
     model.sitemap.add(pathname, entry.modified);
 
-    const initialData: InitialData = { entries: {}, isIndexComplete: false };
+    const initialData: Data = { entries: {}, isIndexComplete: false };
     initialData.entries[pathname] = entry;
-    return render(template, pathname, initialData);
+    return render(template, pathname, '/knowledge/:category/:id', initialData);
   });
 
-  renderer.use('/knowledge/:category/:id/entry.json', (ctx) => {
-    const pathname = toPathname(['knowledge', ctx.params['category'], ctx.params['id']])
+  renderer.use('/knowledge/:category/:id/data.json', (ctx) => {
+    const pathname = toPathname(['knowledge', ctx.params['category'], ctx.params['id']]);
     const entry = model.getEntry(pathname);
+    const data = {entries: {
+      [pathname]: entry
+    }};
 
-    return JSON.stringify(entry);
+    return JSON.stringify(data);
   });
 
   renderer.use('/knowledge/:category/:id/:path*', (ctx) => {
@@ -71,7 +74,7 @@ export function createRenderer(outRoot: string | null, template: string, model: 
 
   renderer.use('/log/(index.html)?', (ctx) => {
     model.sitemap.add('/log');
-    return render(template, '/log', { entries: getEntries(), isIndexComplete: true });
+    return render(template, '/log', '/log', { entries: getEntries(), isIndexComplete: true });
   });
 
   renderer.use('/log/:id/(index.html)?', (ctx) => {
@@ -79,29 +82,32 @@ export function createRenderer(outRoot: string | null, template: string, model: 
     const entry = model.getEntry(pathname);
     model.sitemap.add(pathname, entry.modified);
 
-    const initialData: InitialData = { entries: {}, isIndexComplete: false };
+    const initialData: Data = { entries: {}, isIndexComplete: false };
     initialData.entries[pathname] = entry;
-    return render(template, pathname, initialData);
+    return render(template, pathname, '/log/:id', initialData);
   });
 
-  renderer.use('/log/:id/entry.json', (ctx) => {
+  renderer.use('/log/:id/data.json', (ctx) => {
     const pathname = toPathname(['log', ctx.params['id']]);
     const entry = model.getEntry(pathname);
+    const data = {entries: {
+      [pathname]: entry
+    }};
 
-    return JSON.stringify(entry);
+    return JSON.stringify(data);
   });
 
   renderer.use('/log/:id/:path*', (ctx) => {
     return fs.readFile(`${model.rootDir}/log/${ctx.params.id}/${ctx.params.path.join('/')}`);
   });
 
-  renderer.use('/entries.json', (ctx) => {
-    return JSON.stringify(getEntries());
+  renderer.use('/data.json', (ctx) => {
+    return JSON.stringify({entries: getEntries()});
   });
 
   renderer.use('/novel/(index.html)?', (ctx) => {
     model.sitemap.add('/novel');
-    return render(template, '/novel', { entries: getEntries(), isIndexComplete: true });
+    return render(template, '/novel', '/novel', { entries: getEntries(), isIndexComplete: true });
   });
 
   renderer.use('/novel/:novel/:chapter/(index.html)?', (ctx) => {
@@ -109,21 +115,24 @@ export function createRenderer(outRoot: string | null, template: string, model: 
     const entry = model.getEntry(pathname);
     model.sitemap.add(pathname, entry.modified);
 
-    const initialData: InitialData = { entries: {}, isIndexComplete: false };
+    const initialData: Data = { entries: {}, isIndexComplete: false };
     initialData.entries[pathname] = entry;
-    return render(template, pathname, initialData);
+    return render(template, pathname, '/novel/:novel/:chapter', initialData);
   });
 
-  renderer.use('/novel/:novel/:chapter/entry.json', (ctx) => {
+  renderer.use('/novel/:novel/:chapter/data.json', (ctx) => {
     const pathname = toPathname(['novel', ctx.params['novel'], ctx.params['chapter']]);
     const entry = model.getEntry(pathname);
+    const data = {entries: {
+      [pathname]: entry
+    }};
 
-    return JSON.stringify(entry);
+    return JSON.stringify(data);
   });
 
   renderer.use('/artwork/(index.html)?', (ctx) => {
     model.sitemap.add('/artwork');
-    return render(template, '/artwork', { entries: getEntries(), isIndexComplete: true });
+    return render(template, '/artwork', '/artwork', { entries: getEntries(), isIndexComplete: true });
   });
 
   renderer.use('/artwork/:id/(index.html)?', (ctx) => {
@@ -131,16 +140,19 @@ export function createRenderer(outRoot: string | null, template: string, model: 
     const entry = model.getEntry(pathname);
     model.sitemap.add(pathname, entry.modified);
 
-    const initialData: InitialData = { entries: {}, isIndexComplete: false };
+    const initialData: Data = { entries: {}, isIndexComplete: false };
     initialData.entries[pathname] = entry;
-    return render(template, pathname, initialData);
+    return render(template, pathname, '/artwork/:id', initialData);
   });
 
-  renderer.use('/artwork/:id/entry.json', (ctx) => {
+  renderer.use('/artwork/:id/data.json', (ctx) => {
     const pathname = toPathname(['artwork', ctx.params['id']]);
     const entry = model.getEntry(pathname);
+    const data = {entries: {
+      [pathname]: entry
+    }};
 
-    return JSON.stringify(entry);
+    return JSON.stringify(data);
   });
 
   renderer.use('/artwork/:id/:path*', (ctx) => {
@@ -149,7 +161,7 @@ export function createRenderer(outRoot: string | null, template: string, model: 
 
   renderer.use('/dictionary/(index.html)?', (ctx) => {
     model.sitemap.add('/dictionary');
-    return render(template, '/dictionary');
+    return render(template, '/dictionary', '/dictionary');
   });
 
   renderer.use('/dictionary/data.json', (ctx) => {
@@ -196,12 +208,17 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   return renderer;
 }
 
-function render(template: string, pathname: string, data: InitialData = { entries: {}, isIndexComplete: false }) {
+function render(template: string, pathname: string, routeID: string, data: Data = { entries: {}, isIndexComplete: false }) {
   const model = new Model(data);
 
   const router = createMemoryRouter(createRoutes(model), {
     initialEntries: [pathname],
-    initialIndex: 0
+    initialIndex: 0,
+    hydrationData: {
+      loaderData: {
+        [routeID]: data
+      }
+    }
   });
 
   const app = ReactDOM.renderToString(
@@ -216,5 +233,6 @@ function render(template: string, pathname: string, data: InitialData = { entrie
     .replace('<body>', `<body ${helmet.bodyAttributes.toString()}>`)
     .replace('<!--head-->', [helmet.title.toString(), helmet.meta.toString(), helmet.link.toString()].join('\n'))
     .replace('<!--body-->', app)
-    .replace('<!--initial-data-->', JSON.stringify(data));
+    .replace('<!--initial-data-->', JSON.stringify(data))
+    .replace('<!--route-id-->', routeID);
 }

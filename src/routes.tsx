@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Routes, Route, Outlet, RouteObject } from 'react-router';
 import AboutPage from "./pages/about-page.js";
-import MainLayout from './components/common-layout.js';
+import CommonLayout from './components/common-layout.js';
 import IndexPage from "./pages/index-page.js";
 import KnowledgeIndexPage from "./pages/knowledge-index-page.js";
 import KnowledgePage from "./pages/knowledge-page.js";
@@ -16,21 +16,19 @@ import ArtworkPage from './pages/artwork-page.js';
 import DictionaryPage from './pages/dictionary-page.js';
 import { ScrollRestoration } from 'react-router-dom';
 import { Model } from './model.js';
+import { toPathname } from './utils.js';
 
 function RootElement(props: any) {
   const [hydrated, setHydrated] = React.useState(false);
 
   React.useEffect(() => {
     // Suppress warning on server
-    // Temporal fix for hydration error
-    setTimeout(() => setHydrated(true), 1000);
+    setHydrated(true);
   }, []);
 
   return (
     <>
-      <React.Suspense fallback={<p>Loading</p>}>
-        <Outlet />
-      </React.Suspense>
+      <Outlet />
       {hydrated ? <ScrollRestoration /> : null}
     </>
   );
@@ -41,80 +39,93 @@ export function createRoutes(model: Model): RouteObject[] {
     {
       path: '/', element: <RootElement />, children: [
         {
-          element: <MainLayout />, children: [
+          element: <CommonLayout />, children: [
             {
               index: true,
+              id: '/',
               element: <IndexPage />,
-              loader: () => model.getIndex()
+              loader: () => fetch('/data.json').then(d => d.json())
             },
             {
               path: 'about',
+              id: '/about',
               element: <AboutPage />
             },
             {
               path: 'project',
+              id: '/project',
               element: <ProjectPage />
             },
             {
               path: 'knowledge/:category/:id',
+              id: '/knowledge/:category/:id',
               element: <KnowledgePage />,
               loader: ({ params }) => {
-                const path = ['knowledge', params.category!, params.id!];
-                return model.getEntry(path);
+                const path = toPathname(['knowledge', params.category!, params.id!, 'data.json']);
+                return fetch(path).then(d => d.json());
               }
             },
             {
               path: 'knowledge',
+              id: '/knowledge',
               element: <KnowledgeIndexPage />,
-              loader: () => model.getIndex()
+              loader: () => fetch('/data.json').then(d => d.json())
             },
             {
               path: 'log/:id',
+              id: '/log/:id',
               element: <LogPage />,
               loader: ({ params }) => {
-                const path = ['log', params.id!];
-                return model.getEntry(path);
+                const path = toPathname(['log', params.id!, 'data.json']);
+                return fetch(path).then(d => d.json());
               }
             },
             {
               path: 'log',
+              id: '/log',
               element: <LogIndexPage />,
-              loader: () => model.getIndex()
+              loader: () => fetch('/data.json').then(d => d.json())
             },
             {
               path: 'novel',
+              id: '/novel',
               element: <NovelIndexPage />,
-              loader: () => model.getIndex()
+              loader: () => fetch('/data.json').then(d => d.json())
             },
             {
               path: 'artwork',
+              id: '/artwork',
               element: <ArtworkIndexPage />,
-              loader: () => model.getIndex()
+              loader: () => fetch('/data.json').then(d => d.json())
             },
             {
               path: 'artwork/:id',
+              id: '/artwork/:id',
               element: <ArtworkPage />,
               loader: ({ params }) => {
-                const path = ['artwork', params.id!];
-                return model.getEntry(path);
+                const path = toPathname(['artwork', params.id!, 'data.json']);
+                return fetch(path).then(d => d.json());
               }
             },
             {
               path: 'dictionary',
+              id: '/dictionary',
               element: <DictionaryPage />
             },
             {
               path: '*',
+              id: '/*',
               element: <NotFoundPage />
             },
           ]
         },
         {
           path: 'novel/:novel/:chapter',
+          id: '/novel/:novel/:chapter',
           element: <NovelPage />,
           loader: ({ params }) => {
-            const path = ['novel', params.novel!, params.chapter!];
-            return model.getEntry(path);
+            const path = toPathname(['novel', params.novel!, params.chapter!, 'data.json']);
+            return fetch(path).then(d => d.json());
           }
         }
       ]

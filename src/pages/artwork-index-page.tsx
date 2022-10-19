@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useModel, useObservable } from 'kyoka';
 import { Entry } from "../entry.js";
-import { Model } from '../model.js';
+import { Data, Model } from '../model.js';
 import { useLoaderData, useLocation } from 'react-router';
 import Link from '../components/link.js';
 import { toPathname } from '../utils.js';
@@ -14,8 +14,8 @@ function getID(p: Entry) {
 export default function ArtworkIndexPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
-  const data = useLoaderData() as Record<string, Entry>;
-  const entries = Object.values(data).filter(e => e.path[0] == 'artwork');
+  const data = useLoaderData() as Data;
+  const entries = Object.values(data.entries).filter(e => e.path[0] == 'artwork');
   entries.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));
   const model = useModel<Model>();
 

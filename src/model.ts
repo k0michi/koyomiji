@@ -2,7 +2,7 @@ import { Observable } from "kyoka";
 import { Dictionary, Entry } from "./entry.js";
 import { compareArray, toPathname } from "./utils.js";
 
-export interface InitialData {
+export interface Data {
   entries: Record<string, Entry>;
   isIndexComplete: boolean;
 }
@@ -13,7 +13,7 @@ export class Model {
   dictionaries: Observable<Record<string, Dictionary> | null>;
   assets: Observable<Record<string, any>>;
 
-  constructor(data: InitialData) {
+  constructor(data: Data) {
     this.entries = new Observable(data.entries);
     this.isIndexComplete = new Observable<boolean>(data.isIndexComplete);
     this.dictionaries = new Observable<Record<string, Dictionary> | null>(null);
