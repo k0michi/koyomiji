@@ -6,11 +6,12 @@ import { useLoaderData, useLocation } from 'react-router';
 import Link from '../components/link.js';
 import { toPathname } from '../utils.js';
 import Head from '../components/head.js';
+import { useBufferedData } from '../hooks.js';
 
 export default function NovelIndexPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
-  const data = useLoaderData() as Data;
+  const data = useBufferedData<Data>();
   const entries = Object.values(data.entries).filter(e => e.path[0] == 'novel');
   const model = useModel<Model>();
   const map = mapEntries(entries);

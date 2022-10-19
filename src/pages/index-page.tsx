@@ -7,11 +7,12 @@ import { subDays } from 'date-fns';
 import { useModel, useObservable } from 'kyoka';
 import { Data, Model } from '../model.js';
 import { mapEntries } from '../entry.js';
+import { useBufferedData } from '../hooks.js';
 
 export default function IndexPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
-  const data = useLoaderData() as Data;
+  const data = useBufferedData<Data>();
   const entries = Object.values(data.entries);
 
   const now = new Date();

@@ -10,13 +10,14 @@ import Head from '../components/head.js';
 import { toDisplayDateString } from '../date-format.js';
 import { Entry } from '../entry.js';
 import { toPathname } from '../utils.js';
+import { useBufferedData } from '../hooks.js';
 
 export default function LogPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
   const params = useParams();
   const path = ['log', params.id!];
-  const data = useLoaderData() as Data;
+  const data = useBufferedData<Data>();
   const entry = data.entries[toPathname(path)];
   const model = useModel<Model>();
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);

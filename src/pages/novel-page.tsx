@@ -11,6 +11,7 @@ import Head from '../components/head.js';
 import { Helmet } from 'react-helmet';
 import { Entry } from '../entry.js';
 import { toPathname } from '../utils.js';
+import { useBufferedData } from '../hooks.js';
 
 interface NovelStorage {
   locations: Record<string, number | undefined>;
@@ -52,7 +53,7 @@ export default function NovelPage() {
   const url = `https://koyomiji.com${location.pathname}`;
   const params = useParams();
   const path = ['novel', params.novel!, params.chapter!];
-  const data = useLoaderData() as Data;
+  const data = useBufferedData<Data>();
   const entry = data.entries[toPathname(path)];
   const model = useModel<Model>();
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);

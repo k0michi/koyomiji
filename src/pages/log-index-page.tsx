@@ -7,6 +7,7 @@ import Link from '../components/link.js';
 import Icon from '../components/icon.js';
 import Head from '../components/head.js';
 import { toDisplayDateString } from '../date-format.js';
+import { useBufferedData } from '../hooks.js';
 
 function getID(p: Entry) {
   return p.path[1];
@@ -15,7 +16,7 @@ function getID(p: Entry) {
 export default function LogIndexPage() {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
-  const data = useLoaderData() as Data;
+  const data = useBufferedData<Data>();
   const model = useModel<Model>();
   const entries = Object.values(data.entries).filter(e => e.path[0] == 'log');
   entries.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));

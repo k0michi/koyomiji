@@ -5,6 +5,7 @@ import { Outlet, useLocation, useOutlet } from 'react-router';
 import { Model } from '../model.js';
 import Icon from './icon.js';
 import Link from './link.js';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 interface MenuProps {
   href: string;
@@ -21,6 +22,9 @@ export default function CommonLayout() {
   const [menuVisible, setMenuVisible] = React.useState<boolean>(false);
   const outlet = useOutlet();
   const model = useModel<Model>();
+  const location = useLocation();
+  const elementMap = React.useRef<Record<string, React.Ref<any>>>({});
+  elementMap.current[location.pathname] = elementMap.current[location.pathname] ?? React.createRef<any>();
 
   React.useEffect(() => {
     model.fetchAssets();
@@ -66,7 +70,18 @@ export default function CommonLayout() {
           </div>
         </nav>
         <main id="main">
-          {outlet}
+          <SwitchTransition>
+            <CSSTransition
+              key={location.pathname}
+              nodeRef={elementMap.current[location.pathname]}
+              timeout={300}
+              classNames="page"
+              unmountOnExit>
+              <div ref={elementMap.current[location.pathname]} className="page">
+                {outlet}
+              </div>
+              </CSSTransition>
+          </SwitchTransition>
         </main>
       </div>
     </>

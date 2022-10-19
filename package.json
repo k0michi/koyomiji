@@ -51,6 +51,7 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@types/react-helmet": "^6.1.5",
+    "@types/react-transition-group": "^4.4.5",
     "rollup-plugin-license": "2.8.0",
     "serve": "^13.0.2",
     "ts-node": "^10.8.0",
