@@ -138,6 +138,7 @@ body.common-layout {}
   min-width: 100%;
   height: var(--bar-height);
   border-bottom: 1px solid var(--color-8);
+  z-index: 1;
 }
 
 
@@ -150,6 +151,7 @@ body.common-layout {}
   word-break: keep-all;
   font-family: var(--font-sans-en);
   height: fit-content;
+  z-index: 1;
 }
 
 @media (max-width: 767px) {
