@@ -27,7 +27,7 @@ export function getTextContent(query: string, $element: Element) {
   return $found.textContent!;
 }
 
-export function toElement<T>(node: Node | NodeList, factory: (type: any, props: any, ...children: any[]) => T): string | T {
+export function toElement<T>(node: Node | NodeList, factory: (type: Symbol | string, props: { [key: string]: string }, ...children: (string | T)[]) => T): string | T {
   const Node = window.Node;
 
   if (node instanceof Node) {
