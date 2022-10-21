@@ -43,7 +43,7 @@ html {
 @media (prefers-color-scheme: dark) {
   :root {
     /* h = 230 */
-    --color-1: #090b16;
+    --color-1: #0a0c15;
     --color-2: #fafbff;
     --color-3: #555e89;
     --color-4: var(--color-6);
