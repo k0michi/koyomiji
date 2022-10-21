@@ -37,6 +37,8 @@ html {
     --color-8: #705751;
     /* foreground of code */
     --color-9: var(--color-1);
+    /* calender cell */
+    --color-10: hsl(12, 19%, 95%);
   }
 }
 
@@ -52,6 +54,7 @@ html {
     --color-7: var(--color-2);
     --color-8: #30364f;
     --color-9: var(--color-2);
+    --color-10: #141829;
   }
 }
 
@@ -692,6 +695,10 @@ body.common-layout {}
 .cell {
   width: 14px;
   height: 14px;
+}
+
+.cell.filled {
+  background-color: var(--color-10);
 }
 
 

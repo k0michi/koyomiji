@@ -42,13 +42,12 @@ export default function CalenderGraph(props: CalenderGraphProps) {
               if (index >= 0 && index < counted.length) {
                 const count = counted[index];
 
-                if (count == 0) {
-                  color = chroma('#444');
+                if (count > 0) {
+                  color = chroma.scale('YlGn').domain([0, 10])(count + 1);
+                  return <td className='cell filled' key={j} style={{ backgroundColor: color.css() }} />;
                 } else {
-                  color = chroma.scale('YlGn').domain([0, 10])(count);
+                  return <td className='cell filled' key={j} />;
                 }
-
-                return <td className='cell' key={j} style={{ backgroundColor: color.css() }} />;
               } else {
                 return <td className='cell' key={j} />;
               }
