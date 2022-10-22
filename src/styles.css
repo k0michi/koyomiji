@@ -669,6 +669,10 @@ body.common-layout {}
   gap: 6px;
 }
 
+.dictionary-entry .senses {
+  margin-left: 12px;
+}
+
 
 /* Common Layout - Main - Artwork */
 

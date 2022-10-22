@@ -33,11 +33,13 @@ export default function DictionaryPage() {
                   #{e?.number}
                 </div>
               </div>
-              {e?.senses.map(s => {
-                const usage = s.usage != null ? toElement(parseXML(s.usage).firstChild?.childNodes!, reactFactory) : null;
-                const gloss = s.gloss != null ? toElement(parseXML(s.gloss).firstChild?.childNodes!, reactFactory) : null;
-                return <div><span className='pos'>{s.pos}.</span> <span className='usage'>{usage}</span> <span className='gloss'>{gloss}</span></div>;
-              })}
+              <div className='senses'>
+                {e?.senses.map(s => {
+                  const usage = s.usage != null ? toElement(parseXML(s.usage).firstChild?.childNodes!, reactFactory) : null;
+                  const gloss = s.gloss != null ? toElement(parseXML(s.gloss).firstChild?.childNodes!, reactFactory) : null;
+                  return <div><span className='pos'>{s.pos}.</span> <span className='usage'>{usage}</span> <span className='gloss'>{gloss}</span></div>;
+                })}
+              </div>
             </div>
           )
         }
