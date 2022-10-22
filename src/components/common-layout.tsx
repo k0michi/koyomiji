@@ -25,10 +25,6 @@ export default function CommonLayout() {
   const elementMap = React.useRef<Record<string, React.Ref<any>>>({});
   elementMap.current[location.pathname] = elementMap.current[location.pathname] ?? React.createRef<any>();
 
-  React.useEffect(() => {
-    model.fetchAssets();
-  }, []);
-
   return (
     <>
       <Helmet>

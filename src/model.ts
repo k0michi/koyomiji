@@ -61,22 +61,4 @@ export class Model {
       });
     }
   }
-
-  async fetchAssets() {
-    const assets: Record<string, any> = {};
-    await Promise.all([
-      (async () => assets['logoFull'] = (await import('./assets/kissa_koyomiji.svg?raw')).default)(),
-      (async () => assets['asterisk'] = (await import('./assets/asterisk.svg?raw')).default)(),
-      (async () => assets['mailIcon'] = (await import('@tabler/icons/mail.svg?raw')).default)(),
-      (async () => assets['githubIcon'] = (await import('@tabler/icons/brand-github.svg?raw')).default)(),
-      (async () => assets['youtubeIcon'] = (await import('@tabler/icons/brand-youtube.svg?raw')).default)(),
-      (async () => assets['twitchIcon'] = (await import('@tabler/icons/brand-twitch.svg?raw')).default)(),
-      (async () => assets['calenderIcon'] = (await import('@tabler/icons/calendar-time.svg?raw')).default)(),
-      (async () => assets['tagsIcon'] = (await import('@tabler/icons/tags.svg?raw')).default)(),
-      (async () => assets['xIcon'] = (await import('feather-icons/dist/icons/x.svg?raw')).default)(),
-      (async () => assets['menu2'] = (await import('@tabler/icons/menu-2.svg?raw')).default)(),
-      (async () => assets['rss'] = (await import('@tabler/icons/rss.svg?raw')).default)(),
-    ]);
-    this.assets.set(assets);
-  }
 }

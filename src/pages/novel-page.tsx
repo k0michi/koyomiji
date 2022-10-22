@@ -58,10 +58,6 @@ export default function NovelPage() {
   const mainRef = React.useRef<HTMLElement>(null);
 
   React.useEffect(() => {
-    model.fetchAssets();
-  }, []);
-
-  React.useEffect(() => {
     const h = (e: any) => {
       if (e.deltaX == 0) {
         window.scrollBy(-e.deltaY, 0);
