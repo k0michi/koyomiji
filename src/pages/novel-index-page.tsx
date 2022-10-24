@@ -7,7 +7,7 @@ import { useBufferedData } from '../hooks.js';
 
 export default function NovelIndexPage() {
   const data = useBufferedData<Data>();
-  const entries = Object.values(data.entries).filter(e => e.path[0] == 'novel');
+  const entries = Object.values(data.entries).filter(e => e.path.startsWith('/novel'));
   const map = mapEntries(entries);
 
   return (

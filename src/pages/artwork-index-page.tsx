@@ -14,7 +14,7 @@ function getID(p: Entry) {
 
 export default function ArtworkIndexPage() {
   const data = useBufferedData<Data>();
-  const entries = Object.values(data.entries).filter(e => e.path[0] == 'artwork');
+  const entries = Object.values(data.entries).filter(e => e.path.startsWith('/artwork'));
   entries.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));
   const model = useModel<Model>();
 
@@ -29,7 +29,7 @@ export default function ArtworkIndexPage() {
         <div className="thumbnail-list">
           {entries.map(i =>
             <div className="thumbnail" key={i.path}>
-              <Link href={`/artwork/${getID(i)}`}>
+              <Link href={i.path}>
                 <img src={i.source!} />
               </Link>
             </div>
