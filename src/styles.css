@@ -38,7 +38,7 @@ html {
     /* foreground of code */
     --color-9: var(--color-1);
     /* calender cell */
-    --color-10: hsl(12, 19%, 95%);
+    --color-10: #f5f1f0;
   }
 }
 
@@ -59,7 +59,6 @@ html {
 }
 
 body {
-  /*border-top: 4px solid black;*/
   margin: 0;
   background-color: var(--color-1);
   color: var(--color-2);
@@ -271,7 +270,7 @@ body.common-layout {}
   --menu-color-4: hsl(70, 86%, 43%);
   --menu-color-5: hsl(170, 86%, 43%);
   --menu-color-6: hsl(200, 86%, 43%);
-  --menu-color-7: hsl(240, 95%, 64%);
+  --menu-color-7: hsl(240, 92%, 69%);
 }
 
 @media (max-width: 767px) {
