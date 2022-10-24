@@ -4,9 +4,7 @@ import CalenderGraph from '../components/calender-graph.js';
 import Head from '../components/head.js';
 import Link from '../components/link.js';
 import { subDays } from 'date-fns';
-import { useModel, useObservable } from 'kyoka';
 import { Data, Model } from '../model.js';
-import { mapEntries } from '../entry.js';
 import { useBufferedData } from '../hooks.js';
 
 export default function IndexPage() {

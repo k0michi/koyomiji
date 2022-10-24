@@ -31,13 +31,13 @@ export class ServerModel {
 
   async loadEntry(pathname: string) {
     const normalized = toPathname(pathname.split('/').slice(0, -1));
-    const content = await readFileUTF8(path.join(this.rootDir, pathname));
-    this.entries[normalized] =  preprocess(pathname.split('/').slice(0, -1), content);
+    const content = await readFileUTF8(path.posix.join(this.rootDir, pathname));
+    this.entries[normalized] =  preprocess(normalized, content);
   }
 
   async loadDictionary(pathname: string) {
     const normalized = toPathname(pathname.split('/').slice(0, -1));
-    const content = await readFileUTF8(path.join(this.rootDir, pathname));
-    this.dictionaries[normalized] = KDML.preprocess(pathname.split('/').slice(0, -1), content);
+    const content = await readFileUTF8(path.posix.join(this.rootDir, pathname));
+    this.dictionaries[normalized] = KDML.preprocess(normalized, content);
   }
 }

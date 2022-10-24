@@ -17,9 +17,7 @@ export default function LogPage() {
   const path = ['log', params.id!];
   const data = useBufferedData<Data>();
   const entry = data.entries[toPathname(path)];
-  const model = useModel<Model>();
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
-  const assets = useObservable(model.assets);
 
   return (
     <>

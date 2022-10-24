@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useLoaderData, useLocation, useParams } from 'react-router';
 import Link from '../components/link.js';
-import { useModel, useObservable } from 'kyoka';
 import { Data, Model } from '../model.js';
 import { toElement } from '../xml.js';
 import { parseXML } from '../xml.js';
@@ -9,7 +8,6 @@ import * as ReactKTML from '../react-ktml.js';
 import Icon from '../components/icon.js';
 import Head from '../components/head.js';
 import { Helmet } from 'react-helmet';
-import { Entry } from '../entry.js';
 import { toPathname } from '../utils.js';
 import { useBufferedData } from '../hooks.js';
 
@@ -53,7 +51,6 @@ export default function NovelPage() {
   const path = ['novel', params.novel!, params.chapter!];
   const data = useBufferedData<Data>();
   const entry = data.entries[toPathname(path)];
-  const model = useModel<Model>();
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
   const mainRef = React.useRef<HTMLElement>(null);
 

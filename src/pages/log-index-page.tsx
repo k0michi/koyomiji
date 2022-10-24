@@ -10,15 +10,13 @@ import { toDisplayDateString } from '../date-format.js';
 import { useBufferedData } from '../hooks.js';
 
 function getID(p: Entry) {
-  return p.path[1];
+  return p.path.split('/')[2];
 }
 
 export default function LogIndexPage() {
   const data = useBufferedData<Data>();
-  const model = useModel<Model>();
-  const entries = Object.values(data.entries).filter(e => e.path[0] == 'log');
+  const entries = Object.values(data.entries).filter(e => e.path.startsWith('/log/'));
   entries.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));
-  const assets = useObservable(model.assets);
 
   return (
     <>

@@ -9,7 +9,7 @@ import { getCategory } from '../config.js';
 
 export default function KnowledgeIndexPage() {
   const data = useBufferedData<Data>();
-  const entries = Object.values(data.entries).filter(e => e.path[0] == 'knowledge');
+  const entries = Object.values(data.entries).filter(e => e.path.startsWith('/knowledge/'));
   const map = mapEntries(entries);
 
   return (
@@ -22,9 +22,9 @@ export default function KnowledgeIndexPage() {
       <div id="body">
         {Object.entries(map).map(([k, v]) =>
           <div className="category" key={k}>
-            <h2>{getCategory(k).name}</h2>
+            <h2>{getCategory(k)?.name}</h2>
             <ul>
-              {v.map(i => <li key={toPathname(i.path)}><Link href={toPathname(i.path)}>{i.title}</Link></li>)}
+              {v.map(i => <li key={i.path}><Link href={i.path}>{i.title}</Link></li>)}
             </ul>
           </div>
         )}

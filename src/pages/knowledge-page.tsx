@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useModel, useObservable } from 'kyoka';
 import { useLoaderData, useLocation, useParams, useRouteLoaderData } from 'react-router';
 import { Data, Model } from '../model.js';
 import { toElement } from '../xml.js';

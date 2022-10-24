@@ -1,4 +1,5 @@
 import window from '@k0michi/isomorphic-dom';
+import path from 'path';
 import { Entry } from './entry';
 import { getTextContent, parseXML } from './xml.js';
 
@@ -24,18 +25,14 @@ export function getDescription(node: Node, limit: number) {
   }
 }
 
-export function transformImg(element: Element, basePath: string[]) {
+export function transformImg(element: Element, basePath: string) {
   const document = element.ownerDocument!;
 
   for (const img of element.querySelectorAll('img')) {
     const relativeSrc = img.getAttribute('src');
-    const absoluteSrc = resolvePath(basePath, relativeSrc!);
+    const absoluteSrc = path.posix.join(basePath, relativeSrc!);
     img.setAttribute('src', absoluteSrc);
   }
-}
-
-export function resolvePath(p1: string[], p2: string) {
-  return '/' + p1.join('/') + '/' + p2;
 }
 
 export function transformMath(element: Element) {
@@ -66,7 +63,7 @@ export function isContainerBlock(tagName: string) {
   return tagName == 'body';
 }
 
-export function preprocess(entryPath: string[], content: string): Entry {
+export function preprocess(entryPath: string, content: string): Entry {
   const $document = parseXML(content);
   const $head = $document.querySelector('head') as Element;
   const title = getTextContent('title', $head)!;
@@ -76,7 +73,7 @@ export function preprocess(entryPath: string[], content: string): Entry {
   let source = getTextContent('source', $head);
 
   if (source != undefined) {
-    source = resolvePath(entryPath, source);
+    source = path.posix.join(entryPath, source);
   }
 
   const $body = $document.querySelector('body')!;

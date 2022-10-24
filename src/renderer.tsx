@@ -191,7 +191,7 @@ export function createRenderer(outRoot: string | null, template: string, model: 
       entry.appendChild(create('title', {}, e.title));
       entry.appendChild(create('summary', {}, e.description));
       entry.appendChild(create('id', {}, `urn:uuid:${e.id}`));
-      entry.appendChild(create('link', { rel: 'alternate', href: new URL(toPathname(e.path), 'https://koyomiji.com/').toString() }));
+      entry.appendChild(create('link', { rel: 'alternate', href: new URL(e.path, 'https://koyomiji.com/').toString() }));
       entry.appendChild(create('published', {}, e.created));
       entry.appendChild(create('updated', {}, e.modified));
       feed.appendChild(entry);

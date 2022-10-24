@@ -8,7 +8,6 @@ import Icon from '../components/icon.js';
 import { parseXML } from '../xml.js';
 import Head from '../components/head.js';
 import { toDisplayDateString } from '../date-format.js';
-import { Entry } from '../entry.js';
 import { toPathname } from '../utils.js';
 import { useBufferedData } from '../hooks.js';
 
@@ -17,9 +16,7 @@ export default function ArtworkPage() {
   const path = ['artwork', params.id!];
   const data = useBufferedData<Data>();
   const entry = data.entries[toPathname(path)];
-  const model = useModel<Model>();
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
-  const assets = useObservable(model.assets);
 
   return (
     <>

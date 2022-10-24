@@ -28,7 +28,7 @@ export default function ArtworkIndexPage() {
       <div id="body">
         <div className="thumbnail-list">
           {entries.map(i =>
-            <div className="thumbnail" key={toPathname(i.path)}>
+            <div className="thumbnail" key={i.path}>
               <Link href={`/artwork/${getID(i)}`}>
                 <img src={i.source!} />
               </Link>

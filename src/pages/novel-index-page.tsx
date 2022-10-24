@@ -1,17 +1,13 @@
 import * as React from 'react';
-import { useModel, useObservable } from 'kyoka';
 import { Entry, mapEntries } from "../entry.js";
 import { Data, Model } from '../model.js';
-import { useLoaderData, useLocation } from 'react-router';
 import Link from '../components/link.js';
-import { toPathname } from '../utils.js';
 import Head from '../components/head.js';
 import { useBufferedData } from '../hooks.js';
 
 export default function NovelIndexPage() {
   const data = useBufferedData<Data>();
   const entries = Object.values(data.entries).filter(e => e.path[0] == 'novel');
-  const model = useModel<Model>();
   const map = mapEntries(entries);
 
   return (
@@ -26,7 +22,7 @@ export default function NovelIndexPage() {
           <div className="category" key={k}>
             <h2>{k}</h2>
             <ol>
-              {v.map(i => <li key={toPathname(i.path)}><Link href={toPathname(i.path)}>{i.title}</Link></li>)}
+              {v.map(i => <li key={i.path}><Link href={i.path}>{i.title}</Link></li>)}
             </ol>
           </div>
         )}

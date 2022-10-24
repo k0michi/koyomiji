@@ -5,7 +5,7 @@ export interface Entry {
   modified: string;
   description: string;
   source?: string;
-  path: string[];
+  path: string;
   content?: string;
 }
 
@@ -13,7 +13,7 @@ export interface Dictionary {
   title: string;
   created: string;
   description: string;
-  path: string[];
+  path: string;
   content?: DictionaryEntry[];
 }
 
@@ -30,23 +30,23 @@ export interface DictionarySense {
 }
 
 export function mapEntries(entries: Entry[]) {
-  entries.sort((a, b) => {
-    if (a.path[1] == b.path[1]) {
-      return a.path[2].localeCompare(b.path[2]);
-    } else {
-      return a.path[1].localeCompare(b.path[1]);
-    }
-  });
+  entries.sort((a, b) => a.path.localeCompare(b.path));
 
   const map: Record<string, Entry[]> = {};
 
   for (const item of entries) {
-    if (map[item.path[1]] == null) {
-      map[item.path[1]] = [];
+    const category = getCategory(item.path);
+
+    if (map[category] == null) {
+      map[category] = [];
     }
 
-    map[item.path[1]].push(item);
+    map[category].push(item);
   }
 
   return map;
+}
+
+function getCategory(path: string) {
+  return path.split('/')[2];
 }

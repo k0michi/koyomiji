@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useModel, useObservable } from 'kyoka';
 import { Model } from '../model.js';
-import { useLocation } from 'react-router';
 import { parseXML, toElement } from '../xml.js';
 import { reactFactory } from '../react-kdml.js';
 import Head from '../components/head.js';

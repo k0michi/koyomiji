@@ -1,7 +1,7 @@
 import { Dictionary, DictionaryEntry, DictionarySense, Entry } from './entry';
 import { getTextContent, parseXML } from './xml.js';
 
-export function preprocess(entryPath: string[], content: string): Dictionary {
+export function preprocess(entryPath: string, content: string): Dictionary {
   const $document = parseXML(content);
   const $head = $document.querySelector('head') as Element;
   const title = getTextContent('title', $head)!;
