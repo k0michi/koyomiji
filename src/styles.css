@@ -45,16 +45,16 @@ html {
 @media (prefers-color-scheme: dark) {
   :root {
     /* h = 230 */
-    --color-1: #0a0c15;
+    --color-1: #15171e;
     --color-2: #fafbff;
-    --color-3: #555e89;
+    --color-3: #5c6284;
     --color-4: var(--color-6);
     --color-5: #282d43;
-    --color-6: #111527;
+    --color-6: #24293a;
     --color-7: var(--color-2);
-    --color-8: #30364f;
+    --color-8: #3d435c;
     --color-9: var(--color-2);
-    --color-10: #141829;
+    --color-10: #272b3d;
   }
 }
 
