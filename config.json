@@ -1,0 +1,27 @@
+{
+  "featured": [
+    
+  ],
+  "categories": [
+    {
+      "id": "linux",
+      "name": "Linux"
+    },
+    {
+      "id": "web",
+      "name": "Web"
+    },
+    {
+      "id": "dev",
+      "name": "Dev"
+    },
+    {
+      "id": "math",
+      "name": "Math"
+    },
+    {
+      "id": "unix",
+      "name": "Unix"
+    }
+  ]
+}

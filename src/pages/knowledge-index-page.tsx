@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { categoryNames } from "../category.js";
 import { Entry, mapEntries } from "../entry.js";
-import { useModel, useObservable } from 'kyoka';
 import { Data, Model } from '../model.js';
-import { useLoaderData, useLocation } from 'react-router';
 import Link from '../components/link.js';
 import { toPathname } from '../utils.js';
 import Head from '../components/head.js';
 import { useBufferedData } from '../hooks.js';
+import { getCategory } from '../config.js';
 
 export default function KnowledgeIndexPage() {
   const data = useBufferedData<Data>();
@@ -24,7 +22,7 @@ export default function KnowledgeIndexPage() {
       <div id="body">
         {Object.entries(map).map(([k, v]) =>
           <div className="category" key={k}>
-            <h2>{categoryNames[k]}</h2>
+            <h2>{getCategory(k).name}</h2>
             <ul>
               {v.map(i => <li key={toPathname(i.path)}><Link href={toPathname(i.path)}>{i.title}</Link></li>)}
             </ul>

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { categoryNames } from "../category.js";
 import { useModel, useObservable } from 'kyoka';
 import { useLoaderData, useLocation, useParams, useRouteLoaderData } from 'react-router';
 import { Data, Model } from '../model.js';
@@ -9,19 +8,17 @@ import * as ReactKTML from '../react-ktml.js';
 import Icon from '../components/icon.js';
 import Head from '../components/head.js';
 import { toDisplayDateString } from '../date-format.js';
-import { Entry } from '../entry.js';
 import { toPathname } from '../utils.js';
 import { useBufferedData } from '../hooks.js';
+import { getCategory } from '../config.js';
 
 export default function KnowledgePage() {
   const params = useParams();
   const path = ['knowledge', params.category!, params.id!];
   const data = useBufferedData<Data>();
   const entry = data.entries[toPathname(path)];
-  const model = useModel<Model>();
-  const categoryName = categoryNames[params.category!];
+  const categoryName = getCategory(params.category!).name;
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
-  const assets = useObservable(model.assets);
 
   return (
     <>
