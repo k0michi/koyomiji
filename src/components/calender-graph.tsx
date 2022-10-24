@@ -34,7 +34,7 @@ export default function CalenderGraph(props: CalenderGraphProps) {
     <table className="calender-graph">
       <tbody>
         {
-          range(beginOffset, endOffset + 1, 7).map(j => {
+          range(beginOffset - 7, endOffset + 1, 7).map(j => {
             const lastDay = add(props.begin, { days: j + 6 });
 
             if (lastDay.getDate() <= 7) {
@@ -46,10 +46,10 @@ export default function CalenderGraph(props: CalenderGraphProps) {
         }
         {
           range(0, 7, 1).map(i => <tr key={i}> {
-            range(beginOffset - 1, endOffset + 1, 7).map(j => {
+            range(beginOffset - 7, endOffset + 1, 7).map(j => {
               const index = i + j;
 
-              if (j == beginOffset - 1) {
+              if (j == beginOffset - 7) {
                 if (i % 3 == 0) {
                   const day = add(props.begin, { days: index });
                   return <td className='cell week' key={j}>{format(day, 'eee')}</td>;
