@@ -6,10 +6,10 @@ import Head from '../components/head.js';
 export default function AboutPage() {
   return (
     <>
-      <Head title="About" description="このサイトは一体何か。" />
+      <Head title="About" description="このサイトについて。" />
       <header>
         <h1>About</h1>
-        <div className="meta">このサイトは一体何か。</div>
+        <div className="meta">このサイトについて。</div>
       </header>
       <div id="body">
         <h2>サイトについて</h2>

@@ -1,8 +1,12 @@
 import config from '../config.json';
 
 export interface Category {
-  id:string;
-  name:string;
+  id: string;
+  name: string;
+}
+
+export function getFeatured(): string[] {
+  return config.featured;
 }
 
 export function getCategory(id: string) {

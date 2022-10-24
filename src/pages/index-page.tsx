@@ -6,6 +6,10 @@ import Link from '../components/link.js';
 import { subDays } from 'date-fns';
 import { Data, Model } from '../model.js';
 import { useBufferedData } from '../hooks.js';
+import * as config from '../config.js';
+import Icon from '../components/icon.js';
+import { toDisplayDateString } from '../date-format.js';
+import { getPathSegment } from '../utils.js';
 
 export default function IndexPage() {
   const data = useBufferedData<Data>();
@@ -13,28 +17,29 @@ export default function IndexPage() {
 
   const now = new Date();
   const begin = subDays(now, 364);
+  const featured = config.getFeatured();
 
   return (
     <>
-      <Head description="ようこそ。" />
+      <Head description="ようこそ、喫茶曆路へ。" />
       <header>
         <h1>Home</h1>
-        <div className="meta">ようこそ。</div>
+        <div className="meta">ようこそ、喫茶曆路へ。</div>
       </header>
       <div id="body">
         <CalenderGraph begin={begin} end={now} data={entries.map(e => new Date(e.created))} />
-        <h2><Link href="/about">プロフィール</Link></h2>
-        <p>私は一体誰か。</p>
-        <h2><Link href="/knowledge">備忘録</Link></h2>
-        <p>覚書。</p>
-        <h2><Link href="/log">雑記帳</Link></h2>
-        <p>たわいもない話を書いています。</p>
-        <h2><Link href="https://github.com/k0michi">GitHub</Link></h2>
-        <p>開発したものとか。</p>
-        <h2><Link href="https://www.twitch.tv/k0michi">Twitch</Link></h2>
-        <p>超不定期配信。</p>
-        <h2><Link href="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw">YouTube</Link></h2>
-        <p>とりあえず作ったチャンネル。</p>
+        <h2>Featured</h2>
+        {featured.map(f => data.entries[f]).map(i =>
+          <div className="summary" key={getPathSegment(i.path, 1)}>
+            <h3><Link href={`/log/${getPathSegment(i.path, 1)}`}>{i.title}</Link></h3>
+            <div className="meta">
+              <div className="number">#{getPathSegment(i.path, 1)}</div>
+              <div className="date"><Icon name="calenderIcon" /><div>{toDisplayDateString(new Date(i.created))}</div></div>
+            </div>
+            <p>{i.description}</p>
+            <hr />
+          </div>
+        )}
       </div>
     </>
   );

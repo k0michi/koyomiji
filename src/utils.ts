@@ -13,3 +13,7 @@ export function compareArray<T>(a1: Array<T>, a2: Array<T>) {
 export function toPathname(path: string[]) {
   return '/' + path.join('/');
 }
+
+export function getPathSegment(path: string, index: number) {
+  return path.split('/')[index + 1];
+}
