@@ -694,11 +694,24 @@ body.common-layout {}
 .calender-graph {
   border-collapse: separate;
   border-spacing: 2px 2px;
+  font-size: 12px;
+  line-height: 1;
 }
 
 .cell {
   width: 14px;
+  min-width: 14px;
+  max-width: 14px;
   height: 14px;
+  min-height: 14px;
+  max-height: 14px;
+  text-align: right;
+}
+
+.cell.week {
+  width: initial;
+  min-width: initial;
+  max-width: initial;
 }
 
 .cell.filled {

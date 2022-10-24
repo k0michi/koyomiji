@@ -27,6 +27,7 @@ export default function IndexPage() {
         <div className="meta">ようこそ、喫茶曆路へ。</div>
       </header>
       <div id="body">
+        <h2>Updates</h2>
         <CalenderGraph begin={begin} end={now} data={entries.map(e => new Date(e.created))} />
         <h2>Featured</h2>
         {featured.map(f => data.entries[f]).map(i =>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { nextSaturday, previousSunday, differenceInCalendarDays } from 'date-fns';
+import { nextSaturday, previousSunday, differenceInCalendarDays, add, format } from 'date-fns';
 import chroma from 'chroma-js';
 
 interface CalenderGraphProps {
@@ -34,9 +34,30 @@ export default function CalenderGraph(props: CalenderGraphProps) {
     <table className="calender-graph">
       <tbody>
         {
+          range(beginOffset, endOffset + 1, 7).map(j => {
+            const lastDay = add(props.begin, { days: j + 6 });
+
+            if (lastDay.getDate() <= 7) {
+              return <td className='cell' key={j}>{format(lastDay, 'LLL')}</td>;
+            }
+
+            return <td className='cell' key={j} />;
+          })
+        }
+        {
           range(0, 7, 1).map(i => <tr key={i}> {
-            range(beginOffset, endOffset + 1, 7).map(j => {
+            range(beginOffset - 1, endOffset + 1, 7).map(j => {
               const index = i + j;
+
+              if (j == beginOffset - 1) {
+                if (i % 3 == 0) {
+                  const day = add(props.begin, { days: index });
+                  return <td className='cell week' key={j}>{format(day, 'eee')}</td>;
+                } else {
+                  return <td className='cell week' key={j} />;
+                }
+              }
+
               let color;
 
               if (index >= 0 && index < counted.length) {
