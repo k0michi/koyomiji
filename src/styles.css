@@ -691,6 +691,10 @@ body.common-layout {}
 
 /* Calender Graph */
 
+.calender-graph-wrapper {
+  overflow-x: auto;
+}
+
 .calender-graph {
   border-collapse: separate;
   border-spacing: 2px 2px;
