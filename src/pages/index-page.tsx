@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useLoaderData, useLocation } from 'react-router';
 import CalenderGraph from '../components/calender-graph.js';
 import Head from '../components/head.js';
 import Link from '../components/link.js';
@@ -23,7 +22,7 @@ export default function IndexPage() {
     <>
       <Head description="ようこそ、喫茶曆路へ。" />
       <header>
-        <h1>Home</h1>
+        <h1>Welcome</h1>
         <div className="meta">ようこそ、喫茶曆路へ。</div>
       </header>
       <div id="body">
