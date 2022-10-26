@@ -83,6 +83,10 @@ async function processFile(p: string) {
     await model.loadDictionary(p);
     console.log(`'${p}' has been loaded`);
     return true;
+  } else if (p.endsWith('index.md')) {
+    await model.compileEntry(p);
+    console.log(`'${p}' has been loaded`);
+    return false;
   }
 
   return false;
