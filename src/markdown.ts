@@ -91,6 +91,11 @@ export function transformToDOM(node: unist.Node, document: Document) {
   } else if (node.type == 'code') {
     const code = node as mdast.Code;
     const element = document.createElement('code');
+
+    if (code.lang != undefined) {
+      element.setAttribute('lang', code.lang);
+    }
+
     element.append(code.value);
     return element;
     // } else if (node.type == 'definition') {
