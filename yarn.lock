@@ -2759,6 +2759,7 @@ __metadata:
     koa: ^2.13.4
     koa-connect: ^2.1.0
     kyoka: ^0.0.3
+    mdast-util-math: ^2.0.1
     path-to-regexp: ^6.2.1
     prismjs: ^1.28.0
     react: ^18.2.0
@@ -2898,7 +2899,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mdast-util-math@npm:^2.0.0":
+"mdast-util-math@npm:^2.0.0, mdast-util-math@npm:^2.0.1":
   version: 2.0.1
   resolution: "mdast-util-math@npm:2.0.1"
   dependencies:

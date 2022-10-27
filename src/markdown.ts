@@ -3,6 +3,7 @@ import remarkParse from "remark-parse";
 import { unified } from "unified";
 import * as unist from "unist";
 import * as mdast from "mdast";
+import * as mdastMath from "mdast-util-math";
 import { readFileUTF8 } from "./utils.js";
 import window from "@k0michi/isomorphic-dom";
 import crypto from "crypto";
@@ -46,52 +47,97 @@ export function toDOM(source: string) {
   return transformToDOM(parsed, document);
 }
 
+function transformChildren(node: unist.Parent, parent: Element | DocumentFragment) {
+  for (const child of node.children) {
+    parent.appendChild(transformToDOM(child, parent.ownerDocument));
+  }
+}
+
 export function transformToDOM(node: unist.Node, document: Document) {
   if (node.type == 'root') {
     const root = node as mdast.Root;
     const element = document.createDocumentFragment();
-
-    for (const child of root.children) {
-      element.appendChild(transformToDOM(child, document));
-    }
-
-    return element;
-  } else if (node.type == 'heading') {
-    const heading = node as mdast.Heading;
-    const element = document.createElement('h' + heading.depth);
-
-    for (const child of heading.children) {
-      element.appendChild(transformToDOM(child, document));
-    }
-
+    transformChildren(root, element);
     return element;
   } else if (node.type == 'paragraph') {
     const paragraph = node as mdast.Paragraph;
     const element = document.createElement('p');
-
-    for (const child of paragraph.children) {
-      element.appendChild(transformToDOM(child, document));
-    }
-
+    transformChildren(paragraph, element);
     return element;
-  } else if (node.type == 'link') {
-    const link = node as mdast.Link;
-    const element = document.createElement('a');
-    element.setAttribute('href', link.url);
-
-    for (const child of link.children) {
-      element.appendChild(transformToDOM(child, document));
-    }
-
+  } else if (node.type == 'heading') {
+    const heading = node as mdast.Heading;
+    const element = document.createElement('h' + heading.depth);
+    transformChildren(heading, element);
+    return element;
+  } else if (node.type == 'thematicBreak') {
+    const element = document.createElement('hr');
+    return element;
+  } else if (node.type == 'blockquote') {
+    const blockquote = node as mdast.Blockquote;
+    // This may change in the future
+    const element = document.createElement('blockquote');
+    transformChildren(blockquote, element);
+    return element;
+  } else if (node.type == 'list') {
+    const list = node as mdast.List;
+    const element = document.createElement(list.ordered ? 'ol' : 'ul');
+    transformChildren(list, element);
+    return element;
+  } else if (node.type == 'listItem') {
+    const listItem = node as mdast.ListItem;
+    const element = document.createElement('li');
+    transformChildren(listItem, element);
+    return element;
+  } else if (node.type == 'code') {
+    const code = node as mdast.Code;
+    const element = document.createElement('code');
+    element.append(code.value);
+    return element;
+    // } else if (node.type == 'definition') {
+  } else if (node.type == 'text') {
+    const text = node as mdast.Text;
+    return document.createTextNode(text.value);
+  } else if (node.type == 'emphasis') {
+    const emphasis = node as mdast.Emphasis;
+    const element = document.createElement('i');
+    transformChildren(emphasis, element);
+    return element;
+  } else if (node.type == 'strong') {
+    const strong = node as mdast.Strong;
+    const element = document.createElement('b');
+    transformChildren(strong, element);
     return element;
   } else if (node.type == 'inlineCode') {
     const inlineCode = node as mdast.InlineCode;
     const element = document.createElement('code');
     element.append(inlineCode.value);
     return element;
-  } else if (node.type == 'text') {
-    const text = node as mdast.Text;
-    return document.createTextNode(text.value);
+  } else if (node.type == 'break') {
+    const element = document.createElement('br');
+    return element;
+  } else if (node.type == 'link') {
+    const link = node as mdast.Link;
+    const element = document.createElement('a');
+    element.setAttribute('href', link.url);
+    transformChildren(link, element);
+    return element;
+  } else if (node.type == 'image') {
+    const image = node as mdast.Image;
+    const element = document.createElement('img');
+    element.setAttribute('src', image.url);
+    return element;
+    // } else if (node.type == 'linkReference') {
+    // } else if (node.type == 'imageReference') {
+  } else if (node.type == 'math') {
+    const math = node as mdastMath.Math;
+    const element = document.createElement('math');
+    element.append(math.value);
+    return element;
+  } else if (node.type == 'inlineMath') {
+    const inlineMath = node as mdastMath.InlineMath;
+    const element = document.createElement('math');
+    element.append(inlineMath.value);
+    return element;
   }
 
   throw new Error(`Type ${node.type} is not supported`);
