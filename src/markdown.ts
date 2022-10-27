@@ -36,8 +36,8 @@ export async function toKTML(source: string) {
 </ktml>`;
 }
 
-export async function toDOM(source: string) {
-  const parsed = await unified()
+export function toDOM(source: string) {
+  const parsed = unified()
     .use(remarkParse)
     .use(remarkMath)
     .parse(source);
