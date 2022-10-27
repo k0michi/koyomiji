@@ -74,7 +74,7 @@ async function listen(app: Koa, port: number) {
   });
 }
 
-async function processFile(p: string) {
+async function loadFile(p: string) {
   if (p.endsWith('index.ktml')) {
     await model.loadEntry(p);
     console.log(`'${p}' has been loaded`);
@@ -83,18 +83,21 @@ async function processFile(p: string) {
     await model.loadDictionary(p);
     console.log(`'${p}' has been loaded`);
     return true;
-  } else if (p.endsWith('index.md')) {
-    await model.compileEntry(p);
-    console.log(`'${p}' has been loaded`);
-    return false;
   }
 
   return false;
 }
 
+async function compileFile(p: string) {
+  if (p.endsWith('index.md')) {
+    await model.compileEntry(p);
+    console.log(`'${p}' has been loaded`);
+  }
+}
+
 async function prepare() {
   for (const p of await glob('**/*', { cwd: contentRoot, nodir: true })) {
-    processFile(p);
+    loadFile(p);
   }
 }
 
@@ -102,8 +105,10 @@ function registerHandler(vite: ViteDevServer) {
   chokidar.watch('.', { cwd: contentRoot }).on('all', async (event, p) => {
     try {
       if (event == 'change') {
-        if (await processFile(p)) {
+        if (await loadFile(p)) {
           vite.ws.send({ type: 'full-reload' });
+        } else {
+          compileFile(p);
         }
       }
     } catch (e) {
