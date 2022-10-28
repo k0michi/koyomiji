@@ -535,11 +535,9 @@ body.common-layout {}
 }
 
 #main ul li {
-  list-style: none;
 }
 
 #main ul li:before {
-  content: "- ";
 }
 
 #main hr {
