@@ -34,19 +34,21 @@ export default function CalenderGraph(props: CalenderGraphProps) {
     <div className="calender-graph-wrapper">
       <table className="calender-graph">
         <tbody>
-          {
-            range(beginOffset - 7, endOffset + 1, 7).map(j => {
-              const lastDay = add(props.begin, { days: j + 6 });
+          <tr>
+            {
+              range(beginOffset - 7, endOffset + 1, 7).map(j => {
+                const lastDay = add(props.begin, { days: j + 6 });
 
-              if (lastDay.getDate() <= 7) {
-                return <td className='cell' key={j}>{format(lastDay, 'LLL')}</td>;
-              }
+                if (lastDay.getDate() <= 7) {
+                  return <td className='cell' key={j}>{format(lastDay, 'LLL')}</td>;
+                }
 
-              return <td className='cell' key={j} />;
-            })
-          }
+                return <td className='cell' key={j} />;
+              })
+            }
+          </tr>
           {
-            range(0, 7, 1).map(i => <tr key={i}> {
+            range(0, 7, 1).map(i => <tr key={i}>{
               range(beginOffset - 7, endOffset + 1, 7).map(j => {
                 const index = i + j;
 
