@@ -5,4 +5,7 @@ import 'prismjs/components/prism-python.js';
 import 'prismjs/components/prism-bash.js';
 import 'prismjs/components/prism-d.js';
 import 'prismjs/components/prism-yaml.js';
-import 'prismjs/components/prism-json';
+import 'prismjs/components/prism-json.js';
+import 'prismjs/components/prism-markdown.js';
+import 'prismjs/components/prism-ignore.js';
+import 'prismjs/components/prism-toml.js';
