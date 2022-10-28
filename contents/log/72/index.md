@@ -1,4 +1,4 @@
-# HugoとGitHub Pagesを使って手軽にサイトを作る方法
+# HugoとGitHub Pagesを使ったお手軽サイト構築
 
 静的サイトジェネレーターとGitHub Pagesを使えば、ものの数分で自分のサイトを作って公開することができます。ということで今回は、Hugoで作ったサイトをGitHub Pagesに公開するまでの手順を説明していきます。
 
@@ -207,3 +207,5 @@ Pushされたタイミングで先ほど設定したワークフローが自動�
 https://[ユーザー名].github.io/[リポジトリ名] にアクセスすると、実際にサイトがGitHub Pages上で公開されていることがわかります。
 ![サイト](site.png)
 
+## 参考
+今回構築したサイトは、[https://k0michi.github.io/hugo-example/](https://k0michi.github.io/hugo-example/)から見ることができます。リポジトリは、[k0michi/hugo-example](https://github.com/k0michi/hugo-example)にあります。

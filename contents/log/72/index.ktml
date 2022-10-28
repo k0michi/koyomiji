@@ -1,9 +1,10 @@
 <ktml version="0.1">
 
 <head>
-  <title>HugoとGitHub Pagesを使って手軽にサイトを作る方法</title>
+  <title>HugoとGitHub Pagesを使ったお手軽サイト構築</title>
   <id>53867779-8b54-4290-977c-a14aaaa2af95</id>
   <created>2022-10-28T22:28:19+09:00</created>
+  <modified>2022-10-28T22:44:44+09:00</modified>
 </head>
 
 <body>
@@ -142,7 +143,7 @@ jobs:
 % git push -u origin main</code><h2>完成</h2><p>Pushされたタイミングで先ほど設定したワークフローが自動的に実行され、GitHub Pagesにサイトがデプロイされます。Actionsを選択し、以下のようにチェックマークが表示されていれば、デプロイに成功しています。
 <img src="github-actions.png"/>
 https://[ユーザー名].github.io/[リポジトリ名] にアクセスすると、実際にサイトがGitHub Pages上で公開されていることがわかります。
-<img src="site.png"/></p>
+<img src="site.png"/></p><h2>参考</h2><p>今回構築したサイトは、<a href="https://k0michi.github.io/hugo-example/">https://k0michi.github.io/hugo-example/</a>から見ることができます。リポジトリは、<a href="https://github.com/k0michi/hugo-example">k0michi/hugo-example</a>にあります。</p>
 </body>
 
 </ktml>
