@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { nextSaturday, previousSunday, differenceInCalendarDays, add, format } from 'date-fns';
+import { nextSaturday, previousSunday, differenceInCalendarDays, add, format, isSaturday, isSunday } from 'date-fns';
 import chroma from 'chroma-js';
 
 interface CalenderGraphProps {
@@ -27,8 +27,8 @@ export default function CalenderGraph(props: CalenderGraphProps) {
     setCounted(counted);
   }, []);
 
-  const beginOffset = differenceInCalendarDays(previousSunday(props.begin), props.begin);
-  const endOffset = differenceInCalendarDays(nextSaturday(props.end), props.begin);
+  const beginOffset = differenceInCalendarDays(isSunday(props.begin) ? props.begin : previousSunday(props.begin), props.begin);
+  const endOffset = differenceInCalendarDays(isSaturday(props.end) ? props.end : nextSaturday(props.end), props.begin);
 
   return (
     <div className="calender-graph-wrapper">
