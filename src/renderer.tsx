@@ -43,23 +43,23 @@ export function createRenderer(outRoot: string | null, template: string, model: 
     return render(template, '/project', '/project');
   });
 
-  renderer.use('/knowledge/(index.html)?', (ctx) => {
-    model.sitemap.add('/knowledge');
-    return render(template, '/knowledge', '/knowledge', { entries: getEntries(), isIndexComplete: true });
+  renderer.use('/reference/(index.html)?', (ctx) => {
+    model.sitemap.add('/reference');
+    return render(template, '/reference', '/reference', { entries: getEntries(), isIndexComplete: true });
   });
 
-  renderer.use('/knowledge/:category/:id/(index.html)?', (ctx) => {
-    const pathname = toPathname(['knowledge', ctx.params['category'], ctx.params['id']]);
+  renderer.use('/reference/:category/:id/(index.html)?', (ctx) => {
+    const pathname = toPathname(['reference', ctx.params['category'], ctx.params['id']]);
     const entry = model.getEntry(pathname);
     model.sitemap.add(pathname, entry.modified);
 
     const initialData: Data = { entries: {}, isIndexComplete: false };
     initialData.entries[pathname] = entry;
-    return render(template, pathname, '/knowledge/:category/:id', initialData);
+    return render(template, pathname, '/reference/:category/:id', initialData);
   });
 
-  renderer.use('/knowledge/:category/:id/data.json', (ctx) => {
-    const pathname = toPathname(['knowledge', ctx.params['category'], ctx.params['id']]);
+  renderer.use('/reference/:category/:id/data.json', (ctx) => {
+    const pathname = toPathname(['reference', ctx.params['category'], ctx.params['id']]);
     const entry = model.getEntry(pathname);
     const data = {entries: {
       [pathname]: entry
@@ -68,8 +68,8 @@ export function createRenderer(outRoot: string | null, template: string, model: 
     return JSON.stringify(data);
   });
 
-  renderer.use('/knowledge/:category/:id/:path*', (ctx) => {
-    return fs.readFile(`${model.rootDir}/knowledge/${ctx.params.category}/${ctx.params.id}/${ctx.params.path.join('/')}`);
+  renderer.use('/reference/:category/:id/:path*', (ctx) => {
+    return fs.readFile(`${model.rootDir}/reference/${ctx.params.category}/${ctx.params.id}/${ctx.params.path.join('/')}`);
   });
 
   renderer.use('/log/(index.html)?', (ctx) => {

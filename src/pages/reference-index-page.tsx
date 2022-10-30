@@ -7,16 +7,16 @@ import Head from '../components/head.js';
 import { useBufferedData } from '../hooks.js';
 import { getCategory } from '../config.js';
 
-export default function KnowledgeIndexPage() {
+export default function ReferenceIndexPage() {
   const data = useBufferedData<Data>();
-  const entries = Object.values(data.entries).filter(e => e.path.startsWith('/knowledge/'));
+  const entries = Object.values(data.entries).filter(e => e.path.startsWith('/reference/'));
   const map = mapEntries(entries);
 
   return (
     <>
-      <Head title="Knowledge" description="学んだことの覚書。" />
+      <Head title="Reference" description="学んだことの覚書。" />
       <header>
-        <h1>Knowledge</h1>
+        <h1>Reference</h1>
         <div className="meta">学んだことの覚書。</div>
       </header>
       <div id="body">

@@ -3,8 +3,8 @@ import { Routes, Route, Outlet, RouteObject } from 'react-router';
 import AboutPage from "./pages/about-page.js";
 import CommonLayout from './components/common-layout.js';
 import IndexPage from "./pages/index-page.js";
-import KnowledgeIndexPage from "./pages/knowledge-index-page.js";
-import KnowledgePage from "./pages/knowledge-page.js";
+import ReferenceIndexPage from "./pages/reference-index-page.js";
+import ReferencePage from "./pages/reference-page.js";
 import LogIndexPage from "./pages/log-index-page.js";
 import LogPage from "./pages/log-page.js";
 import NotFoundPage from './pages/not-found-page.js';
@@ -57,18 +57,18 @@ export function createRoutes(model: Model): RouteObject[] {
               element: <ProjectPage />
             },
             {
-              path: 'knowledge/:category/:id',
-              id: '/knowledge/:category/:id',
-              element: <KnowledgePage />,
+              path: 'reference/:category/:id',
+              id: '/reference/:category/:id',
+              element: <ReferencePage />,
               loader: ({ params }) => {
-                const path = toPathname(['knowledge', params.category!, params.id!, 'data.json']);
+                const path = toPathname(['reference', params.category!, params.id!, 'data.json']);
                 return fetch(path).then(d => d.json());
               }
             },
             {
-              path: 'knowledge',
-              id: '/knowledge',
-              element: <KnowledgeIndexPage />,
+              path: 'reference',
+              id: '/reference',
+              element: <ReferenceIndexPage />,
               loader: () => fetch('/data.json').then(d => d.json())
             },
             {

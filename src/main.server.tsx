@@ -34,7 +34,7 @@ const model = new ServerModel(contentRoot);
   await renderer.render('/about/index.html');
   await renderer.render('/project/index.html');
   await renderer.render('/log/index.html');
-  await renderer.render('/knowledge/index.html');
+  await renderer.render('/reference/index.html');
   await renderer.render('/novel/index.html');
   await renderer.render('/artwork/index.html');
   await renderer.render('/dictionary/index.html');

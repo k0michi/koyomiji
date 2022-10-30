@@ -19,7 +19,7 @@ export default function AboutPage() {
         <ul>
           <li><Link href="/project">Projects</Link>には、私が開発している(していた)いくつかのソフトウェアの紹介があります。</li>
           <li><Link href="/log">Logs</Link>は、私のブログです。日記やエッセイなどを、形式に囚われず自由に書いています。</li>
-          <li><Link href="/knowledge">Knowledge</Link>は、私が学んだことの備忘録です。</li>
+          <li><Link href="/reference">Reference</Link>は、私が学んだことの備忘録です。</li>
           <li><Link href="/dictionary">Dictionary</Link>は、私が出逢った英単語をまとめた辞書です。</li>
         </ul>
         <h2>フィードについて</h2>

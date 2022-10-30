@@ -11,9 +11,9 @@ import { toPathname } from '../utils.js';
 import { useBufferedData } from '../hooks.js';
 import { getCategory } from '../config.js';
 
-export default function KnowledgePage() {
+export default function ReferencePage() {
   const params = useParams();
-  const path = ['knowledge', params.category!, params.id!];
+  const path = ['reference', params.category!, params.id!];
   const data = useBufferedData<Data>();
   const entry = data.entries[toPathname(path)];
   const categoryName = getCategory(params.category!).name;
