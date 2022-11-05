@@ -9,12 +9,11 @@ import { parseXML } from '../xml.js';
 import Head from '../components/head.js';
 import { toDisplayDateString } from '../date-format.js';
 import { toPathname } from '../utils.js';
-import { useBufferedData } from '../hooks.js';
 
 export default function ArtworkPage() {
   const params = useParams();
   const path = ['artwork', params.id!];
-  const data = useBufferedData<Data>();
+  const data = useLoaderData() as Data;
   const entry = data.entries[toPathname(path)];
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
 

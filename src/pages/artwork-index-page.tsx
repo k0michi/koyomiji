@@ -6,14 +6,13 @@ import { useLoaderData, useLocation } from 'react-router';
 import Link from '../components/link.js';
 import { toPathname } from '../utils.js';
 import Head from '../components/head.js';
-import { useBufferedData } from '../hooks.js';
 
 function getID(p: Entry) {
   return p.path[1];
 }
 
 export default function ArtworkIndexPage() {
-  const data = useBufferedData<Data>();
+  const data = useLoaderData() as Data;
   const entries = Object.values(data.entries).filter(e => e.path.startsWith('/artwork'));
   entries.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));
   const model = useModel<Model>();

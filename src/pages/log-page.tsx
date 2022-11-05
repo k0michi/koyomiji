@@ -10,12 +10,11 @@ import Head from '../components/head.js';
 import { toDisplayDateString } from '../date-format.js';
 import { Entry } from '../entry.js';
 import { toPathname } from '../utils.js';
-import { useBufferedData } from '../hooks.js';
 
 export default function LogPage() {
   const params = useParams();
   const path = ['log', params.id!];
-  const data = useBufferedData<Data>();
+  const data = useLoaderData() as Data;
   const entry = data.entries[toPathname(path)];
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
 

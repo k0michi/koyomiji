@@ -8,13 +8,12 @@ import Icon from '../components/icon.js';
 import Head from '../components/head.js';
 import { toDisplayDateString } from '../date-format.js';
 import { toPathname } from '../utils.js';
-import { useBufferedData } from '../hooks.js';
 import { getCategory } from '../config.js';
 
 export default function ReferencePage() {
   const params = useParams();
   const path = ['reference', params.category!, params.id!];
-  const data = useBufferedData<Data>();
+  const data = useLoaderData() as Data;
   const entry = data.entries[toPathname(path)];
   const categoryName = getCategory(params.category!).name;
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);

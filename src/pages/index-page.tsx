@@ -4,14 +4,14 @@ import Head from '../components/head.js';
 import Link from '../components/link.js';
 import { subDays } from 'date-fns';
 import { Data, Model } from '../model.js';
-import { useBufferedData } from '../hooks.js';
 import * as config from '../config.js';
 import Icon from '../components/icon.js';
 import { toDisplayDateString } from '../date-format.js';
 import { getPathSegment } from '../utils.js';
+import { useLoaderData } from 'react-router';
 
 export default function IndexPage() {
-  const data = useBufferedData<Data>();
+  const data = useLoaderData() as Data;
   const entries = Object.values(data.entries);
 
   const now = new Date();

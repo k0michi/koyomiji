@@ -9,7 +9,6 @@ import Icon from '../components/icon.js';
 import Head from '../components/head.js';
 import { Helmet } from 'react-helmet';
 import { toPathname } from '../utils.js';
-import { useBufferedData } from '../hooks.js';
 
 interface NovelStorage {
   locations: Record<string, number | undefined>;
@@ -49,7 +48,7 @@ function saveLocation(pathname: string, location: number) {
 export default function NovelPage() {
   const params = useParams();
   const path = ['novel', params.novel!, params.chapter!];
-  const data = useBufferedData<Data>();
+  const data = useLoaderData() as Data;
   const entry = data.entries[toPathname(path)];
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
   const mainRef = React.useRef<HTMLElement>(null);
