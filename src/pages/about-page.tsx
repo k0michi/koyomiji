@@ -2,9 +2,16 @@ import * as React from 'react';
 import { useLocation } from 'react-router';
 import Link from '../components/link.js';
 import Head from '../components/head.js';
-import profile from '../assets/profile.png';
 
 export default function AboutPage() {
+  const [profile, setProfile] = React.useState<string>();
+
+  React.useEffect(() => {
+    (async () => {
+      setProfile((await import('../assets/profile.png')).default);
+    })();
+  }, []);
+
   return (
     <>
       <Head title="About" description="このサイトについて。" />
