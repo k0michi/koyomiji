@@ -547,7 +547,13 @@ body.common-layout {}
   background-color: var(--color-5);
 }
 
-#main img {
+#body>img {
+  display: block;
+  margin: 0 auto 16px auto;
+  width: 80%;
+}
+
+#main img.artwork {
   display: block;
   margin: 0 auto 16px auto;
   width: 80%;
@@ -681,7 +687,7 @@ body.common-layout {}
 }
 
 .thumbnail img {
-  height: 192px;
+  height: 256px;
   border-radius: 2px;
 }
 
