@@ -21,6 +21,7 @@ export default function AboutPage() {
           <li><Link href="/log">Logs</Link>は、私のブログです。日記やエッセイなどを、形式に囚われず自由に書いています。</li>
           <li><Link href="/reference">Reference</Link>は、私が学んだことの備忘録です。</li>
           <li><Link href="/dictionary">Dictionary</Link>は、私が出逢った英単語をまとめた辞書です。</li>
+          <li><Link href="/artwork">Artworks</Link>では、私が描いたイラストを展示してあります。</li>
         </ul>
         <h2>フィードについて</h2>
         <p>サイトのAtomフィードは<Link href="https://koyomiji.com/feed.xml">https://koyomiji.com/feed.xml</Link>にあります。このサイトの更新情報を、お好みのRSSリーダーで取得することが可能です。</p>

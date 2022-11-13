@@ -19,10 +19,10 @@ export default function ArtworkIndexPage() {
 
   return (
     <>
-      <Head title="Artworks" description="🚧 工事中" />
+      <Head title="Artworks" description="描いたイラスト。" />
       <header>
         <h1>Artworks</h1>
-        <div className="meta">🚧 工事中</div>
+        <div className="meta">描いたイラスト。</div>
       </header>
       <div id="body">
         <div className="thumbnail-list">
