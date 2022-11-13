@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useLocation } from 'react-router';
 import Link from '../components/link.js';
 import Head from '../components/head.js';
+import profile from '../assets/profile.png';
 
 export default function AboutPage() {
   return (
@@ -13,6 +14,13 @@ export default function AboutPage() {
       </header>
       <div id="body">
         <h2>サイトについて</h2>
+        <div className='profile'>
+          <img src={profile} />
+          <div>
+            <p className='name'>曆月こみち</p>
+            <p className='id'>@k0michi</p>
+          </div>
+        </div>
         <p>当サイト、喫茶<ruby>曆路<rt>こよみじ</rt></ruby> を運営している、<ruby>曆月<rt>れきづき</rt></ruby>こみち と申します。このサイトは、私が気まぐれに勉強したことを書いたり、日記を書いたり、創作したりするための場所です。プログラミングや英語、数学に関する内容が多いですが、これらに限らず私の興味のあることを取り扱っていきます。</p>
         <p>特段の明記がない限り、サイト上のコンテンツは<Link href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</Link>に準拠することとします。</p>
         <h2>ページについて</h2>

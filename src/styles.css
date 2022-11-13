@@ -547,13 +547,7 @@ body.common-layout {}
   background-color: var(--color-5);
 }
 
-#body>img {
-  display: block;
-  margin: 0 auto 16px auto;
-  width: 80%;
-}
-
-#main img.artwork {
+#main img.img {
   display: block;
   margin: 0 auto 16px auto;
   width: 80%;
@@ -651,6 +645,37 @@ body.common-layout {}
   color: var(--color-3);
 }
 
+
+/* Common Layout - Main - About */
+
+#main .profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+#main .profile img {
+  display: block;
+  --profile-size: 80px;
+  width: var(--profile-size);
+  border-radius: calc(var(--profile-size) / 2);
+}
+
+#main .profile .name {
+  font-size: 20px;
+  font-weight: bolder;
+  font-family: var(--font-serif);
+}
+
+#main .profile .id {
+  color: var(--color-3);
+  font-family: var(--font-monospace)
+}
+
+
 /* Common Layout - Main - Dictionary */
 
 .dictionary-entry {
@@ -689,6 +714,12 @@ body.common-layout {}
 .thumbnail img {
   height: 256px;
   border-radius: 2px;
+}
+
+#main img.artwork {
+  display: block;
+  margin: 0 auto 16px auto;
+  width: 80%;
 }
 
 

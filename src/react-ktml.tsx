@@ -1,5 +1,6 @@
 import * as React from "react";
 import Code from "./components/code.js";
+import Image from "./components/image.js";
 import Link from "./components/link.js";
 import Math from "./components/math.js";
 import { Fragment } from "./xml.js";
@@ -19,6 +20,10 @@ export function reactFactory(type: string | Symbol, props: any, ...children: any
 
   if (type == 'a') {
     return React.createElement(Link, props, ...children);
+  }
+
+  if (type == 'img') {
+    return React.createElement(Image, props, ...children);
   }
 
   return React.createElement(type as string, props, ...children);
