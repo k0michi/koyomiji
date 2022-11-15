@@ -2770,7 +2770,7 @@ __metadata:
     react-transition-group: ^4.4.5
     remark-math: ^5.1.1
     remark-parse: ^10.0.1
-    rollup-plugin-license: 2.8.0
+    rollup-plugin-license: ^3.0.1
     serve: ^13.0.2
     ts-node: ^10.8.0
     typescript: ^4.6.4
@@ -3998,9 +3998,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup-plugin-license@npm:2.8.0":
-  version: 2.8.0
-  resolution: "rollup-plugin-license@npm:2.8.0"
+"rollup-plugin-license@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "rollup-plugin-license@npm:3.0.1"
   dependencies:
     commenting: ~1.1.0
     glob: ~7.2.0
@@ -4012,8 +4012,8 @@ __metadata:
     spdx-expression-validate: ~2.0.0
     spdx-satisfies: ~5.0.1
   peerDependencies:
-    rollup: ^1.0.0 || ^2.0.0
-  checksum: 727610c519e69cc654bb453e5b2600f812ab01641cac85968fb44e9b83b2385b2f18a6eaf1126e744176e3c5e140482d04c3996bbd4e14cb2013594e1a8e5cab
+    rollup: ^1.0.0 || ^2.0.0 || ^3.0.0
+  checksum: bff41568d71f54968c664a995190a1d2e0be1b5fa87983d3ea0e70d0c78c943dad01f43dd0be07883b6960801af61d48e6f1a611e967ac2f8271f7cf96d39a69
   languageName: node
   linkType: hard
 
