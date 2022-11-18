@@ -19,10 +19,10 @@ export default function LogIndexPage() {
 
   return (
     <>
-      <Head title="Logs" description="ブログ。日記やエッセイなど。" />
+      <Head title="Logs" description="取り止めのないブログ。" />
       <header>
         <h1>Logs</h1>
-        <div className="meta">ブログ。日記やエッセイなど。</div>
+        <div className="meta">取り止めのないブログ。</div>
       </header>
       <div id="body">
         {entries.map(i =>
