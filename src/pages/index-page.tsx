@@ -20,10 +20,10 @@ export default function IndexPage() {
 
   return (
     <>
-      <Head description="ようこそ、喫茶曆路へ。" />
+      <Head description="ようこそ、喫茶＊曆路へ。" />
       <header>
         <h1>Welcome</h1>
-        <div className="meta">ようこそ、喫茶曆路へ。</div>
+        <div className="meta">ようこそ、喫茶＊曆路へ。</div>
       </header>
       <div id="body">
         <h2>Updates</h2>
