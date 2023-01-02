@@ -15,7 +15,7 @@ export default function Link(props: LinkProps) {
   const handleClick = ReactRouterDOM.useLinkClickHandler(props.href);
 
   return (external ?
-    <a href={props.href} className={props.className} aria-label={props['aria-label']}>{props.children}</a>
+    <a href={props.href} className={props.className} aria-label={props['aria-label']} target="_blank">{props.children}</a>
     :
     <a href={props.href} className={props.className} aria-label={props['aria-label']} onClick={e => {
       e.preventDefault();
