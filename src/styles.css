@@ -373,12 +373,11 @@ body.common-layout {}
   width: fit-content;
   margin-top: auto;
   margin-bottom: auto;
-  gap: 4px;
+  gap: 10px;
 }
 
 #icons>li {
   list-style: none;
-  margin-right: 6px;
 }
 
 #icons>li svg {
