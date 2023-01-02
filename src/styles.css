@@ -272,12 +272,12 @@ body.common-layout {}
   flex-direction: row;
   align-items: center;
   gap: 8px;
-  transition: color .5s ease;
+  transition: color .25s ease;
   position: relative;
 }
 
 #menu>li>a svg {
-  transition: color .5s ease;
+  transition: color .25s ease;
 }
 
 #menu>li>a::before {
@@ -373,7 +373,7 @@ body.common-layout {}
   width: fit-content;
   margin-top: auto;
   margin-bottom: auto;
-  gap: 10px;
+  gap: 8px;
 }
 
 #icons>li {
@@ -384,6 +384,41 @@ body.common-layout {}
   stroke-width: 1.35px;
   width: 25px;
   height: 25px;
+}
+
+#icons>li>a {
+  padding: 2px;
+  display: inline-flex;
+  position: relative;
+}
+
+#icons>li>a svg {
+  transition: color .25s ease;
+}
+
+#icons>li>a::before {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  z-index: -1;
+  width: 100%;
+  height: 0px;
+  background: var(--color-2);
+  transition: height .25s ease;
+}
+
+#icons>li>a:hover::before {
+  height: 100%;
+}
+
+#icons>li svg {
+  color: var(--color-2);
+}
+
+#icons>li>a:hover,
+#icons>li>a:hover svg {
+  color: var(--color-1);
 }
 
 
