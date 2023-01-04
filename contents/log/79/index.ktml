@@ -1,0 +1,16 @@
+<ktml version="0.1">
+
+<head>
+  <title>Python向けパッケージマネージャ Poetry を試す</title>
+  <id>55532f00-9f9a-4f70-ad48-bb7c5b2204a7</id>
+  <created>2023-01-04T23:01:30+09:00</created>
+</head>
+
+<body>
+  <p>Pythonに触れる度に、毎回どのパッケージマネージャ・仮想環境を使ってプロジェクトの環境を構築すれば良いのかがわからず躓いてしまうのですが、<a href="https://python-poetry.org/">Poetry</a>なる新しいパッケージマネージャが登場しているようなので使ってしました。私はいつもnpmやYarnを使っているのですが、Poetryのコマンドラインインターフェースはそれらに近い印象なので、気に入っています。依存関係がTOMLファイルに記述されるのも良いです。</p><p><a href="https://python-poetry.org/docs/">公式のインストール手順</a>では、シェルスクリプトからインストールしているようですが、brewでもインストールすることができました。</p><code lang="bash">% brew install poetry</code><p>で、インストールすることができます。パスも自動で通るようです。</p><code lang="bash">% poetry --version
+Poetry (version 1.3.1)</code><h2>コマンド</h2><p>よく使うであろう幾つかのコマンドです。これら以外にも、パッケージをパブリッシュするための機能もあるようです。</p><h3>new</h3><p>指定したディレクトリに新しいプロジェクトを生成します。</p><code lang="bash">% poetry new &lt;project_name&gt;</code><h3>init</h3><p>現在のディレクトリに<code>pyproject.toml</code>を作成します。対話的なインターフェースです。</p><code lang="bash">% poetry init</code><h3>add</h3><p>指定したパッケージをプロジェクトにインストールします。</p><code lang="bash">% poetry add &lt;package_name&gt;</code><h3>remove</h3><p>指定したパッケージをプロジェクトから削除します。</p><code lang="bash">% poetry remove &lt;package_name&gt;</code><h3>install</h3><p>プロジェクトの<code>pyproject.toml</code>に記されたパッケージをインストールします。</p><code lang="bash">% poetry install</code><h3>update</h3><p>プロジェクトの<code>pyproject.toml</code>の全ての依存パッケージをアップデートします。指定したパッケージだけをアップデートすることもできます。</p><code lang="bash">% poetry update
+% poetry update &lt;package_name&gt;</code><h3>show</h3><p>インストールされたパッケージの情報を表示します。パッケージ名を指定すると、詳細な情報が表示されます。</p><code lang="bash">% poetry show
+% poetry show &lt;package_name&gt;</code><h3>run</h3><p>プロジェクトのvirtualenv環境内でコマンドを実行します。以下の例では、main.pyを実行します。</p><code lang="bash">% poetry run python main.py</code><p><code>pyproject.toml</code>に記述されているスクリプトを実行することもできるようです。</p><h3>search</h3><p>パッケージを検索します。</p><code lang="bash">% poetry run &lt;keyword&gt;</code><h3>list</h3><p>Poetryのコマンドを一覧表示します。</p><code lang="bash">% poetry list</code>
+</body>
+
+</ktml>
