@@ -82,7 +82,7 @@ Poetry (version 1.3.1)
 
 パッケージを検索します。
 ```bash
-% poetry run <keyword>
+% poetry search <keyword>
 ```
 
 ### list
