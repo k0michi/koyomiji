@@ -5,7 +5,7 @@ import * as KDML from "./kdml.js";
 import { readFileUTF8, toPathname } from "./utils.js";
 import Sitemap from "./sitemap.js";
 import * as fs from "fs/promises";
-import { toKTML } from "./markdown.js";
+import { toKTML } from "./format/markdown.js";
 
 export class ServerModel {
   rootDir: string;
