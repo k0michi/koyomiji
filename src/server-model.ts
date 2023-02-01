@@ -1,7 +1,7 @@
 import path from "path";
 import { Dictionary, Entry } from "./entry.js";
-import { preprocess } from "./ktml.js";
-import * as KDML from "./kdml.js";
+import { preprocess } from "./format/ktml.js";
+import * as KDML from "./format/kdml.js";
 import { readFileUTF8, toPathname } from "./utils.js";
 import Sitemap from "./sitemap.js";
 import * as fs from "fs/promises";
