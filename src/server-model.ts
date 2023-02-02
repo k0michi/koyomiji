@@ -46,7 +46,7 @@ export class ServerModel {
   async compileEntry(pathname: string) {
     const normalized = toPathname(pathname.split('/').slice(0, -1));
     const file = await readFileUTF8(path.posix.join(this.rootDir, pathname));
-    const xmlContent = await toKTML(file);
+    const xmlContent = toKTML(file);
     const dest = path.join(this.rootDir, normalized, 'index.ktml');
     await fs.writeFile(dest, xmlContent);
     await this.loadEntry(path.join(normalized, 'index.ktml'));

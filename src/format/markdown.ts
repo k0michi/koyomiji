@@ -9,8 +9,8 @@ import window from "@k0michi/isomorphic-dom";
 import crypto from "crypto";
 import { toISOStringJST } from "../date-format.js";
 
-export async function toKTML(source: string) {
-  const dom = await toDOM(source) as HTMLElement;
+export function toKTML(source: string) {
+  const dom = toDOM(source) as HTMLElement;
   let title;
   let h1 = dom.querySelector('h1');
 
