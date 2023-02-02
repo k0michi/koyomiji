@@ -92,6 +92,9 @@ async function compileFile(p: string) {
   if (p.endsWith('index.md')) {
     await model.compileEntry(p);
     console.log(`'${p}' has been loaded`);
+  } else if (p.endsWith('index.himd')) {
+    await model.compileEntry(p);
+    console.log(`'${p}' has been loaded`);
   }
 }
 

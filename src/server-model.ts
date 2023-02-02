@@ -6,6 +6,7 @@ import { readFileUTF8, toPathname } from "./utils.js";
 import Sitemap from "./sitemap.js";
 import * as fs from "fs/promises";
 import { toKTML } from "./format/markdown.js";
+import { parse } from "./format/himd.js";
 
 export class ServerModel {
   rootDir: string;
@@ -44,11 +45,24 @@ export class ServerModel {
   }
 
   async compileEntry(pathname: string) {
-    const normalized = toPathname(pathname.split('/').slice(0, -1));
-    const file = await readFileUTF8(path.posix.join(this.rootDir, pathname));
-    const xmlContent = toKTML(file);
-    const dest = path.join(this.rootDir, normalized, 'index.ktml');
-    await fs.writeFile(dest, xmlContent);
-    await this.loadEntry(path.join(normalized, 'index.ktml'));
+    if (pathname.endsWith('.md')) {
+      const normalized = toPathname(pathname.split('/').slice(0, -1));
+      const file = await readFileUTF8(path.posix.join(this.rootDir, pathname));
+      const xmlContent = toKTML(file);
+      const dest = path.join(this.rootDir, normalized, 'index.ktml');
+      await fs.writeFile(dest, xmlContent);
+      await this.loadEntry(path.join(normalized, 'index.ktml'));
+    } else if (pathname.endsWith('.himd')) {
+      const normalized = toPathname(pathname.split('/').slice(0, -1));
+      const file = await readFileUTF8(path.posix.join(this.rootDir, pathname));
+      const parsed = parse(file);
+      console.log(parsed)
+
+      /*
+      const xmlContent = toKTML(file);
+      const dest = path.join(this.rootDir, normalized, 'index.ktml');
+      await fs.writeFile(dest, xmlContent);
+      await this.loadEntry(path.join(normalized, 'index.ktml'));*/
+    }
   }
 }

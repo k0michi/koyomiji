@@ -13,6 +13,11 @@ export function parseXML(string: string) {
   return $document;
 }
 
+export function serializeXML(node: Node) {
+  const serializer = new window.XMLSerializer();
+  return serializer.serializeToString(node);
+}
+
 export function getTextContent(query: string, $element: Element) {
   if ($element == null) {
     return undefined;

@@ -8,9 +8,10 @@ import { readFileUTF8 } from "../utils.js";
 import window from "@k0michi/isomorphic-dom";
 import crypto from "crypto";
 import { toISOStringJST } from "../date-format.js";
+import { parseXML } from "../xml.js";
 
 export function toKTML(source: string) {
-  const dom = toDOM(source) as HTMLElement;
+  const dom = toDOM(source);
   let title;
   let h1 = dom.querySelector('h1');
 
@@ -44,7 +45,7 @@ export function toDOM(source: string) {
     .parse(source);
 
   const document = window.document.implementation.createDocument(null, 'ktml');
-  return transformToDOM(parsed, document);
+  return transformToDOM(parsed, document) as DocumentFragment;
 }
 
 function transformChildren(node: unist.Parent, parent: Element | DocumentFragment) {
@@ -88,7 +89,10 @@ export function transformToDOM(node: unist.Node, document: Document) {
     const element = document.createElement('li');
     transformChildren(listItem, element);
     return element;
-  } else if (node.type == 'code') {
+  } /*else if (node.type == 'html') {
+    const html = node as mdast.HTML;
+    return parseXML(html.value).documentElement;
+  }*/ else if (node.type == 'code') {
     const code = node as mdast.Code;
     const element = document.createElement('code');
 
