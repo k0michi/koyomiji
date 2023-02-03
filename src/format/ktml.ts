@@ -1,7 +1,7 @@
 import window from '@k0michi/isomorphic-dom';
 import path from 'path';
 import { ArticleDocument } from '../document.js';
-import { getTextContent, parseXML } from '../xml.js';
+import { getTextContent, parseXML, serializeXML } from '../xml.js';
 
 export function getDescription(node: Node, limit: number) {
   const Node = window.Node;
@@ -64,7 +64,11 @@ export function isContainerBlock(tagName: string) {
   return tagName == 'body';
 }
 
-export function createDocument(entryPath: string, source: string): ArticleDocument {
+interface CreateDocumentOptions {
+  transformPaths: boolean;
+}
+
+export function createDocument(entryPath: string, source: string, options: CreateDocumentOptions = {transformPaths:true}): ArticleDocument {
   const $document = parseXML(source);
   const $head = $document.querySelector('head') as Element;
   const title = getTextContent('title', $head)!;
@@ -80,7 +84,11 @@ export function createDocument(entryPath: string, source: string): ArticleDocume
   const $body = $document.querySelector('body')!;
   transformMath($body);
   transformCode($body);
-  transformImg($body, entryPath);
+
+  if (options.transformPaths) {
+    transformImg($body, entryPath);
+  }
+
   const description = getDescription($body, 120);
 
   return { type: 'article', title, id, created, modified, description, path: entryPath, source: sourceStr, content: $body.outerHTML };
