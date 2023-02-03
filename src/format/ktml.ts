@@ -25,17 +25,6 @@ export function getDescription(node: Node, limit: number) {
   }
 }
 
-// Fix img path to absolute path
-export function transformImg(element: Element, basePath: string) {
-  const document = element.ownerDocument!;
-
-  for (const img of element.querySelectorAll('img')) {
-    const relativeSrc = img.getAttribute('src');
-    const absoluteSrc = path.posix.join(basePath, relativeSrc!);
-    img.setAttribute('src', absoluteSrc);
-  }
-}
-
 export function transformMath(element: Element) {
   for (const math of element.querySelectorAll('math')) {
     const parentTag = (math.parentNode as Element).tagName;
@@ -64,11 +53,7 @@ export function isContainerBlock(tagName: string) {
   return tagName == 'body';
 }
 
-interface CreateDocumentOptions {
-  transformPaths: boolean;
-}
-
-export function createDocument(entryPath: string, source: string, options: CreateDocumentOptions = {transformPaths:true}): ArticleDocument {
+export function createDocument(entryPath: string, source: string): ArticleDocument {
   const $document = parseXML(source);
   const $head = $document.querySelector('head') as Element;
   const title = getTextContent('title', $head)!;
@@ -85,11 +70,26 @@ export function createDocument(entryPath: string, source: string, options: Creat
   transformMath($body);
   transformCode($body);
 
-  if (options.transformPaths) {
-    transformImg($body, entryPath);
-  }
-
   const description = getDescription($body, 120);
 
   return { type: 'article', title, id, created, modified, description, path: entryPath, source: sourceStr, content: $body.outerHTML };
+}
+
+// Fix img path to absolute path
+function transformImg(element: Element, basePath: string) {
+  const document = element.ownerDocument!;
+
+  for (const img of element.querySelectorAll('img')) {
+    const relativeSrc = img.getAttribute('src');
+    const absoluteSrc = path.posix.join(basePath, relativeSrc!);
+    img.setAttribute('src', absoluteSrc);
+  }
+}
+
+export function transformPaths(doc: ArticleDocument) {
+  const $document = parseXML(doc.content!);
+  transformImg($document.documentElement, doc.path);
+  const serialized = serializeXML($document);
+  const transformed = {...doc, content: serialized };
+  return transformed as ArticleDocument;
 }

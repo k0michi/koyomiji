@@ -29,7 +29,7 @@ export class ServerModel {
       throw new Error(`Not found: ${pathname}`);
     }
 
-    return entry;
+    return KTML.transformPaths(entry);
   }
 
   async loadEntry(pathname: string) {
