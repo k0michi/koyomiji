@@ -1,6 +1,5 @@
 import remarkMath from "remark-math";
 import remarkParse from "remark-parse";
-import remarkCodeTitles from "remark-flexible-code-titles";
 import { unified } from "unified";
 import * as unist from "unist";
 import * as mdast from "mdast";
@@ -48,7 +47,6 @@ export function parseToXast(source: string) {
   const parsed = unified()
     .use(remarkParse)
     .use(remarkMath)
-    .use(remarkCodeTitles)
     .parse(source);
 
   return transformToXast(parsed);
