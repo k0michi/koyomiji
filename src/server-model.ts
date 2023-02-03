@@ -1,5 +1,5 @@
 import path from "path";
-import { Dictionary, Entry } from "./entry.js";
+import { DictionaryDocument, ArticleDocument } from "./entry.js";
 import { preprocess } from "./format/ktml.js";
 import * as KDML from "./format/kdml.js";
 import { readFileUTF8, toPathname } from "./utils.js";
@@ -10,8 +10,8 @@ import { parse } from "./format/himd.js";
 
 export class ServerModel {
   rootDir: string;
-  entries: Record<string, Entry>;
-  dictionaries: Record<string, Dictionary>;
+  entries: Record<string, ArticleDocument>;
+  dictionaries: Record<string, DictionaryDocument>;
 
   sitemap: Sitemap;
 

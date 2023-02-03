@@ -1,7 +1,7 @@
-import { Dictionary, DictionaryEntry, DictionarySense, Entry } from '../entry';
+import { DictionaryDocument, DictionaryEntry, DictionarySense, ArticleDocument } from '../entry';
 import { getTextContent, parseXML } from '../xml.js';
 
-export function preprocess(entryPath: string, content: string): Dictionary {
+export function preprocess(entryPath: string, content: string): DictionaryDocument {
   const $document = parseXML(content);
   const $head = $document.querySelector('head') as Element;
   const title = getTextContent('title', $head)!;
@@ -21,7 +21,7 @@ export function preprocess(entryPath: string, content: string): Dictionary {
       throw new Error("<entry> must have <word>");
     }
 
-    if(wordSet.has(word)) {
+    if (wordSet.has(word)) {
       console.error(`Word '${word}' already exists`);
     }
 
@@ -56,5 +56,5 @@ export function preprocess(entryPath: string, content: string): Dictionary {
     number++;
   }
 
-  return { title, created, description, path: entryPath, content: entries };
+  return { type: 'dictionary', title, created, description, path: entryPath, content: entries };
 }

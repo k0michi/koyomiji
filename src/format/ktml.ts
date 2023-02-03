@@ -1,6 +1,6 @@
 import window from '@k0michi/isomorphic-dom';
 import path from 'path';
-import { Entry } from '../entry.js';
+import { ArticleDocument } from '../entry.js';
 import { getTextContent, parseXML } from '../xml.js';
 
 export function getDescription(node: Node, limit: number) {
@@ -63,7 +63,7 @@ export function isContainerBlock(tagName: string) {
   return tagName == 'body';
 }
 
-export function preprocess(entryPath: string, content: string): Entry {
+export function preprocess(entryPath: string, content: string): ArticleDocument {
   const $document = parseXML(content);
   const $head = $document.querySelector('head') as Element;
   const title = getTextContent('title', $head)!;
@@ -81,5 +81,6 @@ export function preprocess(entryPath: string, content: string): Entry {
   transformCode($body);
   transformImg($body, entryPath);
   const description = getDescription($body, 120);
-  return { title, id, created, modified, description, path: entryPath, source, content: $body.outerHTML };
+
+  return { type: 'article', title, id, created, modified, description, path: entryPath, source, content: $body.outerHTML };
 }

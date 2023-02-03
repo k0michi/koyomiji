@@ -1,22 +1,22 @@
 import { Observable } from "kyoka";
-import { Dictionary, Entry } from "./entry.js";
+import { DictionaryDocument, ArticleDocument } from "./entry.js";
 import { toPathname } from "./utils.js";
 
 export interface Data {
-  entries: Record<string, Entry>;
+  entries: Record<string, ArticleDocument>;
   isIndexComplete: boolean;
 }
 
 export class Model {
-  entries: Observable<Record<string, Entry>>;
+  entries: Observable<Record<string, ArticleDocument>>;
   isIndexComplete: Observable<boolean>;
-  dictionaries: Observable<Record<string, Dictionary> | null>;
+  dictionaries: Observable<Record<string, DictionaryDocument> | null>;
   assets: Observable<Record<string, any>>;
 
   constructor(data: Data) {
     this.entries = new Observable(data.entries);
     this.isIndexComplete = new Observable<boolean>(data.isIndexComplete);
-    this.dictionaries = new Observable<Record<string, Dictionary> | null>(null);
+    this.dictionaries = new Observable<Record<string, DictionaryDocument> | null>(null);
     this.assets = new Observable({});
   }
 
@@ -32,7 +32,7 @@ export class Model {
     return fetch('/' + path.join('/') + '/entry.json').then(e => e.json()).then(e => {
       entries[pathname] = e;
       this.entries.set(this.entries.get());
-      return e as Entry;
+      return e as ArticleDocument;
     });
   }
 
