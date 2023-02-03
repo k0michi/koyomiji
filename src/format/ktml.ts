@@ -132,6 +132,10 @@ function validateNode(node: Node) {
       validationAssert(element.attributes.length == 0);
     } else if (tag == 'b') {
       validationAssert(element.attributes.length == 0);
+    } else if (tag == 's') {
+      validationAssert(element.attributes.length == 0);
+    } else if (tag == 'u') {
+      validationAssert(element.attributes.length == 0);
     } else if (tag == 'br') {
       validationAssert(element.attributes.length == 0);
     } else if (tag == 'a') {
