@@ -11,6 +11,7 @@ import * as xast from 'xast';
 import { x } from 'xastscript';
 import { u } from 'unist-builder';
 import { toXml } from 'xast-util-to-xml';
+import { validate } from "./ktml.js";
 
 // FIX ME
 export function toKTML(source: string) {
@@ -25,6 +26,7 @@ export function toKTML(source: string) {
   }
 
   xml = serializeXML(dom);
+  validate(xml);
 
   return `<ktml version="0.1">
 

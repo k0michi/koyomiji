@@ -67,12 +67,14 @@ export function createDocument(entryPath: string, source: string): ArticleDocume
   }
 
   const $body = $document.querySelector('body')!;
+  validate($body.outerHTML);
   transformMath($body);
   transformCode($body);
 
   const description = getDescription($body, 120);
+  const content = $body.outerHTML;
 
-  return { type: 'article', title, id, created, modified, description, path: entryPath, source: sourceStr, content: $body.outerHTML };
+  return { type: 'article', title, id, created, modified, description, path: entryPath, source: sourceStr, content };
 }
 
 // Fix img path to absolute path
@@ -90,6 +92,77 @@ export function transformPaths(doc: ArticleDocument) {
   const $document = parseXML(doc.content!);
   transformImg($document.documentElement, doc.path);
   const serialized = serializeXML($document);
-  const transformed = {...doc, content: serialized };
+  const transformed = { ...doc, content: serialized };
   return transformed as ArticleDocument;
+}
+
+export function validate(source: string) {
+  const $document = parseXML(source);
+  validateNode($document);
+}
+
+function validationAssert(condition: boolean) {
+  if (!condition) {
+    throw new Error('Validation failed');
+  }
+}
+
+function validateNode(node: Node) {
+  if (node.nodeType == window.Node.ELEMENT_NODE) {
+    const element = node as Element;
+    const tag = element.tagName;
+
+    if (tag == 'p') {
+      validationAssert(element.attributes.length == 0);
+    } else if (tag == 'h1' || tag == 'h2' || tag == 'h3' || tag == 'h4' || tag == 'h5' || tag == 'h6') {
+      validationAssert(element.attributes.length == 0);
+    } else if (tag == 'hr') {
+      validationAssert(element.attributes.length == 0);
+    } else if (tag == 'blockquote') {
+      validationAssert(element.attributes.length == 0);
+    } else if (tag == 'ul' || tag == 'ol') {
+      validationAssert(element.attributes.length == 0);
+    } else if (tag == 'li') {
+      validationAssert(element.attributes.length == 0);
+    } else if (tag == 'code') {
+      for (const a of element.attributes) {
+        validationAssert(a.name == 'lang');
+      }
+    } else if (tag == 'i') {
+      validationAssert(element.attributes.length == 0);
+    } else if (tag == 'b') {
+      validationAssert(element.attributes.length == 0);
+    } else if (tag == 'br') {
+      validationAssert(element.attributes.length == 0);
+    } else if (tag == 'a') {
+      for (const a of element.attributes) {
+        validationAssert(a.name == 'href');
+      }
+    } else if (tag == 'img') {
+      for (const a of element.attributes) {
+        validationAssert(a.name == 'src');
+      }
+    } else if (tag == 'math') {
+      validationAssert(element.attributes.length == 0);
+    } else if (tag == 'table') {
+      validationAssert(element.attributes.length == 0);
+    } else if (tag == 'tr') {
+      validationAssert(element.attributes.length == 0);
+    } else if (tag == 'td') {
+      validationAssert(element.attributes.length == 0);
+    } else if (tag == 'thead') {
+      validationAssert(element.attributes.length == 0);
+    } else if (tag == 'tbody') {
+      validationAssert(element.attributes.length == 0);
+    } else if (tag == 'body') {
+      // TODO: Remove body element
+      validationAssert(element.attributes.length == 0);
+    } else {
+      throw new Error('Unsupported element');
+    }
+  }
+
+  for (const c of node.childNodes) {
+    validateNode(c);
+  }
 }
