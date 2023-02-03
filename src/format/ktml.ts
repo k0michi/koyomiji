@@ -25,6 +25,7 @@ export function getDescription(node: Node, limit: number) {
   }
 }
 
+// Fix img path to absolute path
 export function transformImg(element: Element, basePath: string) {
   const document = element.ownerDocument!;
 
@@ -63,14 +64,14 @@ export function isContainerBlock(tagName: string) {
   return tagName == 'body';
 }
 
-export function preprocess(entryPath: string, content: string): ArticleDocument {
-  const $document = parseXML(content);
+export function createDocument(entryPath: string, source: string): ArticleDocument {
+  const $document = parseXML(source);
   const $head = $document.querySelector('head') as Element;
   const title = getTextContent('title', $head)!;
   const id = getTextContent('id', $head)!;
   const created = getTextContent('created', $head)!;
   const modified = getTextContent('modified', $head) ?? created;
-  let source = getTextContent('source', $head);
+  let sourceStr = getTextContent('source', $head);
 
   if (source != undefined) {
     source = path.posix.join(entryPath, source);
@@ -82,5 +83,5 @@ export function preprocess(entryPath: string, content: string): ArticleDocument 
   transformImg($body, entryPath);
   const description = getDescription($body, 120);
 
-  return { type: 'article', title, id, created, modified, description, path: entryPath, source, content: $body.outerHTML };
+  return { type: 'article', title, id, created, modified, description, path: entryPath, source: sourceStr, content: $body.outerHTML };
 }
