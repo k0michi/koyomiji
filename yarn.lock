@@ -571,6 +571,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/xast@npm:^1.0.0":
+  version: 1.0.2
+  resolution: "@types/xast@npm:1.0.2"
+  dependencies:
+    "@types/unist": "*"
+  checksum: 52a5e9e7295d32156abb4e07d5c1a7a52a09c0f346c6e5c80ddb2b16b2b9472e81ce066d9a9de51d4ec6293028111abfe269811f38f9e060d3b44faccd032841
+  languageName: node
+  linkType: hard
+
 "@web3-storage/multipart-parser@npm:^1.0.0":
   version: 1.0.0
   resolution: "@web3-storage/multipart-parser@npm:1.0.0"
@@ -960,6 +969,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ccount@npm:^2.0.0":
+  version: 2.0.1
+  resolution: "ccount@npm:2.0.1"
+  checksum: 48193dada54c9e260e0acf57fc16171a225305548f9ad20d5471e0f7a8c026aedd8747091dccb0d900cde7df4e4ddbd235df0d8de4a64c71b12f0d3303eeafd4
+  languageName: node
+  linkType: hard
+
 "chalk@npm:2.4.1":
   version: 2.4.1
   resolution: "chalk@npm:2.4.1"
@@ -978,6 +994,20 @@ __metadata:
     ansi-styles: ^4.1.0
     supports-color: ^7.1.0
   checksum: fe75c9d5c76a7a98d45495b91b2172fa3b7a09e0cc9370e5c8feb1c567b85c4288e2b3fded7cfdd7359ac28d6b3844feb8b82b8686842e93d23c827c417e83fc
+  languageName: node
+  linkType: hard
+
+"character-entities-html4@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "character-entities-html4@npm:2.1.0"
+  checksum: 7034aa7c7fa90309667f6dd50499c8a760c3d3a6fb159adb4e0bada0107d194551cdbad0714302f62d06ce4ed68565c8c2e15fdef2e8f8764eb63fa92b34b11d
+  languageName: node
+  linkType: hard
+
+"character-entities-legacy@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "character-entities-legacy@npm:3.0.0"
+  checksum: 7582af055cb488b626d364b7d7a4e46b06abd526fb63c0e4eb35bcb9c9799cc4f76b39f34fdccef2d1174ac95e53e9ab355aae83227c1a2505877893fce77731
   languageName: node
   linkType: hard
 
@@ -2783,7 +2813,10 @@ __metadata:
     ts-node: ^10.8.0
     typescript: ^4.6.4
     unified: ^10.1.2
+    unist-builder: ^3.0.1
     vite: ^3.0.9
+    xast-util-to-xml: ^3.0.1
+    xastscript: ^3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4410,6 +4443,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"stringify-entities@npm:^4.0.0":
+  version: 4.0.3
+  resolution: "stringify-entities@npm:4.0.3"
+  dependencies:
+    character-entities-html4: ^2.0.0
+    character-entities-legacy: ^3.0.0
+  checksum: 59e8f523b403bf7d415690e72ae52982decd6ea5426bd8b3f5c66225ddde73e766c0c0d91627df082d0794e30b19dd907ffb5864cef3602e4098d6777d7ca3c2
+  languageName: node
+  linkType: hard
+
 "strip-ansi@npm:^6.0.0, strip-ansi@npm:^6.0.1":
   version: 6.0.1
   resolution: "strip-ansi@npm:6.0.1"
@@ -4655,6 +4698,15 @@ __metadata:
   dependencies:
     imurmurhash: ^0.1.4
   checksum: 5b6876a645da08d505dedb970d1571f6cebdf87044cb6b740c8dbb24f0d6e1dc8bdbf46825fd09f994d7cf50760e6f6e063cfa197d51c5902c00a861702eb75a
+  languageName: node
+  linkType: hard
+
+"unist-builder@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "unist-builder@npm:3.0.1"
+  dependencies:
+    "@types/unist": ^2.0.0
+  checksum: d8c42fe69aa55a3e9aed3c581007ec5371349bf9885bfa8b0b787634f8d12fa5081f066b205ded379b6d0aeaa884039bae9ebb65a3e71784005fb110aef30d0f
   languageName: node
   linkType: hard
 
@@ -5023,6 +5075,26 @@ __metadata:
     utf-8-validate:
       optional: true
   checksum: 2152cf862cae0693f3775bc688a6afb2e989d19d626d215e70f5fcd8eb55b1c3b0d3a6a4052905ec320e2d7734e20aeedbf9744496d62f15a26ad79cf4cf7dae
+  languageName: node
+  linkType: hard
+
+"xast-util-to-xml@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "xast-util-to-xml@npm:3.0.1"
+  dependencies:
+    "@types/xast": ^1.0.0
+    ccount: ^2.0.0
+    stringify-entities: ^4.0.0
+  checksum: 2784cb65828823728916184f5eed19154d94ce5e752dd0731a58ae5c7b5fb5d641daa9ece086b9e839cd17a9af5db72f4b990735beda793088f944967f38be84
+  languageName: node
+  linkType: hard
+
+"xastscript@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "xastscript@npm:3.1.1"
+  dependencies:
+    "@types/xast": ^1.0.0
+  checksum: 43d62b4b4f8335e170b23e364cca4ac5540b21d178a37064afbb00ca19eb557d22ed8fb49c3d215039c2e4df28fb1f7bd69d060ce440af58e93f1f14e3552770
   languageName: node
   linkType: hard
 

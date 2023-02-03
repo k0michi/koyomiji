@@ -1,7 +1,7 @@
 import * as hipt from 'hipt';
 
 import * as markdown from './markdown.js';
-import { serializeXML } from '../xml.js';
+import { toXml } from 'xast-util-to-xml';
 
 const headingExp = /^#\s*(.*)$/;
 
@@ -40,6 +40,6 @@ function processBlock(node: hipt.Node): Block {
     }
   }
 
-  const contentXML = serializeXML(markdown.toDOM(content));
+  const contentXML = toXml(markdown.parseToXast(content) as any, { allowDangerousXml: true });
   return { title: heading, content: contentXML, children: childBlocks };
 }

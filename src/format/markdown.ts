@@ -4,15 +4,18 @@ import { unified } from "unified";
 import * as unist from "unist";
 import * as mdast from "mdast";
 import * as mdastMath from "mdast-util-math";
-import { readFileUTF8 } from "../utils.js";
-import window from "@k0michi/isomorphic-dom";
 import crypto from "crypto";
 import { toISOStringJST } from "../date-format.js";
-import { parseXML } from "../xml.js";
+import { parseXML, parseXMLFragment, serializeXML } from "../xml.js";
+import * as xast from 'xast';
+import { x } from 'xastscript';
+import { u } from 'unist-builder';
+import { toXml } from 'xast-util-to-xml';
 
 // FIX ME
 export function toKTML(source: string) {
-  const dom = toDOM(source);
+  let xml = toXml(parseToXast(source) as any, { allowDangerousXml: true });
+  const dom = parseXMLFragment(xml);
   let title;
   let h1 = dom.querySelector('h1');
 
@@ -21,8 +24,7 @@ export function toKTML(source: string) {
     h1.parentNode?.removeChild(h1);
   }
 
-  const serializer = new window.XMLSerializer();
-  const xml = serializer.serializeToString(dom);
+  xml = serializeXML(dom);
 
   return `<ktml version="0.1">
 
@@ -39,115 +41,107 @@ export function toKTML(source: string) {
 </ktml>`;
 }
 
-export function toDOM(source: string) {
+export function parseToXast(source: string) {
   const parsed = unified()
     .use(remarkParse)
     .use(remarkMath)
     .parse(source);
 
-  const document = window.document.implementation.createDocument(null, 'ktml');
-  return transformToDOM(parsed, document) as DocumentFragment;
+  return transformToXast(parsed);
 }
 
-function transformChildren(node: unist.Parent, parent: Element | DocumentFragment) {
+export interface Raw extends xast.Literal {
+  type: 'raw';
+}
+
+type XastNode = xast.Element | xast.Text | xast.Root | Raw;
+
+// Temporal fix
+function transformChildren(node: unist.Parent): any[] {
+  const children = [];
+
   for (const child of node.children) {
-    parent.appendChild(transformToDOM(child, parent.ownerDocument));
+    children.push(transformToXast(child));
   }
+
+  return children;
 }
 
-export function transformToDOM(node: unist.Node, document: Document) {
+export function transformToXast(node: unist.Node): XastNode {
   if (node.type == 'root') {
     const root = node as mdast.Root;
-    const element = document.createDocumentFragment();
-    transformChildren(root, element);
-    return element;
+    const children = transformChildren(root);
+    return x(null, children);
   } else if (node.type == 'paragraph') {
     const paragraph = node as mdast.Paragraph;
-    const element = document.createElement('p');
-    transformChildren(paragraph, element);
-    return element;
+    const children = transformChildren(paragraph);
+    return x('p', {}, children);
   } else if (node.type == 'heading') {
     const heading = node as mdast.Heading;
-    const element = document.createElement('h' + heading.depth);
-    transformChildren(heading, element);
-    return element;
+    const children = transformChildren(heading);
+    return x('h' + heading.depth, {}, children);
   } else if (node.type == 'thematicBreak') {
-    const element = document.createElement('hr');
-    return element;
+    return x('hr', {}, []);
   } else if (node.type == 'blockquote') {
     const blockquote = node as mdast.Blockquote;
     // This may change in the future
-    const element = document.createElement('blockquote');
-    transformChildren(blockquote, element);
-    return element;
+    const children = transformChildren(blockquote);
+    return x('blockquote', {}, children);
   } else if (node.type == 'list') {
     const list = node as mdast.List;
-    const element = document.createElement(list.ordered ? 'ol' : 'ul');
-    transformChildren(list, element);
-    return element;
+    const children = transformChildren(list);
+    return x(list.ordered ? 'ol' : 'ul', {}, children);
   } else if (node.type == 'listItem') {
     const listItem = node as mdast.ListItem;
-    const element = document.createElement('li');
-    transformChildren(listItem, element);
-    return element;
-  } /*else if (node.type == 'html') {
+    const children = transformChildren(listItem);
+    return x('li', {}, children);
+  } else if (node.type == 'html') {
     const html = node as mdast.HTML;
-    return parseXML(html.value).documentElement;
-  }*/ else if (node.type == 'code') {
+    return u('raw', html.value);
+  } else if (node.type == 'code') {
     const code = node as mdast.Code;
-    const element = document.createElement('code');
+    const attributes: Record<string, string | undefined> = {};
 
     if (code.lang != undefined) {
-      element.setAttribute('lang', code.lang);
+      attributes['lang'] = code.lang;
     }
 
-    element.append(code.value);
-    return element;
+    return x('code', attributes, [code.value]);
     // } else if (node.type == 'definition') {
   } else if (node.type == 'text') {
     const text = node as mdast.Text;
-    return document.createTextNode(text.value);
+    return u('text', text.value);
   } else if (node.type == 'emphasis') {
     const emphasis = node as mdast.Emphasis;
-    const element = document.createElement('i');
-    transformChildren(emphasis, element);
-    return element;
+    const children = transformChildren(emphasis);
+    return x('i', {}, children);
   } else if (node.type == 'strong') {
     const strong = node as mdast.Strong;
-    const element = document.createElement('b');
-    transformChildren(strong, element);
-    return element;
+    const children = transformChildren(strong);
+    return x('b', {}, children);
   } else if (node.type == 'inlineCode') {
     const inlineCode = node as mdast.InlineCode;
-    const element = document.createElement('code');
-    element.append(inlineCode.value);
-    return element;
+    return x('code', {}, inlineCode.value);
   } else if (node.type == 'break') {
-    const element = document.createElement('br');
-    return element;
+    return x('br', {}, []);
   } else if (node.type == 'link') {
     const link = node as mdast.Link;
-    const element = document.createElement('a');
-    element.setAttribute('href', link.url);
-    transformChildren(link, element);
-    return element;
+    const children = transformChildren(link);
+    return x('a', {}, children);
   } else if (node.type == 'image') {
     const image = node as mdast.Image;
-    const element = document.createElement('img');
-    element.setAttribute('src', image.url);
-    return element;
+    const attributes: Record<string, string | undefined> = {};
+
+    attributes['src'] = image.url;
+    return x('img', attributes, []);
     // } else if (node.type == 'linkReference') {
     // } else if (node.type == 'imageReference') {
   } else if (node.type == 'math') {
     const math = node as mdastMath.Math;
-    const element = document.createElement('math');
-    element.append(math.value);
-    return element;
+    return x('math', {}, [math.value]);
   } else if (node.type == 'inlineMath') {
     const inlineMath = node as mdastMath.InlineMath;
-    const element = document.createElement('math');
-    element.append(inlineMath.value);
-    return element;
+    return x('math', {}, [inlineMath.value]);
   }
 
   throw new Error(`Type ${node.type} is not supported`);

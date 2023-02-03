@@ -13,6 +13,23 @@ export function parseXML(string: string) {
   return $document;
 }
 
+export function parseXMLFragment(string: string) {
+  const parser = new window.DOMParser();
+  const $document = parser.parseFromString(`<root>${string}</root>`, 'text/xml');
+
+  if ($document.querySelector('parsererror') != null) {
+    throw new Error('Failed to parse');
+  }
+
+  const fragment = $document.createDocumentFragment();
+
+  while ($document.documentElement.firstChild != null) {
+    fragment.appendChild($document.documentElement.firstChild!);
+  }
+
+  return fragment;
+}
+
 export function serializeXML(node: Node) {
   const serializer = new window.XMLSerializer();
   return serializer.serializeToString(node);
