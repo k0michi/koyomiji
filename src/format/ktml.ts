@@ -1,7 +1,7 @@
 import window from '@k0michi/isomorphic-dom';
 import path from 'path';
 import { ArticleDocument } from '../document.js';
-import { getTextContent, parseXML, serializeXML } from '../xml.js';
+import { getTextContent, parseXML, parseXMLFragment, serializeXML } from '../xml.js';
 
 export function getDescription(node: Node, limit: number) {
   const Node = window.Node;
@@ -97,7 +97,7 @@ export function transformPaths(doc: ArticleDocument) {
 }
 
 export function validate(source: string) {
-  const $document = parseXML(source);
+  const $document = parseXMLFragment(source);
   validateNode($document);
 }
 
@@ -126,7 +126,7 @@ function validateNode(node: Node) {
       validationAssert(element.attributes.length == 0);
     } else if (tag == 'code') {
       for (const a of element.attributes) {
-        validationAssert(a.name == 'lang');
+        validationAssert(a.name == 'lang' || a.name == 'title');
       }
     } else if (tag == 'i') {
       validationAssert(element.attributes.length == 0);

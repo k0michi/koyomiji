@@ -1,5 +1,6 @@
 import remarkMath from "remark-math";
 import remarkParse from "remark-parse";
+import remarkCodeTitles from "remark-flexible-code-titles";
 import { unified } from "unified";
 import * as unist from "unist";
 import * as mdast from "mdast";
@@ -47,6 +48,7 @@ export function parseToXast(source: string) {
   const parsed = unified()
     .use(remarkParse)
     .use(remarkMath)
+    .use(remarkCodeTitles)
     .parse(source);
 
   return transformToXast(parsed);
@@ -105,7 +107,13 @@ export function transformToXast(node: unist.Node): XastNode {
     const attributes: Record<string, string | undefined> = {};
 
     if (code.lang != undefined) {
-      attributes['lang'] = code.lang;
+      if (code.lang.includes(':')) {
+        const split = code.lang.split(':');
+        attributes['lang'] = split[0];
+        attributes['title'] = split[1];
+      } else {
+        attributes['lang'] = code.lang;
+      }
     }
 
     return x('code', attributes, [code.value]);

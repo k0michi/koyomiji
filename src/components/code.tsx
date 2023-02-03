@@ -3,6 +3,7 @@ import * as React from 'react';
 interface CodeProps {
   display: string;
   lang?: string;
+  title?: string;
   children: string;
 }
 
@@ -25,8 +26,8 @@ export default function Code(props: CodeProps) {
 
   return (props.display == 'block' ?
     html != undefined ?
-      <pre className={className}><code className={className} dangerouslySetInnerHTML={{ __html: html }}></code></pre> :
-      <pre className={className}><code className={className}>{props.children}</code></pre>
+      <div>{props.title}<pre className={className}><code className={className} dangerouslySetInnerHTML={{ __html: html }}></code></pre></div> :
+      <div>{props.title}<pre className={className}><code className={className}>{props.children}</code></pre></div>
     :
     html != undefined ?
       <code className={className} dangerouslySetInnerHTML={{ __html: html }}></code> :
