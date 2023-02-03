@@ -140,11 +140,11 @@ function validateNode(node: Node) {
       validationAssert(element.attributes.length == 0);
     } else if (tag == 'a') {
       for (const a of element.attributes) {
-        validationAssert(a.name == 'href');
+        validationAssert(a.name == 'href' || a.name == 'title');
       }
     } else if (tag == 'img') {
       for (const a of element.attributes) {
-        validationAssert(a.name == 'src');
+        validationAssert(a.name == 'src' || a.name == 'alt' || a.name == 'title');
       }
     } else if (tag == 'math') {
       validationAssert(element.attributes.length == 0);

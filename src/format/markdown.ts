@@ -140,6 +140,10 @@ export function transformToXast(node: unist.Node): XastNode {
       attributes['href'] = link.url;
     }
 
+    if (link.title != undefined) {
+      attributes['title'] = link.title;
+    }
+
     const children = transformChildren(link);
     return x('a', attributes, children);
   } else if (node.type == 'image') {
@@ -147,6 +151,15 @@ export function transformToXast(node: unist.Node): XastNode {
     const attributes: Record<string, string | undefined> = {};
 
     attributes['src'] = image.url;
+
+    if (image.alt != undefined) {
+      attributes['alt'] = image.alt;
+    }
+
+    if (image.title != undefined) {
+      attributes['title'] = image.title;
+    }
+
     return x('img', attributes, []);
     // } else if (node.type == 'linkReference') {
     // } else if (node.type == 'imageReference') {
