@@ -126,8 +126,14 @@ export function transformToXast(node: unist.Node): XastNode {
     return x('br', {}, []);
   } else if (node.type == 'link') {
     const link = node as mdast.Link;
+    const attributes: Record<string, string | undefined> = {};
+
+    if (link.url != undefined) {
+      attributes['href'] = link.url;
+    }
+
     const children = transformChildren(link);
-    return x('a', {}, children);
+    return x('a', attributes, children);
   } else if (node.type == 'image') {
     const image = node as mdast.Image;
     const attributes: Record<string, string | undefined> = {};
