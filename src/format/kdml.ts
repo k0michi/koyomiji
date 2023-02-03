@@ -1,4 +1,4 @@
-import { DictionaryDocument, DictionaryEntry, DictionarySense, ArticleDocument } from '../entry';
+import { DictionaryDocument, DictionaryEntry, DictionarySense, ArticleDocument } from '../document';
 import { getTextContent, parseXML } from '../xml.js';
 
 export function preprocess(entryPath: string, content: string): DictionaryDocument {

@@ -8,7 +8,7 @@ import * as ReactKTML from '../react-ktml.js';
 import Icon from '../components/icon.js';
 import Head from '../components/head.js';
 import { toDisplayDateString } from '../date-format.js';
-import { ArticleDocument } from '../entry.js';
+import { ArticleDocument } from '../document.js';
 import { toPathname } from '../utils.js';
 
 export default function LogPage() {

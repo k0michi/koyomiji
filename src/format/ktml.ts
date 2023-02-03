@@ -1,6 +1,6 @@
 import window from '@k0michi/isomorphic-dom';
 import path from 'path';
-import { ArticleDocument } from '../entry.js';
+import { ArticleDocument } from '../document.js';
 import { getTextContent, parseXML } from '../xml.js';
 
 export function getDescription(node: Node, limit: number) {
