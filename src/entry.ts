@@ -14,12 +14,8 @@ export interface ArticleDocument extends Document {
   content?: string;
 }
 
-export interface DictionaryDocument {
+export interface DictionaryDocument extends Document {
   type: 'dictionary';
-  title: string;
-  created: string;
-  description: string;
-  path: string;
   content?: DictionaryEntry[];
 }
 

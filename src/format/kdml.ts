@@ -7,6 +7,8 @@ export function preprocess(entryPath: string, content: string): DictionaryDocume
   const title = getTextContent('title', $head)!;
   const description = getTextContent('description', $head)!;
   const created = getTextContent('created', $head)!;
+  const modified = getTextContent('modified', $head)!;
+  const id = getTextContent('id', $head)!;
 
   const $entries = $document.querySelector('entries')!;
   const entries: DictionaryEntry[] = [];
@@ -56,5 +58,5 @@ export function preprocess(entryPath: string, content: string): DictionaryDocume
     number++;
   }
 
-  return { type: 'dictionary', title, created, description, path: entryPath, content: entries };
+  return { type: 'dictionary', title, id, created, modified, description, path: entryPath, content: entries };
 }
