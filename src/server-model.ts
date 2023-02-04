@@ -32,35 +32,44 @@ export class ServerModel {
     return KTML.transformPaths(entry);
   }
 
+  resolvePath(pathname: string) {
+    return path.join(this.rootDir, pathname);
+  }
+
+  trimFilename(pathname: string) {
+    return toPathname(pathname.split('/').slice(0, -1));
+  }
+
   async loadEntry(pathname: string) {
-    const normalized = toPathname(pathname.split('/').slice(0, -1));
-    const content = await readFileUTF8(path.join(this.rootDir, pathname));
+    const normalized = this.trimFilename(pathname);
+    const content = await this.readFile(pathname);
     this.entries[normalized] = KTML.createDocument(normalized, content);
   }
 
   async loadDictionary(pathname: string) {
-    const normalized = toPathname(pathname.split('/').slice(0, -1));
-    const content = await readFileUTF8(path.join(this.rootDir, pathname));
+    const normalized = this.trimFilename(pathname);
+    const content = await this.readFile(pathname);
     this.dictionaries[normalized] = KDML.createDocument(normalized, content);
+  }
+
+  async readFile(pathname: string) {
+    return await readFileUTF8(this.resolvePath(pathname));
+  }
+
+  async writeFile(pathname: string, content: string) {
+    await fs.writeFile(this.resolvePath(pathname), content);
   }
 
   async compileEntry(pathname: string) {
     if (pathname.endsWith('.md')) {
-      const normalized = toPathname(pathname.split('/').slice(0, -1));
-      const file = await readFileUTF8(path.posix.join(this.rootDir, pathname));
+      const normalized = this.trimFilename(pathname);
+      const xmlPath = path.join(normalized, 'index.ktml');
+      const file = await this.readFile(pathname);
       const xmlContent = markdown.toKTML(file);
-      const dest = path.join(this.rootDir, normalized, 'index.ktml');
-      await fs.writeFile(dest, xmlContent);
-      await this.loadEntry(path.join(normalized, 'index.ktml'));
+      await this.writeFile(xmlPath, xmlContent);
+      await this.loadEntry(xmlPath);
     } else if (pathname.endsWith('.himd')) {
-      const normalized = toPathname(pathname.split('/').slice(0, -1));
-      const file = await readFileUTF8(path.posix.join(this.rootDir, pathname));
 
-      /*
-      const xmlContent = toKTML(file);
-      const dest = path.join(this.rootDir, normalized, 'index.ktml');
-      await fs.writeFile(dest, xmlContent);
-      await this.loadEntry(path.join(normalized, 'index.ktml'));*/
     }
   }
 }
