@@ -69,7 +69,12 @@ export class ServerModel {
       await this.writeFile(xmlPath, xmlContent);
       await this.loadEntry(xmlPath);
     } else if (pathname.endsWith('.himd')) {
-
+      const normalized = this.trimFilename(pathname);
+      const xmlPath = path.join(normalized, 'index.ktml');
+      const file = await this.readFile(pathname);
+      const xmlContent = markdown.toKTML(himd.toMarkdown(file));
+      await this.writeFile(xmlPath, xmlContent);
+      await this.loadEntry(xmlPath);
     }
   }
 }

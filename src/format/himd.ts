@@ -20,15 +20,14 @@ export function toMarkdown(source: string) {
   return flattened;
 }
 
-function flatten(node: hipt.Node): string {
-  let content = node.value! + '\n';
+function flatten(node: hipt.Node, depth = 0): string {
+  let content = '#'.repeat(depth) + node.value! + '\n';
 
   for (const c of node.children) {
     if (c.value!.startsWith('#')) {
-      c.value = '#' + c.value!
-      content += '<section>\n\n';
-      content += flatten(c);
-      content += '\n</section>\n';
+      content += '\n<section>\n\n';
+      content += flatten(c, depth + 1);
+      content += '\n</section>\n\n';
     } else {
       content += c.value! + '\n';
     }

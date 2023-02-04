@@ -161,6 +161,8 @@ function validateNode(node: Node) {
     } else if (tag == 'body') {
       // TODO: Remove body element
       validationAssert(element.attributes.length == 0);
+    } else if (tag == 'section') {
+      validationAssert(element.attributes.length == 0);
     } else {
       throw new Error('Unsupported element');
     }
