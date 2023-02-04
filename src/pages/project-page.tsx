@@ -11,7 +11,7 @@ export default function ProjectPage() {
         <div className="meta">開発したもの。</div>
       </header>
       <div id="body">
-        <h2><Link href="https://github.com/k0michi/kakisute">Kakisute</Link></h2>
+        <h2><Link href="https://github.com/k0michi/notist">Notist</Link></h2>
         <div className='meta'>
           Built with TypeScript, React, Electron, Vite
         </div>
