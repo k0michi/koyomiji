@@ -55,8 +55,6 @@ export class ServerModel {
     } else if (pathname.endsWith('.himd')) {
       const normalized = toPathname(pathname.split('/').slice(0, -1));
       const file = await readFileUTF8(path.posix.join(this.rootDir, pathname));
-      const parsed = himd.parse(file);
-      console.log(parsed)
 
       /*
       const xmlContent = toKTML(file);

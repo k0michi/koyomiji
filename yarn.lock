@@ -2175,10 +2175,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hipt@npm:^0.0.2":
-  version: 0.0.2
-  resolution: "hipt@npm:0.0.2"
-  checksum: 19d00f9611f527558f06ec5ab95cd6fe07df441f58f2b61d4f27a12fa99966b646168808ece6776ff4b4a9c1fb0192c85d0f976ec0d3734ca85999820812ce02
+"hipt@npm:^0.0.3":
+  version: 0.0.3
+  resolution: "hipt@npm:0.0.3"
+  checksum: 69294ed63e2c755bc6fa985602fbc6aa76e337330b85c3cab1911e15d70e31bf700fd7ae622822e06fefd618fe68ae062c355c13bf38b28fa5285408f2312cb2
   languageName: node
   linkType: hard
 
@@ -2790,7 +2790,7 @@ __metadata:
     feather-icons: ^4.29.0
     glob: ^8.0.3
     glob-promise: ^4.2.2
-    hipt: ^0.0.2
+    hipt: ^0.0.3
     immer: ^9.0.15
     jsdom: ^19.0.0
     katex: ^0.15.6
