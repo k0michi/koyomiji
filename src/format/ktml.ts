@@ -34,8 +34,8 @@ export function createDocument(entryPath: string, source: string): ArticleDocume
   const modified = getTextContent('modified', $head) ?? created;
   let sourceStr = getTextContent('source', $head);
 
-  if (source != undefined) {
-    source = path.posix.join(entryPath, source);
+  if (sourceStr != undefined) {
+    sourceStr = path.posix.join(entryPath, sourceStr);
   }
 
   const $body = $document.querySelector('body')!;
