@@ -23,11 +23,12 @@ export default function Code(props: CodeProps) {
   }, []);
 
   const className = lang != undefined ? `language-${lang}` : 'language-none';
+  const showTitle = props.title != undefined;
 
   return (props.display == 'block' ?
     html != undefined ?
-      <div>{props.title}<pre className={className}><code className={className} dangerouslySetInnerHTML={{ __html: html }}></code></pre></div> :
-      <div>{props.title}<pre className={className}><code className={className}>{props.children}</code></pre></div>
+      <pre className={className}>{showTitle ? <div className='code-title'>{props.title}</div> : null}<code className={className} dangerouslySetInnerHTML={{ __html: html }}></code></pre> :
+      <pre className={className}>{showTitle ? <div className='code-title'>{props.title}</div> : null}<code className={className}>{props.children}</code></pre>
     :
     html != undefined ?
       <code className={className} dangerouslySetInnerHTML={{ __html: html }}></code> :

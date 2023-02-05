@@ -96,11 +96,11 @@ function validateNode(node: Node) {
       validationAssert(element.attributes.length == 0);
     } else if (tag == 'inline-code') {
       for (const a of element.attributes) {
-        validationAssert(a.name == 'lang' || a.name == 'title');
+        validationAssert(a.name == 'lang');
       }
     } else if (tag == 'code') {
       for (const a of element.attributes) {
-        validationAssert(a.name == 'lang');
+        validationAssert(a.name == 'lang' || a.name == 'title');
       }
     } else if (tag == 'i') {
       validationAssert(element.attributes.length == 0);
