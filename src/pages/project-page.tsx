@@ -11,6 +11,11 @@ export default function ProjectPage() {
         <div className="meta">開発したもの。</div>
       </header>
       <div id="body">
+        <h2><Link href="https://github.com/k0michi/himd">Himd (Hierarchically Indented Markdown)</Link></h2>
+        <div className='meta'>
+          Built with TypeScript
+        </div>
+        <p>アウトライン付きのMarkdown拡張。</p>
         <h2><Link href="https://github.com/k0michi/notist">Notist</Link></h2>
         <div className='meta'>
           Built with TypeScript, React, Electron, Vite
@@ -41,7 +46,7 @@ export default function ProjectPage() {
           Built with TypeScript
         </div>
         <p>React用のロジック、ステート管理ライブラリ。</p>
-        <h2><Link href="https://github.com/k0michi/hipt">hipt (Hierarchically Indented Plain Text)</Link></h2>
+        <h2><Link href="https://github.com/k0michi/hipt">Hipt (Hierarchically Indented Plain Text)</Link></h2>
         <div className='meta'>
           Built with TypeScript
         </div>
