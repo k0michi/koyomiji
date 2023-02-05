@@ -25,34 +25,6 @@ export function getDescription(node: Node, limit: number) {
   }
 }
 
-export function transformMath(element: Element) {
-  for (const math of element.querySelectorAll('math')) {
-    const parentTag = (math.parentNode as Element).tagName;
-
-    if (isContainerBlock(parentTag)) {
-      math.setAttribute('display', 'block');
-    } else {
-      math.setAttribute('display', 'inline');
-    }
-  }
-}
-
-export function transformCode(element: Element) {
-  for (const code of element.querySelectorAll('code')) {
-    const parentTag = (code.parentNode as Element).tagName;
-
-    if (isContainerBlock(parentTag)) {
-      code.setAttribute('display', 'block');
-    } else {
-      code.setAttribute('display', 'inline');
-    }
-  }
-}
-
-export function isContainerBlock(tagName: string) {
-  return tagName == 'body';
-}
-
 export function createDocument(entryPath: string, source: string): ArticleDocument {
   const $document = parseXML(source);
   const $head = $document.querySelector('head') as Element;
@@ -68,8 +40,6 @@ export function createDocument(entryPath: string, source: string): ArticleDocume
 
   const $body = $document.querySelector('body')!;
   validate($body.outerHTML);
-  transformMath($body);
-  transformCode($body);
 
   const description = getDescription($body, 120);
   const content = $body.outerHTML;
@@ -124,9 +94,13 @@ function validateNode(node: Node) {
       validationAssert(element.attributes.length == 0);
     } else if (tag == 'li') {
       validationAssert(element.attributes.length == 0);
-    } else if (tag == 'code') {
+    } else if (tag == 'inline-code') {
       for (const a of element.attributes) {
         validationAssert(a.name == 'lang' || a.name == 'title');
+      }
+    } else if (tag == 'code') {
+      for (const a of element.attributes) {
+        validationAssert(a.name == 'lang');
       }
     } else if (tag == 'i') {
       validationAssert(element.attributes.length == 0);
@@ -146,6 +120,8 @@ function validateNode(node: Node) {
       for (const a of element.attributes) {
         validationAssert(a.name == 'src' || a.name == 'alt' || a.name == 'title');
       }
+    } else if (tag == 'inline-math') {
+      validationAssert(element.attributes.length == 0);
     } else if (tag == 'math') {
       validationAssert(element.attributes.length == 0);
     } else if (tag == 'table') {

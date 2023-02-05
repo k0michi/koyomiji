@@ -6,8 +6,10 @@ import crypto from "crypto";
 
 import { readFileUTF8 } from '../utils.js';
 import { getElemAfter, getIndent, moveChildren } from "./utils.js";
-import { isContainerBlock } from "../format/ktml.js";
 
+export function isContainerBlock(tagName: string) {
+  return tagName == 'body';
+}
 
 function changeElementName($document: Document) {
   const $body = $document.querySelector('body')!;

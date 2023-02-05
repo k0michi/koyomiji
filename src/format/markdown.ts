@@ -129,7 +129,7 @@ export function transformToXast(node: unist.Node): XastNode {
     return x('b', {}, children);
   } else if (node.type == 'inlineCode') {
     const inlineCode = node as mdast.InlineCode;
-    return x('code', {}, inlineCode.value);
+    return x('inline-code', {}, inlineCode.value);
   } else if (node.type == 'break') {
     return x('br', {}, []);
   } else if (node.type == 'link') {
@@ -168,7 +168,7 @@ export function transformToXast(node: unist.Node): XastNode {
     return x('math', {}, [math.value]);
   } else if (node.type == 'inlineMath') {
     const inlineMath = node as mdastMath.InlineMath;
-    return x('math', {}, [inlineMath.value]);
+    return x('inline-math', {}, [inlineMath.value]);
   }
 
   throw new Error(`Type ${node.type} is not supported`);

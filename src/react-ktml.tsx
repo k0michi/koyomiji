@@ -11,11 +11,19 @@ export function reactFactory(type: string | Symbol, props: any, ...children: any
   }
 
   if (type == 'math') {
-    return React.createElement(Math, props, ...children);
+    return React.createElement(Math, { ...props, display: 'block' }, ...children);
+  }
+
+  if (type == 'inline-math') {
+    return React.createElement(Math, { ...props, display: 'inline' }, ...children);
   }
 
   if (type == 'code') {
-    return React.createElement(Code, props, ...children);
+    return React.createElement(Code, { ...props, display: 'block' }, ...children);
+  }
+
+  if (type == 'inline-code') {
+    return React.createElement(Code, { ...props, display: 'inline' }, ...children);
   }
 
   if (type == 'a') {
