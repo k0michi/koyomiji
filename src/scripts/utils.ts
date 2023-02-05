@@ -14,6 +14,12 @@ export function getIndent($elem: Element) {
   return null;
 }
 
+export function moveChildren(src: Element, dest: Element) {
+  while (src.firstChild != null) {
+    dest.appendChild(src.firstChild);
+  }
+}
+
 export function getElemAfter($elem: Element) {
   if ($elem.lastChild?.nodeType == window.Node.TEXT_NODE) {
     return $elem.lastChild;
