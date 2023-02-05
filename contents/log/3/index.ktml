@@ -9,9 +9,9 @@
 
 <body>
   <p>
-    JavaScriptを触っていたところ、<code>document.getElementById("要素ID")</code>を使わずとも、<code>window.要素ID</code>で要素を取得できることに気づきました。さらに言うと、<code>window</code>はグローバルオブジェクトですから、単にグローバル変数<code>要素ID</code>から要素にアクセスできることになります。
+    JavaScriptを触っていたところ、<inline-code>document.getElementById("要素ID")</inline-code>を使わずとも、<inline-code>window.要素ID</inline-code>で要素を取得できることに気づきました。さらに言うと、<inline-code>window</inline-code>はグローバルオブジェクトですから、単にグローバル変数<inline-code>要素ID</inline-code>から要素にアクセスできることになります。
   </p>
-  <p>互換性のための機能なのかと思いましたが、調べてみたところ、<a href="https://html.spec.whatwg.org/#named-access-on-the-window-object">そういう仕様</a>が存在しているみたいです。あえてこの書き方をする理由はないでしょうが、知っているとデバッグ等の役に立つかもしれません。現に私のコードで、<code>getElementById()</code>した変数が範囲外なのにも関わらず、要素にアクセスできていましたから。
+  <p>互換性のための機能なのかと思いましたが、調べてみたところ、<a href="https://html.spec.whatwg.org/#named-access-on-the-window-object">そういう仕様</a>が存在しているみたいです。あえてこの書き方をする理由はないでしょうが、知っているとデバッグ等の役に立つかもしれません。現に私のコードで、<inline-code>getElementById()</inline-code>した変数が範囲外なのにも関わらず、要素にアクセスできていましたから。
   </p>
 </body>
 

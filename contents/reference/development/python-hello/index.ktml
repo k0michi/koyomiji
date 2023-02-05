@@ -4,10 +4,11 @@
   <title>Python: Hello, world</title>
   <id>dd880c8f-a0bf-4fea-9e55-6ccdfbccbad9</id>
   <created>2022-06-18T13:21:45+09:00</created>
+  <modified>2022-06-18T13:21:45+09:00</modified>
 </head>
 
 <body>
-  <p><code lang="python">print</code>関数で文字列を標準出力する。<code lang="python">#</code>以降はコメントとなる。</p>
+  <p><inline-code>print</inline-code>関数で文字列を標準出力する。<inline-code>#</inline-code>以降はコメントとなる。</p>
   <code lang="python"># Hello
 print("Hello, world")</code>
   <code>% python3 hello.py

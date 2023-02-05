@@ -4,11 +4,12 @@
   <title>ベクトル空間</title>
   <id>3116d1d0-e0d8-4a32-8c29-b5a54ab78756</id>
   <created>2022-09-04T20:06:02+09:00</created>
+  <modified>2022-09-04T20:06:02+09:00</modified>
 </head>
 
 <body>
   <h2>線形結合(一次結合)</h2>
-  <p><math>K</math>上のベクトル空間<math>V</math>のベクトル<math>v_1, v_2, ..., v_n</math>について、</p>
+  <p><inline-math>K</inline-math>上のベクトル空間<inline-math>V</inline-math>のベクトル<inline-math>v_1, v_2, ..., v_n</inline-math>について、</p>
   <math>c_1 \boldsymbol{v_1} + c_2 \boldsymbol{v_2} + ... + c_n \boldsymbol{v_n}, \ c_i \in K</math>
   <p>を線型結合(一次結合)と言う。</p>
   <h2/>
@@ -16,9 +17,9 @@
   <math>c_1 \boldsymbol{v_1} + c_2 \boldsymbol{v_2} + ... + c_n \boldsymbol{v_n} = \boldsymbol{0}</math>
   <p>を線型結合(一次結合)と言う。</p>
   <h2>自明な線形関係</h2>
-  <p><math>c_1 = c_2 = ... = c_n = 0</math>とした線形関係を自明な線形関係と呼ぶ。</p>
+  <p><inline-math>c_1 = c_2 = ... = c_n = 0</inline-math>とした線形関係を自明な線形関係と呼ぶ。</p>
   <h2>線形独立(一次独立), 線形従属(一次従属)</h2>
-  <p><math>\boldsymbol{v_1}, \boldsymbol{v_2}, ..., \boldsymbol{v_n}</math>が自明でない線形関係をもたないとき、<math>\boldsymbol{v_1}, \boldsymbol{v_2}, ..., \boldsymbol{v_n}</math>は線形従属(一次独立)であると言う。自明でない線形関係をもつとき、線形従属(一次従属)であると言う。</p>
+  <p><inline-math>\boldsymbol{v_1}, \boldsymbol{v_2}, ..., \boldsymbol{v_n}</inline-math>が自明でない線形関係をもたないとき、<inline-math>\boldsymbol{v_1}, \boldsymbol{v_2}, ..., \boldsymbol{v_n}</inline-math>は線形従属(一次独立)であると言う。自明でない線形関係をもつとき、線形従属(一次従属)であると言う。</p>
 </body>
 
 </ktml>

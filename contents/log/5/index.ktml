@@ -4,12 +4,13 @@
   <title>MacでGCCを使う</title>
   <id>62f7cf00-2330-4880-9c44-8b726d4c7308</id>
   <created>2022-03-26T20:48:17+09:00</created>
+  <modified>2022-03-26T20:48:17+09:00</modified>
 </head>
 
 <body>
-  <p>Macの<code>gcc</code>はClangへのエイリアスとなっている。Homebrewで、本来のGCCをインストールできる。</p>
+  <p>Macの<inline-code>gcc</inline-code>はClangへのエイリアスとなっている。Homebrewで、本来のGCCをインストールできる。</p>
   <code>% brew install gcc</code>
-  <p>これでGCCを使えるようになるが、<code>gcc-11</code>としてインストールされるので、<code>.zshrc</code>に以下のエイリアスを登録して、<code>gcc</code>で実行できるようにしておく。
+  <p>これでGCCを使えるようになるが、<inline-code>gcc-11</inline-code>としてインストールされるので、<inline-code>.zshrc</inline-code>に以下のエイリアスを登録して、<inline-code>gcc</inline-code>で実行できるようにしておく。
   </p>
   <code>alias gcc='gcc-11'
 alias g++='g++-11'</code>

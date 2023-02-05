@@ -47,7 +47,7 @@ b3 = 3 &gt; 4
 b4 = 3 &lt; 4
 b5 = 5 &gt;= 6
 b6 = 5 &lt;= 6</code>
-  <p>Pythonでは<code lang="python">a &lt; b &lt; c</code>のような書き方も可能。これは<code lang="python">a &lt; b and b &lt; c</code>と等価になる。</p>
+  <p>Pythonでは<inline-code>a &lt; b &lt; c</inline-code>のような書き方も可能。これは<inline-code>a &lt; b and b &lt; c</inline-code>と等価になる。</p>
 
   <h2>論理演算</h2>
   <p>C言語などとは異なり、記号を用いない。</p>

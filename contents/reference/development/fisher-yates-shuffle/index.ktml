@@ -9,7 +9,7 @@
 
 <body>
   <p>Fisher-Yates shuffleは、配列をシャッフルするためのアルゴリズムです。Knuth shuffleとも呼ばれるようです。</p>
-  <p>以下の実装では、計算量は<math>O(n)</math>です。</p>
+  <p>以下の実装では、計算量は<inline-math>O(n)</inline-math>です。</p>
   <p>参考: <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher–Yates shuffle - Wikipedia</a></p>
   <code lang="js">const N = 16;
 const a = Array.from({ length: N }, (v, i) =&gt; i); // [0, 1, ..., 15]

@@ -36,11 +36,11 @@
     \vdots \\
     b_m
     \end{bmatrix}</math>
-  <p>と書き表すことができる。<math>A = [a_{ij}], \bm x = [x_j], \bm b = [b_i]</math>とおくと、以下のように書ける。</p>
+  <p>と書き表すことができる。<inline-math>A = [a_{ij}], \bm x = [x_j], \bm b = [b_i]</inline-math>とおくと、以下のように書ける。</p>
   <math>A \bm x = \bm b</math>
-  <p><math>A</math>を係数行列と呼ぶ。</p>
+  <p><inline-math>A</inline-math>を係数行列と呼ぶ。</p>
   <h2>拡大係数行列</h2>
-  <p><math>A \bm x = \bm b</math>において、係数行列<math>A</math>とベクトル<math>\bm b</math>を並べてできる行列</p>
+  <p><inline-math>A \bm x = \bm b</inline-math>において、係数行列<inline-math>A</inline-math>とベクトル<inline-math>\bm b</inline-math>を並べてできる行列</p>
   <math>\begin{bmatrix}
     A \mid \bm b
     \end{bmatrix} = 
@@ -55,9 +55,9 @@
 
   <h2>行基本変形</h2>
   <ol>
-    <li><math>i</math>行目と<math>j</math>行目を入れ替える (<math>i \neq j</math>)</li>
-    <li><math>i</math>行目を<math>c</math>倍する (<math>c \neq 0</math>)</li>
-    <li><math>i</math>行目に<math>j</math>行目の<math>c</math>倍を加える (<math>i \neq j</math>)</li>
+    <li><inline-math>i</inline-math>行目と<inline-math>j</inline-math>行目を入れ替える (<inline-math>i \neq j</inline-math>)</li>
+    <li><inline-math>i</inline-math>行目を<inline-math>c</inline-math>倍する (<inline-math>c \neq 0</inline-math>)</li>
+    <li><inline-math>i</inline-math>行目に<inline-math>j</inline-math>行目の<inline-math>c</inline-math>倍を加える (<inline-math>i \neq j</inline-math>)</li>
   </ol>
 
   <h2>行階段型</h2>
@@ -68,7 +68,7 @@
     0 &amp; 0 &amp; -1 &amp; 0 \\
     0 &amp; 0 &amp; 0 &amp; 3
     \end{bmatrix}</math>
-  <p>階段の段の個数を階数(ランク)と呼び、行列<math>A</math>の階数を<math>\rm rank\ A</math>と書く。</p>
+  <p>階段の段の個数を階数(ランク)と呼び、行列<inline-math>A</inline-math>の階数を<inline-math>\rm rank\ A</inline-math>と書く。</p>
 
   <h2>行簡約階段形</h2>
   <p>階段形であり、主成分が1であり、主成分の上下の成分が0である行列を、行簡約階段形と呼ぶ。</p>
@@ -81,22 +81,22 @@
   <p>任意の行列は、行基本変形を行うことで行簡約階段形に変形できる。このアルゴリズムは、掃き出し法(ガウスの消去法)と呼ばれる。</p>
 
   <h2>行基本変形と連立1次方程式</h2>
-  <p>連立1次方程式<math>A \bm x = \bm b</math>を考える。<math>\begin{bmatrix}A \mid \bm b\end{bmatrix}</math>に行基本変形を行い、<math>\begin{bmatrix}B \mid \bm c\end{bmatrix}</math>が得られたとする。このとき、<math>A \bm x = \bm b</math>は<math>B \bm x = \bm c</math>と同値である。</p>
+  <p>連立1次方程式<inline-math>A \bm x = \bm b</inline-math>を考える。<inline-math>\begin{bmatrix}A \mid \bm b\end{bmatrix}</inline-math>に行基本変形を行い、<inline-math>\begin{bmatrix}B \mid \bm c\end{bmatrix}</inline-math>が得られたとする。このとき、<inline-math>A \bm x = \bm b</inline-math>は<inline-math>B \bm x = \bm c</inline-math>と同値である。</p>
   
   <h2>行基本変形の解と自由度</h2>
-  <p>連立1次方程式<math>A \bm x = \bm b</math>を考える。<math>A</math>は<math>(m, n)</math>型行列である。<math>A \bm x = \bm b</math>が解をもつための必要十分条件は、</p>
+  <p>連立1次方程式<inline-math>A \bm x = \bm b</inline-math>を考える。<inline-math>A</inline-math>は<inline-math>(m, n)</inline-math>型行列である。<inline-math>A \bm x = \bm b</inline-math>が解をもつための必要十分条件は、</p>
   <math>\rm rank\ A = \rm rank \begin{bmatrix}A \mid \bm b\end{bmatrix}</math>
   <p>となることである。この等式が成り立つときの連立1次方程式の解の自由度(任意定数の個数)は</p>
   <math>n - \rm rank\ A</math>
   <p>である。</p>
 
   <h2>同次(斉次)連立1次方程式</h2>
-  <p>連立1次方程式<math>A \bm x = \bm b</math>において、<math>\bm b = \bm 0</math>であるとき、同次(斉次)であるという。そうでないとき、非同次(非斉次)であるという。</p>
-  <p>同次連立1時方程式は必ず<math>\bm x = \bm 0</math>を解にもち、これを自明な解と呼ぶ。<math>\bm 0</math>以外の解は非自明な解と呼ばれる。</p>
-  <p><math>A</math>を<math>(m, n)</math>型行列とする。同次連立1次方程式<math>A \bm x = \bm 0</math>について、以下が成り立つ。</p>
+  <p>連立1次方程式<inline-math>A \bm x = \bm b</inline-math>において、<inline-math>\bm b = \bm 0</inline-math>であるとき、同次(斉次)であるという。そうでないとき、非同次(非斉次)であるという。</p>
+  <p>同次連立1時方程式は必ず<inline-math>\bm x = \bm 0</inline-math>を解にもち、これを自明な解と呼ぶ。<inline-math>\bm 0</inline-math>以外の解は非自明な解と呼ばれる。</p>
+  <p><inline-math>A</inline-math>を<inline-math>(m, n)</inline-math>型行列とする。同次連立1次方程式<inline-math>A \bm x = \bm 0</inline-math>について、以下が成り立つ。</p>
   <ol>
-    <li><math>\rm rank\ A = n</math>ならば、<math>A \bm x = \bm 0</math>は自明な解のみをもつ。</li>
-    <li><math>\rm rank\ A &lt; n</math>ならば、<math>A \bm x = \bm 0</math>は非自明な解をもつ。</li>
+    <li><inline-math>\rm rank\ A = n</inline-math>ならば、<inline-math>A \bm x = \bm 0</inline-math>は自明な解のみをもつ。</li>
+    <li><inline-math>\rm rank\ A &lt; n</inline-math>ならば、<inline-math>A \bm x = \bm 0</inline-math>は非自明な解をもつ。</li>
   </ol>
 </body>
 

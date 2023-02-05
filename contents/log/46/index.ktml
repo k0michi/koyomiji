@@ -4,6 +4,7 @@
   <title>リコリス・リコイル7話に登場するソースコード</title>
   <id>b5c86b31-55f3-4ee5-91e0-b09b2efa9836</id>
   <created>2022-09-01T14:53:33+09:00</created>
+  <modified>2022-09-01T14:53:33+09:00</modified>
 </head>
 
 <body>
@@ -34,14 +35,14 @@ util.inherits(Readable, Stream);
 
 function prependListener(emitter, event, fn) {
   // Sadly this is not cacheable as some libraries bundle their own</code>
-  <p>どう見てもJavaScript、それもCommonJSのコードにしか見えませんよね。これだけ<code lang="js">require()</code>していれば明らかです。</p>
-  <p>では一体何のコードなのでしょうか。鍵は<code lang="js">util.inherits(Readable, Stream)</code>です。<code lang="js">util.inherits</code>というのはNode.jsが提供する関数で、ES6のクラスが無かった時代に継承を行うのに使われていたものです。つまりこの場合、<code lang="js">Stream</code>という型を<code lang="js">Readable</code>に継承させています。故にこのコードは<code lang="js">Readable</code>という型を実装するためのものと考えられます。</p>
-  <p>そしてこの<code lang="js">Readable</code>というのも、Node.jsが提供する読み取り専用ストリームのクラスなのです。</p>
+  <p>どう見てもJavaScript、それもCommonJSのコードにしか見えませんよね。これだけ<inline-code>require()</inline-code>していれば明らかです。</p>
+  <p>では一体何のコードなのでしょうか。鍵は<inline-code>util.inherits(Readable, Stream)</inline-code>です。<inline-code>util.inherits</inline-code>というのはNode.jsが提供する関数で、ES6のクラスが無かった時代に継承を行うのに使われていたものです。つまりこの場合、<inline-code>Stream</inline-code>という型を<inline-code>Readable</inline-code>に継承させています。故にこのコードは<inline-code>Readable</inline-code>という型を実装するためのものと考えられます。</p>
+  <p>そしてこの<inline-code>Readable</inline-code>というのも、Node.jsが提供する読み取り専用ストリームのクラスなのです。</p>
   <p>ここまで来れば、このコードが何処から来たのかおおよそ想像がつきます。Node.jsのReadable実装、または、Node.js互換のReadableを実装するライブラリのどちらかとしか考えられません。</p>
 
   <h2>答え合わせ</h2>
   <p>このソースコードは果たして、正確には、Node.jsのReadableの実装から取られたものでは<b>ありません</b>でした。というのも、このコード片のオリジナルが見つかったのは、<a href="https://github.com/nodejs/readable-stream">nodejs/readable-stream</a>というリポジトリの<a href="https://github.com/nodejs/readable-stream/blob/7af74b040213486d9c76ef41931011a2a4859119/lib/_stream_readable.js">_stream_readable.js</a>だったからです。このリポジトリはオリジナルのNode.jsのstreamの実装をミラーしている、とあるので、実質的にはNode.jsのコードだったと言っても良いのかも知れませんが。</p>
-  <p>この奇妙な<code lang="js">/*&lt;replacement&gt;*/</code>というコメントは、どうやら、元のリポジトリからミラーする過程で生まれたもののようです。ミラーの工程で、いくつかのファイルが一つのファイルに結合されたことによって、<code lang="js">require()</code>の位置が不揃いなコードになったようです。</p>
+  <p>この奇妙な<inline-code>/*&lt;replacement&gt;*/</inline-code>というコメントは、どうやら、元のリポジトリからミラーする過程で生まれたもののようです。ミラーの工程で、いくつかのファイルが一つのファイルに結合されたことによって、<inline-code>require()</inline-code>の位置が不揃いなコードになったようです。</p>
 </body>
 
 </ktml>

@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <p>平均計算時間: <math>O(n^2)</math></p>
+  <p>平均計算時間: <inline-math>O(n^2)</inline-math></p>
   <p>安定ソート</p>
   <h2>JavaScriptによる実装</h2>
   <code lang="js">function insertionSort(a) {

@@ -4,31 +4,32 @@
   <title>論理演算</title>
   <id>85e28eda-e5b5-4d6a-a439-08e144d21a0a</id>
   <created>2022-07-02T10:43:36+09:00</created>
+  <modified>2022-07-02T10:43:36+09:00</modified>
 </head>
 
 <body>
   <h2>否定</h2>
   <math>\neg P</math>
-  <p><math>P</math>が真のとき<math>\neg P</math>は偽、<math>P</math>が偽のとき<math>\neg P</math>は真になる。</p>
+  <p><inline-math>P</inline-math>が真のとき<inline-math>\neg P</inline-math>は偽、<inline-math>P</inline-math>が偽のとき<inline-math>\neg P</inline-math>は真になる。</p>
 
   <h2>論理積</h2>
   <math>P \land Q</math>
-  <p><math>P</math>, <math>Q</math>が共に真であるときにだけ、<math>P \land Q</math>は真になる。</p>
-  <p><math>\neg (P \to \neg Q)</math>と等価。</p>
+  <p><inline-math>P</inline-math>, <inline-math>Q</inline-math>が共に真であるときにだけ、<inline-math>P \land Q</inline-math>は真になる。</p>
+  <p><inline-math>\neg (P \to \neg Q)</inline-math>と等価。</p>
 
   <h2>論理和</h2>
   <math>P \lor Q</math>
-  <p><math>P</math>, <math>Q</math>の少なくとも一方が真であれば、<math>P \lor Q</math>は真になる。</p>
-  <p><math>\neg P \to Q</math>と等価。</p>
+  <p><inline-math>P</inline-math>, <inline-math>Q</inline-math>の少なくとも一方が真であれば、<inline-math>P \lor Q</inline-math>は真になる。</p>
+  <p><inline-math>\neg P \to Q</inline-math>と等価。</p>
 
   <h2>含意</h2>
   <math>P \to Q</math>
-  <p><math>P</math>が真であれば、<math>P \to Q</math>は<math>Q</math>の真理値と等しくなる。<math>P</math>が偽であれば、<math>P \to Q</math>は真になる。</p>
+  <p><inline-math>P</inline-math>が真であれば、<inline-math>P \to Q</inline-math>は<inline-math>Q</inline-math>の真理値と等しくなる。<inline-math>P</inline-math>が偽であれば、<inline-math>P \to Q</inline-math>は真になる。</p>
 
   <h2>同値</h2>
   <math>P \leftrightarrow Q</math>
-  <p><math>P</math>と<math>Q</math>の真理値が等しいときにだけ、<math>P \leftrightarrow Q</math>は真になる。</p>
-  <p><math>(P \to Q) \land (Q \to P)</math>と等価。</p>
+  <p><inline-math>P</inline-math>と<inline-math>Q</inline-math>の真理値が等しいときにだけ、<inline-math>P \leftrightarrow Q</inline-math>は真になる。</p>
+  <p><inline-math>(P \to Q) \land (Q \to P)</inline-math>と等価。</p>
 </body>
 
 </ktml>

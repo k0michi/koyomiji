@@ -4,11 +4,12 @@
   <title>JavaScriptでのタイムゾーンの扱いは面倒</title>
   <id>7191a1de-bdce-4d83-aad0-b8600cef7c32</id>
   <created>2022-09-16T02:28:10+09:00</created>
+  <modified>2022-09-16T02:28:10+09:00</modified>
 </head>
 
 <body>
-  <p>サイトの開発をしていて、やはり日付の取り扱いは面倒だなと実感しました。特にタイムゾーンの取り扱いが、です。JavaScriptのDateオブジェクトには<code lang="javascript">getHours</code>等々の関数がありますが、これらはマシンに設定されたタイムゾーンでの値を返すのです。これは、自分のマシンでのみプログラムを使う場合には問題にはなりませんが、異なるタイムゾーンのマシンで動かすと結果が変わることがあります。</p>
-  <p>私のサイトでは、各投稿の作成日時がページ上に表示されます。ページはサーバーサイドで一度描画されるのですが、この際に作成日時のDateオブジェクトから<code lang="javascript">getHours</code>などを使用して日時を文字列化すると、サーバーのタイムゾーンの日時として描画されてしまいます。この問題を解決するためには、タイムゾーンを指定してDateオブジェクトを文字列化しなければなりません。<a href="https://www.npmjs.com/package/date-fns-tz">date-fns-tz</a>を使うと、タイムゾーンを指定して、Dateオブジェクトを文字列化することができます。</p>
+  <p>サイトの開発をしていて、やはり日付の取り扱いは面倒だなと実感しました。特にタイムゾーンの取り扱いが、です。JavaScriptのDateオブジェクトには<inline-code>getHours</inline-code>等々の関数がありますが、これらはマシンに設定されたタイムゾーンでの値を返すのです。これは、自分のマシンでのみプログラムを使う場合には問題にはなりませんが、異なるタイムゾーンのマシンで動かすと結果が変わることがあります。</p>
+  <p>私のサイトでは、各投稿の作成日時がページ上に表示されます。ページはサーバーサイドで一度描画されるのですが、この際に作成日時のDateオブジェクトから<inline-code>getHours</inline-code>などを使用して日時を文字列化すると、サーバーのタイムゾーンの日時として描画されてしまいます。この問題を解決するためには、タイムゾーンを指定してDateオブジェクトを文字列化しなければなりません。<a href="https://www.npmjs.com/package/date-fns-tz">date-fns-tz</a>を使うと、タイムゾーンを指定して、Dateオブジェクトを文字列化することができます。</p>
   <code lang="typescript">import formatInTimeZone from 'date-fns-tz/esm/formatInTimeZone';
 
 export function toISOStringJST(date: Date) {

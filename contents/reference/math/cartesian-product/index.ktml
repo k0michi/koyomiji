@@ -4,13 +4,14 @@
   <title>直積</title>
   <id>599504ca-aaf2-46ea-bdd5-ce3e6bde8e1a</id>
   <created>2022-06-28T17:37:46+09:00</created>
+  <modified>2022-06-28T17:37:46+09:00</modified>
 </head>
 
 <body>
   <p>デカルト積とも呼ばれる。英語ではCartesian product。</p>
   <math>A \times B = \{(a, b)\ |\ a \in A, b \in B \}</math>
   <h2>例</h2>
-  <p><math>A = \{1, 2, 3\}</math>、<math>B = \{4, 5, 6\}</math>の場合は</p>
+  <p><inline-math>A = \{1, 2, 3\}</inline-math>、<inline-math>B = \{4, 5, 6\}</inline-math>の場合は</p>
   <math>A \times B = \{(1, 4), (1, 5), (1, 6), (2, 4), (2, 5), (2, 6), (3, 4), (3, 5), (3, 6)\}</math>
 </body>
 

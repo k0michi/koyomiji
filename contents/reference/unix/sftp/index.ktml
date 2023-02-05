@@ -4,6 +4,7 @@
   <title>sftpコマンド</title>
   <id>3844b795-3655-4edd-9f91-1085d5e1f1bd</id>
   <created>2022-06-25T11:05:26+09:00</created>
+  <modified>2022-06-25T11:05:26+09:00</modified>
 </head>
 
 <body>
@@ -27,7 +28,7 @@
   <p>ワイルドカード指定も可能。</p>
   <code lang="bash">&gt; get text.txt
 &gt; get *.txt</code>
-  <p><code lang="bash">-r</code>でディレクトリを再帰的に取得する。<code lang="bash">-p</code>でパーミッションと日付を維持する。</p>
+  <p><inline-code>-r</inline-code>でディレクトリを再帰的に取得する。<inline-code>-p</inline-code>でパーミッションと日付を維持する。</p>
   <code lang="bash">&gt; get -p text.txt
 &gt; get -r Dir</code>
 

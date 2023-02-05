@@ -4,6 +4,7 @@
   <title>Python: 制御構文</title>
   <id>e258a651-ea42-4ad6-ad93-c40f44064730</id>
   <created>2022-07-22T18:29:55+09:00</created>
+  <modified>2022-07-22T18:29:55+09:00</modified>
 </head>
 
 <body>
@@ -17,7 +18,7 @@ elif x &lt; 10:
   print("x is smaller than 10")
 else:
   print("x equals 10")</code>
-  <p><code>x equals 10</code>を出力する。</p>
+  <p><inline-code>x equals 10</inline-code>を出力する。</p>
 
   <h2>while文</h2>
   <code lang="python">i = 0

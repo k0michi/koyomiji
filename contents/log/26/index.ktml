@@ -4,6 +4,7 @@
   <title>GitHub ActionsからPagesに簡単にデプロイできるようになった</title>
   <id>4a37eefd-5e4b-4536-99eb-7780a0505eda</id>
   <created>2022-07-29T18:47:02+09:00</created>
+  <modified>2022-07-29T18:47:02+09:00</modified>
 </head>
 
 <body>
@@ -87,7 +88,7 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v1
 </code>
-  <p>こちらのworkflowはVite用に書きましたが、あくまで<code lang="bash">npm run build</code>して、生成された<code>dist</code>ディレクトリをGitHub Pagesで公開しているだけなので、Webpack等でも使えます。</p>
+  <p>こちらのworkflowはVite用に書きましたが、あくまで<inline-code>npm run build</inline-code>して、生成された<inline-code>dist</inline-code>ディレクトリをGitHub Pagesで公開しているだけなので、Webpack等でも使えます。</p>
 </body>
 
 </ktml>

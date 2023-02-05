@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <p><code lang="d">writeln</code>で標準出力から文字列を出力する。下記の内容をhello.dとして保存。</p>
+  <p><inline-code>writeln</inline-code>で標準出力から文字列を出力する。下記の内容をhello.dとして保存。</p>
   <code lang="d">import std.stdio;
 
 void main() {

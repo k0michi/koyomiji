@@ -13,7 +13,7 @@
 Fri Jul 15 18:05:00 JST 2022</code>
 
   <h2>タイムゾーンの変更</h2>
-  <p><code lang="bash">timedatectl set-timezone</code>でタイムゾーンを変更する。タイムゾーンの一覧は<code lang="bash">timedatectl list-timezones</code>で得られる。</p>
+  <p><inline-code>timedatectl set-timezone</inline-code>でタイムゾーンを変更する。タイムゾーンの一覧は<inline-code>timedatectl list-timezones</inline-code>で得られる。</p>
   <code lang="bash">$ timedatectl
                 Local time: Fri 2022-07-15 03:11:18 UTC
             Universal time: Fri 2022-07-15 03:11:18 UTC

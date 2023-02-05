@@ -4,11 +4,12 @@
   <title>Node.js: Process</title>
   <id>bb52c7c4-31c5-4f0e-8704-4c391a5f671f</id>
   <created>2022-07-15T19:05:21+09:00</created>
+  <modified>2022-07-15T19:05:21+09:00</modified>
 </head>
 
 <body>
   <h2>引数を取得</h2>
-  <p>プログラムの引数は<code lang="js">process.argv</code>に格納される。</p>
+  <p>プログラムの引数は<inline-code>process.argv</inline-code>に格納される。</p>
   <code lang="js">console.log(process.argv)</code>
   <code lang="bash">$ node argv.js a b c
 [
@@ -20,7 +21,7 @@
 ]</code>
 
   <h2>環境変数を取得</h2>
-  <p>環境変数は<code lang="js">process.env</code>に格納される。</p>
+  <p>環境変数は<inline-code>process.env</inline-code>に格納される。</p>
   <code lang="js">process.env['HOME']; // '/Users/k0michi'
 process.env['SHELL']; // '/bin/zsh'
 process.env['USER']; // 'k0michi'
@@ -28,7 +29,7 @@ process.env['TERM']; // 'xterm-256color'
 process.env['PWD']; // '/Users/k0michi/Repository/Development/misc'</code>
 
   <h2>exit codeを指定して終了</h2>
-  <p><code lang="js">process.exit</code>で、exit codeを指定して終了できる。</p>
+  <p><inline-code>process.exit</inline-code>で、exit codeを指定して終了できる。</p>
   <code lang="js">process.exit(1);</code>
   <code lang="bash">$ node exit.js
 $ echo $?

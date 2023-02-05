@@ -4,51 +4,52 @@
   <title>二項関係</title>
   <id>4302a506-f8ed-4e69-8673-21cc698b5f22</id>
   <created>2022-07-02T13:39:39+09:00</created>
+  <modified>2022-07-02T13:39:39+09:00</modified>
 </head>
 
 <body>
   <h2>関係の定義</h2>
-  <p>集合<math>A</math>から集合<math>B</math>への二項関係<math>R</math>は、<math>A \times B</math>の部分集合である。</p>
-  <p><math>(x, y) \in R</math>のとき、<math>x</math>と<math>y</math>はR-関係にあるといい、</p>
+  <p>集合<inline-math>A</inline-math>から集合<inline-math>B</inline-math>への二項関係<inline-math>R</inline-math>は、<inline-math>A \times B</inline-math>の部分集合である。</p>
+  <p><inline-math>(x, y) \in R</inline-math>のとき、<inline-math>x</inline-math>と<inline-math>y</inline-math>はR-関係にあるといい、</p>
   <math>x\ R\ y</math>
   <p>と書く。</p>
 
   <h2>全体関係/空関係</h2>
-  <p><math>A</math>上の関係において、<math>R = A \times A</math>を全体関係と呼び、<math>R = \emptyset</math>を空関係と呼ぶ。</p>
+  <p><inline-math>A</inline-math>上の関係において、<inline-math>R = A \times A</inline-math>を全体関係と呼び、<inline-math>R = \emptyset</inline-math>を空関係と呼ぶ。</p>
 
   <h2>逆関係</h2>
-  <p><math>A</math>から<math>B</math>への関係<math>R</math>の逆関係<math>R^{-1}</math>とは、<math>B</math>から<math>A</math>への関係であり、以下のように定義される。</p>
+  <p><inline-math>A</inline-math>から<inline-math>B</inline-math>への関係<inline-math>R</inline-math>の逆関係<inline-math>R^{-1}</inline-math>とは、<inline-math>B</inline-math>から<inline-math>A</inline-math>への関係であり、以下のように定義される。</p>
   <math>R^{-1} = \{(y, x) | (x, y) \in R\}</math>
   <p>また、次が成り立つ。</p>
   <math>x\ R\ y \iff y\ R^{-1}\ x</math>
 
   <h2>関係の合成</h2>
-  <p><math>R</math>を<math>A</math>から<math>B</math>への関係、<math>S</math>を<math>B</math>から<math>C</math>への関係とすると、<math>R</math>と<math>S</math>の合成とは、</p>
+  <p><inline-math>R</inline-math>を<inline-math>A</inline-math>から<inline-math>B</inline-math>への関係、<inline-math>S</inline-math>を<inline-math>B</inline-math>から<inline-math>C</inline-math>への関係とすると、<inline-math>R</inline-math>と<inline-math>S</inline-math>の合成とは、</p>
   <math>R \circ S = \{(x, z) \in A \times C\ |\ \exists y \in B (x\ R\ y \land y\ S\ z)\}</math>
-  <p>のこと。上記の<math>R \circ S</math>を<math>S \circ R</math>と書く場合がある。</p>
+  <p>のこと。上記の<inline-math>R \circ S</inline-math>を<inline-math>S \circ R</inline-math>と書く場合がある。</p>
   <p>結合法則が成り立つ。</p>
   <math>(R \circ S) \circ T = R \circ (S \circ T)</math>
 
   <h2>関係の性質</h2>
-  <p><math>R</math>を<math>A</math>上の関係とする。</p>
+  <p><inline-math>R</inline-math>を<inline-math>A</inline-math>上の関係とする。</p>
   <h3>反射性</h3>
-  <p>任意の<math>x \in A</math>について<math>x\ R\ x</math>であるとき、<math>R</math>は反射的である。</p>
+  <p>任意の<inline-math>x \in A</inline-math>について<inline-math>x\ R\ x</inline-math>であるとき、<inline-math>R</inline-math>は反射的である。</p>
   <h3>対称性</h3>
-  <p>任意の<math>x, y \in A</math>について<math>x\ R\ y</math>ならば<math>y\ R\ x</math>であるとき、<math>R</math>は対称的である。</p>
+  <p>任意の<inline-math>x, y \in A</inline-math>について<inline-math>x\ R\ y</inline-math>ならば<inline-math>y\ R\ x</inline-math>であるとき、<inline-math>R</inline-math>は対称的である。</p>
   <h3>反対称性</h3>
-  <p>任意の<math>x, y \in A</math>について<math>x\ R\ y</math>かつ<math>y\ R\ x</math>ならば<math>x = y</math>であるとき、<math>R</math>は反対称的である。</p>
+  <p>任意の<inline-math>x, y \in A</inline-math>について<inline-math>x\ R\ y</inline-math>かつ<inline-math>y\ R\ x</inline-math>ならば<inline-math>x = y</inline-math>であるとき、<inline-math>R</inline-math>は反対称的である。</p>
   <h3>推移性</h3>
-  <p>任意の<math>x, y, z \in A</math>について<math>x\ R\ y</math>かつ<math>y\ R\ z</math>ならば<math>x\ R\ z</math>であるとき、<math>R</math>は推移的である。</p>
+  <p>任意の<inline-math>x, y, z \in A</inline-math>について<inline-math>x\ R\ y</inline-math>かつ<inline-math>y\ R\ z</inline-math>ならば<inline-math>x\ R\ z</inline-math>であるとき、<inline-math>R</inline-math>は推移的である。</p>
 
   <h2>同値関係</h2>
   <p>関係が反射的、対称的、推移的であるとき、その関係は同値関係であるという。</p>
   
   <h2>同値類</h2>
-  <p><math>R</math>を集合<math>A</math>上の同値関係とする。<math>A</math>の要素<math>a</math>の同値類とは、<math>a\ R\ x</math>となる全ての<math>x</math>からなる集合のことである。</p>
+  <p><inline-math>R</inline-math>を集合<inline-math>A</inline-math>上の同値関係とする。<inline-math>A</inline-math>の要素<inline-math>a</inline-math>の同値類とは、<inline-math>a\ R\ x</inline-math>となる全ての<inline-math>x</inline-math>からなる集合のことである。</p>
   <math>[a] = \{x \in A\ |\ a\ R\ x\}</math>
 
   <h2>商集合</h2>
-  <p><math>R</math>を集合<math>A</math>上の同値関係とする。<math>R</math>で定まる全ての同値類からなる集合を<math>R</math>による<math>A</math>の商集合という。</p>
+  <p><inline-math>R</inline-math>を集合<inline-math>A</inline-math>上の同値関係とする。<inline-math>R</inline-math>で定まる全ての同値類からなる集合を<inline-math>R</inline-math>による<inline-math>A</inline-math>の商集合という。</p>
   <math>A / R = \{[x] \subset A\ |\ x \in A\}</math>
 </body>
 

@@ -10,9 +10,9 @@
 <body>
   <h2>定義</h2>
   <math>a^y = x \quad (a &gt; 0, a \ne 1, x &gt; 0)</math>
-  <p>を満たす<math>y</math>を</p>
+  <p>を満たす<inline-math>y</inline-math>を</p>
   <math>y = \log_a{x}</math>
-  <p>と書く。この値を<math>a</math>を底(base)とする<math>x</math>の対数(logarithm)といい、<math>x</math>をaを底とする対数<math>y</math>の真数(antilogarithm)という。</p>
+  <p>と書く。この値を<inline-math>a</inline-math>を底(base)とする<inline-math>x</inline-math>の対数(logarithm)といい、<inline-math>x</inline-math>をaを底とする対数<inline-math>y</inline-math>の真数(antilogarithm)という。</p>
   <h2>性質</h2>
   <math>\log_a{mn} = \log_a{m} + \log_a{n}</math>
   <math>\log_a{\frac{m}{n}} = \log_a{m} - \log_a{n}</math>

@@ -4,6 +4,7 @@
   <title>Python: 例外処理</title>
   <id>dcd0eac0-4ffe-4ac2-bef5-e602b925745e</id>
   <created>2022-07-26T16:07:37+09:00</created>
+  <modified>2022-07-26T16:07:37+09:00</modified>
 </head>
 
 <body>
@@ -15,8 +16,8 @@ except RuntimeError as e:
 
   <h2>raise</h2>
   <p>例外はBaseExceptionクラスを継承している必要がある。</p>
-  <p><code lang="python">raise RuntimeError</code>のようにクラス名を指定すると、そのクラスが引数なしでインスタンス化され、そのインスタンスが例外として投げられる。</p>
-  <p><code lang="python">raise RuntimeError("Exception occurred")</code>のようにインスタンスをそのまま渡すと、そのインスタンスが例外として投げられる。</p>
+  <p><inline-code>raise RuntimeError</inline-code>のようにクラス名を指定すると、そのクラスが引数なしでインスタンス化され、そのインスタンスが例外として投げられる。</p>
+  <p><inline-code>raise RuntimeError("Exception occurred")</inline-code>のようにインスタンスをそのまま渡すと、そのインスタンスが例外として投げられる。</p>
   <p>from節を使用すると、例外を連鎖させることができる。例えば以下のコード</p>
   <code lang="python">try:
   raise RuntimeError("Exception 1")

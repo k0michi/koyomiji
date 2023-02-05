@@ -4,10 +4,11 @@
   <title>pacmanでPGP署名が原因でエラーになるときの対処法</title>
   <id>15e3921e-9c73-4d94-b1bf-6edaae5a4398</id>
   <created>2022-08-26T15:07:05+09:00</created>
+  <modified>2022-08-26T15:07:05+09:00</modified>
 </head>
 
 <body>
-  <p>Arch Linuxで暫く間が開いてから<code lang="bash">sudo pacman -Syu</code>すると、こんなメッセージが出てエラーになることがある。</p>
+  <p>Arch Linuxで暫く間が開いてから<inline-code>sudo pacman -Syu</inline-code>すると、こんなメッセージが出てエラーになることがある。</p>
   <code lang="bash">error: failed to commit transaction (invalid or corrupted package (PGP signature))</code>
   <p>パッケージの署名に使う鍵が古すぎるのが原因の模様。エラーメッセージで検索すると色々と情報が出てくるが、手っ取り早い解決策はarchlinux-keyringだけを先にアップグレードすることである。詳しくは<a href="https://wiki.archlinux.jp/index.php/Pacman-key#.E3.82.B7.E3.82.B9.E3.83.86.E3.83.A0.E3.81.AE.E5.AE.9A.E6.9C.9F.E7.9A.84.E3.81.AA.E6.9B.B4.E6.96.B0">https://wiki.archlinux.jp/index.php/Pacman-key</a>を参照されたし。</p>
   <code lang="bash">% sudo pacman -Sy archlinux-keyring

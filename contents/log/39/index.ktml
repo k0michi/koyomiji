@@ -21,12 +21,12 @@
 % make</code>
 
   <h2>3. ビルドする</h2>
-  <p>プラットフォームを指定してもう一度makeします。macOSの場合は<code lang="bash">osx-release</code>です。</p>
+  <p>プラットフォームを指定してもう一度makeします。macOSの場合は<inline-code>osx-release</inline-code>です。</p>
   <code lang="bash">% make osx-release</code>
   <p>ビルドにはしばらく時間がかかります。</p>
 
   <h2>4. Exampleを開く</h2>
-  <p>公式のDocumentationでは、Exampleのパスは<code lang="bash">../../.build/osx64_clang/bin/examples.app/Contents/MacOS/examplesRelease</code>となっていますが、これとは異なるところに生成されていました。<code lang="bash">../../.build/</code>内には<code lang="bash">osx-arm64</code>と<code lang="bash">osx-x64</code>があるので、使っているマシンに応じて選びます。以下はApple Siliconの場合です。</p>
+  <p>公式のDocumentationでは、Exampleのパスは<inline-code>../../.build/osx64_clang/bin/examples.app/Contents/MacOS/examplesRelease</inline-code>となっていますが、これとは異なるところに生成されていました。<inline-code>../../.build/</inline-code>内には<inline-code>osx-arm64</inline-code>と<inline-code>osx-x64</inline-code>があるので、使っているマシンに応じて選びます。以下はApple Siliconの場合です。</p>
   <code lang="bash">% cd examples/runtime
 % ../../.build/osx-arm64/bin/examples.app/Contents/MacOS/examplesRelease</code>
   <p>ウィンドウが表示されて、描画できていればビルドに成功しています。</p>

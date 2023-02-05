@@ -4,6 +4,7 @@
   <title>JSON.parse()で日付をパースするときの懸念点</title>
   <id>f063ae02-7826-4856-bb3b-a58ce433339b</id>
   <created>2022-10-04T12:37:53+09:00</created>
+  <modified>2022-10-04T12:37:53+09:00</modified>
 </head>
 
 <body>
@@ -16,7 +17,7 @@
 
 function parseJSON(json) {
   return JSON.parse(json, (key, value) =&gt; {
-    if (typeof value == &apos;string&apos; &amp;&amp; timestampExp.test(value)) {
+    if (typeof value == 'string' &amp;&amp; timestampExp.test(value)) {
       return new Date(value);
     } else {
       return value;
@@ -30,7 +31,7 @@ function parseJSON(json) {
   "postedAt": "2022-10-04T03:41:07.950Z",
   "content": "..."
 }</code>
-  <p>ここで、titleプロパティはユーザーが自由に入力できる文字列であるとする。もし仮にユーザーが、2022-10-04T03:41:07.950Zのような文字列をタイトルとして設定したらどうなるか。さっきの<code>parseJSON</code>でこのJSONをパースすると、titleがDateとしてパースされてしまうのだ。titleがStringであることを前提としたコードがあったら、これは確実にエラーを引き起こす。</p>
+  <p>ここで、titleプロパティはユーザーが自由に入力できる文字列であるとする。もし仮にユーザーが、2022-10-04T03:41:07.950Zのような文字列をタイトルとして設定したらどうなるか。さっきの<inline-code>parseJSON</inline-code>でこのJSONをパースすると、titleがDateとしてパースされてしまうのだ。titleがStringであることを前提としたコードがあったら、これは確実にエラーを引き起こす。</p>
   <p>この問題にどう対処すればよいか。ユーザーによる入力の段階で、日付と認識されるものを弾く、という方法も無くはない。だが根本的な問題はJSON.parseのreviverで、文字列の形式だけを見てパースする方法を変えていることだ。Dateが入るプロパティのkeyを判断した上でDateに変換するべきだろう。そうしないと、意図しないプロパティにDateが入ってしまう。</p>
   <p>JSONをパースする段階では日付に対して何も処理を加えない、というのがよい方法かもしれない。そもそも、JavaScriptのDateはmutableであり、意図しない変更が発生する可能性が常に伴う。だから、日付は常にstringで保持し、必要に応じてDateに変換、というのもありだろう。</p>
 </body>

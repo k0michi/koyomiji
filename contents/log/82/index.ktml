@@ -4,14 +4,15 @@
   <title>AsciiDocを使ってみよう</title>
   <id>4f12e2e9-791e-43dc-97e5-380f58da25cd</id>
   <created>2023-02-05T13:11:03+09:00</created>
+  <modified>2023-02-05T13:11:03+09:00</modified>
 </head>
 
 <body>
-  <p>Markdownのような、簡潔なマークアップからHTMLやXMLを生成する言語を、<a href="https://ja.wikipedia.org/wiki/%E8%BB%BD%E9%87%8F%E3%83%9E%E3%83%BC%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E8%A8%80%E8%AA%9E">軽量マークアップ言語</a>と呼びます。Markdownは最も有名な軽量マークアップ言語ではありますが、実際には他にも沢山あります。<a href="https://asciidoc.org/">AsciiDoc</a>もその一つです。</p><p>AsciiDocの良いところは、Markdownよりも機能が豊富である点です。例えば、目次を挿入したり、ソースコードを別のファイルから埋め込むといったことが可能です。さらに、Markdownでは拡張である、ソースコードのハイライトや脚注、数式の表示などが言語の標準機能として存在します。</p><p>また、<a href="https://asciidoctor.org/">Asciidoctor</a>と呼ばれる、デファクトスタンダードとなっている実装が存在します。Asciidoctor自体はRubyで書かれていますが、Javaバインディングである<a href="https://docs.asciidoctor.org/asciidoctorj/latest/">AsciidoctorJ</a>や、JavaScriptで動く<a href="https://docs.asciidoctor.org/asciidoctor.js/latest/">Asciidoctor.js</a>などが用意されているため、多彩な環境で使うことができます。<a href="https://docs.asciidoctor.org/pdf-converter/latest/">Asciidoctor PDF</a>を使うことで、AsciiDocをLaTeXなどを介さず直接PDFに変換することも可能です。</p><h2>Asciidoctorのインストール</h2><p>Asciidoctorのインストール方法は<a href="https://asciidoctor.org/">公式サイト</a>に詳しく書かれています。</p><p>Macであれば、<code>brew</code>でインストールすることができます。</p><code lang="bash">% brew install asciidoctor</code><p>インストール出来ているか確認します。</p><code lang="bash">% asciidoctor -v
+  <p>Markdownのような、簡潔なマークアップからHTMLやXMLを生成する言語を、<a href="https://ja.wikipedia.org/wiki/%E8%BB%BD%E9%87%8F%E3%83%9E%E3%83%BC%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E8%A8%80%E8%AA%9E">軽量マークアップ言語</a>と呼びます。Markdownは最も有名な軽量マークアップ言語ではありますが、実際には他にも沢山あります。<a href="https://asciidoc.org/">AsciiDoc</a>もその一つです。</p><p>AsciiDocの良いところは、Markdownよりも機能が豊富である点です。例えば、目次を挿入したり、ソースコードを別のファイルから埋め込むといったことが可能です。さらに、Markdownでは拡張である、ソースコードのハイライトや脚注、数式の表示などが言語の標準機能として存在します。</p><p>また、<a href="https://asciidoctor.org/">Asciidoctor</a>と呼ばれる、デファクトスタンダードとなっている実装が存在します。Asciidoctor自体はRubyで書かれていますが、Javaバインディングである<a href="https://docs.asciidoctor.org/asciidoctorj/latest/">AsciidoctorJ</a>や、JavaScriptで動く<a href="https://docs.asciidoctor.org/asciidoctor.js/latest/">Asciidoctor.js</a>などが用意されているため、多彩な環境で使うことができます。<a href="https://docs.asciidoctor.org/pdf-converter/latest/">Asciidoctor PDF</a>を使うことで、AsciiDocをLaTeXなどを介さず直接PDFに変換することも可能です。</p><h2>Asciidoctorのインストール</h2><p>Asciidoctorのインストール方法は<a href="https://asciidoctor.org/">公式サイト</a>に詳しく書かれています。</p><p>Macであれば、<inline-code>brew</inline-code>でインストールすることができます。</p><code lang="bash">% brew install asciidoctor</code><p>インストール出来ているか確認します。</p><code lang="bash">% asciidoctor -v
 Asciidoctor 2.0.18 [https://asciidoctor.org]
 Runtime Environment (ruby 3.2.0 (2022-12-25 revision a528908271) [arm64-darwin21]) (lc:UTF-8 fs:UTF-8 in:UTF-8 ex:UTF-8)</code><h2>Asciidoctor PDFのインストール</h2><p>Asciidoctor PDFのインストール方法は、<a href="https://github.com/asciidoctor/asciidoctor-pdf">GitHubページ</a>に詳しく載っています。こちらはgemからインストールする必要があります。</p><p>Ruby 2.7以降が必要です。しかし、MacのビルトインのRubyは若干古いです。</p><code lang="bash">% /usr/bin/ruby -v
 ruby 2.6.10p210 (2022-04-12 revision 67958) [universal.arm64e-darwin21]</code><p>なので、brewで新しいバージョンのRubyをインストールします。</p><code lang="bash">% brew install ruby</code><p>Rubyと、gemでインストールされるコマンドにパスを通します。.zshrcに以下の内容を書き加えます。</p><code>export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-export PATH="/opt/homebrew/lib/ruby/gems/3.2.0/bin:$PATH"</code><h2>Asciidoctorの使い方</h2><p>AsciiDocの拡張子は.adocです。AsciidoctorにAsciiDocファイルを与えると、HTMLが生成されます。同様にAsciidoctor PDFの場合はPDFが生成されます。</p><p>Asciidoctor PDFはデフォルトでは日本語が豆腐になってしまうので、<code>-a pdf-theme=default-with-fallback-font</code>を指定します。</p><code lang="bash">% asciidoctor test.adoc 
+export PATH="/opt/homebrew/lib/ruby/gems/3.2.0/bin:$PATH"</code><h2>Asciidoctorの使い方</h2><p>AsciiDocの拡張子は.adocです。AsciidoctorにAsciiDocファイルを与えると、HTMLが生成されます。同様にAsciidoctor PDFの場合はPDFが生成されます。</p><p>Asciidoctor PDFはデフォルトでは日本語が豆腐になってしまうので、<inline-code>-a pdf-theme=default-with-fallback-font</inline-code>を指定します。</p><code lang="bash">% asciidoctor test.adoc 
 % asciidoctor-pdf -a pdf-theme=default-with-fallback-font test.adoc 
 % ls
 test.adoc	test.html	test.pdf</code><h2>書き方</h2><p>詳細な書き方のリファレンスは、<a href="https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/">AsciiDoc Syntax Quick Reference</a>にあります。</p><h3>段落</h3><p>Markdownのように、何も指定しなければ自動的に段落になります。</p><code>一つ目の段落。
@@ -34,7 +35,7 @@ unconstrained-``monospace``</code><h3>その他のテキスト修飾</h3><code>#
 
 [.line-through]#打ち消し#</code><h3>上付き、下付き</h3><code>^上付き^文字
 
-~下付き~文字</code><h3>記号の置換</h3><p>いくつかの記号が自動的に置換されます。例えば、<code>(C)</code>は©に、<code>-&gt;</code>は→に、<code>...</code>は…​に置換されます。</p><h3>リンク</h3><p>URLは自動的にリンクになります。</p><code>https://example.com/
+~下付き~文字</code><h3>記号の置換</h3><p>いくつかの記号が自動的に置換されます。例えば、<inline-code>(C)</inline-code>は©に、<inline-code>-&gt;</inline-code>は→に、<inline-code>...</inline-code>は…​に置換されます。</p><h3>リンク</h3><p>URLは自動的にリンクになります。</p><code>https://example.com/
 
 https://example.com/[リンクの表示名]</code><h3>見出し</h3><p>ドキュメントの見出しは、ファイルの上部に書きます。</p><code>= ドキュメントの見出し
 著者名 &lt;author@example.com&gt;
@@ -57,7 +58,7 @@ v1.0, 2022-02-05</code><p>著者名などの追加情報はオプショナルで
 * [x] チェック済み
 * [ ] 未チェック</code><h3>画像</h3><code>image::embedded-image.png[]
 
-image::embedded-image.png[alt属性]</code><h3>テキストの埋め込み</h3><p>画像のように、他のテキストファイルを埋め込むことができます。</p><code>include::embedded-text.txt[]</code><h3>ソースコード</h3><p>インラインのソースコードを書くには、<code>\</code>に加えて、<code>+</code>で囲います。これにより、前述の記号の置換を無効にできます。</p><code>`+インラインコード...+`</code><p>コードブロックをハイライトするには、ドキュメントのヘッダーに<code>:source-highlighter:</code>を指定する必要があります。他のファイルを埋め込んで表示することもできます。</p><code>.コードタイトル
+image::embedded-image.png[alt属性]</code><h3>テキストの埋め込み</h3><p>画像のように、他のテキストファイルを埋め込むことができます。</p><code>include::embedded-text.txt[]</code><h3>ソースコード</h3><p>インラインのソースコードを書くには、<inline-code>\</inline-code>に加えて、<inline-code>+</inline-code>で囲います。これにより、前述の記号の置換を無効にできます。</p><code>`+インラインコード...+`</code><p>コードブロックをハイライトするには、ドキュメントのヘッダーに<inline-code>:source-highlighter:</inline-code>を指定する必要があります。他のファイルを埋め込んで表示することもできます。</p><code>.コードタイトル
 [,js]
 ----
 console.log('hello');
@@ -81,7 +82,7 @@ WARNING: 警告...</code><h3>表</h3><code>.表タイトル
 
 |列1行1 |列2行1
 |列1行2 |列2行2
-|===</code><h3>脚注</h3><code>文章...footnote:[脚注の文章]</code><h3>数式</h3><p>ドキュメントのヘッダーに<code>:stem:</code>を指定する必要があります。また、デフォルトではAsciiMath記法となっていますが、<code>:stem: latexmath</code>を指定することでLaTeX記法を利用できます。</p><p>インラインの数式。</p><code>stem:[\sqrt{2} = 1.41421...]</code><p>数式ブロック。</p><code>[stem]
+|===</code><h3>脚注</h3><code>文章...footnote:[脚注の文章]</code><h3>数式</h3><p>ドキュメントのヘッダーに<inline-code>:stem:</inline-code>を指定する必要があります。また、デフォルトではAsciiMath記法となっていますが、<inline-code>:stem: latexmath</inline-code>を指定することでLaTeX記法を利用できます。</p><p>インラインの数式。</p><code>stem:[\sqrt{2} = 1.41421...]</code><p>数式ブロック。</p><code>[stem]
 ++++
 \sqrt{4} = 2
 ++++</code><p>Asciidoctor PDFでは、<a href="https://github.com/asciidoctor/asciidoctor-mathematical">asciidoctor-mathematical</a> gemを入れる必要がありますが、手元の環境(MacBook Pro 2021, macOS 12.6.2)ではうまく動かすことができませんでした。</p>

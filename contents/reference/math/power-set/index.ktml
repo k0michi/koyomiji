@@ -8,17 +8,17 @@
 </head>
 
 <body>
-  <p>ある集合<math>A</math>について、そのすべての部分集合からなる集合を<math>A</math>の冪集合といい、<math>\mathcal{P}(A)</math>と書く。</p>
-  <p><math>A</math>の冪集合は<math>\emptyset</math>と<math>A</math>自身を要素に持つ。</p>
-  <p>要素数が<math>n</math>の集合の冪集合の要素数は<math>2^n</math>である。</p>
+  <p>ある集合<inline-math>A</inline-math>について、そのすべての部分集合からなる集合を<inline-math>A</inline-math>の冪集合といい、<inline-math>\mathcal{P}(A)</inline-math>と書く。</p>
+  <p><inline-math>A</inline-math>の冪集合は<inline-math>\emptyset</inline-math>と<inline-math>A</inline-math>自身を要素に持つ。</p>
+  <p>要素数が<inline-math>n</inline-math>の集合の冪集合の要素数は<inline-math>2^n</inline-math>である。</p>
   <h2>例</h2>
-  <p><math>A = \emptyset</math>のとき、</p>
+  <p><inline-math>A = \emptyset</inline-math>のとき、</p>
   <math>\mathcal{P}(A) = \{\emptyset\}</math>
-  <p><math>A = \{1\}</math>のとき、</p>
+  <p><inline-math>A = \{1\}</inline-math>のとき、</p>
   <math>\mathcal{P}(A) = \{\emptyset, \{1\}\}</math>
-  <p><math>A = \{1, 2\}</math>のとき、</p>
+  <p><inline-math>A = \{1, 2\}</inline-math>のとき、</p>
   <math>\mathcal{P}(A) = \{\emptyset, \{1\}, \{2\}, \{1, 2\}\}</math>
-  <p><math>A = \{1, 2, 3\}</math>のとき、</p>
+  <p><inline-math>A = \{1, 2, 3\}</inline-math>のとき、</p>
   <math>\mathcal{P}(A) = \{\emptyset, \{1\}, \{2\}, \{3\}, \{1, 2\}, \{1, 3\}, \{2, 3\}, \{1, 2, 3\}\}</math>
 </body>
 

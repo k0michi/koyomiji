@@ -4,26 +4,27 @@
   <title>合同式</title>
   <id>3352c08a-3f25-471c-acf9-57a44bc8da3c</id>
   <created>2022-06-30T13:08:11+09:00</created>
+  <modified>2022-06-30T13:08:11+09:00</modified>
 </head>
 
 <body>
-  <p><math>a - b</math>が<math>n</math>の倍数であるとき、<math>a, b</math>は<math>n</math>を<b>法</b>として<b>合同</b>であるといい、以下の<b>合同式</b>で表す。</p>
+  <p><inline-math>a - b</inline-math>が<inline-math>n</inline-math>の倍数であるとき、<inline-math>a, b</inline-math>は<inline-math>n</inline-math>を<b>法</b>として<b>合同</b>であるといい、以下の<b>合同式</b>で表す。</p>
   <math>a \equiv b\ (\rm{mod}\ n)</math>
-  <p>これは<math>a</math>を<math>n</math>で割った余りと、<math>b</math>を<math>n</math>で割った余りが等しいことと同値である。</p>
+  <p>これは<inline-math>a</inline-math>を<inline-math>n</inline-math>で割った余りと、<inline-math>b</inline-math>を<inline-math>n</inline-math>で割った余りが等しいことと同値である。</p>
 
   <h2>性質</h2>
-  <p>反射律: <math>a \equiv a\ (\rm{mod}\ n)</math></p>
-  <p>対称律: <math>a \equiv b\ (\rm{mod}\ n)</math>ならば、<math>b \equiv a\ (\rm{mod}\ n)</math></p>
-  <p>推移律: <math>a \equiv b\ (\rm{mod}\ n)</math>かつ<math>b \equiv c\ (\rm{mod}\ n)</math>ならば、<math>a \equiv c\ (\rm{mod}\ n)</math></p>
-  <p><math>a \equiv b\ (\rm{mod}\ n)</math>かつ<math>c \equiv d\ (\rm{mod}\ n)</math>のとき、</p>
+  <p>反射律: <inline-math>a \equiv a\ (\rm{mod}\ n)</inline-math></p>
+  <p>対称律: <inline-math>a \equiv b\ (\rm{mod}\ n)</inline-math>ならば、<inline-math>b \equiv a\ (\rm{mod}\ n)</inline-math></p>
+  <p>推移律: <inline-math>a \equiv b\ (\rm{mod}\ n)</inline-math>かつ<inline-math>b \equiv c\ (\rm{mod}\ n)</inline-math>ならば、<inline-math>a \equiv c\ (\rm{mod}\ n)</inline-math></p>
+  <p><inline-math>a \equiv b\ (\rm{mod}\ n)</inline-math>かつ<inline-math>c \equiv d\ (\rm{mod}\ n)</inline-math>のとき、</p>
   <ul>
-    <li><math>a + c \equiv b + d\ (\rm{mod}\ n)</math></li>
-    <li><math>a - c \equiv b - d\ (\rm{mod}\ n)</math></li>
-    <li><math>ac \equiv bd\ (\rm{mod}\ n)</math></li>
-    <li><math>a^k \equiv b^k\ (\rm{mod}\ n)</math> ただし、<math>k</math>は自然数</li>
+    <li><inline-math>a + c \equiv b + d\ (\rm{mod}\ n)</inline-math></li>
+    <li><inline-math>a - c \equiv b - d\ (\rm{mod}\ n)</inline-math></li>
+    <li><inline-math>ac \equiv bd\ (\rm{mod}\ n)</inline-math></li>
+    <li><inline-math>a^k \equiv b^k\ (\rm{mod}\ n)</inline-math> ただし、<inline-math>k</inline-math>は自然数</li>
   </ul>
-  <p><math>ka \equiv kb\ (\rm{mod}\ n)</math>かつ<math>k</math>と<math>n</math>が互いに素のとき、<math>a \equiv b\ (\rm{mod}\ n)</math></p>
-  <p><math>ka \equiv kb\ (\rm{mod}\ kn)</math>かつ<math>k \ne 0</math>のとき、<math>a \equiv b\ (\rm{mod}\ n)</math></p>
+  <p><inline-math>ka \equiv kb\ (\rm{mod}\ n)</inline-math>かつ<inline-math>k</inline-math>と<inline-math>n</inline-math>が互いに素のとき、<inline-math>a \equiv b\ (\rm{mod}\ n)</inline-math></p>
+  <p><inline-math>ka \equiv kb\ (\rm{mod}\ kn)</inline-math>かつ<inline-math>k \ne 0</inline-math>のとき、<inline-math>a \equiv b\ (\rm{mod}\ n)</inline-math></p>
 </body>
 
 </ktml>
