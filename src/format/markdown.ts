@@ -28,12 +28,15 @@ export function toKTML(source: string) {
   xml = serializeXML(dom);
   validate(xml);
 
+  const now = toISOStringJST(new Date());
+
   return `<ktml version="0.1">
 
 <head>
   <title>${title}</title>
   <id>${crypto.randomUUID()}</id>
-  <created>${toISOStringJST(new Date())}</created>
+  <created>${now}</created>
+  <modified>${now}</modified>
 </head>
 
 <body>

@@ -72,14 +72,30 @@ export class ServerModel {
       const normalized = this.trimFilename(pathname);
       const xmlPath = path.join(normalized, 'index.ktml');
       const file = await this.readFile(pathname);
-      const xmlContent = markdown.toKTML(file);
+      let xmlContent: string;
+
+      try {
+        xmlContent = markdown.toKTML(file);
+      } catch (error) {
+        console.error(error);
+        return;
+      }
+
       await this.writeFile(xmlPath, xmlContent);
       await this.loadEntry(xmlPath);
     } else if (pathname.endsWith('.himd')) {
       const normalized = this.trimFilename(pathname);
       const xmlPath = path.join(normalized, 'index.ktml');
       const file = await this.readFile(pathname);
-      const xmlContent = markdown.toKTML(himd.toMarkdown(file));
+      let xmlContent: string;
+
+      try {
+        xmlContent = markdown.toKTML(himd.toMarkdown(file));
+      } catch (error) {
+        console.error(error);
+        return;
+      }
+      
       await this.writeFile(xmlPath, xmlContent);
       await this.loadEntry(xmlPath);
     }
