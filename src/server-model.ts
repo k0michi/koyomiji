@@ -41,9 +41,16 @@ export class ServerModel {
   }
 
   async loadEntry(pathname: string) {
-    const normalized = this.trimFilename(pathname);
+    let normalized = this.trimFilename(pathname);
+    let logicalPath = normalized;
+
+    if (normalized.startsWith('/reference/')) {
+      const spliced = normalized.split('/');
+      normalized = `/reference/${spliced.at(-1)}`;
+    }
+
     const content = await this.readFile(pathname);
-    this.entries[normalized] = KTML.createDocument(normalized, content);
+    this.entries[normalized] = KTML.createDocument(normalized, content, logicalPath);
   }
 
   async loadDictionary(pathname: string) {

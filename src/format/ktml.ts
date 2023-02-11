@@ -25,7 +25,7 @@ export function getDescription(node: Node, limit: number) {
   }
 }
 
-export function createDocument(entryPath: string, source: string): ArticleDocument {
+export function createDocument(entryPath: string, source: string, logicalPath: string): ArticleDocument {
   const $document = parseXML(source);
   const $head = $document.querySelector('head') as Element;
   const title = getTextContent('title', $head)!;
@@ -44,7 +44,7 @@ export function createDocument(entryPath: string, source: string): ArticleDocume
   const description = getDescription($body, 120);
   const content = $body.outerHTML;
 
-  return { type: 'article', title, id, created, modified, description, path: entryPath, source: sourceStr, content };
+  return { type: 'article', title, id, created, modified, description, path: entryPath, source: sourceStr, content, logicalPath };
 }
 
 // Fix img path to absolute path

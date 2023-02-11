@@ -9,23 +9,25 @@ import Head from '../components/head.js';
 import { toDisplayDateString } from '../date-format.js';
 import { toPathname } from '../utils.js';
 import { getCategory } from '../config.js';
+import { getLocation } from '../document.js';
 
 export default function ReferencePage() {
   const params = useParams();
-  const path = ['reference', params.category!, params.id!];
+  const path = ['reference', params.id!];
   const data = useLoaderData() as Data;
   const entry = data.entries[toPathname(path)];
-  const categoryName = getCategory(params.category!).name;
+  const location = getLocation(entry);
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
 
   return (
     <>
       <Head title={entry.title} description={entry.description} type="article" published={entry.created} modified={entry.modified} />
       <header>
+        <div className='meta'>{['/', ...location ,entry.title].join(' > ')}</div>
         <h1>{entry.title}</h1>
         <div className="meta">
           <div className="date"><Icon name="calenderIcon" /><div>{toDisplayDateString(new Date(entry.created))}</div></div>
-          <div className="tags"><Icon name="tagsIcon" /><div>{categoryName}</div></div>
+          {/*<div className="tags"><Icon name="tagsIcon" /><div></div></div>*/}
         </div>
       </header>
       <div id="body">

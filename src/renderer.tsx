@@ -48,18 +48,18 @@ export function createRenderer(outRoot: string | null, template: string, model: 
     return render(template, '/reference', '/reference', { entries: getEntries(), isIndexComplete: true });
   });
 
-  renderer.use('/reference/:category/:id/(index.html)?', (ctx) => {
-    const pathname = toPathname(['reference', ctx.params['category'], ctx.params['id']]);
+  renderer.use('/reference/:id/(index.html)?', (ctx) => {
+    const pathname = toPathname(['reference', ctx.params['id']]);
     const entry = model.getEntry(pathname);
     model.sitemap.add(pathname, entry.modified);
 
     const initialData: Data = { entries: {}, isIndexComplete: false };
     initialData.entries[pathname] = entry;
-    return render(template, pathname, '/reference/:category/:id', initialData);
+    return render(template, pathname, '/reference/:id', initialData);
   });
 
-  renderer.use('/reference/:category/:id/data.json', (ctx) => {
-    const pathname = toPathname(['reference', ctx.params['category'], ctx.params['id']]);
+  renderer.use('/reference/:id/data.json', (ctx) => {
+    const pathname = toPathname(['reference', ctx.params['id']]);
     const entry = model.getEntry(pathname);
     const data = {entries: {
       [pathname]: entry

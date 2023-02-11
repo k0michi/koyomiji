@@ -57,11 +57,11 @@ export function createRoutes(model: Model): RouteObject[] {
               element: <ProjectPage />
             },
             {
-              path: 'reference/:category/:id',
-              id: '/reference/:category/:id',
+              path: 'reference/:id',
+              id: '/reference/:id',
               element: <ReferencePage />,
               loader: ({ params }) => {
-                const path = toPathname(['reference', params.category!, params.id!, 'data.json']);
+                const path = toPathname(['reference', params.id!, 'data.json']);
                 return fetch(path).then(d => d.json());
               }
             },

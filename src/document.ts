@@ -6,6 +6,7 @@ export interface Document {
   modified: string;
   description: string;
   path: string;
+  logicalPath?: string;
 }
 
 export interface ArticleDocument extends Document {
@@ -31,13 +32,14 @@ export interface DictionarySense {
   gloss: string;
 }
 
+// TODO: Return map as a tree
 export function mapEntries(entries: Document[]) {
   entries.sort((a, b) => a.path.localeCompare(b.path));
 
   const map: Record<string, Document[]> = {};
 
   for (const item of entries) {
-    const category = getCategory(item.path);
+    const category = getLocation(item).at(-1)!;
 
     if (map[category] == null) {
       map[category] = [];
@@ -49,6 +51,6 @@ export function mapEntries(entries: Document[]) {
   return map;
 }
 
-function getCategory(path: string) {
-  return path.split('/')[2];
+export function getLocation(document: Document) {
+  return document.logicalPath!.split('/').slice(2, -1);
 }

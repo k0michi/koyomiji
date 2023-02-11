@@ -22,7 +22,7 @@ export default function ReferenceIndexPage() {
       <div id="body">
         {Object.entries(map).map(([k, v]) =>
           <div className="category" key={k}>
-            <h2>{getCategory(k)?.name}</h2>
+            <h2>{k}</h2>
             <ul>
               {v.map(i => <li key={i.path}><Link href={i.path}>{i.title}</Link></li>)}
             </ul>
