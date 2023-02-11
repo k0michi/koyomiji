@@ -51,12 +51,14 @@ export class ServerModel {
 
     const content = await this.readFile(pathname);
     this.entries[normalized] = KTML.createDocument(normalized, content, logicalPath);
+    return normalized;
   }
 
   async loadDictionary(pathname: string) {
     const normalized = this.trimFilename(pathname);
     const content = await this.readFile(pathname);
     this.dictionaries[normalized] = KDML.createDocument(normalized, content);
+    return normalized;
   }
 
   async readFile(pathname: string) {

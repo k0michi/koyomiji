@@ -17,11 +17,10 @@ const model = new ServerModel(contentRoot);
 
   for (const p of await glob('**/*', { cwd: contentRoot, nodir: true })) {
     if (p.endsWith('index.ktml')) {
-      const entryPath = p.split('/').slice(0, -1);
-      await model.loadEntry(p);
-      const htmlPath = `/${entryPath.join('/')}/index.html`;
+      const path = await model.loadEntry(p);
+      const htmlPath = `${path}/index.html`;
       await renderer.render(htmlPath);
-      const jsonPath = `/${entryPath.join('/')}/data.json`;
+      const jsonPath = `${path}/data.json`;
       await renderer.render(jsonPath);
     } else if (p.endsWith('index.kdml')) {
       await model.loadDictionary(p);
