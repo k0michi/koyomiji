@@ -1,45 +1,46 @@
 import * as React from 'react';
+import SVG from './svg.js';
 
-interface IconProps {
-  name: string;
+export function LogoFull() {
+  return <SVG loader={async () => (await import('../assets/kissa_koyomiji.svg?raw')).default} className="icon"></SVG>;
 }
 
-export default function Icon(props: IconProps) {
-  const [imported, setImported] = React.useState<string>();
+export function Asterisk() {
+  return <SVG loader={async () => (await import('../assets/asterisk.svg?raw')).default} className="icon"></SVG>;
+}
 
-  React.useEffect(() => {
-    (async () => {
-      if (props.name == 'logoFull') {
-        setImported((await import('../assets/kissa_koyomiji.svg?raw')).default);
-      } else if (props.name == 'asterisk') {
-        setImported((await import('../assets/asterisk.svg?raw')).default);
-      } else if (props.name == 'mailIcon') {
-        setImported((await import('@tabler/icons/mail.svg?raw')).default);
-      } else if (props.name == 'githubIcon') {
-        setImported((await import('@tabler/icons/brand-github.svg?raw')).default);
-      } else if (props.name == 'youtubeIcon') {
-        setImported((await import('@tabler/icons/brand-youtube.svg?raw')).default);
-      } else if (props.name == 'twitchIcon') {
-        setImported((await import('@tabler/icons/brand-twitch.svg?raw')).default);
-      } else if (props.name == 'calenderIcon') {
-        setImported((await import('@tabler/icons/calendar-time.svg?raw')).default);
-      } else if (props.name == 'tagsIcon') {
-        setImported((await import('@tabler/icons/tags.svg?raw')).default);
-      } else if (props.name == 'xIcon') {
-        setImported((await import('feather-icons/dist/icons/x.svg?raw')).default);
-      } else if (props.name == 'menu2') {
-        setImported((await import('@tabler/icons/menu-2.svg?raw')).default);
-      } else if (props.name == 'rss') {
-        setImported((await import('@tabler/icons/rss.svg?raw')).default);
-      } else {
-        throw new Error('Unknown icon');
-      }
-    })();
-  }, []);
+export function MailIcon() {
+  return <SVG loader={async () => (await import('@tabler/icons/mail.svg?raw')).default} className="icon"></SVG>;
+}
 
-  if (imported != null) {
-    return <div className="icon" dangerouslySetInnerHTML={{ __html: imported }} />;
-  } else {
-    return <div className="icon" />;
-  }
+export function GithubIcon() {
+  return <SVG loader={async () => (await import('@tabler/icons/brand-github.svg?raw')).default} className="icon"></SVG>;
+}
+
+export function YoutubeIcon() {
+  return <SVG loader={async () => (await import('@tabler/icons/brand-youtube.svg?raw')).default} className="icon"></SVG>;
+}
+
+export function TwitchIcon() {
+  return <SVG loader={async () => (await import('@tabler/icons/brand-twitch.svg?raw')).default} className="icon"></SVG>;
+}
+
+export function CalenderIcon() {
+  return <SVG loader={async () => (await import('@tabler/icons/calendar-time.svg?raw')).default} className="icon"></SVG>;
+}
+
+export function TagsIcon() {
+  return <SVG loader={async () => (await import('@tabler/icons/tags.svg?raw')).default} className="icon"></SVG>;
+}
+
+export function XIcon() {
+  return <SVG loader={async () => (await import('feather-icons/dist/icons/x.svg?raw')).default} className="icon"></SVG>;
+}
+
+export function Menu2() {
+  return <SVG loader={async () => (await import('@tabler/icons/menu-2.svg?raw')).default} className="icon"></SVG>;
+}
+
+export function RSS() {
+  return <SVG loader={async () => (await import('@tabler/icons/rss.svg?raw')).default} className="icon"></SVG>;
 }

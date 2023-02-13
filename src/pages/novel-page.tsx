@@ -5,7 +5,7 @@ import { Data, Model } from '../model.js';
 import { toElement } from '../xml.js';
 import { parseXML } from '../xml.js';
 import * as ReactKTML from '../react-ktml.js';
-import Icon from '../components/icon.js';
+import { XIcon } from '../components/icon.js';
 import Head from '../components/head.js';
 import { Helmet } from 'react-helmet';
 import { toPathname } from '../utils.js';
@@ -120,7 +120,7 @@ export default function NovelPage() {
         <body className="novel-layout" />
       </Helmet>
       <div id="novel-nav">
-        <Link href='/novel'><Icon name="xIcon" /></Link>
+        <Link href='/novel'><XIcon /></Link>
       </div>
       <main id="novel-main" ref={mainRef}>
         {content}

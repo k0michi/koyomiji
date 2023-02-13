@@ -100,7 +100,7 @@ p {
   display: contents;
 }
 
-.icon>svg {
+.icon svg {
   display: block;
 }
 
