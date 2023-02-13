@@ -4,7 +4,7 @@ import { Document } from "../document.js";
 import { Data, Model } from '../model.js';
 import { useLoaderData, useLocation } from 'react-router';
 import Link from '../components/link.js';
-import Icon from '../components/icon.js';
+import { CalenderIcon } from '../components/icon.js';
 import Head from '../components/head.js';
 import { toDisplayDateString } from '../date-format.js';
 
@@ -30,7 +30,7 @@ export default function LogIndexPage() {
             <h2><Link href={`/log/${getID(i)}`}>{i.title}</Link></h2>
             <div className="meta">
               <div className="number">#{getID(i)}</div>
-              <div className="date"><Icon name="calenderIcon" /><div>{toDisplayDateString(new Date(i.created))}</div></div>
+              <div className="date"><CalenderIcon /><div>{toDisplayDateString(new Date(i.created))}</div></div>
             </div>
             <p>{i.description}</p>
             <hr />
