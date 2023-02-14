@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { ArticleDocument, mapEntries } from "../document.js";
 import { Data, Model } from '../model.js';
 import Link from '../components/link.js';
-import { toPathname } from '../utils.js';
+import { mapEntries, toPathname } from '../utils.js';
 import Head from '../components/head.js';
 import { getCategory } from '../config.js';
 import { useLoaderData } from 'react-router';

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { ArticleDocument, mapEntries } from "../document.js";
 import { Data, Model } from '../model.js';
 import Link from '../components/link.js';
 import Head from '../components/head.js';
 import { useLoaderData } from 'react-router';
+import { mapEntries } from '../utils.js';
 
 export default function NovelIndexPage() {
   const data = useLoaderData() as Data;
