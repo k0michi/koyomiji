@@ -26,7 +26,7 @@ export default function ReferencePage() {
       <header>
         <div className='meta'><Breadcrumb links={[
           { name: '/' },
-          ...location.map(l => { return { name: l }; }),
+          ...location.map(l => { return { name: getCategory(l)?.name }; }),
           { name: entry.title }
         ]} /></div>
         <h1>{entry.title}</h1>

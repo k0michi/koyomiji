@@ -32,16 +32,44 @@
       "name": "Web"
     },
     {
-      "id": "development",
-      "name": "Dev"
+      "id": "tech",
+      "name": "技術"
     },
     {
       "id": "math",
-      "name": "Math"
+      "name": "数学"
     },
     {
       "id": "unix",
       "name": "Unix"
+    },
+    {
+      "id": "nodejs",
+      "name": "Node.js"
+    },
+    {
+      "id": "python",
+      "name": "Python"
+    },
+    {
+      "id": "javascript",
+      "name": "JavaScript"
+    },
+    {
+      "id": "git",
+      "name": "Git"
+    },
+    {
+      "id": "go",
+      "name": "Go言語"
+    },
+    {
+      "id": "d",
+      "name": "D言語"
+    },
+    {
+      "id": "algorithms",
+      "name": "アルゴリズム"
     }
   ]
 }
