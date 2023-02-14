@@ -2175,6 +2175,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"himd@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "himd@npm:0.0.1"
+  dependencies:
+    hipt: ^0.0.3
+  checksum: c58e34286f5c3fb6a4942146931508ab08bba6456b66ef1ee971c3b0c8451e94feeb9f85d00e398a06fa933e503063098f74c413410c2fd0ef292fe2f859db14
+  languageName: node
+  linkType: hard
+
 "hipt@npm:^0.0.3":
   version: 0.0.3
   resolution: "hipt@npm:0.0.3"
@@ -2790,6 +2799,7 @@ __metadata:
     feather-icons: ^4.29.0
     glob: ^8.0.3
     glob-promise: ^4.2.2
+    himd: ^0.0.1
     hipt: ^0.0.3
     immer: ^9.0.15
     jsdom: ^19.0.0
