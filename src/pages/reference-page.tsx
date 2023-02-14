@@ -10,6 +10,7 @@ import { toDisplayDateString } from '../date-format.js';
 import { toPathname } from '../utils.js';
 import { getCategory } from '../config.js';
 import { getLocation } from '../document.js';
+import Breadcrumb from '../components/breadcrumb.js';
 
 export default function ReferencePage() {
   const params = useParams();
@@ -23,10 +24,14 @@ export default function ReferencePage() {
     <>
       <Head title={entry.title} description={entry.description} type="article" published={entry.created} modified={entry.modified} />
       <header>
-        <div className='meta'>{['/', ...location ,entry.title].join(' > ')}</div>
+        <div className='meta'><Breadcrumb links={[
+          { name: '/' },
+          ...location.map(l => { return { name: l }; }),
+          { name: entry.title }
+        ]} /></div>
         <h1>{entry.title}</h1>
         <div className="meta">
-          <div className="date"><CalenderIcon/><div>{toDisplayDateString(new Date(entry.created))}</div></div>
+          <div className="date"><CalenderIcon /><div>{toDisplayDateString(new Date(entry.created))}</div></div>
           {/*<div className="tags"><Icon name="tagsIcon" /><div></div></div>*/}
         </div>
       </header>
