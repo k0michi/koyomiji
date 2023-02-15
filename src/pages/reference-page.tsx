@@ -7,9 +7,8 @@ import * as ReactKTML from '../react-ktml.js';
 import { CalenderIcon, TagsIcon } from '../components/icon.js';
 import Head from '../components/head.js';
 import { toDisplayDateString } from '../date-format.js';
-import { toPathname } from '../utils.js';
+import { getLocation, toPathname } from '../utils.js';
 import { getCategory } from '../config.js';
-import { getLocation } from '../document.js';
 import Breadcrumb from '../components/breadcrumb.js';
 
 export default function ReferencePage() {
