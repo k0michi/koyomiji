@@ -1,0 +1,13 @@
+<ktml version="0.1">
+
+<head>
+  <title>お薦めPDFリーダー"Skim"</title>
+  <id>f8d67421-941f-4d5d-ab4d-4eb2beb3f4dd</id>
+  <created>2023-02-15T23:14:59+09:00</created>
+</head>
+
+<body>
+  <p>今回は、<a href="https://skim-app.sourceforge.io/">Skim</a>というPDFリーダーを紹介します。これは、macOS専用のアプリケーションではありますが、オープンソースで開発されており、無料で使うことができます。公式サイトの説明を引用すると、</p><blockquote><p>Skim is a PDF reader and note-taker for OS X. It is designed to help you read and annotate scientific papers in PDF, but is also great for viewing any PDF file.</p></blockquote><p>このアプリケーションは、説明にもある通り、PDFリーダーであるだけでなく、PDFに書き込みをすることにも特化していることが特徴です。</p><p>Macにはビルトインでプレビュー.appが入っていますが、Skimはプレビュー.appの操作感を継承しつつも、より快適にPDFを閲覧することができます。加えて、PDFに自由に書き込みを行うことができます。</p><p>単に読むだけではなくて、書き込みをすることにフォーカスしている、というところが肝心です。数百ページあるような技術文章やeBookを読もうとすると、それなりに時間がかかってしまいますし、読んだことも忘れて行ってしまいます。ですが、このアプリケーションを使うことで、重要な箇所をハイライトしたり、自分の理解を文章上に書き残すことができるわけです。これによって、もし内容を忘れてしまっても、再度理解するために掛かる時間を短縮することができ、理解も深まります。</p><p>個人的には、このアプリケーションに出会ってからは、Web上の記事であっても、PDFに変換しダウンロードした上で読むことが多くなりました。ブラウザのHTML上ではそうした書き込みを行うのは難しいですが、PDFにしてしまえばレイアウトが固定されるので簡単に書き込めるわけです。</p><p>唯一惜しい点はMac専用であるということでしょうか。これはきっとSkimがmacOSのPDF描画エンジンを使っているためです。クロスプラットフォームではない代わりに、パフォーマンスは非常に最適化されており、スムーズで快適です。</p><p>ということで、Macを使っている人は皆Skimを使いましょう、というお話でした。ダウンロードは<a href="https://skim-app.sourceforge.io/">skim-app.sourceforge.io</a>から行えます。</p>
+</body>
+
+</ktml>

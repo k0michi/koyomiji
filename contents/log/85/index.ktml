@@ -1,0 +1,27 @@
+<ktml version="0.1">
+
+<head>
+  <title>M1 Macでもasciidoctor-mathematicalを使いたい【Docker】</title>
+  <id>8434a089-9974-4df1-bd00-a0a799a5be94</id>
+  <created>2023-02-16T21:33:34+09:00</created>
+</head>
+
+<body>
+  <p>以前の記事でAsciiDoctor PDFでasciidoctor-mathematicalを使い、数式を出力しようとしたのですが、どうしてもSegmentation faultとなって上手く動かすことができませんでした。エラーメッセージは以下のようなものです。</p><code>% asciidoctor-pdf -a pdf-theme=default-with-fallback-font -r asciidoctor-mathematical test.adoc
+/opt/homebrew/lib/ruby/gems/3.2.0/gems/mathematical-1.6.14/lib/mathematical.rb:47: [BUG] Segmentation fault at 0x0000600052682438
+ruby 3.2.0 (2022-12-25 revision a528908271) [arm64-darwin21]
+...</code><p>この問題について少し調べたのですが、MathematicalのIssueとして似た現象が上がっていました。M1 Mac特有の問題のようです。</p><ul><li><p><a href="https://github.com/gjtorikian/mathematical/issues/108">`Segmentation fault at 0x000060002054cfb0` on M1 Mac · Issue #108 · gjtorikian/mathematical</a></p></li></ul><p>しかし、残念ながら直接的な解決策は今のところ何も無さそうです。しかしながら、その場しのぎ的な対処療法は存在します。Dockerを用いて、x86_64バージョンを動かせば良いのです。そして幸いなことに、Asciidoctor公式が<a href="https://github.com/asciidoctor/docker-asciidoctor">asciidoctor/docker-asciidoctor</a>というDockerイメージを提供してくれています。</p><p>使い方はとても簡単です。asciidoctor/docker-asciidoctorをイメージ名に指定し、<code>-v</code>オプションでホスト側のディレクトリをマウントします。<code>-v ホストの絶対パス:コンテナ内の絶対パス</code>のように指定します。カレントディレクトリの絶対パスは環境変数<code>$PWD</code>に格納されているので、そこからの相対パスとして書くこともできます。</p><code>% docker run -it -v $PWD/adoc:/documents/ asciidoctor/docker-asciidoctor
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+85f99e41ac2b:/documents#</code><p>次の内容を<code>test2.adoc</code>として保存します。</p><code>= ドキュメントの見出し
+:stem: latexmath
+
+インライン: stem:[\sqrt{2} = 1.41421...]
+
+ブロック:
+[stem]
+++++
+\sqrt{4} = 2
+++++</code><p>これをPDFに変換してみます。デフォルトの設定では、数式はPNG形式の画像として埋め込まれますが、拡大すると粗が目立ってしまうので、<code>-a mathematical-format=svg</code>でSVG形式に変更します。</p><code># asciidoctor-pdf -a pdf-theme=default-with-fallback-font -a mathematical-format=svg -r asciidoctor-mathematical test2.adoc</code><p>以下のようなPDFが出力されます。日本語も正しく表示されています。</p><p><img src="output.png"/></p><p>このように、Dockerとasciidoctor/docker-asciidoctorイメージを利用することで、M1 Macでもasciidoctor-mathematicalを動かすことができました。</p>
+</body>
+
+</ktml>
