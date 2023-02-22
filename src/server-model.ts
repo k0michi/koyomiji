@@ -19,7 +19,7 @@ export class ServerModel {
     this.rootDir = rootDir;
     this.entries = {};
     this.dictionaries = {};
-    this.sitemap = new Sitemap();
+    this.sitemap = new Sitemap('https://koyomiji.com/');
   }
 
   getEntry(pathname: string) {

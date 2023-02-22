@@ -10,13 +10,15 @@ export interface MapURL {
 
 export default class Sitemap {
   map: Record<string, MapURL>;
+  baseURL: string;
 
-  constructor() {
+  constructor(baseURL: string) {
     this.map = {};
+    this.baseURL = baseURL;
   }
 
   add(loc: string, lastMod?: string) {
-    loc = new URL(loc, 'https://koyomiji.com/').toString();
+    loc = new URL(loc, this.baseURL).toString();
     this.map[loc] = { loc, lastMod };
   }
 

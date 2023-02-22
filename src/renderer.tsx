@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet';
 import { ModelProvider } from 'kyoka';
 import * as fs from 'fs/promises';
 import produce from 'immer';
-import window from '@k0michi/isomorphic-dom';
 
 import { Renderer } from "./base/renderer.js";
 import { Data, Model } from './model.js';
@@ -14,6 +13,7 @@ import { toISOStringJST } from './date-format.js';
 import { newElementCreator } from './xml.js';
 import { createMemoryRouter, createRoutesFromElements, RouterProvider } from 'react-router';
 import { createRoutes } from './routes.js';
+import { Feed } from './feed.js';
 
 export function createRenderer(outRoot: string | null, template: string, model: ServerModel) {
   const renderer = new Renderer(outRoot);
@@ -61,9 +61,11 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   renderer.use('/reference/:id/data.json', (ctx) => {
     const pathname = toPathname(['reference', ctx.params['id']]);
     const entry = model.getEntry(pathname);
-    const data = {entries: {
-      [pathname]: entry
-    }};
+    const data = {
+      entries: {
+        [pathname]: entry
+      }
+    };
 
     return JSON.stringify(data);
   });
@@ -90,9 +92,11 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   renderer.use('/log/:id/data.json', (ctx) => {
     const pathname = toPathname(['log', ctx.params['id']]);
     const entry = model.getEntry(pathname);
-    const data = {entries: {
-      [pathname]: entry
-    }};
+    const data = {
+      entries: {
+        [pathname]: entry
+      }
+    };
 
     return JSON.stringify(data);
   });
@@ -102,7 +106,7 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   });
 
   renderer.use('/data.json', (ctx) => {
-    return JSON.stringify({entries: getEntries()});
+    return JSON.stringify({ entries: getEntries() });
   });
 
   renderer.use('/novel/(index.html)?', (ctx) => {
@@ -123,9 +127,11 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   renderer.use('/novel/:novel/:chapter/data.json', (ctx) => {
     const pathname = toPathname(['novel', ctx.params['novel'], ctx.params['chapter']]);
     const entry = model.getEntry(pathname);
-    const data = {entries: {
-      [pathname]: entry
-    }};
+    const data = {
+      entries: {
+        [pathname]: entry
+      }
+    };
 
     return JSON.stringify(data);
   });
@@ -148,9 +154,11 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   renderer.use('/artwork/:id/data.json', (ctx) => {
     const pathname = toPathname(['artwork', ctx.params['id']]);
     const entry = model.getEntry(pathname);
-    const data = {entries: {
-      [pathname]: entry
-    }};
+    const data = {
+      entries: {
+        [pathname]: entry
+      }
+    };
 
     return JSON.stringify(data);
   });
@@ -169,36 +177,29 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   });
 
   renderer.use('/feed.xml', (ctx) => {
-    const atomNS = 'http://www.w3.org/2005/Atom';
-    const document = window.document.implementation.createDocument(atomNS, 'feed');
-    const create = newElementCreator(document, atomNS);
-    const feed = document.firstChild! as Element;
+    const feed = new Feed({
+      title: '喫茶＊曆路',
+      id: '7e260dae-5479-45c2-bad8-0be227c48ab8',
+      linkSelf: 'https://koyomiji.com/feed.xml',
+      linkAlternate: 'https://koyomiji.com/',
+      updated: toISOStringJST(new Date()),
+      icon: 'https://koyomiji.com/favicon.ico',
+      author: {
+        name: 'Komichi',
+        email: 'k0michi@koyomi.co',
+      }
+    });
 
-    feed.appendChild(create('title', {}, '喫茶＊曆路'));
-    feed.appendChild(create('id', {}, 'urn:uuid:7e260dae-5479-45c2-bad8-0be227c48ab8'));
-    feed.appendChild(create('link', { rel: 'self', href: 'https://koyomiji.com/feed.xml' }));
-    feed.appendChild(create('link', { rel: 'alternate', href: 'https://koyomiji.com/' }));
-    feed.appendChild(create('updated', {}, toISOStringJST(new Date())));
-    feed.appendChild(create('icon', {}, 'https://koyomiji.com/favicon.ico'));
+    feed.addEntries(Object.values(model.entries).map(e => ({
+      title: e.title,
+      summary: e.description,
+      id: e.id,
+      linkRelative: e.path,
+      published: e.created,
+      updated: e.modified
+    })));
 
-    const author = create('author');
-    author.appendChild(create('name', {}, 'Komichi'));
-    author.appendChild(create('email', {}, 'k0michi@koyomi.co'));
-    feed.appendChild(author);
-
-    for (const e of Object.values(model.entries)) {
-      const entry = create('entry');
-      entry.appendChild(create('title', {}, e.title));
-      entry.appendChild(create('summary', {}, e.description));
-      entry.appendChild(create('id', {}, `urn:uuid:${e.id}`));
-      entry.appendChild(create('link', { rel: 'alternate', href: new URL(e.path, 'https://koyomiji.com/').toString() }));
-      entry.appendChild(create('published', {}, e.created));
-      entry.appendChild(create('updated', {}, e.modified));
-      feed.appendChild(entry);
-    }
-
-    const serializer = new window.XMLSerializer();
-    return '<?xml version="1.0" encoding="UTF-8"?>\n' + serializer.serializeToString(feed);
+    return feed.toAtom();
   });
 
   renderer.use('/sitemap.xml', (ctx) => {
