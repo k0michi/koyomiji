@@ -1,4 +1,4 @@
-import config from '../config.json' assert { type: "json" };
+import config from '../site.config.json' assert { type: "json" };
 
 export interface Category {
   id: string;
