@@ -13,7 +13,7 @@ import { toISOStringJST } from './date-format.js';
 import { newElementCreator } from './xml.js';
 import { createMemoryRouter, createRoutesFromElements, RouterProvider } from 'react-router';
 import { createRoutes } from './routes.js';
-import { Feed } from './feed.js';
+import { Feed } from './meta/feed.js';
 
 export function createRenderer(outRoot: string | null, template: string, model: ServerModel) {
   const renderer = new Renderer(outRoot);

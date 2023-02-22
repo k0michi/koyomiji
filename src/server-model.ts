@@ -3,7 +3,7 @@ import { DictionaryDocument, ArticleDocument } from "./document.js";
 import * as KTML from "./format/ktml.js";
 import * as KDML from "./format/kdml.js";
 import { readFileUTF8, toPathname } from "./utils.js";
-import Sitemap from "./sitemap.js";
+import Sitemap from "./meta/sitemap.js";
 import * as fs from "fs/promises";
 import * as markdown from "./format/markdown.js";
 import * as himd from './format/himd.js';
