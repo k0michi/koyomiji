@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { Outlet, useLocation, useOutlet } from 'react-router';
 import { Model } from '../model.js';
-import { Asterisk, GithubIcon, LogoFull, MailIcon, RSS, TwitchIcon, YoutubeIcon } from './icon.js';
+import { Asterisk, GithubIcon, LogoFull, MailIcon, Mastodon, RSS, TwitchIcon, YoutubeIcon } from './icon.js';
 import Link from './link.js';
 
 interface MenuProps {
@@ -56,6 +56,7 @@ export default function CommonLayout() {
           <ul id="icons">
             <li><Link aria-label="RSS" href="https://koyomiji.com/feed.xml"><RSS /></Link></li>
             <li><Link aria-label="Mail" href="mailto:k0michi@koyomi.co"><MailIcon /></Link></li>
+            <li><Link aria-label="Mastodon" href="https://koyomi.co/@k0michi"><Mastodon /></Link></li>
             <li><Link aria-label="GitHub" href="https://github.com/k0michi"><GithubIcon /></Link></li>
             <li><Link aria-label="YouTube" href="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw"><YoutubeIcon /></Link></li>
             <li><Link aria-label="Twitch" href="https://www.twitch.tv/k0michi"><TwitchIcon /></Link></li>

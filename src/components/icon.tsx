@@ -44,3 +44,7 @@ export function Menu2() {
 export function RSS() {
   return <SVG loader={async () => (await import('@tabler/icons/rss.svg?raw')).default} className="icon"></SVG>;
 }
+
+export function Mastodon() {
+  return <SVG loader={async () => (await import('@tabler/icons/brand-mastodon.svg?raw')).default} className="icon"></SVG>;
+}
