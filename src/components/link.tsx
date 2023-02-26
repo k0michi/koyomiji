@@ -7,6 +7,7 @@ interface LinkProps {
   children?: any;
   className?: any;
   'aria-label'?: string;
+  rel?: string;
 }
 
 export default function Link(props: LinkProps) {
@@ -15,9 +16,9 @@ export default function Link(props: LinkProps) {
   const handleClick = ReactRouterDOM.useLinkClickHandler(props.href);
 
   return (external ?
-    <a href={props.href} className={props.className} aria-label={props['aria-label']} target="_blank">{props.children}</a>
+    <a href={props.href} className={props.className} aria-label={props['aria-label']} rel={props.rel} target="_blank">{props.children}</a>
     :
-    <a href={props.href} className={props.className} aria-label={props['aria-label']} onClick={e => {
+    <a href={props.href} className={props.className} aria-label={props['aria-label']} rel={props.rel} onClick={e => {
       e.preventDefault();
       startTransition(() => {
         handleClick(e);

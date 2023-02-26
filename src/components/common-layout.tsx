@@ -56,10 +56,10 @@ export default function CommonLayout() {
           <ul id="icons">
             <li><Link aria-label="RSS" href="https://koyomiji.com/feed.xml"><RSS /></Link></li>
             <li><Link aria-label="Mail" href="mailto:k0michi@koyomi.co"><MailIcon /></Link></li>
-            <li><Link aria-label="Mastodon" href="https://koyomi.co/@k0michi"><Mastodon /></Link></li>
-            <li><Link aria-label="GitHub" href="https://github.com/k0michi"><GithubIcon /></Link></li>
-            <li><Link aria-label="YouTube" href="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw"><YoutubeIcon /></Link></li>
-            <li><Link aria-label="Twitch" href="https://www.twitch.tv/k0michi"><TwitchIcon /></Link></li>
+            <li><Link aria-label="Mastodon" rel="me" href="https://koyomi.co/@k0michi"><Mastodon /></Link></li>
+            <li><Link aria-label="GitHub" rel="me" href="https://github.com/k0michi"><GithubIcon /></Link></li>
+            <li><Link aria-label="YouTube" rel="me" href="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw"><YoutubeIcon /></Link></li>
+            <li><Link aria-label="Twitch" rel="me" href="https://www.twitch.tv/k0michi"><TwitchIcon /></Link></li>
           </ul>
         </nav>
         <main id="main">
