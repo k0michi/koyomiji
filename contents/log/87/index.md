@@ -1,4 +1,4 @@
-# VulkanとDirectX 12が難しすぎる件
+# VulkanとDirect3D 12が難しすぎる件
 
 私は2023年に入ってから、本格的にゲーム開発をしようと思いまして、OpenGLやDirect3D 11、Metalといった3DグラフィックスAPIを勉強し始めました。そしてこういったAPIを勉強する上で、最新のローレベルグラフィックスAPIであるVulkanとDirect3D 12の存在を無視することができません。
 
