@@ -1,10 +1,10 @@
 <ktml version="0.1">
 
 <head>
-  <title>VulkanとDirectX 12が難しすぎる件</title>
+  <title>VulkanとDirect3D 12が難しすぎる件</title>
   <id>c55ac604-9264-4ecd-978b-d2a3e9cc21d3</id>
   <created>2023-03-01T18:56:32+09:00</created>
-  <modified>2023-03-01T19:01:44+09:00</modified>
+  <modified>2023-03-02T11:10:14+09:00</modified>
 </head>
 
 <body>
