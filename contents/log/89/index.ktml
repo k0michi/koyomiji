@@ -1,0 +1,16 @@
+<ktml version="0.1">
+
+<head>
+  <title>UbuntuのOBSでBlackmagicのキャプチャーボードが認識されない問題</title>
+  <id>dc36219d-02e6-4b56-987e-c38a61d777c2</id>
+  <created>2023-08-07T18:04:23+09:00</created>
+</head>
+
+<body>
+  <p>中古で購入したPCに、偶然にもBlackmagic DesignのIntensity Proが付属していたので、Ubuntu上のOBSで使おうとしたのだが、ソースとして認識されておらず使うことができなかった。ちなみにBlackmagicの公式ドライバはインストールしてあり、デバイス自体は認識されている。</p><p>調べてみたところ、どうやら、OBSをSnapからインストールしていることが原因のようだった。ということで、OBSを<a href="https://launchpad.net/~obsproject/+archive/ubuntu/obs-studio">PPA</a>からインストールし直してみた。</p><code>$ sudo snap remove obs-studio
+$ sudo add-apt-repository ppa:obsproject/obs-studio
+$ sudo apt update
+$ sudo apt install obs-studio</code><p>すると、"Blackmagic Device"がソースとして追加され、映像をキャプチャすることができた。今回はNintendo Switchの画面で試してみた。</p><p><img src="switch.png"/></p><p>Switchの画面をキャプチャする時の注意点としては、Modeを720p60にしないとキャプチャすることができない点である。デフォルトだと525iになっているので、何も表示されない。</p>
+</body>
+
+</ktml>
