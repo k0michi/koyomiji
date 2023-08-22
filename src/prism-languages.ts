@@ -9,3 +9,5 @@ import 'prismjs/components/prism-json.js';
 import 'prismjs/components/prism-markdown.js';
 import 'prismjs/components/prism-ignore.js';
 import 'prismjs/components/prism-toml.js';
+import 'prismjs/components/prism-c.js';
+import 'prismjs/components/prism-cpp.js';
