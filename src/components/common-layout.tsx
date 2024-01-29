@@ -67,7 +67,7 @@ export default function CommonLayout() {
         </main>
         <div id="footer">
           <div id="copyright">
-            © 2023 Kissa-Koyomiji
+            © 2024 Kissa-Koyomiji
           </div>
         </div>
       </div>
