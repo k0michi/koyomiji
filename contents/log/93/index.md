@@ -70,7 +70,7 @@ PubkeyAuthentication yes
 PasswordAuthentication no
 ```
 
-これで、無事公開鍵でログインが行えるはずである。
+「サービス」からSSHサーバーを再起動すると、無事公開鍵でログインが行えるはずである。
 
 ## 参考
 
