@@ -1,0 +1,13 @@
+<ktml version="0.1">
+
+<head>
+  <title>WindowsのランチャーはPowerToys Runで決まり</title>
+  <id>8c8a0654-fd9c-426c-9065-21ab38abd45f</id>
+  <created>2024-01-30T16:23:38+09:00</created>
+</head>
+
+<body>
+  <p>WindowsにおけるmacOSのAlfredのようなランチャーはいくつか存在しているが、いつの間にかMicrosoft公式からもリリースされていたので使ってみた。PowerToys Runというランチャーで、PowerToysと呼ばれるWindowsのユーティリティの一つとなっている。</p><ul><li><p><a href="https://github.com/microsoft/PowerToys">microsoft/PowerToys: Windows system utilities to maximize productivity</a></p></li></ul><p>UIはこんな感じ。Microsoft公式なだけあって、OSのテーマとの親和性が高い。</p><p><img src="powertoys_run.png"/></p><p>フォントサイズの変更やテーマへの切り替えは設定で行うことができる。最大表示数が初期設定では4個となっていて少ないので、8個くらいに増やすと良いだろう。</p><p>PowerToysにはランチャーだけではなくて、macOSで言うところのQuick Lookに相当する「プレビュー」機能もある。ただプレビューはまだ不安定な印象なので、アップデートに期待。</p>
+</body>
+
+</ktml>
