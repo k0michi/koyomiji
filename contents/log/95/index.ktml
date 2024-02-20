@@ -1,0 +1,39 @@
+<ktml version="0.1">
+
+<head>
+  <title>Jupyter Notebookを起動しても空白のページしか表示されない問題 [macOS]</title>
+  <id>de1e7208-097c-439b-a61e-cd5c7720fe7b</id>
+  <created>2024-02-20T13:48:31+09:00</created>
+</head>
+
+<body>
+  <h2>問題</h2><p>Jupyter Notebookを使ってみるべく、<code>pip install jupyter</code>でインストールして、<code>jupyter notebook</code>で起動したのだが、次のようにまっさらなページしか表示されなかった。</p><p><img src="blank.png"/></p><p>コンソールのエラーメッセージ:</p><code>[W 2024-02-20 13:21:28.902 JupyterNotebookApp] Missing or misshapen translation settings schema:
+    HTTP 404: Not Found (Schema not found: /opt/homebrew/Cellar/python@3.11/3.11.6/Frameworks/Python.framework/Versions/3.11/share/jupyter/lab/schemas/@jupyterlab/translation-extension/plugin.json)
+[W 2024-02-20 13:21:28.903 JupyterNotebookApp] Settings directory does not exist at /opt/homebrew/Cellar/python@3.11/3.11.6/Frameworks/Python.framework/Versions/3.11/share/jupyter/lab/schemas
+[W 2024-02-20 13:21:28.942 JupyterNotebookApp] Missing or misshapen translation settings schema:
+    HTTP 404: Not Found (Schema not found: /opt/homebrew/Cellar/python@3.11/3.11.6/Frameworks/Python.framework/Versions/3.11/share/jupyter/lab/schemas/@jupyterlab/translation-extension/plugin.json)
+[W 2024-02-20 13:21:28.942 ServerApp] 404 GET /lab/api/settings/@jupyter-notebook/application-extension:shell?1708402888939 (127.0.0.1): Schema not found: /opt/homebrew/Cellar/python@3.11/3.11.6/Frameworks/Python.framework/Versions/3.11/share/jupyter/lab/schemas/@jupyter-notebook/application-extension/shell.json
+[W 2024-02-20 13:21:28.942 JupyterNotebookApp] wrote error: 'Schema not found: /opt/homebrew/Cellar/python@3.11/3.11.6/Frameworks/Python.framework/Versions/3.11/share/jupyter/lab/schemas/@jupyter-notebook/application-extension/shell.json'
+    Traceback (most recent call last):
+      File "/opt/homebrew/lib/python3.11/site-packages/tornado/web.py", line 1788, in _execute
+        result = method(*self.path_args, **self.path_kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/lib/python3.11/site-packages/tornado/web.py", line 3301, in wrapper
+        return method(self, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/lib/python3.11/site-packages/jupyterlab_server/settings_handler.py", line 57, in get
+        result, warnings = get_settings(
+                           ^^^^^^^^^^^^^
+      File "/opt/homebrew/lib/python3.11/site-packages/jupyterlab_server/settings_utils.py", line 379, in get_settings
+        schema, version = _get_schema(schemas_dir, schema_name, overrides, labextensions_path)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/opt/homebrew/lib/python3.11/site-packages/jupyterlab_server/settings_utils.py", line 55, in _get_schema
+        raise web.HTTPError(404, notfound_error % path)
+    tornado.web.HTTPError: HTTP 404: Not Found (Schema not found: /opt/homebrew/Cellar/python@3.11/3.11.6/Frameworks/Python.framework/Versions/3.11/share/jupyter/lab/schemas/@jupyter-notebook/application-extension/shell.json)</code><h2>環境</h2><ul><li><p>MacBook Pro (2021, M1 Pro)</p></li><li><p>macOS Ventura 13.6</p></li><li><p>Python 3.11.6</p></li></ul><h2>解決法</h2><p>ググってみると、同じ症状を見つけることができた:</p><ul><li><p><a href="https://stackoverflow.com/questions/77010850/cant-use-jupyter-notebook-because-of-missing-or-misshapen-translation-settings">python - Can't use Jupyter Notebook because of "missing or misshapen translation settings schema" - Stack Overflow</a></p></li><li><p><a href="https://github.com/jupyter/notebook/issues/6974">Missing or misshapen translation settings schema · Issue #6974 · jupyter/notebook</a></p></li></ul><p>JupyterLabを入れ直せばいいらしい。</p><code>% pip3 uninstall jupyterlab
+% pip3 install jupyterlab
+% jupyter lab build
+% jupyter lab
+% jupyter notebook</code><p>入れ直すと、無事に起動できた。コードも実行できている。</p><p><img src="jupyter.png"/></p>
+</body>
+
+</ktml>
