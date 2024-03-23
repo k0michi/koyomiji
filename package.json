@@ -1,7 +1,6 @@
 {
   "name": "koyomiji",
   "private": true,
-  "packageManager": "yarn@3.2.1",
   "dependencies": {
     "@fontsource/raleway": "^4.5.10",
     "@k0michi/isomorphic-dom": "^0.0.1",
@@ -57,6 +56,7 @@
     "@types/react-dom": "^18.0.6",
     "@types/react-helmet": "^6.1.5",
     "@types/react-transition-group": "^4.4.5",
+    "pandoc-types": "^0.0.2",
     "rollup-plugin-license": "^3.0.1",
     "serve": "^13.0.2",
     "ts-node": "^10.9.1",
