@@ -19,6 +19,7 @@ export default function Head(props: HeadProps) {
   const location = useLocation();
   const url = `https://koyomiji.com${location.pathname}`;
   const type = props.type ?? 'general';
+  const ogType = type === 'article' ? 'article' : 'website';
 
   return (
     <>
@@ -32,7 +33,7 @@ export default function Head(props: HeadProps) {
         <meta property="og:url" content={url} />
         <meta property="og:title" content={props.title} />
         <meta property="og:description" content={props.description} />
-        <meta property="og:type" content={type} />
+        <meta property="og:type" content={ogType} />
       </Helmet>
       {type == 'article' ?
         <Helmet>
