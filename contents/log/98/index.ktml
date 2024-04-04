@@ -1,0 +1,13 @@
+<ktml version="0.1">
+
+<head>
+  <title>docker compose restartは、compose.ymlへの変更を反映しない</title>
+  <id>142cbb6f-9330-42e0-9746-4642fb2959d6</id>
+  <created>2024-04-04T13:45:52+09:00</created>
+</head>
+
+<body>
+  <p>Docker Composeの<code>restart</code>コマンドは、<code>compose.yml</code>に定義されているサービスの一部または全てを再起動するコマンドであるが、この<code>restart</code>では、起動後に<code>compose.yml</code>が変更されていたとしても、その内容を<b>反映しない</b>。</p><ul><li><p><a href="https://docs.docker.com/reference/cli/docker/compose/restart/">docker compose restart | Docker Docs</a></p></li></ul><p>このことについては、公式のドキュメント内にも注意書きがある。systemctlなどのノリで、<code>restart</code>なのだから、<code>compose.yml</code>が再読み込みされ、新しい設定が反映されるだろうと思い込んでいるとハマるので、注意されたし。</p><p>ではどうすれば設定が反映されるかというと、単純に<code>up</code>しなおせば良い。</p><code>$ sudo docker compose up -d</code><ul><li><p><a href="https://stackoverflow.com/questions/54114045/how-to-implement-changes-made-to-docker-compose-yml-to-detached-running-containe">How to implement changes made to docker-compose.yml to detached running containers - Stack Overflow</a></p></li></ul>
+</body>
+
+</ktml>
