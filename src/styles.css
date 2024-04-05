@@ -509,11 +509,9 @@ body.common-layout {}
   margin-bottom: 12px;
 }
 
-#main ul li {
-}
+#main ul li {}
 
-#main ul li:before {
-}
+#main ul li:before {}
 
 #main hr {
   border: 0;
@@ -525,7 +523,7 @@ body.common-layout {}
 #main img.img {
   display: block;
   margin: 0 auto 16px auto;
-  width: 80%;
+  max-width: 80%;
 }
 
 #main .math-block {
