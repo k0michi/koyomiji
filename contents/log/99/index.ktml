@@ -1,0 +1,13 @@
+<ktml version="0.1">
+
+<head>
+  <title>Homebrew Caskで入れたアプリが破損していると言われ開けない問題</title>
+  <id>a1b221d8-ebf8-4b88-810f-7510f5994a4b</id>
+  <created>2024-04-05T17:25:27+09:00</created>
+</head>
+
+<body>
+  <p>ChromiumやLibreWolfなどのアプリをHomebrew経由でインストールすると、次のようにアプリが破損しているというエラーが現れて、アプリが使用できない。Apple Siliconでのみ起きる、署名関連の問題らしい。</p><p><img src="error.png"/></p><p>このエラーは、<code>brew install</code>時に<code>--no-quarantine</code>フラグを与えてインストールすることで回避できる。</p><code>% brew install chromium --no-quarantine</code><ul><li><p><a href="https://www.reddit.com/r/MacOS/comments/q9d772/homebrew_chromium_is_damaged_and_cant_be_openend/">Homebrew - Chromium is damaged and can't be openend : r/MacOS</a></p></li><li><p><a href="https://librewolf.net/docs/faq/#why-is-librewolf-marked-as-broken">Frequently Asked Questions – LibreWolf</a></p></li></ul>
+</body>
+
+</ktml>
