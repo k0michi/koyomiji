@@ -1,0 +1,15 @@
+<ktml version="0.1">
+
+<head>
+  <title>TailscaleでExit Nodeを設定する</title>
+  <id>96e2c8ac-e300-48f0-b788-789b9491b014</id>
+  <created>2024-05-24T15:41:22+09:00</created>
+</head>
+
+<body>
+  <p>TailscaleにはExit Nodeと呼ばれる機能がある。これは文字通り、Tailscaleネットワーク内のExit Nodeを介してすべての通信を行えるというものである。</p><h2>環境</h2><p>今回は自宅サーバー(Ubuntu)を出口ノードとする。</p><ul><li><p>Mac Pro (Ubuntu 22.04): 出口ノード</p></li><li><p>MacBook Pro (macOS 13.6): クライアントノード</p></li></ul><h2>セットアップ</h2><p>基本的には<a href="https://tailscale.com/kb/1103/exit-nodes">ドキュメント</a>に従えば良い。</p><p>まずはサーバー側の設定。IPパケットフォワーディングを有効化する。</p><code>$ echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
+$ echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
+$ sudo sysctl -p /etc/sysctl.d/99-tailscale.conf</code><p><code>--advertise-exit-node</code>オプションとともに、<code>tailscale up</code>を実行。</p><code>$ sudo tailscale up --advertise-exit-node</code><p>UDP GRO forwardingというのを有効化したほうがいいと言われるが、今回は簡単のため無視する。</p><p>次に、Admin consoleのMachinesから、サーバーの"Edit route settings..."を開き、"Use as exit node"を有効にする。</p><p><img src="admin.png"/></p><p>これで、サーバーを出口ノードとして使えるようになる。</p><p>あとは、クライアント側で出口ノードを選択すれば、すべての通信が設定した出口ノードを経由するようになる。</p><p><img src="client.png"/></p><h2>参考</h2><ul><li><p><a href="https://tailscale.com/kb/1103/exit-nodes">Exit nodes (route all traffic) · Tailscale Docs</a></p></li><li><p><a href="https://tailscale.com/kb/1320/performance-best-practices#ethtool-configuration">Performance best practices · Tailscale Docs</a></p></li></ul>
+</body>
+
+</ktml>
