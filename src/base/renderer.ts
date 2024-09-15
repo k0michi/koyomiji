@@ -46,7 +46,7 @@ export class Renderer {
           content = await content;
         }
 
-        if (content instanceof Buffer) {
+        if (content instanceof Uint8Array) {
           await fs.mkdir(path.dirname(path.join(this.rootDir!, pPath)), { recursive: true });
           await fs.writeFile(path.join(this.rootDir!, pPath), content);
           break;
