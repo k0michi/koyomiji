@@ -48,6 +48,7 @@ export class Renderer {
 
         if (content instanceof Uint8Array) {
           await fs.mkdir(path.dirname(path.join(this.rootDir!, pPath)), { recursive: true });
+          // Prevents error TS2345: Argument of type 'Buffer' is not assignable to parameter of type 'string | ArrayBufferView | Iterable<string | ArrayBufferView> | AsyncIterable<string | ArrayBufferView> | Stream'.
           await fs.writeFile(path.join(this.rootDir!, pPath), (content as any) as Uint8Array);
           break;
         } else if (typeof content == 'string') {
