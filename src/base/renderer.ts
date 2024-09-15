@@ -48,7 +48,7 @@ export class Renderer {
 
         if (content instanceof Uint8Array) {
           await fs.mkdir(path.dirname(path.join(this.rootDir!, pPath)), { recursive: true });
-          await fs.writeFile(path.join(this.rootDir!, pPath), content as Uint8Array);
+          await fs.writeFile(path.join(this.rootDir!, pPath), (content as any) as Uint8Array);
           break;
         } else if (typeof content == 'string') {
           await fs.mkdir(path.dirname(path.join(this.rootDir!, pPath)), { recursive: true });
