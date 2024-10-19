@@ -1,0 +1,110 @@
+# レーベンシュタイン距離を使って、紛らわしい英単語の組を見つける
+
+ここ最近Ankiを使った英単語の勉強をしているが、この勉強をしていて頭痛の種となっているのが、似通っているが全く意味が違う英単語たちである。例えば、cinch(朝飯前) と clinch(...を成し遂げる)。l一文字あるかないかで、全く意味が変わってくる。見た目が似通っているので、片方だけなんとなく覚えたとしても、もう片方が現れた瞬間に、「あれ、この単語見た気がするのに意味が違う……」となってしまう。
+
+そんな紛らわしい単語を見つける方法はないか考えていたところ、[レーベンシュタイン距離](https://ja.wikipedia.org/wiki/%E3%83%AC%E3%83%BC%E3%83%99%E3%83%B3%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E8%B7%9D%E9%9B%A2)(編集距離)の存在を思い出した。レーベンシュタイン距離というのは、文字列$a$から文字列$b$を得るのに必要な操作の総コスト。ハミング距離よりも計算が複雑ではあるが、文字の挿入や削除についても考慮できるので、こういう場合にはレーベンシュタイン距離の方が良いだろう。
+
+さくっと、JavaScript(Node.js)で書いてみた。
+
+```js
+import * as fs from 'node:fs/promises';
+
+const kInsCost = 1.5;
+const kDelCost = 1.5;
+const kSubCost = 1;
+
+function levenshteinDistance(str1, str2) {
+  const m = str1.length;
+  const n = str2.length;
+  const dp = Array(m + 1).fill().map(() => Array(n + 1).fill(0));
+
+  for (let i = 0; i <= m; i++) {
+    dp[i][0] = i * kDelCost;
+  }
+  for (let j = 0; j <= n; j++) {
+    dp[0][j] = j * kInsCost;
+  }
+
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      if (str1[i - 1] === str2[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1];
+      } else {
+        dp[i][j] = Math.min(
+          dp[i - 1][j] + kDelCost,    // deletion
+          dp[i][j - 1] + kInsCost,    // insertion
+          dp[i - 1][j - 1] + kSubCost // substitution
+        );
+      }
+    }
+  }
+
+  return dp[m][n];
+}
+
+const args = process.argv.slice(2);
+const words = (await fs.readFile(args[0], 'utf-8')).split('\n');
+
+let results = [];
+
+for (const e of words) {
+  for (const f of words) {
+    if (e.localeCompare(f) < 0) {
+      results.push([e, f, levenshteinDistance(e, f)]);
+    }
+  }
+}
+
+function compare(...results) {
+  for (const r of results) {
+    if (r != 0) return r;
+  }
+
+  return 0;
+}
+
+const kCostFilter = 2;
+results = results.filter(r => r[2] <= kCostFilter);
+results.sort((a, b) => compare(a[2] - b[2], a[0].localeCompare(b[0]), a[1].localeCompare(b[1])));
+results.forEach(r => console.log(r.join(', ')));
+```
+
+レーベンシュタイン距離の挿入、削除、置き換えコストはそれぞれ1.5, 1.5, 1とした。総コストが2以下のものだけ出力している。
+
+単語リストは引数で与える。
+
+```
+$ node levenshtein.mjs in.txt
+```
+
+実行するとこんな感じになる。3列目が単語間の編集距離。
+
+```
+allude, allure, 1
+arid, avid, 1
+avert, overt, 1
+balk, bask, 1
+bane, wane, 1
+bellow, billow, 1
+binge, tinge, 1
+blunder, plunder, 1
+blunt, blurt, 1
+blunt, brunt, 1
+blur, slur, 1
+blurb, blurt, 1
+bout, rout, 1
+bout, tout, 1
+breach, broach, 1
+budge, bulge, 1
+budge, nudge, 1
+chauvinism, chauvinist, 1
+clench, clinch, 1
+clinch, flinch, 1
+clout, flout, 1
+clump, slump, 1
+clumpy, clumsy, 1
+coax, hoax, 1
+...
+```
+
+小一時間で作ったが、割といい感じ。ただ、全ての組のレーベンシュタイン距離を求めているので、単語数が1万とかあると遅いかもしれない。
