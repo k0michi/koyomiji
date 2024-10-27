@@ -10,27 +10,27 @@ export function Asterisk() {
 }
 
 export function MailIcon() {
-  return <SVG loader={async () => (await import('@tabler/icons/mail.svg?raw')).default} className="icon"></SVG>;
+  return <SVG loader={async () => (await import('@tabler/icons/outline/mail.svg?raw')).default} className="icon"></SVG>;
 }
 
 export function GithubIcon() {
-  return <SVG loader={async () => (await import('@tabler/icons/brand-github.svg?raw')).default} className="icon"></SVG>;
+  return <SVG loader={async () => (await import('@tabler/icons/outline/brand-github.svg?raw')).default} className="icon"></SVG>;
 }
 
 export function YoutubeIcon() {
-  return <SVG loader={async () => (await import('@tabler/icons/brand-youtube.svg?raw')).default} className="icon"></SVG>;
+  return <SVG loader={async () => (await import('@tabler/icons/outline/brand-youtube.svg?raw')).default} className="icon"></SVG>;
 }
 
 export function TwitchIcon() {
-  return <SVG loader={async () => (await import('@tabler/icons/brand-twitch.svg?raw')).default} className="icon"></SVG>;
+  return <SVG loader={async () => (await import('@tabler/icons/outline/brand-twitch.svg?raw')).default} className="icon"></SVG>;
 }
 
 export function CalenderIcon() {
-  return <SVG loader={async () => (await import('@tabler/icons/calendar-time.svg?raw')).default} className="icon"></SVG>;
+  return <SVG loader={async () => (await import('@tabler/icons/outline/calendar-time.svg?raw')).default} className="icon"></SVG>;
 }
 
 export function TagsIcon() {
-  return <SVG loader={async () => (await import('@tabler/icons/tags.svg?raw')).default} className="icon"></SVG>;
+  return <SVG loader={async () => (await import('@tabler/icons/outline/tags.svg?raw')).default} className="icon"></SVG>;
 }
 
 export function XIcon() {
@@ -38,13 +38,13 @@ export function XIcon() {
 }
 
 export function Menu2() {
-  return <SVG loader={async () => (await import('@tabler/icons/menu-2.svg?raw')).default} className="icon"></SVG>;
+  return <SVG loader={async () => (await import('@tabler/icons/outline/menu-2.svg?raw')).default} className="icon"></SVG>;
 }
 
 export function RSS() {
-  return <SVG loader={async () => (await import('@tabler/icons/rss.svg?raw')).default} className="icon"></SVG>;
+  return <SVG loader={async () => (await import('@tabler/icons/outline/rss.svg?raw')).default} className="icon"></SVG>;
 }
 
 export function Mastodon() {
-  return <SVG loader={async () => (await import('@tabler/icons/brand-mastodon.svg?raw')).default} className="icon"></SVG>;
+  return <SVG loader={async () => (await import('@tabler/icons/outline/brand-mastodon.svg?raw')).default} className="icon"></SVG>;
 }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Routes, Route, Outlet, RouteObject } from 'react-router';
 import AboutPage from "./pages/about-page.js";
-import CommonLayout from './components/common-layout.js';
+import CommonLayout from '../app/routes/_common.js';
 import IndexPage from "./pages/index-page.js";
 import ReferenceIndexPage from "./pages/reference-index-page.js";
 import ReferencePage from "./pages/reference-page.js";
