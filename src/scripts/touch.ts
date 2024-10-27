@@ -4,7 +4,7 @@ import window from "@k0michi/isomorphic-dom";
 
 import { readFileUTF8 } from '../utils.js';
 import { getElemAfter, getIndent } from "./utils.js";
-import { toISOStringJST } from "../date-format.js";
+import { toISOStringJST } from "../../lib/date-format.js";
 
 function editModified($document: Document) {
   const $head = $document.querySelector('head')!;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Entry, mapEntries } from "../entry.js";
+import { Entry, mapEntries } from "../../lib/entry.js";
 import { Data, Model } from '../model.js';
 import Link from '../components/link.js';
 import Head from '../components/head.js';

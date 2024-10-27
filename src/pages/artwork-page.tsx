@@ -7,7 +7,7 @@ import * as ReactKTML from '../react-ktml.js';
 import { CalenderIcon } from '../components/icon.js';
 import { parseXML } from '../xml.js';
 import Head from '../components/head.js';
-import { toDisplayDateString } from '../date-format.js';
+import { toDisplayDateString } from '../../lib/date-format.js';
 import { toPathname } from '../utils.js';
 
 export default function ArtworkPage() {

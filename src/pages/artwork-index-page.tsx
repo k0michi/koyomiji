@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useModel, useObservable } from 'kyoka';
-import { Entry } from "../entry.js";
+import { Entry } from "../../lib/entry.js";
 import { Data, Model } from '../model.js';
 import { useLoaderData, useLocation } from 'react-router';
 import Link from '../components/link.js';

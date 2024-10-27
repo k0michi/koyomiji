@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useModel, useObservable } from 'kyoka';
-import { Entry } from "../entry.js";
+import { Entry } from "../../lib/entry.js";
 import { Data, Model } from '../model.js';
 import { useLoaderData, useLocation } from 'react-router';
 import Link from '../components/link.js';
 import { CalenderIcon } from '../components/icon.js';
 import Head from '../components/head.js';
-import { toDisplayDateString } from '../date-format.js';
+import { toDisplayDateString } from '../../lib/date-format.js';
 
 function getID(p: Entry) {
   return p.path.split('/')[2];

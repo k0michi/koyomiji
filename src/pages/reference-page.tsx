@@ -6,7 +6,7 @@ import { parseXML } from '../xml.js';
 import * as ReactKTML from '../react-ktml.js';
 import { CalenderIcon, TagsIcon } from '../components/icon.js';
 import Head from '../components/head.js';
-import { toDisplayDateString } from '../date-format.js';
+import { toDisplayDateString } from '../../lib/date-format.js';
 import { toPathname } from '../utils.js';
 import { getCategory } from '../config.js';
 
@@ -24,7 +24,7 @@ export default function ReferencePage() {
       <header>
         <h1>{entry.title}</h1>
         <div className="meta">
-          <div className="date"><CalenderIcon/><div>{toDisplayDateString(new Date(entry.created))}</div></div>
+          <div className="date"><CalenderIcon /><div>{toDisplayDateString(new Date(entry.created))}</div></div>
           <div className="tags"><TagsIcon /><div>{categoryName}</div></div>
         </div>
       </header>

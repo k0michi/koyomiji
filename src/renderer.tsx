@@ -10,7 +10,7 @@ import { Renderer } from "./base/renderer.js";
 import { Data, Model } from './model.js';
 import { toPathname } from './utils.js';
 import { ServerModel } from './server-model.js';
-import { toISOStringJST } from './date-format.js';
+import { toISOStringJST } from '../lib/date-format.js';
 import { newElementCreator } from './xml.js';
 import { createMemoryRouter, createRoutesFromElements, RouterProvider } from 'react-router';
 import { createRoutes } from './routes.js';
@@ -61,9 +61,11 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   renderer.use('/reference/:category/:id/data.json', (ctx) => {
     const pathname = toPathname(['reference', ctx.params['category'], ctx.params['id']]);
     const entry = model.getEntry(pathname);
-    const data = {entries: {
-      [pathname]: entry
-    }};
+    const data = {
+      entries: {
+        [pathname]: entry
+      }
+    };
 
     return JSON.stringify(data);
   });
@@ -90,9 +92,11 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   renderer.use('/log/:id/data.json', (ctx) => {
     const pathname = toPathname(['log', ctx.params['id']]);
     const entry = model.getEntry(pathname);
-    const data = {entries: {
-      [pathname]: entry
-    }};
+    const data = {
+      entries: {
+        [pathname]: entry
+      }
+    };
 
     return JSON.stringify(data);
   });
@@ -102,7 +106,7 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   });
 
   renderer.use('/data.json', (ctx) => {
-    return JSON.stringify({entries: getEntries()});
+    return JSON.stringify({ entries: getEntries() });
   });
 
   renderer.use('/novel/(index.html)?', (ctx) => {
@@ -123,9 +127,11 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   renderer.use('/novel/:novel/:chapter/data.json', (ctx) => {
     const pathname = toPathname(['novel', ctx.params['novel'], ctx.params['chapter']]);
     const entry = model.getEntry(pathname);
-    const data = {entries: {
-      [pathname]: entry
-    }};
+    const data = {
+      entries: {
+        [pathname]: entry
+      }
+    };
 
     return JSON.stringify(data);
   });
@@ -148,9 +154,11 @@ export function createRenderer(outRoot: string | null, template: string, model: 
   renderer.use('/artwork/:id/data.json', (ctx) => {
     const pathname = toPathname(['artwork', ctx.params['id']]);
     const entry = model.getEntry(pathname);
-    const data = {entries: {
-      [pathname]: entry
-    }};
+    const data = {
+      entries: {
+        [pathname]: entry
+      }
+    };
 
     return JSON.stringify(data);
   });

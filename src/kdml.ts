@@ -1,4 +1,4 @@
-import { Dictionary, DictionaryEntry, DictionarySense, Entry } from './entry';
+import { Dictionary, DictionaryEntry, DictionarySense, Entry } from '../lib/entry';
 import { getTextContent, parseXML } from './xml.js';
 
 export function preprocess(entryPath: string, content: string): Dictionary {
@@ -21,7 +21,7 @@ export function preprocess(entryPath: string, content: string): Dictionary {
       throw new Error("<entry> must have <word>");
     }
 
-    if(wordSet.has(word)) {
+    if (wordSet.has(word)) {
       console.error(`Word '${word}' already exists`);
     }
 

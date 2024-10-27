@@ -1,5 +1,5 @@
 import path from "path";
-import { Dictionary, Entry } from "./entry.js";
+import { Dictionary, Entry } from "../lib/entry.js";
 import { preprocess } from "./ktml.js";
 import * as KDML from "./kdml.js";
 import { readFileUTF8, toPathname } from "./utils.js";

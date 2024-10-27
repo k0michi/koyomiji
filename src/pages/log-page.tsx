@@ -7,8 +7,8 @@ import { parseXML } from '../xml.js';
 import * as ReactKTML from '../react-ktml.js';
 import { CalenderIcon } from '../components/icon.js';
 import Head from '../components/head.js';
-import { toDisplayDateString } from '../date-format.js';
-import { Entry } from '../entry.js';
+import { toDisplayDateString } from '../../lib/date-format.js';
+import { Entry } from '../../lib/entry.js';
 import { toPathname } from '../utils.js';
 
 export default function LogPage() {
