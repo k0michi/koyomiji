@@ -1,0 +1,55 @@
+<ktml version="0.1">
+
+<head>
+  <title>Deno 2で遊んでみる</title>
+  <id>efe31d86-4f03-47f8-8084-20056876d0e9</id>
+  <created>2024-10-27T15:47:22+09:00</created>
+</head>
+
+<body>
+  <p>JavaScriptのランタイムといえばNode.jsをよく使っていたのだけど、Denoも遂に<a href="https://deno.com/blog/v2.0">2.0</a>がリリースされたらしいので、触ってみた。ちなみに、筆者はDeno 1.xを使ったことがないので、詳しい使用感の違いとかは書けないので悪しからず。</p><h2>インストール</h2><code>% brew install deno</code><h2>Hello world</h2><p>denoコマンドでREPLに入れる。</p><code>% deno
+Deno 2.0.3
+exit using ctrl+d, ctrl+c, or close()
+REPL is running with all permissions allowed.
+To specify permissions, run `deno repl` with allow flags.
+&gt; console.log("Hell world")
+Hell world
+undefined
+&gt; </code><p>JSファイルを指定すると、そのスクリプトを実行できる。この辺まではNode.jsと同じ。</p><code>% deno hello.js
+Hello world</code><h2>Hello world (TypeScript)</h2><p>Denoがすごいのは、TypeScriptのスクリプトもそのまま実行できる点。Node.jsでこれをやろうと思うと、ts-nodeとかtsconfig.jsonとか色々やるのが面倒だけど、DenoではTypeScriptがなんと標準装備。ちょっとしたスクリプトでも積極的にTypeScriptを使えそう。</p><code>% cat hello.ts
+const str: string = "Hello world";
+console.log(str);
+% deno hello.ts
+Hello world</code><h2>npm互換性</h2><p>Deno 2では、Node.jsとの互換性が追加されたらしいので、これを試してみる。<code>npm:</code>でnpmパッケージを直接インポートして使うことができるようだ。</p><p>Reactを試してみたが、ちゃんと使うことができた。</p><code lang="jsx">import * as React from 'npm:react@latest';
+import { renderToString } from 'npm:react-dom@latest/server';
+
+function App() {
+  return &lt;div&gt;Hello world&lt;/div&gt;;
+}
+
+console.log(renderToString(&lt;App /&gt;));</code><code>% deno react.jsx
+┏ ⚠️  Deno requests env access to "NODE_ENV".
+✅ Granted env access to "NODE_ENV".
+&lt;div&gt;Hello world&lt;/div&gt;</code><p>JSXもzero-configで実行できるのが便利すぎる。</p><h2>Node API</h2><p>Denoには、Node.jsが提供しているAPIへのポリフィルがある。もっとも、これはDeno 2以前から存在しているっぽい。すべてのAPIがサポートされているわけではないが、移植の役に立つだろう。</p><code>&gt; import os from 'node:os';
+undefined
+&gt; os.arch()
+"arm64"
+&gt; os.platform()
+"darwin"
+&gt; os.version()
+"22.6.0"</code><ul><li><p><a href="https://docs.deno.com/runtime/reference/node_apis/">Node APIs</a></p></li></ul><h2><code>deno add</code></h2><p>Denoにも<code>npm install</code>や<code>pnpm add</code>のような、<code>deno add</code>コマンドが追加されたよう。</p><p>例えば</p><code>% deno add jsr:@std/path</code><p>とすると、<code>deno.json</code>に依存パッケージとバージョンが書き込まれる。</p><code lang="json">{
+  "tasks": {
+    "dev": "deno run --watch main.ts"
+  },
+  "imports": {
+    "@std/path": "jsr:@std/path@^1.0.7"
+  }
+}</code><p>これにより、<code>import * as path from '@std/path';</code>とするだけで該当パッケージをインポートできるようになる。</p><p>個人的に、Deno 1.xを見ていて懐疑的だったのが、import ... from 'https://...'のような冗長なパッケージ指定だったので、これは良い改善と感じた。</p><h2>Secure by default</h2><p>Denoは安全性に注力していて、スクリプトがファイルにアクセスしようとすると、このようなプロンプトが表示されて、実行が中断されるようになっている。</p><code>% deno fs.ts
+┏ ⚠️  Deno requests read access to "/Users/k0michi/Local/Playground/hello.txt".
+┠─ Requested by `Deno.readFile()` API.
+┠─ Learn more at: https://docs.deno.com/go/--allow-read
+┠─ Run again with --allow-read to bypass this prompt.
+┗ Allow? [y/n/A] (y = yes, allow; n = no, deny; A = allow all read permissions) &gt;</code><p>この方が安全なのは間違いないが、これが煩わしい場合には<code>--allow-all</code>または<code>-A</code>でこのセキュリティを無効化できる:</p><code>% deno --allow-all fs.ts</code><h2>JavaScript Registry</h2><p>Deno 2ではJSR (JavaScript Registry)という新しいレジストリが導入されたようだ。</p><p>JSRの良いところは、ESModuleのみのサポートである点、そしてTypeScriptがネイティブサポートされている点である。CommonJSが蔓延り続けるnpmと比べて、相互運用性が高まることが期待できると思うし、型定義に悩むことも少なくなると思われる。</p><p>加えて、JSR上のモジュールはNode.jsからも使うことができるようになっているのが素晴らしい。</p><ul><li><p><a href="https://jsr.io/docs/with/node">Using JSR with Node.js - Docs - JSR</a></p></li></ul><h2>そのほか</h2><p>そのほかにも、Deno 2ではNext.jsなどといったフレームワークをサポートするようになったらしい。</p><p>あと、<a href="https://fresh.deno.dev/">Fresh</a>という、Deno公式によるPreactを使ったフレームワークを見つけた。結構良さそう。</p><h2>おまけ</h2><p>Dinoくん(ハロウィン風)</p><p><img src="dino.png"/></p>
+</body>
+
+</ktml>
