@@ -4,7 +4,7 @@ import Head from '../components/head.js';
 import Link from '../components/link.js';
 import { subDays } from 'date-fns';
 import { Data, Model } from '../model.js';
-import * as config from '../config.js';
+import * as config from '../../lib/config.js';
 import { toDisplayDateString } from '../../lib/date-format.js';
 import { getPathSegment } from '../utils.js';
 import { useLoaderData } from 'react-router';

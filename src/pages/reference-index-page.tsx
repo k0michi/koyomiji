@@ -4,7 +4,7 @@ import { Data, Model } from '../model.js';
 import Link from '../components/link.js';
 import { toPathname } from '../utils.js';
 import Head from '../components/head.js';
-import { getCategory } from '../config.js';
+import { getCategory } from '../../lib/config.js';
 import { useLoaderData } from 'react-router';
 
 export default function ReferenceIndexPage() {

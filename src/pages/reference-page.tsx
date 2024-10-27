@@ -8,7 +8,7 @@ import { CalenderIcon, TagsIcon } from '../components/icon.js';
 import Head from '../components/head.js';
 import { toDisplayDateString } from '../../lib/date-format.js';
 import { toPathname } from '../utils.js';
-import { getCategory } from '../config.js';
+import { getCategory } from '../../lib/config.js';
 
 export default function ReferencePage() {
   const params = useParams();
