@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     reactRouter({
       async prerender() {
-        return ["/"];
+        return ["/", "/about"];
       },
     }), , tsconfigPaths()],
 });

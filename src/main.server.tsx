@@ -1,7 +1,7 @@
 import { readFileUTF8, toPathname } from '../lib/utils.js';
 import glob from 'glob-promise';
 import { createRenderer } from './renderer.js';
-import { ServerModel } from './server-model.js';
+import { ServerModel } from '../lib/server-model.js';
 import { installGlobals } from '@remix-run/node';
 
 installGlobals();

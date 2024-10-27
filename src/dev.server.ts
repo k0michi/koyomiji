@@ -6,7 +6,7 @@ import * as path from 'path';
 import glob from 'glob-promise';
 import * as chokidar from 'chokidar';
 import { AddressInfo } from 'net';
-import { ServerModel } from './server-model.js';
+import { ServerModel } from '../lib/server-model.js';
 import { installGlobals } from '@remix-run/node';
 
 installGlobals();

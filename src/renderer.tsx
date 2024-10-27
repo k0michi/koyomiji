@@ -9,7 +9,7 @@ import window from '@k0michi/isomorphic-dom';
 import { Renderer } from "./base/renderer.js";
 import { Data, Model } from './model.js';
 import { toPathname } from '../lib/utils.js';
-import { ServerModel } from './server-model.js';
+import { ServerModel } from '../lib/server-model.js';
 import { toISOStringJST } from '../lib/date-format.js';
 import { newElementCreator } from '../lib/xml.js';
 import { createMemoryRouter, createRoutesFromElements, RouterProvider } from 'react-router';

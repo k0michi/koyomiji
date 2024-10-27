@@ -11,14 +11,24 @@ export class ServerModel {
   rootDir: string;
   entries: Record<string, Entry>;
   dictionaries: Record<string, Dictionary>;
-
   sitemap: Sitemap;
+
+  static _instance: ServerModel | null = null;
+
+  static get instance() {
+    if (ServerModel._instance) {
+      throw new Error('ServerModel not created');
+    }
+
+    return ServerModel._instance;
+  }
 
   constructor(rootDir: string) {
     this.rootDir = rootDir;
     this.entries = {};
     this.dictionaries = {};
     this.sitemap = new Sitemap();
+    ServerModel._instance = this;
   }
 
   getEntry(pathname: string) {
