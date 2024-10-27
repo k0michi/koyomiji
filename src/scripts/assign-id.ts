@@ -1,7 +1,7 @@
 import * as path from "path";
 import * as fs from "fs/promises";
 import window from "@k0michi/isomorphic-dom";
-import glob from "glob-promise";
+import { glob } from "glob";
 import crypto from "crypto";
 
 import { readFileUTF8 } from '../../lib/utils.js';
