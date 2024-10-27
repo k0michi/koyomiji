@@ -90,7 +90,7 @@ async function loadFile(p: string) {
 
 async function compileFile(p: string) {
   if (p.endsWith('index.md')) {
-    await model.compileEntry(p);
+    await model.compileMarkdown(p);
     console.log(`'${p}' has been loaded`);
   }
 }

@@ -53,7 +53,7 @@ export class ServerModel {
     this.dictionaries[normalized] = KDML.preprocess(normalized, content);
   }
 
-  async compileEntry(pathname: string) {
+  async compileMarkdown(pathname: string) {
     const normalized = toPathname(pathname.split('/').slice(0, -1));
     const file = await readFileUTF8(path.posix.join(this.rootDir, pathname));
     const xmlContent = await toKTML(file);
