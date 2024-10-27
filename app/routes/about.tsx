@@ -1,19 +1,16 @@
-import * as React from 'react';
-import Link from '../components/link.js';
-import Head from '../components/head.js';
+import { getMeta } from 'lib/meta';
+import { Link, MetaFunction } from 'react-router';
+import profile from '../../assets/profile.png';
+
+export const meta: MetaFunction = ({ location }) => getMeta({
+  title: "About",
+  description: "このサイトについて。",
+  location
+});
 
 export default function AboutPage() {
-  const [profile, setProfile] = React.useState<string>();
-
-  React.useEffect(() => {
-    (async () => {
-      setProfile((await import('../assets/profile.png')).default);
-    })();
-  }, []);
-
   return (
     <>
-      <Head title="About" description="このサイトについて。" />
       <header>
         <h1>About</h1>
         <div className="meta">このサイトについて。</div>
@@ -30,21 +27,21 @@ export default function AboutPage() {
         <p>私の趣味は、プログラムを書くこと、ブログを書くこと、絵を描くこと、本を読むこと、旅をすること、などです。やってみたいことは、小説を書くこと、作曲をすること、ゲームを作ることです。</p>
         <h2>ページについて</h2>
         <ul>
-          <li><Link href="/project">Projects</Link>には、私が開発している/していたソフトウェアの紹介があります。</li>
-          <li><Link href="/log">Logs</Link>は、私のブログです。取り止めのないことを書いています。</li>
-          <li><Link href="/reference">Reference</Link>は、私が学んだことの備忘録です。</li>
-          <li><Link href="/dictionary">Dictionary</Link>は、私が出逢った英単語をまとめた辞書です。</li>
-          <li><Link href="/artwork">Artworks</Link>では、私が描いたイラストを置いています。</li>
+          <li><Link to="/project">Projects</Link>には、私が開発している/していたソフトウェアの紹介があります。</li>
+          <li><Link to="/log">Logs</Link>は、私のブログです。取り止めのないことを書いています。</li>
+          <li><Link to="/reference">Reference</Link>は、私が学んだことの備忘録です。</li>
+          <li><Link to="/dictionary">Dictionary</Link>は、私が出逢った英単語をまとめた辞書です。</li>
+          <li><Link to="/artwork">Artworks</Link>では、私が描いたイラストを置いています。</li>
         </ul>
         <h2>フィードについて</h2>
-        <p>サイトのAtomフィードは<Link href="https://koyomiji.com/feed.xml">https://koyomiji.com/feed.xml</Link>にあります。このサイトの更新情報を、お好みのRSSリーダーで取得することが可能です。</p>
+        <p>サイトのAtomフィードは<Link to="https://koyomiji.com/feed.xml">https://koyomiji.com/feed.xml</Link>にあります。このサイトの更新情報を、お好みのRSSリーダーで取得することが可能です。</p>
         <h2>お問い合せ</h2>
-        <p><Link href="mailto:k0michi@koyomi.co">k0michi@koyomi.co</Link>まで。</p>
+        <p><a href="mailto:k0michi@koyomi.co">k0michi@koyomi.co</a>まで。</p>
         <h2>技術構成について</h2>
         <p>当サイトの全てのページは、TypeScriptで書かれた自作の静的サイトジェネレータを使用して生成されています。フロントエンドフレームワークにはReactを採用し、モジュールバンドラにはViteを使用しています。サイトはVercel上でビルド、ホストされています。</p>
         <p>サイト上のテキストは、XMLベースのフォーマットで記述されています。</p>
         <h2>ライセンスについて</h2>
-        <p>特段の明記がない限り、サイト上のコンテンツは<Link href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</Link>でライセンスされるものとします。</p>
+        <p>特段の明記がない限り、サイト上のコンテンツは<Link to="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</Link>でライセンスされるものとします。</p>
       </div>
     </>
   );
