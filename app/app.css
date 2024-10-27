@@ -1,12 +1,805 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Global */
 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
+* {
+  box-sizing: border-box;
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+html {
+  height: 100%;
+}
+
+:root {
+  --font-sans: "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
+  --font-sans-en: "Raleway", sans-serif;
+  --font-serif: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
+  --font-monospace: "Monaco", "Consolas", "Source Code Pro", monospace;
+  --bar-height: 6px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    /* h = 20 */
+    /* background */
+    --color-1: #fffefe;
+    /* foreground */
+    --color-2: #2e2a29;
+    /* additional */
+    --color-3: #9f9793;
+    /* background of code */
+    --color-4: var(--color-2);
+    /* horizontal rule */
+    --color-5: #d3cac5;
+    /* background of logo */
+    --color-6: var(--color-2);
+    /* foreground of logo */
+    --color-7: var(--color-1);
+    /* border of logo */
+    --color-8: #705751;
+    /* foreground of code */
+    --color-9: var(--color-1);
+    /* calender cell */
+    --color-10: #f5f1f0;
   }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* h = 230 */
+    --color-1: #15171e;
+    --color-2: #fafbff;
+    --color-3: #5c6284;
+    --color-4: var(--color-6);
+    --color-5: #282d43;
+    --color-6: #24293a;
+    --color-7: var(--color-2);
+    --color-8: #3d435c;
+    --color-9: var(--color-2);
+    --color-10: #272b3d;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-1);
+  color: var(--color-2);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  height: 100%;
+  font-family: var(--font-sans);
+  font-weight: 300;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+}
+
+ol {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.icon {
+  display: contents;
+}
+
+.icon svg {
+  display: block;
+}
+
+
+/* Root */
+
+#root {
+  display: contents;
+}
+
+
+/* Common Layout */
+
+body.common-layout {}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100% - var(--bar-height));
+}
+
+@media (max-width: 767px) {
+  body.common-layout {}
+}
+
+@media (min-width: 768px) {
+  body.common-layout {}
+
+  #wrapper {
+    /* max-width: 1480px; */
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 767px) {
+  #wrapper>* {
+    padding: 0 12px 0 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  #wrapper>* {
+    padding: 0 32px 0 32px;
+  }
+}
+
+
+/* Common Layout - Bar */
+
+#bar {
+  background-color: var(--color-6);
+  width: 100%;
+  height: var(--bar-height);
+  border-bottom: 1px solid var(--color-8);
+}
+
+
+/* Common Layout - Navigation */
+
+#nav {
+  flex-grow: 0;
+  font-weight: 200;
+  word-break: keep-all;
+  font-family: var(--font-sans-en);
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  height: 88px;
+  gap: 12px;
+  overflow-y: auto;
+}
+
+#nav a {
+  transition: filter 0.15s;
+  text-decoration: none;
+}
+
+
+/* Common Layout - Navigation - Logo */
+
+#logo-block {
+  color: var(--color-2);
+  width: fit-content;
+  height: fit-content;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+@media (max-width: 767px) {
+  #logo-block {
+    flex: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  #logo-block {
+    flex: 0;
+  }
+}
+
+#logo-block svg {
+  width: 176px;
+}
+
+/*
+#menu-button-container {
+  flex: 0 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 24px;
+}
+
+@media (max-width: 767px) {
+  #menu-button-container {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  #menu-button-container {
+    display: none;
+  }
+}
+
+#menu-button {
+  cursor: pointer;
+}
+
+#menu-button svg {
+  stroke-width: 1px;
+  width: 32px;
+  height: 32px;
+}
+*/
+
+/* Common Layout - Navigation - Menu */
+
+#menu {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 0;
+  font-size: 20px;
+  font-weight: inherit;
+  color: var(--color-2);
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  gap: 4px;
+  justify-content: space-between;
+  --menu-color-1: hsl(0, 86%, 43%);
+  --menu-color-2: hsl(20, 86%, 43%);
+  --menu-color-3: hsl(50, 86%, 43%);
+  --menu-color-4: hsl(70, 86%, 43%);
+  --menu-color-5: hsl(170, 86%, 43%);
+  --menu-color-6: hsl(200, 86%, 43%);
+  --menu-color-7: hsl(240, 92%, 69%);
+}
+
+#menu>li {
+  list-style: none;
+}
+
+#menu>li>a {
+  padding: 2px 10px;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  transition: color .25s ease;
+  position: relative;
+}
+
+#menu>li>a svg {
+  transition: color .25s ease;
+}
+
+#menu>li>a::before {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  z-index: -1;
+  width: 100%;
+  height: 0px;
+  transition: height .25s ease;
+}
+
+#menu>li>a:hover::before,
+#menu>li>a.active::before {
+  height: 100%;
+}
+
+#menu>li svg {
+  width: 12px;
+}
+
+#menu>li:nth-child(1) svg {
+  color: var(--menu-color-1);
+}
+
+#menu>li:nth-child(1)>a::before {
+  background: var(--menu-color-1);
+}
+
+#menu>li:nth-child(2) svg {
+  color: var(--menu-color-2);
+}
+
+#menu>li:nth-child(2)>a::before {
+  background: var(--menu-color-2);
+}
+
+#menu>li:nth-child(3) svg {
+  color: var(--menu-color-3);
+}
+
+#menu>li:nth-child(3)>a::before {
+  background: var(--menu-color-3);
+}
+
+#menu>li:nth-child(4) svg {
+  color: var(--menu-color-4);
+}
+
+#menu>li:nth-child(4)>a::before {
+  background: var(--menu-color-4);
+}
+
+#menu>li:nth-child(5) svg {
+  color: var(--menu-color-5);
+}
+
+#menu>li:nth-child(5)>a::before {
+  background: var(--menu-color-5);
+}
+
+#menu>li:nth-child(6) svg {
+  color: var(--menu-color-6);
+}
+
+#menu>li:nth-child(6)>a::before {
+  background: var(--menu-color-6);
+}
+
+#menu>li:nth-child(7) svg {
+  color: var(--menu-color-7);
+}
+
+#menu>li:nth-child(7)>a::before {
+  background: var(--menu-color-7);
+}
+
+#menu>li>a:hover,
+#menu>li>a:hover svg,
+#menu>li>a.active,
+#menu>li>a.active svg {
+  color: var(--color-1);
+}
+
+
+/* Common Layout - Navigation - Icons */
+
+#icons {
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  margin-top: auto;
+  margin-bottom: auto;
+  gap: 8px;
+}
+
+#icons>li {
+  list-style: none;
+}
+
+#icons>li svg {
+  stroke-width: 1.35px;
+  width: 25px;
+  height: 25px;
+}
+
+#icons>li>a {
+  padding: 2px;
+  display: inline-flex;
+  position: relative;
+}
+
+#icons>li>a svg {
+  transition: color .25s ease;
+}
+
+#icons>li>a::before {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  z-index: -1;
+  width: 100%;
+  height: 0px;
+  background: var(--color-2);
+  transition: height .25s ease;
+}
+
+#icons>li>a:hover::before {
+  height: 100%;
+}
+
+#icons>li svg {
+  color: var(--color-2);
+}
+
+#icons>li>a:hover,
+#icons>li>a:hover svg {
+  color: var(--color-1);
+}
+
+
+/* Common Layout - Main */
+
+#main {
+  font-size: 16px;
+  flex: auto;
+  overflow-x: hidden;
+}
+
+#main h1,
+#main h2,
+#main h3,
+#main h4,
+#main h5,
+#main h6 {
+  font-weight: 500;
+  font-family: var(--font-serif);
+}
+
+#main h1 {
+  font-size: 30px;
+}
+
+#main h2 {
+  font-size: 22px;
+}
+
+#main h3 {
+  font-size: 20px;
+}
+
+#main h4 {
+  font-size: 18px;
+}
+
+#main h5 {
+  font-size: 16px;
+}
+
+#main h6 {
+  font-size: 14px;
+}
+
+#main table {
+  margin: auto;
+}
+
+#main table thead {
+  font-weight: bold;
+}
+
+#main table td {
+  text-align: center;
+}
+
+#main code {
+  background-color: var(--color-4);
+  color: var(--color-9);
+  font-family: var(--font-monospace);
+  padding: 2px;
+  border-radius: 0px;
+  font-size: 14px;
+  word-break: break-all;
+}
+
+#main pre {
+  margin: 0 0 16px 0;
+  border-radius: 0px;
+  padding: 12px;
+  background-color: var(--color-4);
+  overflow-x: auto;
+}
+
+#main pre code {
+  background-color: unset;
+  padding: 0px;
+  border-radius: 0px;
+}
+
+#main ul {
+  padding-left: 24px;
+  margin-bottom: 12px;
+}
+
+#main ol {
+  padding-left: 24px;
+  margin-bottom: 12px;
+}
+
+#main ul li {}
+
+#main ul li:before {}
+
+#main hr {
+  border: 0;
+  height: 1px;
+  margin: 12px 0;
+  background-color: var(--color-5);
+}
+
+#main img.img {
+  display: block;
+  margin: 0 auto 16px auto;
+  max-width: 80%;
+}
+
+#main .math-block {
+  overflow-x: auto;
+}
+
+#main.invisible {
+  opacity: 0;
+}
+
+
+/* Common Layout - Main - Reference */
+
+#main .summary h2 {
+  margin-bottom: 0;
+}
+
+#main .summary p,
+#main .summary .meta {
+  margin-bottom: 6px;
+}
+
+#main .summary p {
+  line-height: 1.6;
+}
+
+#main .category {
+  margin-bottom: 16px;
+}
+
+
+/* Common Layout - Main - Body */
+
+#body>h1,
+#body>h2,
+#body>h3,
+#body>h4,
+#body>h5,
+#body>h6 {
+  margin: 24px 0 4px 0;
+}
+
+#body>p {
+  margin: 0 0 16px 0;
+  line-height: 1.9;
+  text-align: justify;
+}
+
+#body>ul li,
+#body>ol li {
+  line-height: 1.9;
+}
+
+#body>*:first-child {
+  margin-top: 0px;
+}
+
+#body>*:last-child {
+  margin-bottom: 0px;
+}
+
+
+/* Common Layout - Main - Header */
+
+#main header {
+  margin-bottom: 16px;
+}
+
+.meta {
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.meta>div {
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.meta svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.35px;
+}
+
+.meta {
+  color: var(--color-3);
+}
+
+
+/* Common Layout - Main - About */
+
+#main .profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+#main .profile img {
+  display: block;
+  --profile-size: 80px;
+  width: var(--profile-size);
+  border-radius: calc(var(--profile-size) / 2);
+}
+
+#main .profile .name {
+  font-size: 20px;
+  font-weight: bolder;
+  font-family: var(--font-serif);
+}
+
+#main .profile .id {
+  color: var(--color-3);
+  font-family: var(--font-monospace)
+}
+
+
+/* Common Layout - Main - Dictionary */
+
+.dictionary-entry {
+  margin-bottom: 12px;
+}
+
+.dictionary-entry .pos {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.dictionary-entry .usage {
+  font-weight: 500;
+}
+
+.dictionary-entry .head {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+}
+
+.dictionary-entry .senses {
+  margin-left: 12px;
+}
+
+
+/* Common Layout - Main - Artwork */
+
+.thumbnail-list {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.thumbnail img {
+  height: 256px;
+  border-radius: 2px;
+}
+
+#main img.artwork {
+  display: block;
+  margin: 0 auto 16px auto;
+  width: 80%;
+}
+
+
+/* Common Layout - Footer */
+
+#footer {
+  width: 100%;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  font-family: var(--font-sans-en);
+}
+
+#copyright {
+  width: fit-content;
+  color: var(--color-3);
+}
+
+/* Calender Graph */
+
+.calender-graph-wrapper {
+  overflow-x: auto;
+}
+
+.calender-graph {
+  border-collapse: separate;
+  border-spacing: 2px 2px;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.cell {
+  width: 14px;
+  min-width: 14px;
+  max-width: 14px;
+  height: 14px;
+  min-height: 14px;
+  max-height: 14px;
+  text-align: right;
+}
+
+.cell.week {
+  width: initial;
+  min-width: initial;
+  max-width: initial;
+}
+
+.cell.filled {
+  background-color: var(--color-10);
+}
+
+
+/* Novel Layout */
+
+body.novel-layout {
+  text-align: right;
+  overflow-y: hidden;
+  /* Temporal fix for Chrome */
+  max-height: 100%;
+  min-height: 100%;
+  height: 100vh;
+}
+
+#novel-nav {
+  text-align: left;
+  position: fixed;
+  right: 0;
+  top: 0;
+  padding: 12px;
+  width: 100%;
+  z-index: 1;
+}
+
+#novel-nav svg {
+  stroke-width: 1.0px;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+}
+
+#novel-main {
+  writing-mode: vertical-rl;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 2em;
+  text-indent: 1em;
+  padding: 32px 24px 24px 24px;
+  text-align: justify;
+  display: inline-block;
+  height: 100%;
+}
+
+
+/* React Transition Group */
+
+.page-enter {
+  opacity: 0;
+}
+
+.page-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.page-exit {
+  opacity: 1;
+}
+
+.page-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
 }
