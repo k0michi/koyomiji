@@ -10,7 +10,7 @@ import crypto from "crypto";
 import { toISOStringJST } from "../lib/date-format.js";
 
 export async function toKTML(source: string) {
-  const dom = await toDOM(source) as HTMLElement;
+  const dom = toDOM(source) as HTMLElement;
   let title;
   let h1 = dom.querySelector('h1');
 
