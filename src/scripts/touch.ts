@@ -2,7 +2,7 @@ import * as path from "path";
 import * as fs from "fs/promises";
 import window from "@k0michi/isomorphic-dom";
 
-import { readFileUTF8 } from '../utils.js';
+import { readFileUTF8 } from '../../lib/utils.js';
 import { getElemAfter, getIndent } from "./utils.js";
 import { toISOStringJST } from "../../lib/date-format.js";
 

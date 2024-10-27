@@ -4,7 +4,7 @@ import window from "@k0michi/isomorphic-dom";
 import glob from "glob-promise";
 import crypto from "crypto";
 
-import { readFileUTF8 } from '../utils.js';
+import { readFileUTF8 } from '../../lib/utils.js';
 import { getElemAfter, getIndent } from "./utils.js";
 
 function assignID($document: Document) {
@@ -26,7 +26,7 @@ function assignID($document: Document) {
   const filenames = await glob('contents/**/*.ktml');
   const parser = new window.DOMParser();
   const serializer = new window.XMLSerializer();
-  
+
   for (const filename of filenames) {
     const content = await readFileUTF8(filename);
     const $document = parser.parseFromString(content, 'text/xml');

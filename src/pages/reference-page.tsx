@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useLoaderData, useLocation, useParams, useRouteLoaderData } from 'react-router';
 import { Data, Model } from '../model.js';
-import { toElement } from '../xml.js';
-import { parseXML } from '../xml.js';
+import { toElement } from '../../lib/xml.js';
+import { parseXML } from '../../lib/xml.js';
 import * as ReactKTML from '../react-ktml.js';
 import { CalenderIcon, TagsIcon } from '../components/icon.js';
 import Head from '../components/head.js';
 import { toDisplayDateString } from '../../lib/date-format.js';
-import { toPathname } from '../utils.js';
+import { toPathname } from '../../lib/utils.js';
 import { getCategory } from '../../lib/config.js';
 
 export default function ReferencePage() {

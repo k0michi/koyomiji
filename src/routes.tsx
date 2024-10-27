@@ -16,7 +16,7 @@ import ArtworkPage from './pages/artwork-page.js';
 import DictionaryPage from './pages/dictionary-page.js';
 import { ScrollRestoration } from 'react-router-dom';
 import { Model } from './model.js';
-import { toPathname } from './utils.js';
+import { toPathname } from '../lib/utils.js';
 
 function RootElement(props: any) {
   const [hydrated, setHydrated] = React.useState(false);

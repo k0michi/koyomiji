@@ -1,4 +1,4 @@
-import { readFileUTF8, toPathname } from './utils.js';
+import { readFileUTF8, toPathname } from '../lib/utils.js';
 import glob from 'glob-promise';
 import { createRenderer } from './renderer.js';
 import { ServerModel } from './server-model.js';

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Entry, mapEntries } from "../../lib/entry.js";
 import { Data, Model } from '../model.js';
 import Link from '../components/link.js';
-import { toPathname } from '../utils.js';
+import { toPathname } from '../../lib/utils.js';
 import Head from '../components/head.js';
 import { getCategory } from '../../lib/config.js';
 import { useLoaderData } from 'react-router';

@@ -2,13 +2,13 @@ import * as React from 'react';
 import { useModel, useObservable } from 'kyoka';
 import { useLoaderData, useLocation, useParams } from 'react-router';
 import { Data, Model } from '../model.js';
-import { toElement } from '../xml.js';
+import { toElement } from '../../lib/xml.js';
 import * as ReactKTML from '../react-ktml.js';
 import { CalenderIcon } from '../components/icon.js';
-import { parseXML } from '../xml.js';
+import { parseXML } from '../../lib/xml.js';
 import Head from '../components/head.js';
 import { toDisplayDateString } from '../../lib/date-format.js';
-import { toPathname } from '../utils.js';
+import { toPathname } from '../../lib/utils.js';
 
 export default function ArtworkPage() {
   const params = useParams();

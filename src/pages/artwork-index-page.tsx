@@ -4,7 +4,7 @@ import { Entry } from "../../lib/entry.js";
 import { Data, Model } from '../model.js';
 import { useLoaderData, useLocation } from 'react-router';
 import Link from '../components/link.js';
-import { toPathname } from '../utils.js';
+import { toPathname } from '../../lib/utils.js';
 import Head from '../components/head.js';
 
 function getID(p: Entry) {

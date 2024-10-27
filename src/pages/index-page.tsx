@@ -6,7 +6,7 @@ import { subDays } from 'date-fns';
 import { Data, Model } from '../model.js';
 import * as config from '../../lib/config.js';
 import { toDisplayDateString } from '../../lib/date-format.js';
-import { getPathSegment } from '../utils.js';
+import { getPathSegment } from '../../lib/utils.js';
 import { useLoaderData } from 'react-router';
 import { CalenderIcon } from '../components/icon.js';
 

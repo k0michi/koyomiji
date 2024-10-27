@@ -8,10 +8,10 @@ import window from '@k0michi/isomorphic-dom';
 
 import { Renderer } from "./base/renderer.js";
 import { Data, Model } from './model.js';
-import { toPathname } from './utils.js';
+import { toPathname } from '../lib/utils.js';
 import { ServerModel } from './server-model.js';
 import { toISOStringJST } from '../lib/date-format.js';
-import { newElementCreator } from './xml.js';
+import { newElementCreator } from '../lib/xml.js';
 import { createMemoryRouter, createRoutesFromElements, RouterProvider } from 'react-router';
 import { createRoutes } from './routes.js';
 

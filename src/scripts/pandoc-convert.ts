@@ -1,6 +1,6 @@
 import * as fs from "fs/promises";
 import glob from "glob-promise";
-import { parseXML } from "../xml.js";
+import { parseXML } from "../../lib/xml.js";
 import { Header, Link, PandocJSON } from 'pandoc-types';
 import window from '@k0michi/isomorphic-dom';
 

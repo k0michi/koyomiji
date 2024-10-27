@@ -2,13 +2,13 @@ import * as React from 'react';
 import { useLoaderData, useLocation, useParams } from 'react-router';
 import Link from '../components/link.js';
 import { Data, Model } from '../model.js';
-import { toElement } from '../xml.js';
-import { parseXML } from '../xml.js';
+import { toElement } from '../../lib/xml.js';
+import { parseXML } from '../../lib/xml.js';
 import * as ReactKTML from '../react-ktml.js';
 import { XIcon } from '../components/icon.js';
 import Head from '../components/head.js';
 import { Helmet } from 'react-helmet';
-import { toPathname } from '../utils.js';
+import { toPathname } from '../../lib/utils.js';
 
 interface NovelStorage {
   locations: Record<string, number | undefined>;

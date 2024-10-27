@@ -3,7 +3,7 @@ import Code from "./components/code.js";
 import Image from "./components/image.js";
 import Link from "./components/link.js";
 import Math from "./components/math.js";
-import { Fragment } from "./xml.js";
+import { Fragment } from "../lib/xml.js";
 
 export function reactFactory(type: string | Symbol, props: any, ...children: any[]) {
   if (type == Fragment) {
