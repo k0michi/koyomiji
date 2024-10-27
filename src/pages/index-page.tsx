@@ -8,7 +8,7 @@ import * as config from '../../lib/config.js';
 import { toDisplayDateString } from '../../lib/date-format.js';
 import { getPathSegment } from '../../lib/utils.js';
 import { useLoaderData } from 'react-router';
-import { CalenderIcon } from '../components/icon.js';
+import { CalenderIcon } from '../../components/icon.js';
 
 export default function IndexPage() {
   const data = useLoaderData() as Data;

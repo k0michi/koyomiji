@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { Outlet, useLocation, useOutlet } from 'react-router';
 import { Model } from '../model.js';
-import { Asterisk, GithubIcon, LogoFull, MailIcon, Mastodon, RSS, TwitchIcon, YoutubeIcon } from './icon.js';
+import { Asterisk, GithubIcon, LogoFull, MailIcon, Mastodon, RSS, TwitchIcon, YoutubeIcon } from '../../components/icon.js';
 import Link from './link.js';
 
 interface MenuProps {

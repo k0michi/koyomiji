@@ -4,7 +4,7 @@ import { useLoaderData, useLocation, useParams } from 'react-router';
 import { Data, Model } from '../model.js';
 import { toElement } from '../../lib/xml.js';
 import * as ReactKTML from '../react-ktml.js';
-import { CalenderIcon } from '../components/icon.js';
+import { CalenderIcon } from '../../components/icon.js';
 import { parseXML } from '../../lib/xml.js';
 import Head from '../components/head.js';
 import { toDisplayDateString } from '../../lib/date-format.js';

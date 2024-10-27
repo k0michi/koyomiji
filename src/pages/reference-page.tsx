@@ -4,7 +4,7 @@ import { Data, Model } from '../model.js';
 import { toElement } from '../../lib/xml.js';
 import { parseXML } from '../../lib/xml.js';
 import * as ReactKTML from '../react-ktml.js';
-import { CalenderIcon, TagsIcon } from '../components/icon.js';
+import { CalenderIcon, TagsIcon } from '../../components/icon.js';
 import Head from '../components/head.js';
 import { toDisplayDateString } from '../../lib/date-format.js';
 import { toPathname } from '../../lib/utils.js';

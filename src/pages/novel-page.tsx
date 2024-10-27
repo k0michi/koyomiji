@@ -5,7 +5,7 @@ import { Data, Model } from '../model.js';
 import { toElement } from '../../lib/xml.js';
 import { parseXML } from '../../lib/xml.js';
 import * as ReactKTML from '../react-ktml.js';
-import { XIcon } from '../components/icon.js';
+import { XIcon } from '../../components/icon.js';
 import Head from '../components/head.js';
 import { Helmet } from 'react-helmet';
 import { toPathname } from '../../lib/utils.js';
