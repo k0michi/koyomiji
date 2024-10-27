@@ -1,8 +1,8 @@
 import remarkMath from "remark-math";
 import remarkParse from "remark-parse";
 import { unified } from "unified";
-import * as unist from "unist";
-import * as mdast from "mdast";
+import type * as unist from "unist";
+import type * as mdast from "mdast";
 import * as mdastMath from "mdast-util-math";
 import { readFileUTF8 } from "../lib/utils.js";
 import window from "@k0michi/isomorphic-dom";
