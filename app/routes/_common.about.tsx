@@ -36,7 +36,7 @@ export default function AboutPage() {
         <h2>フィードについて</h2>
         <p>サイトのAtomフィードは<Link to="https://koyomiji.com/feed.xml">https://koyomiji.com/feed.xml</Link>にあります。このサイトの更新情報を、お好みのRSSリーダーで取得することが可能です。</p>
         <h2>お問い合せ</h2>
-        <p><a href="mailto:k0michi@koyomi.co">k0michi@koyomi.co</a>まで。</p>
+        <p><Link to="mailto:k0michi@koyomi.co">k0michi@koyomi.co</Link>まで。</p>
         <h2>技術構成について</h2>
         <p>当サイトの全てのページは、TypeScriptで書かれた自作の静的サイトジェネレータを使用して生成されています。フロントエンドフレームワークにはReactを採用し、モジュールバンドラにはViteを使用しています。サイトはVercel上でビルド、ホストされています。</p>
         <p>サイト上のテキストは、XMLベースのフォーマットで記述されています。</p>
