@@ -1,3 +1,4 @@
+// FIXME: Find better way
 import 'prismjs/components/prism-typescript.js';
 import 'prismjs/components/prism-jsx.js';
 import 'prismjs/components/prism-tsx.js';
