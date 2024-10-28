@@ -1,26 +1,39 @@
 import * as React from 'react';
-import { useLoaderData, useLocation, useParams, useRouteLoaderData } from 'react-router';
-import { Data, Model } from '../model.js';
+import { LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation, useParams, useRouteLoaderData } from 'react-router';
 import { toElement } from '../../lib/xml.js';
 import { parseXML } from '../../lib/xml.js';
-import * as ReactKTML from '../react-ktml.js';
+import * as ReactKTML from '../../lib/react-ktml.js';
 import { CalenderIcon, TagsIcon } from '../../components/icon.js';
-import Head from '../components/head.js';
 import { toDisplayDateString } from '../../lib/date-format.js';
 import { toPathname } from '../../lib/utils.js';
 import { getCategory } from '../../lib/config.js';
+import { ServerModel } from 'lib/server-model.js';
+import { getMeta } from 'lib/meta.js';
+
+export const loader = async ({ params }: LoaderFunctionArgs) => {
+  return await ServerModel.instance.getEntry(`/reference/${params.category}/${params.id}`);
+}
+
+type Data = Awaited<ReturnType<typeof loader>>;
+
+export const meta: MetaFunction = ({ location, data }) => getMeta({
+  location,
+  title: (data as Data).title,
+  description: (data as Data).description,
+  type: 'article',
+  published: (data as Data).created,
+  modified: (data as Data).modified,
+});
 
 export default function ReferencePage() {
-  const params = useParams();
-  const path = ['reference', params.category!, params.id!];
   const data = useLoaderData() as Data;
-  const entry = data.entries[toPathname(path)];
+  const params = useParams();
+  const entry = data;
   const categoryName = getCategory(params.category!).name;
   const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
 
   return (
     <>
-      <Head title={entry.title} description={entry.description} type="article" published={entry.created} modified={entry.modified} />
       <header>
         <h1>{entry.title}</h1>
         <div className="meta">
