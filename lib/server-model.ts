@@ -73,6 +73,8 @@ export class ServerModel {
     for (const p of await glob('**/*', { cwd: this.rootDir, nodir: true })) {
       if (p.endsWith('index.ktml')) {
         await this.loadEntry(p);
+        const normalized = this.normalizePath(p);
+        this.sitemap.add(normalized, this.entries[normalized].modified);
       } else if (p.endsWith('index.kdml')) {
         await this.loadDictionary(p);
       }
@@ -95,22 +97,26 @@ export class ServerModel {
   //   return entry;
   // }
 
+  normalizePath(pathname: string) {
+    return toPathname(pathname.split('/').slice(0, -1));
+  }
+
   // FIXME: Argument name. Here pathname is a real file path
   // FIXME: Insane path normalization
   async loadEntry(pathname: string) {
-    const normalized = toPathname(pathname.split('/').slice(0, -1));
+    const normalized = this.normalizePath(pathname);
     const content = await readFileUTF8(path.join(this.rootDir, pathname));
     this.entries[normalized] = preprocess(normalized, content);
   }
 
   async loadDictionary(pathname: string) {
-    const normalized = toPathname(pathname.split('/').slice(0, -1));
+    const normalized = this.normalizePath(pathname);
     const content = await readFileUTF8(path.join(this.rootDir, pathname));
     this.dictionaries[normalized] = KDML.preprocess(normalized, content);
   }
 
   async compileMarkdown(pathname: string) {
-    const normalized = toPathname(pathname.split('/').slice(0, -1));
+    const normalized = this.normalizePath(pathname);
     const file = await readFileUTF8(path.posix.join(this.rootDir, pathname));
     const xmlContent = await toKTML(file);
     const dest = path.join(this.rootDir, normalized, 'index.ktml');

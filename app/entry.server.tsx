@@ -22,6 +22,21 @@ export default function handleRequest(
   routerContext: EntryContext,
   loadContext: AppLoadContext
 ) {
+  // Begin modified
+  for (const [k, v] of Object.entries(routerContext.manifest.routes)) {
+    if (v.path) {
+      // FIXME: Not checking escape
+      if (!v.path.includes(':') && !v.path.includes('*')) {
+        if (v.path == 'sitemap.xml' || v.path == 'feed.xml') {
+          continue;
+        }
+
+        serverModel.sitemap.add('/' + v.path);
+      }
+    }
+  }
+  // End modified
+
   return new Promise((resolve, reject) => {
     let shellRendered = false;
     let userAgent = request.headers.get("user-agent");
