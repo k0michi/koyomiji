@@ -68,6 +68,10 @@ export class ServerModel {
     this.readAll = true;
   }
 
+  async readFile(pathname: string) {
+    return await fs.readFile(path.join(this.rootDir, pathname));
+  }
+
   // getEntry(pathname: string) {
   //   const entry = this.entries[pathname];
 
