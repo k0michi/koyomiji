@@ -14,7 +14,7 @@ export default function Code(props: CodeProps) {
     if (lang != undefined) {
       (async () => {
         const Prism = await import('prismjs');
-        await import('../prism-languages.js');
+        await import('../lib/prism-languages.js');
         const html = Prism.highlight(props.children, Prism.languages[lang], lang);
         setHTML(html);
       })();

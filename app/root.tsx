@@ -1,8 +1,11 @@
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration, useMatches, useRouteError } from "react-router";
 import type { LinksFunction } from "react-router";
-
-import "./app.css";
 import { Handle } from "lib/handle";
+
+import './app.css';
+import 'prismjs/themes/prism-tomorrow.css';
+import 'katex/dist/katex.min.css';
+import '@fontsource/raleway';
 
 function concatClassNames(cn1: string | undefined, cn2: string | undefined) {
   const concated = [cn1, cn2].filter(cn => cn != undefined).join(' ');
@@ -15,7 +18,7 @@ export default function App() {
   const bodyClassName = matches.map(m => (m.handle as (Handle | undefined))?.()?.body?.className).reduceRight((previous, current) => concatClassNames(previous, current), undefined);
 
   return (
-    <html lang={lang ?? "en"}>
+    <html lang={lang ?? "ja"}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

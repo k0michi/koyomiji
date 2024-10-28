@@ -5,6 +5,7 @@ export async function readFileUTF8(path: string) {
 }
 
 export function toPathname(path: string[]) {
+  path = path.filter(p => p != '');
   return '/' + path.join('/');
 }
 

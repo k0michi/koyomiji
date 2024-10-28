@@ -37,7 +37,7 @@ export class ServerModel {
     const entry = this.entries[pathname];
 
     if (entry == undefined) {
-      await this.loadEntry(pathname);
+      await this.loadEntry(pathname + '/index.ktml');
     }
 
     return this.entries[pathname];
@@ -78,6 +78,8 @@ export class ServerModel {
   //   return entry;
   // }
 
+  // FIXME: Argument name. Here pathname is a real file path
+  // FIXME: Insane path normalization
   async loadEntry(pathname: string) {
     const normalized = toPathname(pathname.split('/').slice(0, -1));
     const content = await readFileUTF8(path.join(this.rootDir, pathname));

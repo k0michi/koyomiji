@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@fontsource/raleway':
+    specifier: ^5.1.0
+    version: 5.1.0
   '@k0michi/isomorphic-dom':
     specifier: ^0.0.1
     version: 0.0.1
@@ -587,6 +590,10 @@ packages:
     os: [win32]
     requiresBuild: true
     optional: true
+
+  /@fontsource/raleway@5.1.0:
+    resolution: {integrity: sha512-g97nQtuEMVlW95xKCZuDun4gSxmBOxf+7yfValqOwATvJL/98RkCacEsBgJlFNtWxO0+FkmoMl3b9kvZpyQ6VA==}
+    dev: false
 
   /@isaacs/cliui@8.0.2:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
