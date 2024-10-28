@@ -8,7 +8,7 @@ import ReferencePage from "./pages/reference-page.js";
 import LogIndexPage from "./pages/log-index-page.js";
 import LogPage from "./pages/log-page.js";
 import NotFoundPage from './pages/not-found-page.js';
-import ProjectPage from './pages/project-page.js';
+import ProjectPage from '../app/routes/_common.project.js';
 import NovelIndexPage from './pages/novel-index-page.js';
 import ArtworkIndexPage from './pages/artwork-index-page.js';
 import NovelPage from './pages/novel-page.js';
