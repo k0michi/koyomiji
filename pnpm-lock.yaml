@@ -9,14 +9,14 @@ dependencies:
     specifier: ^0.0.1
     version: 0.0.1
   '@react-router/fs-routes':
-    specifier: 7.0.0-pre.1
-    version: 7.0.0-pre.1(@react-router/dev@7.0.0-pre.1)(typescript@5.6.3)
+    specifier: 7.0.0-pre.2
+    version: 7.0.0-pre.2(@react-router/dev@7.0.0-pre.2)(typescript@5.6.3)
   '@react-router/node':
-    specifier: 7.0.0-pre.1
-    version: 7.0.0-pre.1(react-router@7.0.0-pre.1)(typescript@5.6.3)
+    specifier: 7.0.0-pre.2
+    version: 7.0.0-pre.2(react-router@7.0.0-pre.2)(typescript@5.6.3)
   '@react-router/serve':
-    specifier: 7.0.0-pre.1
-    version: 7.0.0-pre.1(react-router@7.0.0-pre.1)(typescript@5.6.3)
+    specifier: 7.0.0-pre.2
+    version: 7.0.0-pre.2(react-router@7.0.0-pre.2)(typescript@5.6.3)
   '@tabler/icons':
     specifier: ^3.20.0
     version: 3.20.0
@@ -51,8 +51,8 @@ dependencies:
     specifier: ^18.3.1
     version: 18.3.1(react@18.3.1)
   react-router:
-    specifier: 7.0.0-pre.1
-    version: 7.0.0-pre.1(react-dom@18.3.1)(react@18.3.1)
+    specifier: 7.0.0-pre.2
+    version: 7.0.0-pre.2(react-dom@18.3.1)(react@18.3.1)
   remark-math:
     specifier: ^6.0.0
     version: 6.0.0
@@ -65,8 +65,8 @@ dependencies:
 
 devDependencies:
   '@react-router/dev':
-    specifier: 7.0.0-pre.1
-    version: 7.0.0-pre.1(@react-router/serve@7.0.0-pre.1)(@types/node@22.8.1)(react-router@7.0.0-pre.1)(typescript@5.6.3)(vite@5.4.10)
+    specifier: 7.0.0-pre.2
+    version: 7.0.0-pre.2(@react-router/serve@7.0.0-pre.2)(@types/node@22.8.1)(react-router@7.0.0-pre.2)(typescript@5.6.3)(vite@5.4.10)
   '@types/chroma-js':
     specifier: ^2.4.4
     version: 2.4.4
@@ -697,13 +697,13 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@react-router/dev@7.0.0-pre.1(@react-router/serve@7.0.0-pre.1)(@types/node@22.8.1)(react-router@7.0.0-pre.1)(typescript@5.6.3)(vite@5.4.10):
-    resolution: {integrity: sha512-Nlp6YXuC2DSMJ7ZgfT/OBwRGlHvieO27WB+SrlL6ipqbi/Ut23UOQ3pn5+y2SS3h1+N6Y+uIOFlnEg8k9adT1g==}
-    engines: {node: '>=18.0.0'}
+  /@react-router/dev@7.0.0-pre.2(@react-router/serve@7.0.0-pre.2)(@types/node@22.8.1)(react-router@7.0.0-pre.2)(typescript@5.6.3)(vite@5.4.10):
+    resolution: {integrity: sha512-clDNkfuZF1BGSr6VsnB/2vV061VVajBfq/vAVHxq7+OuC9W+wHqYOFmb4ve4E4oOVYQtYClA9xyBQqKh/wNGqw==}
+    engines: {node: '>=20.0.0'}
     hasBin: true
     peerDependencies:
-      '@react-router/serve': ^7.0.0-pre.1
-      react-router: ^7.0.0-pre.1
+      '@react-router/serve': ^7.0.0-pre.2
+      react-router: ^7.0.0-pre.2
       typescript: ^5.1.0
       vite: ^5.1.0
       wrangler: ^3.28.2
@@ -724,8 +724,8 @@ packages:
       '@babel/traverse': 7.25.9
       '@babel/types': 7.26.0
       '@npmcli/package-json': 4.0.1
-      '@react-router/node': 7.0.0-pre.1(react-router@7.0.0-pre.1)(typescript@5.6.3)
-      '@react-router/serve': 7.0.0-pre.1(react-router@7.0.0-pre.1)(typescript@5.6.3)
+      '@react-router/node': 7.0.0-pre.2(react-router@7.0.0-pre.2)(typescript@5.6.3)
+      '@react-router/serve': 7.0.0-pre.2(react-router@7.0.0-pre.2)(typescript@5.6.3)
       arg: 5.0.2
       babel-dead-code-elimination: 1.0.6
       chalk: 4.1.2
@@ -742,7 +742,7 @@ packages:
       picomatch: 2.3.1
       prettier: 2.8.8
       react-refresh: 0.14.2
-      react-router: 7.0.0-pre.1(react-dom@18.3.1)(react@18.3.1)
+      react-router: 7.0.0-pre.2(react-dom@18.3.1)(react@18.3.1)
       semver: 7.6.3
       set-cookie-parser: 2.7.1
       typescript: 5.6.3
@@ -762,68 +762,68 @@ packages:
       - supports-color
       - terser
 
-  /@react-router/express@7.0.0-pre.1(express@4.21.1)(react-router@7.0.0-pre.1)(typescript@5.6.3):
-    resolution: {integrity: sha512-24JCslUiirvBckOfRlZmJzr//xFUU2o585Aszf19Dpnga3s+2xCihNbAVIfyZ7kY/AVsJNIuJDo/oJX/STaY6w==}
-    engines: {node: '>=18.0.0'}
+  /@react-router/express@7.0.0-pre.2(express@4.21.1)(react-router@7.0.0-pre.2)(typescript@5.6.3):
+    resolution: {integrity: sha512-K0lbYzJoayqHjM9fYQvWHTkhf0rAdHz3hWjf09KzUMdEYIBLyHOnSORxF+nJaylqdOhXjS7AYUgltpkLs9hJ9g==}
+    engines: {node: '>=20.0.0'}
     peerDependencies:
       express: ^4.17.1
-      react-router: 7.0.0-pre.1
+      react-router: 7.0.0-pre.2
       typescript: ^5.1.0
     peerDependenciesMeta:
       typescript:
         optional: true
     dependencies:
-      '@react-router/node': 7.0.0-pre.1(react-router@7.0.0-pre.1)(typescript@5.6.3)
+      '@react-router/node': 7.0.0-pre.2(react-router@7.0.0-pre.2)(typescript@5.6.3)
       express: 4.21.1
-      react-router: 7.0.0-pre.1(react-dom@18.3.1)(react@18.3.1)
+      react-router: 7.0.0-pre.2(react-dom@18.3.1)(react@18.3.1)
       typescript: 5.6.3
 
-  /@react-router/fs-routes@7.0.0-pre.1(@react-router/dev@7.0.0-pre.1)(typescript@5.6.3):
-    resolution: {integrity: sha512-MQu2egp+5l5lPliWB33wLN/rZ4TMWCIPvbVjI1sdpy3NYhPan1/RDGAUAdIX5MddhLZm5DKQaxlKSxpiQutCug==}
-    engines: {node: '>=18.0.0'}
+  /@react-router/fs-routes@7.0.0-pre.2(@react-router/dev@7.0.0-pre.2)(typescript@5.6.3):
+    resolution: {integrity: sha512-vprjIK/UAtP+gDqvlhh7FFR92Y84xpIx8Z045gbWTKEnYteZw3frOQx9aTkJ3gQFNsBrweT8C2p5MyokjiMMwA==}
+    engines: {node: '>=20.0.0'}
     peerDependencies:
-      '@react-router/dev': ^7.0.0-pre.1
+      '@react-router/dev': ^7.0.0-pre.2
       typescript: ^5.1.0
     peerDependenciesMeta:
       typescript:
         optional: true
     dependencies:
-      '@react-router/dev': 7.0.0-pre.1(@react-router/serve@7.0.0-pre.1)(@types/node@22.8.1)(react-router@7.0.0-pre.1)(typescript@5.6.3)(vite@5.4.10)
+      '@react-router/dev': 7.0.0-pre.2(@react-router/serve@7.0.0-pre.2)(@types/node@22.8.1)(react-router@7.0.0-pre.2)(typescript@5.6.3)(vite@5.4.10)
       minimatch: 9.0.5
       typescript: 5.6.3
     dev: false
 
-  /@react-router/node@7.0.0-pre.1(react-router@7.0.0-pre.1)(typescript@5.6.3):
-    resolution: {integrity: sha512-592GlQxAUcMSzyzeC28dvmLHJgq4uk2uGB9Lzouj9M7uINuFOdBMP/k+bjRD9m281fEB/TBpKsTVfrpnat//Ug==}
-    engines: {node: '>=18.0.0'}
+  /@react-router/node@7.0.0-pre.2(react-router@7.0.0-pre.2)(typescript@5.6.3):
+    resolution: {integrity: sha512-jgXWGomzDQw3yq8EuPCE6AqOvNXT0omOqi2ziHC2Giff4yG5Av5R+OsqEK/NEXvINeAMYKnZ4KdgYVgrtiYKYw==}
+    engines: {node: '>=20.0.0'}
     peerDependencies:
-      react-router: 7.0.0-pre.1
+      react-router: 7.0.0-pre.2
       typescript: ^5.1.0
     peerDependenciesMeta:
       typescript:
         optional: true
     dependencies:
       '@web3-storage/multipart-parser': 1.0.0
-      react-router: 7.0.0-pre.1(react-dom@18.3.1)(react@18.3.1)
+      react-router: 7.0.0-pre.2(react-dom@18.3.1)(react@18.3.1)
       source-map-support: 0.5.21
       stream-slice: 0.1.2
       typescript: 5.6.3
       undici: 6.20.1
 
-  /@react-router/serve@7.0.0-pre.1(react-router@7.0.0-pre.1)(typescript@5.6.3):
-    resolution: {integrity: sha512-WVfYNighCdg0SluI/WaUL1Fg5bvU5pGElLZlXE0jtwpb7NyuRNBl+h8exWbi4odzzfsipUMYGJEwPiX5FGiczw==}
-    engines: {node: '>=18.0.0'}
+  /@react-router/serve@7.0.0-pre.2(react-router@7.0.0-pre.2)(typescript@5.6.3):
+    resolution: {integrity: sha512-WucoEL2kKPhIu0a+XILzExXo20X5j09TlPTzvLu7Sz0mddLLOFiViklJfalcQyAzKr5J7llQZnSH0zrm0BRAaw==}
+    engines: {node: '>=20.0.0'}
     hasBin: true
     peerDependencies:
-      react-router: 7.0.0-pre.1
+      react-router: 7.0.0-pre.2
     dependencies:
-      '@react-router/express': 7.0.0-pre.1(express@4.21.1)(react-router@7.0.0-pre.1)(typescript@5.6.3)
-      '@react-router/node': 7.0.0-pre.1(react-router@7.0.0-pre.1)(typescript@5.6.3)
+      '@react-router/express': 7.0.0-pre.2(express@4.21.1)(react-router@7.0.0-pre.2)(typescript@5.6.3)
+      '@react-router/node': 7.0.0-pre.2(react-router@7.0.0-pre.2)(typescript@5.6.3)
       compression: 1.7.4
       express: 4.21.1
       get-port: 5.1.1
       morgan: 1.10.0
-      react-router: 7.0.0-pre.1(react-dom@18.3.1)(react@18.3.1)
+      react-router: 7.0.0-pre.2(react-dom@18.3.1)(react@18.3.1)
       source-map-support: 0.5.21
     transitivePeerDependencies:
       - supports-color
@@ -1341,13 +1341,13 @@ packages:
   /cookie-signature@1.0.6:
     resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
 
-  /cookie@0.6.0:
-    resolution: {integrity: sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==}
-    engines: {node: '>= 0.6'}
-
   /cookie@0.7.1:
     resolution: {integrity: sha512-6DnInpx7SJ2AK3+CTUE/ZM0vWTUboZCegxhC2xiIydHR9jNuTAASBrfEpHhiGOZw/nX51bHt6YQl8jsGo4y/0w==}
     engines: {node: '>= 0.6'}
+
+  /cookie@1.0.1:
+    resolution: {integrity: sha512-Xd8lFX4LM9QEEwxQpF9J9NTUh8pmdJO0cyRJhFiDoLTk2eH8FXlRv2IFGYVadZpqI3j8fhNrSdKCeYPxiAhLXw==}
+    engines: {node: '>=18'}
 
   /core-js@3.38.1:
     resolution: {integrity: sha512-OP35aUorbU3Zvlx7pjsFdu1rGNnD4pgw/CWoYzRY3t2EzoVT7shKHY1dlAy3f41cGIO7ZDPQimhGFTlEYkG/Hw==}
@@ -2794,9 +2794,9 @@ packages:
     resolution: {integrity: sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==}
     engines: {node: '>=0.10.0'}
 
-  /react-router@7.0.0-pre.1(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-KAopqhQWpZUdIbSVGXBszhvHJjI20XBgYYwD83GL2uXFluKzb1SEw1XY4h3kg0wOT6WpQB7m655MJnk2CIBufQ==}
-    engines: {node: '>=18.0.0'}
+  /react-router@7.0.0-pre.2(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-SKt4Era+LiwvXnqM05MsogMF79DJ33Gw6TYDjjfQyuU9Rca5ub+DrU4UpQshB28PuXqcjMd5Zbo1H1eM0LQPhg==}
+    engines: {node: '>=20.0.0'}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
@@ -2806,7 +2806,7 @@ packages:
     dependencies:
       '@types/cookie': 0.6.0
       '@web3-storage/multipart-parser': 1.0.0
-      cookie: 0.6.0
+      cookie: 1.0.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       set-cookie-parser: 2.7.1
