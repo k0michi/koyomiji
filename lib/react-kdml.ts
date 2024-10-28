@@ -1,5 +1,5 @@
 import * as React from "react";
-import Placeholder from "./components/placeholder.js";
+import Placeholder from "../components/placeholder.js";
 import { Fragment } from "../lib/xml.js";
 
 export function reactFactory(type: string | Symbol, props: any, ...children: any[]) {

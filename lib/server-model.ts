@@ -43,6 +43,16 @@ export class ServerModel {
     return this.entries[pathname];
   }
 
+  async getDictionary(pathname: string) {
+    const entry = this.dictionaries[pathname];
+
+    if (entry == undefined) {
+      await this.loadDictionary(pathname + '/index.kdml');
+    }
+
+    return this.dictionaries[pathname];
+  }
+
   async getEntryIndex() {
     if (!this.readAll) {
       await this._loadAllEntries();

@@ -2,7 +2,7 @@ import window from '@k0michi/isomorphic-dom';
 
 export const Fragment = Symbol('Fragment');
 
-export function parseXML(string: string) {
+export function parseXML(string: string): Document {
   const parser = new window.DOMParser();
   const $document = parser.parseFromString(string, 'text/xml');
 
