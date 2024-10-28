@@ -6,17 +6,19 @@ import { readFileUTF8, toPathname } from "./utils.js";
 import Sitemap from "./sitemap.js";
 import * as fs from "fs/promises";
 import { toKTML } from "./markdown.js";
+import { glob } from "glob";
 
 export class ServerModel {
   rootDir: string;
   entries: Record<string, Entry>;
   dictionaries: Record<string, Dictionary>;
   sitemap: Sitemap;
+  readAll: boolean = false;
 
   static _instance: ServerModel | null = null;
 
-  static get instance() {
-    if (ServerModel._instance) {
+  static get instance(): ServerModel {
+    if (!ServerModel._instance) {
       throw new Error('ServerModel not created');
     }
 
@@ -31,15 +33,50 @@ export class ServerModel {
     ServerModel._instance = this;
   }
 
-  getEntry(pathname: string) {
+  async getEntry(pathname: string) {
     const entry = this.entries[pathname];
 
-    if (entry == undefined || entry.content == null) {
-      throw new Error(`Not found: ${pathname}`);
+    if (entry == undefined) {
+      await this.loadEntry(pathname);
     }
 
-    return entry;
+    return this.entries[pathname];
   }
+
+  async getEntryIndex() {
+    if (!this.readAll) {
+      await this._loadAllEntries();
+    }
+
+    const entries = structuredClone(this.entries);
+    for (const e of Object.values(entries)) {
+      delete e.content;
+    }
+
+    return entries;
+  }
+
+  async _loadAllEntries() {
+    for (const p of await glob('**/*', { cwd: this.rootDir, nodir: true })) {
+      if (p.endsWith('index.ktml')) {
+        await this.loadEntry(p);
+      } else if (p.endsWith('index.kdml')) {
+        await this.loadDictionary(p);
+      }
+    }
+
+    this.readAll = true;
+  }
+
+  // getEntry(pathname: string) {
+  //   const entry = this.entries[pathname];
+
+  //   if (entry == undefined || entry.content == null) {
+  //     throw new Error(`Not found: ${pathname}`);
+  //   }
+
+  //   return entry;
+  // }
 
   async loadEntry(pathname: string) {
     const normalized = toPathname(pathname.split('/').slice(0, -1));
