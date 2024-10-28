@@ -12,7 +12,7 @@ import path from "node:path";
 const ABORT_DELAY = 5_000;
 
 // Begin modified
-let serverModel = new ServerModel(path.join(import.meta.dirname, '..', 'contents'));
+let serverModel = new ServerModel('contents');
 // End modified
 
 export default function handleRequest(
