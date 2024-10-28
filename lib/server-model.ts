@@ -7,6 +7,9 @@ import Sitemap from "./sitemap.js";
 import * as fs from "fs/promises";
 import { toKTML } from "./markdown.js";
 import { glob } from "glob";
+import { newElementCreator } from "./xml.js";
+import { toISOStringJST } from "./date-format.js";
+import window from '@k0michi/isomorphic-dom';
 
 export class ServerModel {
   rootDir: string;
@@ -113,5 +116,50 @@ export class ServerModel {
     const dest = path.join(this.rootDir, normalized, 'index.ktml');
     await fs.writeFile(dest, xmlContent);
     await this.loadEntry(path.join(normalized, 'index.ktml'));
+  }
+
+  async getSitemapAsString() {
+    if (!this.readAll) {
+      await this._loadAllEntries();
+    }
+
+    return this.sitemap.toXML();
+  }
+
+  async getFeedAsString() {
+    if (!this.readAll) {
+      await this._loadAllEntries();
+    }
+
+    const atomNS = 'http://www.w3.org/2005/Atom';
+    const document = window.document.implementation.createDocument(atomNS, 'feed');
+    const create = newElementCreator(document, atomNS);
+    const feed = document.firstChild! as Element;
+
+    feed.appendChild(create('title', {}, '喫茶＊曆路'));
+    feed.appendChild(create('id', {}, 'urn:uuid:7e260dae-5479-45c2-bad8-0be227c48ab8'));
+    feed.appendChild(create('link', { rel: 'self', href: 'https://koyomiji.com/feed.xml' }));
+    feed.appendChild(create('link', { rel: 'alternate', href: 'https://koyomiji.com/' }));
+    feed.appendChild(create('updated', {}, toISOStringJST(new Date())));
+    feed.appendChild(create('icon', {}, 'https://koyomiji.com/favicon.ico'));
+
+    const author = create('author');
+    author.appendChild(create('name', {}, 'Komichi'));
+    author.appendChild(create('email', {}, 'k0michi@koyomi.co'));
+    feed.appendChild(author);
+
+    for (const e of Object.values(this.entries)) {
+      const entry = create('entry');
+      entry.appendChild(create('title', {}, e.title));
+      entry.appendChild(create('summary', {}, e.description));
+      entry.appendChild(create('id', {}, `urn:uuid:${e.id}`));
+      entry.appendChild(create('link', { rel: 'alternate', href: new URL(e.path, 'https://koyomiji.com/').toString() }));
+      entry.appendChild(create('published', {}, e.created));
+      entry.appendChild(create('updated', {}, e.modified));
+      feed.appendChild(entry);
+    }
+
+    const serializer = new window.XMLSerializer();
+    return '<?xml version="1.0" encoding="UTF-8"?>\n' + serializer.serializeToString(feed);
   }
 }
