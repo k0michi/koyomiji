@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Link, Outlet, useLocation } from 'react-router';
 import { Asterisk, GithubIcon, LogoFull, MailIcon, Mastodon, RSS, TwitchIcon, YoutubeIcon } from '../../components/icon';
+import { MetaFunction } from 'react-router';
+import { Handle } from 'lib/handle';
 
 interface MenuProps {
   to: string;
@@ -13,6 +15,14 @@ function Menu(props: MenuProps) {
   return (<Link to={props.to} className={path.startsWith(props.to) ? 'active' : ''}><Asterisk /><div>{props.children}</div></Link>);
 }
 
+export const handle: Handle = () => {
+  return {
+    body: {
+      className: 'common-layout'
+    }
+  };
+}
+
 export default function CommonLayout() {
   const [menuVisible, setMenuVisible] = React.useState<boolean>(false);
   const location = useLocation();
@@ -20,7 +30,7 @@ export default function CommonLayout() {
   elementMap.current[location.pathname] = elementMap.current[location.pathname] ?? React.createRef<any>();
 
   return (
-    <div className="common-layout">
+    <>
       <div id="bar"></div>
       <div id="wrapper">
         <nav id="nav">
@@ -62,6 +72,6 @@ export default function CommonLayout() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
