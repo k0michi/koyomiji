@@ -1,0 +1,43 @@
+import * as React from 'react';
+import { Entry, mapEntries } from "../../lib/entry.js";
+import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData } from 'react-router';
+import { ServerModel } from 'lib/server-model.js';
+import { getMeta } from 'lib/meta.js';
+
+export const loader = async ({ params }: LoaderFunctionArgs) => {
+  const index = await ServerModel.instance.getEntryIndex();
+  return { entries: index };
+}
+
+type Data = Awaited<ReturnType<typeof loader>>;
+
+export const meta: MetaFunction = ({ location }) => getMeta({
+  location,
+  title: "Novels",
+  description: "🚧 工事中"
+});
+
+export default function NovelIndexPage() {
+  const data = useLoaderData() as Data;
+  const entries = Object.values(data.entries).filter(e => e.path.startsWith('/novel'));
+  const map = mapEntries(entries);
+
+  return (
+    <>
+      <header>
+        <h1>Novels</h1>
+        <div className="meta">🚧 工事中</div>
+      </header>
+      <div id="body">
+        {Object.entries(map).map(([k, v]) =>
+          <div className="category" key={k}>
+            <h2>{k}</h2>
+            <ol>
+              {v.map(i => <li key={i.path}><Link to={i.path}>{i.title}</Link></li>)}
+            </ol>
+          </div>
+        )}
+      </div>
+    </>
+  );
+}
