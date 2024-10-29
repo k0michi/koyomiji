@@ -1,14 +1,14 @@
 // FIXME: Find better way
-import 'prismjs/components/prism-typescript.js';
-import 'prismjs/components/prism-jsx.js';
-import 'prismjs/components/prism-tsx.js';
-import 'prismjs/components/prism-python.js';
-import 'prismjs/components/prism-bash.js';
-import 'prismjs/components/prism-d.js';
-import 'prismjs/components/prism-yaml.js';
-import 'prismjs/components/prism-json.js';
-import 'prismjs/components/prism-markdown.js';
-import 'prismjs/components/prism-ignore.js';
-import 'prismjs/components/prism-toml.js';
-import 'prismjs/components/prism-c.js';
-import 'prismjs/components/prism-cpp.js';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-tsx';
+import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-d';
+import 'prismjs/components/prism-yaml';
+import 'prismjs/components/prism-json';
+import 'prismjs/components/prism-markdown';
+import 'prismjs/components/prism-ignore';
+import 'prismjs/components/prism-toml';
+import 'prismjs/components/prism-c';
+import 'prismjs/components/prism-cpp';

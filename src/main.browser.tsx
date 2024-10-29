@@ -3,8 +3,8 @@ import * as ReactDOM from 'react-dom/client'
 import { createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
 import { ModelProvider } from 'kyoka';
 
-import { createRoutes } from './routes.js';
-import { Data, Model } from './model.js';
+import { createRoutes } from './routes';
+import { Data, Model } from './model';
 
 import './styles.css';
 import 'prismjs/themes/prism-tomorrow.css';

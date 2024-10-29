@@ -1,22 +1,22 @@
 import * as React from 'react';
 import { Routes, Route, Outlet, RouteObject } from 'react-router';
-import AboutPage from "./pages/about-page.js";
-import CommonLayout from '../app/routes/_common.js';
-import IndexPage from "./pages/index-page.js";
-import ReferenceIndexPage from "./pages/reference-index-page.js";
-import ReferencePage from "./pages/reference-page.js";
-import LogIndexPage from "./pages/log-index-page.js";
-import LogPage from "./pages/log-page.js";
-import NotFoundPage from './pages/not-found-page.js';
-import ProjectPage from '../app/routes/_common.project.js';
-import NovelIndexPage from './pages/novel-index-page.js';
-import ArtworkIndexPage from './pages/artwork-index-page.js';
-import NovelPage from './pages/novel-page.js';
-import ArtworkPage from './pages/artwork-page.js';
-import DictionaryPage from './pages/dictionary-page.js';
+import AboutPage from "./pages/about-page";
+import CommonLayout from '../app/routes/_common';
+import IndexPage from "./pages/index-page";
+import ReferenceIndexPage from "./pages/reference-index-page";
+import ReferencePage from "./pages/reference-page";
+import LogIndexPage from "./pages/log-index-page";
+import LogPage from "./pages/log-page";
+import NotFoundPage from './pages/not-found-page';
+import ProjectPage from '../app/routes/_common.project';
+import NovelIndexPage from './pages/novel-index-page';
+import ArtworkIndexPage from './pages/artwork-index-page';
+import NovelPage from './pages/novel-page';
+import ArtworkPage from './pages/artwork-page';
+import DictionaryPage from './pages/dictionary-page';
 import { ScrollRestoration } from 'react-router-dom';
-import { Model } from './model.js';
-import { toPathname } from '../lib/utils.js';
+import { Model } from './model';
+import { toPathname } from '../lib/utils';
 
 function RootElement(props: any) {
   const [hydrated, setHydrated] = React.useState(false);

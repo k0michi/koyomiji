@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Entry } from "../../lib/entry.js";
+import { Entry } from "../../lib/entry";
 import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation } from 'react-router';
-import { CalenderIcon } from '../../components/icon.js';
-import { toDisplayDateString } from '../../lib/date-format.js';
-import { ServerModel } from 'lib/server-model.js';
-import { getMeta } from 'lib/meta.js';
+import { CalenderIcon } from '../../components/icon';
+import { toDisplayDateString } from '../../lib/date-format';
+import { ServerModel } from 'lib/server-model';
+import { getMeta } from 'lib/meta';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const index = await ServerModel.instance.getEntryIndex();

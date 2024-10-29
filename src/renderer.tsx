@@ -6,14 +6,14 @@ import * as fs from 'fs/promises';
 import produce from 'immer';
 import window from '@k0michi/isomorphic-dom';
 
-import { Renderer } from "./base/renderer.js";
-import { Data, Model } from './model.js';
-import { toPathname } from '../lib/utils.js';
-import { ServerModel } from '../lib/server-model.js';
-import { toISOStringJST } from '../lib/date-format.js';
-import { newElementCreator } from '../lib/xml.js';
+import { Renderer } from "./base/renderer";
+import { Data, Model } from './model';
+import { toPathname } from '../lib/utils';
+import { ServerModel } from '../lib/server-model';
+import { toISOStringJST } from '../lib/date-format';
+import { newElementCreator } from '../lib/xml';
 import { createMemoryRouter, createRoutesFromElements, RouterProvider } from 'react-router';
-import { createRoutes } from './routes.js';
+import { createRoutes } from './routes';
 
 export function createRenderer(outRoot: string | null, template: string, model: ServerModel) {
   const renderer = new Renderer(outRoot);

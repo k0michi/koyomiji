@@ -4,10 +4,10 @@ import { unified } from "unified";
 import type * as unist from "unist";
 import type * as mdast from "mdast";
 import * as mdastMath from "mdast-util-math";
-import { readFileUTF8 } from "../lib/utils.js";
+import { readFileUTF8 } from "../lib/utils";
 import window from "@k0michi/isomorphic-dom";
 import crypto from "crypto";
-import { toISOStringJST } from "../lib/date-format.js";
+import { toISOStringJST } from "../lib/date-format";
 
 export async function toKTML(source: string) {
   const dom = toDOM(source) as HTMLElement;

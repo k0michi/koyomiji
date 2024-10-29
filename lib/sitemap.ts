@@ -1,5 +1,5 @@
 import window from '@k0michi/isomorphic-dom';
-import { newElementCreator } from './xml.js';
+import { newElementCreator } from './xml';
 
 export interface MapURL {
   loc: string;

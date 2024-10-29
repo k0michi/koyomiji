@@ -1,5 +1,5 @@
 import * as React from 'react';
-import SVG from './svg.js';
+import SVG from './svg';
 
 export function LogoFull() {
   return <SVG loader={async () => (await import('../assets/kissa_koyomiji.svg?raw')).default} className="icon"></SVG>;

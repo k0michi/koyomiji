@@ -1,14 +1,14 @@
 import path from "path";
-import { Dictionary, Entry } from "./entry.js";
-import { preprocess } from "./ktml.js";
-import * as KDML from "./kdml.js";
-import { readFileUTF8, toPathname } from "./utils.js";
-import Sitemap from "./sitemap.js";
+import { Dictionary, Entry } from "./entry";
+import { preprocess } from "./ktml";
+import * as KDML from "./kdml";
+import { readFileUTF8, toPathname } from "./utils";
+import Sitemap from "./sitemap";
 import * as fs from "fs/promises";
-import { toKTML } from "./markdown.js";
+import { toKTML } from "./markdown";
 import { glob } from "glob";
-import { newElementCreator } from "./xml.js";
-import { toISOStringJST } from "./date-format.js";
+import { newElementCreator } from "./xml";
+import { toISOStringJST } from "./date-format";
 import window from '@k0michi/isomorphic-dom';
 
 export class ServerModel {

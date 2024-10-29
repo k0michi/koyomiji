@@ -1,6 +1,6 @@
 import { Observable } from "kyoka";
-import { Dictionary, Entry } from "../lib/entry.js";
-import { toPathname } from "../lib/utils.js";
+import { Dictionary, Entry } from "../lib/entry";
+import { toPathname } from "../lib/utils";
 
 export interface Data {
   entries: Record<string, Entry>;

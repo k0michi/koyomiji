@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation, useParams } from 'react-router';
-import { toElement } from '../../lib/xml.js';
-import { parseXML } from '../../lib/xml.js';
-import * as ReactKTML from '../../lib/react-ktml.js';
-import { CalenderIcon } from '../../components/icon.js';
-import { toDisplayDateString } from '../../lib/date-format.js';
-import { ServerModel } from 'lib/server-model.js';
-import { getMeta } from 'lib/meta.js';
+import { toElement } from '../../lib/xml';
+import { parseXML } from '../../lib/xml';
+import * as ReactKTML from '../../lib/react-ktml';
+import { CalenderIcon } from '../../components/icon';
+import { toDisplayDateString } from '../../lib/date-format';
+import { ServerModel } from 'lib/server-model';
+import { getMeta } from 'lib/meta';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   return await ServerModel.instance.getEntry(`/log/${params.id}`);

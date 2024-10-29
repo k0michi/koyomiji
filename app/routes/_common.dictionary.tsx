@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { parseXML, toElement } from '../../lib/xml.js';
-import { reactFactory } from '../../lib/react-kdml.js';
+import { parseXML, toElement } from '../../lib/xml';
+import { reactFactory } from '../../lib/react-kdml';
 import { LoaderFunctionArgs, MetaFunction, useLoaderData } from 'react-router';
-import { ServerModel } from 'lib/server-model.js';
-import { getMeta } from 'lib/meta.js';
+import { ServerModel } from 'lib/server-model';
+import { getMeta } from 'lib/meta';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   return await ServerModel.instance.getDictionary('/dictionary/english');

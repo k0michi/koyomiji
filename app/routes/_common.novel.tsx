@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Entry, mapEntries } from "../../lib/entry.js";
+import { Entry, mapEntries } from "../../lib/entry";
 import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData } from 'react-router';
-import { ServerModel } from 'lib/server-model.js';
-import { getMeta } from 'lib/meta.js';
+import { ServerModel } from 'lib/server-model';
+import { getMeta } from 'lib/meta';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const index = await ServerModel.instance.getEntryIndex();

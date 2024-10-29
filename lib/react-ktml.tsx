@@ -1,8 +1,8 @@
 import * as React from "react";
-import Code from "../components/code.js";
-import Image from "../components/image.js";
-import Math from "../components/math.js";
-import { Fragment } from "../lib/xml.js";
+import Code from "../components/code";
+import Image from "../components/image";
+import Math from "../components/math";
+import { Fragment } from "../lib/xml";
 import { Link } from "react-router";
 
 export function reactFactory(type: string | Symbol, props: any, ...children: any[]) {

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation, useParams } from 'react-router';
-import { toElement } from '../../lib/xml.js';
-import { parseXML } from '../../lib/xml.js';
-import * as ReactKTML from '../../lib/react-ktml.js';
-import { XIcon } from '../../components/icon.js';
-import { ServerModel } from 'lib/server-model.js';
-import { getMeta } from 'lib/meta.js';
-import { Handle } from 'lib/handle.js';
+import { toElement } from '../../lib/xml';
+import { parseXML } from '../../lib/xml';
+import * as ReactKTML from '../../lib/react-ktml';
+import { XIcon } from '../../components/icon';
+import { ServerModel } from 'lib/server-model';
+import { getMeta } from 'lib/meta';
+import { Handle } from 'lib/handle';
 
 interface NovelStorage {
   locations: Record<string, number | undefined>;

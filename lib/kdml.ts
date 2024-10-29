@@ -1,5 +1,5 @@
 import { Dictionary, DictionaryEntry, DictionarySense, Entry } from '../lib/entry';
-import { getTextContent, parseXML } from '../lib/xml.js';
+import { getTextContent, parseXML } from '../lib/xml';
 
 export function preprocess(entryPath: string, content: string): Dictionary {
   const $document = parseXML(content);
