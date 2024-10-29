@@ -4,7 +4,7 @@ import window from "@k0michi/isomorphic-dom";
 import { glob } from "glob";
 import crypto from "crypto";
 
-import { readFileUTF8 } from '../../lib/utils.js';
+import { readFileUTF8 } from '../lib/utils.js';
 import { getElemAfter, getIndent } from "./utils.js";
 
 function assignID($document: Document) {
