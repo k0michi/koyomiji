@@ -60,7 +60,7 @@ export function transformCode(element: Element) {
 }
 
 export function isContainerBlock(tagName: string) {
-  return tagName == 'body';
+  return tagName == 'body' || tagName == 'li';
 }
 
 export function preprocess(entryPath: string, content: string): Entry {
