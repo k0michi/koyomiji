@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@fontsource/raleway": "^5.1.0",
-    "@k0michi/isomorphic-dom": "^0.0.1",
+    "@k0michi/isomorphic-dom": "^0.0.2",
     "@react-router/fs-routes": "7.0.0-pre.2",
     "@react-router/node": "7.0.0-pre.2",
     "@react-router/serve": "7.0.0-pre.2",
