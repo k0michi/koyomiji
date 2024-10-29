@@ -1,0 +1,13 @@
+diff --git a/dist/vite/plugin.js b/dist/vite/plugin.js
+index 3b959dc6a3dd43d0ced9a3c4e3cb0bb000a0afdf..8028df84129e2bd9ff21c893aa5426f56358c154 100644
+--- a/dist/vite/plugin.js
++++ b/dist/vite/plugin.js
+@@ -1172,7 +1172,7 @@ async function handlePrerender(viteConfig, reactRouterConfig, serverBuildDirecto
+     await prerenderRoute(handler, path, clientBuildDirectory, reactRouterConfig, viteConfig, data ? {
+       headers: {
+         ...headers,
+-        "X-React-Router-Prerender-Data": data
++        "X-React-Router-Prerender-Data": encodeURI(data)
+       }
+     } : {
+       headers

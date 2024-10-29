@@ -1,0 +1,39 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 45720b44a192b828461e814b92a1c413f0e73ccb..73508e3ca6d33964822a64ec3ef4e5e5e79391b8 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -11688,7 +11688,7 @@ function createStaticHandlerDataRoutes(manifest, future, parentId, routesByParen
+         if (args.request.headers.has("X-React-Router-Prerender-Data")) {
+           let encoded = args.request.headers.get("X-React-Router-Prerender-Data");
+           !encoded ? process.env.NODE_ENV !== "production" ? invariant(false, "Missing prerendered data for route") : invariant(false) : void 0;
+-          let uint8array = new TextEncoder().encode(encoded);
++          let uint8array = new TextEncoder().encode(decodeURI(encoded));
+           let stream = new ReadableStream({
+             start(controller) {
+               controller.enqueue(uint8array);
+diff --git a/dist/react-router.development.js b/dist/react-router.development.js
+index e0a8ced11b9ab0f0fb2f966412d543502cd012e0..faab34dbdbb12dd0221e56167a52d9a605095d5d 100644
+--- a/dist/react-router.development.js
++++ b/dist/react-router.development.js
+@@ -11530,7 +11530,7 @@ function createStaticHandlerDataRoutes(manifest, future, parentId = "", routesBy
+         if (args.request.headers.has("X-React-Router-Prerender-Data")) {
+           let encoded = args.request.headers.get("X-React-Router-Prerender-Data");
+           !encoded ? invariant(false, "Missing prerendered data for route")  : void 0;
+-          let uint8array = new TextEncoder().encode(encoded);
++          let uint8array = new TextEncoder().encode(decodeURI(encoded));
+           let stream = new ReadableStream({
+             start(controller) {
+               controller.enqueue(uint8array);
+diff --git a/dist/umd/react-router.development.js b/dist/umd/react-router.development.js
+index 09afb98d2c7d5cec87ad13ce97c5d7f3d485b235..f9cc62b534df370be4b897bf513aad44e3452ccc 100644
+--- a/dist/umd/react-router.development.js
++++ b/dist/umd/react-router.development.js
+@@ -11709,7 +11709,7 @@
+           if (args.request.headers.has("X-React-Router-Prerender-Data")) {
+             let encoded = args.request.headers.get("X-React-Router-Prerender-Data");
+             !encoded ? invariant(false, "Missing prerendered data for route")  : void 0;
+-            let uint8array = new TextEncoder().encode(encoded);
++            let uint8array = new TextEncoder().encode(decodeURI(encoded));
+             let stream = new ReadableStream({
+               start(controller) {
+                 controller.enqueue(uint8array);
