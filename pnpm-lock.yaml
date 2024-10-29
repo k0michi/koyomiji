@@ -6,10 +6,10 @@ settings:
 
 patchedDependencies:
   '@react-router/dev@7.0.0-pre.2':
-    hash: 2uaoljicrcg45kngptjtjgy5um
+    hash: vrzmkfl2ld4hadxfyaesrb6que
     path: patches/@react-router__dev@7.0.0-pre.2.patch
   react-router@7.0.0-pre.2:
-    hash: lyvpslywhrkaanzmhlxc63vka4
+    hash: eqoeakvfsk6uqcqmtqn4vofxoi
     path: patches/react-router@7.0.0-pre.2.patch
 
 dependencies:
@@ -66,7 +66,7 @@ dependencies:
     version: 18.3.1(react@18.3.1)
   react-router:
     specifier: 7.0.0-pre.2
-    version: 7.0.0-pre.2(patch_hash=lyvpslywhrkaanzmhlxc63vka4)(react-dom@18.3.1)(react@18.3.1)
+    version: 7.0.0-pre.2(patch_hash=eqoeakvfsk6uqcqmtqn4vofxoi)(react-dom@18.3.1)(react@18.3.1)
   remark-math:
     specifier: ^6.0.0
     version: 6.0.0
@@ -80,7 +80,7 @@ dependencies:
 devDependencies:
   '@react-router/dev':
     specifier: 7.0.0-pre.2
-    version: 7.0.0-pre.2(patch_hash=2uaoljicrcg45kngptjtjgy5um)(@react-router/serve@7.0.0-pre.2)(@types/node@22.8.1)(react-router@7.0.0-pre.2)(typescript@5.6.3)(vite@5.4.10)
+    version: 7.0.0-pre.2(patch_hash=vrzmkfl2ld4hadxfyaesrb6que)(@react-router/serve@7.0.0-pre.2)(@types/node@22.8.1)(react-router@7.0.0-pre.2)(typescript@5.6.3)(vite@5.4.10)
   '@types/chroma-js':
     specifier: ^2.4.4
     version: 2.4.4
@@ -718,7 +718,7 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@react-router/dev@7.0.0-pre.2(patch_hash=2uaoljicrcg45kngptjtjgy5um)(@react-router/serve@7.0.0-pre.2)(@types/node@22.8.1)(react-router@7.0.0-pre.2)(typescript@5.6.3)(vite@5.4.10):
+  /@react-router/dev@7.0.0-pre.2(patch_hash=vrzmkfl2ld4hadxfyaesrb6que)(@react-router/serve@7.0.0-pre.2)(@types/node@22.8.1)(react-router@7.0.0-pre.2)(typescript@5.6.3)(vite@5.4.10):
     resolution: {integrity: sha512-clDNkfuZF1BGSr6VsnB/2vV061VVajBfq/vAVHxq7+OuC9W+wHqYOFmb4ve4E4oOVYQtYClA9xyBQqKh/wNGqw==}
     engines: {node: '>=20.0.0'}
     hasBin: true
@@ -763,7 +763,7 @@ packages:
       picomatch: 2.3.1
       prettier: 2.8.8
       react-refresh: 0.14.2
-      react-router: 7.0.0-pre.2(patch_hash=lyvpslywhrkaanzmhlxc63vka4)(react-dom@18.3.1)(react@18.3.1)
+      react-router: 7.0.0-pre.2(patch_hash=eqoeakvfsk6uqcqmtqn4vofxoi)(react-dom@18.3.1)(react@18.3.1)
       semver: 7.6.3
       set-cookie-parser: 2.7.1
       typescript: 5.6.3
@@ -797,7 +797,7 @@ packages:
     dependencies:
       '@react-router/node': 7.0.0-pre.2(react-router@7.0.0-pre.2)(typescript@5.6.3)
       express: 4.21.1
-      react-router: 7.0.0-pre.2(patch_hash=lyvpslywhrkaanzmhlxc63vka4)(react-dom@18.3.1)(react@18.3.1)
+      react-router: 7.0.0-pre.2(patch_hash=eqoeakvfsk6uqcqmtqn4vofxoi)(react-dom@18.3.1)(react@18.3.1)
       typescript: 5.6.3
 
   /@react-router/fs-routes@7.0.0-pre.2(@react-router/dev@7.0.0-pre.2)(typescript@5.6.3):
@@ -810,7 +810,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@react-router/dev': 7.0.0-pre.2(patch_hash=2uaoljicrcg45kngptjtjgy5um)(@react-router/serve@7.0.0-pre.2)(@types/node@22.8.1)(react-router@7.0.0-pre.2)(typescript@5.6.3)(vite@5.4.10)
+      '@react-router/dev': 7.0.0-pre.2(patch_hash=vrzmkfl2ld4hadxfyaesrb6que)(@react-router/serve@7.0.0-pre.2)(@types/node@22.8.1)(react-router@7.0.0-pre.2)(typescript@5.6.3)(vite@5.4.10)
       minimatch: 9.0.5
       typescript: 5.6.3
     dev: false
@@ -826,7 +826,7 @@ packages:
         optional: true
     dependencies:
       '@web3-storage/multipart-parser': 1.0.0
-      react-router: 7.0.0-pre.2(patch_hash=lyvpslywhrkaanzmhlxc63vka4)(react-dom@18.3.1)(react@18.3.1)
+      react-router: 7.0.0-pre.2(patch_hash=eqoeakvfsk6uqcqmtqn4vofxoi)(react-dom@18.3.1)(react@18.3.1)
       source-map-support: 0.5.21
       stream-slice: 0.1.2
       typescript: 5.6.3
@@ -845,7 +845,7 @@ packages:
       express: 4.21.1
       get-port: 5.1.1
       morgan: 1.10.0
-      react-router: 7.0.0-pre.2(patch_hash=lyvpslywhrkaanzmhlxc63vka4)(react-dom@18.3.1)(react@18.3.1)
+      react-router: 7.0.0-pre.2(patch_hash=eqoeakvfsk6uqcqmtqn4vofxoi)(react-dom@18.3.1)(react@18.3.1)
       source-map-support: 0.5.21
     transitivePeerDependencies:
       - supports-color
@@ -2820,7 +2820,7 @@ packages:
     resolution: {integrity: sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==}
     engines: {node: '>=0.10.0'}
 
-  /react-router@7.0.0-pre.2(patch_hash=lyvpslywhrkaanzmhlxc63vka4)(react-dom@18.3.1)(react@18.3.1):
+  /react-router@7.0.0-pre.2(patch_hash=eqoeakvfsk6uqcqmtqn4vofxoi)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-SKt4Era+LiwvXnqM05MsogMF79DJ33Gw6TYDjjfQyuU9Rca5ub+DrU4UpQshB28PuXqcjMd5Zbo1H1eM0LQPhg==}
     engines: {node: '>=20.0.0'}
     peerDependencies:

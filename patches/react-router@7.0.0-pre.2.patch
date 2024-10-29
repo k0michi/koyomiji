@@ -1,5 +1,5 @@
 diff --git a/dist/index.mjs b/dist/index.mjs
-index 45720b44a192b828461e814b92a1c413f0e73ccb..73508e3ca6d33964822a64ec3ef4e5e5e79391b8 100644
+index 45720b44a192b828461e814b92a1c413f0e73ccb..103c5a706af660abade2013486b466395cdd1d45 100644
 --- a/dist/index.mjs
 +++ b/dist/index.mjs
 @@ -11688,7 +11688,7 @@ function createStaticHandlerDataRoutes(manifest, future, parentId, routesByParen
@@ -11,6 +11,14 @@ index 45720b44a192b828461e814b92a1c413f0e73ccb..73508e3ca6d33964822a64ec3ef4e5e5
            let stream = new ReadableStream({
              start(controller) {
                controller.enqueue(uint8array);
+@@ -12381,6 +12381,7 @@ async function handleDocumentRequest(serverMode, build, staticHandler, request,
+   }
+ }
+ async function handleResourceRequest(serverMode, build, staticHandler, routeId, request, loadContext, handleError) {
++  request.headers.delete("X-React-Router-Prerender-Data");
+   try {
+     // Note we keep the routeId here to align with the Remix handling of
+     // resource routes which doesn't take ?index into account and just takes
 diff --git a/dist/react-router.development.js b/dist/react-router.development.js
 index e0a8ced11b9ab0f0fb2f966412d543502cd012e0..faab34dbdbb12dd0221e56167a52d9a605095d5d 100644
 --- a/dist/react-router.development.js
