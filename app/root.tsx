@@ -26,7 +26,9 @@ export default function App() {
         <Links />
       </head>
       <body className={bodyClassName}>
-        <Outlet />
+        <div id="root">
+          <Outlet />
+        </div>
         <ScrollRestoration />
         <Scripts />
       </body>
