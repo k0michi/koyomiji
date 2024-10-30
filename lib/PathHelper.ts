@@ -62,4 +62,8 @@ export default class PathHelper {
   static join(segments: string[]) {
     return segments.join(Path.posix.sep);
   }
+
+  static endsWith(path: string, endsWith: string) {
+    return this.split(path).at(-1) == endsWith;
+  }
 }

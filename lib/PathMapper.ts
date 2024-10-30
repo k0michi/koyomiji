@@ -22,7 +22,7 @@ export default class PathMapper {
   }
 
   async _mapInternal(internalPath: string): Promise<string> {
-    if (internalPath.endsWith('/index.ktml')) {
+    if (PathHelper.endsWith(internalPath, 'index.ktml')) {
       return PathHelper.pop(internalPath);
     } else {
       const hash = await FSHelper.getFileHash(Path.join(this.server.rootDir, internalPath), 'sha256');
