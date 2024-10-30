@@ -16,7 +16,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
 export const meta: MetaFunction = ({ location }) => getMeta({
   location,
-  description: "ようこそ、喫茶＊曆路へ。"
+  description: "ようこそ、喫茶曆路へ。"
 });
 
 export default function IndexPage() {
@@ -31,7 +31,7 @@ export default function IndexPage() {
     <>
       <header>
         <h1>Welcome</h1>
-        <div className="meta">ようこそ、喫茶＊曆路へ。</div>
+        <div className="meta">ようこそ、喫茶曆路へ。</div>
       </header>
       <div id="body">
         <h2>Updates</h2>
