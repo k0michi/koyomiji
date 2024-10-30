@@ -11,7 +11,8 @@ export default defineConfig({
     reactRouter({
       async prerender({ getStaticPaths }) {
         const staticPaths = getStaticPaths();
-        return [...staticPaths];
+        const dynamicPaths = await serverModel.getDynamicPaths();
+        return [...staticPaths, ...dynamicPaths];
       },
     }),
     tsconfigPaths(),

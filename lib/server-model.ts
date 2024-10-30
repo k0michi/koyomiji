@@ -46,11 +46,14 @@ export class ServerModel {
     ServerModel._instance = this;
   }
 
-  async getEntry(pathname: string) {
+  async ensureAll() {
     if (!this.readAll) {
       await this._loadAllEntries();
     }
+  }
 
+  async getEntry(pathname: string) {
+    await this.ensureAll();
     const entry = this.entries[pathname];
 
     if (entry == undefined) {
@@ -61,10 +64,7 @@ export class ServerModel {
   }
 
   async getDictionary(pathname: string) {
-    if (!this.readAll) {
-      await this._loadAllEntries();
-    }
-
+    await this.ensureAll();
     const entry = this.dictionaries[pathname];
 
     if (entry == undefined) {
@@ -75,9 +75,7 @@ export class ServerModel {
   }
 
   async getEntryIndex() {
-    if (!this.readAll) {
-      await this._loadAllEntries();
-    }
+    await this.ensureAll();
 
     const entries = structuredClone(this.entries);
     for (const e of Object.values(entries)) {
@@ -191,5 +189,10 @@ export class ServerModel {
 
   mapInternalPath(internalPath: string) {
     return this.pathMapper.mapInternal(internalPath);
+  }
+
+  async getDynamicPaths() {
+    await this.ensureAll();
+    return Object.keys(this.entries).concat(Object.keys(this.attachments));
   }
 }
