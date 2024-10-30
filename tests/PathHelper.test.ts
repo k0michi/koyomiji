@@ -18,4 +18,33 @@ describe('PathHelper', () => {
     expect(PathHelper.removeTrailSlash('a/')).toBe('a');
     expect(PathHelper.removeTrailSlash('')).toBe('');
   });
+
+  test('push', () => {
+    expect(PathHelper.push('/a', 'b')).toBe('/a/b');
+    expect(PathHelper.push('a', 'b')).toBe('a/b');
+  });
+
+  test('pop', () => {
+    expect(PathHelper.pop('/')).toBe('/');
+    expect(PathHelper.pop('a/b')).toBe('a');
+    expect(PathHelper.pop('/a/b')).toBe('/a');
+    expect(PathHelper.pop('/a/b/..')).toBe('/');
+  });
+
+  test('containsDots', () => {
+    expect(PathHelper.containsDots('..')).toBe(true);
+    expect(PathHelper.containsDots('.')).toBe(true);
+    expect(PathHelper.containsDots('/..')).toBe(true);
+    expect(PathHelper.containsDots('../../.')).toBe(true);
+    expect(PathHelper.containsDots('/')).toBe(false);
+    expect(PathHelper.containsDots('/a/b')).toBe(false);
+  });
+
+  test('isCanonical', () => {
+    expect(PathHelper.isCanonical('/')).toBe(true);
+    expect(PathHelper.isCanonical('/a')).toBe(true);
+    expect(PathHelper.isCanonical('/a/b/')).toBe(true);
+    expect(PathHelper.isCanonical('..')).toBe(false);
+    expect(PathHelper.isCanonical('/..')).toBe(false);
+  });
 });

@@ -6,7 +6,7 @@ export default class PathHelper {
   }
 
   static prefixWithSlash(path: string) {
-    const segments = PathHelper.split(path);
+    const segments = this.split(path);
 
     if (segments[0] !== '') {
       segments.unshift('');
@@ -16,28 +16,49 @@ export default class PathHelper {
       }
     }
 
-    return PathHelper.join(segments);
+    return this.join(segments);
   }
 
   static removeTrailSlash(path: string) {
-    const segments = PathHelper.split(path);
+    const segments = this.split(path);
 
     if (segments.at(-1) === '' && segments.at(-2) !== '') {
       segments.pop();
     }
 
-    return PathHelper.join(segments);
+    return this.join(segments);
+  }
+
+  static containsDots(path: string) {
+    const segments = this.split(path);
+    return segments.includes('.') || segments.includes('..');
+  }
+
+  static isCanonical(path: string) {
+    return Path.posix.isAbsolute(path) && !this.containsDots(path);
+  }
+
+  static isCanonicalRoot(path: string) {
+    return path === Path.posix.sep;
+  }
+
+  static pop(path: string) {
+    return Path.posix.join(path, '..');
+  }
+
+  static push(path1: string, ...paths: string[]) {
+    return Path.posix.join(path1, ...paths);
   }
 
   static slice(path: string, start?: number, end?: number) {
-    return PathHelper.join(PathHelper.split(path).slice(start, end));
+    return this.join(this.split(path).slice(start, end));
   }
 
   static split(path: string) {
-    return path.split('/');
+    return path.split(Path.posix.sep);
   }
 
   static join(segments: string[]) {
-    return segments.join('/');
+    return segments.join(Path.posix.sep);
   }
 }
