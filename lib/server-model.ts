@@ -3,7 +3,7 @@ import { Dictionary, Entry } from "./entry";
 import { preprocess } from "./ktml";
 import * as KDML from "./kdml";
 import { toPathname } from "./utils";
-import Sitemap from "./sitemap";
+import Sitemap from "./Sitemap";
 import * as fs from "fs/promises";
 import { toKTML } from "./markdown";
 import { glob } from "glob";
