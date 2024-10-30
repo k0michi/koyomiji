@@ -1,0 +1,29 @@
+diff --git a/dist/vite.js b/dist/vite.js
+index 925ccb5b7c7c0ff93b29e263506b03ee50ea6768..758b8a5ac7dff319be50ef039e14b97eedb321d6 100644
+--- a/dist/vite.js
++++ b/dist/vite.js
+@@ -2256,7 +2256,7 @@ async function handlePrerender(viteConfig, reactRouterConfig, serverBuildDirecto
+         clientBuildDirectory,
+         reactRouterConfig,
+         viteConfig,
+-        data ? { headers: { ...headers, "X-React-Router-Prerender-Data": data } } : { headers }
++        data ? { headers: { ...headers, "X-React-Router-Prerender-Data": encodeURI(data) } } : { headers }
+       );
+     }
+   }
+@@ -2333,12 +2333,12 @@ async function prerenderResourceRoute(handler, prerenderPath, clientBuildDirecto
+   let normalizedPath = `${reactRouterConfig.basename}${prerenderPath}/`.replace(/\/\/+/g, "/").replace(/\/$/g, "");
+   let request = new Request(`http://localhost${normalizedPath}`, requestInit);
+   let response = await handler(request);
+-  let text = await response.text();
+-  validatePrerenderedResponse(response, text, "Prerender", normalizedPath);
++  let bytes = await response.bytes();
++  // validatePrerenderedResponse(response, text, "Prerender", normalizedPath);
+   let outdir = path4.relative(process.cwd(), clientBuildDirectory);
+   let outfile = path4.join(outdir, ...normalizedPath.split("/"));
+   await fse2.ensureDir(path4.dirname(outfile));
+-  await fse2.outputFile(outfile, text);
++  await fse2.outputFile(outfile, bytes);
+   viteConfig.logger.info(`Prerender: Generated ${import_picocolors2.default.bold(outfile)}`);
+ }
+ async function prerenderManifest(build, clientBuildDirectory, reactRouterConfig, viteConfig) {
