@@ -1,6 +1,6 @@
 import window from '@k0michi/isomorphic-dom';
 import Path from 'node:path';
-import { Entry } from '../lib/entry';
+import { DictionaryEntry, DictionarySense, Entry } from '../lib/entry';
 import { getTextContent, parseXML } from '../lib/xml';
 import Crypto from 'node:crypto';
 import FS from 'node:fs';
@@ -83,6 +83,80 @@ export default class KTMLLoader {
       source,
       content: $body.outerHTML,
     };
+
+    return {
+      entry,
+      attachments: context.attachments,
+      internalPath,
+      path
+    }
+  }
+
+  async loadKDML(internalPath: string) {
+    internalPath = PathHelper.prefixWithSlash(internalPath);
+
+    const context = {
+      internalPath,
+      attachments: []
+    } satisfies KTMLLoaderContext;
+
+    const content = await FSPromise.readFile(this.resolveInternal(internalPath), 'utf-8');
+    const $document = parseXML(content);
+    const $head = $document.querySelector('head') as Element;
+    const title = getTextContent('title', $head)!;
+    const description = getTextContent('description', $head)!;
+    const created = getTextContent('created', $head)!;
+
+    const $entries = $document.querySelector('entries')!;
+    const entries: DictionaryEntry[] = [];
+    const wordSet = new Set<string>();
+    let number = 1;
+
+    for (const $entry of $entries.children) {
+      const word = $entry.querySelector('word')?.textContent;
+      const senses: DictionarySense[] = [];
+
+      if (word == null) {
+        throw new Error("<entry> must have <word>");
+      }
+
+      if (wordSet.has(word)) {
+        console.error(`Word '${word}' already exists`);
+      }
+
+      wordSet.add(word);
+      const $senses = $entry.querySelector('senses');
+
+      if ($senses == null) {
+        throw new Error("<entry> must have <senses>");
+      }
+
+      for (const $sense of $senses.children) {
+        let pos = $sense.querySelector('pos')?.textContent;
+        let usage = $sense.querySelector('usage')?.outerHTML;
+        const gloss = $sense.querySelector('gloss')?.outerHTML;
+
+        if (pos === null) {
+          pos = undefined;
+        }
+
+        if (usage === null) {
+          usage = undefined;
+        }
+
+        if (gloss == null) {
+          throw new Error("<sense> must have <gloss>");
+        }
+
+        senses.push({ pos, usage, gloss });
+      }
+
+      entries.push({ word, senses, number });
+      number++;
+    }
+
+    const path = await this.server.mapInternalPath(internalPath);
+    const entry = { title, created, description, path, content: entries };
 
     return {
       entry,

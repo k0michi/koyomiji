@@ -1,7 +1,5 @@
 import path from "path";
 import { Dictionary, Entry } from "./entry";
-import { preprocess } from "./ktml";
-import * as KDML from "./kdml";
 import { toPathname } from "./utils";
 import Sitemap from "./Sitemap";
 import * as fs from "fs/promises";
@@ -103,16 +101,6 @@ export class ServerModel {
     return await fs.readFile(path.join(this.rootDir, internalPath));
   }
 
-  // getEntry(pathname: string) {
-  //   const entry = this.entries[pathname];
-
-  //   if (entry == undefined || entry.content == null) {
-  //     throw new Error(`Not found: ${pathname}`);
-  //   }
-
-  //   return entry;
-  // }
-
   // FIXME: Remove this
   normalizePath(pathname: string) {
     return toPathname(pathname.split('/').slice(0, -1));
@@ -139,10 +127,10 @@ export class ServerModel {
     this.sitemap.add(loadResult.path, loadResult.entry.modified);
   }
 
-  async loadDictionary(pathname: string) {
-    const normalized = this.normalizePath(pathname);
-    const content = await FSHelper.readFileUTF8(path.join(this.rootDir, pathname));
-    this.dictionaries[normalized] = KDML.preprocess(normalized, content);
+  async loadDictionary(internalPath: string) {
+    const loadResult = await this.ktmlLoader.loadKDML(internalPath);
+
+    this.dictionaries[loadResult.path] = loadResult.entry;
   }
 
   async compileMarkdown(pathname: string) {

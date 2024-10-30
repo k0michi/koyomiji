@@ -24,6 +24,8 @@ export default class PathMapper {
   async _mapInternal(internalPath: string): Promise<string> {
     if (PathHelper.endsWith(internalPath, 'index.ktml')) {
       return PathHelper.pop(internalPath);
+    } else if (PathHelper.endsWith(internalPath, 'index.kdml')) {
+      return PathHelper.pop(internalPath);
     } else {
       const hash = await FSHelper.getFileHash(Path.join(this.server.rootDir, internalPath), 'sha256');
       return `/file/${hash}${internalPath.substring(internalPath.lastIndexOf('.'))}`
