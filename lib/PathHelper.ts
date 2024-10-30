@@ -58,6 +58,7 @@ export default class PathHelper {
     return path.split(Path.posix.sep);
   }
 
+  // FIXME: / at the beginning
   static join(segments: string[]) {
     return segments.join(Path.posix.sep);
   }

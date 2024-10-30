@@ -1,4 +1,5 @@
 import FSHelper from "./FSHelper";
+import PathHelper from "./PathHelper";
 import { ServerModel } from "./server-model";
 import Path from 'node:path';
 
@@ -11,19 +12,21 @@ export default class PathMapper {
   }
 
   async mapInternal(internalPath: string) {
-    if (!Path.isAbsolute(internalPath)) {
-      throw new Error(`internalPath should be absolute`);
+    if (!PathHelper.isCanonical(internalPath)) {
+      throw new Error(`internalPath should be canonical`);
     }
 
     const result = await this._mapInternal(internalPath);
     this._map[internalPath] = result;
+    return result;
   }
 
   async _mapInternal(internalPath: string): Promise<string> {
-    if (internalPath.startsWith('/index.ktml')) {
-      return internalPath.split('/').slice(0, -1).join('/');
+    if (internalPath.endsWith('/index.ktml')) {
+      return PathHelper.pop(internalPath);
     } else {
-      const hash = await FSHelper.getFileHash(this.server.resolveInternalPath(internalPath), 'sha256');
+      const hash = await FSHelper.getFileHash(Path.join(this.server.rootDir, internalPath), 'sha256');
+      return `/file/${hash}${internalPath.substring(internalPath.lastIndexOf('.'))}`
     }
   }
 

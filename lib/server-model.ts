@@ -11,13 +11,19 @@ import { newElementCreator } from "./xml";
 import { toISOStringJST } from "./date-format";
 import window from '@k0michi/isomorphic-dom';
 import FSHelper from "./FSHelper";
+import PathMapper from "./PathMapper";
+import KTMLLoader, { KTMLAttachment } from "./KTMLLoader";
+import { assert } from "console";
 
 export class ServerModel {
   rootDir: string;
   entries: Record<string, Entry>;
   dictionaries: Record<string, Dictionary>;
+  attachments: Record<string, KTMLAttachment>;
   sitemap: Sitemap;
   readAll: boolean = false;
+  pathMapper: PathMapper;
+  ktmlLoader: KTMLLoader;
 
   static _instance: ServerModel | null = null;
 
@@ -33,11 +39,18 @@ export class ServerModel {
     this.rootDir = rootDir;
     this.entries = {};
     this.dictionaries = {};
+    this.attachments = {};
     this.sitemap = new Sitemap();
+    this.pathMapper = new PathMapper(this);
+    this.ktmlLoader = new KTMLLoader(this);
     ServerModel._instance = this;
   }
 
   async getEntry(pathname: string) {
+    if (!this.readAll) {
+      await this._loadAllEntries();
+    }
+
     const entry = this.entries[pathname];
 
     if (entry == undefined) {
@@ -48,6 +61,10 @@ export class ServerModel {
   }
 
   async getDictionary(pathname: string) {
+    if (!this.readAll) {
+      await this._loadAllEntries();
+    }
+
     const entry = this.dictionaries[pathname];
 
     if (entry == undefined) {
@@ -74,8 +91,6 @@ export class ServerModel {
     for (const p of await glob('**/*', { cwd: this.rootDir, nodir: true })) {
       if (p.endsWith('index.ktml')) {
         await this.loadEntry(p);
-        const normalized = this.normalizePath(p);
-        this.sitemap.add(normalized, this.entries[normalized].modified);
       } else if (p.endsWith('index.kdml')) {
         await this.loadDictionary(p);
       }
@@ -84,8 +99,8 @@ export class ServerModel {
     this.readAll = true;
   }
 
-  async readFile(pathname: string) {
-    return await fs.readFile(path.join(this.rootDir, pathname));
+  async readFile(internalPath: string) {
+    return await fs.readFile(path.join(this.rootDir, internalPath));
   }
 
   // getEntry(pathname: string) {
@@ -98,17 +113,30 @@ export class ServerModel {
   //   return entry;
   // }
 
-  // Chop last segment
+  // FIXME: Remove this
   normalizePath(pathname: string) {
     return toPathname(pathname.split('/').slice(0, -1));
   }
 
-  // FIXME: Argument name. Here pathname is a real file path
-  // FIXME: Insane path normalization
-  async loadEntry(pathname: string) {
-    const normalized = this.normalizePath(pathname);
-    const content = await FSHelper.readFileUTF8(path.join(this.rootDir, pathname));
-    this.entries[normalized] = preprocess(normalized, content);
+  registerAttachment(attachment: KTMLAttachment) {
+    this.attachments[attachment.path] = attachment;
+  }
+
+  async getAttachmentFromExternalPath(externalPath: string) {
+    const a = this.attachments[externalPath];
+    assert(a);
+    return await this.readFile(a.internalPath);
+  }
+
+  async loadEntry(internalPath: string) {
+    const loadResult = await this.ktmlLoader.load(internalPath);
+
+    for (const a of loadResult.attachments) {
+      this.registerAttachment(a);
+    }
+
+    this.entries[loadResult.path] = loadResult.entry;
+    this.sitemap.add(loadResult.path, loadResult.entry.modified);
   }
 
   async loadDictionary(pathname: string) {
@@ -171,7 +199,7 @@ export class ServerModel {
     return '<?xml version="1.0" encoding="UTF-8"?>\n' + serializer.serializeToString(feed);
   }
 
-  resolveInternalPath(internalPath: string) {
-    return path.resolve(internalPath);
+  mapInternalPath(internalPath: string) {
+    return this.pathMapper.mapInternal(internalPath);
   }
 }

@@ -6,6 +6,8 @@ import Crypto from 'node:crypto';
 import FS from 'node:fs';
 import FSPromise from 'node:fs/promises';
 import FSHelper from './FSHelper';
+import { ServerModel } from './server-model';
+import PathHelper from './PathHelper';
 
 function getDescription(node: Node, limit: number) {
   const Node = window.Node;
@@ -34,25 +36,31 @@ function isContainerBlock(tagName: string) {
 }
 
 export default class KTMLLoader {
-  rootDir: string;
+  server: ServerModel;
 
-  constructor(rootDir: string) {
-    this.rootDir = rootDir;
+  constructor(server: ServerModel) {
+    this.server = server;
   }
 
-  async load(path: string) {
+  resolveInternal(internalPath: string) {
+    return Path.join(this.server.rootDir, internalPath);
+  }
+
+  async load(internalPath: string) {
+    internalPath = PathHelper.prefixWithSlash(internalPath);
+
     const context = {
-      path,
+      internalPath,
       attachments: []
     } satisfies KTMLLoaderContext;
-    const content = await FSPromise.readFile(path, 'utf-8');
+
+    const content = await FSPromise.readFile(this.resolveInternal(internalPath), 'utf-8');
     const $document = parseXML(content);
     const $head = $document.querySelector('head') as Element;
     const title = getTextContent('title', $head)!;
     const id = getTextContent('id', $head)!;
     const created = getTextContent('created', $head)!;
     const modified = getTextContent('modified', $head) ?? created;
-    const attachments: KTMLAttachment[] = [];
     let source = getTextContent('source', $head);
 
     if (source != undefined) {
@@ -62,16 +70,25 @@ export default class KTMLLoader {
     const $body = $document.querySelector('body')!;
     this.transformMath($body);
     this.transformCode($body);
-    this.transformImg($body, context);
+    await this.transformImg($body, context);
     const description = getDescription($body, 120);
-    const entry = { title, id, created, modified, description, path: Path.relative(this.rootDir, path), source, content: $body.outerHTML };
-    const relativePath = Path.relative(this.rootDir, Path.resolve(path));
+    const path = await this.server.mapInternalPath(internalPath);
+    const entry = {
+      title,
+      id,
+      created,
+      modified,
+      description,
+      path,
+      source,
+      content: $body.outerHTML,
+    };
 
     return {
       entry,
-      attachments,
-      internalPath: path,
-      path: relativePath
+      attachments: context.attachments,
+      internalPath,
+      path
     }
   }
 
@@ -99,29 +116,22 @@ export default class KTMLLoader {
     }
   }
 
-  async transformPath(realPath: string) {
-    const hash = await FSHelper.getFileHash(realPath, 'sha256');
-    return '/file/' + hash + realPath.substring(realPath.lastIndexOf('.'));
-  }
-
   async loadAttachment(relativePath: string, context: KTMLLoaderContext): Promise<KTMLAttachment> {
-    const realPath = Path.join(Path.dirname(context.path), relativePath);
-    const transformedPath = await this.transformPath(realPath);
+    const internalPath = Path.join(PathHelper.pop(context.internalPath), relativePath);
+    const externalPath = await this.server.mapInternalPath(internalPath);
     const attachment = {
-      internalPath: realPath,
-      path: transformedPath
+      internalPath,
+      path: externalPath
     };
     context.attachments.push(attachment);
     return attachment;
   }
 
   async transformImg(element: Element, context: KTMLLoaderContext) {
-    const document = element.ownerDocument!;
-
     for (const img of element.querySelectorAll('img')) {
       const relativeSrc = img.getAttribute('src');
 
-      if (relativeSrc) {
+      if (relativeSrc != null) {
         img.setAttribute('src', (await this.loadAttachment(relativeSrc, context)).path);
       }
     }
@@ -129,7 +139,7 @@ export default class KTMLLoader {
 }
 
 interface KTMLLoaderContext {
-  path: string;
+  internalPath: string;
   attachments: KTMLAttachment[];
 }
 
