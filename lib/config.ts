@@ -1,4 +1,4 @@
-import config from '../koyomiji.config.json' assert { type: "json" };
+import config from '../koyomiji.config.json';
 
 export interface Category {
   id: string;
