@@ -98,6 +98,7 @@ export class ServerModel {
   //   return entry;
   // }
 
+  // Chop last segment
   normalizePath(pathname: string) {
     return toPathname(pathname.split('/').slice(0, -1));
   }
@@ -168,5 +169,9 @@ export class ServerModel {
 
     const serializer = new window.XMLSerializer();
     return '<?xml version="1.0" encoding="UTF-8"?>\n' + serializer.serializeToString(feed);
+  }
+
+  resolveInternalPath(internalPath: string) {
+    return path.resolve(internalPath);
   }
 }

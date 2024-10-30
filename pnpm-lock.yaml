@@ -78,6 +78,9 @@ dependencies:
     version: 11.0.5
 
 devDependencies:
+  '@jest/globals':
+    specifier: ^29.7.0
+    version: 29.7.0
   '@react-router/dev':
     specifier: 7.0.0-pre.2
     version: 7.0.0-pre.2(patch_hash=vrzmkfl2ld4hadxfyaesrb6que)(@react-router/serve@7.0.0-pre.2)(@types/node@22.8.1)(react-router@7.0.0-pre.2)(typescript@5.6.3)(vite@5.4.10)
