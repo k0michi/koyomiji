@@ -1,5 +1,7 @@
 import window from '@k0michi/isomorphic-dom';
 import { newElementCreator } from './xml';
+import URLHelper from './URLHelper';
+import SiteConfig from './config';
 
 export interface SitemapItem {
   loc: string;
@@ -16,7 +18,7 @@ export default class Sitemap {
   }
 
   add(loc: string, lastMod?: string) {
-    loc = new URL(loc, 'https://koyomiji.com/').toString();
+    loc = URLHelper.toString(loc, SiteConfig.getInfo().url);
     this.map[loc] = { loc, lastMod };
   }
 

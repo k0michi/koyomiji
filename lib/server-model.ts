@@ -12,6 +12,8 @@ import FSHelper from "./FSHelper";
 import PathMapper from "./PathMapper";
 import KTMLLoader, { KTMLAttachment } from "./KTMLLoader";
 import { assert } from "console";
+import SiteConfig from "./config";
+import URLHelper from "./URLHelper";
 
 export class ServerModel {
   rootDir: string;
@@ -160,16 +162,16 @@ export class ServerModel {
     const create = newElementCreator(document, atomNS);
     const feed = document.firstChild! as Element;
 
-    feed.appendChild(create('title', {}, '喫茶＊曆路'));
-    feed.appendChild(create('id', {}, 'urn:uuid:7e260dae-5479-45c2-bad8-0be227c48ab8'));
-    feed.appendChild(create('link', { rel: 'self', href: 'https://koyomiji.com/feed.xml' }));
-    feed.appendChild(create('link', { rel: 'alternate', href: 'https://koyomiji.com/' }));
+    feed.appendChild(create('title', {}, SiteConfig.getInfo().name));
+    feed.appendChild(create('id', {}, `urn:uuid:${SiteConfig.getInfo().feedID}`));
+    feed.appendChild(create('link', { rel: 'self', href: URLHelper.toString('/feed.xml', SiteConfig.getInfo().url) }));
+    feed.appendChild(create('link', { rel: 'alternate', href: SiteConfig.getInfo().url }));
     feed.appendChild(create('updated', {}, toISOStringJST(new Date())));
-    feed.appendChild(create('icon', {}, 'https://koyomiji.com/favicon.ico'));
+    feed.appendChild(create('icon', {}, URLHelper.toString('/favicon.ico', SiteConfig.getInfo().url)));
 
     const author = create('author');
-    author.appendChild(create('name', {}, 'Komichi'));
-    author.appendChild(create('email', {}, 'k0michi@koyomi.co'));
+    author.appendChild(create('name', {}, SiteConfig.getInfo().authorName));
+    author.appendChild(create('email', {}, SiteConfig.getInfo().email));
     feed.appendChild(author);
 
     for (const e of Object.values(this.entries)) {
@@ -177,7 +179,7 @@ export class ServerModel {
       entry.appendChild(create('title', {}, e.title));
       entry.appendChild(create('summary', {}, e.description));
       entry.appendChild(create('id', {}, `urn:uuid:${e.id}`));
-      entry.appendChild(create('link', { rel: 'alternate', href: new URL(e.path, 'https://koyomiji.com/').toString() }));
+      entry.appendChild(create('link', { rel: 'alternate', href: URLHelper.toString(e.path, SiteConfig.getInfo().url) }));
       entry.appendChild(create('published', {}, e.created));
       entry.appendChild(create('updated', {}, e.modified));
       feed.appendChild(entry);
