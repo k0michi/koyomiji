@@ -1,7 +1,7 @@
 import window from '@k0michi/isomorphic-dom';
 import { newElementCreator } from './xml';
 
-export interface MapURL {
+export interface SitemapItem {
   loc: string;
   lastMod?: string;
   changeFreq?: string;
@@ -9,7 +9,7 @@ export interface MapURL {
 }
 
 export default class Sitemap {
-  map: Record<string, MapURL>;
+  map: Record<string, SitemapItem>;
 
   constructor() {
     this.map = {};
