@@ -19,6 +19,7 @@ export function reactFactory(type: string | Symbol, props: any, ...children: any
   }
 
   if (type == 'a') {
+    props['to'] = props['href'];
     return React.createElement(Link, props, ...children);
   }
 
