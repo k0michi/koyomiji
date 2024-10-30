@@ -24,7 +24,7 @@ export default function handleRequest(
 ) {
   // Begin modified
   for (const [k, v] of Object.entries(routerContext.manifest.routes)) {
-    if (v.path) {
+    if (v?.path) {
       // FIXME: Not checking escape
       if (!v.path.includes(':') && !v.path.includes('*')) {
         if (v.path == 'sitemap.xml' || v.path == 'feed.xml') {
