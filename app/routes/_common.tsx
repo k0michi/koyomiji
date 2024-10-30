@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Link, Outlet, useLocation } from 'react-router';
+import { Link, Outlet, useLoaderData, useLocation } from 'react-router';
 import { Asterisk, GithubIcon, LogoFull, MailIcon, Mastodon, RSS, TwitchIcon, YoutubeIcon } from '../../components/icon';
-import { MetaFunction } from 'react-router';
 import { Handle } from '~/Handle';
+import * as Route from './+types._common';
 
 interface MenuProps {
   to: string;
@@ -23,11 +23,16 @@ export const handle: Handle = () => {
   };
 }
 
+export const loader = () => {
+  return { year: (new Date).getFullYear() };
+};
+
 export default function CommonLayout() {
   const [menuVisible, setMenuVisible] = React.useState<boolean>(false);
   const location = useLocation();
   const elementMap = React.useRef<Record<string, React.Ref<any>>>({});
   elementMap.current[location.pathname] = elementMap.current[location.pathname] ?? React.createRef<any>();
+  const data = useLoaderData() as Route.LoaderData;
 
   return (
     <>
@@ -68,7 +73,7 @@ export default function CommonLayout() {
         </main>
         <div id="footer">
           <div id="copyright">
-            © 2024 Kissa-Koyomiji
+            © {data.year} Kissa-Koyomiji
           </div>
         </div>
       </div>
