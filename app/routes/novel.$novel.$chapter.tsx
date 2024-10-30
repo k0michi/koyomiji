@@ -6,7 +6,7 @@ import * as ReactKTML from '../../lib/react-ktml';
 import { XIcon } from '../../components/icon';
 import { ServerModel } from 'lib/server-model';
 import { getMeta } from 'lib/meta';
-import { Handle } from 'lib/handle';
+import { Handle } from '~/Handle';
 
 interface NovelStorage {
   locations: Record<string, number | undefined>;

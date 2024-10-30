@@ -1,6 +1,6 @@
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration, useMatches, useRouteError } from "react-router";
 import type { LinksFunction } from "react-router";
-import { Handle } from "lib/handle";
+import { Handle } from "~/Handle";
 
 import './app.css';
 import 'prismjs/themes/prism-tomorrow.css';

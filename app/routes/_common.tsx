@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link, Outlet, useLocation } from 'react-router';
 import { Asterisk, GithubIcon, LogoFull, MailIcon, Mastodon, RSS, TwitchIcon, YoutubeIcon } from '../../components/icon';
 import { MetaFunction } from 'react-router';
-import { Handle } from 'lib/handle';
+import { Handle } from '~/Handle';
 
 interface MenuProps {
   to: string;
