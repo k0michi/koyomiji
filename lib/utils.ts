@@ -1,9 +1,5 @@
 import * as fs from 'fs/promises';
 
-export async function readFileUTF8(path: string) {
-  return await fs.readFile(path, { encoding: 'utf-8' });
-}
-
 export function toPathname(path: string[]) {
   path = path.filter(p => p != '');
   return '/' + path.join('/');
