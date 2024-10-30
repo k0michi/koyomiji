@@ -2,7 +2,7 @@ import path from "path";
 import { Dictionary, Entry } from "./entry";
 import { preprocess } from "./ktml";
 import * as KDML from "./kdml";
-import { readFileUTF8, toPathname } from "./utils";
+import { toPathname } from "./utils";
 import Sitemap from "./sitemap";
 import * as fs from "fs/promises";
 import { toKTML } from "./markdown";
@@ -10,6 +10,7 @@ import { glob } from "glob";
 import { newElementCreator } from "./xml";
 import { toISOStringJST } from "./date-format";
 import window from '@k0michi/isomorphic-dom';
+import FSHelper from "./FSHelper";
 
 export class ServerModel {
   rootDir: string;
@@ -105,19 +106,19 @@ export class ServerModel {
   // FIXME: Insane path normalization
   async loadEntry(pathname: string) {
     const normalized = this.normalizePath(pathname);
-    const content = await readFileUTF8(path.join(this.rootDir, pathname));
+    const content = await FSHelper.readFileUTF8(path.join(this.rootDir, pathname));
     this.entries[normalized] = preprocess(normalized, content);
   }
 
   async loadDictionary(pathname: string) {
     const normalized = this.normalizePath(pathname);
-    const content = await readFileUTF8(path.join(this.rootDir, pathname));
+    const content = await FSHelper.readFileUTF8(path.join(this.rootDir, pathname));
     this.dictionaries[normalized] = KDML.preprocess(normalized, content);
   }
 
   async compileMarkdown(pathname: string) {
     const normalized = this.normalizePath(pathname);
-    const file = await readFileUTF8(path.posix.join(this.rootDir, pathname));
+    const file = await FSHelper.readFileUTF8(path.posix.join(this.rootDir, pathname));
     const xmlContent = await toKTML(file);
     const dest = path.join(this.rootDir, normalized, 'index.ktml');
     await fs.writeFile(dest, xmlContent);

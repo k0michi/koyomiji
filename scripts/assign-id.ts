@@ -4,8 +4,8 @@ import window from "@k0michi/isomorphic-dom";
 import { glob } from "glob";
 import crypto from "crypto";
 
-import { readFileUTF8 } from '../lib/utils';
 import { getElemAfter, getIndent } from "./utils";
+import FSHelper from "lib/FSHelper";
 
 function assignID($document: Document) {
   const $head = $document.querySelector('head')!;
@@ -28,7 +28,7 @@ function assignID($document: Document) {
   const serializer = new window.XMLSerializer();
 
   for (const filename of filenames) {
-    const content = await readFileUTF8(filename);
+    const content = await FSHelper.readFileUTF8(filename);
     const $document = parser.parseFromString(content, 'text/xml');
     assignID($document);
     const modifiedContent = serializer.serializeToString($document);

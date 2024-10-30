@@ -5,6 +5,7 @@ import { getTextContent, parseXML } from '../lib/xml';
 import Crypto from 'node:crypto';
 import FS from 'node:fs';
 import FSPromise from 'node:fs/promises';
+import FSHelper from './FSHelper';
 
 function getDescription(node: Node, limit: number) {
   const Node = window.Node;
@@ -30,25 +31,6 @@ function getDescription(node: Node, limit: number) {
 
 function isContainerBlock(tagName: string) {
   return tagName == 'body' || tagName == 'li';
-}
-
-async function getFileHash(filePath: string, algorithm: string) {
-  return new Promise((resolve, reject) => {
-    const hash = Crypto.createHash(algorithm);
-    const stream = FS.createReadStream(filePath);
-
-    stream.on('error', (error) => {
-      reject(error);
-    });
-
-    stream.on('data', (chunk) => {
-      hash.update(chunk);
-    });
-
-    stream.on('end', () => {
-      resolve(hash.digest('hex'));
-    });
-  });
 }
 
 export default class KTMLLoader {
@@ -118,7 +100,7 @@ export default class KTMLLoader {
   }
 
   async transformPath(realPath: string) {
-    const hash = await getFileHash(realPath, 'sha256');
+    const hash = await FSHelper.getFileHash(realPath, 'sha256');
     return '/file/' + hash + realPath.substring(realPath.lastIndexOf('.'));
   }
 

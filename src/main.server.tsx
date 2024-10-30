@@ -1,8 +1,8 @@
-import { readFileUTF8, toPathname } from '../lib/utils';
 import glob from 'glob-promise';
 import { createRenderer } from './renderer';
 import { ServerModel } from '../lib/server-model';
 import { installGlobals } from '@remix-run/node';
+import FSHelper from 'lib/FSHelper';
 
 installGlobals();
 
@@ -12,7 +12,7 @@ const outRoot = './dist';
 const model = new ServerModel(contentRoot);
 
 (async () => {
-  const indexTemplate = await readFileUTF8('dist/index.html');
+  const indexTemplate = await FSHelper.readFileUTF8('dist/index.html');
   const renderer = createRenderer(outRoot, indexTemplate, model);
 
   for (const p of await glob('**/*', { cwd: contentRoot, nodir: true })) {

@@ -2,9 +2,9 @@ import * as path from "path";
 import * as fs from "fs/promises";
 import window from "@k0michi/isomorphic-dom";
 
-import { readFileUTF8 } from '../lib/utils';
 import { getElemAfter, getIndent } from "./utils";
 import { toISOStringJST } from "../lib/date-format";
+import FSHelper from "lib/FSHelper";
 
 function editModified($document: Document) {
   const $head = $document.querySelector('head')!;
@@ -27,7 +27,7 @@ function editModified($document: Document) {
   pathToTouch = path.join(pathToTouch, 'index.ktml');
 
   const parser = new window.DOMParser();
-  const content = await readFileUTF8(pathToTouch);
+  const content = await FSHelper.readFileUTF8(pathToTouch);
   const $document = parser.parseFromString(content, 'text/xml');
   editModified($document);
   const serializer = new window.XMLSerializer();
