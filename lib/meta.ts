@@ -40,7 +40,7 @@ function link(values: { [name: string]: string }) {
 
 export function getMeta(pageMeta: PageMeta): MetaDescriptor[] {
   const url = URLHelper.toString(pageMeta.location.pathname, SiteConfig.getInfo().url);
-  const t = pageMeta.title == null ? SiteConfig.name : `${pageMeta.title} | ${SiteConfig.name}`;
+  const t = pageMeta.title == null ? SiteConfig.getInfo().name : `${pageMeta.title} | ${SiteConfig.getInfo().name}`;
   const type = pageMeta.type ?? 'general';
   const ogType = type === 'article' ? 'article' : 'website';
 
