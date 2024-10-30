@@ -2,18 +2,14 @@ import Path from 'node:path';
 
 export default class PathHelper {
   static isPrefixedWithSlash(path: string) {
-    return this.split(path)[0] === '';
+    return this.split(path)[0] === '/';
   }
 
   static prefixWithSlash(path: string) {
     const segments = this.split(path);
 
-    if (segments[0] !== '') {
-      segments.unshift('');
-    } else {
-      if (segments.length == 1) {
-        segments.unshift('');
-      }
+    if (segments[0] !== '/') {
+      segments.unshift('/');
     }
 
     return this.join(segments);
@@ -22,7 +18,7 @@ export default class PathHelper {
   static removeTrailSlash(path: string) {
     const segments = this.split(path);
 
-    if (segments.at(-1) === '' && segments.at(-2) !== '') {
+    if (segments.at(-1) === '') {
       segments.pop();
     }
 
@@ -50,17 +46,28 @@ export default class PathHelper {
     return Path.posix.join(path1, ...paths);
   }
 
+  static at(path: string, index: number) {
+    return this.split(path).at(index);
+  }
+
   static slice(path: string, start?: number, end?: number) {
     return this.join(this.split(path).slice(start, end));
   }
 
   static split(path: string) {
-    return path.split(Path.posix.sep);
+    if (path[0] === '/') {
+      return ['/', ...path.substring(1).split(Path.posix.sep)];
+    } else {
+      return path.split('/');
+    }
   }
 
-  // FIXME: / at the beginning
   static join(segments: string[]) {
-    return segments.join(Path.posix.sep);
+    if (segments[0] === '/') {
+      return '/' + segments.slice(1).join(Path.posix.sep);
+    } else {
+      return segments.join(Path.posix.sep);
+    }
   }
 
   static endsWith(path: string, endsWith: string) {
