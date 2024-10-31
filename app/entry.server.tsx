@@ -11,10 +11,6 @@ import path from "node:path";
 
 const ABORT_DELAY = 5_000;
 
-// Begin modified
-let serverModel = new ServerModel('contents');
-// End modified
-
 export default function handleRequest(
   request: Request,
   responseStatusCode: number,
@@ -27,11 +23,11 @@ export default function handleRequest(
     if (v?.path) {
       // FIXME: Not checking escape
       if (!v.path.includes(':') && !v.path.includes('*')) {
-        if (v.path == 'sitemap.xml' || v.path == 'feed.xml') {
+        if (v.path.match(/\..+$/)) {
           continue;
         }
 
-        serverModel.sitemap.add('/' + v.path);
+        ServerModel.instance.sitemap.add('/' + v.path);
       }
     }
   }
