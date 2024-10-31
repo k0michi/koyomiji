@@ -28,7 +28,7 @@ export default class PathMapper {
       return PathHelper.pop(internalPath);
     } else {
       const hash = await FSHelper.getFileHash(Path.join(this.server.rootDir, internalPath), 'sha256');
-      return `/file/${hash}${internalPath.substring(internalPath.lastIndexOf('.'))}`
+      return `/attachment/${hash}${internalPath.substring(internalPath.lastIndexOf('.'))}`
     }
   }
 

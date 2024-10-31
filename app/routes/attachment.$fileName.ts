@@ -9,7 +9,7 @@ export async function loader({
   let asset: Uint8Array;
 
   try {
-    asset = await ServerModel.instance.getAttachmentFromExternalPath(`/file/${fileName}`);
+    asset = await ServerModel.instance.getAttachmentFromExternalPath(`/attachment/${fileName}`);
   } catch (e) {
     return new Response('Not found', { status: 404 });
   }
