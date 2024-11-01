@@ -2,7 +2,7 @@ import window from "@k0michi/isomorphic-dom";
 import XMLNodeVisitor from "./XMLNodeVisitor";
 
 export default class XMLNodeWriter extends XMLNodeVisitor {
-  serializer: XMLSerializer = new XMLSerializer();
+  serializer: XMLSerializer = new window.XMLSerializer();
   container: Node;
   document: Document;
 

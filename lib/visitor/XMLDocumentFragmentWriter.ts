@@ -1,7 +1,8 @@
+import XMLNodeVisitor from "./XMLNodeVisitor";
 import XMLNodeWriter from "./XMLNodeWriter";
 
-export default class XMLDocumentWriter extends XMLNodeWriter {
-  constructor(next?: XMLDocumentWriter | null) {
+export default class XMLDocumentFragmentWriter extends XMLNodeWriter {
+  constructor(next?: XMLNodeVisitor | null) {
     super(next, window.document.implementation.createDocument(null, null).createDocumentFragment());
   }
 }

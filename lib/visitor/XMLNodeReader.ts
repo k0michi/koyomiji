@@ -1,3 +1,4 @@
+import window from "@k0michi/isomorphic-dom";
 import XMLNodeVisitor from "./XMLNodeVisitor";
 
 export default class XMLNodeReader {
@@ -8,6 +9,15 @@ export default class XMLNodeReader {
   }
 
   accept(visitor: XMLNodeVisitor) {
+    if (this.container.nodeType === window.Node.ELEMENT_NODE) {
+      const el = this.container as Element;
+
+      for (let i = 0; i < el.attributes.length; i++) {
+        const at = el.attributes.item(i)!;
+        visitor.visitAttribute(at.namespaceURI, at.name, at.value);
+      }
+    }
+
     for (const c of this.container.childNodes) {
       switch (c.nodeType) {
         case window.Node.ELEMENT_NODE:

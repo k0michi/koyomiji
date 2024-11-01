@@ -1,3 +1,4 @@
+import window from '@k0michi/isomorphic-dom';
 import XMLNodeReader from './XMLNodeReader';
 
 export default class XMLDocumentFragmentReader extends XMLNodeReader {
