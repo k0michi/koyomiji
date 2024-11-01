@@ -29,7 +29,7 @@ export class ServerModel {
 
   static get instance(): ServerModel {
     if (!ServerModel._instance) {
-      throw new Error('ServerModel not created');
+      ServerModel._instance = new ServerModel(SiteConfig.getInfo().contentsDir);
     }
 
     return ServerModel._instance;
