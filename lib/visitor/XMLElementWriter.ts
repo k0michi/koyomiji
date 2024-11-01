@@ -3,15 +3,15 @@ import XMLElementVisitor from "./XMLElementVisitor";
 export default class XMLElementWriter extends XMLElementVisitor {
   element: Element;
 
-  constructor(element: Element) {
-    super();
+  constructor(next: XMLElementVisitor | null | undefined, element: Element) {
+    super(next);
     this.element = element;
   }
 
   visitElement(namespaceURI: string | null, qualifiedName: string): XMLElementVisitor | null {
     const el = this.element.ownerDocument.createElementNS(namespaceURI, qualifiedName);
     this.element.appendChild(el);
-    return new XMLElementWriter(el);
+    return new XMLElementWriter(this.next, el);
   }
 
   visitAttribute(namespace: string | null, qualifiedName: string, value: string): void {
