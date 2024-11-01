@@ -32,4 +32,8 @@ export default class XMLNodeVisitor {
   visitDocumentType(qualifiedName: string, publicId: string, systemId: string) {
     this.next?.visitDocumentType(qualifiedName, publicId, systemId);
   }
+
+  visitEnd() {
+    this.next?.visitEnd();
+  }
 }
