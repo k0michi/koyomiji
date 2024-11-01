@@ -1,3 +1,4 @@
+import window from "@k0michi/isomorphic-dom";
 import XMLNodeVisitor from "./XMLNodeVisitor";
 import XMLNodeWriter from "./XMLNodeWriter";
 
