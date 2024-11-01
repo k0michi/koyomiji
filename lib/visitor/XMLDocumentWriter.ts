@@ -1,43 +1,12 @@
 import window from "@k0michi/isomorphic-dom";
-import XMLDocumentVisitor from "./XMLDocumentVisitor";
+import XMLDocumentVisitor from "./XMLRootVisitor";
 import XMLElementVisitor from "./XMLElementVisitor";
 import XMLElementWriter from "./XMLElementWriter";
+import XMLRootVisitor from "./XMLRootVisitor";
+import XMLRootWriter from "./XMLRootWriter";
 
-export default class XMLDocumentWriter extends XMLDocumentVisitor {
-  serializer: XMLSerializer = new XMLSerializer();
-  document: Document;
-
-  constructor(next?: XMLDocumentVisitor | null) {
-    super(next);
-    this.document = window.document.implementation.createDocument(null, null);
-  }
-
-  visitElement(namespaceURI: string | null, qualifiedName: string): XMLElementVisitor | null {
-    const el = this.document.createElementNS(namespaceURI, qualifiedName);
-    this.document.appendChild(el);
-    return new XMLElementWriter(super.visitElement(namespaceURI, qualifiedName), el);
-  }
-
-  visitProcessingInstruction(target: string, data: string): void {
-    this.document.appendChild(this.document.createProcessingInstruction(target, data));
-    super.visitProcessingInstruction(target, data);
-  }
-
-  visitComment(data: string): void {
-    this.document.appendChild(this.document.createComment(data));
-    super.visitComment(data);
-  }
-
-  visitDocumentType(qualifiedName: string, publicId: string, systemId: string): void {
-    this.document.appendChild(window.document.implementation.createDocumentType(qualifiedName, publicId, systemId));
-    super.visitDocumentType(qualifiedName, publicId, systemId);
-  }
-
-  toNode() {
-    return this.document.cloneNode(true);
-  }
-
-  toString() {
-    return this.serializer.serializeToString(this.document);
+export default class XMLDocumentWriter extends XMLRootWriter {
+  constructor(next?: XMLDocumentWriter | null) {
+    super(next, window.document.implementation.createDocument(null, null));
   }
 }

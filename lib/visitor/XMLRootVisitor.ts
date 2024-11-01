@@ -1,9 +1,9 @@
 import XMLElementVisitor from "./XMLElementVisitor";
 
-export default class XMLDocumentFragmentVisitor {
-  next: XMLDocumentFragmentVisitor | null;
+export default class XMLRootVisitor {
+  next: XMLRootVisitor | null;
 
-  constructor(next?: XMLDocumentFragmentVisitor | null) {
+  constructor(next?: XMLRootVisitor | null) {
     this.next = next ?? null;
   }
 
