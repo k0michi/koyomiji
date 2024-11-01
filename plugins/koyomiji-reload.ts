@@ -1,6 +1,7 @@
 import { Plugin, ViteDevServer } from "vite";
 import * as chokidar from 'chokidar';
 import { ServerModel } from "../lib/server-model";
+import PathHelper from "../lib/PathHelper";
 
 export default function koyomijiReload() {
   return (new KoyomijiReload()).getPlugin();
@@ -32,20 +33,22 @@ class KoyomijiReload {
   }
 
   initialize() {
-    // console.log(this.server?.config)
-    // this.watcher = chokidar.watch('.', { cwd: ServerModel.instance.rootDir }).on('all', async (event, path) => {
-    //   try {
-    // console.log(event, path);
-    // if (event == 'change') {
-    //   if (await loadFile(p)) {
-    //     vite.ws.send({ type: 'full-reload' });
-    //   } else {
-    //     compileFile(p);
-    //   }
-    // }
-    // } catch (e) {
-    // }
-    // });
+    this.watcher = chokidar.watch('.', { cwd: ServerModel.instance.rootDir }).on('all', async (event, path) => {
+      try {
+        if (event == 'change') {
+          if (PathHelper.endsWith(path, 'index.ktml')) {
+            console.log(new Date(), `Reloading ${path}`);
+            await ServerModel.instance.loadEntry(path);
+            this.server?.ws.send('koyomiji:update', {});
+          } else if (PathHelper.endsWith(path, 'index.md')) {
+            console.log(new Date(), `Compiling ${path}`);
+            await ServerModel.instance.compileMarkdown(path);
+            this.server?.ws.send('koyomiji:update', {});
+          }
+        }
+      } catch (e) {
+      }
+    });
   }
 
   finalize() {
