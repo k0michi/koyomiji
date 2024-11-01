@@ -7,6 +7,7 @@ export interface Entry {
   source?: string;
   path: string;
   content?: string;
+  private: boolean;
 }
 
 export interface Dictionary {

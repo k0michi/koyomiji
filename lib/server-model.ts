@@ -52,7 +52,6 @@ export class ServerModel {
   }
 
   async getEntry(pathname: string) {
-    await this.ensureAll();
     const entry = this.entries[pathname];
 
     if (entry == undefined) {
@@ -63,7 +62,6 @@ export class ServerModel {
   }
 
   async getDictionary(pathname: string) {
-    await this.ensureAll();
     const entry = this.dictionaries[pathname];
 
     if (entry == undefined) {
@@ -115,8 +113,20 @@ export class ServerModel {
     return await this.readFile(a.internalPath);
   }
 
+  isProduction() {
+    return import.meta.env?.PROD ?? process.env.NODE_ENV === 'production';
+  }
+
+  isDevelopment() {
+    return import.meta.env?.DEV ?? process.env.NODE_ENV === 'development';
+  }
+
   async loadEntry(internalPath: string) {
     const loadResult = await this.ktmlLoader.load(internalPath);
+
+    if (loadResult.entry.private && this.isProduction()) {
+      return;
+    }
 
     for (const a of loadResult.attachments) {
       this.registerAttachment(a);
@@ -133,12 +143,11 @@ export class ServerModel {
   }
 
   async compileMarkdown(pathname: string) {
-    const normalized = this.normalizePath(pathname);
-    const file = await FSHelper.readFileUTF8(path.posix.join(this.rootDir, pathname));
+    const file = await FSHelper.readFileUTF8(path.join(this.rootDir, pathname));
     const xmlContent = await toKTML(file);
-    const dest = path.join(this.rootDir, normalized, 'index.ktml');
+    const dest = path.join(this.rootDir, pathname, '..', 'index.ktml');
     await fs.writeFile(dest, xmlContent);
-    await this.loadEntry(path.join(normalized, 'index.ktml'));
+    await this.loadEntry(path.join(pathname, '..', 'index.ktml'));
   }
 
   async getSitemapAsString() {
