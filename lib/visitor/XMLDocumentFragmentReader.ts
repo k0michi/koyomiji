@@ -1,7 +1,7 @@
 import XMLNodeReader from './XMLNodeReader';
 
 export default class XMLDocumentFragmentReader extends XMLNodeReader {
-  constructor(root: Document);
+  constructor(root: DocumentFragment);
   constructor(string: string);
   constructor(...args: any[]) {
     super(
