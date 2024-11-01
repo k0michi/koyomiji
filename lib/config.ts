@@ -12,6 +12,7 @@ export interface SiteInfo {
   twitterName: string;
   authorName: string;
   feedID: string;
+  contentsDir: string;
 }
 
 export function getFeatured(): string[] {

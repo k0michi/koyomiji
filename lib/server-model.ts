@@ -43,7 +43,6 @@ export class ServerModel {
     this.sitemap = new Sitemap();
     this.pathMapper = new PathMapper(this);
     this.ktmlLoader = new KTMLLoader(this);
-    ServerModel._instance = this;
   }
 
   async ensureAll() {
