@@ -38,4 +38,12 @@ describe('JSONWriter', () => {
   test('Boolean 1', () => {
     roundtrip(true);
   });
+
+  test('Deep Nest 1', () => {
+    roundtrip([[[[[[[[[[[[[[[]]]]]]]]]]]]]]]);
+  });
+
+  test('Deep Nest 2', () => {
+    roundtrip({ a: { a: { a: { a: { a: { a: { a: { a: { a: { a: { a: { a: { a: { a: { a: { a: { a: { a: { a: { a: 1 } } } } } } } } } } } } } } } } } } } });
+  });
 });
