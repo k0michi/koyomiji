@@ -165,7 +165,7 @@ export class ServerModel {
     const atomNS = 'http://www.w3.org/2005/Atom';
     const document = window.document.implementation.createDocument(atomNS, 'feed');
     const create = newElementCreator(document, atomNS);
-    const feed = document.firstChild! as Element;
+    const feed = document.documentElement;
 
     feed.appendChild(create('title', {}, SiteConfig.getInfo().name));
     feed.appendChild(create('id', {}, `urn:uuid:${SiteConfig.getInfo().feedID}`));

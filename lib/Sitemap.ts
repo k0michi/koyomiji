@@ -26,7 +26,7 @@ export default class Sitemap {
     const ns = 'http://www.sitemaps.org/schemas/sitemap/0.9';
     const document = window.document.implementation.createDocument(ns, 'urlset');
     const create = newElementCreator(document, ns);
-    const urlset = document.firstChild! as Element;
+    const urlset = document.documentElement;
 
     for (const u of Object.values(this.map)) {
       const url = create('url');
