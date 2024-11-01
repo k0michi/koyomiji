@@ -1,5 +1,6 @@
 import window from "@k0michi/isomorphic-dom";
 import XMLNodeVisitor from "./XMLNodeVisitor";
+import XMLHelper from "./XMLHelper";
 
 export default class XMLNodeWriter extends XMLNodeVisitor {
   serializer: XMLSerializer = new window.XMLSerializer();
@@ -53,6 +54,6 @@ export default class XMLNodeWriter extends XMLNodeVisitor {
   }
 
   toString() {
-    return this.serializer.serializeToString(this.container);
+    return XMLHelper.serialize(this.container);
   }
 }
