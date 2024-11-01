@@ -155,17 +155,12 @@ export class ServerModel {
   }
 
   async getSitemapAsString() {
-    if (!this.readAll) {
-      await this._loadAllEntries();
-    }
-
+    await this.ensureAll();
     return this.sitemap.toXML();
   }
 
   async getFeedAsString() {
-    if (!this.readAll) {
-      await this._loadAllEntries();
-    }
+    await this.ensureAll();
 
     const atomNS = 'http://www.w3.org/2005/Atom';
     const document = window.document.implementation.createDocument(atomNS, 'feed');
