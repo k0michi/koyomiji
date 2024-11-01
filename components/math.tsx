@@ -14,7 +14,7 @@ export default function Math(props: MathProps) {
       const html = Katex.renderToString(props.children, { displayMode: props.display == 'block' });
       setHTML(html);
     })();
-  }, []);
+  }, [props.children]);
 
   return (props.display == 'block' ?
     html != undefined ?

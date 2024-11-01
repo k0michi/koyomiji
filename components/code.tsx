@@ -19,7 +19,7 @@ export default function Code(props: CodeProps) {
         setHTML(html);
       })();
     }
-  }, []);
+  }, [props.children]);
 
   const className = lang != undefined ? `language-${lang}` : 'language-none';
 
