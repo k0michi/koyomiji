@@ -27,8 +27,8 @@ export default class XMLDocumentFragmentReader extends XMLNodeReader {
 
     const fragment = document.createDocumentFragment();
 
-    for (const c of document.documentElement.childNodes) {
-      fragment.appendChild(c);
+    while (document.documentElement.firstChild) {
+      fragment.appendChild(document.documentElement.firstChild);
     }
 
     return fragment;
