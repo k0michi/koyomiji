@@ -1,21 +1,21 @@
-import XMLElementVisitor from "./XMLElementVisitor";
+import XMLNodeVisitor from "./XMLNodeVisitor";
 
-export default class XMLElementReader {
-  element: Element;
+export default class XMLNodeReader {
+  container: Node;
 
-  constructor(element: Element) {
-    this.element = element;
+  constructor(container: Node) {
+    this.container = container;
   }
 
-  accept(visitor: XMLElementVisitor) {
-    for (const c of this.element.childNodes) {
+  accept(visitor: XMLNodeVisitor) {
+    for (const c of this.container.childNodes) {
       switch (c.nodeType) {
         case window.Node.ELEMENT_NODE:
           const el = c as Element;
           const elVisitor = visitor.visitElement(el.namespaceURI, el.tagName);
 
           if (elVisitor !== null) {
-            const elReader = new XMLElementReader(el);
+            const elReader = new XMLNodeReader(el);
             elReader.accept(elVisitor);
           }
           break;
@@ -34,6 +34,10 @@ export default class XMLElementReader {
         case window.Node.COMMENT_NODE:
           const co = c as Comment;
           visitor.visitComment(co.data);
+          break;
+        case window.Node.DOCUMENT_TYPE_NODE:
+          const dt = c as DocumentType;
+          visitor.visitDocumentType(dt.name, dt.publicId, dt.systemId);
           break;
         default:
       }

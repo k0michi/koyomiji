@@ -1,11 +1,11 @@
-export default class XMLElementVisitor {
-  next: XMLElementVisitor | null;
+export default class XMLNodeVisitor {
+  next: XMLNodeVisitor | null;
 
-  constructor(next?: XMLElementVisitor | null) {
+  constructor(next?: XMLNodeVisitor | null) {
     this.next = next ?? null;
   }
 
-  visitElement(namespaceURI: string | null, qualifiedName: string): XMLElementVisitor | null {
+  visitElement(namespaceURI: string | null, qualifiedName: string): XMLNodeVisitor | null {
     return this.next?.visitElement(namespaceURI, qualifiedName) ?? null;
   }
 
@@ -27,5 +27,9 @@ export default class XMLElementVisitor {
 
   visitComment(data: string) {
     this.next?.visitComment(data);
+  }
+
+  visitDocumentType(qualifiedName: string, publicId: string, systemId: string) {
+    this.next?.visitDocumentType(qualifiedName, publicId, systemId);
   }
 }
