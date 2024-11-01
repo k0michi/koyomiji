@@ -113,12 +113,16 @@ export class ServerModel {
     return await this.readFile(a.internalPath);
   }
 
+  getMode() {
+    return import.meta.env.MODE ?? process.env.NODE_ENV ?? 'production';
+  }
+
   isProduction() {
-    return import.meta.env?.PROD ?? process.env.NODE_ENV === 'production';
+    return this.getMode() === 'production';
   }
 
   isDevelopment() {
-    return import.meta.env?.DEV ?? process.env.NODE_ENV === 'development';
+    return this.getMode() === 'development';
   }
 
   async loadEntry(internalPath: string) {
