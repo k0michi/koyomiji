@@ -37,6 +37,13 @@ export default class KTMLReactTransformer extends XMLNodeVisitor {
         return new KTMLReactTransformerA(this.nextReact?.visitElement(Link));
       case 'img':
         return new KTMLReactTransformer(this.nextReact?.visitElement(Image));
+      // Prevents ` Whitespace text nodes cannot appear as a child of <table>. Make sure you don't have any extra whitespace between tags on each line of your source code.`
+      case 'table':
+        return new KTMLReactTransformerTable(this.nextReact?.visitElement('table'));
+      case 'tbody':
+        return new KTMLReactTransformerTBody(this.nextReact?.visitElement('tbody'));
+      case 'tr':
+        return new KTMLReactTransformerTR(this.nextReact?.visitElement('tr'));
     }
 
     return new KTMLReactTransformer(this.nextReact?.visitElement(split.local));
@@ -85,5 +92,35 @@ export class KTMLReactTransformerA extends KTMLReactTransformer {
     }
 
     this.nextReact?.visitProp(key, value);
+  }
+}
+
+export class KTMLReactTransformerNoText extends KTMLReactTransformer {
+  constructor(nextReact?: ReactNodeVisitor | null) {
+    super(nextReact ?? null);
+  }
+
+  visitTextNode(data: string): void {
+  }
+
+  visitCDATASection(data: string): void {
+  }
+}
+
+export class KTMLReactTransformerTable extends KTMLReactTransformerNoText {
+  constructor(nextReact?: ReactNodeVisitor | null) {
+    super(nextReact ?? null);
+  }
+}
+
+export class KTMLReactTransformerTBody extends KTMLReactTransformerNoText {
+  constructor(nextReact?: ReactNodeVisitor | null) {
+    super(nextReact ?? null);
+  }
+}
+
+export class KTMLReactTransformerTR extends KTMLReactTransformerNoText {
+  constructor(nextReact?: ReactNodeVisitor | null) {
+    super(nextReact ?? null);
   }
 }

@@ -7,6 +7,10 @@ import { CalenderIcon } from '../../components/icon';
 import { toDisplayDateString } from '../../lib/date-format';
 import { ServerModel } from 'lib/server-model';
 import { getMeta } from 'lib/meta';
+import ReactNodeWriter from 'lib/visitor/ReactNodeWriter';
+import ReactFragmentWriter from 'lib/visitor/ReactFragmentWriter';
+import KTMLReactTransformer from 'lib/KTMLReactTransformer';
+import XMLDocumentFragmentReader from 'lib/visitor/XMLDocumentFragmentReader';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   return await ServerModel.instance.getEntry(`/log/${params.id}`);
@@ -27,7 +31,12 @@ export default function LogPage() {
   const data = useLoaderData() as Data;
   const params = useParams();
   const entry = data;
-  const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
+  // const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
+
+  const writer = new ReactFragmentWriter();
+  const transformer = new KTMLReactTransformer(writer);
+  const reader = XMLDocumentFragmentReader.fromString(entry.content!);
+  reader.accept(transformer);
 
   return (
     <>
@@ -39,7 +48,7 @@ export default function LogPage() {
         </div>
       </header>
       <div id="body">
-        {content}
+        {writer.toReactNode()}
       </div>
     </>
   );

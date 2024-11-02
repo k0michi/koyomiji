@@ -82,7 +82,7 @@ export default class KTMLLoader {
       description,
       path,
       source,
-      content: $body.outerHTML,
+      content: $body.innerHTML,
       private: private_,
     } satisfies Entry;
 
@@ -192,8 +192,8 @@ export default class KTMLLoader {
     }
   }
 
-  async loadAttachment(relativePath: string, context: KTMLLoaderContext): Promise<KTMLAttachment> {
-    const internalPath = Path.join(PathHelper.pop(context.internalPath), relativePath);
+  async loadAttachment(attachmentPath: string, context: KTMLLoaderContext): Promise<KTMLAttachment> {
+    const internalPath = Path.isAbsolute(attachmentPath) ? attachmentPath : Path.join(PathHelper.pop(context.internalPath), attachmentPath);
     const externalPath = await this.server.mapInternalPath(internalPath);
     const attachment = {
       internalPath,
