@@ -71,4 +71,12 @@ describe('XMLNodeWriter', () => {
     reader.accept(writer);
     expect(writer.toString()).toBe(`<?xml version="1.0" encoding="UTF-8"?><a href="https://koyomiji.com/"/>`);
   });
+
+  test('Namespace 1', () => {
+    roundtrip(`<a xmlns="https://koyomiji.com/test">abc</a>`);
+  });
+
+  test('Namespace 2', () => {
+    roundtrip(`<a xmlns:kymj="https://koyomiji.com/test"><kymj:a>abc</kymj:a></a>`);
+  });
 });
