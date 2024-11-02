@@ -7,7 +7,7 @@ export default class ReactNodeVisitor {
     this.next = next ?? null;
   }
 
-  visitElement(type: FunctionComponent | ComponentClass | string): ReactNodeVisitor | null {
+  visitElement<P extends {}>(type: FunctionComponent<P> | ComponentClass<P> | string): ReactNodeVisitor | null {
     return this.next?.visitElement(type) ?? null;
   }
 

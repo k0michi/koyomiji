@@ -15,7 +15,7 @@ export enum ReactNodeType {
 export default class ReactMutableNode {
   type: ReactNodeType;
 
-  elementType?: FunctionComponent | ComponentClass | string;
+  elementType?: FunctionComponent<any> | ComponentClass<any> | string;
   stringValue?: string;
   numberValue?: number;
   portalContainer?: Element | DocumentFragment;
@@ -29,7 +29,7 @@ export default class ReactMutableNode {
     this.type = type;
   }
 
-  static createElement(type: FunctionComponent | ComponentClass | string) {
+  static createElement<P extends {}>(type: FunctionComponent<P> | ComponentClass<P> | string) {
     const node = new ReactMutableNode(ReactNodeType.element);
     node.elementType = type;
     return node;

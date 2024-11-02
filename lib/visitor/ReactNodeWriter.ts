@@ -10,7 +10,7 @@ export default class ReactNodeWriter extends ReactNodeVisitor {
     this.container = container;
   }
 
-  visitElement(type: FunctionComponent | ComponentClass | string): ReactNodeVisitor | null {
+  visitElement<P extends {}>(type: FunctionComponent<P> | ComponentClass<P> | string): ReactNodeVisitor | null {
     const el = ReactMutableNode.createElement(type);
     this.container.appendChild(el);
     return new ReactNodeWriter(super.visitElement(type), el);
