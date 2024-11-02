@@ -7,6 +7,7 @@ import * as mdastMath from "mdast-util-math";
 import window from "@k0michi/isomorphic-dom";
 import crypto from "crypto";
 import { toISOStringJST } from "../lib/date-format";
+import XMLHelper from "./visitor/XMLHelper";
 
 export async function toKTML(source: string) {
   const dom = toDOM(source) as HTMLElement;
@@ -36,14 +37,16 @@ export async function toKTML(source: string) {
 </ktml>`;
 }
 
-export function toDOM(source: string) {
-  const parsed = unified()
+function parse(string: string) {
+  return unified()
     .use(remarkParse)
     .use(remarkMath)
-    .parse(source);
+    .parse(string);
+}
 
+export function toDOM(source: string) {
   const document = window.document.implementation.createDocument(null, 'ktml');
-  return transformToDOM(parsed, document);
+  return transformToDOM(parse(source), document);
 }
 
 function transformChildren(node: unist.Parent, parent: Element | DocumentFragment) {
@@ -52,7 +55,7 @@ function transformChildren(node: unist.Parent, parent: Element | DocumentFragmen
   }
 }
 
-export function transformToDOM(node: unist.Node, document: Document) {
+export function transformToDOM(node: unist.Node, document: Document): Node {
   if (node.type == 'root') {
     const root = node as mdast.Root;
     const element = document.createDocumentFragment();
@@ -142,6 +145,13 @@ export function transformToDOM(node: unist.Node, document: Document) {
     const element = document.createElement('math');
     element.append(inlineMath.value);
     return element;
+  } else if (node.type == 'html') {
+    const html = node as mdast.Html;
+    const parsed = XMLHelper.parseFragment(html.value);
+    // const element = document.createElement(parsed.firstElementChild!.tagName);
+    // const parsedMD = parse(parsed.firstElementChild!.innerHTML);
+    // transformChildren(parsedMD, element);
+    return parsed;
   }
 
   throw new Error(`Type ${node.type} is not supported`);
