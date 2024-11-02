@@ -1,3 +1,5 @@
+// DEPRECATED
+
 import window from '@k0michi/isomorphic-dom';
 
 export function getTextContent(query: string, $element: Element) {

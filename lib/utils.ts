@@ -1,3 +1,5 @@
+// DEPRECATED
+
 import * as fs from 'fs/promises';
 
 export function toPathname(path: string[]) {

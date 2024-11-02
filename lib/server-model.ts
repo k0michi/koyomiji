@@ -159,6 +159,7 @@ export class ServerModel {
     return this.sitemap.toXML();
   }
 
+  // TODO: Move
   async getFeedAsString() {
     await this.ensureAll();
 
