@@ -3,6 +3,7 @@ import { Link, Outlet, useLoaderData, useLocation } from 'react-router';
 import { Asterisk, GithubIcon, LogoFull, MailIcon, Mastodon, RSS, TwitchIcon, YoutubeIcon } from '../../components/icon';
 import { Handle } from '~/Handle';
 import * as Route from './+types._common';
+import { useDevReload } from '~/Hook.index';
 
 interface MenuProps {
   to: string;
@@ -33,6 +34,7 @@ export default function CommonLayout() {
   const elementMap = React.useRef<Record<string, React.Ref<any>>>({});
   elementMap.current[location.pathname] = elementMap.current[location.pathname] ?? React.createRef<any>();
   const data = useLoaderData() as Route.LoaderData;
+  useDevReload();
 
   return (
     <>

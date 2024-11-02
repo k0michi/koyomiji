@@ -33,17 +33,19 @@ class KoyomijiReload {
   }
 
   initialize() {
+    this.log("Initializing");
+
     this.watcher = chokidar.watch('.', { cwd: ServerModel.instance.rootDir }).on('all', async (event, path) => {
       try {
         if (event == 'change') {
           if (PathHelper.endsWith(path, 'index.ktml')) {
-            console.log(new Date(), `Reloading ${path}`);
+            this.log(`Reloading ${path}`);
             await ServerModel.instance.loadEntry(path);
             this.server?.ws.send('koyomiji:update', {});
           } else if (PathHelper.endsWith(path, 'index.md')) {
-            console.log(new Date(), `Compiling ${path}`);
+            this.log(`Compiling ${path}`);
             await ServerModel.instance.compileMarkdown(path);
-            this.server?.ws.send('koyomiji:update', {});
+            // this.server?.ws.send('koyomiji:update', {});
           }
         }
       } catch (e) {
@@ -52,6 +54,11 @@ class KoyomijiReload {
   }
 
   finalize() {
+    this.log("Finalizing");
     this.watcher?.close();
+  }
+
+  log(...args: any) {
+    console.log(`[Koyomiji|${new Date().toLocaleString()}]`, ...args);
   }
 }

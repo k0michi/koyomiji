@@ -25,14 +25,14 @@ export class ServerModel {
   pathMapper: PathMapper;
   ktmlLoader: KTMLLoader;
 
-  static _instance: ServerModel | null = null;
-
   static get instance(): ServerModel {
-    if (!ServerModel._instance) {
-      ServerModel._instance = new ServerModel(SiteConfig.getInfo().contentsDir);
+    const global = globalThis as any;
+
+    if (!global['koyomiji']) {
+      global['koyomiji'] = new ServerModel(SiteConfig.getInfo().contentsDir);
     }
 
-    return ServerModel._instance;
+    return global['koyomiji'];
   }
 
   constructor(rootDir: string) {
