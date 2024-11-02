@@ -172,7 +172,7 @@ body.common-layout {}
   flex-direction: row;
   height: 88px;
   gap: 12px;
-  /* overflow-y: auto; */
+  overflow-y: auto;
 }
 
 #nav a {
