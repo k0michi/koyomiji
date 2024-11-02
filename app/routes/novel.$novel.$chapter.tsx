@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation, useParams } from 'react-router';
-import { toElement } from '../../lib/xml';
-import { parseXML } from '../../lib/xml';
-import * as ReactKTML from '../../lib/react-ktml';
 import { XIcon } from '../../components/icon';
 import { ServerModel } from 'lib/server-model';
 import { getMeta } from 'lib/meta';
 import { Handle } from '~/Handle';
+import KTMLHelper from '~/KTMLHelper';
 
 interface NovelStorage {
   locations: Record<string, number | undefined>;
@@ -70,7 +68,6 @@ export default function NovelPage() {
   const params = useParams();
   const data = useLoaderData() as Data;
   const entry = data;
-  const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
   const mainRef = React.useRef<HTMLElement>(null);
 
   React.useEffect(() => {
@@ -139,7 +136,7 @@ export default function NovelPage() {
         <Link to='/novel'><XIcon /></Link>
       </div>
       <main id="novel-main" ref={mainRef}>
-        {content}
+        {KTMLHelper.parseAsReact(entry.content!)}
       </main>
     </>
   );

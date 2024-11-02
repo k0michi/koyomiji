@@ -1,14 +1,10 @@
-import * as React from 'react';
 import { LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation, useParams, useRouteLoaderData } from 'react-router';
-import { toElement } from '../../lib/xml';
-import { parseXML } from '../../lib/xml';
-import * as ReactKTML from '../../lib/react-ktml';
 import { CalenderIcon, TagsIcon } from '../../components/icon';
 import { toDisplayDateString } from '../../lib/date-format';
-import { toPathname } from '../../lib/utils';
 import { getCategory } from '../../lib/config';
 import { ServerModel } from 'lib/server-model';
 import { getMeta } from 'lib/meta';
+import KTMLHelper from '~/KTMLHelper';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   return await ServerModel.instance.getEntry(`/reference/${params.category}/${params.id}`);
@@ -30,7 +26,6 @@ export default function ReferencePage() {
   const params = useParams();
   const entry = data;
   const categoryName = getCategory(params.category!).name;
-  const content = toElement(parseXML(entry.content!).firstChild?.childNodes!, ReactKTML.reactFactory);
 
   return (
     <>
@@ -42,7 +37,7 @@ export default function ReferencePage() {
         </div>
       </header>
       <div id="body">
-        {content}
+        {KTMLHelper.parseAsReact(entry.content!)}
       </div>
     </>
   );

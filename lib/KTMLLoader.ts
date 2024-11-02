@@ -1,13 +1,14 @@
 import window from '@k0michi/isomorphic-dom';
 import Path from 'node:path';
 import { DictionaryEntry, DictionarySense, Entry } from '../lib/entry';
-import { getTextContent, parseXML } from '../lib/xml';
+import { getTextContent } from '../lib/xml';
 import Crypto from 'node:crypto';
 import FS from 'node:fs';
 import FSPromise from 'node:fs/promises';
 import FSHelper from './FSHelper';
 import { ServerModel } from './server-model';
 import PathHelper from './PathHelper';
+import XMLHelper from './visitor/XMLHelper';
 
 function getDescription(node: Node, limit: number) {
   const Node = window.Node;
@@ -55,7 +56,7 @@ export default class KTMLLoader {
     } satisfies KTMLLoaderContext;
 
     const content = await FSPromise.readFile(this.resolveInternal(internalPath), 'utf-8');
-    const $document = parseXML(content);
+    const $document = XMLHelper.parse(content);
     const $head = $document.querySelector('head') as Element;
     const title = getTextContent('title', $head)!;
     const id = getTextContent('id', $head)!;
@@ -103,7 +104,7 @@ export default class KTMLLoader {
     } satisfies KTMLLoaderContext;
 
     const content = await FSPromise.readFile(this.resolveInternal(internalPath), 'utf-8');
-    const $document = parseXML(content);
+    const $document = XMLHelper.parse(content);
     const $head = $document.querySelector('head') as Element;
     const title = getTextContent('title', $head)!;
     const description = getTextContent('description', $head)!;

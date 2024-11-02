@@ -1,9 +1,7 @@
-import * as React from 'react';
-import { parseXML, toElement } from '../../lib/xml';
-import { reactFactory } from '../../lib/react-kdml';
 import { LoaderFunctionArgs, MetaFunction, useLoaderData } from 'react-router';
 import { ServerModel } from 'lib/server-model';
 import { getMeta } from 'lib/meta';
+import KTMLHelper from '~/KTMLHelper';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   return await ServerModel.instance.getDictionary('/dictionary/english');
@@ -40,8 +38,8 @@ export default function DictionaryPage() {
               </div>
               <div className='senses'>
                 {e?.senses.map(s => {
-                  const usage = s.usage != null ? toElement(parseXML(s.usage).firstChild?.childNodes!, reactFactory) : null;
-                  const gloss = s.gloss != null ? toElement(parseXML(s.gloss).firstChild?.childNodes!, reactFactory) : null;
+                  const usage = s.usage != null ? KTMLHelper.parseAsReact(s.usage) : null;
+                  const gloss = s.gloss != null ? KTMLHelper.parseAsReact(s.gloss) : null;
                   // FIXME: Proper key instead of gloss
                   return <div key={s.gloss}><span className='pos'>{s.pos}.</span> <span className='usage'>{usage}</span> <span className='gloss'>{gloss}</span></div>;
                 })}
