@@ -6,9 +6,8 @@ import XMLPrinter from '../lib/visitor/XMLPrinter';
 function roundtrip(xml: string) {
   const reader = XMLDocumentReader.fromString(xml);
   const writer = new XMLDocumentWriter();
-  const printer = new XMLPrinter(writer);
   writer.setEmitXMLDecl(false);
-  reader.accept(printer);
+  reader.accept(writer);
   expect(writer.toString()).toBe(xml);
 }
 
