@@ -49,6 +49,7 @@ class KoyomijiReload {
           }
         }
       } catch (e) {
+        this.log(e);
       }
     });
   }
