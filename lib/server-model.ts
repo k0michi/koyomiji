@@ -114,7 +114,7 @@ export class ServerModel {
   }
 
   getMode() {
-    return import.meta.env.MODE ?? process.env.NODE_ENV ?? 'production';
+    return import.meta?.env?.MODE ?? process?.env?.NODE_ENV ?? 'production';
   }
 
   isProduction() {
