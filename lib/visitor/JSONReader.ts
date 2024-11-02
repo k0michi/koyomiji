@@ -8,6 +8,10 @@ export default class JSONReader {
     this.value = value;
   }
 
+  static fromString(string: string) {
+    return new JSONReader(JSON.parse(string));
+  }
+
   #acceptValue(visitor: JSONVisitor, key: string | number | null, value: JSONValue) {
     switch (typeof (value)) {
       case "string":

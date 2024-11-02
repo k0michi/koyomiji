@@ -1,12 +1,14 @@
 import { describe, expect, test } from '@jest/globals';
 import XMLDocumentReader from '../lib/visitor/XMLDocumentReader';
 import XMLDocumentWriter from '../lib/visitor/XMLDocumentWriter';
+import XMLPrinter from '../lib/visitor/XMLPrinter';
 
 function roundtrip(xml: string) {
-  const reader = new XMLDocumentReader(xml);
+  const reader = XMLDocumentReader.fromString(xml);
   const writer = new XMLDocumentWriter();
+  const printer = new XMLPrinter(writer);
   writer.setEmitXMLDecl(false);
-  reader.accept(writer);
+  reader.accept(printer);
   expect(writer.toString()).toBe(xml);
 }
 
@@ -23,11 +25,11 @@ describe('XMLNodeWriter', () => {
     roundtrip(`<a a="1" b="2" c="3"/>`);
   });
 
-  test('Nest 1', () => {
+  test('Element 2', () => {
     roundtrip(`<a><b/></a>`);
   });
 
-  test('Nest 2', () => {
+  test('Element 3', () => {
     roundtrip(`<a><b/><c/></a>`);
   });
 
@@ -64,7 +66,7 @@ describe('XMLNodeWriter', () => {
   });
 
   test('XML Decl 1', () => {
-    const reader = new XMLDocumentReader(`<a href="https://koyomiji.com/"/>`);
+    const reader = XMLDocumentReader.fromString(`<a href="https://koyomiji.com/"/>`);
     const writer = new XMLDocumentWriter();
     writer.setEmitXMLDecl(true);
     reader.accept(writer);

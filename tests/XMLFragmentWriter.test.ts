@@ -3,7 +3,7 @@ import XMLDocumentFragmentReader from '../lib/visitor/XMLDocumentFragmentReader'
 import XMLDocumentFragmentWriter from '../lib/visitor/XMLDocumentFragmentWriter';
 
 function roundtrip(xml: string) {
-  const reader = new XMLDocumentFragmentReader(xml);
+  const reader = XMLDocumentFragmentReader.fromString(xml);
   const writer = new XMLDocumentFragmentWriter();
   reader.accept(writer);
   expect(writer.toString()).toBe(xml);
