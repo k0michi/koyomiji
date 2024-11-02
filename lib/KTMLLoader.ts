@@ -33,7 +33,7 @@ function getDescription(node: Node, limit: number) {
 }
 
 function isContainerBlock(tagName: string) {
-  return tagName == 'body' || tagName == 'li';
+  return tagName == 'body' || tagName == 'li' || tagName == 'blockquote';
 }
 
 export default class KTMLLoader {
