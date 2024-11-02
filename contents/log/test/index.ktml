@@ -1,0 +1,92 @@
+<ktml version="0.1">
+
+<head>
+  <title>Test</title>
+  <id>d2ed2aaf-cf76-4cda-b20f-e4e990720947</id>
+  <created>2024-10-31T20:36:03+09:00</created>
+  <private>true</private>
+</head>
+
+<body>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+  <h2>Heading 2</h2>
+  <h3>Heading 3</h3>
+  <h4>Heading 4</h4>
+  <h5>Heading 5</h5>
+  <h6>Heading 6</h6>
+
+  <details>
+    <summary>Details</summary>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </details>
+  
+  <p><a href="/">Go to /</a></p>
+
+  <math><![CDATA[\begin{bmatrix}a & b & c\end{bmatrix}]]></math>
+
+  <code>console.log();</code>
+
+  <ul>
+    <li><p>ABC</p></li>
+    <li><p>DEF</p></li>
+  </ul>
+
+  <ol>
+    <li><p>ABC</p></li>
+    <li><p>DEF</p></li>
+  </ol>
+
+  <hr/>
+
+  <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</blockquote>
+
+  <table>
+    <tbody>
+      <tr>
+        <th></th>
+        <th>Knocky</th>
+        <th>Flor</th>
+        <th>Ella</th>
+        <th>Juan</th>
+      </tr>
+      <tr>
+        <td>Breed</td>
+        <td>Jack Russell</td>
+        <td>Poodle</td>
+        <td>Streetdog</td>
+        <td>Cocker Spaniel</td>
+      </tr>
+      <tr>
+        <td>Age</td>
+        <td>16</td>
+        <td>9</td>
+        <td>10</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Owner</td>
+        <td>Mother-in-law</td>
+        <td>Me</td>
+        <td>Me</td>
+        <td>Sister-in-law</td>
+      </tr>
+      <tr>
+        <td>Eating Habits</td>
+        <td>Eats everyone's leftovers</td>
+        <td>Nibbles at food</td>
+        <td>Hearty eater</td>
+        <td>Will eat till he explodes</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><i>italic</i> <b>bold</b> <s>strikethrough</s> <u>underline</u></p>
+
+  <figure>
+    <img src="/log/106/dino.png"/>
+    <figcaption>Caption</figcaption>
+  </figure> 
+</body>
+
+</ktml>
