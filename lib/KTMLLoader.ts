@@ -136,8 +136,8 @@ export default class KTMLLoader {
 
       for (const $sense of $senses.children) {
         let pos = $sense.querySelector('pos')?.textContent;
-        let usage = $sense.querySelector('usage')?.outerHTML;
-        const gloss = $sense.querySelector('gloss')?.outerHTML;
+        let usage = $sense.querySelector('usage')?.innerHTML;
+        const gloss = $sense.querySelector('gloss')?.innerHTML;
 
         if (pos === null) {
           pos = undefined;
