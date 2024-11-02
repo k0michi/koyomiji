@@ -535,6 +535,15 @@ body.common-layout {}
   opacity: 0;
 }
 
+#main details {
+  padding-left: 24px;
+}
+
+#main summary {
+  cursor: pointer;
+  list-style-position: outside;
+}
+
 
 /* Common Layout - Main - Reference */
 
