@@ -64,10 +64,10 @@ export default function CommonLayout() {
           <ul id="icons">
             <li><Link aria-label="RSS" to="https://koyomiji.com/feed.xml"><RSS /></Link></li>
             <li><Link aria-label="Mail" to="mailto:k0michi@koyomi.co"><MailIcon /></Link></li>
-            <li><Link aria-label="Mastodon" rel="me" to="https://koyomi.co/@k0michi"><Mastodon /></Link></li>
+            {/* <li><Link aria-label="Mastodon" rel="me" to="https://koyomi.co/@k0michi"><Mastodon /></Link></li> */}
             <li><Link aria-label="GitHub" rel="me" to="https://github.com/k0michi"><GithubIcon /></Link></li>
-            <li><Link aria-label="YouTube" rel="me" to="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw"><YoutubeIcon /></Link></li>
-            <li><Link aria-label="Twitch" rel="me" to="https://www.twitch.tv/k0michi"><TwitchIcon /></Link></li>
+            {/* <li><Link aria-label="YouTube" rel="me" to="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw"><YoutubeIcon /></Link></li> */}
+            {/* <li><Link aria-label="Twitch" rel="me" to="https://www.twitch.tv/k0michi"><TwitchIcon /></Link></li> */}
           </ul>
         </nav>
         <main id="main">
