@@ -52,5 +52,7 @@ export default class XMLNodeReader {
         default:
       }
     }
+
+    visitor.visitEnd();
   }
 }

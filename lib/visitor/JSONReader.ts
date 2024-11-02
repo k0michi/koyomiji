@@ -33,6 +33,8 @@ export default class JSONReader {
             for (let i = 0; i < value.length; i++) {
               this.#acceptValue(arVisitor, i, value[i]);
             }
+
+            arVisitor.visitEnd();
           }
         } else {
           const obVisitor = visitor.visitObject(key);
@@ -41,11 +43,15 @@ export default class JSONReader {
             for (const [k, v] of Object.entries(value)) {
               this.#acceptValue(obVisitor, k, v);
             }
+
+            obVisitor.visitEnd();
           }
         }
         break;
       default:
     }
+
+    visitor.visitEnd();
   }
 
   accept(visitor: JSONVisitor) {
