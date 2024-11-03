@@ -39,6 +39,8 @@ html {
     --color-9: var(--color-1);
     /* calender cell */
     --color-10: #f5f1f0;
+    /* code title */
+    --color-11: #8b807e;
   }
 }
 
@@ -55,6 +57,7 @@ html {
     --color-8: #3d435c;
     --color-9: var(--color-2);
     --color-10: #272b3d;
+    --color-11: rgb(129, 138, 171);
   }
 }
 
@@ -498,6 +501,17 @@ body.common-layout {}
   background-color: unset;
   padding: 0px;
   border-radius: 0px;
+}
+
+#main pre>.code-title {
+  background-color: var(--color-11);
+  color: var(--color-1);
+  font-family: var(--font-sans);
+  width: fit-content;
+  /* #main preのマージン分 */
+  margin-top: -12px;
+  padding: 2px 6px;
+  margin-bottom: 12px;
 }
 
 #main ul {

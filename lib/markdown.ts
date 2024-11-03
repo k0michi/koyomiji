@@ -95,7 +95,17 @@ export function transformToDOM(node: unist.Node, document: Document): Node {
     const element = document.createElement('code');
 
     if (code.lang != undefined) {
-      element.setAttribute('lang', code.lang);
+      if (code.lang.includes(':')) {
+        const split = code.lang.split(':');
+        if (split[0].length > 0) {
+          element.setAttribute('lang', split[0]);
+        }
+        if (split[1].length > 0) {
+          element.setAttribute('title', split[1]);
+        }
+      } else {
+        element.setAttribute('lang', code.lang);
+      }
     }
 
     element.append(code.value);
