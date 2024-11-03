@@ -148,9 +148,22 @@ export function transformToDOM(node: unist.Node, document: Document): Node {
   } else if (node.type == 'html') {
     const html = node as mdast.Html;
     const parsed = XMLHelper.parseFragment(html.value);
-    // const element = document.createElement(parsed.firstElementChild!.tagName);
-    // const parsedMD = parse(parsed.firstElementChild!.innerHTML);
-    // transformChildren(parsedMD, element);
+
+    // console.log([...parsed.childNodes])
+    // for (const c of parsed.childNodes) {
+    //   if (c.nodeType === window.Node.ELEMENT_NODE) {
+    //     const el = (c as Element);
+    //     console.log(el.innerHTML)
+    //     const parsedMD = parse(el.innerHTML);
+
+    //     while (el.firstChild) {
+    //       el.firstChild.remove();
+    //     }
+
+    //     transformChildren(parsedMD, el);
+    //   }
+    // }
+
     return parsed;
   }
 
