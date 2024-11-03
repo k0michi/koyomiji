@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Entry } from "../../lib/entry";
+import { Entry } from "../../lib/Entry.index";
 import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation } from 'react-router';
 import { CalenderIcon } from '../../components/icon';
-import { toDisplayDateString } from '../../lib/date-format';
+import { toDisplayDateString } from '../../lib/DateFormat.index';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 

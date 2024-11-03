@@ -6,7 +6,7 @@ import type * as mdast from "mdast";
 import * as mdastMath from "mdast-util-math";
 import window from "@k0michi/isomorphic-dom";
 import crypto from "crypto";
-import { toISOStringJST } from "../lib/date-format";
+import { toISOStringJST } from "./DateFormat.index";
 import XMLHelper from "./visitor/XMLHelper";
 
 export async function toKTML(source: string) {

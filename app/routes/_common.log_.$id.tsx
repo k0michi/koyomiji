@@ -1,6 +1,6 @@
 import { LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation, useParams } from 'react-router';
 import { CalenderIcon } from '../../components/icon';
-import { toDisplayDateString } from '../../lib/date-format';
+import { toDisplayDateString } from '../../lib/DateFormat.index';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 import KTMLHelper from '~/KTMLHelper';

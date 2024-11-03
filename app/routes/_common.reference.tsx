@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Entry, mapEntries } from "../../lib/entry";
-import { getCategory } from '../../lib/config';
+import { Entry, mapEntries } from "../../lib/Entry.index";
+import { getCategory } from '../../lib/SiteConfig';
 import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData } from 'react-router';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';

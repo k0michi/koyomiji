@@ -3,7 +3,7 @@ import * as fs from "fs/promises";
 import window from "@k0michi/isomorphic-dom";
 
 import { getElemAfter, getIndent } from "./utils";
-import { toISOStringJST } from "../lib/date-format";
+import { toISOStringJST } from "../lib/DateFormat.index";
 import FSHelper from "lib/FSHelper";
 
 function editModified($document: Document) {

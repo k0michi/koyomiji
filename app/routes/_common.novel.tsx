@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Entry, mapEntries } from "../../lib/entry";
+import { Entry, mapEntries } from "../../lib/Entry.index";
 import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData } from 'react-router';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';

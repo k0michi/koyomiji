@@ -1,18 +1,18 @@
 import path from "path";
-import { Dictionary, Entry } from "./entry";
+import { Dictionary, Entry } from "./Entry.index";
 import { toPathname } from "./utils";
 import Sitemap from "./Sitemap";
 import * as fs from "fs/promises";
 import { toKTML } from "./markdown";
 import { glob } from "glob";
 import { newElementCreator } from "./xml";
-import { toISOStringJST } from "./date-format";
+import { toISOStringJST } from "./DateFormat.index";
 import window from '@k0michi/isomorphic-dom';
 import FSHelper from "./FSHelper";
 import PathMapper from "./PathMapper";
 import KTMLLoader, { KTMLAttachment } from "./KTMLLoader";
 import { assert } from "console";
-import SiteConfig from "./config";
+import SiteConfig from "./SiteConfig";
 import URLHelper from "./URLHelper";
 
 export default class ServerModel {

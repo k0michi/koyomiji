@@ -1,6 +1,6 @@
 import window from '@k0michi/isomorphic-dom';
 import Path from 'node:path';
-import { DictionaryEntry, DictionarySense, Entry } from '../lib/entry';
+import { DictionaryEntry, DictionarySense, Entry } from './Entry.index';
 import { getTextContent } from '../lib/xml';
 import Crypto from 'node:crypto';
 import FS from 'node:fs';
