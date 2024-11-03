@@ -1,6 +1,6 @@
 import { Plugin, ViteDevServer } from "vite";
 import * as chokidar from 'chokidar';
-import { ServerModel } from "../lib/server-model";
+import ServerModel from "../lib/ServerModel";
 import PathHelper from "../lib/PathHelper";
 
 export default function koyomijiReload() {

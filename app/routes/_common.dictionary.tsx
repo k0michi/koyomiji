@@ -1,5 +1,5 @@
 import { LoaderFunctionArgs, MetaFunction, useLoaderData } from 'react-router';
-import { ServerModel } from 'lib/server-model';
+import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 import KTMLHelper from '~/KTMLHelper';
 

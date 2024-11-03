@@ -15,7 +15,7 @@ import { assert } from "console";
 import SiteConfig from "./config";
 import URLHelper from "./URLHelper";
 
-export class ServerModel {
+export default class ServerModel {
   rootDir: string;
   entries: Record<string, Entry>;
   dictionaries: Record<string, Dictionary>;

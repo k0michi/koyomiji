@@ -1,6 +1,6 @@
 import { LoaderFunctionArgs } from "react-router";
 import * as mimeTypes from 'mime-types';
-import { ServerModel } from "lib/server-model";
+import ServerModel from "lib/ServerModel";
 
 export async function loader({
   params,

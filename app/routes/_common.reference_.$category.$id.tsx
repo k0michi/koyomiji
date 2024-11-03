@@ -2,7 +2,7 @@ import { LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation, useParams
 import { CalenderIcon, TagsIcon } from '../../components/icon';
 import { toDisplayDateString } from '../../lib/date-format';
 import { getCategory } from '../../lib/config';
-import { ServerModel } from 'lib/server-model';
+import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 import KTMLHelper from '~/KTMLHelper';
 

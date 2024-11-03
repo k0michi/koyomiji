@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Entry, mapEntries } from "../../lib/entry";
 import { getCategory } from '../../lib/config';
 import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData } from 'react-router';
-import { ServerModel } from 'lib/server-model';
+import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {

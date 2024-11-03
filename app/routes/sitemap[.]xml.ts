@@ -1,5 +1,5 @@
 import { LoaderFunctionArgs } from "react-router";
-import { ServerModel } from "lib/server-model";
+import ServerModel from "lib/ServerModel";
 
 export async function loader({
   params,

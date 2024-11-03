@@ -6,7 +6,7 @@ import { ServerRouter } from "react-router";
 import { isbot } from "isbot";
 import type { RenderToPipeableStreamOptions } from "react-dom/server";
 import { renderToPipeableStream } from "react-dom/server";
-import { ServerModel } from "lib/server-model";
+import ServerModel from "lib/ServerModel";
 import path from "node:path";
 
 const ABORT_DELAY = 5_000;

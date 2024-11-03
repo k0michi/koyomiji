@@ -1,6 +1,6 @@
 import FSHelper from "./FSHelper";
 import PathHelper from "./PathHelper";
-import { ServerModel } from "./server-model";
+import ServerModel from "./ServerModel";
 import Path from 'node:path';
 
 export default class PathMapper {

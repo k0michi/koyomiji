@@ -6,7 +6,7 @@ import Crypto from 'node:crypto';
 import FS from 'node:fs';
 import FSPromise from 'node:fs/promises';
 import FSHelper from './FSHelper';
-import { ServerModel } from './server-model';
+import ServerModel from './ServerModel';
 import PathHelper from './PathHelper';
 import XMLHelper from './visitor/XMLHelper';
 

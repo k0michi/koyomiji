@@ -3,7 +3,7 @@ import { Entry } from "../../lib/entry";
 import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation } from 'react-router';
 import { CalenderIcon } from '../../components/icon';
 import { toDisplayDateString } from '../../lib/date-format';
-import { ServerModel } from 'lib/server-model';
+import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {

@@ -6,7 +6,7 @@ import { toDisplayDateString } from '../../lib/date-format';
 import { getPathSegment } from '../../lib/utils';
 import { Link, LoaderFunction, LoaderFunctionArgs, MetaFunction, useLoaderData } from 'react-router';
 import { CalenderIcon } from '../../components/icon';
-import { ServerModel } from 'lib/server-model';
+import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
