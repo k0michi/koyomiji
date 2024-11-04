@@ -1,0 +1,82 @@
+<ktml version="0.1">
+
+<head>
+  <title>英語版WordNetを使って、単語カードに英英辞典+シソーラスを追加する</title>
+  <id>4281337b-f2f5-4f8b-bfda-4151d50b2a4e</id>
+  <created>2024-11-04T19:42:42+09:00</created>
+</head>
+
+<body>
+  <p><a href="https://wordnet.princeton.edu/">WordNet</a>とは、プリンストン大学が公開しているフリーな英単語データベースです。WordNetには、このオリジナルの英語版に加えて<a href="https://bond-lab.github.io/wnja/">日本語版</a>も存在しますが、今回扱うのはオリジナルの英語版WordNet 3.1です。</p><p>このWordNet 3.1なのですが、日本語版とは異なり独自のプレーンテキスト形式として公開されています。そのため、これを使うためには何らかのライブラリが必要となります(もちろん、自分で作ることも可能です)。公式でもフロントエンドを用意しているようですが、今回は使いません。</p><p>今回は、このWordNet 3.1をJavaScriptから利用して、既存の単語カードに対して、英語による語義の説明とシソーラス(類語)を追加してみます。</p><h2>WordNet 3.1のダウンロード</h2><p><a href="https://wordnet.princeton.edu/download/current-version">Current Version</a>のページからWordNet 3.1 Databaseをダウンロードし、展開します。</p><h2>node-wordnetのインストール</h2><p>WordNet 3.1を扱うためのJavaScriptライブラリとして、<a href="https://github.com/morungos/wordnet">node-wordnet</a>があります。このnode-wordnetはnpmにも上がっていますが、そっちは古いままなのでGitHubから開発ブランチを持ってきます。</p><code>$ pnpm add https://github.com/morungos/wordnet</code><h2>node-wordnetの使い方</h2><p>node-wordnetの基本的な使い方の例は次のとおりです。</p><code lang="js">import WordNet from 'node-wordnet';
+
+const wordnet = new WordNet({
+  dataDir: 'data/dict' // WordNetのディレクトリを指定
+});
+await wordnet.open();
+
+// 見出し後を検索する
+const senses = await wordnet.lookup('word');
+
+// 品詞を指定する場合
+// const senses = await wordnet.lookup('word#n');
+
+// sensesを用いた処理...
+
+await wordnet.close();</code><p><code>wordnet.lookup()</code>の結果は次のようなオブジェクトの配列になっています。</p><code lang="js">[
+  {
+    synsetOffset: 6686933,
+    lexFilenum: 10,
+    pos: 'n',
+    wCnt: 5,
+    lemma: 'password',
+    synonyms: [ 'password', 'watchword', 'word', 'parole', 'countersign' ],
+    lexId: '0',
+    ptrs: [
+      {
+        pointerSymbol: '@',
+        synsetOffset: 6898439,
+        pos: 'n',
+        sourceTarget: '0000'
+      },
+      {
+        pointerSymbol: '@',
+        synsetOffset: 6685698,
+        pos: 'n',
+        sourceTarget: '0000'
+      }
+    ],
+    gloss: 'a secret word or phrase known only to a restricted group; "he forgot the password"  ',
+    def: 'a secret word or phrase known only to a restricted group',
+    exp: [ 'he forgot the password' ]
+  }
+]</code><ul><li><p><code>pos</code>: 単語の品詞</p><ul><li><p><code>n</code>: 名詞</p></li><li><p><code>v</code>: 動詞</p></li><li><p><code>a</code>: 形容詞</p></li><li><p><code>r</code>: 副詞</p></li><li><p><code>s</code>: 形容詞(adjective satellite)</p></li></ul></li><li><p><code>synonyms</code>: 同義語</p></li><li><p><code>gloss</code>: 語義&amp;例文</p></li><li><p><code>def</code>: 語義</p></li><li><p><code>exp</code>: 例文</p></li></ul><p>という構造になっています。</p><h2>単語カードに情報を加える</h2><p>与えられた単語に対して、その単語の語義と類語をHTMLとして返す処理を作ります。</p><code lang="js">import { escape } from 'html-escaper';
+
+/**
+ * @param {string} word 
+ * @returns {string}
+ */
+async function getSynonymsAsHTML(word) {
+  const senses = await wordnet.lookup(word);
+
+  if (!senses) {
+    return '';
+  }
+
+  let result = '&lt;ul&gt;';
+
+  for (const s of senses) {
+    result += '&lt;li&gt;';
+    result += `${s.pos}. ${escape(s.gloss)}`;
+    const synonyms = s.synonyms.filter(sy =&gt; sy != word);
+    if (synonyms.length &gt; 0) {
+      result += `&lt;ul&gt;&lt;li&gt;${synonyms.join(', ')}&lt;/li&gt;&lt;/ul&gt;`
+    }
+    result += '&lt;/li&gt;'
+  }
+
+  result += '&lt;/ul&gt;';
+  return result;
+}</code><p>このHTMLを既存の単語カードの変換処理に付け加えます。これにより、次のように単語カードにWordNetの情報を付け加えることができます(罫線よりも下がWordNet、上は既存の単語カード)。</p><p><img src="./card.png"/></p><h2>node-wordnetの不具合&amp;フォーク</h2><p>このように、node-wordnetはWordNetを簡単に扱える素晴らしいライブラリなのですが、バイナリサーチの処理にバグがあり、実際には存在するにも関わらず<code>lookup</code>の結果が空になる不具合があります。</p><ul><li><p><a href="https://github.com/morungos/wordnet/pull/42">Binary search fix by k0michi · Pull Request #42 · morungos/wordnet · GitHub</a></p></li></ul><p>残念ながらこのパッケージは積極的にアップデートされていないため、いつupstreamが修正されるかは不透明です。</p><p>応急処置として、筆者が作成したフォークを使うことができます。このフォークは次のコマンドでインストールできます:</p><code>$ pnpm add https://github.com/k0michi/wordnet</code>
+</body>
+
+</ktml>
