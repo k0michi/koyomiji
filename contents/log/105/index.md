@@ -1,4 +1,4 @@
-# Blazorを使わずに、C#をWASMにコンパイルしブラウザ上で動かす
+# Blazorを使わずに、C#をWasmにコンパイルしブラウザ上で動かす
 
 C#をWebAssemblyにコンパイルしてブラウザ上で動かしたいという場合は、Blazor WebAssemblyを使うのが一般的で、Microsoftも推奨している方法であるかと思います。
 

@@ -1,9 +1,10 @@
 <ktml version="0.1">
 
 <head>
-  <title>Blazorを使わずに、C#をWASMにコンパイルしブラウザ上で動かす</title>
+  <title>Blazorを使わずに、C#をWasmにコンパイルしブラウザ上で動かす</title>
   <id>1cc6f4c9-9696-44f9-9c11-17161f3125c4</id>
   <created>2024-10-20T18:04:39+09:00</created>
+  <modified>2024-11-05T15:06:26+09:00</modified>
 </head>
 
 <body>
