@@ -50,12 +50,42 @@ export function toDOM(source: string) {
 }
 
 function transformChildren(node: unist.Parent, parent: Element | DocumentFragment) {
+  const children: (string | Node)[] = [];
+  let hasRaw = false;
+
   for (const child of node.children) {
-    parent.appendChild(transformToDOM(child, parent.ownerDocument));
+    const transformed = transformToDOM(child, parent.ownerDocument);
+    children.push(transformed);
+
+    if (typeof (transformed) === 'string') {
+      hasRaw = true;
+    }
+  }
+
+  if (hasRaw) {
+    let result = '';
+
+    for (const c of children) {
+      if (typeof (c) === 'string') {
+        result += c;
+      } else {
+        result += XMLHelper.serialize(c);
+      }
+    }
+
+    const parsed = XMLHelper.parseFragment(result);
+
+    while (parsed.firstChild) {
+      parent.appendChild(parsed.firstChild);
+    }
+  } else {
+    for (const c of children as Node[]) {
+      parent.appendChild(c);
+    }
   }
 }
 
-export function transformToDOM(node: unist.Node, document: Document): Node {
+export function transformToDOM(node: unist.Node, document: Document): Node | string {
   if (node.type == 'root') {
     const root = node as mdast.Root;
     const element = document.createDocumentFragment();
@@ -65,6 +95,11 @@ export function transformToDOM(node: unist.Node, document: Document): Node {
     const paragraph = node as mdast.Paragraph;
     const element = document.createElement('p');
     transformChildren(paragraph, element);
+
+    if (element.childElementCount === 1 && element.firstElementChild?.tagName === 'img') {
+      return element.firstElementChild;
+    }
+
     return element;
   } else if (node.type == 'heading') {
     const heading = node as mdast.Heading;
@@ -157,7 +192,8 @@ export function transformToDOM(node: unist.Node, document: Document): Node {
     return element;
   } else if (node.type == 'html') {
     const html = node as mdast.Html;
-    const parsed = XMLHelper.parseFragment(html.value);
+    return html.value;
+    // const parsed = XMLHelper.parseFragment(html.value);
 
     // console.log([...parsed.childNodes])
     // for (const c of parsed.childNodes) {
@@ -174,7 +210,7 @@ export function transformToDOM(node: unist.Node, document: Document): Node {
     //   }
     // }
 
-    return parsed;
+    // return parsed;
   }
 
   throw new Error(`Type ${node.type} is not supported`);
