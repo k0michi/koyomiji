@@ -6,7 +6,7 @@ export default class XMLHelper {
     const document = parser.parseFromString(string, 'text/xml');
 
     if (document.querySelector('parsererror') != null) {
-      throw new Error('Failed to parse XML');
+      throw new Error('Failed to parse XML: ' + string);
     }
 
     return document;
@@ -18,7 +18,7 @@ export default class XMLHelper {
     const document = parser.parseFromString(string, 'text/xml');
 
     if (document.querySelector('parsererror') != null) {
-      throw new Error('Failed to parse XML');
+      throw new Error('Failed to parse XML: ' + string);
     }
 
     const fragment = document.createDocumentFragment();
