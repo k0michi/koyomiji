@@ -5,6 +5,7 @@ import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 import { Handle } from '~/Handle';
 import KTMLHelper from '~/KTMLHelper';
+import { useDevReload } from '~/Hook.index';
 
 interface NovelStorage {
   locations: Record<string, number | undefined>;
@@ -42,7 +43,7 @@ function saveLocation(pathname: string, location: number) {
 }
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
-  return await ServerModel.instance.getEntry(`/artwork/${params.id}`);
+  return await ServerModel.instance.getEntry(`/novel/${params.novel}/${params.chapter}`);
 }
 
 type Data = Awaited<ReturnType<typeof loader>>;
@@ -69,6 +70,7 @@ export default function NovelPage() {
   const data = useLoaderData() as Data;
   const entry = data;
   const mainRef = React.useRef<HTMLElement>(null);
+  useDevReload();
 
   React.useEffect(() => {
     const h = (e: any) => {
