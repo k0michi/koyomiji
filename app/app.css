@@ -527,6 +527,15 @@ body.common-layout {}
   max-width: 80%;
 }
 
+#main figure {
+  margin: 0 auto 16px auto;
+  max-width: 80%;
+}
+
+#main figure>img.img {
+  max-width: 100%;
+}
+
 #main .math-block {
   overflow-x: auto;
 }
