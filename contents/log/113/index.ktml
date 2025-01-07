@@ -1,0 +1,13 @@
+<ktml version="0.1">
+
+<head>
+  <title>AtCoderのレートが茶色になりました</title>
+  <id>52c8f62e-90aa-48fc-b8b3-40691e2c50a8</id>
+  <created>2025-01-07T11:42:06+09:00</created>
+</head>
+
+<body>
+  <p>先日のABC387でAtCoderのレートが茶色になりました。まだまだ初心者ですが、次は緑色を目指して精進していきます。</p><p><img src="rate.png"/></p><p>にしても、前回の<a href="https://atcoder.jp/contests/abc387/tasks/abc387_c">C問題</a>はやけに難しかったです……。桁を操作する関数を準備しておくべきだと感じました。</p>
+</body>
+
+</ktml>
