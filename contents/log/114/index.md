@@ -32,7 +32,7 @@ int main(void) {
 前述のオプションを指定してコンパイルすると、`i`が初期化されていないことを警告してくれる:
 
 ```
-$ gcc -fsanitize=undefined,address -Wall program.c
+$ clang -fsanitize=undefined,address -Wall program.c
 program.c:6:15: warning: variable 'i' is uninitialized when used here [-Wuninitialized]
   for (int i; i < 3; i++) {
               ^

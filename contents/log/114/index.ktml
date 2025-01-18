@@ -4,6 +4,7 @@
   <title>まだSegmentation faultで消耗してるの？</title>
   <id>08c5c84b-a5bf-469b-96b5-3749879cdcca</id>
   <created>2025-01-18T14:13:47+09:00</created>
+  <modified>2025-01-18T14:25:16+09:00</modified>
 </head>
 
 <body>
@@ -17,7 +18,7 @@ int main(void) {
   }
 
   return 0;
-}</code><p>前述のオプションを指定してコンパイルすると、<code>i</code>が初期化されていないことを警告してくれる:</p><code>$ gcc -fsanitize=undefined,address -Wall program.c
+}</code><p>前述のオプションを指定してコンパイルすると、<code>i</code>が初期化されていないことを警告してくれる:</p><code>$ clang -fsanitize=undefined,address -Wall program.c
 program.c:6:15: warning: variable 'i' is uninitialized when used here [-Wuninitialized]
   for (int i; i &lt; 3; i++) {
               ^
