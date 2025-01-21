@@ -9,6 +9,7 @@ import crypto from "crypto";
 import { toISOStringJST } from "../lib/date-format";
 import XMLHelper from "./visitor/XMLHelper";
 
+// FIXME
 export async function toKTML(source: string) {
   const dom = toDOM(source) as HTMLElement;
   let title;
@@ -16,6 +17,8 @@ export async function toKTML(source: string) {
 
   if (h1 != null) {
     title = h1.textContent;
+    title = title?.replace('<', '&lt;');
+    title = title?.replace('>', '&gt;');
     h1.parentNode?.removeChild(h1);
   }
 
