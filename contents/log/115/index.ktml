@@ -1,0 +1,137 @@
+<ktml version="0.1">
+
+<head>
+  <title>&lt;cstdint&gt;のリテラルをなんとかしたい【C++】</title>
+  <id>d6067393-eb4d-4846-af44-a22149af2f76</id>
+  <created>2025-01-21T14:22:59+09:00</created>
+</head>
+
+<body>
+  <p>C++の<code>&lt;cstdint&gt;</code>は、<code>int32_t</code>などといった、プラットフォームに依らず、固定長の幅を持つ整数を別名定義しています。このヘッダを用いることで、移植性の高いプログラムを記述できるようになるので、よほどの理由がない限りは<code>int</code>などを直接使うよりも、これらの型を利用した方がいいのですが、この<code>&lt;cstdint&gt;</code>にはとある問題があります。</p><p>この問題というのが、<code>int32_t</code>などのリテラルを表現する簡単な方法が用意されていないことです。具体的な例を挙げると、型が<code>int8_t</code>であるような定数<code>0</code>を表現するのに、<code>static_cast&lt;std::int8_t&gt;(0)</code>のように書く必要があります。単に<code>0</code>と書いてしまうと、これでは<code>int</code>型になってしまうので、明示的なキャストを行う必要があるのです。<code>static_cast</code>の代わりに関数スタイルのキャストを用いて<code>std::int8_t(0)</code>のように書くこともできますが、どちらにせよ毎回定数をこのように書くのは面倒です。</p><p><code>intN_t</code>であるようなリテラルを簡単に記述できないと困るのは、具体的には次のような場面です。</p><ol><li><p>右辺の値を<code>auto</code>で受けたいとき。明示的なキャストをしないと、変数の型が<code>int</code>として推論されてしまいます。</p><code lang="cpp">auto x = std::int8_t(0);</code></li><li><p><code>std::max</code>のような、型<code>T</code>が引数から推論されるテンプレート関数で、複数の<code>T</code>を引数にとる関数を呼び出すとき。引数の型が一致しないと型推論が行えずエラーになります。</p><code lang="cpp">std::int64_t y = -1;
+// int64_tがlongまたはlong longの別名であるとき、std::max(y, 0);はエラー
+auto z = std::max(y, std::int64_t(0));</code></li><li><p>整数の型によってオーバーロードされている関数を呼び出したいとき。</p><code lang="cpp">void f(std::int32_t x) {}
+void f(std::uint32_t x) {}
+
+void main() {
+  f(std::uint32_t(0));
+}</code></li></ol><p><code>intN_t</code>のリテラルをもっと簡単に書く方法はないのでしょうか。</p><p>幸いにも、C++11以降には<a href="https://cpprefjp.github.io/lang/cpp11/user_defined_literals.html">ユーザー定義リテラル</a>があります。次のようにユーザー定義リテラルを定義します:</p><code lang="cpp">#include &lt;cstdint&gt;
+
+#ifdef INT8_MAX
+constexpr inline std::int8_t operator""_i8(unsigned long long x) {
+  return static_cast&lt;std::int8_t&gt;(x);
+}
+#endif
+
+#ifdef UINT8_MAX
+constexpr inline std::uint8_t operator""_u8(unsigned long long x) {
+  return static_cast&lt;std::uint8_t&gt;(x);
+}
+#endif
+
+#ifdef INT16_MAX
+constexpr inline std::int16_t operator""_i16(unsigned long long x) {
+  return static_cast&lt;std::int16_t&gt;(x);
+}
+#endif
+
+#ifdef UINT16_MAX
+constexpr inline std::uint16_t operator""_u16(unsigned long long x) {
+  return static_cast&lt;std::uint16_t&gt;(x);
+}
+#endif
+
+#ifdef INT32_MAX
+constexpr inline std::int32_t operator""_i32(unsigned long long x) {
+  return static_cast&lt;std::int32_t&gt;(x);
+}
+#endif
+
+#ifdef UINT32_MAX
+constexpr inline std::uint32_t operator""_u32(unsigned long long x) {
+  return static_cast&lt;std::uint32_t&gt;(x);
+}
+#endif
+
+#ifdef INT64_MAX
+constexpr inline std::int64_t operator""_i64(unsigned long long x) {
+  return static_cast&lt;std::int64_t&gt;(x);
+}
+#endif
+
+#ifdef UINT64_MAX
+constexpr inline std::uint64_t operator""_u64(unsigned long long x) {
+  return static_cast&lt;std::uint64_t&gt;(x);
+}
+#endif
+
+constexpr inline std::int_fast8_t operator""_if8(unsigned long long x) {
+  return static_cast&lt;std::int_fast8_t&gt;(x);
+}
+
+constexpr inline std::uint_fast8_t operator""_uf8(unsigned long long x) {
+  return static_cast&lt;std::uint_fast8_t&gt;(x);
+}
+
+constexpr inline std::int_fast16_t operator""_if16(unsigned long long x) {
+  return static_cast&lt;std::int_fast16_t&gt;(x);
+}
+
+constexpr inline std::uint_fast16_t operator""_uf16(unsigned long long x) {
+  return static_cast&lt;std::uint_fast16_t&gt;(x);
+}
+
+constexpr inline std::int_fast32_t operator""_if32(unsigned long long x) {
+  return static_cast&lt;std::int_fast32_t&gt;(x);
+}
+
+constexpr inline std::uint_fast32_t operator""_uf32(unsigned long long x) {
+  return static_cast&lt;std::uint_fast32_t&gt;(x);
+}
+
+constexpr inline std::int_fast64_t operator""_if64(unsigned long long x) {
+  return static_cast&lt;std::int_fast64_t&gt;(x);
+}
+
+constexpr inline std::uint_fast64_t operator""_uf64(unsigned long long x) {
+  return static_cast&lt;std::uint_fast64_t&gt;(x);
+}
+
+constexpr inline std::int_least8_t operator""_il8(unsigned long long x) {
+  return static_cast&lt;std::int_least8_t&gt;(x);
+}
+
+constexpr inline std::uint_least8_t operator""_ul8(unsigned long long x) {
+  return static_cast&lt;std::uint_least8_t&gt;(x);
+}
+
+constexpr inline std::int_least16_t operator""_il16(unsigned long long x) {
+  return static_cast&lt;std::int_least16_t&gt;(x);
+}
+
+constexpr inline std::uint_least16_t operator""_ul16(unsigned long long x) {
+  return static_cast&lt;std::uint_least16_t&gt;(x);
+}
+
+constexpr inline std::int_least32_t operator""_il32(unsigned long long x) {
+  return static_cast&lt;std::int_least32_t&gt;(x);
+}
+
+constexpr inline std::uint_least32_t operator""_ul32(unsigned long long x) {
+  return static_cast&lt;std::uint_least32_t&gt;(x);
+}
+
+constexpr inline std::int_least64_t operator""_il64(unsigned long long x) {
+  return static_cast&lt;std::int_least64_t&gt;(x);
+}
+
+constexpr inline std::uint_least64_t operator""_ul64(unsigned long long x) {
+  return static_cast&lt;std::uint_least64_t&gt;(x);
+}</code><p>このようにリテラルを定義することによって、<code>intN_t</code>のリテラルを<code>0_iN</code>のように記述できるようになります。<code>int_leastN_t</code>、<code>int_fastN_t</code>に関しても同様に<code>0_ilN</code>、<code>0_ifN</code>とできます。<code>intN_t</code>に関しては、<code>N</code>ビットちょうどの整数がない環境では定義されないので、<code>INTN_MAX</code>が定義されているかによって<code>#ifdef</code>しています。</p><p>先ほどの例を、これらのリテラルを用いて書き直すとこうなります:</p><code lang="cpp">auto x = 0_i8;
+
+auto y = -1_i64;
+auto z = std::min(y, 0_i64);
+
+f(0_u32);</code><p>余談ですが、<code>&lt;cstdint&gt;</code>には<code>INT32_C(n)</code>といった定数値マクロが用意されています。<a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3096.pdf">N3096</a>によると、<code>INTN_C(value)</code>は<code>int_leastN_t</code>に対応する(corresponding)整数定数式になる、とあります。しかしながら、これらのマクロはあくまでC向けのようで、<code>auto x = INT8_C(0);</code>としたとき<code>x</code>が<code>int_least8_t</code>にならなかったりします(少なくとも手元のAppleClang 16.0.0では、単に末尾に<code>U</code>や<code>LL</code>を付与するのみで、キャストは行われない)。</p>
+</body>
+
+</ktml>
