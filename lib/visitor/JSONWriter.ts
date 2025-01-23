@@ -10,7 +10,7 @@ export default class JSONWriter extends JSONVisitor {
     this.container = container;
   }
 
-  #set(key: string | number | null, value: JSONValue) {
+  _setProperty(key: string | number | null, value: JSONValue) {
     if (this.container) {
       if (Array.isArray(this.container)) {
         if (typeof (key) === 'number') {
@@ -30,47 +30,43 @@ export default class JSONWriter extends JSONVisitor {
     }
   }
 
-  #get() {
+  _getRoot() {
     return this.container ? this.container : this.rootValue;
   }
 
   visitObject(key: string | number | null): JSONVisitor | null {
     const ob = {};
-    this.#set(key, ob);
+    this._setProperty(key, ob);
     return new JSONWriter(super.visitObject(key), ob);
   }
 
   visitArray(key: string | number | null): JSONVisitor | null {
     const ar: JSONValue[] = [];
-    this.#set(key, ar);
+    this._setProperty(key, ar);
     return new JSONWriter(super.visitArray(key), ar);
   }
 
   visitString(key: string | number | null, value: string) {
-    this.#set(key, value);
+    this._setProperty(key, value);
     super.visitString(key, value);
   }
 
   visitNumber(key: string | number | null, value: number) {
-    this.#set(key, value);
+    this._setProperty(key, value);
     super.visitNumber(key, value);
   }
 
   visitBoolean(key: string | number | null, value: boolean) {
-    this.#set(key, value);
+    this._setProperty(key, value);
     super.visitBoolean(key, value);
   }
 
   visitNull(key: string | number | null) {
-    this.#set(key, null);
+    this._setProperty(key, null);
     super.visitNull(key);
   }
 
-  toString() {
-    return JSON.stringify(this.#get());
-  }
-
   toObject() {
-    return structuredClone(this.#get());
+    return structuredClone(this._getRoot());
   }
 }

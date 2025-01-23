@@ -2,10 +2,11 @@ import { describe, expect, test } from '@jest/globals';
 import { JSONValue } from '../lib/visitor/JSON.index';
 import JSONReader from '../lib/visitor/JSONReader';
 import JSONWriter from '../lib/visitor/JSONWriter';
+import JSONSerializer from '../lib/visitor/JSONSerializer';
 
 function roundtrip(value: JSONValue) {
   const reader = new JSONReader(value);
-  const writer = new JSONWriter();
+  const writer = new JSONSerializer();
   reader.accept(writer);
   expect(JSON.parse(writer.toString())).toStrictEqual(value);
 }

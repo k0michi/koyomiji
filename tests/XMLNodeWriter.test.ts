@@ -2,10 +2,12 @@ import { describe, expect, test } from '@jest/globals';
 import XMLDocumentReader from '../lib/visitor/XMLDocumentReader';
 import XMLDocumentWriter from '../lib/visitor/XMLDocumentWriter';
 import XMLPrinter from '../lib/visitor/XMLPrinter';
+import XMLDocumentParser from '../lib/visitor/XMLDocumentParser';
+import XMLDocumentSerializer from '../lib/visitor/XMLDocumentSerializer';
 
 function roundtrip(xml: string) {
-  const reader = XMLDocumentReader.fromString(xml);
-  const writer = new XMLDocumentWriter();
+  const reader = new XMLDocumentParser(xml);
+  const writer = new XMLDocumentSerializer();
   writer.setEmitXMLDecl(false);
   reader.accept(writer);
   expect(writer.toString()).toBe(xml);
@@ -65,8 +67,8 @@ describe('XMLNodeWriter', () => {
   });
 
   test('XML Decl 1', () => {
-    const reader = XMLDocumentReader.fromString(`<a href="https://koyomiji.com/"/>`);
-    const writer = new XMLDocumentWriter();
+    const reader = new XMLDocumentParser(`<a href="https://koyomiji.com/"/>`);
+    const writer = new XMLDocumentSerializer();
     writer.setEmitXMLDecl(true);
     reader.accept(writer);
     expect(writer.toString()).toBe(`<?xml version="1.0" encoding="UTF-8"?><a href="https://koyomiji.com/"/>`);

@@ -52,8 +52,4 @@ export default class XMLNodeWriter extends XMLNodeVisitor {
   toNode() {
     return this.container.cloneNode(true);
   }
-
-  toString() {
-    return XMLHelper.serialize(this.container);
-  }
 }
