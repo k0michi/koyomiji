@@ -1,10 +1,10 @@
 import window from "@k0michi/isomorphic-dom";
 import XMLNodeVisitor from "./XMLNodeVisitor";
 import XMLNodeWriter from "./XMLNodeWriter";
-import XMLDocumentFragmentWriter from "./XMLDocumentFragmentWriter";
+import XMLFragmentWriter from "./XMLFragmentWriter";
 import XMLHelper from "./XMLHelper";
 
-export default class XMLDocumentFragmentSerializer extends XMLDocumentFragmentWriter {
+export default class XMLFragmentSerializer extends XMLFragmentWriter {
   constructor(next?: XMLNodeVisitor | null) {
     super(next);
   }

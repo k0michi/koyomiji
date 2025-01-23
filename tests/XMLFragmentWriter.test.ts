@@ -1,12 +1,12 @@
 import { describe, expect, test } from '@jest/globals';
-import XMLDocumentFragmentReader from '../lib/visitor/XMLDocumentFragmentReader';
-import XMLDocumentFragmentWriter from '../lib/visitor/XMLDocumentFragmentWriter';
-import XMLDocumentFragmentParser from '../lib/visitor/XMLDocumentFragmentParser';
-import XMLDocumentFragmentSerializer from '../lib/visitor/XMLDocumentFragmentSerializer';
+import XMLFragmentReader from '../lib/visitor/XMLFragmentReader';
+import XMLFragmentWriter from '../lib/visitor/XMLFragmentWriter';
+import XMLFragmentParser from '../lib/visitor/XMLFragmentParser';
+import XMLFragmentSerializer from '../lib/visitor/XMLFragmentSerializer';
 
 function roundtrip(xml: string) {
-  const reader = new XMLDocumentFragmentParser(xml);
-  const writer = new XMLDocumentFragmentSerializer();
+  const reader = new XMLFragmentParser(xml);
+  const writer = new XMLFragmentSerializer();
   reader.accept(writer);
   expect(writer.toString()).toBe(xml);
 }
