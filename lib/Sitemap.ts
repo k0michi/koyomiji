@@ -2,6 +2,7 @@ import window from '@k0michi/isomorphic-dom';
 import { newElementCreator } from './xml';
 import URLHelper from './URLHelper';
 import SiteConfig from './config';
+import XMLDocumentSerializer from './visitor/XMLDocumentSerializer';
 
 export interface SitemapItem {
   loc: string;
@@ -24,30 +25,26 @@ export default class Sitemap {
 
   toXML(): string {
     const ns = 'http://www.sitemaps.org/schemas/sitemap/0.9';
-    const document = window.document.implementation.createDocument(ns, 'urlset');
-    const create = newElementCreator(document, ns);
-    const urlset = document.documentElement;
+    const serializer = new XMLDocumentSerializer();
+    const urlset = serializer.visitElement(ns, 'urlset');
 
     for (const u of Object.values(this.map)) {
-      const url = create('url');
-      url.appendChild(create('loc', {}, u.loc));
+      const url = urlset?.visitElement(ns, 'url');
+      url?.visitElement(ns, 'loc')?.visitTextNode(u.loc);
 
       if (u.lastMod != null) {
-        url.appendChild(create('lastmod', {}, u.lastMod));
+        url?.visitElement(ns, 'lastmod')?.visitTextNode(u.lastMod);
       }
 
       if (u.changeFreq != null) {
-        url.appendChild(create('changefreq', {}, u.changeFreq));
+        url?.visitElement(ns, 'changefreq')?.visitTextNode(u.changeFreq);
       }
 
       if (u.priority != null) {
-        url.appendChild(create('priority', {}, u.priority));
+        url?.visitElement(ns, 'priority')?.visitTextNode(u.priority);
       }
-
-      urlset.appendChild(url);
     }
 
-    const serializer = new window.XMLSerializer();
-    return '<?xml version="1.0" encoding="UTF-8"?>\n' + serializer.serializeToString(urlset);
+    return serializer.toString();
   }
 }
