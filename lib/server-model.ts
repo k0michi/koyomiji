@@ -1,6 +1,5 @@
 import path from "path";
 import { Dictionary, Entry } from "./entry";
-import { toPathname } from "./utils";
 import Sitemap from "./Sitemap";
 import * as fs from "fs/promises";
 import { toKTML } from "./markdown";
@@ -96,11 +95,6 @@ export class ServerModel {
 
   async readFile(internalPath: string) {
     return await fs.readFile(path.join(this.rootDir, internalPath));
-  }
-
-  // FIXME: Remove this
-  normalizePath(pathname: string) {
-    return toPathname(pathname.split('/').slice(0, -1));
   }
 
   registerAttachment(attachment: KTMLAttachment) {
