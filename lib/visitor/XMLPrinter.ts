@@ -18,6 +18,10 @@ export default class XMLPrinter extends XMLNodeVisitor {
     super.visitAttribute(namespace, qualifiedName, value);
   }
 
+  visitAttributeEnd(): void {
+    super.visitAttributeEnd();
+  }
+
   visitTextNode(data: string): void {
     console.log(' '.repeat(this.indent) + 'visitTextNode', data);
     super.visitTextNode(data);

@@ -15,6 +15,10 @@ export default class ReactNodeVisitor {
     this.next?.visitProp(key, value);
   }
 
+  visitPropEnd() {
+    this.next?.visitPropEnd();
+  }
+
   visitString(value: string) {
     this.next?.visitString(value);
   }

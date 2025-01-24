@@ -16,6 +16,8 @@ export default class XMLNodeReader {
         const at = el.attributes.item(i)!;
         visitor.visitAttribute(at.namespaceURI, at.name, at.value);
       }
+
+      visitor.visitAttributeEnd();
     }
 
     for (const c of this.container.childNodes) {

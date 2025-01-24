@@ -8,6 +8,7 @@ describe('ReactFragmentWriter', () => {
   test('Element 1', () => {
     const writer = new ReactFragmentWriter();
     const el = writer.visitElement('a');
+    el?.visitPropEnd();
     el?.visitEnd();
     writer.visitEnd();
     expect(ReactDOMServer.renderToString(writer.toReactNode())).toBe('<a></a>');
@@ -16,6 +17,7 @@ describe('ReactFragmentWriter', () => {
   test('Text 1', () => {
     const writer = new ReactFragmentWriter();
     const el = writer.visitElement('a');
+    el?.visitPropEnd();
     el?.visitString('foo');
     el?.visitEnd();
     writer.visitEnd();
@@ -25,9 +27,11 @@ describe('ReactFragmentWriter', () => {
   test('Element 2', () => {
     const writer = new ReactFragmentWriter();
     let el = writer.visitElement('a');
+    el?.visitPropEnd();
     el?.visitString('foo');
     el?.visitEnd();
     el = writer.visitElement('a');
+    el?.visitPropEnd();
     el?.visitString('foo');
     el?.visitEnd();
     writer.visitEnd();
@@ -38,6 +42,7 @@ describe('ReactFragmentWriter', () => {
     const writer = new ReactFragmentWriter();
     let el = writer.visitElement('a');
     el?.visitProp('href', '/');
+    el?.visitPropEnd();
     el?.visitString('foo');
     el?.visitEnd();
     writer.visitEnd();

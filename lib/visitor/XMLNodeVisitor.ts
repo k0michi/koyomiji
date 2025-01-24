@@ -13,6 +13,10 @@ export default class XMLNodeVisitor {
     this.next?.visitAttribute(namespace, qualifiedName, value);
   }
 
+  visitAttributeEnd() {
+    this.next?.visitAttributeEnd();
+  }
+
   visitTextNode(data: string) {
     this.next?.visitTextNode(data);
   }

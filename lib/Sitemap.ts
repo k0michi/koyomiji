@@ -33,24 +33,28 @@ export default class Sitemap {
 
       {
         const loc = url?.visitElement(ns, 'loc');
+        loc?.visitAttributeEnd();
         loc?.visitTextNode(u.loc);
         loc?.visitEnd();
       }
 
       if (u.lastMod != null) {
         const lastmod = url?.visitElement(ns, 'lastmod');
+        lastmod?.visitAttributeEnd();
         lastmod?.visitTextNode(u.lastMod);
         lastmod?.visitEnd();
       }
 
       if (u.changeFreq != null) {
         const changefreq = url?.visitElement(ns, 'changefreq');
+        changefreq?.visitAttributeEnd();
         changefreq?.visitTextNode(u.changeFreq);
         changefreq?.visitEnd();
       }
 
       if (u.priority != null) {
         const priority = url?.visitElement(ns, 'priority');
+        priority?.visitAttributeEnd();
         priority?.visitTextNode(u.priority);
         priority?.visitEnd();
       }

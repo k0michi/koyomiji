@@ -63,6 +63,10 @@ export default class KTMLReactTransformer extends XMLNodeVisitor {
     this.nextReact?.visitProp(split.local, value);
   }
 
+  visitAttributeEnd(): void {
+    this.nextReact?.visitPropEnd();
+  }
+
   visitTextNode(data: string): void {
     this.nextReact?.visitString(data);
   }
