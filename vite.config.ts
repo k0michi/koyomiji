@@ -16,4 +16,7 @@ export default defineConfig({
     tsconfigPaths(),
     koyomijiReload()
   ],
+  server: {
+    port: 5432
+  }
 });
