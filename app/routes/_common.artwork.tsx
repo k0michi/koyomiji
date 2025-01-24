@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Entry } from "../../lib/entry";
+import { Entry } from "../../lib/Entry.index";
 import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation } from 'react-router';
-import { ServerModel } from 'lib/server-model';
+import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {

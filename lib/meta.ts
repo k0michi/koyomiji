@@ -1,5 +1,5 @@
 import { Location, MetaDescriptor } from "react-router";
-import SiteConfig from "./config";
+import SiteConfig from "./SiteConfig";
 import URLHelper from "./URLHelper";
 
 export interface PageMeta {

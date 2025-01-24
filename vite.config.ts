@@ -1,7 +1,7 @@
 import { reactRouter } from "@react-router/dev/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig, Plugin } from "vite";
-import { ServerModel } from "./lib/server-model";
+import ServerModel from "./lib/ServerModel";
 import koyomijiReload from "./plugins/koyomiji-reload";
 
 export default defineConfig({

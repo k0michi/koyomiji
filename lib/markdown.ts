@@ -6,7 +6,7 @@ import type * as mdast from "mdast";
 import * as mdastMath from "mdast-util-math";
 import window from "@k0michi/isomorphic-dom";
 import crypto from "crypto";
-import { toISOStringJST } from "../lib/date-format";
+import { toISOStringJST } from "./DateFormat.index";
 import XMLHelper from "./visitor/XMLHelper";
 
 // FIXME
@@ -53,12 +53,42 @@ export function toDOM(source: string) {
 }
 
 function transformChildren(node: unist.Parent, parent: Element | DocumentFragment) {
+  const children: (string | Node)[] = [];
+  let hasRaw = false;
+
   for (const child of node.children) {
-    parent.appendChild(transformToDOM(child, parent.ownerDocument));
+    const transformed = transformToDOM(child, parent.ownerDocument);
+    children.push(transformed);
+
+    if (typeof (transformed) === 'string') {
+      hasRaw = true;
+    }
+  }
+
+  if (hasRaw) {
+    let result = '';
+
+    for (const c of children) {
+      if (typeof (c) === 'string') {
+        result += c;
+      } else {
+        result += XMLHelper.serialize(c);
+      }
+    }
+
+    const parsed = XMLHelper.parseFragment(result);
+
+    while (parsed.firstChild) {
+      parent.appendChild(parsed.firstChild);
+    }
+  } else {
+    for (const c of children as Node[]) {
+      parent.appendChild(c);
+    }
   }
 }
 
-export function transformToDOM(node: unist.Node, document: Document): Node {
+export function transformToDOM(node: unist.Node, document: Document): Node | string {
   if (node.type == 'root') {
     const root = node as mdast.Root;
     const element = document.createDocumentFragment();
@@ -68,6 +98,11 @@ export function transformToDOM(node: unist.Node, document: Document): Node {
     const paragraph = node as mdast.Paragraph;
     const element = document.createElement('p');
     transformChildren(paragraph, element);
+
+    if (element.childElementCount === 1 && element.firstElementChild?.tagName === 'img') {
+      return element.firstElementChild;
+    }
+
     return element;
   } else if (node.type == 'heading') {
     const heading = node as mdast.Heading;
@@ -98,7 +133,17 @@ export function transformToDOM(node: unist.Node, document: Document): Node {
     const element = document.createElement('code');
 
     if (code.lang != undefined) {
-      element.setAttribute('lang', code.lang);
+      if (code.lang.includes(':')) {
+        const split = code.lang.split(':');
+        if (split[0].length > 0) {
+          element.setAttribute('lang', split[0]);
+        }
+        if (split[1].length > 0) {
+          element.setAttribute('title', split[1]);
+        }
+      } else {
+        element.setAttribute('lang', code.lang);
+      }
     }
 
     element.append(code.value);
@@ -150,11 +195,25 @@ export function transformToDOM(node: unist.Node, document: Document): Node {
     return element;
   } else if (node.type == 'html') {
     const html = node as mdast.Html;
-    const parsed = XMLHelper.parseFragment(html.value);
-    // const element = document.createElement(parsed.firstElementChild!.tagName);
-    // const parsedMD = parse(parsed.firstElementChild!.innerHTML);
-    // transformChildren(parsedMD, element);
-    return parsed;
+    return html.value;
+    // const parsed = XMLHelper.parseFragment(html.value);
+
+    // console.log([...parsed.childNodes])
+    // for (const c of parsed.childNodes) {
+    //   if (c.nodeType === window.Node.ELEMENT_NODE) {
+    //     const el = (c as Element);
+    //     console.log(el.innerHTML)
+    //     const parsedMD = parse(el.innerHTML);
+
+    //     while (el.firstChild) {
+    //       el.firstChild.remove();
+    //     }
+
+    //     transformChildren(parsedMD, el);
+    //   }
+    // }
+
+    // return parsed;
   }
 
   throw new Error(`Type ${node.type} is not supported`);

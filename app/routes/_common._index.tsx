@@ -1,12 +1,12 @@
 import * as React from 'react';
 import CalenderGraph from '../../components/calender-graph';
 import { subDays } from 'date-fns';
-import * as config from '../../lib/config';
-import { toDisplayDateString } from '../../lib/date-format';
+import * as config from '../../lib/SiteConfig';
+import { toDisplayDateString } from '../../lib/DateFormat.index';
 import { getPathSegment } from '../../lib/utils';
 import { Link, LoaderFunction, LoaderFunctionArgs, MetaFunction, useLoaderData } from 'react-router';
 import { CalenderIcon } from '../../components/icon';
-import { ServerModel } from 'lib/server-model';
+import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {

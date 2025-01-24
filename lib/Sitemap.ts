@@ -1,7 +1,7 @@
 import window from '@k0michi/isomorphic-dom';
 import { newElementCreator } from './xml';
 import URLHelper from './URLHelper';
-import SiteConfig from './config';
+import SiteConfig from './SiteConfig';
 import XMLDocumentSerializer from './visitor/XMLDocumentSerializer';
 
 export interface SitemapItem {
