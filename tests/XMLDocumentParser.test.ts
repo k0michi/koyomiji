@@ -10,11 +10,15 @@ describe('XMLDocumentParser', () => {
     expect(() => new XMLDocumentParser(`<>`)).toThrow(Error);
   });
 
-  test('Not Error 1', () => {
+  test('Edge Case 1', () => {
     expect(() => new XMLDocumentParser(`<parsererror/>`)).not.toThrow(Error);
   });
 
-  test('Not Error 2', () => {
+  test('Edge Case 2', () => {
     expect(() => new XMLDocumentParser(`<parsererror xmlns="http://www.mozilla.org/newlayout/xml/parsererror.xml"/>`)).not.toThrow(Error);
+  });
+
+  test('Decl 1', () => {
+    expect(() => new XMLDocumentParser(`<?xml version="1.0" encoding="UTF-8"?><a/>`)).not.toThrow(Error);
   });
 });
