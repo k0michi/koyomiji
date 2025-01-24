@@ -16,7 +16,7 @@ describe('XMLDocumentWriter', () => {
   });
 
   test('Attribute 1', () => {
-    roundtrip(`<a href="https://koyomiji.com/"/>`);
+    roundtrip(`<a href="b"/>`);
   });
 
   test('Attribute 2', () => {

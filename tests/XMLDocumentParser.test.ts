@@ -30,6 +30,22 @@ describe('XMLDocumentParser', () => {
     expect(() => new XMLDocumentParser(`>`)).toThrow(Error);
   });
 
+  test('Error 7', () => {
+    expect(() => new XMLDocumentParser(`<!--a-->`)).toThrow(Error);
+  });
+
+  test('Error 8', () => {
+    expect(() => new XMLDocumentParser(`<?a ?>`)).toThrow(Error);
+  });
+
+  test('Error 9', () => {
+    expect(() => new XMLDocumentParser(``)).toThrow(Error);
+  });
+
+  test('Error 10', () => {
+    expect(() => new XMLDocumentParser(`a`)).toThrow(Error);
+  });
+
   test('Edge Case 1', () => {
     expect(() => new XMLDocumentParser(`<parsererror/>`)).not.toThrow(Error);
   });
