@@ -9,6 +9,18 @@ describe('XMLFragmentParser', () => {
     expect(() => new XMLFragmentParser(`<>`)).toThrow(Error);
   });
 
+  test('Edge Case 1', () => {
+    expect(() => new XMLFragmentParser(`</root>`)).toThrow(Error);
+  });
+
+  test('Edge Case 2', () => {
+    expect(() => new XMLFragmentParser(`</root><root>`)).toThrow(Error);
+  });
+
+  test('Edge Case 3', () => {
+    expect(() => new XMLFragmentParser(``)).not.toThrow(Error);
+  });
+
   test('Not Error 1', () => {
     expect(() => new XMLFragmentParser(`<parsererror/>`)).not.toThrow(Error);
   });

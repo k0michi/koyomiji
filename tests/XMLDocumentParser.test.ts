@@ -51,7 +51,7 @@ describe('XMLDocumentParser', () => {
   });
 
   test('Edge Case 2', () => {
-    expect(() => new XMLDocumentParser(`<parsererror xmlns="http://www.mozilla.org/newlayout/xml/parsererror.xml"/>`)).not.toThrow(Error);
+    expect(() => new XMLDocumentParser(`<parsererror/><?end ?><!--`)).toThrow(Error);
   });
 
   test('Decl 1', () => {
