@@ -1,15 +1,16 @@
 import { describe, expect, test } from '@jest/globals';
-import XMLFragmentParser from '../lib/visitor/XMLFragmentParser';
-import XMLFragmentSerializer from '../lib/visitor/XMLFragmentSerializer';
+import XMLDocumentParser from '../lib/visitor/XMLDocumentParser';
+import XMLDocumentSerializer from '../lib/visitor/XMLDocumentSerializer';
 
 function roundtrip(xml: string) {
-  const reader = new XMLFragmentParser(xml);
-  const writer = new XMLFragmentSerializer();
+  const reader = new XMLDocumentParser(xml);
+  const writer = new XMLDocumentSerializer();
+  writer.setEmitXMLDecl(false);
   reader.accept(writer);
   expect(writer.toString()).toBe(xml);
 }
 
-describe('XMLFragmentWriter', () => {
+describe('XMLDocumentWriter', () => {
   test('Element 1', () => {
     roundtrip(`<a/>`);
   });
@@ -59,47 +60,11 @@ describe('XMLFragmentWriter', () => {
   });
 
 
-  test('Fragment Element 1', () => {
-    roundtrip(`<a/><b/>`);
-  });
-
-  test('Fragment Element 2', () => {
-    roundtrip(`<a><e/></a><b/><c/><d/>`);
-  });
-
-  test('Fragment Text 1', () => {
-    roundtrip(`a<a/>b`);
-  });
-
-  test('Fragment Text 2', () => {
-    roundtrip(`a`);
-  });
-
-  test('Fragment CDATA 1', () => {
-    roundtrip(`<a/><![CDATA[abc<>&"']]>`);
-  });
-
-  test('Fragment CDATA 2', () => {
-    roundtrip(`<![CDATA[abc<>&"']]>`);
-  });
-
   test('Edge Case 1', () => {
-    roundtrip(`<root/>`);
+    roundtrip(`<a/><?end ?>`);
   });
 
-  test('Fragment Processing Instruction 1', () => {
-    roundtrip(`<?abc e="f"?>`);
-  });
-
-  test('Fragment Processing Instruction 2', () => {
-    roundtrip(`<?abc ?>`);
-  });
-
-  test('Fragment Comment 1', () => {
-    roundtrip(`<!--a-->`);
-  });
-
-  test('Fragment Comment 2', () => {
-    roundtrip(`<!--a--><!--b-->`);
+  test('Edge Case 2', () => {
+    roundtrip(`<?end ?><a/><?end ?>`);
   });
 });
