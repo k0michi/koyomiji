@@ -9,6 +9,7 @@ export interface PageMeta {
   type?: 'general' | 'article';
   published?: string;
   modified?: string;
+  locale?: string;
 }
 
 function title(title: string) {
@@ -56,7 +57,7 @@ export function getMeta(pageMeta: PageMeta): MetaDescriptor[] {
       type: 'application/atom+xml',
       href: '/feed.xml'
     }),
-    metaProperty('og:locale', 'ja_JP'),
+    metaProperty('og:locale', pageMeta.locale ?? 'ja_JP'),
     metaProperty('og:site_name', SiteConfig.getInfo().name),
     metaProperty('og:url', url),
     metaProperty('og:title', t),
