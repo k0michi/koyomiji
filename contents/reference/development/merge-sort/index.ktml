@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -8,22 +9,22 @@
 </head>
 
 <body>
-  <p>平均計算時間: <math>O(n \log n)</math></p>
+  <p>平均計算時間: <math><![CDATA[O(n \log n)]]></math></p>
   <p>安定ソート</p>
   <h2>JavaScriptによる実装</h2>
-  <code lang="js">function merge(a, left, mid, right) {
+  <blockcode lang="js"><![CDATA[function merge(a, left, mid, right) {
   const aLeft = a.slice(left, mid);
   const aRight = a.slice(mid, right);
   let i = 0, j = 0;
 
-  for (let k = left; k &lt; right; k++) {
-    if (i &gt;= mid - left) {
+  for (let k = left; k < right; k++) {
+    if (i >= mid - left) {
       a[k] = aRight[j];
       j++;
-    } else if (j &gt;= right - mid) {
+    } else if (j >= right - mid) {
       a[k] = aLeft[i];
       i++;
-    } else if (aLeft[i] &lt;= aRight[j]) {
+    } else if (aLeft[i] <= aRight[j]) {
       a[k] = aLeft[i];
       i++;
     } else {
@@ -34,7 +35,7 @@
 }
 
 function mergeSort(a, left = 0, right = a.length) {
-  if (left + 1 &lt; right) {
+  if (left + 1 < right) {
     const mid = (left + right) / 2;
     mergeSort(a, left, mid);
     mergeSort(a, mid, right);
@@ -46,7 +47,7 @@ const a = [7, 15, 1, 8, 11, 5, 13, 0, 2, 4, 6, 3, 12, 14, 9, 10];
 mergeSort(a);
 
 console.log(a);
-// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]</code>
+// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]]]></blockcode>
 </body>
 
 </ktml>

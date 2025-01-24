@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -8,27 +9,27 @@
 </head>
 
 <body>
-  <p>静的サイトジェネレーターとGitHub Pagesを使えば、ものの数分で自分のサイトを作って公開することができます。ということで今回は、Hugoで作ったサイトをGitHub Pagesに公開するまでの手順を説明していきます。</p><h2>前提</h2><ul><li><p>GitHubアカウントを持っていること</p></li><li><p>Gitがインストールされていること (<a href="https://git-scm.com/book/ja/v2/%E4%BD%BF%E3%81%84%E5%A7%8B%E3%82%81%E3%82%8B-Git%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">インストール方法</a>)</p></li><li><p>Hugoがインストールされていること (<a href="https://gohugo.io/getting-started/installing/">インストール方法</a>)</p></li></ul><h2>手順1. Hugoのサイトを作成する</h2><p><code>hugo new site [ディレクトリ名]</code>で新しくHugoのサイトを作成します。ここでは<code>hugo-example</code>というディレクトリ名にしました。</p><code lang="bash">% hugo new site hugo-example
+  <p>静的サイトジェネレーターとGitHub Pagesを使えば、ものの数分で自分のサイトを作って公開することができます。ということで今回は、Hugoで作ったサイトをGitHub Pagesに公開するまでの手順を説明していきます。</p><h2>前提</h2><ul><li><p>GitHubアカウントを持っていること</p></li><li><p>Gitがインストールされていること (<a ref="https://git-scm.com/book/ja/v2/%E4%BD%BF%E3%81%84%E5%A7%8B%E3%82%81%E3%82%8B-Git%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">インストール方法</a>)</p></li><li><p>Hugoがインストールされていること (<a ref="https://gohugo.io/getting-started/installing/">インストール方法</a>)</p></li></ul><h2>手順1. Hugoのサイトを作成する</h2><p><code><![CDATA[hugo new site [ディレクトリ名]]]></code>で新しくHugoのサイトを作成します。ここでは<code><![CDATA[hugo-example]]></code>というディレクトリ名にしました。</p><blockcode lang="bash"><![CDATA[% hugo new site hugo-example
 Congratulations! Your new Hugo site is created in /Users/k0michi/Repository/Development/hugo-example.
 
 Just a few more steps and you're ready to go:
 
 1. Download a theme into the same-named folder.
    Choose a theme from https://themes.gohugo.io/ or
-   create your own with the "hugo new theme &lt;THEMENAME&gt;" command.
+   create your own with the "hugo new theme <THEMENAME>" command.
 2. Perhaps you want to add some content. You can add single files
-   with "hugo new &lt;SECTIONNAME&gt;/&lt;FILENAME&gt;.&lt;FORMAT&gt;".
+   with "hugo new <SECTIONNAME>/<FILENAME>.<FORMAT>".
 3. Start the built-in live server via "hugo server".
 
-Visit https://gohugo.io/ for quickstart guide and full documentation.</code><p>上記のようなメッセージが出れば、サイトの作成に成功しています。</p><h2>手順2. テーマをインストールする</h2><p>手順1で作成されたディレクトリに移動してテーマをインストールします。ここでは公式のQuick Startでも使われているAnankeというテーマをインストールしていますが、もしお好みのテーマがあればそれを使いましょう。</p><code lang="bash">% cd hugo-example
+Visit https://gohugo.io/ for quickstart guide and full documentation.]]></blockcode><p>上記のようなメッセージが出れば、サイトの作成に成功しています。</p><h2>手順2. テーマをインストールする</h2><p>手順1で作成されたディレクトリに移動してテーマをインストールします。ここでは公式のQuick Startでも使われているAnankeというテーマをインストールしていますが、もしお好みのテーマがあればそれを使いましょう。</p><blockcode lang="bash"><![CDATA[% cd hugo-example
 % git init
 % git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke
-% echo theme = \"ananke\" &gt;&gt; config.toml</code><h2>手順3. ページを追加する</h2><p><code>hugo new posts/[ページの名前].md</code>で新しいページを追加します。ページの名前には英数字とハイフン(-)を使いましょう。ここではaboutというページを作成しています。</p><code>% hugo new posts/about.md</code><p>上記のコマンドを実行すると、<code>content/posts/[ページの名前].md</code>にファイルが出来上がるので、これを編集します。好きなように書き換えましょう。<code>draft: true</code>となっていると、ページが公開されないので注意です。</p><code lang="markdown">---
+% echo theme = \"ananke\" >> config.toml]]></blockcode><h2>手順3. ページを追加する</h2><p><code><![CDATA[hugo new posts/[ページの名前].md]]></code>で新しいページを追加します。ページの名前には英数字とハイフン(-)を使いましょう。ここではaboutというページを作成しています。</p><blockcode><![CDATA[% hugo new posts/about.md]]></blockcode><p>上記のコマンドを実行すると、<code><![CDATA[content/posts/[ページの名前].md]]></code>にファイルが出来上がるので、これを編集します。好きなように書き換えましょう。<code><![CDATA[draft: true]]></code>となっていると、ページが公開されないので注意です。</p><blockcode lang="markdown"><![CDATA[---
 title: "About"
 date: 2022-10-28T20:17:48+09:00
 ---
 
-Hugoのテストです。</code><h2>手順4. 表示を確かめる</h2><p><code>hugo serve</code>でサーバーを立ち上げることができます。<code>http://localhost:1313/</code>にアクセスして、手順3で追加したページが正しく表示されているか確かめます。</p><code lang="bash">% hugo server
+Hugoのテストです。]]></blockcode><h2>手順4. 表示を確かめる</h2><p><code><![CDATA[hugo serve]]></code>でサーバーを立ち上げることができます。<code><![CDATA[http://localhost:1313/]]></code>にアクセスして、手順3で追加したページが正しく表示されているか確かめます。</p><blockcode lang="bash"><![CDATA[% hugo server
 Start building sites … 
 hugo v0.104.3+extended darwin/arm64 BuildDate=unknown
 
@@ -49,11 +50,11 @@ Watching for config changes in /Users/k0michi/Repository/Development/hugo-exampl
 Environment: "development"
 Serving pages from memory
 Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
-Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)</code><h2>手順5. リポジトリを作る</h2><p>GitHubにサイト用のリポジトリを作ります。リポジトリの名前はなんでも構いません。
-<img src="github-repository.png"/></p><h2>手順6. configを変更する</h2><p>config.tomlの<code>baseURL</code>と<code>languageCode</code>を変更します。<code>baseURL</code>にはGitHubのユーザー名、そして手順5で作成したリポジトリ名から、以下のように設定します。</p><p><code>languageCode</code>は、日本語ならば<code>ja</code>です。</p><code lang="toml">baseURL = 'http://[ユーザー名].github.io/[リポジトリ名]'
+Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)]]></blockcode><h2>手順5. リポジトリを作る</h2><p>GitHubにサイト用のリポジトリを作ります。リポジトリの名前はなんでも構いません。
+<img src="github-repository.png"/></p><h2>手順6. configを変更する</h2><p>config.tomlの<code><![CDATA[baseURL]]></code>と<code><![CDATA[languageCode]]></code>を変更します。<code><![CDATA[baseURL]]></code>にはGitHubのユーザー名、そして手順5で作成したリポジトリ名から、以下のように設定します。</p><p><code><![CDATA[languageCode]]></code>は、日本語ならば<code><![CDATA[ja]]></code>です。</p><blockcode lang="toml"><![CDATA[baseURL = 'http://[ユーザー名].github.io/[リポジトリ名]'
 languageCode = 'ja'
 title = 'My New Hugo Site'
-theme = "ananke"</code><h2>手順7. .gitignoreを作る</h2><p>デフォルトでは.gitignoreが無いので、生成されたファイルがリポジトリに含まれてしまいます。幸い、<a href="https://github.com/github/gitignore">github.com/github/gitignore</a>に<a href="https://github.com/github/gitignore/blob/main/community/Golang/Hugo.gitignore">Hugo.gitignore</a>があるのでこれを使います。以下の内容を、.gitignoreとして保存します。</p><code lang="gitignore"># Generated files by hugo
+theme = "ananke"]]></blockcode><h2>手順7. .gitignoreを作る</h2><p>デフォルトでは.gitignoreが無いので、生成されたファイルがリポジトリに含まれてしまいます。幸い、<a ref="https://github.com/github/gitignore">github.com/github/gitignore</a>に<a ref="https://github.com/github/gitignore/blob/main/community/Golang/Hugo.gitignore">Hugo.gitignore</a>があるのでこれを使います。以下の内容を、.gitignoreとして保存します。</p><blockcode lang="gitignore"><![CDATA[# Generated files by hugo
 /public/
 /resources/_gen/
 /assets/jsconfig.json
@@ -65,7 +66,7 @@ hugo.darwin
 hugo.linux
 
 # Temporary lock file while building
-/.hugo_build.lock</code><h2>手順8. ワークフローを作る</h2><p>GitHub Actionsを使うことにより、サイトをビルドして、GitHub Pagesに公開するまでの一連の工程をGitHubのサーバー上で行うことができます。HugoのサイトをビルドしてPagesに公開するためのワークフローは、<a href="https://github.com/actions/starter-workflows">actions/starter-workflows</a>の<a href="https://github.com/actions/starter-workflows/blob/main/pages/hugo.yml">hugo.yml</a>に用意されているので、これを拝借します。以下の内容を、.github/workflows/pages.ymlとして保存します。</p><code lang="yaml"># Sample workflow for building and deploying a Hugo site to GitHub Pages
+/.hugo_build.lock]]></blockcode><h2>手順8. ワークフローを作る</h2><p>GitHub Actionsを使うことにより、サイトをビルドして、GitHub Pagesに公開するまでの一連の工程をGitHubのサーバー上で行うことができます。HugoのサイトをビルドしてPagesに公開するためのワークフローは、<a ref="https://github.com/actions/starter-workflows">actions/starter-workflows</a>の<a ref="https://github.com/actions/starter-workflows/blob/main/pages/hugo.yml">hugo.yml</a>に用意されているので、これを拝借します。以下の内容を、.github/workflows/pages.ymlとして保存します。</p><blockcode lang="yaml"><![CDATA[# Sample workflow for building and deploying a Hugo site to GitHub Pages
 name: Deploy Hugo site to Pages
 
 on:
@@ -102,7 +103,7 @@ jobs:
       - name: Install Hugo CLI
         run: |
           wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.deb \
-          &amp;&amp; sudo dpkg -i ${{ runner.temp }}/hugo.deb
+          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -134,16 +135,16 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1</code><h2>手順9. GitHub Pagesを有効にする</h2><p>GitHubのリポジトリからSettingsを開き、GitHub Pagesの項目を開きます。Build and deploymentのSourceを、GitHub Actionsに設定します。
-<img src="github-pages.png"/></p><h2>手順10. リポジトリをPushする</h2><p>ローカルリポジトリを作成し、GitHub上にPushします。</p><code lang="bash">% git init
+        uses: actions/deploy-pages@v1]]></blockcode><h2>手順9. GitHub Pagesを有効にする</h2><p>GitHubのリポジトリからSettingsを開き、GitHub Pagesの項目を開きます。Build and deploymentのSourceを、GitHub Actionsに設定します。
+<img src="github-pages.png"/></p><h2>手順10. リポジトリをPushする</h2><p>ローカルリポジトリを作成し、GitHub上にPushします。</p><blockcode lang="bash"><![CDATA[% git init
 % git add .
 % git commit -m "Initial commit"
 % git branch -M main
 % git remote add origin https://github.com/[ユーザー名]/[リポジトリ名].git
-% git push -u origin main</code><h2>完成</h2><p>Pushされたタイミングで先ほど設定したワークフローが自動的に実行され、GitHub Pagesにサイトがデプロイされます。Actionsを選択し、以下のようにチェックマークが表示されていれば、デプロイに成功しています。
+% git push -u origin main]]></blockcode><h2>完成</h2><p>Pushされたタイミングで先ほど設定したワークフローが自動的に実行され、GitHub Pagesにサイトがデプロイされます。Actionsを選択し、以下のようにチェックマークが表示されていれば、デプロイに成功しています。
 <img src="github-actions.png"/>
 https://[ユーザー名].github.io/[リポジトリ名] にアクセスすると、実際にサイトがGitHub Pages上で公開されていることがわかります。
-<img src="site.png"/></p><h2>参考</h2><p>今回構築したサイトは、<a href="https://k0michi.github.io/hugo-example/">https://k0michi.github.io/hugo-example/</a>から見ることができます。リポジトリは、<a href="https://github.com/k0michi/hugo-example">k0michi/hugo-example</a>にあります。</p>
+<img src="site.png"/></p><h2>参考</h2><p>今回構築したサイトは、<a ref="https://k0michi.github.io/hugo-example/">https://k0michi.github.io/hugo-example/</a>から見ることができます。リポジトリは、<a ref="https://github.com/k0michi/hugo-example">k0michi/hugo-example</a>にあります。</p>
 </body>
 
 </ktml>

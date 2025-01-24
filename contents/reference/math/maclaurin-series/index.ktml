@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -9,12 +10,12 @@
 
 <body>
   <h2>テイラー展開</h2>
-  <p>無限回微分可能な<math>f(x)</math>について、</p>
-  <math>f(x) = f(a) + f^{\prime}(a)\left(x-a\right) + \frac{1}{2!}f^{\prime\prime}(a)\left(x-a\right)^2 + \cdots = \sum_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}\left(x-a\right)^n</math>
+  <p>無限回微分可能な<math><![CDATA[f(x)]]></math>について、</p>
+  <blockmath><![CDATA[f(x) = f(a) + f^{\prime}(a)\left(x-a\right) + \frac{1}{2!}f^{\prime\prime}(a)\left(x-a\right)^2 + \cdots = \sum_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}\left(x-a\right)^n]]></blockmath>
   <h2>マクローリン展開</h2>
-  <p>テイラー展開の<math>a = 0</math>の場合、マクローリン展開という。</p>
-  <p>無限回微分可能な<math>f(x)</math>について、</p>
-  <math>f(x) = f(0) + f^{\prime}(0)x + \frac{1}{2!}f^{\prime\prime}(0)x^2 + \cdots = \sum_{n=0}^{\infty}\frac{f^{(n)}(0)}{n!}x^n</math>
+  <p>テイラー展開の<math><![CDATA[a = 0]]></math>の場合、マクローリン展開という。</p>
+  <p>無限回微分可能な<math><![CDATA[f(x)]]></math>について、</p>
+  <blockmath><![CDATA[f(x) = f(0) + f^{\prime}(0)x + \frac{1}{2!}f^{\prime\prime}(0)x^2 + \cdots = \sum_{n=0}^{\infty}\frac{f^{(n)}(0)}{n!}x^n]]></blockmath>
 </body>
 
 </ktml>

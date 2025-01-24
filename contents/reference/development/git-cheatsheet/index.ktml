@@ -1,65 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>Gitチートシート</title>
   <id>e7b8704f-56cf-48b4-94ef-f1e9535d94a4</id>
   <created>2022-07-06T14:48:57+09:00</created>
+  <modified>2022-07-06T14:48:57+09:00</modified>
 </head>
 
 <body>
   <h2>Gitの設定</h2>
-  <code lang="bash">$ git config --global user.name "username"
-$ git config --global user.email "user@example.com"</code>
+  <blockcode lang="bash"><![CDATA[$ git config --global user.name "username"
+$ git config --global user.email "user@example.com"]]></blockcode>
 
   <h2>Gitの初期化</h2>
-  <code lang="bash">$ git init</code>
+  <blockcode lang="bash"><![CDATA[$ git init]]></blockcode>
   <p>ディレクトリを指定する場合</p>
-  <code lang="bash">$ git init directory</code>
+  <blockcode lang="bash"><![CDATA[$ git init directory]]></blockcode>
 
   <h2>ステージに追加</h2>
-  <code lang="bash">$ git add filename</code>
+  <blockcode lang="bash"><![CDATA[$ git add filename]]></blockcode>
   <p>カレントディレクトリ内の全てのファイルをステージに追加</p>
-  <code lang="bash">$ git add .</code>
+  <blockcode lang="bash"><![CDATA[$ git add .]]></blockcode>
 
   <h2>コミット</h2>
-  <code lang="bash">$ git commit</code>
+  <blockcode lang="bash"><![CDATA[$ git commit]]></blockcode>
   <p>コミットメッセージを指定する場合</p>
-  <code lang="bash">$ git commit -m "message"</code>
+  <blockcode lang="bash"><![CDATA[$ git commit -m "message"]]></blockcode>
 
   <h2>クローン</h2>
-  <code lang="bash">$ git clone "URL"</code>
+  <blockcode lang="bash"><![CDATA[$ git clone "URL"]]></blockcode>
 
   <h2>プッシュ</h2>
-  <code lang="bash">$ git push</code>
+  <blockcode lang="bash"><![CDATA[$ git push]]></blockcode>
 
   <h2>ログ</h2>
-  <code lang="bash">$ git log</code>
+  <blockcode lang="bash"><![CDATA[$ git log]]></blockcode>
 
   <h2>diffを表示</h2>
-  <code lang="bash">$ git diff</code>
+  <blockcode lang="bash"><![CDATA[$ git diff]]></blockcode>
 
   <h2>ブランチを表示</h2>
-  <code lang="bash">$ git branch</code>
+  <blockcode lang="bash"><![CDATA[$ git branch]]></blockcode>
 
   <h2>ブランチを作成</h2>
-  <code lang="bash">$ git branch branchname</code>
+  <blockcode lang="bash"><![CDATA[$ git branch branchname]]></blockcode>
 
   <h2>ブランチの切り替え</h2>
-  <code lang="bash">$ git checkout branchname</code>
+  <blockcode lang="bash"><![CDATA[$ git checkout branchname]]></blockcode>
   <p>-bオプションでブランチを作成してから切り替える。</p>
-  <code lang="bash">$ git checkout -b branchname</code>
+  <blockcode lang="bash"><![CDATA[$ git checkout -b branchname]]></blockcode>
 
   <h2>マージ</h2>
   <p>anotherbranchを現在のブランチにマージする。</p>
-  <code lang="bash">$ git merge anotherbranch</code>
+  <blockcode lang="bash"><![CDATA[$ git merge anotherbranch]]></blockcode>
 
   <h2>remoteを追加</h2>
-  <code lang="bash">$ git remote add "name" "url"</code>
+  <blockcode lang="bash"><![CDATA[$ git remote add "name" "url"]]></blockcode>
   <p>nameは慣習的にoriginとする。</p>
-  <code lang="bash">$ git remote add origin "url"</code>
+  <blockcode lang="bash"><![CDATA[$ git remote add origin "url"]]></blockcode>
 
   <h2>remoteを削除</h2>
-  <code lang="bash">$ git remote remove "name"</code>
+  <blockcode lang="bash"><![CDATA[$ git remote remove "name"]]></blockcode>
 </body>
 
 </ktml>

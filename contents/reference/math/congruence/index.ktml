@@ -1,29 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>合同式</title>
   <id>3352c08a-3f25-471c-acf9-57a44bc8da3c</id>
   <created>2022-06-30T13:08:11+09:00</created>
+  <modified>2022-06-30T13:08:11+09:00</modified>
 </head>
 
 <body>
-  <p><math>a - b</math>が<math>n</math>の倍数であるとき、<math>a, b</math>は<math>n</math>を<b>法</b>として<b>合同</b>であるといい、以下の<b>合同式</b>で表す。</p>
-  <math>a \equiv b\ (\rm{mod}\ n)</math>
-  <p>これは<math>a</math>を<math>n</math>で割った余りと、<math>b</math>を<math>n</math>で割った余りが等しいことと同値である。</p>
+  <p><math><![CDATA[a - b]]></math>が<math><![CDATA[n]]></math>の倍数であるとき、<math><![CDATA[a, b]]></math>は<math><![CDATA[n]]></math>を<b>法</b>として<b>合同</b>であるといい、以下の<b>合同式</b>で表す。</p>
+  <blockmath><![CDATA[a \equiv b\ (\rm{mod}\ n)]]></blockmath>
+  <p>これは<math><![CDATA[a]]></math>を<math><![CDATA[n]]></math>で割った余りと、<math><![CDATA[b]]></math>を<math><![CDATA[n]]></math>で割った余りが等しいことと同値である。</p>
 
   <h2>性質</h2>
-  <p>反射律: <math>a \equiv a\ (\rm{mod}\ n)</math></p>
-  <p>対称律: <math>a \equiv b\ (\rm{mod}\ n)</math>ならば、<math>b \equiv a\ (\rm{mod}\ n)</math></p>
-  <p>推移律: <math>a \equiv b\ (\rm{mod}\ n)</math>かつ<math>b \equiv c\ (\rm{mod}\ n)</math>ならば、<math>a \equiv c\ (\rm{mod}\ n)</math></p>
-  <p><math>a \equiv b\ (\rm{mod}\ n)</math>かつ<math>c \equiv d\ (\rm{mod}\ n)</math>のとき、</p>
+  <p>反射律: <math><![CDATA[a \equiv a\ (\rm{mod}\ n)]]></math></p>
+  <p>対称律: <math><![CDATA[a \equiv b\ (\rm{mod}\ n)]]></math>ならば、<math><![CDATA[b \equiv a\ (\rm{mod}\ n)]]></math></p>
+  <p>推移律: <math><![CDATA[a \equiv b\ (\rm{mod}\ n)]]></math>かつ<math><![CDATA[b \equiv c\ (\rm{mod}\ n)]]></math>ならば、<math><![CDATA[a \equiv c\ (\rm{mod}\ n)]]></math></p>
+  <p><math><![CDATA[a \equiv b\ (\rm{mod}\ n)]]></math>かつ<math><![CDATA[c \equiv d\ (\rm{mod}\ n)]]></math>のとき、</p>
   <ul>
-    <li><math>a + c \equiv b + d\ (\rm{mod}\ n)</math></li>
-    <li><math>a - c \equiv b - d\ (\rm{mod}\ n)</math></li>
-    <li><math>ac \equiv bd\ (\rm{mod}\ n)</math></li>
-    <li><math>a^k \equiv b^k\ (\rm{mod}\ n)</math> ただし、<math>k</math>は自然数</li>
+    <li><blockmath><![CDATA[a + c \equiv b + d\ (\rm{mod}\ n)]]></blockmath></li>
+    <li><blockmath><![CDATA[a - c \equiv b - d\ (\rm{mod}\ n)]]></blockmath></li>
+    <li><blockmath><![CDATA[ac \equiv bd\ (\rm{mod}\ n)]]></blockmath></li>
+    <li><blockmath><![CDATA[a^k \equiv b^k\ (\rm{mod}\ n)]]></blockmath> ただし、<blockmath><![CDATA[k]]></blockmath>は自然数</li>
   </ul>
-  <p><math>ka \equiv kb\ (\rm{mod}\ n)</math>かつ<math>k</math>と<math>n</math>が互いに素のとき、<math>a \equiv b\ (\rm{mod}\ n)</math></p>
-  <p><math>ka \equiv kb\ (\rm{mod}\ kn)</math>かつ<math>k \ne 0</math>のとき、<math>a \equiv b\ (\rm{mod}\ n)</math></p>
+  <p><math><![CDATA[ka \equiv kb\ (\rm{mod}\ n)]]></math>かつ<math><![CDATA[k]]></math>と<math><![CDATA[n]]></math>が互いに素のとき、<math><![CDATA[a \equiv b\ (\rm{mod}\ n)]]></math></p>
+  <p><math><![CDATA[ka \equiv kb\ (\rm{mod}\ kn)]]></math>かつ<math><![CDATA[k \ne 0]]></math>のとき、<math><![CDATA[a \equiv b\ (\rm{mod}\ n)]]></math></p>
 </body>
 
 </ktml>

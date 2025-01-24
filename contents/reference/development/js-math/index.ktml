@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -9,57 +10,57 @@
 
 <body>
   <h2>冪乗</h2>
-  <p>冪乗<math>b^x</math>を求めるには、<code lang="js">Math.pow(b, x)</code>を用いる。</p>
-  <code lang="js">Math.pow(2, 10) // 1024
-Math.pow(10, 3) // 1000</code>
-  <p>ECMAScript 2016以降では、冪乗演算子(exponentiation operator)<code lang="js">b ** x</code>でも同様の結果が得られる。</p>
-  <code lang="js">2 ** 10 // 1024
-10 ** 3 // 1000</code>
+  <p>冪乗<math><![CDATA[b^x]]></math>を求めるには、<code lang="js"><![CDATA[Math.pow(b, x)]]></code>を用いる。</p>
+  <blockcode lang="js"><![CDATA[Math.pow(2, 10) // 1024
+Math.pow(10, 3) // 1000]]></blockcode>
+  <p>ECMAScript 2016以降では、冪乗演算子(exponentiation operator)<code lang="js"><![CDATA[b ** x]]></code>でも同様の結果が得られる。</p>
+  <blockcode lang="js"><![CDATA[2 ** 10 // 1024
+10 ** 3 // 1000]]></blockcode>
   <p>冪乗演算子では、BigIntの冪乗も計算可能である。</p>
-  <code lang="js">2 ** 64 // 18446744073709552000
-2n ** 64n // 18446744073709551616n</code>
+  <blockcode lang="js"><![CDATA[2 ** 64 // 18446744073709552000
+2n ** 64n // 18446744073709551616n]]></blockcode>
 
   <h2>対数</h2>
-  <p>自然対数<math>\ln x</math>を求めるには、<code lang="js">Math.log(x)</code>を用いる。また、自然対数の底<math>e</math>は<code lang="js">Math.E</code>で取得できる。</p>
-  <code lang="js">Math.log(1) // 0
+  <p>自然対数<math><![CDATA[\ln x]]></math>を求めるには、<code lang="js"><![CDATA[Math.log(x)]]></code>を用いる。また、自然対数の底<math><![CDATA[e]]></math>は<code lang="js"><![CDATA[Math.E]]></code>で取得できる。</p>
+  <blockcode lang="js"><![CDATA[Math.log(1) // 0
 Math.log(Math.E) // 1
-Math.log(Math.E ** 2) // 2 </code>
-  <p>10を底とした常用対数<math>\log_{10} x</math>は、<code lang="js">Math.log10(x)</code>、2を底とした対数<math>\log_2 x</math>は、<code lang="js">Math.log2(x)</code>でそれぞれ求められる。</p>
-  <code lang="js">Math.log10(10) // 1
+Math.log(Math.E ** 2) // 2 ]]></blockcode>
+  <p>10を底とした常用対数<math><![CDATA[\log_{10} x]]></math>は、<code lang="js"><![CDATA[Math.log10(x)]]></code>、2を底とした対数<math><![CDATA[\log_2 x]]></math>は、<code lang="js"><![CDATA[Math.log2(x)]]></code>でそれぞれ求められる。</p>
+  <blockcode lang="js"><![CDATA[Math.log10(10) // 1
 Math.log10(123) // 2.089905111439398
-Math.log2(128) // 7 </code>
-  <p>任意の実数<math>b</math>を底とした対数<math>\log_b x</math>は、底の変換公式を用いて計算できる。</p>
-  <math>\log_b x = \frac{\ln x}{\ln b}</math>
-  <code lang="js">function logb(b, x) {
+Math.log2(128) // 7 ]]></blockcode>
+  <p>任意の実数<math><![CDATA[b]]></math>を底とした対数<math><![CDATA[\log_b x]]></math>は、底の変換公式を用いて計算できる。</p>
+  <blockmath><![CDATA[\log_b x = \frac{\ln x}{\ln b}]]></blockmath>
+  <blockcode lang="js"><![CDATA[function logb(b, x) {
   return Math.log(x) / Math.log(b);
 }
 
 logb(5, 5) // 1
-logb(5, 25) // 2</code>
+logb(5, 25) // 2]]></blockcode>
 
   <h2>三角関数</h2>
-  <p><math>\sin x</math>, <math>\cos x</math>, <math>\tan x</math>は<code lang="js">Math.sin(x)</code>, <code lang="js">Math.cos(x)</code>, <code lang="js">Math.tan(x)</code>で求められる。ただし、引数はラジアンであることに注意する。<math>\pi</math>は<code lang="js">Math.PI</code>で取得できる。</p>
-  <code lang="js">Math.sin(Math.PI / 2) // 1
+  <p><math><![CDATA[\sin x]]></math>, <math><![CDATA[\cos x]]></math>, <math><![CDATA[\tan x]]></math>は<code lang="js"><![CDATA[Math.sin(x)]]></code>, <code lang="js"><![CDATA[Math.cos(x)]]></code>, <code lang="js"><![CDATA[Math.tan(x)]]></code>で求められる。ただし、引数はラジアンであることに注意する。<math><![CDATA[\pi]]></math>は<code lang="js"><![CDATA[Math.PI]]></code>で取得できる。</p>
+  <blockcode lang="js"><![CDATA[Math.sin(Math.PI / 2) // 1
 Math.cos(Math.PI / 2) // 6.123233995736766e-17
-Math.tan(Math.PI / 4) // 0.9999999999999999</code>
+Math.tan(Math.PI / 4) // 0.9999999999999999]]></blockcode>
 
   <h2>度数法から弧度法に変換</h2>
-  <code lang="js">function degToRad(d) {
+  <blockcode lang="js"><![CDATA[function degToRad(d) {
   return d * (Math.PI / 180);
 }
 
 degToRad(180) // 3.141592653589793
 degToRad(45) // 0.7853981633974483
-</code>
+]]></blockcode>
 
   <h2>弧度法から度数法に変換</h2>
-  <code lang="js">function radToDeg(r) {
+  <blockcode lang="js"><![CDATA[function radToDeg(r) {
   return r * (180 / Math.PI);
 }
 
 radToDeg(Math.PI / 2) // 90
 radToDeg(Math.PI * (3 / 2)) // 270
-</code>
+]]></blockcode>
 </body>
 
 </ktml>

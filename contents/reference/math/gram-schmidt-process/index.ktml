@@ -1,27 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>Gram–Schmidtの直交化法</title>
   <id>553c48bb-a3d5-41c2-8ec2-b89e9bd4be24</id>
   <created>2022-09-04T20:34:51+09:00</created>
+  <modified>2022-09-04T20:34:51+09:00</modified>
 </head>
 
 <body>
   <h2>直行化</h2>
-  <p>基底<math>\{\boldsymbol{v_1}, \boldsymbol{v_2}, ..., \boldsymbol{v_n}\}</math>から直交基底を求める。</p>
-  <math>\begin{aligned}
-    \boldsymbol{u_1} &amp;= \boldsymbol{v_1} \\
-  \boldsymbol{u_2} &amp;= \boldsymbol{v_2} - \frac{(\boldsymbol{v_2}, \boldsymbol{u_1})}{||\boldsymbol{u_1}||^2} \boldsymbol{u_1} \\
-  \boldsymbol{u_3} &amp;= \boldsymbol{v_3} - \frac{(\boldsymbol{v_3}, \boldsymbol{u_1})}{||\boldsymbol{u_1}||^2} \boldsymbol{u_1} - \frac{(\boldsymbol{v_3}, \boldsymbol{u_2})}{||\boldsymbol{u_2}||^2} \boldsymbol{u_2} \\
+  <p>基底<math><![CDATA[\{\boldsymbol{v_1}, \boldsymbol{v_2}, ..., \boldsymbol{v_n}\}]]></math>から直交基底を求める。</p>
+  <blockmath><![CDATA[\begin{aligned}
+    \boldsymbol{u_1} &= \boldsymbol{v_1} \\
+  \boldsymbol{u_2} &= \boldsymbol{v_2} - \frac{(\boldsymbol{v_2}, \boldsymbol{u_1})}{||\boldsymbol{u_1}||^2} \boldsymbol{u_1} \\
+  \boldsymbol{u_3} &= \boldsymbol{v_3} - \frac{(\boldsymbol{v_3}, \boldsymbol{u_1})}{||\boldsymbol{u_1}||^2} \boldsymbol{u_1} - \frac{(\boldsymbol{v_3}, \boldsymbol{u_2})}{||\boldsymbol{u_2}||^2} \boldsymbol{u_2} \\
   ... \\
-  \boldsymbol{u_k} &amp;= \boldsymbol{v_k} - \frac{(\boldsymbol{v_k}, \boldsymbol{u_1})}{||\boldsymbol{u_1}||^2} \boldsymbol{u_1} - \frac{(\boldsymbol{v_k}, \boldsymbol{u_2})}{||\boldsymbol{u_2}||^2} \boldsymbol{u_2} - ... - \frac{(\boldsymbol{v_k}, \boldsymbol{u_{k-1}})}{||\boldsymbol{u_{k-1}}||^2} \boldsymbol{u_{k-1}}
+  \boldsymbol{u_k} &= \boldsymbol{v_k} - \frac{(\boldsymbol{v_k}, \boldsymbol{u_1})}{||\boldsymbol{u_1}||^2} \boldsymbol{u_1} - \frac{(\boldsymbol{v_k}, \boldsymbol{u_2})}{||\boldsymbol{u_2}||^2} \boldsymbol{u_2} - ... - \frac{(\boldsymbol{v_k}, \boldsymbol{u_{k-1}})}{||\boldsymbol{u_{k-1}}||^2} \boldsymbol{u_{k-1}}
   \end{aligned}
-  </math>
-  <p>この手順により、直交基底<math>\{\boldsymbol{u_1}, \boldsymbol{u_2}, ..., \boldsymbol{u_n}\}</math>が得られる。</p>
+  ]]></blockmath>
+  <p>この手順により、直交基底<math><![CDATA[\{\boldsymbol{u_1}, \boldsymbol{u_2}, ..., \boldsymbol{u_n}\}]]></math>が得られる。</p>
   <h2>正規化</h2>
-  <p>得られた直交基底<math>\{\boldsymbol{u_1}, \boldsymbol{u_2}, ..., \boldsymbol{u_n}\}</math>を正規化する。</p>
-  <math>\boldsymbol{e_k} = \frac{\boldsymbol{u_k}}{||\boldsymbol{u_k}||}</math>
-  <p>よって、正規直交基底<math>\{\boldsymbol{e_1}, \boldsymbol{e_2}, ..., \boldsymbol{e_n}\}</math>が得られる。</p>
+  <p>得られた直交基底<math><![CDATA[\{\boldsymbol{u_1}, \boldsymbol{u_2}, ..., \boldsymbol{u_n}\}]]></math>を正規化する。</p>
+  <blockmath><![CDATA[\boldsymbol{e_k} = \frac{\boldsymbol{u_k}}{||\boldsymbol{u_k}||}]]></blockmath>
+  <p>よって、正規直交基底<math><![CDATA[\{\boldsymbol{e_1}, \boldsymbol{e_2}, ..., \boldsymbol{e_n}\}]]></math>が得られる。</p>
 </body>
 
 </ktml>

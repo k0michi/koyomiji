@@ -1,34 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>論理演算</title>
   <id>85e28eda-e5b5-4d6a-a439-08e144d21a0a</id>
   <created>2022-07-02T10:43:36+09:00</created>
+  <modified>2022-07-02T10:43:36+09:00</modified>
 </head>
 
 <body>
   <h2>否定</h2>
-  <math>\neg P</math>
-  <p><math>P</math>が真のとき<math>\neg P</math>は偽、<math>P</math>が偽のとき<math>\neg P</math>は真になる。</p>
+  <blockmath><![CDATA[\neg P]]></blockmath>
+  <p><math><![CDATA[P]]></math>が真のとき<math><![CDATA[\neg P]]></math>は偽、<math><![CDATA[P]]></math>が偽のとき<math><![CDATA[\neg P]]></math>は真になる。</p>
 
   <h2>論理積</h2>
-  <math>P \land Q</math>
-  <p><math>P</math>, <math>Q</math>が共に真であるときにだけ、<math>P \land Q</math>は真になる。</p>
-  <p><math>\neg (P \to \neg Q)</math>と等価。</p>
+  <blockmath><![CDATA[P \land Q]]></blockmath>
+  <p><math><![CDATA[P]]></math>, <math><![CDATA[Q]]></math>が共に真であるときにだけ、<math><![CDATA[P \land Q]]></math>は真になる。</p>
+  <p><math><![CDATA[\neg (P \to \neg Q)]]></math>と等価。</p>
 
   <h2>論理和</h2>
-  <math>P \lor Q</math>
-  <p><math>P</math>, <math>Q</math>の少なくとも一方が真であれば、<math>P \lor Q</math>は真になる。</p>
-  <p><math>\neg P \to Q</math>と等価。</p>
+  <blockmath><![CDATA[P \lor Q]]></blockmath>
+  <p><math><![CDATA[P]]></math>, <math><![CDATA[Q]]></math>の少なくとも一方が真であれば、<math><![CDATA[P \lor Q]]></math>は真になる。</p>
+  <p><math><![CDATA[\neg P \to Q]]></math>と等価。</p>
 
   <h2>含意</h2>
-  <math>P \to Q</math>
-  <p><math>P</math>が真であれば、<math>P \to Q</math>は<math>Q</math>の真理値と等しくなる。<math>P</math>が偽であれば、<math>P \to Q</math>は真になる。</p>
+  <blockmath><![CDATA[P \to Q]]></blockmath>
+  <p><math><![CDATA[P]]></math>が真であれば、<math><![CDATA[P \to Q]]></math>は<math><![CDATA[Q]]></math>の真理値と等しくなる。<math><![CDATA[P]]></math>が偽であれば、<math><![CDATA[P \to Q]]></math>は真になる。</p>
 
   <h2>同値</h2>
-  <math>P \leftrightarrow Q</math>
-  <p><math>P</math>と<math>Q</math>の真理値が等しいときにだけ、<math>P \leftrightarrow Q</math>は真になる。</p>
-  <p><math>(P \to Q) \land (Q \to P)</math>と等価。</p>
+  <blockmath><![CDATA[P \leftrightarrow Q]]></blockmath>
+  <p><math><![CDATA[P]]></math>と<math><![CDATA[Q]]></math>の真理値が等しいときにだけ、<math><![CDATA[P \leftrightarrow Q]]></math>は真になる。</p>
+  <p><math><![CDATA[(P \to Q) \land (Q \to P)]]></math>と等価。</p>
 </body>
 
 </ktml>

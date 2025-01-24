@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -8,24 +9,24 @@
 </head>
 
 <body>
-  <math>\int{x^n}dx = \frac{1}{n+1} x^{n+1} + C \quad \left(n \neq -1\right)</math>
-  <math>\int{\frac{1}{x}}dx = \ln{\left|x\right|} + C</math>
-  <math>\int{e^x}dx = e^{x} + C</math>
-  <math>\int{e^{ax}}dx = \frac{1}{a} e^{ax} + C</math>
-  <math>\int{a^x}dx = \frac{a^x}{\ln{a}} + C</math>
-  <math>\int{\sin{x}}dx = -\cos{x} + C</math>
-  <math>\int{\cos{x}}dx = \sin{x} + C</math>
-  <math>\int{\frac{1}{\cos^2{x}}}dx = \tan{x} + C</math>
-  <math>\int{\tan{x}}dx = -\ln{\left|\cos{x}\right|} + C</math>
+  <blockmath><![CDATA[\int{x^n}dx = \frac{1}{n+1} x^{n+1} + C \quad \left(n \neq -1\right)]]></blockmath>
+  <blockmath><![CDATA[\int{\frac{1}{x}}dx = \ln{\left|x\right|} + C]]></blockmath>
+  <blockmath><![CDATA[\int{e^x}dx = e^{x} + C]]></blockmath>
+  <blockmath><![CDATA[\int{e^{ax}}dx = \frac{1}{a} e^{ax} + C]]></blockmath>
+  <blockmath><![CDATA[\int{a^x}dx = \frac{a^x}{\ln{a}} + C]]></blockmath>
+  <blockmath><![CDATA[\int{\sin{x}}dx = -\cos{x} + C]]></blockmath>
+  <blockmath><![CDATA[\int{\cos{x}}dx = \sin{x} + C]]></blockmath>
+  <blockmath><![CDATA[\int{\frac{1}{\cos^2{x}}}dx = \tan{x} + C]]></blockmath>
+  <blockmath><![CDATA[\int{\tan{x}}dx = -\ln{\left|\cos{x}\right|} + C]]></blockmath>
   <h2>部分積分 (integration by parts)</h2>
-  <math>\int f(x)g^{\prime}(x) = f(x)g(x) - \int f^{\prime}(x)g(x)dx</math>
-  <math>\int_a^b f(x)g^{\prime}(x) = \left[f(x)g(x)\right]_a^b - \int_a^b f^{\prime}(x)g(x)dx</math>
+  <blockmath><![CDATA[\int f(x)g^{\prime}(x) = f(x)g(x) - \int f^{\prime}(x)g(x)dx]]></blockmath>
+  <blockmath><![CDATA[\int_a^b f(x)g^{\prime}(x) = \left[f(x)g(x)\right]_a^b - \int_a^b f^{\prime}(x)g(x)dx]]></blockmath>
   <h2>置換積分 (integration by substitution)</h2>
-  <p><math>x = g(t)</math>とおくと</p>
-  <math>\int f(x)dx = \int f(g(t))\frac{dx}{dt}dt</math>
-  <p><math>x = g(t)</math>とおくと</p>
-  <math>\int_a^b f(x)dx = \int_c^d f(g(t))\frac{dx}{dt}dt</math>
-  <p>ただし、<math>a = g(c), b = g(d)</math></p>
+  <p><math><![CDATA[x = g(t)]]></math>とおくと</p>
+  <blockmath><![CDATA[\int f(x)dx = \int f(g(t))\frac{dx}{dt}dt]]></blockmath>
+  <p><math><![CDATA[x = g(t)]]></math>とおくと</p>
+  <blockmath><![CDATA[\int_a^b f(x)dx = \int_c^d f(g(t))\frac{dx}{dt}dt]]></blockmath>
+  <p>ただし、<math><![CDATA[a = g(c), b = g(d)]]></math></p>
 </body>
 
 </ktml>

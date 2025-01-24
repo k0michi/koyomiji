@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>私がTwitterを辞めた理由</title>
   <id>6ab2ace8-5908-40fa-bce7-6a07bf206412</id>
   <created>2022-08-22T18:20:26+09:00</created>
+  <modified>2022-08-22T18:20:26+09:00</modified>
 </head>
 
 <body>
@@ -44,7 +46,7 @@
   <h2>今後</h2>
   <p>今後私がTwitterのようなソーシャルメディアを使うかどうかは未定。もしかしたらMastodonなどのActivityPub系のソーシャルメディアを使うかもしれない。ActivityPubを実装したソーシャルメディアを自作することも技術的には可能ではあるが、そこまでする意義があるだろうか。</p>
   <p>Mastodonであればきっと、上記に挙げた理由1から4までの問題は解決されるだろう。ソースコードは公開されているし、ビジネスをする場所としてはそれほど成熟していないし、何より自由である。私の心情として、Twitterというプロプライエタリな場所に時間を費やすよりは、Mastodonのような自由でオープンな場所で時間を過ごしたいと思うのは必然なのである。</p>
-  <p>ひとまず、mstdn.jpでアカウントを作ってみた。使うかどうかは未定であるが。適当に呟く場所として、Twitterほどの窮屈さはないと思われる。<a href="https://mstdn.jp/@k0michi">@k0michi@mstdn.jp</a></p>
+  <p>ひとまず、mstdn.jpでアカウントを作ってみた。使うかどうかは未定であるが。適当に呟く場所として、Twitterほどの窮屈さはないと思われる。<a ref="https://mstdn.jp/@k0michi">@k0michi@mstdn.jp</a></p>
 </body>
 
 </ktml>

@@ -29,8 +29,16 @@ export default class KTMLReactTransformer extends XMLNodeVisitor {
     const split = this.splitQualified(qualifiedName);
 
     switch (split.local) {
+      case 'blockmath':
+        const bm = this.nextReact?.visitElement(Math);
+        bm?.visitProp('display', 'block');
+        return new KTMLReactTransformer(bm);
       case 'math':
         return new KTMLReactTransformer(this.nextReact?.visitElement(Math));
+      case 'blockcode':
+        const bc = this.nextReact?.visitElement(Code);
+        bc?.visitProp('display', 'block');
+        return new KTMLReactTransformer(bc);
       case 'code':
         return new KTMLReactTransformer(this.nextReact?.visitElement(Code));
       case 'a':
@@ -87,7 +95,7 @@ export class KTMLReactTransformerA extends KTMLReactTransformer {
     let key = split.local;
 
     switch (key) {
-      case 'href':
+      case 'ref':
         key = 'to';
         break;
     }

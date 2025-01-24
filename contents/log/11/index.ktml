@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -8,8 +9,8 @@
 </head>
 
 <body>
-  <p><a href="https://github.com/k0michi/kyoka">Kyoka</a>というReact向けの状態&amp;ロジック管理ライブラリを作ってみました。このライブラリを使うと、こんな感じでロジックを書けます。</p>
-  <code lang="tsx">import * as React from 'react';
+  <p><a ref="https://github.com/k0michi/kyoka">Kyoka</a>というReact向けの状態&amp;ロジック管理ライブラリを作ってみました。このライブラリを使うと、こんな感じでロジックを書けます。</p>
+  <blockcode lang="tsx"><![CDATA[import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { ModelProvider, Observable, useModel, useObservable } from 'kyoka';
 
@@ -22,13 +23,13 @@ class Model {
 }
 
 function Counter() {
-  const model = useModel&lt;Model&gt;();
+  const model = useModel<Model>();
   const value = useObservable(model.count);
 
   return (
-    &lt;&gt;
-      {value}{' '}&lt;button onClick={model.addCount.bind(model)}&gt;Add count&lt;/button&gt;
-    &lt;/&gt;
+    <>
+      {value}{' '}<button onClick={model.addCount.bind(model)}>Add count</button>
+    </>
   );
 }
 
@@ -36,13 +37,13 @@ const model = new Model();
 const root = ReactDOM.createRoot(document.getElementById('app')!);
 
 root.render(
-  &lt;ModelProvider model={model}&gt;
-    &lt;Counter /&gt;
-  &lt;/ModelProvider&gt;
-);</code>
+  <ModelProvider model={model}>
+    <Counter />
+  </ModelProvider>
+);]]></blockcode>
   <p>最低限のグローバルステート管理パターンをライブラリ化しただけです。Reactの状態管理ライブラリは色々ありますが、個人的にオブジェクト指向かつ最小限のライブラリが欲しかったのですが、見当たらなかったので作りました。この方法ならほぼボイラープレート要らずで、何よりホワイトボックスで直感的ではないでしょうか。</p>
   <p>mutableなオブジェクトを扱うこともできるようになっています。</p>
-  <code lang="tsx">import * as React from 'react';
+  <blockcode lang="tsx"><![CDATA[import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { ModelProvider, Observable, useModel, useObservable } from 'kyoka';
 
@@ -53,7 +54,7 @@ interface Todo {
 }
 
 class Model {
-  todos = new Observable&lt;Todo[]&gt;([]);
+  todos = new Observable<Todo[]>([]);
   key = 0;
 
   addTodo(text: string) {
@@ -66,18 +67,18 @@ class Model {
 }
 
 function Todo() {
-  const model = useModel&lt;Model&gt;();
+  const model = useModel<Model>();
   const todos = useObservable(model.todos);
-  const [todo, setTodo] = React.useState&lt;string&gt;('');
+  const [todo, setTodo] = React.useState<string>('');
 
   return (
-    &lt;&gt;
-      &lt;input type="text" onChange={e =&gt; setTodo(e.target.value)}&gt;&lt;/input&gt;
-      &lt;button onClick={model.addTodo.bind(model, todo)}&gt;Add todo&lt;/button&gt;
-      {todos.map(t =&gt;
-        &lt;div key={t.key}&gt;{t.date.toLocaleTimeString()} {t.text}&lt;/div&gt;
+    <>
+      <input type="text" onChange={e => setTodo(e.target.value)}></input>
+      <button onClick={model.addTodo.bind(model, todo)}>Add todo</button>
+      {todos.map(t =>
+        <div key={t.key}>{t.date.toLocaleTimeString()} {t.text}</div>
       )}
-    &lt;/&gt;
+    </>
   );
 };
 
@@ -85,10 +86,10 @@ const model = new Model();
 const root = ReactDOM.createRoot(document.getElementById('app')!);
 
 root.render(
-  &lt;ModelProvider model={model}&gt;
-    &lt;Todo /&gt;
-  &lt;/ModelProvider&gt;
-);</code>
+  <ModelProvider model={model}>
+    <Todo />
+  </ModelProvider>
+);]]></blockcode>
   <p>Observableに同じ参照をsetすることで、明示的なアップデートを行なっています。</p>
   <p>現状はReact18のuseSyncExternalStoreに頼りきりですが、気が向いたらReact17以前や他のJSXライブラリでも動くようにするつもりです。</p>
 </body>

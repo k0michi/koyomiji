@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -8,18 +9,18 @@
 </head>
 
 <body>
-  <p>ある集合<math>A</math>について、そのすべての部分集合からなる集合を<math>A</math>の冪集合といい、<math>\mathcal{P}(A)</math>と書く。</p>
-  <p><math>A</math>の冪集合は<math>\emptyset</math>と<math>A</math>自身を要素に持つ。</p>
-  <p>要素数が<math>n</math>の集合の冪集合の要素数は<math>2^n</math>である。</p>
+  <p>ある集合<math><![CDATA[A]]></math>について、そのすべての部分集合からなる集合を<math><![CDATA[A]]></math>の冪集合といい、<math><![CDATA[\mathcal{P}(A)]]></math>と書く。</p>
+  <p><math><![CDATA[A]]></math>の冪集合は<math><![CDATA[\emptyset]]></math>と<math><![CDATA[A]]></math>自身を要素に持つ。</p>
+  <p>要素数が<math><![CDATA[n]]></math>の集合の冪集合の要素数は<math><![CDATA[2^n]]></math>である。</p>
   <h2>例</h2>
-  <p><math>A = \emptyset</math>のとき、</p>
-  <math>\mathcal{P}(A) = \{\emptyset\}</math>
-  <p><math>A = \{1\}</math>のとき、</p>
-  <math>\mathcal{P}(A) = \{\emptyset, \{1\}\}</math>
-  <p><math>A = \{1, 2\}</math>のとき、</p>
-  <math>\mathcal{P}(A) = \{\emptyset, \{1\}, \{2\}, \{1, 2\}\}</math>
-  <p><math>A = \{1, 2, 3\}</math>のとき、</p>
-  <math>\mathcal{P}(A) = \{\emptyset, \{1\}, \{2\}, \{3\}, \{1, 2\}, \{1, 3\}, \{2, 3\}, \{1, 2, 3\}\}</math>
+  <p><math><![CDATA[A = \emptyset]]></math>のとき、</p>
+  <blockmath><![CDATA[\mathcal{P}(A) = \{\emptyset\}]]></blockmath>
+  <p><math><![CDATA[A = \{1\}]]></math>のとき、</p>
+  <blockmath><![CDATA[\mathcal{P}(A) = \{\emptyset, \{1\}\}]]></blockmath>
+  <p><math><![CDATA[A = \{1, 2\}]]></math>のとき、</p>
+  <blockmath><![CDATA[\mathcal{P}(A) = \{\emptyset, \{1\}, \{2\}, \{1, 2\}\}]]></blockmath>
+  <p><math><![CDATA[A = \{1, 2, 3\}]]></math>のとき、</p>
+  <blockmath><![CDATA[\mathcal{P}(A) = \{\emptyset, \{1\}, \{2\}, \{3\}, \{1, 2\}, \{1, 3\}, \{2, 3\}, \{1, 2, 3\}\}]]></blockmath>
 </body>
 
 </ktml>

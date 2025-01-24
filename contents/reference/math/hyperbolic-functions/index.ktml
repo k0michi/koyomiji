@@ -1,15 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>双曲線関数</title>
   <id>25f7495e-4df4-48eb-936d-e6f8457e6f4b</id>
   <created>2022-06-16T11:16:54+09:00</created>
+  <modified>2022-06-16T11:16:54+09:00</modified>
 </head>
 
 <body>
-  <math>\sinh{x} = \frac{1}{2}\left(e^x-e^{-x}\right)</math>
-  <math>\cosh{x}= \frac{1}{2}\left(e^x+e^{-x}\right)</math>
-  <math>\tanh{x} = \frac{e^x-e^{-x}}{e^x+e^{-x}}</math>
+  <blockmath><![CDATA[\sinh{x} = \frac{1}{2}\left(e^x-e^{-x}\right)]]></blockmath>
+  <blockmath><![CDATA[\cosh{x}= \frac{1}{2}\left(e^x+e^{-x}\right)]]></blockmath>
+  <blockmath><![CDATA[\tanh{x} = \frac{e^x-e^{-x}}{e^x+e^{-x}}]]></blockmath>
 </body>
 
 </ktml>

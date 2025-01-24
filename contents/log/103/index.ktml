@@ -1,13 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>レーベンシュタイン距離を使って、紛らわしい英単語の組を見つける</title>
   <id>8880ec21-d6ad-47c6-87f2-cf8e3238e0c9</id>
   <created>2024-10-19T11:02:39+09:00</created>
+  <modified>2024-10-19T11:02:39+09:00</modified>
 </head>
 
 <body>
-  <p>ここ最近Ankiを使った英単語の勉強をしているが、この勉強をしていて頭痛の種となっているのが、似通っているが全く意味が違う英単語たちである。例えば、cinch(朝飯前) と clinch(...を成し遂げる)。l一文字あるかないかで、全く意味が変わってくる。見た目が似通っているので、片方だけなんとなく覚えたとしても、もう片方が現れた瞬間に、「あれ、この単語見た気がするのに意味が違う……」となってしまう。</p><p>そんな紛らわしい単語を見つける方法はないか考えていたところ、<a href="https://ja.wikipedia.org/wiki/%E3%83%AC%E3%83%BC%E3%83%99%E3%83%B3%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E8%B7%9D%E9%9B%A2">レーベンシュタイン距離</a>(編集距離)の存在を思い出した。レーベンシュタイン距離というのは、文字列<math>a</math>から文字列<math>b</math>を得るのに必要な操作の総コスト。ハミング距離よりも計算が複雑ではあるが、文字の挿入や削除についても考慮できるので、こういう場合にはレーベンシュタイン距離の方が良いだろう。</p><p>さくっと、JavaScript(Node.js)で書いてみた。</p><code lang="js">import * as fs from 'node:fs/promises';
+  <p>ここ最近Ankiを使った英単語の勉強をしているが、この勉強をしていて頭痛の種となっているのが、似通っているが全く意味が違う英単語たちである。例えば、cinch(朝飯前) と clinch(...を成し遂げる)。l一文字あるかないかで、全く意味が変わってくる。見た目が似通っているので、片方だけなんとなく覚えたとしても、もう片方が現れた瞬間に、「あれ、この単語見た気がするのに意味が違う……」となってしまう。</p><p>そんな紛らわしい単語を見つける方法はないか考えていたところ、<a ref="https://ja.wikipedia.org/wiki/%E3%83%AC%E3%83%BC%E3%83%99%E3%83%B3%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E8%B7%9D%E9%9B%A2">レーベンシュタイン距離</a>(編集距離)の存在を思い出した。レーベンシュタイン距離というのは、文字列<math><![CDATA[a]]></math>から文字列<math><![CDATA[b]]></math>を得るのに必要な操作の総コスト。ハミング距離よりも計算が複雑ではあるが、文字の挿入や削除についても考慮できるので、こういう場合にはレーベンシュタイン距離の方が良いだろう。</p><p>さくっと、JavaScript(Node.js)で書いてみた。</p><blockcode lang="js"><![CDATA[import * as fs from 'node:fs/promises';
 
 const kInsCost = 1.5;
 const kDelCost = 1.5;
@@ -16,17 +18,17 @@ const kSubCost = 1;
 function levenshteinDistance(str1, str2) {
   const m = str1.length;
   const n = str2.length;
-  const dp = Array(m + 1).fill().map(() =&gt; Array(n + 1).fill(0));
+  const dp = Array(m + 1).fill().map(() => Array(n + 1).fill(0));
 
-  for (let i = 0; i &lt;= m; i++) {
+  for (let i = 0; i <= m; i++) {
     dp[i][0] = i * kDelCost;
   }
-  for (let j = 0; j &lt;= n; j++) {
+  for (let j = 0; j <= n; j++) {
     dp[0][j] = j * kInsCost;
   }
 
-  for (let i = 1; i &lt;= m; i++) {
-    for (let j = 1; j &lt;= n; j++) {
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
       if (str1[i - 1] === str2[j - 1]) {
         dp[i][j] = dp[i - 1][j - 1];
       } else {
@@ -49,7 +51,7 @@ let results = [];
 
 for (const e of words) {
   for (const f of words) {
-    if (e.localeCompare(f) &lt; 0) {
+    if (e.localeCompare(f) < 0) {
       results.push([e, f, levenshteinDistance(e, f)]);
     }
   }
@@ -64,9 +66,9 @@ function compare(...results) {
 }
 
 const kCostFilter = 2;
-results = results.filter(r =&gt; r[2] &lt;= kCostFilter);
-results.sort((a, b) =&gt; compare(a[2] - b[2], a[0].localeCompare(b[0]), a[1].localeCompare(b[1])));
-results.forEach(r =&gt; console.log(r.join(', ')));</code><p>レーベンシュタイン距離の挿入、削除、置き換えコストはそれぞれ1.5, 1.5, 1とした。総コストが2以下のものだけ出力している。</p><p>単語リストは引数で与える。</p><code>$ node levenshtein.mjs in.txt</code><p>実行するとこんな感じになる。3列目が単語間の編集距離。</p><code>allude, allure, 1
+results = results.filter(r => r[2] <= kCostFilter);
+results.sort((a, b) => compare(a[2] - b[2], a[0].localeCompare(b[0]), a[1].localeCompare(b[1])));
+results.forEach(r => console.log(r.join(', ')));]]></blockcode><p>レーベンシュタイン距離の挿入、削除、置き換えコストはそれぞれ1.5, 1.5, 1とした。総コストが2以下のものだけ出力している。</p><p>単語リストは引数で与える。</p><blockcode><![CDATA[$ node levenshtein.mjs in.txt]]></blockcode><p>実行するとこんな感じになる。3列目が単語間の編集距離。</p><blockcode><![CDATA[allude, allure, 1
 arid, avid, 1
 avert, overt, 1
 balk, bask, 1
@@ -90,7 +92,7 @@ clout, flout, 1
 clump, slump, 1
 clumpy, clumsy, 1
 coax, hoax, 1
-...</code><p>小一時間で作ったが、割といい感じ。ただ、全ての組のレーベンシュタイン距離を求めているので、単語数が1万とかあると遅いかもしれない。</p>
+...]]></blockcode><p>小一時間で作ったが、割といい感じ。ただ、全ての組のレーベンシュタイン距離を求めているので、単語数が1万とかあると遅いかもしれない。</p>
 </body>
 
 </ktml>

@@ -1,99 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>Python: 例外処理</title>
   <id>dcd0eac0-4ffe-4ac2-bef5-e602b925745e</id>
   <created>2022-07-26T16:07:37+09:00</created>
+  <modified>2022-07-26T16:07:37+09:00</modified>
 </head>
 
 <body>
   <p>raiseで例外を発生させることができる。投げられた例外はtry-exceptで捕捉することができる。</p>
-  <code lang="python">try:
+  <blockcode lang="python"><![CDATA[try:
   raise RuntimeError('Error occurred')
 except RuntimeError as e:
-  print(e)</code>
+  print(e)]]></blockcode>
 
   <h2>raise</h2>
   <p>例外はBaseExceptionクラスを継承している必要がある。</p>
-  <p><code lang="python">raise RuntimeError</code>のようにクラス名を指定すると、そのクラスが引数なしでインスタンス化され、そのインスタンスが例外として投げられる。</p>
-  <p><code lang="python">raise RuntimeError("Exception occurred")</code>のようにインスタンスをそのまま渡すと、そのインスタンスが例外として投げられる。</p>
+  <p><code lang="python"><![CDATA[raise RuntimeError]]></code>のようにクラス名を指定すると、そのクラスが引数なしでインスタンス化され、そのインスタンスが例外として投げられる。</p>
+  <p><code lang="python"><![CDATA[raise RuntimeError("Exception occurred")]]></code>のようにインスタンスをそのまま渡すと、そのインスタンスが例外として投げられる。</p>
   <p>from節を使用すると、例外を連鎖させることができる。例えば以下のコード</p>
-  <code lang="python">try:
+  <blockcode lang="python"><![CDATA[try:
   raise RuntimeError("Exception 1")
 except RuntimeError as e:
-  raise RuntimeError("Exception 2") from e</code>
+  raise RuntimeError("Exception 2") from e]]></blockcode>
   <p>を実行すると、以下のようなTracebackが出力される。</p>
-  <code>Traceback (most recent call last):
-  File "/Users/k0michi/Repository/Development/misc/python/exception.py", line 2, in &lt;module&gt;
+  <blockcode><![CDATA[Traceback (most recent call last):
+  File "/Users/k0michi/Repository/Development/misc/python/exception.py", line 2, in <module>
     raise RuntimeError("Exception 1")
 RuntimeError: Exception 1
 
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "/Users/k0michi/Repository/Development/misc/python/exception.py", line 4, in &lt;module&gt;
+  File "/Users/k0michi/Repository/Development/misc/python/exception.py", line 4, in <module>
     raise RuntimeError("Exception 2") from e
-RuntimeError: Exception 2</code>
+RuntimeError: Exception 2]]></blockcode>
   <p>raiseに例外を指定しなかった場合は、捕捉中の例外がそのままreraiseされる。</p>
-  <code lang="python">try:
+  <blockcode lang="python"><![CDATA[try:
   raise RuntimeError("Exception 1")
 except RuntimeError as e:
-  raise</code>
-  <code>Traceback (most recent call last):
-  File "/Users/k0michi/Repository/Development/misc/python/exception.py", line 2, in &lt;module&gt;
+  raise]]></blockcode>
+  <blockcode><![CDATA[Traceback (most recent call last):
+  File "/Users/k0michi/Repository/Development/misc/python/exception.py", line 2, in <module>
     raise RuntimeError("Exception 1")
-RuntimeError: Exception 1</code>
+RuntimeError: Exception 1]]></blockcode>
   <p>捕捉中の例外が存在しない場合は以下のような例外になる。</p>
-  <code>Traceback (most recent call last):
-  File "/Users/k0michi/Repository/Development/misc/python/exception.py", line 1, in &lt;module&gt;
+  <blockcode><![CDATA[Traceback (most recent call last):
+  File "/Users/k0michi/Repository/Development/misc/python/exception.py", line 1, in <module>
     raise
-RuntimeError: No active exception to reraise</code>
+RuntimeError: No active exception to reraise]]></blockcode>
 
   <h2>except</h2>
   <p>exceptに例外の型を指定すると、その型の例外がtryで投げられた時にのみ実行される。</p>
-  <code lang="python">try:
+  <blockcode lang="python"><![CDATA[try:
   open("nonexistent_file")
 except RuntimeError:
   print("RuntimeError was thrown")
 except FileNotFoundError:
-  print("FileNotFoundError was thrown")</code>
+  print("FileNotFoundError was thrown")]]></blockcode>
   <p>型を列挙したタプルを指定することもできる。</p>
-  <code lang="python">try:
+  <blockcode lang="python"><![CDATA[try:
   open("nonexistent_file")
 except (RuntimeError, FileNotFoundError):
-  print("Error occurred")</code>
+  print("Error occurred")]]></blockcode>
   <p>asで変数を指定すると、その変数で例外インスタンスにアクセスすることができる。</p>
-  <code lang="python">try:
+  <blockcode lang="python"><![CDATA[try:
   open("nonexistent_file")
 except FileNotFoundError as e:
-  print(e.filename)</code>
+  print(e.filename)]]></blockcode>
   <p>exceptに何も型を指定しない場合は、任意の型の例外を捕捉する。このexcept節は最後に記述しなければならない。</p>
-  <code lang="python">try:
+  <blockcode lang="python"><![CDATA[try:
   raise RuntimeError
 except FileNotFoundError as e:
   print(e.filename)
 except:
-  print("Unknown error occurred")</code>
+  print("Unknown error occurred")]]></blockcode>
 
   <h2>finally</h2>
   <p>例外の発生に関わらず、最後に実行される。</p>
-  <code lang="python">try:
+  <blockcode lang="python"><![CDATA[try:
   a = open("file")
   raise RuntimeError
 except RuntimeError:
   print("RuntimeError")
 finally:
   a.close()
-  print("File closed")</code>
+  print("File closed")]]></blockcode>
 
   <h2>else</h2>
   <p>例外が発生しなかった場合に実行される。</p>
-  <code lang="python">try:
+  <blockcode lang="python"><![CDATA[try:
   pass
 except RuntimeError:
   print("RuntimeError")
 else:
-  print("else")</code>
+  print("else")]]></blockcode>
 </body>
 
 </ktml>

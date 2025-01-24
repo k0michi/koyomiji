@@ -1,19 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>macOSのDockerでRocky Linuxを動かしてみる</title>
   <id>eb8065d8-1beb-421c-9fe0-5f5748ac436d</id>
   <created>2023-02-12T22:10:52+09:00</created>
+  <modified>2023-02-12T22:10:52+09:00</modified>
 </head>
 
 <body>
-  <p>最近Dockerを使い始めたので、Rocky Linuxを動かすまでのメモです。</p><h2>インストール</h2><p>今回はDocker Desktopをインストールします。Docker Desktopのインストール方法に関しては、<a href="https://docs.docker.com/get-docker/">Get Docker | Docker Documentation</a>に詳しく載っていますが、macOSの場合はHomebrewでインストールすることもできます。</p><p>紛らわしいですが、Homebrewには<a href="https://formulae.brew.sh/formula/docker">Formulaのdocker</a>と、<a href="https://formulae.brew.sh/cask/docker">Caskのdocker</a>が存在します。Docker Desktopをインストールするには、Caskの方を指定する必要があります。Formulaの方はDockerのCLIクライアントのようです。</p><code>% brew install --cask docker</code><p>インストールが完了したら、Applications内にあるDocker.appを起動します。CLIからDockerを使う場合でも、このアプリケーションを立ち上げておきます。</p><h2>コンテナを動かす</h2><p><a href="https://hub.docker.com/">Docker Hub</a>からコンテナイメージを探します。Rocky Linuxの場合は公式のイメージがあります。<code>docker pull</code>コマンドでイメージを取得することができます。イメージは、<code>(イメージ名):(タグ)</code>のように指定します。タグを省略すると、デフォルトで<code>latest</code>となりますが、Rocky Linuxの場合は<code>latest</code>タグが無いのでエラーになります。</p><code>% docker pull rockylinux:9</code><p>次に<code>docker run</code>コマンドでコンテナを起動します。コマンドライン上から操作する場合には、<code>-it</code>オプションを与えます。(<code>-i</code>は標準入力を開くオプション、<code>-t</code>は仮想TTYを割り当てるオプションのようです。)</p><code>% docker run -it rockylinux:9
-[root@9132f9b19b4b /]#</code><p>これで、コンテナを起動することができました。実際に、Rocky Linuxの環境となっていることが確認できます。</p><code>[root@9132f9b19b4b /]# cat /etc/rocky-release
-Rocky Linux release 9.1 (Blue Onyx)</code><p>コンテナの終了は<code>exit</code>コマンドで行えます。</p><h2>作成したコンテナを起動する</h2><p>作成したコンテナを再度起動したい場合は、<code>docker ps -a</code>でコンテナのIDを確認し、IDを<code>docker start</code>の引数に与えることで再び起動することができます。</p><code>% docker start -i 9132f9b19b4b</code><h2>異なるCPUアーキテクチャのイメージを使う</h2><p>Dockerは、CPUのエミュレーションも行うことができます。これにより、例えばARMベースのApple M1チップ上で、x86_64のコンテナを動かすことができます。<code>--platform</code>オプションを指定します。</p><p>Rosetta 2が入っていることが前提です。</p><code>% arch
+  <p>最近Dockerを使い始めたので、Rocky Linuxを動かすまでのメモです。</p><h2>インストール</h2><p>今回はDocker Desktopをインストールします。Docker Desktopのインストール方法に関しては、<a ref="https://docs.docker.com/get-docker/">Get Docker | Docker Documentation</a>に詳しく載っていますが、macOSの場合はHomebrewでインストールすることもできます。</p><p>紛らわしいですが、Homebrewには<a ref="https://formulae.brew.sh/formula/docker">Formulaのdocker</a>と、<a ref="https://formulae.brew.sh/cask/docker">Caskのdocker</a>が存在します。Docker Desktopをインストールするには、Caskの方を指定する必要があります。Formulaの方はDockerのCLIクライアントのようです。</p><blockcode><![CDATA[% brew install --cask docker]]></blockcode><p>インストールが完了したら、Applications内にあるDocker.appを起動します。CLIからDockerを使う場合でも、このアプリケーションを立ち上げておきます。</p><h2>コンテナを動かす</h2><p><a ref="https://hub.docker.com/">Docker Hub</a>からコンテナイメージを探します。Rocky Linuxの場合は公式のイメージがあります。<code><![CDATA[docker pull]]></code>コマンドでイメージを取得することができます。イメージは、<code><![CDATA[(イメージ名):(タグ)]]></code>のように指定します。タグを省略すると、デフォルトで<code><![CDATA[latest]]></code>となりますが、Rocky Linuxの場合は<code><![CDATA[latest]]></code>タグが無いのでエラーになります。</p><blockcode><![CDATA[% docker pull rockylinux:9]]></blockcode><p>次に<code><![CDATA[docker run]]></code>コマンドでコンテナを起動します。コマンドライン上から操作する場合には、<code><![CDATA[-it]]></code>オプションを与えます。(<code><![CDATA[-i]]></code>は標準入力を開くオプション、<code><![CDATA[-t]]></code>は仮想TTYを割り当てるオプションのようです。)</p><blockcode><![CDATA[% docker run -it rockylinux:9
+[root@9132f9b19b4b /]#]]></blockcode><p>これで、コンテナを起動することができました。実際に、Rocky Linuxの環境となっていることが確認できます。</p><blockcode><![CDATA[[root@9132f9b19b4b /]# cat /etc/rocky-release
+Rocky Linux release 9.1 (Blue Onyx)]]></blockcode><p>コンテナの終了は<code><![CDATA[exit]]></code>コマンドで行えます。</p><h2>作成したコンテナを起動する</h2><p>作成したコンテナを再度起動したい場合は、<code><![CDATA[docker ps -a]]></code>でコンテナのIDを確認し、IDを<code><![CDATA[docker start]]></code>の引数に与えることで再び起動することができます。</p><blockcode><![CDATA[% docker start -i 9132f9b19b4b]]></blockcode><h2>異なるCPUアーキテクチャのイメージを使う</h2><p>Dockerは、CPUのエミュレーションも行うことができます。これにより、例えばARMベースのApple M1チップ上で、x86_64のコンテナを動かすことができます。<code><![CDATA[--platform]]></code>オプションを指定します。</p><p>Rosetta 2が入っていることが前提です。</p><blockcode><![CDATA[% arch
 arm64
 % docker run -it --platform linux/amd64 rockylinux:9 
 [root@c12c7735ab87 /]# arch
-x86_64</code><p>arm64上でx86_64の環境をエミュレートできていることがわかります。エミュレーションは、内部的にはQEMUによって行われているようです。</p><p>このように、Dockerを使うことで、macOS上で手軽に、多様なLinux環境を使うことができます。今後は独自コンテナの作成方法なども調べてみようと思います。</p>
+x86_64]]></blockcode><p>arm64上でx86_64の環境をエミュレートできていることがわかります。エミュレーションは、内部的にはQEMUによって行われているようです。</p><p>このように、Dockerを使うことで、macOS上で手軽に、多様なLinux環境を使うことができます。今後は独自コンテナの作成方法なども調べてみようと思います。</p>
 </body>
 
 </ktml>

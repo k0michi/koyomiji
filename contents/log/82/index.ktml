@@ -1,22 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>AsciiDocを使ってみよう</title>
   <id>4f12e2e9-791e-43dc-97e5-380f58da25cd</id>
   <created>2023-02-05T13:11:03+09:00</created>
+  <modified>2023-02-05T13:11:03+09:00</modified>
 </head>
 
 <body>
-  <p>Markdownのような、簡潔なマークアップからHTMLやXMLを生成する言語を、<a href="https://ja.wikipedia.org/wiki/%E8%BB%BD%E9%87%8F%E3%83%9E%E3%83%BC%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E8%A8%80%E8%AA%9E">軽量マークアップ言語</a>と呼びます。Markdownは最も有名な軽量マークアップ言語ではありますが、実際には他にも沢山あります。<a href="https://asciidoc.org/">AsciiDoc</a>もその一つです。</p><p>AsciiDocの良いところは、Markdownよりも機能が豊富である点です。例えば、目次を挿入したり、ソースコードを別のファイルから埋め込むといったことが可能です。さらに、Markdownでは拡張である、ソースコードのハイライトや脚注、数式の表示などが言語の標準機能として存在します。</p><p>また、<a href="https://asciidoctor.org/">Asciidoctor</a>と呼ばれる、デファクトスタンダードとなっている実装が存在します。Asciidoctor自体はRubyで書かれていますが、Javaバインディングである<a href="https://docs.asciidoctor.org/asciidoctorj/latest/">AsciidoctorJ</a>や、JavaScriptで動く<a href="https://docs.asciidoctor.org/asciidoctor.js/latest/">Asciidoctor.js</a>などが用意されているため、多彩な環境で使うことができます。<a href="https://docs.asciidoctor.org/pdf-converter/latest/">Asciidoctor PDF</a>を使うことで、AsciiDocをLaTeXなどを介さず直接PDFに変換することも可能です。</p><h2>Asciidoctorのインストール</h2><p>Asciidoctorのインストール方法は<a href="https://asciidoctor.org/">公式サイト</a>に詳しく書かれています。</p><p>Macであれば、<code>brew</code>でインストールすることができます。</p><code lang="bash">% brew install asciidoctor</code><p>インストール出来ているか確認します。</p><code lang="bash">% asciidoctor -v
+  <p>Markdownのような、簡潔なマークアップからHTMLやXMLを生成する言語を、<a ref="https://ja.wikipedia.org/wiki/%E8%BB%BD%E9%87%8F%E3%83%9E%E3%83%BC%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E8%A8%80%E8%AA%9E">軽量マークアップ言語</a>と呼びます。Markdownは最も有名な軽量マークアップ言語ではありますが、実際には他にも沢山あります。<a ref="https://asciidoc.org/">AsciiDoc</a>もその一つです。</p><p>AsciiDocの良いところは、Markdownよりも機能が豊富である点です。例えば、目次を挿入したり、ソースコードを別のファイルから埋め込むといったことが可能です。さらに、Markdownでは拡張である、ソースコードのハイライトや脚注、数式の表示などが言語の標準機能として存在します。</p><p>また、<a ref="https://asciidoctor.org/">Asciidoctor</a>と呼ばれる、デファクトスタンダードとなっている実装が存在します。Asciidoctor自体はRubyで書かれていますが、Javaバインディングである<a ref="https://docs.asciidoctor.org/asciidoctorj/latest/">AsciidoctorJ</a>や、JavaScriptで動く<a ref="https://docs.asciidoctor.org/asciidoctor.js/latest/">Asciidoctor.js</a>などが用意されているため、多彩な環境で使うことができます。<a ref="https://docs.asciidoctor.org/pdf-converter/latest/">Asciidoctor PDF</a>を使うことで、AsciiDocをLaTeXなどを介さず直接PDFに変換することも可能です。</p><h2>Asciidoctorのインストール</h2><p>Asciidoctorのインストール方法は<a ref="https://asciidoctor.org/">公式サイト</a>に詳しく書かれています。</p><p>Macであれば、<code><![CDATA[brew]]></code>でインストールすることができます。</p><blockcode lang="bash"><![CDATA[% brew install asciidoctor]]></blockcode><p>インストール出来ているか確認します。</p><blockcode lang="bash"><![CDATA[% asciidoctor -v
 Asciidoctor 2.0.18 [https://asciidoctor.org]
-Runtime Environment (ruby 3.2.0 (2022-12-25 revision a528908271) [arm64-darwin21]) (lc:UTF-8 fs:UTF-8 in:UTF-8 ex:UTF-8)</code><h2>Asciidoctor PDFのインストール</h2><p>Asciidoctor PDFのインストール方法は、<a href="https://github.com/asciidoctor/asciidoctor-pdf">GitHubページ</a>に詳しく載っています。こちらはgemからインストールする必要があります。</p><p>Ruby 2.7以降が必要です。しかし、MacのビルトインのRubyは若干古いです。</p><code lang="bash">% /usr/bin/ruby -v
-ruby 2.6.10p210 (2022-04-12 revision 67958) [universal.arm64e-darwin21]</code><p>なので、brewで新しいバージョンのRubyをインストールします。</p><code lang="bash">% brew install ruby</code><p>Rubyと、gemでインストールされるコマンドにパスを通します。.zshrcに以下の内容を書き加えます。</p><code>export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-export PATH="/opt/homebrew/lib/ruby/gems/3.2.0/bin:$PATH"</code><h2>Asciidoctorの使い方</h2><p>AsciiDocの拡張子は.adocです。AsciidoctorにAsciiDocファイルを与えると、HTMLが生成されます。同様にAsciidoctor PDFの場合はPDFが生成されます。</p><p>Asciidoctor PDFはデフォルトでは日本語が豆腐になってしまうので、<code>-a pdf-theme=default-with-fallback-font</code>を指定します。</p><code lang="bash">% asciidoctor test.adoc 
+Runtime Environment (ruby 3.2.0 (2022-12-25 revision a528908271) [arm64-darwin21]) (lc:UTF-8 fs:UTF-8 in:UTF-8 ex:UTF-8)]]></blockcode><h2>Asciidoctor PDFのインストール</h2><p>Asciidoctor PDFのインストール方法は、<a ref="https://github.com/asciidoctor/asciidoctor-pdf">GitHubページ</a>に詳しく載っています。こちらはgemからインストールする必要があります。</p><p>Ruby 2.7以降が必要です。しかし、MacのビルトインのRubyは若干古いです。</p><blockcode lang="bash"><![CDATA[% /usr/bin/ruby -v
+ruby 2.6.10p210 (2022-04-12 revision 67958) [universal.arm64e-darwin21]]]></blockcode><p>なので、brewで新しいバージョンのRubyをインストールします。</p><blockcode lang="bash"><![CDATA[% brew install ruby]]></blockcode><p>Rubyと、gemでインストールされるコマンドにパスを通します。.zshrcに以下の内容を書き加えます。</p><blockcode><![CDATA[export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH="/opt/homebrew/lib/ruby/gems/3.2.0/bin:$PATH"]]></blockcode><h2>Asciidoctorの使い方</h2><p>AsciiDocの拡張子は.adocです。AsciidoctorにAsciiDocファイルを与えると、HTMLが生成されます。同様にAsciidoctor PDFの場合はPDFが生成されます。</p><p>Asciidoctor PDFはデフォルトでは日本語が豆腐になってしまうので、<code><![CDATA[-a pdf-theme=default-with-fallback-font]]></code>を指定します。</p><blockcode lang="bash"><![CDATA[% asciidoctor test.adoc 
 % asciidoctor-pdf -a pdf-theme=default-with-fallback-font test.adoc 
 % ls
-test.adoc	test.html	test.pdf</code><h2>書き方</h2><p>詳細な書き方のリファレンスは、<a href="https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/">AsciiDoc Syntax Quick Reference</a>にあります。</p><h3>段落</h3><p>Markdownのように、何も指定しなければ自動的に段落になります。</p><code>一つ目の段落。
+test.adoc	test.html	test.pdf]]></blockcode><h2>書き方</h2><p>詳細な書き方のリファレンスは、<a ref="https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/">AsciiDoc Syntax Quick Reference</a>にあります。</p><h3>段落</h3><p>Markdownのように、何も指定しなければ自動的に段落になります。</p><blockcode><![CDATA[一つ目の段落。
 
-二つ目の段落。</code><h3>コメント</h3><code>// コメント</code><h3>太字、斜体、等幅</h3><p>ConstrainedとUnconstrainedな書き方があります。Constrainedは修飾記号の前後にスペースや改行が必要ですが、Unconstrainedは必要ありません。</p><code>*constrained-bold*
+二つ目の段落。]]></blockcode><h3>コメント</h3><blockcode><![CDATA[// コメント]]></blockcode><h3>太字、斜体、等幅</h3><p>ConstrainedとUnconstrainedな書き方があります。Constrainedは修飾記号の前後にスペースや改行が必要ですが、Unconstrainedは必要ありません。</p><blockcode><![CDATA[*constrained-bold*
 
 _constrained-italic_
 
@@ -26,19 +28,19 @@ unconstrained-**bold**
 
 unconstrained-__italic__
 
-unconstrained-``monospace``</code><h3>その他のテキスト修飾</h3><code>#ハイライト#
+unconstrained-``monospace``]]></blockcode><h3>その他のテキスト修飾</h3><blockcode><![CDATA[#ハイライト#
 
 一部分を##ハイライト##
 
 [.underline]#下線#
 
-[.line-through]#打ち消し#</code><h3>上付き、下付き</h3><code>^上付き^文字
+[.line-through]#打ち消し#]]></blockcode><h3>上付き、下付き</h3><blockcode><![CDATA[^上付き^文字
 
-~下付き~文字</code><h3>記号の置換</h3><p>いくつかの記号が自動的に置換されます。例えば、<code>(C)</code>は©に、<code>-&gt;</code>は→に、<code>...</code>は…​に置換されます。</p><h3>リンク</h3><p>URLは自動的にリンクになります。</p><code>https://example.com/
+~下付き~文字]]></blockcode><h3>記号の置換</h3><p>いくつかの記号が自動的に置換されます。例えば、<code><![CDATA[(C)]]></code>は©に、<code><![CDATA[->]]></code>は→に、<code><![CDATA[...]]></code>は…​に置換されます。</p><h3>リンク</h3><p>URLは自動的にリンクになります。</p><blockcode><![CDATA[https://example.com/
 
-https://example.com/[リンクの表示名]</code><h3>見出し</h3><p>ドキュメントの見出しは、ファイルの上部に書きます。</p><code>= ドキュメントの見出し
-著者名 &lt;author@example.com&gt;
-v1.0, 2022-02-05</code><p>著者名などの追加情報はオプショナルです。</p><code>= ドキュメントの見出し</code><p>セクションの見出しは、1から5段階あります。</p><code>== セクションの見出し1
+https://example.com/[リンクの表示名]]]></blockcode><h3>見出し</h3><p>ドキュメントの見出しは、ファイルの上部に書きます。</p><blockcode><![CDATA[= ドキュメントの見出し
+著者名 <author@example.com>
+v1.0, 2022-02-05]]></blockcode><p>著者名などの追加情報はオプショナルです。</p><blockcode><![CDATA[= ドキュメントの見出し]]></blockcode><p>セクションの見出しは、1から5段階あります。</p><blockcode><![CDATA[== セクションの見出し1
 
 === セクションの見出し2
 
@@ -46,7 +48,7 @@ v1.0, 2022-02-05</code><p>著者名などの追加情報はオプショナルで
 
 ===== セクションの見出し4
 
-====== セクションの見出し5</code><h3>リスト</h3><p>順序なし、順序付き、そしてチェックリストがあります。</p><code>* リストアイテム
+====== セクションの見出し5]]></blockcode><h3>リスト</h3><p>順序なし、順序付き、そしてチェックリストがあります。</p><blockcode><![CDATA[* リストアイテム
 ** リストアイテム
 * リストアイテム
 
@@ -55,9 +57,9 @@ v1.0, 2022-02-05</code><p>著者名などの追加情報はオプショナルで
 . 順序付きリストアイテム
 
 * [x] チェック済み
-* [ ] 未チェック</code><h3>画像</h3><code>image::embedded-image.png[]
+* [ ] 未チェック]]></blockcode><h3>画像</h3><blockcode><![CDATA[image::embedded-image.png[]
 
-image::embedded-image.png[alt属性]</code><h3>テキストの埋め込み</h3><p>画像のように、他のテキストファイルを埋め込むことができます。</p><code>include::embedded-text.txt[]</code><h3>ソースコード</h3><p>インラインのソースコードを書くには、<code>\</code>に加えて、<code>+</code>で囲います。これにより、前述の記号の置換を無効にできます。</p><code>`+インラインコード...+`</code><p>コードブロックをハイライトするには、ドキュメントのヘッダーに<code>:source-highlighter:</code>を指定する必要があります。他のファイルを埋め込んで表示することもできます。</p><code>.コードタイトル
+image::embedded-image.png[alt属性]]]></blockcode><h3>テキストの埋め込み</h3><p>画像のように、他のテキストファイルを埋め込むことができます。</p><blockcode><![CDATA[include::embedded-text.txt[]]]></blockcode><h3>ソースコード</h3><p>インラインのソースコードを書くには、<code><![CDATA[\]]></code>に加えて、<code><![CDATA[+]]></code>で囲います。これにより、前述の記号の置換を無効にできます。</p><blockcode><![CDATA[`+インラインコード...+`]]></blockcode><p>コードブロックをハイライトするには、ドキュメントのヘッダーに<code><![CDATA[:source-highlighter:]]></code>を指定する必要があります。他のファイルを埋め込んで表示することもできます。</p><blockcode><![CDATA[.コードタイトル
 [,js]
 ----
 console.log('hello');
@@ -67,7 +69,7 @@ console.log('hello');
 [,js]
 ----
 include::embedded-script.js[]
-----</code><h3>罫線</h3><code>'''</code><h3>Admonition</h3><code>NOTE: 追加情報...
+----]]></blockcode><h3>罫線</h3><blockcode><![CDATA[''']]></blockcode><h3>Admonition</h3><blockcode><![CDATA[NOTE: 追加情報...
 
 IMPORTANT: 重要な情報...
 
@@ -75,16 +77,16 @@ TIP: ヒント...
 
 CAUTION: 注意...
 
-WARNING: 警告...</code><h3>表</h3><code>.表タイトル
+WARNING: 警告...]]></blockcode><h3>表</h3><blockcode><![CDATA[.表タイトル
 |===
 |列1のヘッダー |列2のヘッダー
 
 |列1行1 |列2行1
 |列1行2 |列2行2
-|===</code><h3>脚注</h3><code>文章...footnote:[脚注の文章]</code><h3>数式</h3><p>ドキュメントのヘッダーに<code>:stem:</code>を指定する必要があります。また、デフォルトではAsciiMath記法となっていますが、<code>:stem: latexmath</code>を指定することでLaTeX記法を利用できます。</p><p>インラインの数式。</p><code>stem:[\sqrt{2} = 1.41421...]</code><p>数式ブロック。</p><code>[stem]
+|===]]></blockcode><h3>脚注</h3><blockcode><![CDATA[文章...footnote:[脚注の文章]]]></blockcode><h3>数式</h3><p>ドキュメントのヘッダーに<code><![CDATA[:stem:]]></code>を指定する必要があります。また、デフォルトではAsciiMath記法となっていますが、<code><![CDATA[:stem: latexmath]]></code>を指定することでLaTeX記法を利用できます。</p><p>インラインの数式。</p><blockcode><![CDATA[stem:[\sqrt{2} = 1.41421...]]]></blockcode><p>数式ブロック。</p><blockcode><![CDATA[[stem]
 ++++
 \sqrt{4} = 2
-++++</code><p>Asciidoctor PDFでは、<a href="https://github.com/asciidoctor/asciidoctor-mathematical">asciidoctor-mathematical</a> gemを入れる必要がありますが、手元の環境(MacBook Pro 2021, macOS 12.6.2)ではうまく動かすことができませんでした。</p>
+++++]]></blockcode><p>Asciidoctor PDFでは、<a ref="https://github.com/asciidoctor/asciidoctor-mathematical">asciidoctor-mathematical</a> gemを入れる必要がありますが、手元の環境(MacBook Pro 2021, macOS 12.6.2)ではうまく動かすことができませんでした。</p>
 </body>
 
 </ktml>

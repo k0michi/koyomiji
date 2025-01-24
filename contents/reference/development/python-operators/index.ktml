@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -9,16 +10,16 @@
 
 <body>
   <h2>変数宣言と代入</h2>
-  <code lang="python">n = 10
-s = "abc"</code>
+  <blockcode lang="python"><![CDATA[n = 10
+s = "abc"]]></blockcode>
   <p>=は代入<b>文</b>であることに注意。代入<b>式</b>は:=である。</p>
   
-  <code lang="python">if result := re.search("&lt;.*&gt;", "&lt;html&gt;"):
-  print(result)</code>
+  <blockcode lang="python"><![CDATA[if result := re.search("<.*>", "<html>"):
+  print(result)]]></blockcode>
 
   <h2>算術演算</h2>
   <p>**は冪乗。//は除算して小数点を切り捨てる。</p>
-  <code lang="python">n1 = +10
+  <blockcode lang="python"><![CDATA[n1 = +10
 n2 = -10
 
 n3 = 1 + 2
@@ -27,33 +28,33 @@ n5 = 5 * 6
 n6 = 7 / 8
 n7 = 10 % 9
 n8 = 11 ** 12
-n9 = 13 // 14</code>
+n9 = 13 // 14]]></blockcode>
   <p>演算と代入を同時に行う。</p>
-  <code lang="python">n16 = 10
-n16 += 4</code>
+  <blockcode lang="python"><![CDATA[n16 = 10
+n16 += 4]]></blockcode>
 
   <h2>ビット演算</h2>
-  <code lang="python">n10 = 7 &amp; 3
+  <blockcode lang="python"><![CDATA[n10 = 7 & 3
 n11 = 7 | 3
 n12 = 7 ^ 3
 n13 = ~10
-n14 = 2 &lt;&lt; 3
-n15 = 256 &gt;&gt; 3</code>
+n14 = 2 << 3
+n15 = 256 >> 3]]></blockcode>
 
   <h2>比較演算</h2>
-  <code lang="python">b1 = 1 == 2
+  <blockcode lang="python"><![CDATA[b1 = 1 == 2
 b2 = 1 != 2
-b3 = 3 &gt; 4
-b4 = 3 &lt; 4
-b5 = 5 &gt;= 6
-b6 = 5 &lt;= 6</code>
-  <p>Pythonでは<code lang="python">a &lt; b &lt; c</code>のような書き方も可能。これは<code lang="python">a &lt; b and b &lt; c</code>と等価になる。</p>
+b3 = 3 > 4
+b4 = 3 < 4
+b5 = 5 >= 6
+b6 = 5 <= 6]]></blockcode>
+  <p>Pythonでは<code lang="python"><![CDATA[a < b < c]]></code>のような書き方も可能。これは<code lang="python"><![CDATA[a < b and b < c]]></code>と等価になる。</p>
 
   <h2>論理演算</h2>
   <p>C言語などとは異なり、記号を用いない。</p>
-  <code lang="python">b7 = b1 and b2
+  <blockcode lang="python"><![CDATA[b7 = b1 and b2
 b8 = b1 or b2
-b9 = not b3</code>
+b9 = not b3]]></blockcode>
 </body>
 
 </ktml>

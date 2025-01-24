@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -9,16 +10,16 @@
 
 <body>
   <h2>ユーザの追加</h2>
-  <p>ユーザを追加には<code lang="bash">useradd</code>を用いる。</p>
-  <p>デフォルトでは、ホームディレクトリは作成されない。作成する場合は、<code lang="bash">-m</code>を指定する。</p>
-  <p>Ubuntuなどでは、対話形式の<code lang="bash">adduser</code>を使うこともできる。</p>
-  <code lang="bash">$ sudo useradd (ユーザ名)</code>
+  <p>ユーザを追加には<code lang="bash"><![CDATA[useradd]]></code>を用いる。</p>
+  <p>デフォルトでは、ホームディレクトリは作成されない。作成する場合は、<code lang="bash"><![CDATA[-m]]></code>を指定する。</p>
+  <p>Ubuntuなどでは、対話形式の<code lang="bash"><![CDATA[adduser]]></code>を使うこともできる。</p>
+  <blockcode lang="bash"><![CDATA[$ sudo useradd (ユーザ名)]]></blockcode>
   <h2>ユーザ覧を表示</h2>
-  <p>ユーザの一覧は<code lang="bash">/etc/passwd</code>に格納されている。</p>
-  <code lang="bash">$ cat /etc/passwd</code>
+  <p>ユーザの一覧は<code lang="bash"><![CDATA[/etc/passwd]]></code>に格納されている。</p>
+  <blockcode lang="bash"><![CDATA[$ cat /etc/passwd]]></blockcode>
   <h2>ユーザの削除</h2>
-  <p>ユーザの削除には<code lang="bash">userdel</code>を用いる。</p>
-  <code lang="bash">$ sudo userdel (ユーザ名)</code>
+  <p>ユーザの削除には<code lang="bash"><![CDATA[userdel]]></code>を用いる。</p>
+  <blockcode lang="bash"><![CDATA[$ sudo userdel (ユーザ名)]]></blockcode>
 </body>
 
 </ktml>

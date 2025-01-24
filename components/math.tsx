@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface MathProps {
-  display: string;
+  display?: string;
   children: string;
 }
 

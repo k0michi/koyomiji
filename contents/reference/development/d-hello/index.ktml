@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -8,19 +9,19 @@
 </head>
 
 <body>
-  <p><code lang="d">writeln</code>で標準出力から文字列を出力する。下記の内容をhello.dとして保存。</p>
-  <code lang="d">import std.stdio;
+  <p><code lang="d"><![CDATA[writeln]]></code>で標準出力から文字列を出力する。下記の内容をhello.dとして保存。</p>
+  <blockcode lang="d"><![CDATA[import std.stdio;
 
 void main() {
   writeln("Hello, World!");
-}</code>
+}]]></blockcode>
   <p>DMDでコンパイルする場合。</p>
-  <code lang="bash">% dmd hello.d</code>
+  <blockcode lang="bash"><![CDATA[% dmd hello.d]]></blockcode>
   <p>LDCでコンパイルする場合。</p>
-  <code lang="bash">% ldc2 hello.d</code>
+  <blockcode lang="bash"><![CDATA[% ldc2 hello.d]]></blockcode>
   <p>実行。</p>
-  <code lang="bash">% ./hello 
-Hello, World!</code>
+  <blockcode lang="bash"><![CDATA[% ./hello 
+Hello, World!]]></blockcode>
 </body>
 
 </ktml>

@@ -1,34 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>集合</title>
   <id>b9a8b7ab-4d74-4f10-8d75-1c98b9fbb087</id>
   <created>2022-07-01T22:03:37+09:00</created>
+  <modified>2022-07-01T22:03:37+09:00</modified>
 </head>
 
 <body>
   <h2>部分集合</h2>
-  <p>集合<math>B</math>の任意の要素が集合<math>A</math>の要素でもあるとき、<math>B</math>は<math>A</math>の<b>部分集合</b>である。</p>
-  <math>A \supset B</math>
-  <p><math>A \supset B</math>かつ<math>A \ne B</math>であるとき、<math>B</math>は<math>A</math>の<b>真部分集合</b>である。</p>
-  <math>A \supsetneq B</math>
+  <p>集合<math><![CDATA[B]]></math>の任意の要素が集合<math><![CDATA[A]]></math>の要素でもあるとき、<math><![CDATA[B]]></math>は<math><![CDATA[A]]></math>の<b>部分集合</b>である。</p>
+  <blockmath><![CDATA[A \supset B]]></blockmath>
+  <p><math><![CDATA[A \supset B]]></math>かつ<math><![CDATA[A \ne B]]></math>であるとき、<math><![CDATA[B]]></math>は<math><![CDATA[A]]></math>の<b>真部分集合</b>である。</p>
+  <blockmath><![CDATA[A \supsetneq B]]></blockmath>
 
 
   <h2>和集合(Union)</h2>
-  <math>A \cup B</math>
+  <blockmath><![CDATA[A \cup B]]></blockmath>
 
   <h2>積集合(共通部分, Intersection)</h2>
-  <math>A \cap B</math>
-  <p>集合<math>A</math>, <math>B</math>の共通部分が空集合であるとき、<math>A</math>と<math>B</math>は<b>互いに素</b>である。</p>
+  <blockmath><![CDATA[A \cap B]]></blockmath>
+  <p>集合<math><![CDATA[A]]></math>, <math><![CDATA[B]]></math>の共通部分が空集合であるとき、<math><![CDATA[A]]></math>と<math><![CDATA[B]]></math>は<b>互いに素</b>である。</p>
 
   <h2>差集合(Difference)</h2>
-  <math>A \setminus B</math>
+  <blockmath><![CDATA[A \setminus B]]></blockmath>
   <p>または</p>
-  <math>A - B</math>
+  <blockmath><![CDATA[A - B]]></blockmath>
 
   <h2>補集合</h2>
-  <p>普遍集合を<math>U</math>とすると</p>
-  <math>A^c = U - A</math>
+  <p>普遍集合を<math><![CDATA[U]]></math>とすると</p>
+  <blockmath><![CDATA[A^c = U - A]]></blockmath>
 </body>
 
 </ktml>

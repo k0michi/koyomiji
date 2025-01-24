@@ -1,14 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>Adobe公式からPhotoshopのブラシをゲットしよう</title>
   <id>4aecc9d6-b5aa-40f2-b505-46c962a7b328</id>
   <created>2022-10-06T21:26:59+09:00</created>
+  <modified>2022-10-06T21:26:59+09:00</modified>
 </head>
 
 <body>
-  <p>Photoshopはデフォルトだと、ブラシがあんまり用意されていないので、イラストを描くには困りものです。そんなわけでPhotoshopのブラシを探していたのですが、Adobe公式が大量に配布しているではありませんか。Adobeのアカウントでログインが必要ですが、<a href="https://www.adobe.com/jp/products/photoshop/brushes.html">https://www.adobe.com/jp/products/photoshop/brushes.html</a>からダウンロードできます。Kyle T. Websterという方がデザインしているようです。</p>
-  <img src="brushes.png" />
+  <p>Photoshopはデフォルトだと、ブラシがあんまり用意されていないので、イラストを描くには困りものです。そんなわけでPhotoshopのブラシを探していたのですが、Adobe公式が大量に配布しているではありませんか。Adobeのアカウントでログインが必要ですが、<a ref="https://www.adobe.com/jp/products/photoshop/brushes.html">https://www.adobe.com/jp/products/photoshop/brushes.html</a>からダウンロードできます。Kyle T. Websterという方がデザインしているようです。</p>
+  <img src="brushes.png"/>
   <p>上の画像はMegaPackのブラシの一部ですが、それだけでこんなにあるので、当分困ることは無いでしょう。これだけで表現の幅が相当広がるかと思います。非常におすすめです。</p>
 </body>
 

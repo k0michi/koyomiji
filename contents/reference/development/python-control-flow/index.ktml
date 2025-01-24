@@ -1,77 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>Python: 制御構文</title>
   <id>e258a651-ea42-4ad6-ad93-c40f44064730</id>
   <created>2022-07-22T18:29:55+09:00</created>
+  <modified>2022-07-22T18:29:55+09:00</modified>
 </head>
 
 <body>
   <h2>if文</h2>
   <p>Pythonのif文は、C言語などと殆ど同じ。else ifではなくelifであることに注意。</p>
-  <code lang="python">x = 10
+  <blockcode lang="python"><![CDATA[x = 10
 
-if x &gt; 10:
+if x > 10:
   print("x is greater than 10")
-elif x &lt; 10:
+elif x < 10:
   print("x is smaller than 10")
 else:
-  print("x equals 10")</code>
-  <p><code>x equals 10</code>を出力する。</p>
+  print("x equals 10")]]></blockcode>
+  <p><code><![CDATA[x equals 10]]></code>を出力する。</p>
 
   <h2>while文</h2>
-  <code lang="python">i = 0
+  <blockcode lang="python"><![CDATA[i = 0
 
-while i &lt; 10:
+while i < 10:
   print(i)
-  i += 1</code>
+  i += 1]]></blockcode>
 
   <p>出力は</p>
-  <code>0
+  <blockcode><![CDATA[0
 1
 2
-3</code>
+3]]></blockcode>
 
   <p>while内ではbreakでループを抜けることができる。またcontinueでwhileの式の評価に戻る。</p>
   <p>Pythonではwhile文の直後に、else文を加えることができる。このelse文は、whileループを抜けた後に実行される。</p>
 
-  <code lang="python">i = 0
+  <blockcode lang="python"><![CDATA[i = 0
 
-while i &lt; 4:
+while i < 4:
   print(i)
   i += 1
 else:
-  print("else")</code>
+  print("else")]]></blockcode>
 
   <p>出力:</p>
-  <code>0
+  <blockcode><![CDATA[0
 1
 2
 3
-else</code>
+else]]></blockcode>
 
   <p>しかし、以下のようにwhile内でbreakされた時には実行されない。</p>
-  <code lang="python">while True:
+  <blockcode lang="python"><![CDATA[while True:
   break
 else:
-  print("else")</code>
+  print("else")]]></blockcode>
 
   <h2>for文</h2>
   <p>Pythonのfor文では、反復可能なオブジェクト(iterable object)のみ扱うことができる。</p>
-  <code lang="python">for i in range(4):
-  print(i)</code>
+  <blockcode lang="python"><![CDATA[for i in range(4):
+  print(i)]]></blockcode>
   <p>whileと同じようにfor内で、break, continueすることができる。else文も同様に機能する。</p>
 
-  <code lang="python">for i in range(2):
+  <blockcode lang="python"><![CDATA[for i in range(2):
   print(i)
 else:
-  print("else")</code>
+  print("else")]]></blockcode>
 
   <p>文字列や配列を反復する例。</p>
-  <code lang="python">for i in [1, 2]:
-  print(i)</code>
-  <code lang="python">for c in "abc":
-  print(c)</code>
+  <blockcode lang="python"><![CDATA[for i in [1, 2]:
+  print(i)]]></blockcode>
+  <blockcode lang="python"><![CDATA[for c in "abc":
+  print(c)]]></blockcode>
 </body>
 
 </ktml>

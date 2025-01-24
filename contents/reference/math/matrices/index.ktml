@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -9,68 +10,68 @@
 
 <body>
   <h2>行列式の明示公式</h2>
-  <p><math>n</math>次正方行列<math>A</math>について、</p>
-  <math>\det(A) = \sum_{\sigma \in S_n} (\rm{sgn}\ \sigma) \prod_{i=1}^{n} a_{\sigma (i), i}</math>
-  <p><math>S_n</math>は置換群であり、<math>n</math>文字の置換全体を表す。</p>
+  <p><math><![CDATA[n]]></math>次正方行列<math><![CDATA[A]]></math>について、</p>
+  <blockmath><![CDATA[\det(A) = \sum_{\sigma \in S_n} (\rm{sgn}\ \sigma) \prod_{i=1}^{n} a_{\sigma (i), i}]]></blockmath>
+  <p><math><![CDATA[S_n]]></math>は置換群であり、<math><![CDATA[n]]></math>文字の置換全体を表す。</p>
 
   <h2>2次正方行列の行列式</h2>
-  <math>\begin{vmatrix}
-    a &amp; b \\
-    c &amp; d
- \end{vmatrix} = ad - bc</math>
+  <blockmath><![CDATA[\begin{vmatrix}
+    a & b \\
+    c & d
+ \end{vmatrix} = ad - bc]]></blockmath>
 
  <h2>3次正方行列の行列式</h2>
- <math>\begin{vmatrix}
-   a &amp; b &amp; c \\
-   d &amp; e &amp; f \\
-   g &amp; h &amp; i \\
-\end{vmatrix} = aei + bfg + cdh - ceg - bdi - afh</math>
+ <blockmath><![CDATA[\begin{vmatrix}
+   a & b & c \\
+   d & e & f \\
+   g & h & i \\
+\end{vmatrix} = aei + bfg + cdh - ceg - bdi - afh]]></blockmath>
 
   <h2>転置行列の行列式</h2>
-  <p>正方行列<math>A</math>について、</p>
-  <math>\det(	{}^t\! A) = \det(A)</math>
+  <p>正方行列<math><![CDATA[A]]></math>について、</p>
+  <blockmath><![CDATA[\det(	{}^t\! A) = \det(A)]]></blockmath>
 
   <h2>行列の積の行列式</h2>
-  <p>正則行列<math>A, B</math>について、</p>
-  <math>\det(AB) = \det(A)\det(B)</math>
+  <p>正則行列<math><![CDATA[A, B]]></math>について、</p>
+  <blockmath><![CDATA[\det(AB) = \det(A)\det(B)]]></blockmath>
 
   <h2>逆行列の行列式</h2>
-  <p><math>A</math>が正則行列ならば、</p>
-  <math>\det(A^{-1}) = \det(A)^{-1}</math>
-  <math>\det(A) \ne 0</math>
+  <p><math><![CDATA[A]]></math>が正則行列ならば、</p>
+  <blockmath><![CDATA[\det(A^{-1}) = \det(A)^{-1}]]></blockmath>
+  <blockmath><![CDATA[\det(A) \ne 0]]></blockmath>
 
   <h2>余因子</h2>
-  <p>正方行列<math>A</math>の小行列式<math>M_{i,j}</math>は、<math>A</math>の<math>i</math>行目と<math>j</math>列目を取り除いて得られる小行列の行列式である。</p>
-  <p>余因子<math>\tilde{a}_{i,j}</math>は<math>M_{i,j}</math>に<math>(-1)^{i+j}</math>を掛けて得られる。</p>
-  <math>\tilde{a}_{i,j} = (-1)^{i+j} M_{i,j}</math>
+  <p>正方行列<math><![CDATA[A]]></math>の小行列式<math><![CDATA[M_{i,j}]]></math>は、<math><![CDATA[A]]></math>の<math><![CDATA[i]]></math>行目と<math><![CDATA[j]]></math>列目を取り除いて得られる小行列の行列式である。</p>
+  <p>余因子<math><![CDATA[\tilde{a}_{i,j}]]></math>は<math><![CDATA[M_{i,j}]]></math>に<math><![CDATA[(-1)^{i+j}]]></math>を掛けて得られる。</p>
+  <blockmath><![CDATA[\tilde{a}_{i,j} = (-1)^{i+j} M_{i,j}]]></blockmath>
 
   <h2>余因子行列</h2>
-  <p>余因子行列とは、<math>(i,j)</math>成分が<math>\tilde{a}_{j,i}</math>となっている<math>n</math>次正方行列のことである。</p>
+  <p>余因子行列とは、<math><![CDATA[(i,j)]]></math>成分が<math><![CDATA[\tilde{a}_{j,i}]]></math>となっている<math><![CDATA[n]]></math>次正方行列のことである。</p>
 
   <h2>逆行列の明示公式</h2>
-  <p>正則行列<math>A</math>について、</p>
-  <math>A^{-1} = \frac{1}{\det(A)}\tilde{A}</math>
-  <p><math>\tilde{A}</math>は<math>A</math>の余因子行列である。</p>
+  <p>正則行列<math><![CDATA[A]]></math>について、</p>
+  <blockmath><![CDATA[A^{-1} = \frac{1}{\det(A)}\tilde{A}]]></blockmath>
+  <p><math><![CDATA[\tilde{A}]]></math>は<math><![CDATA[A]]></math>の余因子行列である。</p>
 
   <h2>2次正方行列の逆行列</h2>
-  <math>A = \begin{pmatrix}
-    a &amp; b \\
-    c &amp; d
- \end{pmatrix}</math>
-  <p>の逆行列は、<math>\det(A) \ne 0</math>のとき存在して、</p>
-  <math>A^{-1} = \frac{1}{\det(A)}\begin{pmatrix}
-    d &amp; -b \\
-    -c &amp; a
- \end{pmatrix}</math>
+  <blockmath><![CDATA[A = \begin{pmatrix}
+    a & b \\
+    c & d
+ \end{pmatrix}]]></blockmath>
+  <p>の逆行列は、<math><![CDATA[\det(A) \ne 0]]></math>のとき存在して、</p>
+  <blockmath><![CDATA[A^{-1} = \frac{1}{\det(A)}\begin{pmatrix}
+    d & -b \\
+    -c & a
+ \end{pmatrix}]]></blockmath>
 
  <h2>正則行列と逆行列</h2>
- <p>正則行列<math>A</math>に対して、<math>XA = AX = E</math>を満たす正方行列<math>X</math>が存在するとき、<math>A</math>は正則行列であるといい、<math>X</math>は<math>A</math>の逆行列と呼ぶ。</p>
+ <p>正則行列<math><![CDATA[A]]></math>に対して、<math><![CDATA[XA = AX = E]]></math>を満たす正方行列<math><![CDATA[X]]></math>が存在するとき、<math><![CDATA[A]]></math>は正則行列であるといい、<math><![CDATA[X]]></math>は<math><![CDATA[A]]></math>の逆行列と呼ぶ。</p>
 
  <h2>正則行列の性質</h2>
- <p>1. 正則行列<math>A, B</math>について、</p>
- <math>(AB)^{-1} = B^{-1} A^{-1}</math>
- <p>2. 正則行列<math>A</math>について、</p>
- <math>(A^{-1})^{-1} = A</math>
+ <p>1. 正則行列<math><![CDATA[A, B]]></math>について、</p>
+ <blockmath><![CDATA[(AB)^{-1} = B^{-1} A^{-1}]]></blockmath>
+ <p>2. 正則行列<math><![CDATA[A]]></math>について、</p>
+ <blockmath><![CDATA[(A^{-1})^{-1} = A]]></blockmath>
 </body>
 
 </ktml>

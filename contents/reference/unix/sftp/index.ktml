@@ -1,38 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>sftpコマンド</title>
   <id>3844b795-3655-4edd-9f91-1085d5e1f1bd</id>
   <created>2022-06-25T11:05:26+09:00</created>
+  <modified>2022-06-25T11:05:26+09:00</modified>
 </head>
 
 <body>
   <h2>接続</h2>
-  <code lang="bash">$ sftp user@host</code>
+  <blockcode lang="bash"><![CDATA[$ sftp user@host]]></blockcode>
   
   <h2>リモートの操作</h2>
-  <code lang="bash">&gt; cd RemoteDir
-&gt; ls
-&gt; pwd
-&gt; mkdir NewRemoteDir</code>
+  <blockcode lang="bash"><![CDATA[> cd RemoteDir
+> ls
+> pwd
+> mkdir NewRemoteDir]]></blockcode>
 
   <h2>ローカルの操作</h2>
   <p>コマンド名に接頭辞lをつけるとローカルでの操作になる。</p>
-  <code lang="bash">&gt; lcd LocalDir
-&gt; lls
-&gt; lpwd
-&gt; lmkdir NewLocalDir</code>
+  <blockcode lang="bash"><![CDATA[> lcd LocalDir
+> lls
+> lpwd
+> lmkdir NewLocalDir]]></blockcode>
 
   <h2>ファイルを取得</h2>
   <p>ワイルドカード指定も可能。</p>
-  <code lang="bash">&gt; get text.txt
-&gt; get *.txt</code>
-  <p><code lang="bash">-r</code>でディレクトリを再帰的に取得する。<code lang="bash">-p</code>でパーミッションと日付を維持する。</p>
-  <code lang="bash">&gt; get -p text.txt
-&gt; get -r Dir</code>
+  <blockcode lang="bash"><![CDATA[> get text.txt
+> get *.txt]]></blockcode>
+  <p><code lang="bash"><![CDATA[-r]]></code>でディレクトリを再帰的に取得する。<code lang="bash"><![CDATA[-p]]></code>でパーミッションと日付を維持する。</p>
+  <blockcode lang="bash"><![CDATA[> get -p text.txt
+> get -r Dir]]></blockcode>
 
   <h2>切断</h2>
-  <code lang="bash">&gt; exit</code>
+  <blockcode lang="bash"><![CDATA[> exit]]></blockcode>
 </body>
 
 </ktml>

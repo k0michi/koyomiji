@@ -25,6 +25,7 @@ function changeElementName($document: Document) {
     if (block) {
       const $block = $document.createElement('blockcode');
       DOMHelper.moveChildren($codeElem, $block);
+      DOMHelper.copyAttributes($codeElem, $block);
       $codeElem.parentNode?.replaceChild($block, $codeElem);
     }
   }
@@ -37,7 +38,17 @@ function changeElementName($document: Document) {
     if (block) {
       const $block = $document.createElement('blockmath');
       DOMHelper.moveChildren($mathElem, $block);
+      DOMHelper.copyAttributes($mathElem, $block);
       $mathElem.parentNode?.replaceChild($block, $mathElem);
+    }
+  }
+
+  for (const $aElem of $body.querySelectorAll('a')) {
+    const href = $aElem.getAttribute('href');
+
+    if (href) {
+      $aElem.setAttribute('ref', href);
+      $aElem.removeAttribute('href');
     }
   }
 }
@@ -84,10 +95,10 @@ function unwrapImages($document: Document) {
     const content = await FSHelper.readFileUTF8(filename);
     const $document = parser.parseFromString(content, 'text/xml');
 
-    const $kyml = $document.createElementNS('https://koyomiji.com/kyml', 'text');
-    DOMHelper.moveChildren($document.documentElement, $kyml);
-    $document.documentElement.remove();
-    $document.appendChild($kyml);
+    // const $kyml = $document.createElementNS('https://koyomiji.com/kyml', 'text');
+    // DOMHelper.moveChildren($document.documentElement, $kyml);
+    // $document.documentElement.remove();
+    // $document.appendChild($kyml);
 
     changeElementName($document);
     appendModified($document);
@@ -95,7 +106,9 @@ function unwrapImages($document: Document) {
 
     let modifiedContent = '<?xml version="1.0" encoding="UTF-8"?>\n' + serializer.serializeToString($document);
     // 全て要素のnamespaceを変更するのが面倒なので
-    modifiedContent = modifiedContent.replaceAll(` xmlns=""`, '');
-    await fs.writeFile(Path.join(PathHelper.pop(filename), 'index.kyml'), modifiedContent);
+    // modifiedContent = modifiedContent.replaceAll(` xmlns=""`, '');
+    // await fs.writeFile(Path.join(PathHelper.pop(filename), 'index.kyml'), modifiedContent);
+
+    await fs.writeFile(Path.join(PathHelper.pop(filename), 'index.ktml'), modifiedContent);
   }
 })();

@@ -1,15 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>React Router v7のプレリリースが来たよ</title>
   <id>2b53c5b3-2390-4ab7-8d27-93c905216b37</id>
   <created>2024-10-29T18:14:03+09:00</created>
+  <modified>2024-10-29T18:14:03+09:00</modified>
 </head>
 
 <body>
-  <p><a href="https://reactrouter.com/dev/guides">React Router v7</a>のプレリリース版が10月4日にリリースされていました。これを書いている現在の最新版は、<a href="https://www.npmjs.com/package/react-router/v/7.0.0-pre.2">7.0.0-pre.2</a>です。</p><p>React Routerといえば、もともとは文字通りReact向けに開発されたルーティングライブラリなわけです。現在のようにNext.jsが台頭する前は、クライアントサイドルーティングを実現するライブラリとしてメジャーだったのですが、v6になってからは、何方かと言えば<a href="https://remix.run/">Remix</a>というフルスタックフレームワークの一部として開発されていた印象です。</p><p>が、今回のアップデートではReact RouterとRemixがついに併合され、React Router v7というフルスタックフレームワークになります。</p><ul><li><p><a href="https://remix.run/blog/merging-remix-and-react-router">Merging Remix and React Router | Remix</a></p></li></ul><p>React Router v7では、React Router v6、Remix v2からの破壊的変更は最小限に留められています。また、プリレンダリングやRSCといった新しい機能が追加されます。ただRSCに関しては、まだ開発途中のようです(ドキュメントがない)。プリレンダリングに関しても、まだバグが多い印象です。</p><h2>インストール</h2><p>テンプレートがあるので、これを使うと簡単に使い始められます。<code>my-app</code>は任意のディレクトリ名です。</p><code>$ npx degit remix-run/react-router/templates/basic#dev my-app</code><p>お好みのパッケージマネージャで<code>install</code>します。</p><p><code>dev</code>コマンドで、開発サーバーが立ち上がります。</p><code>$ cd my-app
+  <p><a ref="https://reactrouter.com/dev/guides">React Router v7</a>のプレリリース版が10月4日にリリースされていました。これを書いている現在の最新版は、<a ref="https://www.npmjs.com/package/react-router/v/7.0.0-pre.2">7.0.0-pre.2</a>です。</p><p>React Routerといえば、もともとは文字通りReact向けに開発されたルーティングライブラリなわけです。現在のようにNext.jsが台頭する前は、クライアントサイドルーティングを実現するライブラリとしてメジャーだったのですが、v6になってからは、何方かと言えば<a ref="https://remix.run/">Remix</a>というフルスタックフレームワークの一部として開発されていた印象です。</p><p>が、今回のアップデートではReact RouterとRemixがついに併合され、React Router v7というフルスタックフレームワークになります。</p><ul><li><p><a ref="https://remix.run/blog/merging-remix-and-react-router">Merging Remix and React Router | Remix</a></p></li></ul><p>React Router v7では、React Router v6、Remix v2からの破壊的変更は最小限に留められています。また、プリレンダリングやRSCといった新しい機能が追加されます。ただRSCに関しては、まだ開発途中のようです(ドキュメントがない)。プリレンダリングに関しても、まだバグが多い印象です。</p><h2>インストール</h2><p>テンプレートがあるので、これを使うと簡単に使い始められます。<code><![CDATA[my-app]]></code>は任意のディレクトリ名です。</p><blockcode><![CDATA[$ npx degit remix-run/react-router/templates/basic#dev my-app]]></blockcode><p>お好みのパッケージマネージャで<code><![CDATA[install]]></code>します。</p><p><code><![CDATA[dev]]></code>コマンドで、開発サーバーが立ち上がります。</p><blockcode><![CDATA[$ cd my-app
 $ pnpm install
-$ pnpm run dev</code><h2>ルーティング</h2><p>ルーティングについてはRemix v2から少し変更されて、<code>routes.ts</code>という一つのファイルに全てのルートの設定を記述するのがデフォルトになったようです。</p><ul><li><p><code>index(componentFile)</code>: 親パスを<code>componentFile</code>で描画する。</p></li><li><p><code>route(path, componentFile)</code>: 親パスに<code>path</code>を繋げたパスを<code>componentFile</code>で描画する。</p></li><li><p><code>layout(componentFile, children)</code>: <code>children</code>の各ルートを、<code>componentFile</code>の<code>&lt;Outlet /&gt;</code>のもとで描画する。パスは変化しない。</p></li><li><p><code>prefix(prefixPath, routes)</code>: <code>routes</code>の各ルートのパスの先頭に<code>prefixPath</code>を繋げる。</p></li></ul><p>公式ドキュメントから持ってきた例です。</p><code lang="tsx">import { type RouteConfig, route, index, layout, prefix } from "@react-router/dev/routes";
+$ pnpm run dev]]></blockcode><h2>ルーティング</h2><p>ルーティングについてはRemix v2から少し変更されて、<code><![CDATA[routes.ts]]></code>という一つのファイルに全てのルートの設定を記述するのがデフォルトになったようです。</p><ul><li><p><code><![CDATA[index(componentFile)]]></code>: 親パスを<code><![CDATA[componentFile]]></code>で描画する。</p></li><li><p><code><![CDATA[route(path, componentFile)]]></code>: 親パスに<code><![CDATA[path]]></code>を繋げたパスを<code><![CDATA[componentFile]]></code>で描画する。</p></li><li><p><code><![CDATA[layout(componentFile, children)]]></code>: <code><![CDATA[children]]></code>の各ルートを、<code><![CDATA[componentFile]]></code>の<code><![CDATA[<Outlet />]]></code>のもとで描画する。パスは変化しない。</p></li><li><p><code><![CDATA[prefix(prefixPath, routes)]]></code>: <code><![CDATA[routes]]></code>の各ルートのパスの先頭に<code><![CDATA[prefixPath]]></code>を繋げる。</p></li></ul><p>公式ドキュメントから持ってきた例です。</p><blockcode lang="tsx"><![CDATA[import { type RouteConfig, route, index, layout, prefix } from "@react-router/dev/routes";
 
 export const routes: RouteConfig = [
   index("./home.tsx"),
@@ -25,26 +27,26 @@ export const routes: RouteConfig = [
     route(":city", "./concerts/city.tsx"),
     route("trending", "./concerts/trending.tsx"),
   ]),
-];</code><p>初見だと面食らいますが、これは次のような意味です。</p><ul><li><p>URL <code>/</code>へのリクエストは、コンポーネント<code>./home.tsx</code>によって描画される</p></li><li><p><code>/about</code>は、<code>./about.tsx</code>によって描画される</p></li><li><p><code>/login</code>は、<code>./auth/login.tsx</code>によって描画される。ただし、この描画結果は<code>./auth/layout.tsx</code>の<code>&lt;Outlet /&gt;</code>に埋め込まれる</p></li><li><p><code>/register</code>は、<code>./auth/register.tsx</code>によって描画され、<code>/login</code>と同様のレイアウトがなされる</p></li><li><p><code>/concerts</code>は、<code>./concerts/home.tsx</code>によって描画される</p></li><li><p><code>/concerts/:city</code>は、<code>./concerts/city.tsx</code>によって描画される</p></li><li><p><code>/concerts/trending</code>は、<code>./concerts/trending.tsx</code>によって描画される</p></li></ul><p>加えて、得られた描画結果は暗黙的に<code>app/root.tsx</code>の<code>&lt;Outlet /&gt;</code>に埋め込まれます。このため、<code>app/root.tsx</code>は<i>ルート</i>ルート(<i>Root</i> Route)と呼ばれます(ややこしい)。</p><p>Remix v2時代のファイルベースのルーティングは<code>@react-router/fs-routes</code>によって<a href="https://reactrouter.com/dev/guides/misc/file-route-conventions">引き続きサポートされています</a>。</p><code lang="tsx">import { type RouteConfig } from "@react-router/dev/routes";
+];]]></blockcode><p>初見だと面食らいますが、これは次のような意味です。</p><ul><li><p>URL <code><![CDATA[/]]></code>へのリクエストは、コンポーネント<code><![CDATA[./home.tsx]]></code>によって描画される</p></li><li><p><code><![CDATA[/about]]></code>は、<code><![CDATA[./about.tsx]]></code>によって描画される</p></li><li><p><code><![CDATA[/login]]></code>は、<code><![CDATA[./auth/login.tsx]]></code>によって描画される。ただし、この描画結果は<code><![CDATA[./auth/layout.tsx]]></code>の<code><![CDATA[<Outlet />]]></code>に埋め込まれる</p></li><li><p><code><![CDATA[/register]]></code>は、<code><![CDATA[./auth/register.tsx]]></code>によって描画され、<code><![CDATA[/login]]></code>と同様のレイアウトがなされる</p></li><li><p><code><![CDATA[/concerts]]></code>は、<code><![CDATA[./concerts/home.tsx]]></code>によって描画される</p></li><li><p><code><![CDATA[/concerts/:city]]></code>は、<code><![CDATA[./concerts/city.tsx]]></code>によって描画される</p></li><li><p><code><![CDATA[/concerts/trending]]></code>は、<code><![CDATA[./concerts/trending.tsx]]></code>によって描画される</p></li></ul><p>加えて、得られた描画結果は暗黙的に<code><![CDATA[app/root.tsx]]></code>の<code><![CDATA[<Outlet />]]></code>に埋め込まれます。このため、<code><![CDATA[app/root.tsx]]></code>は<i>ルート</i>ルート(<i>Root</i> Route)と呼ばれます(ややこしい)。</p><p>Remix v2時代のファイルベースのルーティングは<code><![CDATA[@react-router/fs-routes]]></code>によって<a ref="https://reactrouter.com/dev/guides/misc/file-route-conventions">引き続きサポートされています</a>。</p><blockcode lang="tsx"><![CDATA[import { type RouteConfig } from "@react-router/dev/routes";
 import { flatRoutes } from "@react-router/fs-routes";
 
-export const routes: RouteConfig = flatRoutes();</code><h2>レンダリング方式</h2><p>React Router v7では、次の3つのレンダリング方式が使えます。</p><ul><li><p>Client Side Rendering</p></li><li><p>Server Side Rendering</p></li><li><p>Static Pre-rendering</p></li></ul><p>レンダリング方式は、<code>vite.config.ts</code>で設定することができます。デフォルトではSSRになっているようです。</p><h3>Client Side Rendering</h3><code lang="ts">reactRouter({
+export const routes: RouteConfig = flatRoutes();]]></blockcode><h2>レンダリング方式</h2><p>React Router v7では、次の3つのレンダリング方式が使えます。</p><ul><li><p>Client Side Rendering</p></li><li><p>Server Side Rendering</p></li><li><p>Static Pre-rendering</p></li></ul><p>レンダリング方式は、<code><![CDATA[vite.config.ts]]></code>で設定することができます。デフォルトではSSRになっているようです。</p><h3>Client Side Rendering</h3><blockcode lang="ts"><![CDATA[reactRouter({
   ssr: false
-})</code><h3>Server Side Rendering</h3><code lang="ts">reactRouter({
+})]]></blockcode><h3>Server Side Rendering</h3><blockcode lang="ts"><![CDATA[reactRouter({
   ssr: true
-})</code><h3>Static Pre-rendering</h3><p>プリレンダリングは<code>prerender</code>プロパティを指定するのですが、指定できるものがいくつかあります。</p><ul><li><p><code>true</code></p><ul><li><p>静的なルートをすべてプリレンダする。パスに<code>:param</code>などのパラメータがあるものはプリレンダされない</p></li></ul><code lang="ts">reactRouter({
+})]]></blockcode><h3>Static Pre-rendering</h3><p>プリレンダリングは<code><![CDATA[prerender]]></code>プロパティを指定するのですが、指定できるものがいくつかあります。</p><ul><li><p><code><![CDATA[true]]></code></p><ul><li><p>静的なルートをすべてプリレンダする。パスに<code><![CDATA[:param]]></code>などのパラメータがあるものはプリレンダされない</p></li></ul><blockcode lang="ts"><![CDATA[reactRouter({
   prerender: true
-})</code></li><li><p>配列</p><ul><li><p>指定したルートのみをプリレンダする</p></li></ul><code lang="ts">reactRouter({
+})]]></blockcode></li><li><p>配列</p><ul><li><p>指定したルートのみをプリレンダする</p></li></ul><blockcode lang="ts"><![CDATA[reactRouter({
   prerender: ['/', '/about']
-})</code></li><li><p>関数</p><ul><li><p>プリレンダすべきパスを返す関数を指定する</p></li><li><p>引数の<code>getStaticPaths</code>から、静的な全てのルートを配列として取得できる</p></li><li><p>静的サイトジェネレータ的な使い方ができる</p></li></ul><code lang="ts">reactRouter({
+})]]></blockcode></li><li><p>関数</p><ul><li><p>プリレンダすべきパスを返す関数を指定する</p></li><li><p>引数の<code><![CDATA[getStaticPaths]]></code>から、静的な全てのルートを配列として取得できる</p></li><li><p>静的サイトジェネレータ的な使い方ができる</p></li></ul><blockcode lang="ts"><![CDATA[reactRouter({
   async prerender({ getStaticPaths }) {
     let posts = await getPosts();
     let staticPaths = getStaticPaths();
     return staticPaths.concat(
-      posts.map((post) =&gt; post.href)
+      posts.map((post) => post.href)
     );
   },
-})</code></li></ul><h2>型定義の自動生成</h2><p>React Router v7では、パスパラメータに安全にアクセスできるよう、ルートの型定義を自動生成することができるようになっています。TanStack Routerなどに触発された機能かと思います。</p><p>例えば、ファイルベースのルーティングをしていて<code>app/routes/blog.$pageID.tsx</code>というルートがあったとします。この時、<code>pageID</code>というパラメータが存在しますが、TypeScript上から<code>params['pageID']</code>が<code>string</code>であるという型情報を得ることができれば、<code>params['pageID']!</code>のような怪しい操作を回避することができ、安全になります。</p><p>型ファイルを生成するには、<code>react-router typegen</code>を使います。</p><code>$ pnpm react-router typegen</code><p>これにより、次のような型定義が自動生成されます。</p><code lang="ts">// React Router generated types for route:
+})]]></blockcode></li></ul><h2>型定義の自動生成</h2><p>React Router v7では、パスパラメータに安全にアクセスできるよう、ルートの型定義を自動生成することができるようになっています。TanStack Routerなどに触発された機能かと思います。</p><p>例えば、ファイルベースのルーティングをしていて<code><![CDATA[app/routes/blog.$pageID.tsx]]></code>というルートがあったとします。この時、<code><![CDATA[pageID]]></code>というパラメータが存在しますが、TypeScript上から<code><![CDATA[params['pageID']]]></code>が<code><![CDATA[string]]></code>であるという型情報を得ることができれば、<code><![CDATA[params['pageID']!]]></code>のような怪しい操作を回避することができ、安全になります。</p><p>型ファイルを生成するには、<code><![CDATA[react-router typegen]]></code>を使います。</p><blockcode><![CDATA[$ pnpm react-router typegen]]></blockcode><p>これにより、次のような型定義が自動生成されます。</p><blockcode lang="ts"><![CDATA[// React Router generated types for route:
 // routes/blog.$pageID.tsx
 
 import * as T from "react-router/types"
@@ -55,20 +57,20 @@ export type Params = {
 
 type Route = typeof import("./blog.$pageID")
 
-export type LoaderData = T.CreateLoaderData&lt;Route&gt;
-export type ActionData = T.CreateActionData&lt;Route&gt;
+export type LoaderData = T.CreateLoaderData<Route>
+export type ActionData = T.CreateActionData<Route>
 
-export type LoaderArgs = T.CreateServerLoaderArgs&lt;Params&gt;
-export type ClientLoaderArgs = T.CreateClientLoaderArgs&lt;Params, Route&gt;
-export type ActionArgs = T.CreateServerActionArgs&lt;Params&gt;
-export type ClientActionArgs = T.CreateClientActionArgs&lt;Params, Route&gt;
+export type LoaderArgs = T.CreateServerLoaderArgs<Params>
+export type ClientLoaderArgs = T.CreateClientLoaderArgs<Params, Route>
+export type ActionArgs = T.CreateServerActionArgs<Params>
+export type ClientActionArgs = T.CreateClientActionArgs<Params, Route>
 
-export type HydrateFallbackProps = T.CreateHydrateFallbackProps&lt;Params&gt;
-export type ComponentProps = T.CreateComponentProps&lt;Params, LoaderData, ActionData&gt;
-export type ErrorBoundaryProps = T.CreateErrorBoundaryProps&lt;Params, LoaderData, ActionData&gt;</code><p>この型定義をインポートすることで、次のように型安全なルートコンポーネントを書くことができるようになります。パスパラメータだけでなく、<code>loader</code>や<code>action</code>の返り値についても正しい型を得ることができます。</p><code lang="tsx">import type * as Route from "./+types.blog.$pageID";
+export type HydrateFallbackProps = T.CreateHydrateFallbackProps<Params>
+export type ComponentProps = T.CreateComponentProps<Params, LoaderData, ActionData>
+export type ErrorBoundaryProps = T.CreateErrorBoundaryProps<Params, LoaderData, ActionData>]]></blockcode><p>この型定義をインポートすることで、次のように型安全なルートコンポーネントを書くことができるようになります。パスパラメータだけでなく、<code><![CDATA[loader]]></code>や<code><![CDATA[action]]></code>の返り値についても正しい型を得ることができます。</p><blockcode lang="tsx"><![CDATA[import type * as Route from "./+types.blog.$pageID";
 import { useLoaderData, useParams } from "react-router";
 
-export const loader = async ({ }: Route.LoaderArgs) =&gt; {
+export const loader = async ({ }: Route.LoaderArgs) => {
   return 'foo';
 }
 
@@ -76,11 +78,11 @@ export default function BlogPage() {
   const params = useParams() as Route.Params;
   const data = useLoaderData() as Route.LoaderData;
 
-  return &lt;&gt;
-    &lt;div&gt;First letter of pageID: {params.pageID[0]}&lt;/div&gt;
-    &lt;div&gt;First letter of loader data: {data[0]}&lt;/div&gt;
-  &lt;/&gt;;
-}</code><h2>既知のバグ</h2><p>まだReact Router v7はプレリリースの段階なので、結構な頻度でバグを踏みます。</p><ul><li><p><a href="https://github.com/remix-run/react-router/issues/12160">[Bug]: (v7) Static Prerender Error: Cannot convert argument to a ByteString due to invalid character value · Issue #12160 · remix-run/react-router · GitHub</a></p><ul><li><p><code>loader</code>が非ASCII文字を含むデータを返す場合、プリレンダリングが失敗する</p></li></ul></li><li><p><a href="https://github.com/remix-run/react-router/issues/12196">[Bug]: (v7) Cannot prerender resource routes · Issue #12196 · remix-run/react-router · GitHub</a></p><ul><li><p>リソースルートをプリレンダすると失敗する</p></li></ul></li></ul><p>静的サイトジェネレータとして使う場合、この二つが結構厄介なので、パッチを(多少強引に)作りました。ご自由にお使いください。patch-packageなどで使えます。</p><ul><li><p><a href="https://gist.github.com/k0michi/5f1ac7f4670a05f20a540ceb9f1b9c50">Tentative fixes for React Router 7.0.0-pre.2 · GitHub</a></p></li></ul>
+  return <>
+    <div>First letter of pageID: {params.pageID[0]}</div>
+    <div>First letter of loader data: {data[0]}</div>
+  </>;
+}]]></blockcode><h2>既知のバグ</h2><p>まだReact Router v7はプレリリースの段階なので、結構な頻度でバグを踏みます。</p><ul><li><p><a ref="https://github.com/remix-run/react-router/issues/12160">[Bug]: (v7) Static Prerender Error: Cannot convert argument to a ByteString due to invalid character value · Issue #12160 · remix-run/react-router · GitHub</a></p><ul><li><p><code><![CDATA[loader]]></code>が非ASCII文字を含むデータを返す場合、プリレンダリングが失敗する</p></li></ul></li><li><p><a ref="https://github.com/remix-run/react-router/issues/12196">[Bug]: (v7) Cannot prerender resource routes · Issue #12196 · remix-run/react-router · GitHub</a></p><ul><li><p>リソースルートをプリレンダすると失敗する</p></li></ul></li></ul><p>静的サイトジェネレータとして使う場合、この二つが結構厄介なので、パッチを(多少強引に)作りました。ご自由にお使いください。patch-packageなどで使えます。</p><ul><li><p><a ref="https://gist.github.com/k0michi/5f1ac7f4670a05f20a540ceb9f1b9c50">Tentative fixes for React Router 7.0.0-pre.2 · GitHub</a></p></li></ul>
 </body>
 
 </ktml>

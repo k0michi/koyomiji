@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -8,15 +9,15 @@
 </head>
 
 <body>
-  <p>平均計算時間: <math>O(n \log n)</math></p>
+  <p>平均計算時間: <math><![CDATA[O(n \log n)]]></math></p>
   <p>不安定ソート</p>
   <h2>JavaScriptによる実装</h2>
-  <code lang="js">function partition(a, begin, end) {
+  <blockcode lang="js"><![CDATA[function partition(a, begin, end) {
   let pValue = a[end - 1];
   let pivot = begin;
 
-  for (let i = begin; i &lt; end - 1; i++) {
-    if (a[i] &lt;= pValue) {
+  for (let i = begin; i < end - 1; i++) {
+    if (a[i] <= pValue) {
       [a[pivot], a[i]] = [a[i], a[pivot]];
       pivot++;
     }
@@ -27,7 +28,7 @@
 }
 
 function quickSort(a, begin = 0, end = a.length) {
-  if (begin &lt; end - 1) {
+  if (begin < end - 1) {
     const pivot = partition(a, begin, end);
     quickSort(a, begin, pivot);
     quickSort(a, pivot, end);
@@ -38,7 +39,7 @@ const a = [7, 15, 1, 8, 11, 5, 13, 0, 2, 4, 6, 3, 12, 14, 9, 10];
 quickSort(a);
 
 console.log(a);
-// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]</code>
+// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]]]></blockcode>
 </body>
 
 </ktml>

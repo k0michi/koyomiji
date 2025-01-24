@@ -1,31 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>path.dirname()は親ディレクトリを返すわけじゃない？ [Node.js]</title>
   <id>2fcbe471-87a3-4321-94db-839f895d9f40</id>
   <created>2024-10-31T16:21:03+09:00</created>
+  <modified>2024-10-31T16:21:03+09:00</modified>
 </head>
 
 <body>
-  <p>一番最初に断っておきますが、この記事では「親ディレクトリ」という少しばかり曖昧な用語をこう定義しています:</p><ul><li><p>ファイルシステムを根付き木(rooted tree)として考え、ファイルとディレクトリを各頂点として表す。頂点<math>v</math>の親<math>v'</math>を、<math>v</math>の<b>親ディレクトリ</b>と呼ぶ。</p></li></ul><hr/><p>Node.jsの<a href="https://nodejs.org/dist/latest/docs/api/path.html">Path API</a>には、<code>path.dirname(path)</code>という関数があります。</p><p>この関数に例えば、<code>'/a/b/c/d.json'</code>というパスを与えると、こうなります。</p><code>&gt; path.dirname('/a/b/c/d.json')
-'/a/b/c'</code><p>相対パスの場合も見てみましょう。</p><code>&gt; path.dirname('a/../c/d/')
-'a/../c'</code><p>これを見たあなたはこう思ったかもしれません。なるほど、<code>path.dirname()</code>は、与えられたファイル/ディレクトリのパスの親ディレクトリのパスを返す関数なのだ、と。そう思うのも不思議ではありません。なぜならこの関数は、大体の場合には親ディレクトリを返すのですから。</p><p><b>ですが、次の例を見ると、この認識は全くの誤りであることがわかります。</b></p><code>&gt; path.dirname('/a/b/c/..')
-'/a/b/c'</code><p><code>/a/b/c/..</code>を渡した結果返されたパスは<code>/a/b/c</code>。これは明らかに、<b><code>/a/b/c/..</code>の親ディレクトリではありません。</b><code>/a/b/c/..</code>とはつまり<code>/a/b</code>なのですから、その親ディレクトリは<code>/a</code>になるはずです。</p><code>&gt; path.dirname('/a/b/c/.')
-'/a/b/c'</code><p><code>/a/b/c/.</code>を渡した結果返されたパスは<code>/a/b/c</code>。<code>/a/b/c/.</code>の<code>.</code>を解決すると<code>/a/b/c</code>。親ディレクトリは<code>/a/b</code>なので、これまた返却されたパスは親ディレクトリではありません。</p><p>つまり、<code>path.dirname()</code>は親ディレクトリのパスを返す関数ではないことがわかります。実際に返されるのは、単にパスの最後の<code>/</code>以降を切り落としたパスで、それが親ディレクトリであるとは限りません。ファイルへのパスの場合には、偶然にもファイルの親ディレクトリが返却されるというだけです。</p><h2>仕様を読んでみる</h2><p>Node.jsのAPIリファレンスでは、<code>path.dirname</code>は次のように説明されています。</p><blockquote><p>The <code>path.dirname()</code> method returns the directory name of a path, similar to the Unix <code>dirname</code> command. Trailing directory separators are ignored, see <code>path.sep</code>.</p></blockquote><ul><li><p><a href="https://nodejs.org/dist/latest/docs/api/path.html#pathdirnamepath">Path | Node.js v23.1.0 Documentation</a></p></li></ul><p>UNIXの<code>dirname</code>を模倣しているよ、という以上の情報がないので、POSIXの仕様を見てみましょう。</p><blockquote><p>The dirname() function shall take a pointer to a character string that contains a pathname, and return a pointer to a string that is a pathname of the directory containing the entry of the final pathname component.</p></blockquote><ul><li><p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/dirname.html">dirname</a></p></li></ul><p>最後のpathname componentを含むディレクトリのpathnameを返す、と言っています。確かに、UNIXシステムでは<code>..</code>や<code>.</code>が隠しディレクトリとして存在しているので、それを考慮すると<code>/a/b/..</code>の<code>..</code>は<code>/a/b</code>がcontainしている、と言えるでしょう。</p><p>(ちなみに、これがこの記事の最初に断り書きを加えた理由です。ファイルシステムを巡回グラフと考えれば、「<code>/a/b/..</code>の<code>..</code>は隠れているとはいえディレクトリなのだから、<code>/a/b</code>が<code>..</code>の親ディレクトリだろう！」という詭弁が成立してしまうので……)</p><p><code>basename</code>のEXAMPLESセクションの表には、<code>dirname</code>に<code>/home/dwc/.</code>を与えると<code>/home/dwc</code>が返却される、という記載があります。これはNode.jsの挙動と一致します。</p><ul><li><p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/basename.html">basename</a></p></li></ul><h2>正しい親ディレクトリの取り方</h2><p><code>path.join()</code>関数で、パスの末尾に<code>..</code>を連結すれば、正しい親ディレクトリを得ることができます。ファイルパスの場合も問題ありません。</p><code>function getParent(p) {
+  <p>一番最初に断っておきますが、この記事では「親ディレクトリ」という少しばかり曖昧な用語をこう定義しています:</p><ul><li><p>ファイルシステムを根付き木(rooted tree)として考え、ファイルとディレクトリを各頂点として表す。頂点<math><![CDATA[v]]></math>の親<math><![CDATA[v']]></math>を、<math><![CDATA[v]]></math>の<b>親ディレクトリ</b>と呼ぶ。</p></li></ul><hr/><p>Node.jsの<a ref="https://nodejs.org/dist/latest/docs/api/path.html">Path API</a>には、<code><![CDATA[path.dirname(path)]]></code>という関数があります。</p><p>この関数に例えば、<code><![CDATA['/a/b/c/d.json']]></code>というパスを与えると、こうなります。</p><blockcode><![CDATA[> path.dirname('/a/b/c/d.json')
+'/a/b/c']]></blockcode><p>相対パスの場合も見てみましょう。</p><blockcode><![CDATA[> path.dirname('a/../c/d/')
+'a/../c']]></blockcode><p>これを見たあなたはこう思ったかもしれません。なるほど、<code><![CDATA[path.dirname()]]></code>は、与えられたファイル/ディレクトリのパスの親ディレクトリのパスを返す関数なのだ、と。そう思うのも不思議ではありません。なぜならこの関数は、大体の場合には親ディレクトリを返すのですから。</p><p><b>ですが、次の例を見ると、この認識は全くの誤りであることがわかります。</b></p><blockcode><![CDATA[> path.dirname('/a/b/c/..')
+'/a/b/c']]></blockcode><p><code><![CDATA[/a/b/c/..]]></code>を渡した結果返されたパスは<code><![CDATA[/a/b/c]]></code>。これは明らかに、<b><code><![CDATA[/a/b/c/..]]></code>の親ディレクトリではありません。</b><code><![CDATA[/a/b/c/..]]></code>とはつまり<code><![CDATA[/a/b]]></code>なのですから、その親ディレクトリは<code><![CDATA[/a]]></code>になるはずです。</p><blockcode><![CDATA[> path.dirname('/a/b/c/.')
+'/a/b/c']]></blockcode><p><code><![CDATA[/a/b/c/.]]></code>を渡した結果返されたパスは<code><![CDATA[/a/b/c]]></code>。<code><![CDATA[/a/b/c/.]]></code>の<code><![CDATA[.]]></code>を解決すると<code><![CDATA[/a/b/c]]></code>。親ディレクトリは<code><![CDATA[/a/b]]></code>なので、これまた返却されたパスは親ディレクトリではありません。</p><p>つまり、<code><![CDATA[path.dirname()]]></code>は親ディレクトリのパスを返す関数ではないことがわかります。実際に返されるのは、単にパスの最後の<code><![CDATA[/]]></code>以降を切り落としたパスで、それが親ディレクトリであるとは限りません。ファイルへのパスの場合には、偶然にもファイルの親ディレクトリが返却されるというだけです。</p><h2>仕様を読んでみる</h2><p>Node.jsのAPIリファレンスでは、<code><![CDATA[path.dirname]]></code>は次のように説明されています。</p><blockquote><p>The <code><![CDATA[path.dirname()]]></code> method returns the directory name of a path, similar to the Unix <code><![CDATA[dirname]]></code> command. Trailing directory separators are ignored, see <code><![CDATA[path.sep]]></code>.</p></blockquote><ul><li><p><a ref="https://nodejs.org/dist/latest/docs/api/path.html#pathdirnamepath">Path | Node.js v23.1.0 Documentation</a></p></li></ul><p>UNIXの<code><![CDATA[dirname]]></code>を模倣しているよ、という以上の情報がないので、POSIXの仕様を見てみましょう。</p><blockquote><p>The dirname() function shall take a pointer to a character string that contains a pathname, and return a pointer to a string that is a pathname of the directory containing the entry of the final pathname component.</p></blockquote><ul><li><p><a ref="https://pubs.opengroup.org/onlinepubs/9799919799/functions/dirname.html">dirname</a></p></li></ul><p>最後のpathname componentを含むディレクトリのpathnameを返す、と言っています。確かに、UNIXシステムでは<code><![CDATA[..]]></code>や<code><![CDATA[.]]></code>が隠しディレクトリとして存在しているので、それを考慮すると<code><![CDATA[/a/b/..]]></code>の<code><![CDATA[..]]></code>は<code><![CDATA[/a/b]]></code>がcontainしている、と言えるでしょう。</p><p>(ちなみに、これがこの記事の最初に断り書きを加えた理由です。ファイルシステムを巡回グラフと考えれば、「<code><![CDATA[/a/b/..]]></code>の<code><![CDATA[..]]></code>は隠れているとはいえディレクトリなのだから、<code><![CDATA[/a/b]]></code>が<code><![CDATA[..]]></code>の親ディレクトリだろう！」という詭弁が成立してしまうので……)</p><p><code><![CDATA[basename]]></code>のEXAMPLESセクションの表には、<code><![CDATA[dirname]]></code>に<code><![CDATA[/home/dwc/.]]></code>を与えると<code><![CDATA[/home/dwc]]></code>が返却される、という記載があります。これはNode.jsの挙動と一致します。</p><ul><li><p><a ref="https://pubs.opengroup.org/onlinepubs/9799919799/functions/basename.html">basename</a></p></li></ul><h2>正しい親ディレクトリの取り方</h2><p><code><![CDATA[path.join()]]></code>関数で、パスの末尾に<code><![CDATA[..]]></code>を連結すれば、正しい親ディレクトリを得ることができます。ファイルパスの場合も問題ありません。</p><blockcode><![CDATA[function getParent(p) {
   return path.join(p, '..');
 }
 
-&gt; getParent('/a/b/c/d.json')
+> getParent('/a/b/c/d.json')
 '/a/b/c'
-&gt; getParent('a/../c/d/')
+> getParent('a/../c/d/')
 'c'
-&gt; getParent('/a/b/c/..')
+> getParent('/a/b/c/..')
 '/a'
-&gt; getParent('/a/b/c/.')
-'/a/b'</code><h2>【おまけ】LLMに聞いてみた</h2><h3>ChatGPT</h3><p>[Node.js] path.dirname()は親ディレクトリを返す関数ですか？</p><blockquote><p>はい、<code>path.dirname()</code> は指定したパスの「親ディレクトリ」を返す関数です。</p><p>例えば、以下のように使用します：</p><code lang="javascript">const path = require('path');
+> getParent('/a/b/c/.')
+'/a/b']]></blockcode><h2>【おまけ】LLMに聞いてみた</h2><h3>ChatGPT</h3><p>[Node.js] path.dirname()は親ディレクトリを返す関数ですか？</p><blockquote><p>はい、<code><![CDATA[path.dirname()]]></code> は指定したパスの「親ディレクトリ」を返す関数です。</p><p>例えば、以下のように使用します：</p><blockcode lang="javascript"><![CDATA[const path = require('path');
 
 const filePath = '/Users/example/Documents/file.txt';
-console.log(path.dirname(filePath));</code><p>このコードの出力は以下になります：</p><code>/Users/example/Documents</code><p>このように、<code>path.dirname()</code> は指定したパスから最後の部分（ファイルやフォルダ名）を取り除き、その親ディレクトリを返します。</p></blockquote><h3>Claude</h3><p>[Node.js] path.dirname()は親ディレクトリを返す関数ですか？</p><blockquote><p>いいえ、<code>path.dirname()</code>は完全に異なる機能を持っています。</p><p><code>path.dirname()</code>は、与えられたパス文字列からファイル名やディレクトリ名を除いた、ディレクトリパスを返す関数です。</p><p>例を見てみましょう：</p><code lang="javascript">const path = require('path');
+console.log(path.dirname(filePath));]]></blockcode><p>このコードの出力は以下になります：</p><blockcode><![CDATA[/Users/example/Documents]]></blockcode><p>このように、<code><![CDATA[path.dirname()]]></code> は指定したパスから最後の部分（ファイルやフォルダ名）を取り除き、その親ディレクトリを返します。</p></blockquote><h3>Claude</h3><p>[Node.js] path.dirname()は親ディレクトリを返す関数ですか？</p><blockquote><p>いいえ、<code><![CDATA[path.dirname()]]></code>は完全に異なる機能を持っています。</p><p><code><![CDATA[path.dirname()]]></code>は、与えられたパス文字列からファイル名やディレクトリ名を除いた、ディレクトリパスを返す関数です。</p><p>例を見てみましょう：</p><blockcode lang="javascript"><![CDATA[const path = require('path');
 
 console.log(path.dirname('/foo/bar/baz.txt'));
 // 出力: /foo/bar
@@ -34,13 +36,13 @@ console.log(path.dirname('/foo/bar/'));
 // 出力: /foo
 
 console.log(path.dirname('/foo/'));
-// 出力: /</code><p>親ディレクトリを取得したい場合は、次のような方法があります：</p><ol><li><p><code>path.join()</code> と <code>..</code> を使用する:</p></li></ol><code lang="javascript">const path = require('path');
+// 出力: /]]></blockcode><p>親ディレクトリを取得したい場合は、次のような方法があります：</p><ol><li><p><code><![CDATA[path.join()]]></code> と <code><![CDATA[..]]></code> を使用する:</p></li></ol><blockcode lang="javascript"><![CDATA[const path = require('path');
 
 // 現在のディレクトリの親ディレクトリを取得
-const parentDir = path.join(__dirname, '..');</code><ol><li><p><code>path.resolve()</code> を使用する:</p></li></ol><code lang="javascript">const path = require('path');
+const parentDir = path.join(__dirname, '..');]]></blockcode><ol><li><p><code><![CDATA[path.resolve()]]></code> を使用する:</p></li></ol><blockcode lang="javascript"><![CDATA[const path = require('path');
 
 // 現在のディレクトリの親ディレクトリを取得
-const parentDir = path.resolve(__dirname, '..');</code></blockquote>
+const parentDir = path.resolve(__dirname, '..');]]></blockcode></blockquote>
 </body>
 
 </ktml>

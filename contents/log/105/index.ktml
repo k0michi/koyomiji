@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -8,8 +9,8 @@
 </head>
 
 <body>
-  <p>C#をWebAssemblyにコンパイルしてブラウザ上で動かしたいという場合は、Blazor WebAssemblyを使うのが一般的で、Microsoftも推奨している方法であるかと思います。</p><p>しかし、BlazorというのはWebアプリを作るためのフレームワークという側面が強く、単純にC#をWebAssemblyに変換して動かしたい、という場合には不必要なこともあります。例えば、ブラウザゲームを作る場合などです。</p><p>C#をブラウザ上で動かすにはBlazorを使わざるを得ない、というふうに私も思っていたのですが、実際はBlazorを使わずにC#のコードだけを動かす方法が(実験的にですが)用意されています。</p><p>使用している.NETは8.0.110です。</p><h2>workloadのインストール</h2><p>.NET SDKをインストールし、<code>dotnet new list</code>とすると、Blazor WebAssembly Standalone App (blazorwasm)というテンプレートがあるかと思います。紛らわしいですが、これは、Blazor WebAssemblyのテンプレートであって、今回求めているものではありません。</p><p>Blazorを使わないWebAssemblyテンプレートとして、<a href="https://github.com/dotnet/runtime/tree/release/8.0/src/mono/wasm/templates/templates/browser">WebAssembly Browser App</a> (wasmbrowser)というものが実験的に用意されています。しかし、SDKをインストールしただけでは、このテンプレートが現れません。</p><p>これらのテンプレートを利用するには、wasm-toolsとwasm-experimentalという二つのworkloadをインストールします:</p><code>$ dotnet workload install wasm-tools
-$ dotnet workload install wasm-experimental</code><p>これにより、wasmbrowserというテンプレートが利用できるようになります。</p><h2>wasmbrowserテンプレート</h2><p>では、wasmbrowserテンプレートを使ってみましょう。</p><code>$ dotnet new wasmbrowser</code><p>wasmbrowserテンプレートは、Blazorのものよりもずっとシンプルです。blazorwasmとは異なり、wwwroot/main.jsというJavaScriptで書かれたエントリポイントが存在しており、ここからC#のコードが呼び出されます。</p><code lang="js">// Licensed to the .NET Foundation under one or more agreements.
+  <p>C#をWebAssemblyにコンパイルしてブラウザ上で動かしたいという場合は、Blazor WebAssemblyを使うのが一般的で、Microsoftも推奨している方法であるかと思います。</p><p>しかし、BlazorというのはWebアプリを作るためのフレームワークという側面が強く、単純にC#をWebAssemblyに変換して動かしたい、という場合には不必要なこともあります。例えば、ブラウザゲームを作る場合などです。</p><p>C#をブラウザ上で動かすにはBlazorを使わざるを得ない、というふうに私も思っていたのですが、実際はBlazorを使わずにC#のコードだけを動かす方法が(実験的にですが)用意されています。</p><p>使用している.NETは8.0.110です。</p><h2>workloadのインストール</h2><p>.NET SDKをインストールし、<code><![CDATA[dotnet new list]]></code>とすると、Blazor WebAssembly Standalone App (blazorwasm)というテンプレートがあるかと思います。紛らわしいですが、これは、Blazor WebAssemblyのテンプレートであって、今回求めているものではありません。</p><p>Blazorを使わないWebAssemblyテンプレートとして、<a ref="https://github.com/dotnet/runtime/tree/release/8.0/src/mono/wasm/templates/templates/browser">WebAssembly Browser App</a> (wasmbrowser)というものが実験的に用意されています。しかし、SDKをインストールしただけでは、このテンプレートが現れません。</p><p>これらのテンプレートを利用するには、wasm-toolsとwasm-experimentalという二つのworkloadをインストールします:</p><blockcode><![CDATA[$ dotnet workload install wasm-tools
+$ dotnet workload install wasm-experimental]]></blockcode><p>これにより、wasmbrowserというテンプレートが利用できるようになります。</p><h2>wasmbrowserテンプレート</h2><p>では、wasmbrowserテンプレートを使ってみましょう。</p><blockcode><![CDATA[$ dotnet new wasmbrowser]]></blockcode><p>wasmbrowserテンプレートは、Blazorのものよりもずっとシンプルです。blazorwasmとは異なり、wwwroot/main.jsというJavaScriptで書かれたエントリポイントが存在しており、ここからC#のコードが呼び出されます。</p><blockcode lang="js"><![CDATA[// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 import { dotnet } from './_framework/dotnet.js'
@@ -22,7 +23,7 @@ const { setModuleImports, getAssemblyExports, getConfig } = await dotnet
 setModuleImports('main.js', {
     window: {
         location: {
-            href: () =&gt; globalThis.window.location.href
+            href: () => globalThis.window.location.href
         }
     }
 });
@@ -33,7 +34,7 @@ const text = exports.MyClass.Greeting();
 console.log(text);
 
 document.getElementById('out').innerHTML = text;
-await dotnet.run();</code><p>C#の呼び出し方法は、この例からおおよそ分かるようになっています。ただAPIが明文化されていないので、詳しい使い方を知るにはソースコードを読む必要があります。</p><ul><li><p><a href="https://github.com/dotnet/runtime/tree/release/8.0/src/mono/wasm/runtime">runtime/src/mono/wasm/runtime at release/8.0 · dotnet/runtime · GitHub</a></p></li></ul><p><code>dotnet run</code>でサーバーが立ち上がります。</p><h2>Ahead-of-timeコンパイルする</h2><p>WebAssemblyのAhead-of-time(AOT)コンパイルもサポートされています。</p><p>AOTを有効にするには、(プロジェクト名).csprojの<code>&lt;PropertyGroup&gt;</code>内に</p><code>&lt;RunAOTCompilation&gt;true&lt;/RunAOTCompilation&gt;</code><p>を書き加えます。</p><p>ただし、AOTコンパイルは<code>dotnet publish</code>した場合にだけ行われるようです。</p><h2>スレッドを有効にする</h2><p>スレッドを有効化するには、<code>&lt;PropertyGroup&gt;</code>に</p><code>&lt;WasmEnableThreads&gt;true&lt;/WasmEnableThreads&gt;</code><p>を書き加えます。これで、<code>Thread</code>を使うことができるようになります。内部的には、<code>WebWorker</code>で動くようです。</p><p><code>dotnet run</code>では実行時エラーとなって動かなかった(バグ?)のですが、<code>dotnet publish</code>でビルドすれば動きました。<code>SharedArrayBuffer</code>を使えるように、Cross-Origin周りのヘッダをいじる必要があります。</p><code>$ dotnet publish &amp;&amp; dotnet serve -h "Cross-Origin-Embedder-Policy:require-corp" -h "Cross-Origin-Opener-Policy:same-origin"</code><h2>参考</h2><ul><li><p><a href="https://github.com/dotnet/runtime/blob/main/src/mono/wasm/features.md">runtime/src/mono/wasm/features.md at main · dotnet/runtime · GitHub</a></p></li></ul>
+await dotnet.run();]]></blockcode><p>C#の呼び出し方法は、この例からおおよそ分かるようになっています。ただAPIが明文化されていないので、詳しい使い方を知るにはソースコードを読む必要があります。</p><ul><li><p><a ref="https://github.com/dotnet/runtime/tree/release/8.0/src/mono/wasm/runtime">runtime/src/mono/wasm/runtime at release/8.0 · dotnet/runtime · GitHub</a></p></li></ul><p><code><![CDATA[dotnet run]]></code>でサーバーが立ち上がります。</p><h2>Ahead-of-timeコンパイルする</h2><p>WebAssemblyのAhead-of-time(AOT)コンパイルもサポートされています。</p><p>AOTを有効にするには、(プロジェクト名).csprojの<code><![CDATA[<PropertyGroup>]]></code>内に</p><blockcode><![CDATA[<RunAOTCompilation>true</RunAOTCompilation>]]></blockcode><p>を書き加えます。</p><p>ただし、AOTコンパイルは<code><![CDATA[dotnet publish]]></code>した場合にだけ行われるようです。</p><h2>スレッドを有効にする</h2><p>スレッドを有効化するには、<code><![CDATA[<PropertyGroup>]]></code>に</p><blockcode><![CDATA[<WasmEnableThreads>true</WasmEnableThreads>]]></blockcode><p>を書き加えます。これで、<code><![CDATA[Thread]]></code>を使うことができるようになります。内部的には、<code><![CDATA[WebWorker]]></code>で動くようです。</p><p><code><![CDATA[dotnet run]]></code>では実行時エラーとなって動かなかった(バグ?)のですが、<code><![CDATA[dotnet publish]]></code>でビルドすれば動きました。<code><![CDATA[SharedArrayBuffer]]></code>を使えるように、Cross-Origin周りのヘッダをいじる必要があります。</p><blockcode><![CDATA[$ dotnet publish && dotnet serve -h "Cross-Origin-Embedder-Policy:require-corp" -h "Cross-Origin-Opener-Policy:same-origin"]]></blockcode><h2>参考</h2><ul><li><p><a ref="https://github.com/dotnet/runtime/blob/main/src/mono/wasm/features.md">runtime/src/mono/wasm/features.md at main · dotnet/runtime · GitHub</a></p></li></ul>
 </body>
 
 </ktml>

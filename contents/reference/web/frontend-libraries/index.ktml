@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -10,33 +11,33 @@
 <body>
   <p>順不同。新しいのを見つけ次第順次追加。</p>
   <ul>
-    <li><a href="https://reactjs.org/">React</a></li>
-    <li><a href="https://vuejs.org/">Vue</a></li>
-    <li><a href="https://angular.io/">Angular</a></li>
-    <li><a href="https://svelte.dev/">Svelte</a></li>
-    <li><a href="https://riot.js.org/">Riot.js</a></li>
-    <li><a href="https://lit.dev/">Lit</a></li>
-    <li><a href="https://mithril.js.org/">Mithril.js</a></li>
-    <li><a href="https://preactjs.com/">Preact</a></li>
-    <li><a href="https://www.infernojs.org/">Inferno</a></li>
-    <li><a href="https://markojs.com/">Marko</a></li>
-    <li><a href="https://aurelia.io/">Aurelia</a></li>
-    <li><a href="https://github.com/snabbdom/snabbdom">Snabbdom</a></li>
-    <li><a href="https://nanojsx.io/">Nano JSX</a></li>
-    <li><a href="https://diffhtml.org/">diffHTML</a></li>
-    <li><a href="https://github.com/hyperhype/hyperscript">hyperscript</a></li>
-    <li><a href="https://github.com/jorgebucaran/hyperapp">hyperapp</a></li>
-    <li><a href="https://www.solidjs.com/">SolidJS</a></li>
-    <li><a href="https://github.com/WebReflection/hyperHTML">hyperHTML</a></li>
-    <li><a href="https://redom.js.org/">RE:DOM</a></li>
-    <li><a href="https://millionjs.org/">Million</a></li>
-    <li><a href="https://stenciljs.com/">Stencil</a></li>
-    <li><a href="https://alpinejs.dev/">Alpine.js</a></li>
-    <li><a href="https://emberjs.com/">Ember.js</a></li>
-    <li><a href="https://knockoutjs.com/">Knockout</a></li>
-    <li><a href="https://fre.js.org/">Fre</a></li>
-    <li><a href="https://www.choo.io/">Choo</a></li>
-    <li><a href="https://jquery.com/">jQuery</a></li>
+    <li><a ref="https://reactjs.org/">React</a></li>
+    <li><a ref="https://vuejs.org/">Vue</a></li>
+    <li><a ref="https://angular.io/">Angular</a></li>
+    <li><a ref="https://svelte.dev/">Svelte</a></li>
+    <li><a ref="https://riot.js.org/">Riot.js</a></li>
+    <li><a ref="https://lit.dev/">Lit</a></li>
+    <li><a ref="https://mithril.js.org/">Mithril.js</a></li>
+    <li><a ref="https://preactjs.com/">Preact</a></li>
+    <li><a ref="https://www.infernojs.org/">Inferno</a></li>
+    <li><a ref="https://markojs.com/">Marko</a></li>
+    <li><a ref="https://aurelia.io/">Aurelia</a></li>
+    <li><a ref="https://github.com/snabbdom/snabbdom">Snabbdom</a></li>
+    <li><a ref="https://nanojsx.io/">Nano JSX</a></li>
+    <li><a ref="https://diffhtml.org/">diffHTML</a></li>
+    <li><a ref="https://github.com/hyperhype/hyperscript">hyperscript</a></li>
+    <li><a ref="https://github.com/jorgebucaran/hyperapp">hyperapp</a></li>
+    <li><a ref="https://www.solidjs.com/">SolidJS</a></li>
+    <li><a ref="https://github.com/WebReflection/hyperHTML">hyperHTML</a></li>
+    <li><a ref="https://redom.js.org/">RE:DOM</a></li>
+    <li><a ref="https://millionjs.org/">Million</a></li>
+    <li><a ref="https://stenciljs.com/">Stencil</a></li>
+    <li><a ref="https://alpinejs.dev/">Alpine.js</a></li>
+    <li><a ref="https://emberjs.com/">Ember.js</a></li>
+    <li><a ref="https://knockoutjs.com/">Knockout</a></li>
+    <li><a ref="https://fre.js.org/">Fre</a></li>
+    <li><a ref="https://www.choo.io/">Choo</a></li>
+    <li><a ref="https://jquery.com/">jQuery</a></li>
   </ul>
 </body>
 

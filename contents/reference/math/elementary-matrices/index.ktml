@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -8,66 +9,66 @@
 </head>
 
 <body>
-  <h2>基本行列 <math>P_{i,j}</math></h2>
-  <p><math>(n, n)</math>型単位行列の<math>i</math>行目と<math>j</math>行目を入れ替えた行列を<math>P_{i,j}</math>とする。</p>
-  <math>P_{i,j} = \begin{bmatrix}
-    1 &amp; &amp; &amp; &amp; &amp; &amp; \\
-     &amp; \ddots &amp; &amp; &amp; &amp; &amp; \\
-     &amp; &amp; 0 &amp; &amp; 1 &amp; &amp; \\
-     &amp; &amp; &amp; \ddots &amp; &amp; &amp; \\
-     &amp; &amp; 1 &amp; &amp; 0 &amp; &amp; \\
-     &amp; &amp; &amp; &amp; &amp; \ddots &amp; \\
-     &amp; &amp; &amp; &amp; &amp; &amp; 1
- \end{bmatrix}</math>
- <p>この行列をある<math>(m, n)</math>型行列に左から掛けると、<math>i</math>行目と<math>j</math>行目が入れ替わる。右から掛けると、<math>i</math>列目と<math>j</math>列目が入れ替わる。</p>
+  <h2>基本行列 <math><![CDATA[P_{i,j}]]></math></h2>
+  <p><math><![CDATA[(n, n)]]></math>型単位行列の<math><![CDATA[i]]></math>行目と<math><![CDATA[j]]></math>行目を入れ替えた行列を<math><![CDATA[P_{i,j}]]></math>とする。</p>
+  <blockmath><![CDATA[P_{i,j} = \begin{bmatrix}
+    1 & & & & & & \\
+     & \ddots & & & & & \\
+     & & 0 & & 1 & & \\
+     & & & \ddots & & & \\
+     & & 1 & & 0 & & \\
+     & & & & & \ddots & \\
+     & & & & & & 1
+ \end{bmatrix}]]></blockmath>
+ <p>この行列をある<math><![CDATA[(m, n)]]></math>型行列に左から掛けると、<math><![CDATA[i]]></math>行目と<math><![CDATA[j]]></math>行目が入れ替わる。右から掛けると、<math><![CDATA[i]]></math>列目と<math><![CDATA[j]]></math>列目が入れ替わる。</p>
 
- <h2>基本行列 <math>Q_{i,j}</math></h2>
- <p><math>(n, n)</math>型単位行列の<math>(i, i)</math>成分を<math>c</math>とした行列を<math>Q_i(c)</math>とする。</p>
- <math>Q_{i}(c) = \begin{bmatrix}
-   1 &amp; &amp; &amp; &amp; &amp; &amp; \\
-    &amp; \ddots &amp; &amp; &amp; &amp; &amp; \\
-    &amp; &amp; 1 &amp; &amp; &amp; &amp; \\
-    &amp; &amp; &amp; c &amp; &amp; &amp; \\
-    &amp; &amp; &amp; &amp; 1 &amp; &amp; \\
-    &amp; &amp; &amp; &amp; &amp; \ddots &amp; \\
-    &amp; &amp; &amp; &amp; &amp; &amp; 1
-\end{bmatrix}</math>
-  <p>この行列をある<math>(m, n)</math>型行列に左から掛けると、<math>i</math>行目が<math>c</math>倍される。右から掛けると、<math>i</math>列目が<math>c</math>倍される。</p>
+ <h2>基本行列 <math><![CDATA[Q_{i,j}]]></math></h2>
+ <p><math><![CDATA[(n, n)]]></math>型単位行列の<math><![CDATA[(i, i)]]></math>成分を<math><![CDATA[c]]></math>とした行列を<math><![CDATA[Q_i(c)]]></math>とする。</p>
+ <blockmath><![CDATA[Q_{i}(c) = \begin{bmatrix}
+   1 & & & & & & \\
+    & \ddots & & & & & \\
+    & & 1 & & & & \\
+    & & & c & & & \\
+    & & & & 1 & & \\
+    & & & & & \ddots & \\
+    & & & & & & 1
+\end{bmatrix}]]></blockmath>
+  <p>この行列をある<math><![CDATA[(m, n)]]></math>型行列に左から掛けると、<math><![CDATA[i]]></math>行目が<math><![CDATA[c]]></math>倍される。右から掛けると、<math><![CDATA[i]]></math>列目が<math><![CDATA[c]]></math>倍される。</p>
 
-  <h2>基本行列 <math>R_{i,j}(c)</math></h2>
-  <p><math>(n, n)</math>型単位行列の<math>(i, j)</math>成分を<math>c</math>とした行列を<math>R_{i,j}(c)</math>とする。</p>
-  <math>R_{i,j}(c) = \begin{bmatrix}
-    1 &amp; &amp; &amp; &amp; &amp; &amp; \\
-    &amp; \ddots &amp; &amp; &amp; &amp; &amp; \\
-    &amp; &amp; 1 &amp; \cdots &amp; c &amp; &amp; \\
-    &amp; &amp; &amp; \ddots &amp; \vdots &amp; &amp; \\
-    &amp; &amp; &amp; &amp; 1 &amp; &amp; \\
-    &amp; &amp; &amp; &amp; &amp; \ddots &amp; \\
-    &amp; &amp; &amp; &amp; &amp; &amp; 1
-  \end{bmatrix}</math>
-  <p>この行列をある<math>(m, n)</math>型行列に左から掛けると、<math>i</math>行目に<math>j</math>行目の<math>c</math>倍が加わる。右から掛けると、<math>j</math>列目に<math>i</math>列目の<math>c</math>倍が加わる。</p>
+  <h2>基本行列 <math><![CDATA[R_{i,j}(c)]]></math></h2>
+  <p><math><![CDATA[(n, n)]]></math>型単位行列の<math><![CDATA[(i, j)]]></math>成分を<math><![CDATA[c]]></math>とした行列を<math><![CDATA[R_{i,j}(c)]]></math>とする。</p>
+  <blockmath><![CDATA[R_{i,j}(c) = \begin{bmatrix}
+    1 & & & & & & \\
+    & \ddots & & & & & \\
+    & & 1 & \cdots & c & & \\
+    & & & \ddots & \vdots & & \\
+    & & & & 1 & & \\
+    & & & & & \ddots & \\
+    & & & & & & 1
+  \end{bmatrix}]]></blockmath>
+  <p>この行列をある<math><![CDATA[(m, n)]]></math>型行列に左から掛けると、<math><![CDATA[i]]></math>行目に<math><![CDATA[j]]></math>行目の<math><![CDATA[c]]></math>倍が加わる。右から掛けると、<math><![CDATA[j]]></math>列目に<math><![CDATA[i]]></math>列目の<math><![CDATA[c]]></math>倍が加わる。</p>
 
   <h2>基本行列の正則性</h2>
-  <p><math>P_{i,j}, Q_{i}(c), R_{i,j}(c)</math>は正則である。次が成り立つ。</p>
-  <math>P_{i,j}^{-1} = P_{i,j}</math>
-  <math>Q_{i}(c)^{-1} = Q_{i}(c^{-1})</math>
-  <math>R_{i,j}(c)^{-1} = R_{i,j}(-c)</math>
+  <p><math><![CDATA[P_{i,j}, Q_{i}(c), R_{i,j}(c)]]></math>は正則である。次が成り立つ。</p>
+  <blockmath><![CDATA[P_{i,j}^{-1} = P_{i,j}]]></blockmath>
+  <blockmath><![CDATA[Q_{i}(c)^{-1} = Q_{i}(c^{-1})]]></blockmath>
+  <blockmath><![CDATA[R_{i,j}(c)^{-1} = R_{i,j}(-c)]]></blockmath>
 
   <h2>階数標準形</h2>
-  <p>任意の行列<math>A</math>は、行基本変形と列基本変形を施すことで、階数標準形に変形することができる。</p>
-  <math>\begin{bmatrix}
-    1 &amp; &amp; &amp; &amp; &amp; \\
-    &amp; \ddots &amp; &amp; &amp; &amp; \\
-    &amp; &amp; 1 &amp; &amp; &amp; \\
-    &amp; &amp; &amp; 0 &amp; &amp; \\
-    &amp; &amp; &amp; &amp; \ddots &amp; \\
-    &amp; &amp; &amp; &amp; &amp; 0 \\
-  \end{bmatrix}</math>
-  <p><math>\rm{rank}\ A</math>個の対角成分が1であり、残りは0である。</p>
+  <p>任意の行列<math><![CDATA[A]]></math>は、行基本変形と列基本変形を施すことで、階数標準形に変形することができる。</p>
+  <blockmath><![CDATA[\begin{bmatrix}
+    1 & & & & & \\
+    & \ddots & & & & \\
+    & & 1 & & & \\
+    & & & 0 & & \\
+    & & & & \ddots & \\
+    & & & & & 0 \\
+  \end{bmatrix}]]></blockmath>
+  <p><math><![CDATA[\rm{rank}\ A]]></math>個の対角成分が1であり、残りは0である。</p>
 
   <h2>正則行列とランク</h2>
-  <p>正方行列<math>A</math>が正則であるための必要十分条件は、<math>\rm{rank}\ A = n</math>となることである。</p>
-  <p>また、正則行列<math>A</math>は基本行列の積によって表される。<math>A</math>から単位行列を得る変形を単位行列に施すことで、<math>A^{-1}</math>が得られる。</p>
+  <p>正方行列<math><![CDATA[A]]></math>が正則であるための必要十分条件は、<math><![CDATA[\rm{rank}\ A = n]]></math>となることである。</p>
+  <p>また、正則行列<math><![CDATA[A]]></math>は基本行列の積によって表される。<math><![CDATA[A]]></math>から単位行列を得る変形を単位行列に施すことで、<math><![CDATA[A^{-1}]]></math>が得られる。</p>
 </body>
 
 </ktml>

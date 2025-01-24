@@ -1,37 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>三角関数</title>
   <id>c2d060b1-5205-44c3-b02c-191eb2abecd0</id>
   <created>2022-06-16T11:27:54+09:00</created>
+  <modified>2022-06-16T11:27:54+09:00</modified>
 </head>
 
 <body>
   <p>secant</p>
-  <math>\sec{\theta} = \frac{1}{\cos{\theta}}</math>
+  <blockmath><![CDATA[\sec{\theta} = \frac{1}{\cos{\theta}}]]></blockmath>
   <p>cosecant</p>
-  <math>\cosec{\theta} = \csc{\theta} = \frac{1}{\sin{\theta}}</math>
+  <blockmath><![CDATA[\cosec{\theta} = \csc{\theta} = \frac{1}{\sin{\theta}}]]></blockmath>
   <p>cotangent</p>
-  <math>\cot{\theta} = \frac{1}{\tan{\theta}}</math>
+  <blockmath><![CDATA[\cot{\theta} = \frac{1}{\tan{\theta}}]]></blockmath>
   <h2>相互関係</h2>
-  <math>\tan{\theta} = \frac{\sin{\theta}}{\cos{\theta}}</math>
-  <math>\sin^2{\theta} + \cos^2{\theta} = 1</math>
-  <math>\tan^2{\theta} + 1 = \frac{1}{\cos^2{\theta}}</math>
-  <math/>
+  <blockmath><![CDATA[\tan{\theta} = \frac{\sin{\theta}}{\cos{\theta}}]]></blockmath>
+  <blockmath><![CDATA[\sin^2{\theta} + \cos^2{\theta} = 1]]></blockmath>
+  <blockmath><![CDATA[\tan^2{\theta} + 1 = \frac{1}{\cos^2{\theta}}]]></blockmath>
+  <blockmath><![CDATA[]]></blockmath>
   <h2>加法定理</h2>
-  <math>\sin{\left(x \pm y\right)} = \sin{x}\cos{y} \pm \cos{x}\sin{y}</math>
-  <math>\cos{\left(x \pm y\right)} = \cos{x}\cos{y} \mp \sin{x}\sin{y}</math>
-  <math>\tan{\left(x \pm y\right)} = \frac{\tan{x} \pm \tan{y}}{1 \mp \tan{x}\tan{y}}</math>
+  <blockmath><![CDATA[\sin{\left(x \pm y\right)} = \sin{x}\cos{y} \pm \cos{x}\sin{y}]]></blockmath>
+  <blockmath><![CDATA[\cos{\left(x \pm y\right)} = \cos{x}\cos{y} \mp \sin{x}\sin{y}]]></blockmath>
+  <blockmath><![CDATA[\tan{\left(x \pm y\right)} = \frac{\tan{x} \pm \tan{y}}{1 \mp \tan{x}\tan{y}}]]></blockmath>
   <h2>積和公式</h2>
-  <math>\sin{x}\cos{y} = \frac{1}{2} \left\{ \sin{\left(x + y\right)} + \sin{\left(x - y\right)} \right\}</math>
-  <math>\cos{x}\sin{y} = \frac{1}{2} \left\{ \sin{\left(x + y\right)} - \sin{\left(x - y\right)} \right\}</math>
-  <math>\cos{x}\cos{y} = \frac{1}{2} \left\{ \cos{\left(x + y\right)} + \cos{\left(x - y\right)} \right\}</math>
-  <math>\sin{x}\sin{y} = -\frac{1}{2} \left\{ \cos{\left(x + y\right)} - \cos{\left(x - y\right)} \right\}</math>
+  <blockmath><![CDATA[\sin{x}\cos{y} = \frac{1}{2} \left\{ \sin{\left(x + y\right)} + \sin{\left(x - y\right)} \right\}]]></blockmath>
+  <blockmath><![CDATA[\cos{x}\sin{y} = \frac{1}{2} \left\{ \sin{\left(x + y\right)} - \sin{\left(x - y\right)} \right\}]]></blockmath>
+  <blockmath><![CDATA[\cos{x}\cos{y} = \frac{1}{2} \left\{ \cos{\left(x + y\right)} + \cos{\left(x - y\right)} \right\}]]></blockmath>
+  <blockmath><![CDATA[\sin{x}\sin{y} = -\frac{1}{2} \left\{ \cos{\left(x + y\right)} - \cos{\left(x - y\right)} \right\}]]></blockmath>
   <h2>和積公式</h2>
-  <math>\sin{x} + \sin{y} = 2\sin{\frac{x+y}{2}}\cos{\frac{x-y}{2}}</math>
-  <math>\sin{x} - \sin{y} = 2\cos{\frac{x+y}{2}}\sin{\frac{x-y}{2}}</math>
-  <math>\cos{x} + \cos{y} = 2\cos{\frac{x+y}{2}}\cos{\frac{x-y}{2}}</math>
-  <math>\cos{x} - \cos{y} = -2\sin{\frac{x+y}{2}}\sin{\frac{x-y}{2}}</math>
+  <blockmath><![CDATA[\sin{x} + \sin{y} = 2\sin{\frac{x+y}{2}}\cos{\frac{x-y}{2}}]]></blockmath>
+  <blockmath><![CDATA[\sin{x} - \sin{y} = 2\cos{\frac{x+y}{2}}\sin{\frac{x-y}{2}}]]></blockmath>
+  <blockmath><![CDATA[\cos{x} + \cos{y} = 2\cos{\frac{x+y}{2}}\cos{\frac{x-y}{2}}]]></blockmath>
+  <blockmath><![CDATA[\cos{x} - \cos{y} = -2\sin{\frac{x+y}{2}}\sin{\frac{x-y}{2}}]]></blockmath>
 </body>
 
 </ktml>

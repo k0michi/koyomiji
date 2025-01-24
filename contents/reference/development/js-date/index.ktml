@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -10,7 +11,7 @@
 <body>
   <h2>文字列化</h2>
   <p>Dateを文字列化するメソッドと結果の一覧。Node.js 18.3.0にて実行。</p>
-  <code lang="js">const date = new Date();
+  <blockcode lang="js"><![CDATA[const date = new Date();
 
 console.log(date.toDateString());
 // "Fri Jun 17 2022"
@@ -43,17 +44,17 @@ console.log(date.toTimeString());
 // 21:08:02 GMT+0900 (Japan Standard Time)
 
 console.log(date.toUTCString());
-// Fri, 17 Jun 2022 12:08:02 GMT</code>
+// Fri, 17 Jun 2022 12:08:02 GMT]]></blockcode>
 
   <h2>コピー</h2>
   <p>Dateオブジェクトはmutableなので、元の日付を弄らずに新しい日付を作るには、新しいオブジェクトを作成する。</p>
-  <code lang="js">const a = new Date();
+  <blockcode lang="js"><![CDATA[const a = new Date();
 const b = new Date(a);
 
 console.log(a.toISOString());
 // 2022-10-07T02:07:35.845Z
 console.log(a.toISOString());
-// 2022-10-07T02:07:35.845Z</code>
+// 2022-10-07T02:07:35.845Z]]></blockcode>
 </body>
 
 </ktml>

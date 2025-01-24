@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface CodeProps {
-  display: string;
+  display?: string;
   lang?: string;
   title?: string;
   children: string;

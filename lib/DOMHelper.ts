@@ -4,4 +4,10 @@ export default class DOMHelper {
       dest.appendChild(src.firstChild);
     }
   }
+
+  static copyAttributes(src: Element, dest: Element) {
+    for (const at of src.attributes) {
+      dest.setAttributeNS(at.namespaceURI, at.name, at.value);
+    }
+  }
 }

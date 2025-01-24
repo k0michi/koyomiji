@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -9,12 +10,12 @@
 
 <body>
   <h2>日時を表示</h2>
-  <code lang="bash">$ date
-Fri Jul 15 18:05:00 JST 2022</code>
+  <blockcode lang="bash"><![CDATA[$ date
+Fri Jul 15 18:05:00 JST 2022]]></blockcode>
 
   <h2>タイムゾーンの変更</h2>
-  <p><code lang="bash">timedatectl set-timezone</code>でタイムゾーンを変更する。タイムゾーンの一覧は<code lang="bash">timedatectl list-timezones</code>で得られる。</p>
-  <code lang="bash">$ timedatectl
+  <p><code lang="bash"><![CDATA[timedatectl set-timezone]]></code>でタイムゾーンを変更する。タイムゾーンの一覧は<code lang="bash"><![CDATA[timedatectl list-timezones]]></code>で得られる。</p>
+  <blockcode lang="bash"><![CDATA[$ timedatectl
                 Local time: Fri 2022-07-15 03:11:18 UTC
             Universal time: Fri 2022-07-15 03:11:18 UTC
                   RTC time: Fri 2022-07-15 03:11:19
@@ -33,7 +34,7 @@ $ timedatectl
 System clock synchronized: yes
               NTP service: active
           RTC in local TZ: no
-</code>
+]]></blockcode>
 </body>
 
 </ktml>

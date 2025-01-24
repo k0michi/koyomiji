@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -9,20 +10,20 @@
 
 <body>
   <h2>行列と連立1次方程式</h2>
-  <math>\left\{
+  <blockmath><![CDATA[\left\{
     \begin{matrix}
-    a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n &amp;=&amp; b_1 \\
-    a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n &amp;=&amp; b_2 \\
+    a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n &=& b_1 \\
+    a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n &=& b_2 \\
     \vdots \\
-    a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n &amp;=&amp; b_m
+    a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n &=& b_m
     \end{matrix}
-    \right.</math>
+    \right.]]></blockmath>
   <p>以上のような連立1次方程式は、行列を用いて</p>
-  <math>\begin{bmatrix}
-    a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
-    a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\
-    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-    a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}
+  <blockmath><![CDATA[\begin{bmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & \cdots & a_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{m1} & a_{m2} & \cdots & a_{mn}
     \end{bmatrix}
     \begin{bmatrix}
     x_1 \\
@@ -35,68 +36,68 @@
     b_2 \\
     \vdots \\
     b_m
-    \end{bmatrix}</math>
-  <p>と書き表すことができる。<math>A = [a_{ij}], \bm x = [x_j], \bm b = [b_i]</math>とおくと、以下のように書ける。</p>
-  <math>A \bm x = \bm b</math>
-  <p><math>A</math>を係数行列と呼ぶ。</p>
+    \end{bmatrix}]]></blockmath>
+  <p>と書き表すことができる。<math><![CDATA[A = [a_{ij}], \bm x = [x_j], \bm b = [b_i]]]></math>とおくと、以下のように書ける。</p>
+  <blockmath><![CDATA[A \bm x = \bm b]]></blockmath>
+  <p><math><![CDATA[A]]></math>を係数行列と呼ぶ。</p>
   <h2>拡大係数行列</h2>
-  <p><math>A \bm x = \bm b</math>において、係数行列<math>A</math>とベクトル<math>\bm b</math>を並べてできる行列</p>
-  <math>\begin{bmatrix}
+  <p><math><![CDATA[A \bm x = \bm b]]></math>において、係数行列<math><![CDATA[A]]></math>とベクトル<math><![CDATA[\bm b]]></math>を並べてできる行列</p>
+  <blockmath><![CDATA[\begin{bmatrix}
     A \mid \bm b
     \end{bmatrix} = 
     \left[\begin{array}{cccc|c}
-    a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} &amp; b_1 \\
-    a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} &amp; b_2 \\
-    \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
-    a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} &amp; b_m
+    a_{11} & a_{12} & \cdots & a_{1n} & b_1 \\
+    a_{21} & a_{22} & \cdots & a_{2n} & b_2 \\
+    \vdots & \vdots & \ddots & \vdots & \vdots \\
+    a_{m1} & a_{m2} & \cdots & a_{mn} & b_m
     \end{array}\right]
-  </math>
+  ]]></blockmath>
   <p>を拡大係数行列と呼ぶ。</p>
 
   <h2>行基本変形</h2>
   <ol>
-    <li><math>i</math>行目と<math>j</math>行目を入れ替える (<math>i \neq j</math>)</li>
-    <li><math>i</math>行目を<math>c</math>倍する (<math>c \neq 0</math>)</li>
-    <li><math>i</math>行目に<math>j</math>行目の<math>c</math>倍を加える (<math>i \neq j</math>)</li>
+    <li><blockmath><![CDATA[i]]></blockmath>行目と<blockmath><![CDATA[j]]></blockmath>行目を入れ替える (<blockmath><![CDATA[i \neq j]]></blockmath>)</li>
+    <li><blockmath><![CDATA[i]]></blockmath>行目を<blockmath><![CDATA[c]]></blockmath>倍する (<blockmath><![CDATA[c \neq 0]]></blockmath>)</li>
+    <li><blockmath><![CDATA[i]]></blockmath>行目に<blockmath><![CDATA[j]]></blockmath>行目の<blockmath><![CDATA[c]]></blockmath>倍を加える (<blockmath><![CDATA[i \neq j]]></blockmath>)</li>
   </ol>
 
   <h2>行階段型</h2>
   <p>主成分(行の最も左の0でない成分)が階段状に並んでいる行列を、行階段型と呼ぶ。以下は行階段型行列の一例である。</p>
-  <math>
+  <blockmath><![CDATA[
     \begin{bmatrix}
-    1 &amp; -4 &amp; 0 &amp; 2 \\
-    0 &amp; 0 &amp; -1 &amp; 0 \\
-    0 &amp; 0 &amp; 0 &amp; 3
-    \end{bmatrix}</math>
-  <p>階段の段の個数を階数(ランク)と呼び、行列<math>A</math>の階数を<math>\rm rank\ A</math>と書く。</p>
+    1 & -4 & 0 & 2 \\
+    0 & 0 & -1 & 0 \\
+    0 & 0 & 0 & 3
+    \end{bmatrix}]]></blockmath>
+  <p>階段の段の個数を階数(ランク)と呼び、行列<math><![CDATA[A]]></math>の階数を<math><![CDATA[\rm rank\ A]]></math>と書く。</p>
 
   <h2>行簡約階段形</h2>
   <p>階段形であり、主成分が1であり、主成分の上下の成分が0である行列を、行簡約階段形と呼ぶ。</p>
-  <math>
+  <blockmath><![CDATA[
     \begin{bmatrix}
-    1 &amp; -4 &amp; 0 &amp; 0 \\
-    0 &amp; 0 &amp; 1 &amp; 0 \\
-    0 &amp; 0 &amp; 0 &amp; 1
-    \end{bmatrix}</math>
+    1 & -4 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+    \end{bmatrix}]]></blockmath>
   <p>任意の行列は、行基本変形を行うことで行簡約階段形に変形できる。このアルゴリズムは、掃き出し法(ガウスの消去法)と呼ばれる。</p>
 
   <h2>行基本変形と連立1次方程式</h2>
-  <p>連立1次方程式<math>A \bm x = \bm b</math>を考える。<math>\begin{bmatrix}A \mid \bm b\end{bmatrix}</math>に行基本変形を行い、<math>\begin{bmatrix}B \mid \bm c\end{bmatrix}</math>が得られたとする。このとき、<math>A \bm x = \bm b</math>は<math>B \bm x = \bm c</math>と同値である。</p>
+  <p>連立1次方程式<math><![CDATA[A \bm x = \bm b]]></math>を考える。<math><![CDATA[\begin{bmatrix}A \mid \bm b\end{bmatrix}]]></math>に行基本変形を行い、<math><![CDATA[\begin{bmatrix}B \mid \bm c\end{bmatrix}]]></math>が得られたとする。このとき、<math><![CDATA[A \bm x = \bm b]]></math>は<math><![CDATA[B \bm x = \bm c]]></math>と同値である。</p>
   
   <h2>行基本変形の解と自由度</h2>
-  <p>連立1次方程式<math>A \bm x = \bm b</math>を考える。<math>A</math>は<math>(m, n)</math>型行列である。<math>A \bm x = \bm b</math>が解をもつための必要十分条件は、</p>
-  <math>\rm rank\ A = \rm rank \begin{bmatrix}A \mid \bm b\end{bmatrix}</math>
+  <p>連立1次方程式<math><![CDATA[A \bm x = \bm b]]></math>を考える。<math><![CDATA[A]]></math>は<math><![CDATA[(m, n)]]></math>型行列である。<math><![CDATA[A \bm x = \bm b]]></math>が解をもつための必要十分条件は、</p>
+  <blockmath><![CDATA[\rm rank\ A = \rm rank \begin{bmatrix}A \mid \bm b\end{bmatrix}]]></blockmath>
   <p>となることである。この等式が成り立つときの連立1次方程式の解の自由度(任意定数の個数)は</p>
-  <math>n - \rm rank\ A</math>
+  <blockmath><![CDATA[n - \rm rank\ A]]></blockmath>
   <p>である。</p>
 
   <h2>同次(斉次)連立1次方程式</h2>
-  <p>連立1次方程式<math>A \bm x = \bm b</math>において、<math>\bm b = \bm 0</math>であるとき、同次(斉次)であるという。そうでないとき、非同次(非斉次)であるという。</p>
-  <p>同次連立1時方程式は必ず<math>\bm x = \bm 0</math>を解にもち、これを自明な解と呼ぶ。<math>\bm 0</math>以外の解は非自明な解と呼ばれる。</p>
-  <p><math>A</math>を<math>(m, n)</math>型行列とする。同次連立1次方程式<math>A \bm x = \bm 0</math>について、以下が成り立つ。</p>
+  <p>連立1次方程式<math><![CDATA[A \bm x = \bm b]]></math>において、<math><![CDATA[\bm b = \bm 0]]></math>であるとき、同次(斉次)であるという。そうでないとき、非同次(非斉次)であるという。</p>
+  <p>同次連立1時方程式は必ず<math><![CDATA[\bm x = \bm 0]]></math>を解にもち、これを自明な解と呼ぶ。<math><![CDATA[\bm 0]]></math>以外の解は非自明な解と呼ばれる。</p>
+  <p><math><![CDATA[A]]></math>を<math><![CDATA[(m, n)]]></math>型行列とする。同次連立1次方程式<math><![CDATA[A \bm x = \bm 0]]></math>について、以下が成り立つ。</p>
   <ol>
-    <li><math>\rm rank\ A = n</math>ならば、<math>A \bm x = \bm 0</math>は自明な解のみをもつ。</li>
-    <li><math>\rm rank\ A &lt; n</math>ならば、<math>A \bm x = \bm 0</math>は非自明な解をもつ。</li>
+    <li><blockmath><![CDATA[\rm rank\ A = n]]></blockmath>ならば、<blockmath><![CDATA[A \bm x = \bm 0]]></blockmath>は自明な解のみをもつ。</li>
+    <li><blockmath><![CDATA[\rm rank\ A < n]]></blockmath>ならば、<blockmath><![CDATA[A \bm x = \bm 0]]></blockmath>は非自明な解をもつ。</li>
   </ol>
 </body>
 

@@ -1,55 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>二項関係</title>
   <id>4302a506-f8ed-4e69-8673-21cc698b5f22</id>
   <created>2022-07-02T13:39:39+09:00</created>
+  <modified>2022-07-02T13:39:39+09:00</modified>
 </head>
 
 <body>
   <h2>関係の定義</h2>
-  <p>集合<math>A</math>から集合<math>B</math>への二項関係<math>R</math>は、<math>A \times B</math>の部分集合である。</p>
-  <p><math>(x, y) \in R</math>のとき、<math>x</math>と<math>y</math>はR-関係にあるといい、</p>
-  <math>x\ R\ y</math>
+  <p>集合<math><![CDATA[A]]></math>から集合<math><![CDATA[B]]></math>への二項関係<math><![CDATA[R]]></math>は、<math><![CDATA[A \times B]]></math>の部分集合である。</p>
+  <p><math><![CDATA[(x, y) \in R]]></math>のとき、<math><![CDATA[x]]></math>と<math><![CDATA[y]]></math>はR-関係にあるといい、</p>
+  <blockmath><![CDATA[x\ R\ y]]></blockmath>
   <p>と書く。</p>
 
   <h2>全体関係/空関係</h2>
-  <p><math>A</math>上の関係において、<math>R = A \times A</math>を全体関係と呼び、<math>R = \emptyset</math>を空関係と呼ぶ。</p>
+  <p><math><![CDATA[A]]></math>上の関係において、<math><![CDATA[R = A \times A]]></math>を全体関係と呼び、<math><![CDATA[R = \emptyset]]></math>を空関係と呼ぶ。</p>
 
   <h2>逆関係</h2>
-  <p><math>A</math>から<math>B</math>への関係<math>R</math>の逆関係<math>R^{-1}</math>とは、<math>B</math>から<math>A</math>への関係であり、以下のように定義される。</p>
-  <math>R^{-1} = \{(y, x) | (x, y) \in R\}</math>
+  <p><math><![CDATA[A]]></math>から<math><![CDATA[B]]></math>への関係<math><![CDATA[R]]></math>の逆関係<math><![CDATA[R^{-1}]]></math>とは、<math><![CDATA[B]]></math>から<math><![CDATA[A]]></math>への関係であり、以下のように定義される。</p>
+  <blockmath><![CDATA[R^{-1} = \{(y, x) | (x, y) \in R\}]]></blockmath>
   <p>また、次が成り立つ。</p>
-  <math>x\ R\ y \iff y\ R^{-1}\ x</math>
+  <blockmath><![CDATA[x\ R\ y \iff y\ R^{-1}\ x]]></blockmath>
 
   <h2>関係の合成</h2>
-  <p><math>R</math>を<math>A</math>から<math>B</math>への関係、<math>S</math>を<math>B</math>から<math>C</math>への関係とすると、<math>R</math>と<math>S</math>の合成とは、</p>
-  <math>R \circ S = \{(x, z) \in A \times C\ |\ \exists y \in B (x\ R\ y \land y\ S\ z)\}</math>
-  <p>のこと。上記の<math>R \circ S</math>を<math>S \circ R</math>と書く場合がある。</p>
+  <p><math><![CDATA[R]]></math>を<math><![CDATA[A]]></math>から<math><![CDATA[B]]></math>への関係、<math><![CDATA[S]]></math>を<math><![CDATA[B]]></math>から<math><![CDATA[C]]></math>への関係とすると、<math><![CDATA[R]]></math>と<math><![CDATA[S]]></math>の合成とは、</p>
+  <blockmath><![CDATA[R \circ S = \{(x, z) \in A \times C\ |\ \exists y \in B (x\ R\ y \land y\ S\ z)\}]]></blockmath>
+  <p>のこと。上記の<math><![CDATA[R \circ S]]></math>を<math><![CDATA[S \circ R]]></math>と書く場合がある。</p>
   <p>結合法則が成り立つ。</p>
-  <math>(R \circ S) \circ T = R \circ (S \circ T)</math>
+  <blockmath><![CDATA[(R \circ S) \circ T = R \circ (S \circ T)]]></blockmath>
 
   <h2>関係の性質</h2>
-  <p><math>R</math>を<math>A</math>上の関係とする。</p>
+  <p><math><![CDATA[R]]></math>を<math><![CDATA[A]]></math>上の関係とする。</p>
   <h3>反射性</h3>
-  <p>任意の<math>x \in A</math>について<math>x\ R\ x</math>であるとき、<math>R</math>は反射的である。</p>
+  <p>任意の<math><![CDATA[x \in A]]></math>について<math><![CDATA[x\ R\ x]]></math>であるとき、<math><![CDATA[R]]></math>は反射的である。</p>
   <h3>対称性</h3>
-  <p>任意の<math>x, y \in A</math>について<math>x\ R\ y</math>ならば<math>y\ R\ x</math>であるとき、<math>R</math>は対称的である。</p>
+  <p>任意の<math><![CDATA[x, y \in A]]></math>について<math><![CDATA[x\ R\ y]]></math>ならば<math><![CDATA[y\ R\ x]]></math>であるとき、<math><![CDATA[R]]></math>は対称的である。</p>
   <h3>反対称性</h3>
-  <p>任意の<math>x, y \in A</math>について<math>x\ R\ y</math>かつ<math>y\ R\ x</math>ならば<math>x = y</math>であるとき、<math>R</math>は反対称的である。</p>
+  <p>任意の<math><![CDATA[x, y \in A]]></math>について<math><![CDATA[x\ R\ y]]></math>かつ<math><![CDATA[y\ R\ x]]></math>ならば<math><![CDATA[x = y]]></math>であるとき、<math><![CDATA[R]]></math>は反対称的である。</p>
   <h3>推移性</h3>
-  <p>任意の<math>x, y, z \in A</math>について<math>x\ R\ y</math>かつ<math>y\ R\ z</math>ならば<math>x\ R\ z</math>であるとき、<math>R</math>は推移的である。</p>
+  <p>任意の<math><![CDATA[x, y, z \in A]]></math>について<math><![CDATA[x\ R\ y]]></math>かつ<math><![CDATA[y\ R\ z]]></math>ならば<math><![CDATA[x\ R\ z]]></math>であるとき、<math><![CDATA[R]]></math>は推移的である。</p>
 
   <h2>同値関係</h2>
   <p>関係が反射的、対称的、推移的であるとき、その関係は同値関係であるという。</p>
   
   <h2>同値類</h2>
-  <p><math>R</math>を集合<math>A</math>上の同値関係とする。<math>A</math>の要素<math>a</math>の同値類とは、<math>a\ R\ x</math>となる全ての<math>x</math>からなる集合のことである。</p>
-  <math>[a] = \{x \in A\ |\ a\ R\ x\}</math>
+  <p><math><![CDATA[R]]></math>を集合<math><![CDATA[A]]></math>上の同値関係とする。<math><![CDATA[A]]></math>の要素<math><![CDATA[a]]></math>の同値類とは、<math><![CDATA[a\ R\ x]]></math>となる全ての<math><![CDATA[x]]></math>からなる集合のことである。</p>
+  <blockmath><![CDATA[[a] = \{x \in A\ |\ a\ R\ x\}]]></blockmath>
 
   <h2>商集合</h2>
-  <p><math>R</math>を集合<math>A</math>上の同値関係とする。<math>R</math>で定まる全ての同値類からなる集合を<math>R</math>による<math>A</math>の商集合という。</p>
-  <math>A / R = \{[x] \subset A\ |\ x \in A\}</math>
+  <p><math><![CDATA[R]]></math>を集合<math><![CDATA[A]]></math>上の同値関係とする。<math><![CDATA[R]]></math>で定まる全ての同値類からなる集合を<math><![CDATA[R]]></math>による<math><![CDATA[A]]></math>の商集合という。</p>
+  <blockmath><![CDATA[A / R = \{[x] \subset A\ |\ x \in A\}]]></blockmath>
 </body>
 
 </ktml>

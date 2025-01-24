@@ -1,13 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>Dev Serverが完成</title>
   <id>4b423933-e32b-43b4-b5d3-b0d045d86416</id>
   <created>2022-07-09T09:55:02+09:00</created>
+  <modified>2022-07-09T09:55:02+09:00</modified>
 </head>
 
 <body>
-  <p>このサイトでは現在、Viteを利用してHTMLやJSを生成しているのですが、ViteにはDev Serverを開発するための機能があります。詳しくは<a href="https://vitejs.dev/guide/ssr.html">https://vitejs.dev/guide/ssr.html</a>に情報があるのですが、これはSSRをしながらもHot Reloadすることができるという優れものです。さらに、任意のタイミングでReloadをかけることも可能です。ということで、これを使って元のマークアップの変更を<a href="https://github.com/paulmillr/chokidar">Chokidar</a>でwatchして、変更されると自動でReloadがかかる仕組みを作ってみました。</p>
+  <p>このサイトでは現在、Viteを利用してHTMLやJSを生成しているのですが、ViteにはDev Serverを開発するための機能があります。詳しくは<a ref="https://vitejs.dev/guide/ssr.html">https://vitejs.dev/guide/ssr.html</a>に情報があるのですが、これはSSRをしながらもHot Reloadすることができるという優れものです。さらに、任意のタイミングでReloadをかけることも可能です。ということで、これを使って元のマークアップの変更を<a ref="https://github.com/paulmillr/chokidar">Chokidar</a>でwatchして、変更されると自動でReloadがかかる仕組みを作ってみました。</p>
   <p>この仕組みを実装すること自体はそこまで難しくないのですが、devビルドとprodビルドで似たようで異なる処理をする必要があり、微妙にコード量が増えてしまいました。しかしながら、ファイルを保存する度に最終的な描画結果が常に見れるのでめちゃくちゃ便利です。今までViteのビルド + HTMLの描画、と二段階の処理が必要で、かつ、TypeScriptを通しているということもあって、描画結果の確認にだいぶ時間がかかっていました。今回のアップデートで、変更後にコマンドを実行して待つ時間が一切なくなったので、これからは作業が捗ることでしょう。</p>
   <p>ViteはTypeScriptのサポートが手厚すぎます。あらゆる場面でTypeScriptがそのまま通るので、本当に楽です。Viteもっと流行るべき。</p>
 </body>

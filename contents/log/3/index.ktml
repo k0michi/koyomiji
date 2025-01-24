@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
@@ -9,9 +10,9 @@
 
 <body>
   <p>
-    JavaScriptを触っていたところ、<code>document.getElementById("要素ID")</code>を使わずとも、<code>window.要素ID</code>で要素を取得できることに気づきました。さらに言うと、<code>window</code>はグローバルオブジェクトですから、単にグローバル変数<code>要素ID</code>から要素にアクセスできることになります。
+    JavaScriptを触っていたところ、<code><![CDATA[document.getElementById("要素ID")]]></code>を使わずとも、<code><![CDATA[window.要素ID]]></code>で要素を取得できることに気づきました。さらに言うと、<code><![CDATA[window]]></code>はグローバルオブジェクトですから、単にグローバル変数<code><![CDATA[要素ID]]></code>から要素にアクセスできることになります。
   </p>
-  <p>互換性のための機能なのかと思いましたが、調べてみたところ、<a href="https://html.spec.whatwg.org/#named-access-on-the-window-object">そういう仕様</a>が存在しているみたいです。あえてこの書き方をする理由はないでしょうが、知っているとデバッグ等の役に立つかもしれません。現に私のコードで、<code>getElementById()</code>した変数が範囲外なのにも関わらず、要素にアクセスできていましたから。
+  <p>互換性のための機能なのかと思いましたが、調べてみたところ、<a ref="https://html.spec.whatwg.org/#named-access-on-the-window-object">そういう仕様</a>が存在しているみたいです。あえてこの書き方をする理由はないでしょうが、知っているとデバッグ等の役に立つかもしれません。現に私のコードで、<code><![CDATA[getElementById()]]></code>した変数が範囲外なのにも関わらず、要素にアクセスできていましたから。
   </p>
 </body>
 

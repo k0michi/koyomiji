@@ -1,16 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>GitHub ActionsからPagesに簡単にデプロイできるようになった</title>
   <id>4a37eefd-5e4b-4536-99eb-7780a0505eda</id>
   <created>2022-07-29T18:47:02+09:00</created>
+  <modified>2022-07-29T18:47:02+09:00</modified>
 </head>
 
 <body>
-  <p>GitHub Actionsというのは、GitHubで継続的インテグレーション/デリバリー(CI/CD)を実現するための機能です。これを使うことで、GitHub Pagesにサイトをデプロイすることは、今までもできたのですが、サードパーティのactionを使う方法が一般的だったようです。しかしつい最近実装された機能で、ActionsからPagesにサイトを簡単にデプロイ可能になりました。詳しくはGitHub公式の記事<a href="https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/">GitHub Pages: Custom GitHub Actions Workflows (beta)</a>を参照。</p>
+  <p>GitHub Actionsというのは、GitHubで継続的インテグレーション/デリバリー(CI/CD)を実現するための機能です。これを使うことで、GitHub Pagesにサイトをデプロイすることは、今までもできたのですが、サードパーティのactionを使う方法が一般的だったようです。しかしつい最近実装された機能で、ActionsからPagesにサイトを簡単にデプロイ可能になりました。詳しくはGitHub公式の記事<a ref="https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/">GitHub Pages: Custom GitHub Actions Workflows (beta)</a>を参照。</p>
   <h2>Workflowを作る</h2>
-  <p>GitHub Actionsを使うためにはworkflowを作る必要があります。この記事では述べられていませんが、GitHubの<a href="https://github.com/actions/starter-workflows/tree/main/pages">starter-workflows</a>を見ると、Next.jsやHugoなどでPagesにデプロイするためのworkflowが既に用意されています。ですが私はViteを使いたかったので、Gatsbyのworkflowを多少アレンジしてみたのがこちらです。</p>
-  <code lang="yaml">name: Deploy Vite site to Pages
+  <p>GitHub Actionsを使うためにはworkflowを作る必要があります。この記事では述べられていませんが、GitHubの<a ref="https://github.com/actions/starter-workflows/tree/main/pages">starter-workflows</a>を見ると、Next.jsやHugoなどでPagesにデプロイするためのworkflowが既に用意されています。ですが私はViteを使いたかったので、Gatsbyのworkflowを多少アレンジしてみたのがこちらです。</p>
+  <blockcode lang="yaml"><![CDATA[name: Deploy Vite site to Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -86,8 +88,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
-</code>
-  <p>こちらのworkflowはVite用に書きましたが、あくまで<code lang="bash">npm run build</code>して、生成された<code>dist</code>ディレクトリをGitHub Pagesで公開しているだけなので、Webpack等でも使えます。</p>
+]]></blockcode>
+  <p>こちらのworkflowはVite用に書きましたが、あくまで<code lang="bash"><![CDATA[npm run build]]></code>して、生成された<code><![CDATA[dist]]></code>ディレクトリをGitHub Pagesで公開しているだけなので、Webpack等でも使えます。</p>
 </body>
 
 </ktml>

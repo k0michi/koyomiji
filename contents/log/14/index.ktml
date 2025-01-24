@@ -1,13 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>ReactとVanillaJSの共存</title>
   <id>f77b4f10-3eee-4930-bd19-e826eba3b0a7</id>
   <created>2022-07-03T15:59:09+09:00</created>
+  <modified>2022-07-03T15:59:09+09:00</modified>
 </head>
 
 <body>
-  <p>最近<a href="https://github.com/k0michi/fractal">Fractal</a>というメモ帳アプリの開発を試みています。このアプリはElectronとReactを使って書いているのですが、WYSIWYGをReactで実装するには多くの課題があります。一番の課題が、contenteditableです。Reactでcontenteditableな要素の子を渡す方法には、dangerouslySetInnerHTMLを用いる方法と、childrenを用いる方法があるのですが、childrenを使って子要素を渡す場合、かなり面倒なことになります。</p>
+  <p>最近<a ref="https://github.com/k0michi/fractal">Fractal</a>というメモ帳アプリの開発を試みています。このアプリはElectronとReactを使って書いているのですが、WYSIWYGをReactで実装するには多くの課題があります。一番の課題が、contenteditableです。Reactでcontenteditableな要素の子を渡す方法には、dangerouslySetInnerHTMLを用いる方法と、childrenを用いる方法があるのですが、childrenを使って子要素を渡す場合、かなり面倒なことになります。</p>
   <p>まず、Reactの流儀に外れず、ユーザからの入力の度、内部のデータを変更してアップデートを発生させるのですが、このアップデートの際、画面上のカーソルの位置がリセットされてしまいます。なので、アップデート前にカーソルの位置を計算し、アップデート後にその位置に戻す処理が必要になります。このカーソルの位置を取得するための、Selectionの操作が結構大変です。</p>
   <p>加えて、仮想DOMとの整合性を取る必要があります。例えば、&lt;b&gt;要素がcontanteditableの中にあった場合、それがユーザによって削除されると、Reactが持つDOMツリーと実際のDOMツリーが異なるのでエラーになります。これを対策するためには、ユーザが&lt;b&gt;を含むテキストを削除しようとするのをpreventして、(アプリがステートとして持つ)AST上からアプリケーション側で選択されている該当部分を削除した上でアップデートする、という処理を実装しなければならないのです。</p>
   <p>おまけに、Reactでcontenteditableな要素を他から操作する(focusしたり)する場合、forwardRefまみれになってコードが複雑化します。</p>

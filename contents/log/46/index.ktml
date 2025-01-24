@@ -1,31 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>リコリス・リコイル7話に登場するソースコード</title>
   <id>b5c86b31-55f3-4ee5-91e0-b09b2efa9836</id>
   <created>2022-09-01T14:53:33+09:00</created>
+  <modified>2022-09-01T14:53:33+09:00</modified>
 </head>
 
 <body>
   <p>今期放送中のアニメ、「リコリス・リコイル」の7話冒頭に、"Internet Automatic Search Program"と題したソースコードが現れます。</p>
-  <code lang="js">/*&lt;replacement&gt;*/
+  <blockcode lang="js"><![CDATA[/*<replacement>*/
 var bufferShim = require('buffer-shims');
-/*&lt;/replacement&gt;*/
+/*</replacement>*/
 
-/*&lt;replacement&gt;*/
+/*<replacement>*/
 var util = require('core-util-is');
 util.inherits = require('inherits');
-/*&lt;/replacement&gt;*/
+/*</replacement>*/
 
-/*&lt;replacement&gt;*/
+/*<replacement>*/
 var debugUtil = require('util');
 var debug = void 0;
-if (debugUtil &amp;&amp; debugUtil.debuglog) {
+if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
 } else {
   debug = function () {};
 }
-/*&lt;/replacement&gt;*/
+/*</replacement>*/
 
 var BufferList = require('./internal/streams/BufferList');
 var StringDecoder;
@@ -33,15 +35,15 @@ var StringDecoder;
 util.inherits(Readable, Stream);
 
 function prependListener(emitter, event, fn) {
-  // Sadly this is not cacheable as some libraries bundle their own</code>
-  <p>どう見てもJavaScript、それもCommonJSのコードにしか見えませんよね。これだけ<code lang="js">require()</code>していれば明らかです。</p>
-  <p>では一体何のコードなのでしょうか。鍵は<code lang="js">util.inherits(Readable, Stream)</code>です。<code lang="js">util.inherits</code>というのはNode.jsが提供する関数で、ES6のクラスが無かった時代に継承を行うのに使われていたものです。つまりこの場合、<code lang="js">Stream</code>という型を<code lang="js">Readable</code>に継承させています。故にこのコードは<code lang="js">Readable</code>という型を実装するためのものと考えられます。</p>
-  <p>そしてこの<code lang="js">Readable</code>というのも、Node.jsが提供する読み取り専用ストリームのクラスなのです。</p>
+  // Sadly this is not cacheable as some libraries bundle their own]]></blockcode>
+  <p>どう見てもJavaScript、それもCommonJSのコードにしか見えませんよね。これだけ<code lang="js"><![CDATA[require()]]></code>していれば明らかです。</p>
+  <p>では一体何のコードなのでしょうか。鍵は<code lang="js"><![CDATA[util.inherits(Readable, Stream)]]></code>です。<code lang="js"><![CDATA[util.inherits]]></code>というのはNode.jsが提供する関数で、ES6のクラスが無かった時代に継承を行うのに使われていたものです。つまりこの場合、<code lang="js"><![CDATA[Stream]]></code>という型を<code lang="js"><![CDATA[Readable]]></code>に継承させています。故にこのコードは<code lang="js"><![CDATA[Readable]]></code>という型を実装するためのものと考えられます。</p>
+  <p>そしてこの<code lang="js"><![CDATA[Readable]]></code>というのも、Node.jsが提供する読み取り専用ストリームのクラスなのです。</p>
   <p>ここまで来れば、このコードが何処から来たのかおおよそ想像がつきます。Node.jsのReadable実装、または、Node.js互換のReadableを実装するライブラリのどちらかとしか考えられません。</p>
 
   <h2>答え合わせ</h2>
-  <p>このソースコードは果たして、正確には、Node.jsのReadableの実装から取られたものでは<b>ありません</b>でした。というのも、このコード片のオリジナルが見つかったのは、<a href="https://github.com/nodejs/readable-stream">nodejs/readable-stream</a>というリポジトリの<a href="https://github.com/nodejs/readable-stream/blob/7af74b040213486d9c76ef41931011a2a4859119/lib/_stream_readable.js">_stream_readable.js</a>だったからです。このリポジトリはオリジナルのNode.jsのstreamの実装をミラーしている、とあるので、実質的にはNode.jsのコードだったと言っても良いのかも知れませんが。</p>
-  <p>この奇妙な<code lang="js">/*&lt;replacement&gt;*/</code>というコメントは、どうやら、元のリポジトリからミラーする過程で生まれたもののようです。ミラーの工程で、いくつかのファイルが一つのファイルに結合されたことによって、<code lang="js">require()</code>の位置が不揃いなコードになったようです。</p>
+  <p>このソースコードは果たして、正確には、Node.jsのReadableの実装から取られたものでは<b>ありません</b>でした。というのも、このコード片のオリジナルが見つかったのは、<a ref="https://github.com/nodejs/readable-stream">nodejs/readable-stream</a>というリポジトリの<a ref="https://github.com/nodejs/readable-stream/blob/7af74b040213486d9c76ef41931011a2a4859119/lib/_stream_readable.js">_stream_readable.js</a>だったからです。このリポジトリはオリジナルのNode.jsのstreamの実装をミラーしている、とあるので、実質的にはNode.jsのコードだったと言っても良いのかも知れませんが。</p>
+  <p>この奇妙な<code lang="js"><![CDATA[/*<replacement>*/]]></code>というコメントは、どうやら、元のリポジトリからミラーする過程で生まれたもののようです。ミラーの工程で、いくつかのファイルが一つのファイルに結合されたことによって、<code lang="js"><![CDATA[require()]]></code>の位置が不揃いなコードになったようです。</p>
 </body>
 
 </ktml>

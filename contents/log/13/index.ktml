@@ -1,27 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ktml version="0.1">
 
 <head>
   <title>M1 MacでIntelのHomebrewをインストールする</title>
   <id>ea15b442-2f4e-491a-99e1-dcdc577a56bf</id>
   <created>2022-06-29T09:25:15+09:00</created>
+  <modified>2022-06-29T09:25:15+09:00</modified>
 </head>
 
 <body>
   <p>ARM版のHomebrewからIntelのバイナリをインストールしようとするとうまくいきませんが、HomebrewのIntel版を別途インストールすることで利用できるようになります。</p>
-  <p>Intel版のHomebrewをインストール。<code lang="bash">arch -x86_64</code>でアーキテクチャを切り替えている以外はいつも通りです。ARM版とは別のパスにインストールされます。</p>
-  <code lang="bash">% arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code>
-  <p><code lang="bash">eval "$(/usr/local/bin/brew shellenv)"</code>を.zprofileに書きなさいと言われるわけですが、今回はアーキテクチャによって通すパスを変えるので、以下のようにします。</p>
-  <code lang="bash">arch=$(arch)
+  <p>Intel版のHomebrewをインストール。<code lang="bash"><![CDATA[arch -x86_64]]></code>でアーキテクチャを切り替えている以外はいつも通りです。ARM版とは別のパスにインストールされます。</p>
+  <blockcode lang="bash"><![CDATA[% arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"]]></blockcode>
+  <p><code lang="bash"><![CDATA[eval "$(/usr/local/bin/brew shellenv)"]]></code>を.zprofileに書きなさいと言われるわけですが、今回はアーキテクチャによって通すパスを変えるので、以下のようにします。</p>
+  <blockcode lang="bash"><![CDATA[arch=$(arch)
 
 if [ $arch = "arm64" ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 else
   eval "$(/usr/local/bin/brew shellenv)"
-fi</code>
-  <p>Intel版のHomebrewをCLIから呼び出す際には、archコマンドに環境変数をリセットするオプション<code lang="bash">-c</code>を与えます。そしてbrewを直接呼び出すのではなく、zshに渡して環境変数を再設定した上で実行します。</p>
-  <code lang="bash">% arch -c -x86_64 zsh -c 'brew install hashlink'</code>
+fi]]></blockcode>
+  <p>Intel版のHomebrewをCLIから呼び出す際には、archコマンドに環境変数をリセットするオプション<code lang="bash"><![CDATA[-c]]></code>を与えます。そしてbrewを直接呼び出すのではなく、zshに渡して環境変数を再設定した上で実行します。</p>
+  <blockcode lang="bash"><![CDATA[% arch -c -x86_64 zsh -c 'brew install hashlink']]></blockcode>
   <h2>参考</h2>
-  <p><a href="https://qiita.com/funatsufumiya/items/cec08f1ba3387edc2eed">M1 MacでARMとIntelのターミナルを切り替えて使う (Homebrew 3以降の場合) - Qiita</a></p>
+  <p><a ref="https://qiita.com/funatsufumiya/items/cec08f1ba3387edc2eed">M1 MacでARMとIntelのターミナルを切り替えて使う (Homebrew 3以降の場合) - Qiita</a></p>
 </body>
 
 </ktml>
