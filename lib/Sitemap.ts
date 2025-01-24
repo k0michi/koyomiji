@@ -30,21 +30,36 @@ export default class Sitemap {
 
     for (const u of Object.values(this.map)) {
       const url = urlset?.visitElement(ns, 'url');
-      url?.visitElement(ns, 'loc')?.visitTextNode(u.loc);
+
+      {
+        const loc = url?.visitElement(ns, 'loc');
+        loc?.visitTextNode(u.loc);
+        loc?.visitEnd();
+      }
 
       if (u.lastMod != null) {
-        url?.visitElement(ns, 'lastmod')?.visitTextNode(u.lastMod);
+        const lastmod = url?.visitElement(ns, 'lastmod');
+        lastmod?.visitTextNode(u.lastMod);
+        lastmod?.visitEnd();
       }
 
       if (u.changeFreq != null) {
-        url?.visitElement(ns, 'changefreq')?.visitTextNode(u.changeFreq);
+        const changefreq = url?.visitElement(ns, 'changefreq');
+        changefreq?.visitTextNode(u.changeFreq);
+        changefreq?.visitEnd();
       }
 
       if (u.priority != null) {
-        url?.visitElement(ns, 'priority')?.visitTextNode(u.priority);
+        const priority = url?.visitElement(ns, 'priority');
+        priority?.visitTextNode(u.priority);
+        priority?.visitEnd();
       }
+
+      url?.visitEnd()
     }
 
+    urlset?.visitEnd();
+    serializer.visitEnd();
     return serializer.toString();
   }
 }
