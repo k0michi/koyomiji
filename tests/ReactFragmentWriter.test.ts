@@ -8,6 +8,8 @@ describe('ReactFragmentWriter', () => {
   test('Element 1', () => {
     const writer = new ReactFragmentWriter();
     const el = writer.visitElement('a');
+    el?.visitEnd();
+    writer.visitEnd();
     expect(ReactDOMServer.renderToString(writer.toReactNode())).toBe('<a></a>');
   });
 
@@ -15,6 +17,8 @@ describe('ReactFragmentWriter', () => {
     const writer = new ReactFragmentWriter();
     const el = writer.visitElement('a');
     el?.visitString('foo');
+    el?.visitEnd();
+    writer.visitEnd();
     expect(ReactDOMServer.renderToString(writer.toReactNode())).toBe('<a>foo</a>');
   });
 
@@ -22,8 +26,11 @@ describe('ReactFragmentWriter', () => {
     const writer = new ReactFragmentWriter();
     let el = writer.visitElement('a');
     el?.visitString('foo');
+    el?.visitEnd();
     el = writer.visitElement('a');
     el?.visitString('foo');
+    el?.visitEnd();
+    writer.visitEnd();
     expect(ReactDOMServer.renderToString(writer.toReactNode())).toBe('<a>foo</a><a>foo</a>');
   });
 
@@ -32,6 +39,8 @@ describe('ReactFragmentWriter', () => {
     let el = writer.visitElement('a');
     el?.visitProp('href', '/');
     el?.visitString('foo');
+    el?.visitEnd();
+    writer.visitEnd();
     expect(ReactDOMServer.renderToString(writer.toReactNode())).toBe('<a href="/">foo</a>');
   });
 });
