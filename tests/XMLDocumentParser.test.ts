@@ -10,6 +10,26 @@ describe('XMLDocumentParser', () => {
     expect(() => new XMLDocumentParser(`<>`)).toThrow(Error);
   });
 
+  test('Error 2', () => {
+    expect(() => new XMLDocumentParser(`<`)).toThrow(Error);
+  });
+
+  test('Error 3', () => {
+    expect(() => new XMLDocumentParser(`<!--`)).toThrow(Error);
+  });
+
+  test('Error 4', () => {
+    expect(() => new XMLDocumentParser(`<!CDATA[`)).toThrow(Error);
+  });
+
+  test('Error 5', () => {
+    expect(() => new XMLDocumentParser(`<?`)).toThrow(Error);
+  });
+
+  test('Error 6', () => {
+    expect(() => new XMLDocumentParser(`>`)).toThrow(Error);
+  });
+
   test('Edge Case 1', () => {
     expect(() => new XMLDocumentParser(`<parsererror/>`)).not.toThrow(Error);
   });
