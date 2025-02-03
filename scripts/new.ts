@@ -20,12 +20,14 @@ import { toISOStringJST } from "../lib/date-format";
 function blankPage(date: Date) {
   const id = crypto.randomUUID();
 
-  return `<ktml version="0.1">
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
 
 <head>
   <title>Untitled</title>
   <id>${id}</id>
   <created>${toISOStringJST(date)}</created>
+  <modified>${toISOStringJST(date)}</modified>
 </head>
 
 <body>
