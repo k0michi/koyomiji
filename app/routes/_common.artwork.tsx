@@ -21,10 +21,14 @@ function getID(p: Entry) {
   return p.path[1];
 }
 
+function compareDates(a: Date, b: Date) {
+  return a.valueOf() - b.valueOf();
+}
+
 export default function ArtworkIndexPage() {
   const data = useLoaderData() as Data;
   const entries = Object.values(data.entries).filter(e => e.path.startsWith('/artwork'));
-  entries.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));
+  entries.sort((a, b) => compareDates(new Date(b.created), new Date(a.created)));
 
   return (
     <>
