@@ -1,5 +1,5 @@
 import { LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation, useParams, useRouteLoaderData } from 'react-router';
-import { CalenderIcon, TagsIcon } from '../../components/icon';
+import { CalenderIcon, RefreshIcon, TagsIcon } from '../../components/icon';
 import { toDisplayDateString } from '../../lib/DateFormat.index';
 import { getCategory } from '../../lib/SiteConfig';
 import ServerModel from 'lib/ServerModel';
@@ -33,6 +33,7 @@ export default function ReferencePage() {
         <h1>{entry.title}</h1>
         <div className="meta">
           <div className="date"><CalenderIcon /><div>{toDisplayDateString(new Date(entry.created))}</div></div>
+          <div className="date"><RefreshIcon /><div>{toDisplayDateString(new Date(entry.modified))}</div></div>
           <div className="tags"><TagsIcon /><div>{categoryName}</div></div>
         </div>
       </header>

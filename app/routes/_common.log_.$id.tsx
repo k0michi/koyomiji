@@ -1,5 +1,5 @@
 import { LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation, useParams } from 'react-router';
-import { CalenderIcon } from '../../components/icon';
+import { CalenderIcon, RefreshIcon } from '../../components/icon';
 import { toDisplayDateString } from '../../lib/DateFormat.index';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
@@ -32,6 +32,7 @@ export default function LogPage() {
         <div className="meta">
           <div className="number">#{params.id}</div>
           <div className="date"><CalenderIcon /><div>{toDisplayDateString(new Date(entry.created))}</div></div>
+          <div className="date"><RefreshIcon /><div>{toDisplayDateString(new Date(entry.modified))}</div></div>
         </div>
       </header>
       <div id="body">

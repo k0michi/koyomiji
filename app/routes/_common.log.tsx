@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Entry } from "../../lib/Entry.index";
 import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation } from 'react-router';
-import { CalenderIcon } from '../../components/icon';
+import { CalenderIcon, RefreshIcon } from '../../components/icon';
 import { toDisplayDateString } from '../../lib/DateFormat.index';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
@@ -39,6 +39,7 @@ export default function LogIndexPage() {
             <div className="meta">
               <div className="number">#{getID(i)}</div>
               <div className="date"><CalenderIcon /><div>{toDisplayDateString(new Date(i.created))}</div></div>
+              <div className="date"><RefreshIcon /><div>{toDisplayDateString(new Date(i.modified))}</div></div>
             </div>
             <p>{i.description}</p>
             <hr />
