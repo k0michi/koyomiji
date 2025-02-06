@@ -32,10 +32,6 @@ function getDescription(node: Node, limit: number) {
   }
 }
 
-function isContainerBlock(tagName: string) {
-  return tagName == 'body' || tagName == 'li' || tagName == 'blockquote';
-}
-
 export default class KTMLLoader {
   server: ServerModel;
 
@@ -70,8 +66,6 @@ export default class KTMLLoader {
     }
 
     const $body = $document.querySelector('body')!;
-    this.transformMath($body);
-    this.transformCode($body);
     await this.transformImg($body, context);
     const description = getDescription($body, 120);
     const path = await this.server.mapInternalPath(internalPath);
@@ -166,30 +160,6 @@ export default class KTMLLoader {
       attachments: context.attachments,
       internalPath,
       path
-    }
-  }
-
-  transformMath(element: Element) {
-    for (const math of element.querySelectorAll('math')) {
-      const parentTag = (math.parentNode as Element).tagName;
-
-      if (isContainerBlock(parentTag)) {
-        math.setAttribute('display', 'block');
-      } else {
-        math.setAttribute('display', 'inline');
-      }
-    }
-  }
-
-  transformCode(element: Element) {
-    for (const code of element.querySelectorAll('code')) {
-      const parentTag = (code.parentNode as Element).tagName;
-
-      if (isContainerBlock(parentTag)) {
-        code.setAttribute('display', 'block');
-      } else {
-        code.setAttribute('display', 'inline');
-      }
     }
   }
 
