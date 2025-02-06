@@ -130,7 +130,9 @@ export function transformToDOM(node: unist.Node, document: Document): Node | str
     return element;
   } else if (node.type == 'code') {
     const code = node as mdast.Code;
-    const element = document.createElement('code');
+    const element = document.createElement('blockcode');
+    const $cdata = document.createCDATASection(code.value);
+    element.append($cdata);
 
     if (code.lang != undefined) {
       if (code.lang.includes(':')) {
@@ -165,7 +167,8 @@ export function transformToDOM(node: unist.Node, document: Document): Node | str
   } else if (node.type == 'inlineCode') {
     const inlineCode = node as mdast.InlineCode;
     const element = document.createElement('code');
-    element.append(inlineCode.value);
+    const $cdata = document.createCDATASection(inlineCode.value);
+    element.append($cdata);
     return element;
   } else if (node.type == 'break') {
     const element = document.createElement('br');
@@ -173,7 +176,7 @@ export function transformToDOM(node: unist.Node, document: Document): Node | str
   } else if (node.type == 'link') {
     const link = node as mdast.Link;
     const element = document.createElement('a');
-    element.setAttribute('href', link.url);
+    element.setAttribute('ref', link.url);
     transformChildren(link, element);
     return element;
   } else if (node.type == 'image') {
@@ -185,13 +188,15 @@ export function transformToDOM(node: unist.Node, document: Document): Node | str
     // } else if (node.type == 'imageReference') {
   } else if (node.type == 'math') {
     const math = node as mdastMath.Math;
-    const element = document.createElement('math');
-    element.append(math.value);
+    const element = document.createElement('blockmath');
+    const $cdata = document.createCDATASection(math.value);
+    element.append($cdata);
     return element;
   } else if (node.type == 'inlineMath') {
     const inlineMath = node as mdastMath.InlineMath;
     const element = document.createElement('math');
-    element.append(inlineMath.value);
+    const $cdata = document.createCDATASection(inlineMath.value);
+    element.append($cdata);
     return element;
   } else if (node.type == 'html') {
     const html = node as mdast.Html;
