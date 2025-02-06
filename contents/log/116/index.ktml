@@ -1,0 +1,67 @@
+<ktml version="0.1">
+
+<head>
+  <title>v22.0.0でfs.globが追加されていた【Node.js】</title>
+  <id>60dd9fdc-92bf-4ee8-ac17-9adb3cdd61f7</id>
+  <created>2025-02-03T15:09:43+09:00</created>
+</head>
+
+<body>
+  <p>Node.jsには長らくglob、ワイルドカードに一致するファイルを列挙する機能が標準で用意されていなかったので、<a href="https://www.npmjs.com/package/glob">glob</a>といったnpmパッケージを用いるのが普通だった。が、Node.js v22.0.0で標準APIに</p><ul><li><p><code>fs.glob(pattern[, options], callback)</code></p></li><li><p><code>fsPromises.glob(pattern[, options])</code></p></li></ul><p>が追加されているのを見つけた。ただし、v23.7.0の時点ではexperimentalとなっていることに注意。<code>glob</code>が標準APIに追加されたことで、ファイルを一括で処理するスクリプトを記述しやすくなるので嬉しい。</p><h2>Promise版</h2><p>二つの引数を受け取る。</p><ul><li><p><code>fsPromises.glob(pattern[, options])</code></p><ul><li><p><code>pattern</code>: <code>string</code>または<code>string[]</code>。<code>string[]</code>の場合、いずれかのパターンにマッチするようなパスを列挙する</p></li><li><p><code>options</code>: <code>Object</code>または<code>undefined</code></p><ul><li><p><code>cwd</code>: ワーキングディレクトリ。省略した場合<code>process.cwd()</code></p></li><li><p><code>exclude</code>: 関数または<code>string[]</code>。ただし、<code>string[]</code>はv23.7.0以降のみ。除外するパスのパターンを指定できる</p></li><li><p><code>withFileTypes</code>: <code>boolean</code>。<code>true</code>にした場合、パスが<code>Dirent</code>として返る。そうでなければ<code>string</code>が返る</p></li></ul></li></ul></li></ul><p>戻り値は<code>AsyncIterator</code>。具体的には<code>withFileTypes == false</code>であるとき<code>AsyncIterator&lt;string&gt;</code>、そうでないとき<code>AsyncIterator&lt;Dirent&gt;</code>。</p><h3>実行例</h3><code lang="js">import * as fsPromises from 'node:fs/promises';
+
+for await (const entry of fsPromises.glob('**/*.mjs')) {
+  console.log(entry);
+}</code><code>% node glob.mjs
+(node:39461) ExperimentalWarning: glob is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+glob.mjs
+dir/blank.mjs
+dir/blank2.mjs</code><code lang="js">import * as fsPromises from 'node:fs/promises';
+
+// v23.7.0以降
+for await (const entry of fsPromises.glob('**/*.mjs', { exclude: ['dir/**/*.mjs'] })) {
+  console.log(entry);
+}</code><code>% node glob.mjs
+(node:52435) ExperimentalWarning: glob is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+glob.mjs</code><code lang="js">import * as fsPromises from 'node:fs/promises';
+
+for await (const entry of fsPromises.glob('**/*', { withFileTypes: true })) {
+  console.log(entry);
+}
+</code><code>% node glob.mjs
+(node:42449) ExperimentalWarning: glob is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Dirent {
+  name: 'blank.txt',
+  parentPath: '/Users/k0michi/Local/Playground/glob',
+  [Symbol(type)]: 1
+}
+Dirent {
+  name: 'dir',
+  parentPath: '/Users/k0michi/Local/Playground/glob',
+  [Symbol(type)]: 2
+}
+Dirent {
+  name: 'glob.mjs',
+  parentPath: '/Users/k0michi/Local/Playground/glob',
+  [Symbol(type)]: 1
+}
+Dirent {
+  name: 'blank.mjs',
+  parentPath: '/Users/k0michi/Local/Playground/glob/dir',
+  [Symbol(type)]: 1
+}
+Dirent {
+  name: 'blank2.mjs',
+  parentPath: '/Users/k0michi/Local/Playground/glob/dir',
+  [Symbol(type)]: 1
+}</code><h2>コールバック版</h2><ul><li><p><code>fs.glob(pattern[, options], callback)</code></p></li></ul><p>Promise版とおおよそ同じだが、結果がコールバック引数として、<code>string[]</code>で得られる点だけ異なる。</p><p>結果が一括で与えられるので、ファイル数が多い場合はPromise版よりもメモリ消費が大きいかもしれない。</p><h3>実行例</h3><code lang="js">fs.glob('**/*.mjs', (err, matches) =&gt; {
+  console.log(matches);
+});</code><code>% node glob.mjs
+(node:53159) ExperimentalWarning: glob is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[ 'glob.mjs', 'dir/blank.mjs', 'dir/blank2.mjs' ]</code>
+</body>
+
+</ktml>
