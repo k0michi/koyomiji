@@ -24,13 +24,16 @@ export async function toKTML(source: string) {
 
   const serializer = new window.XMLSerializer();
   const xml = serializer.serializeToString(dom);
+  const now = new Date();
 
-  return `<ktml version="0.1">
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
 
 <head>
   <title>${title}</title>
   <id>${crypto.randomUUID()}</id>
-  <created>${toISOStringJST(new Date())}</created>
+  <created>${toISOStringJST(now)}</created>
+  <modified>${toISOStringJST(now)}</modified>
 </head>
 
 <body>
