@@ -12,3 +12,4 @@ import 'prismjs/components/prism-ignore';
 import 'prismjs/components/prism-toml';
 import 'prismjs/components/prism-c';
 import 'prismjs/components/prism-cpp';
+import 'prismjs/components/prism-java';
