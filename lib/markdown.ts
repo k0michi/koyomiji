@@ -151,7 +151,6 @@ export function transformToDOM(node: unist.Node, document: Document): Node | str
       }
     }
 
-    element.append(code.value);
     return element;
     // } else if (node.type == 'definition') {
   } else if (node.type == 'text') {
