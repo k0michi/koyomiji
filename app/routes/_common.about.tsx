@@ -38,8 +38,8 @@ export default function AboutPage() {
         <h2>お問い合せ</h2>
         <p><Link to="mailto:k0michi@koyomi.co">k0michi@koyomi.co</Link>まで。</p>
         <h2>技術構成について</h2>
-        <p>当サイトの全てのページは、TypeScriptで書かれた自作の静的サイトジェネレータを使用して生成されています。フロントエンドフレームワークにはReactを採用し、モジュールバンドラにはViteを使用しています。サイトはVercel上でビルド、ホストされています。</p>
-        <p>サイト上のテキストは、XMLベースのフォーマットで記述されています。</p>
+        <p>当サイトの全てのページは、[React Router](https://reactrouter.com/)を使用して生成されています。サイトは[Vercel](https://vercel.com/)上でビルド、ホストされています。</p>
+        <p>またサイト上のテキストは、XMLベースのフォーマットで記述されています。</p>
         <h2>ライセンスについて</h2>
         <p>特段の明記がない限り、サイト上のコンテンツは<Link to="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</Link>でライセンスされるものとします。</p>
       </div>
