@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>UbuntuでマルチキャストDNS(mDNS)を使う</title>
+  <id>7ce5f0fc-f244-4ab4-b62b-bf31ae33b343</id>
+  <created>2025-02-19T23:26:48+09:00</created>
+  <modified>2025-02-19T23:26:48+09:00</modified>
+</head>
+
+<body>
+  <p>LAN内であれば、<a ref="https://ja.wikipedia.org/wiki/%E3%83%9E%E3%83%AB%E3%83%81%E3%82%AD%E3%83%A3%E3%82%B9%E3%83%88DNS">マルチキャストDNS</a>を用いることによって、DNSサーバーを構築せずとも<code><![CDATA[hostname.local]]></code>のようなホスト名からなるドメインを、対応するローカルIPアドレス(<code><![CDATA[192.168.xxx.yyy]]></code>)に解決することが可能です。マルチキャストDNSを用いると、動的にIPアドレスが変わるような場合でも、ホスト名さえ覚えておけばアドレスを解決することができるため便利です。</p><p>macOSではかなり昔のバージョン(Mac OS X 10.2-)からBonjourが同梱されており、デフォルトで使うことができます。また、最近のWindowsでも標準で有効になっているようです。</p><p>Linuxにおいては<a ref="https://avahi.org/">Avahi</a>と呼ばれるマルチキャストDNSの実装が存在しますが、Ubuntu Server 24.04.2においてはデフォルトでインストールされないようです。</p><p>UbuntuでAvahiをインストールするには、<code><![CDATA[avahi-daemon]]></code>をインストールすれば良いです。<code><![CDATA[systemctl]]></code>で有効にします。</p><blockcode><![CDATA[$ sudo apt install -y avahi-daemon
+$ sudo systemctl enable avahi-daemon]]></blockcode><p>有効にしたのち、一応再起動。</p><blockcode><![CDATA[$ sudo reboot]]></blockcode><p>これにより、LANの他のデバイスから<code><![CDATA[(ホスト名).local]]></code>として到達可能になるはずです。</p><blockcode><![CDATA[% ping hosho.local]]></blockcode>
+</body>
+
+</ktml>
