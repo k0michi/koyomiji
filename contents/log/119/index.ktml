@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>ページからリンクされているファイルを一括ダウンロードする</title>
+  <id>ead85dd7-dcf2-4044-bb60-2efeac3a1269</id>
+  <created>2025-02-23T17:01:50+09:00</created>
+  <modified>2025-02-23T17:01:50+09:00</modified>
+</head>
+
+<body>
+  <p>あるページから直接リンクされているファイルのうち、特定の拡張子を持つものだけを全てダウンロードしたいことがたまにある。例えば講義資料のPDFとか。もちろん右クリック+"Save Link As..."で保存できるのだけど、数が多いと面倒くさい。</p><p>Node.jsとかで一括ダウンロードツールを作るということも勿論可能だとは思うけれど、私が考えるより簡単で単純明快な方法は、ブラウザの開発者コンソールと<code><![CDATA[wget]]></code>を用いるというもの。</p><p>最初に、ページを開いた状態で、以下のスクリプトを開発者コンソールで実行し、ダウンロードしたいファイルのURLの一覧を保存する。<code><![CDATA[pattern]]></code>の正規表現は、抽出したいものにあわせて適宜変更する。</p><blockcode lang="js"><![CDATA[// 抽出するURLのパターン: RegExp | null
+pattern = /\.pdf$/;
+// URLリストのファイル名: string
+listName = 'urls.txt';
+
+function downloadText(text, fileName) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([text], { type : 'plain/text' }));
+  a.download = fileName;
+  a.click();
+}
+
+list = [...document.querySelectorAll('a')]
+  .filter(anchor => pattern == null || pattern.test(anchor.href))
+  .join('\n');
+downloadText(list, listName);]]></blockcode><p>ダウンロードすべきURLのリスト(<code><![CDATA[urls.txt]]></code>)が得られたので、実際にファイルを一括ダウンロードする。<code><![CDATA[wget]]></code>には、ファイルに含まれるURLを全てダウンロードする<code><![CDATA[-i]]></code>オプションがあるので、これを用いることで一括ダウンロードが行える。</p><blockcode><![CDATA[% wget -i urls.txt]]></blockcode><p><code><![CDATA[curl]]></code>の場合は、このようなオプションが存在しないが、<code><![CDATA[xargs]]></code>を用いてURLを一行ずつ渡すことで同様のことが実現できる。</p><blockcode><![CDATA[% xargs -n 1 curl -O < urls.txt]]></blockcode>
+</body>
+
+</ktml>
