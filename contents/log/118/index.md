@@ -22,5 +22,5 @@ $ sudo reboot
 これにより、LANの他のデバイスから`(ホスト名).local`として到達可能になるはずです。
 
 ```
-% ping hosho.local
+% ping houshou.local
 ```
