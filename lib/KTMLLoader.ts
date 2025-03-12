@@ -173,9 +173,10 @@ export default class KTMLLoader {
 
   async transformImg(element: Element, context: KTMLLoaderContext) {
     for (const img of element.querySelectorAll('img')) {
-      const relativeSrc = img.getAttribute('src');
+      let relativeSrc = img.getAttribute('src');
 
       if (relativeSrc != null) {
+        relativeSrc = decodeURI(relativeSrc);
         img.setAttribute('src', (await this.loadAttachment(relativeSrc, context)).path);
       }
     }
