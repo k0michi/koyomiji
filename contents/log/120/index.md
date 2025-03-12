@@ -1,0 +1,33 @@
+# 古いmacOS(10.13〜11)のインストールメディアを作ろうとしたら、"... does not appear to be a valid OS installer application."と言われる問題
+
+macOS High Sierra(10.13)〜Big Sur(11)のインストールメディアを作ろうとしたのですが、次のようなメッセージが表示されて作成することができませんでした。使用しているマシンはMacBook Pro(Late 2013)、OSはMavericks(10.9.5)です。
+
+```
+$ sudo /Applications/Install\ macOS\ High\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/Untitled
+Password:
+/Applications/Install macOS High Sierra.app does not appear to be a valid OS installer application.
+```
+
+まず、これのメッセージを日本語に翻訳しますと、
+
+> /Applications/Install macOS High Sierra.appは、有効なOSインストーラアプリケーションではないようです。
+
+となります。
+
+このメッセージが表示される原因として考えられるのは、インストーラがオンラインインストーラ——すなわち、インストールプロセスの途中で、必要なデータがダウンロードされるインストーラ——であることです。これは、インストーラの容量を見れば明らかです。
+
+![](Screen%20Shot%202025-03-12%20at%2010.26.42%20AM.png)
+
+普通ならGB単位であるはずのインストーラの容量が、たった23MBしかなく、これはつまり、ダウンロードしたインストーラがオンラインインストーラであることを意味します。
+
+では、なぜ完全なオフラインインストーラではなく、不完全なオンラインインストーラがダウンロードされてしまうのでしょうか。先に述べておきますと、私はMac App Storeの専門家というわけではないので、この原因の理由を知っているわけではありません。
+
+しかし、色々試した結果、次のことがわかりました。
+
+- Mavericks(10.9.5)からは、High Sierra(10.13)からBig Sur(11)のどのバージョンの完全なインストーラをダウンロードできない。
+- Sierra(10.12.6)からは、High Sierra(10.13)及びMojave(10.14)の完全なインストーラをダウンロードできる。Catalina(10.15)とBig Sur(11)はできない。
+- Mojave(10.14.6)からは、Catalina(10.15)とBig Sur(11)の完全なインストーラをダウンロードできる。
+
+なので概ね、対象バージョンの1、2個前のバージョンからは完全なインストーラをダウンロードすることができるようです。
+
+なお、Sierra(10.12)以前のインストーラはApple公式の「[macOS をダウンロードしてインストールする方法](https://support.apple.com/ja-jp/102662)」から直接ダウンロードすることができるので、この問題は発生しません。
