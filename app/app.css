@@ -538,7 +538,14 @@ body.common-layout {}
 #main img.img {
   display: block;
   margin: 0 auto 16px auto;
-  max-width: 80%;
+  max-width: 75%;
+  max-height: 75vh;
+}
+
+@media (max-width: 767px) {
+  #main img.img {
+    max-width: 100%;
+  }
 }
 
 #main figure {
