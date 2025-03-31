@@ -56,10 +56,11 @@ export default function CommonLayout() {
             <li><Menu to="/about">About</Menu></li>
             <li><Menu to="/project">Projects</Menu></li>
             <li><Menu to="/log">Logs</Menu></li>
-            <li><Menu to="/reference">Reference</Menu></li>
+            {/* <li><Menu to="/reference">Reference</Menu></li>
             <li><Menu to="/dictionary">Dictionary</Menu></li>
-            <li><Menu to="/novel">Novels</Menu></li>
+            <li><Menu to="/novel">Novels</Menu></li> */}
             <li><Menu to="/artwork">Artworks</Menu></li>
+            <li><Menu to="/photograph">Photographs</Menu></li>
           </ul>
           <ul id="icons">
             <li><Link aria-label="RSS" to="https://koyomiji.com/feed.xml"><RSS /></Link></li>
