@@ -33,6 +33,10 @@ export function RefreshIcon() {
   return <SVG loader={async () => (await import('@tabler/icons/outline/refresh.svg?raw')).default} className="icon"></SVG>;
 }
 
+export function CameraIcon() {
+  return <SVG loader={async () => (await import('@tabler/icons/outline/camera.svg?raw')).default} className="icon"></SVG>;
+}
+
 export function TagsIcon() {
   return <SVG loader={async () => (await import('@tabler/icons/outline/tags.svg?raw')).default} className="icon"></SVG>;
 }

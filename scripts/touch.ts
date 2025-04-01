@@ -23,14 +23,17 @@ function editModified($document: Document) {
 }
 
 (async () => {
-  let pathToTouch = process.argv[2];
-  pathToTouch = path.join(pathToTouch, 'index.ktml');
+  let pathsToTouch = process.argv.slice(2);
 
-  const parser = new window.DOMParser();
-  const content = await FSHelper.readFileUTF8(pathToTouch);
-  const $document = parser.parseFromString(content, 'text/xml');
-  editModified($document);
-  const serializer = new window.XMLSerializer();
-  const modifiedContent = serializer.serializeToString($document);
-  await fs.writeFile(pathToTouch, modifiedContent);
+  for (let pathToTouch of pathsToTouch) {
+    pathToTouch = path.join(pathToTouch, 'index.ktml');
+
+    const parser = new window.DOMParser();
+    const content = await FSHelper.readFileUTF8(pathToTouch);
+    const $document = parser.parseFromString(content, 'text/xml');
+    editModified($document);
+    const serializer = new window.XMLSerializer();
+    const modifiedContent = serializer.serializeToString($document);
+    await fs.writeFile(pathToTouch, modifiedContent);
+  }
 })();

@@ -3,6 +3,7 @@ export interface Entry {
   id: string;
   created: string;
   modified: string;
+  taken?: string;
   description: string;
   source?: string;
   path: string;

@@ -55,6 +55,7 @@ export default class KTMLLoader {
     const id = getTextContent('id', $head)!;
     const created = getTextContent('created', $head)!;
     const modified = getTextContent('modified', $head) ?? created;
+    const taken = getTextContent('taken', $head);
     const private_ = JSON.parse(getTextContent('private', $head) ?? 'false') === true;
     let source = getTextContent('source', $head);
 
@@ -71,6 +72,7 @@ export default class KTMLLoader {
       id,
       created,
       modified,
+      taken,
       description,
       path,
       source,
