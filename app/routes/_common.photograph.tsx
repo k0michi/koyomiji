@@ -32,7 +32,7 @@ function compareDates(a: any, b: any) {
 export default function PhotoIndexPage() {
   const data = useLoaderData() as Data;
   const entries = Object.values(data.entries).filter(e => e.path.startsWith('/photograph'));
-  entries.sort((a, b) => compareDates(b.created, a.created));
+  entries.sort((a, b) => compareDates(b.taken!, a.taken!));
 
   return (
     <>
