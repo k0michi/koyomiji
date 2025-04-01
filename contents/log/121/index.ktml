@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>写真ギャラリーページを作った</title>
+  <id>ff696d22-762c-47c8-a040-8fb5e5500785</id>
+  <created>2025-04-01T19:37:42+09:00</created>
+  <modified>2025-04-01T19:37:42+09:00</modified>
+</head>
+
+<body>
+  <p><a ref="/photograph">私が撮った写真を並べるギャラリーページ</a>を作りました。自分でも、今までなぜ作っていなかったのか疑問なくらいです。</p><p>このページを作ったきっかけは、macOSに同梱されているPhotos.appでRAW現像できるということに今更気づいたことです。</p><p>私は今までRAW現像といえばLightroomを使っていたのですが、月額が高いので最近は契約していませんでした。カメラメーカーがリリースしているRAW現像ソフトウェアも当然あるのですが、お世辞にも使いやすいとはいえません。</p><p>そこでPhotos.appです。Lightroomほどの自由度はありませんが、簡単な編集には十分使えますし、Apple製なのでインターフェースが使いやすいです。</p><img src="photos.png"/><p>以前は<a ref="https://www.sony.jp/ichigan/products/NEX-7/">NEX-7</a>で撮ることが多かったのですが、中古の<a ref="https://www.sony.jp/cyber-shot/products/DSC-RX100M2/">RX100II</a>を手に入れてからはRX100IIをよく使っています。ポケットに入るサイズですし、電池もそれなりに持つので、外に出る時はいつも持ち歩いています。</p>
+</body>
+
+</ktml>
