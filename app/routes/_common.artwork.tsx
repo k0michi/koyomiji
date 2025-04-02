@@ -3,6 +3,7 @@ import { Entry } from "../../lib/Entry.index";
 import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation } from 'react-router';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
+import DateHelper from 'lib/DateHelper';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const index = await ServerModel.instance.getEntryIndex();
@@ -17,18 +18,10 @@ export const meta: MetaFunction = ({ location }) => getMeta({
   description: "描いたイラスト。"
 });
 
-function getID(p: Entry) {
-  return p.path[1];
-}
-
-function compareDates(a: Date, b: Date) {
-  return a.valueOf() - b.valueOf();
-}
-
 export default function ArtworkIndexPage() {
   const data = useLoaderData() as Data;
   const entries = Object.values(data.entries).filter(e => e.path.startsWith('/artwork'));
-  entries.sort((a, b) => compareDates(new Date(b.created), new Date(a.created)));
+  entries.sort((a, b) => DateHelper.compareDates(new Date(b.created), new Date(a.created)));
 
   return (
     <>
