@@ -13,9 +13,9 @@
   "dependencies": {
     "@fontsource/raleway": "^5.1.0",
     "@k0michi/isomorphic-dom": "^0.0.2",
-    "@react-router/fs-routes": "7.0.0-pre.4",
-    "@react-router/node": "7.0.0-pre.4",
-    "@react-router/serve": "7.0.0-pre.4",
+    "@react-router/fs-routes": "^7.6.2",
+    "@react-router/node": "^7.6.2",
+    "@react-router/serve": "^7.6.2",
     "@tabler/icons": "^3.20.0",
     "chroma-js": "^3.1.2",
     "date-fns": "^4.1.0",
@@ -28,14 +28,14 @@
     "prismjs": "^1.29.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router": "7.0.0-pre.4",
+    "react-router": "^7.6.2",
     "remark-math": "^6.0.0",
     "remark-parse": "^11.0.0",
     "unified": "^11.0.5"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
-    "@react-router/dev": "7.0.0-pre.4",
+    "@react-router/dev": "^7.6.2",
     "@types/chroma-js": "^2.4.4",
     "@types/jest": "^29.5.14",
     "@types/jsdom": "^21.1.7",
@@ -62,11 +62,5 @@
   "engines": {
     "node": "^20.0.0"
   },
-  "packageManager": "pnpm@8.14.1+sha256.2df78e65d433d7693b9d3fbdaf431b2d96bb4f96a2ffecd51a50efe16e50a6a8",
-  "pnpm": {
-    "patchedDependencies": {
-      "react-router@7.0.0-pre.4": "patches/react-router@7.0.0-pre.4.patch",
-      "@react-router/dev@7.0.0-pre.4": "patches/@react-router__dev@7.0.0-pre.4.patch"
-    }
-  }
+  "packageManager": "pnpm@8.14.1+sha256.2df78e65d433d7693b9d3fbdaf431b2d96bb4f96a2ffecd51a50efe16e50a6a8"
 }
