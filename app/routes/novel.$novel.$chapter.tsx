@@ -42,9 +42,10 @@ function saveLocation(pathname: string, location: number) {
   localStorage.setItem('novel', JSON.stringify(current));
 }
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
-  return await ServerModel.instance.getEntry(`/novel/${params.novel}/${params.chapter}`);
-}
+// FIXME:
+// export const loader = async ({ params }: LoaderFunctionArgs) => {
+//   return await ServerModel.instance.getEntry(`/novel/${params.novel}/${params.chapter}`);
+// }
 
 type Data = Awaited<ReturnType<typeof loader>>;
 
