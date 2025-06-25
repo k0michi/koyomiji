@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>GitHub Copilot Chatの言語を日本語にする【VSCode】</title>
+  <id>2d519604-ec50-44e5-9355-0696b6c12b80</id>
+  <created>2025-06-24T20:08:04+09:00</created>
+  <modified>2025-06-24T20:08:04+09:00</modified>
+</head>
+
+<body>
+  <p>GitHub Copilot Chatは便利なのですが、VSCodeの言語設定が英語の場合、Copilotも英語で回答します。VSCode側の言語を変更せず、Copilotの言語だけを日本語にする方法があったので共有します。</p><ol><li><p>設定を開き"locale override"で検索します。</p></li></ol><img src="./Screenshot%202025-06-24%20at%2020.01.11.png"/><ol><li><p>"Locale Override"を"ja"にします。</p></li></ol><p>これで、わざわざ日本語で聞かなくても勝手に日本語で回答してくれるようになります。</p>
+</body>
+
+</ktml>
