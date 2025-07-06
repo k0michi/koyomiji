@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>JavaScriptでSemaphoreを自作してみる</title>
+  <id>9783ac85-1e8b-4f59-b960-d8ed372d8cab</id>
+  <created>2025-07-06T12:49:58+09:00</created>
+  <modified>2025-07-06T12:49:58+09:00</modified>
+</head>
+
+<body>
+  <h2>Semaphoreの必要性</h2><p>JavaScriptでは、<code><![CDATA[async]]></code>/<code><![CDATA[await]]></code>のおかげで非同期コードを簡単に記述することができます。しかし、これらの実行タイミングを意識せずにコードを書いていると、ひどい目にあうことになるでしょう。JavaScriptの実行モデルは（WebWorkerを用いない限り）シングルスレッドであるものの、非同期コードはイベントループによって並行（concurrent）に実行されるので、実行順が毎回異なる可能性があるためです。</p><p>ブラウザがサーバーにデータを非同期的に送信する例を考えます。UI上にボタンがあって、そのボタンが押された合計の回数をサーバーに送信するというものです:</p><blockcode lang="ts"><![CDATA[function timeout(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function sendCount(value: number) {
+  // 実際にはfetchをここでする
+  await timeout(Math.random() * 100);
+  console.log(`Sent: ${value}`);
+}
+
+let count = 0;
+
+// ボタンが押される度、今まで押された数の合計をサーバーに送信するイベントハンドラ
+async function onButtonClick() {
+  count++;
+  await sendCount(count);
+}
+
+async function main() {
+  const tasks: Promise<void>[] = [];
+
+  // 5回ボタンが押されたと仮定
+  for (let i = 1; i <= 5; i++) {
+    tasks.push(onButtonClick());
+  }
+
+  await Promise.all(tasks);
+}
+
+await main();]]></blockcode><p>実行結果は例えば次のようになります。<code><![CDATA[sendCount]]></code>の待ち時間がランダムなので、実行ごとに異なる結果になります。</p><blockcode><![CDATA[Sent: 3
+Sent: 1
+Sent: 4
+Sent: 2
+Sent: 5]]></blockcode><p>しかし、一般的にこのような合計回数を送信するというシナリオにおいて期待されるのは、</p><blockcode><![CDATA[Sent: 1
+Sent: 2
+Sent: 3
+Sent: 4
+Sent: 5]]></blockcode><p>というように、順々に値が増えていく実行順のはずです。</p><p>この実行順を保証するには、<code><![CDATA[sendCount]]></code>の中で<code><![CDATA[await]]></code>しているうちは、他の実行フローが<code><![CDATA[sendCount]]></code>の処理に入ってはならないという制限を課す、というのが一つのやり方です。ここで、SemaphoreやMutexといった同期プリミティブを使うことができます。</p><h2>Semaphoreを自作してみる</h2><p>ここでは簡単なSemaphoreを自作してみます。作りはC#の<a ref="https://learn.microsoft.com/ja-jp/dotnet/api/system.threading.semaphoreslim?view=net-8.0">SemaphoreSlim</a>に似せています。</p><blockcode lang="ts"><![CDATA[export default class Semaphore {
+  private _currentCount: number;
+  private _maxCount: number;
+  private _queue: (() => void)[] = [];
+
+  // initialCount: リソースを利用できる実行フロー数の初期値
+  // maxCount: リソースを利用できる実行フロー数の最大値
+  constructor(initialCount: number, maxCount: number = Infinity) {
+    if (initialCount < 0) {
+      throw new Error(`initialCount cannot be negative: ${initialCount}`);
+    }
+
+    if (initialCount > maxCount) {
+      throw new Error(`initialCount cannot exceed maxCount: ${this._currentCount} > ${this._maxCount}`);
+    }
+
+    this._currentCount = initialCount;
+    this._maxCount = maxCount;
+  }
+
+  // リソースが利用可能となるまで待ち、リソースを取得する
+  public wait(): Promise<void> {
+    if (this._currentCount > 0) {
+      // リソースが利用可能なとき
+      this._currentCount--;
+      return Promise.resolve();
+    }
+
+    // 利用できないので、待機キューに入れて解放を待つ
+    return new Promise<void>((resolve) => {
+      this._queue.push(() => {
+        // 解放が通知された
+        this._currentCount--;
+        resolve();
+      });
+    });
+  }
+
+  // リソースを解放する
+  public release(): void {
+    if (this._queue.length > 0) {
+      // 待機者がいるとき
+
+      // 待機者に解放を通知する
+      const next = this._queue.shift();
+
+      if (next) {
+        next();
+      }
+    } else if (this._currentCount < this._maxCount) {
+      // 待機者がいないとき
+      this._currentCount++;
+    } else {
+      throw new Error(`currentCount (${this._currentCount}) has reached maxCount (${this._maxCount})`);
+    }
+  }
+
+  public get currentCount(): number {
+    return this._currentCount;
+  }
+}]]></blockcode><p>使い方は簡単です。<code><![CDATA[const semaphore = new Semaphore(1)]]></code>としてSemaphoreを作成し、クリティカルセクションの手前で<code><![CDATA[await semaphore.wait()]]></code>、終わりで<code><![CDATA[semaphore.release()]]></code>を呼ぶだけです。</p><p>先ほどの<code><![CDATA[sendCount]]></code>をSemaphoreを用いて書き直してみます。例外が飛んだ場合でも確実に解放されるよう、<code><![CDATA[release()]]></code>は<code><![CDATA[finally]]></code>句に書きます。</p><blockcode lang="ts"><![CDATA[const semaphore = new Semaphore(1);
+
+async function sendCount(value: number) {
+  // 実際にはfetchをここでする
+
+  await semaphore.wait();
+
+  try {
+    await timeout(Math.random() * 100);
+    console.log(`Sent: ${value}`);
+  } finally {
+    semaphore.release();
+  }
+}]]></blockcode><p>この変更によって、期待通りの実行順を保証できるようになります。</p><blockcode><![CDATA[Sent: 1
+Sent: 2
+Sent: 3
+Sent: 4
+Sent: 5]]></blockcode><p>ただしこの実装では、一般的なSemaphoreと同様に、<code><![CDATA[semaphore]]></code>が取得されているクリティカルセクション内で再度<code><![CDATA[semaphore]]></code>を取得しようとすると、<code><![CDATA[semaphore]]></code>を取得できずにデッドロックを引き起こす可能性があるので、多重ロックには注意を払う必要があります。</p>
+</body>
+
+</ktml>
