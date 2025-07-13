@@ -100,7 +100,6 @@ export default class Semaphore {
     return new Promise<void>((resolve) => {
       this._queue.push(() => {
         // 解放が通知された
-        this._currentCount--;
         resolve();
       });
     });
