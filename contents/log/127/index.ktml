@@ -5,7 +5,7 @@
   <title>JavaScriptでSemaphoreを自作してみる</title>
   <id>9783ac85-1e8b-4f59-b960-d8ed372d8cab</id>
   <created>2025-07-06T12:49:58+09:00</created>
-  <modified>2025-07-06T12:49:58+09:00</modified>
+  <modified>2025-07-13T12:25:26+09:00</modified>
 </head>
 
 <body>
@@ -59,7 +59,7 @@ Sent: 5]]></blockcode><p>というように、順々に値が増えていく実�
     }
 
     if (initialCount > maxCount) {
-      throw new Error(`initialCount cannot exceed maxCount: ${this._currentCount} > ${this._maxCount}`);
+      throw new Error(`initialCount cannot exceed maxCount: ${currentCount} > ${maxCount}`);
     }
 
     this._currentCount = initialCount;

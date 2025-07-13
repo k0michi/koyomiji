@@ -81,7 +81,7 @@ export default class Semaphore {
     }
 
     if (initialCount > maxCount) {
-      throw new Error(`initialCount cannot exceed maxCount: ${this._currentCount} > ${this._maxCount}`);
+      throw new Error(`initialCount cannot exceed maxCount: ${currentCount} > ${maxCount}`);
     }
 
     this._currentCount = initialCount;
