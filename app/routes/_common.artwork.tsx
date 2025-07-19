@@ -15,7 +15,7 @@ type Data = Awaited<ReturnType<typeof loader>>;
 export const meta: MetaFunction = ({ location }) => getMeta({
   location,
   title: "Artworks",
-  description: "描いたイラスト。"
+  description: "描いた絵。"
 });
 
 export default function ArtworkIndexPage() {
@@ -27,7 +27,7 @@ export default function ArtworkIndexPage() {
     <>
       <header>
         <h1>Artworks</h1>
-        <div className="meta">描いたイラスト。</div>
+        <div className="meta">描いた絵。</div>
       </header>
       <div id="body">
         <div className="thumbnail-list">
