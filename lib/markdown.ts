@@ -19,6 +19,8 @@ export async function toKTML(source: string) {
     title = h1.textContent;
     title = title?.replace('<', '&lt;');
     title = title?.replace('>', '&gt;');
+    title = title?.replace('&', '&amp;');
+    title = title?.replace('"', '&quot;');
     h1.parentNode?.removeChild(h1);
   }
 
