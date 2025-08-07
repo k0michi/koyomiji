@@ -1,5 +1,6 @@
 import remarkMath from "remark-math";
 import remarkParse from "remark-parse";
+import remarkGfm from 'remark-gfm'
 import { unified } from "unified";
 import type * as unist from "unist";
 import type * as mdast from "mdast";
@@ -49,6 +50,7 @@ function parse(string: string) {
   return unified()
     .use(remarkParse)
     .use(remarkMath)
+    .use(remarkGfm)
     .parse(string);
 }
 
@@ -201,6 +203,32 @@ export function transformToDOM(node: unist.Node, document: Document): Node | str
     const element = document.createElement('math');
     const $cdata = document.createCDATASection(inlineMath.value);
     element.append($cdata);
+    return element;
+  } else if (node.type == 'table') {
+    const table = node as mdast.Table;
+    const element = document.createElement('table');
+    const thead = document.createElement('thead');
+    const tbody = document.createElement('tbody');
+
+    for (let i = 0; i < table.children.length; i++) {
+      const row = table.children[i] as mdast.TableRow;
+      const tr = document.createElement('tr');
+
+      for (let j = 0; j < row.children.length; j++) {
+        const cell = row.children[j] as mdast.TableCell;
+        const td = document.createElement(i === 0 ? 'th' : 'td');
+        transformChildren(cell, td);
+        tr.appendChild(td);
+      }
+
+      if (i === 0) {
+        thead.appendChild(tr);
+      } else {
+        tbody.appendChild(tr);
+      }
+    }
+    element.appendChild(thead);
+    element.appendChild(tbody);
     return element;
   } else if (node.type == 'html') {
     const html = node as mdast.Html;
