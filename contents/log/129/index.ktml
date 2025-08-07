@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>C#からlong型を含むC言語を呼び出すときは、CLongを用いる</title>
+  <id>c5d0ddab-475b-4ed9-b8a8-f6c6da1a0034</id>
+  <created>2025-08-07T17:18:12+09:00</created>
+  <modified>2025-08-07T17:18:12+09:00</modified>
+</head>
+
+<body>
+  <p>C#からC言語を呼び出す際の問題の一つに、環境によって<code><![CDATA[long]]></code>の大きさが異なるというものがあります。C言語の仕様では<code><![CDATA[long]]></code>を含む整数型の最小の大きさに関しての指定がありますが、厳密な大きさに関しては実装依存となっています。しかし現在では<code><![CDATA[int]]></code>や<code><![CDATA[char]]></code>などといった<code><![CDATA[long]]></code>以外の整数型は、殆どのプラットフォームで共通した大きさとなっています。</p><table><thead><tr><th/><th>ILP32/LP64/LLP64</th></tr></thead><tbody><tr><td><code><![CDATA[sizeof(char) * 8]]></code></td><td>8</td></tr><tr><td><code><![CDATA[sizeof(short) * 8]]></code></td><td>16</td></tr><tr><td><code><![CDATA[sizeof(int) * 8]]></code></td><td>32</td></tr><tr><td><code><![CDATA[sizeof(long long) * 8]]></code></td><td>64</td></tr></tbody></table><p>しかし、問題は<code><![CDATA[long]]></code>の大きさです。一般的な32ビット環境では<code><![CDATA[long]]></code>は32ビットですが、64ビット Unix(-like)では64ビットとなっています。そしてさらにややこしいことに、64ビット WindowsではLLP64と呼ばれるメモリモデルが採用されており、<code><![CDATA[long]]></code>は32ビットになっています。</p><table><thead><tr><th/><th>ILP32 (macOS/Linux/Windows (32ビット))</th><th>LP64 (macOS/Linux (64ビット))</th><th>LLP64(Windows (64ビット))</th></tr></thead><tbody><tr><td><code><![CDATA[sizeof(long) * 8]]></code></td><td>32</td><td>64</td><td>32</td></tr></tbody></table><p>これは、インターフェースに<code><![CDATA[long]]></code>が含まれているC言語のコードを、C#から呼び出す際に問題となります。C#の基本型には、プラットフォームによって大きさが異なるC言語の<code><![CDATA[long]]></code>を表現する型が無いためです。</p><p>このような場合こそが、.NET 6で導入された<a ref="https://learn.microsoft.com/ja-jp/dotnet/api/system.runtime.interopservices.clong?view=net-9.0">System.Runtime.InteropServices.CLong</a>の出番です。<code><![CDATA[CLong]]></code>はC言語の<code><![CDATA[long]]></code>を表すための型であり、上記の大きさの違いをプラットフォームに応じて自動的に吸収してくれます。考え方としては<code><![CDATA[IntPtr]]></code>の大きさがプラットフォームによって変化するのと同じです。</p><p>使い方は単純明快で、<code><![CDATA[long]]></code>に対応する部分の型として<code><![CDATA[CLong]]></code>を指定するだけです。このようなC言語のコードを呼び出したいとします。</p><blockcode lang="c"><![CDATA[#if defined(_WIN32) || defined(_WIN64)
+#define DllExport __declspec(dllexport)
+#else
+#define DllExport
+#endif
+
+DllExport long addLongs(long a, long b) { return a + b; }
+
+typedef struct {
+  long x;
+  long y;
+} LongPoint;
+
+DllExport LongPoint addLongPoints(LongPoint p1, LongPoint p2) {
+  LongPoint result;
+  result.x = p1.x + p2.x;
+  result.y = p1.y + p2.y;
+  return result;
+}]]></blockcode><p>これを呼び出すC#コードは、引数やメンバとして<code><![CDATA[CLong]]></code>を指定すれば良いだけです。</p><blockcode lang="cs"><![CDATA[using System.Runtime.InteropServices;
+
+// ...
+
+[DllImport("native", CallingConvention = CallingConvention.Cdecl)]
+public static extern CLong addLongs(CLong a, CLong b);
+
+public struct LongPoint {
+  public CLong x;
+  public CLong y;
+}
+
+[DllImport("native", CallingConvention = CallingConvention.Cdecl)]
+public static extern LongPoint addLongPoints(LongPoint p1, LongPoint p2);
+
+static void Main(string[] args) {
+  {
+    CLong a = new CLong(1);
+    CLong b = new CLong(2);
+    CLong result = addLongs(a, b);
+    Console.WriteLine($"addLongs({a.Value}, {b.Value}) = {result.Value}");
+  }
+
+  {
+    LongPoint lp1 = new LongPoint { x = new CLong(5), y = new CLong(6) };
+    LongPoint lp2 = new LongPoint { x = new CLong(7), y = new CLong(8) };
+    LongPoint lpResult = addLongPoints(lp1, lp2);
+    Console.WriteLine($"addLongPoints({lp1.x.Value}, {lp1.y.Value}) + ({lp2.x.Value}, {lp2.y.Value}) = ({lpResult.x.Value}, {lpResult.y.Value})");
+  }
+}]]></blockcode><p>これによって、macOSでもWindowsでもLinuxでも、全く同じコードで<code><![CDATA[long]]></code>を含むインターフェースを呼び出すことができます。</p><blockcode><![CDATA[addLongs(1, 2) = 3
+addLongPoints(5, 6) + (7, 8) = (12, 14)]]></blockcode>
+</body>
+
+</ktml>
