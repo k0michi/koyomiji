@@ -47,6 +47,17 @@ function saveLocation(pathname: string, location: number) {
 //   return await ServerModel.instance.getEntry(`/novel/${params.novel}/${params.chapter}`);
 // }
 
+export const loader = async ({ params }: LoaderFunctionArgs) => {
+  console.log(params);
+  let path = `/novel/${params.novel}`;
+
+  if (params['*']) {
+    path += `/${params['*']}`;
+  }
+
+  return await ServerModel.instance.getEntry(path);
+}
+
 type Data = Awaited<ReturnType<typeof loader>>;
 
 export const meta: MetaFunction = ({ location, data }) => getMeta({
@@ -71,67 +82,67 @@ export default function NovelPage() {
   const data = useLoaderData() as Data;
   const entry = data;
   const mainRef = React.useRef<HTMLElement>(null);
-  useDevReload();
+  // useDevReload();
 
-  React.useEffect(() => {
-    const h = (e: any) => {
-      if (e.deltaX == 0) {
-        window.scrollBy(-e.deltaY, 0);
-        e.preventDefault()
-      }
-    };
+  // React.useEffect(() => {
+  //   const h = (e: any) => {
+  //     if (e.deltaX == 0) {
+  //       window.scrollBy(-e.deltaY, 0);
+  //       e.preventDefault()
+  //     }
+  //   };
 
-    window.addEventListener('wheel', h, { passive: false });
-    return () => window.removeEventListener('wheel', h);
-  }, []);
+  //   window.addEventListener('wheel', h, { passive: false });
+  //   return () => window.removeEventListener('wheel', h);
+  // }, []);
 
-  React.useEffect(() => {
-    const rLocation = loadLocation(location.pathname) ?? 0;
-    const elem = mainRef.current?.children!.item(rLocation);
-    const rect = elem?.getBoundingClientRect();
-    window.scrollBy(rect?.left! - window.innerWidth + rect?.width!, 0);
+  // React.useEffect(() => {
+  //   const rLocation = loadLocation(location.pathname) ?? 0;
+  //   const elem = mainRef.current?.children!.item(rLocation);
+  //   const rect = elem?.getBoundingClientRect();
+  //   window.scrollBy(rect?.left! - window.innerWidth + rect?.width!, 0);
 
-    let options = {
-      rootMargin: '0px',
-      threshold: 1.0
-    }
+  //   let options = {
+  //     rootMargin: '0px',
+  //     threshold: 1.0
+  //   }
 
-    let intersectingSet = new Set<Element>();
-    let lastCalculated = Date.now();
+  //   let intersectingSet = new Set<Element>();
+  //   let lastCalculated = Date.now();
 
-    let observer = new IntersectionObserver((entries, observer) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) {
-          intersectingSet.add(entry.target);
-        } else {
-          intersectingSet.delete(entry.target);
-        }
+  //   let observer = new IntersectionObserver((entries, observer) => {
+  //     for (const entry of entries) {
+  //       if (entry.isIntersecting) {
+  //         intersectingSet.add(entry.target);
+  //       } else {
+  //         intersectingSet.delete(entry.target);
+  //       }
 
-        const now = Date.now();
+  //       const now = Date.now();
 
-        if (now - lastCalculated > 1000) {
-          let min = Number.MAX_VALUE;
+  //       if (now - lastCalculated > 1000) {
+  //         let min = Number.MAX_VALUE;
 
-          for (const e of intersectingSet.values()) {
-            const index = indexOf(mainRef.current?.children!, e);
+  //         for (const e of intersectingSet.values()) {
+  //           const index = indexOf(mainRef.current?.children!, e);
 
-            if (index < min) {
-              min = index;
-            }
-          }
+  //           if (index < min) {
+  //             min = index;
+  //           }
+  //         }
 
-          if (min != Number.MAX_VALUE) {
-            saveLocation(location.pathname, min);
-            lastCalculated = now;
-          }
-        }
-      }
-    }, options);
+  //         if (min != Number.MAX_VALUE) {
+  //           saveLocation(location.pathname, min);
+  //           lastCalculated = now;
+  //         }
+  //       }
+  //     }
+  //   }, options);
 
-    for (const elem of mainRef.current?.children!) {
-      observer.observe(elem);
-    }
-  }, []);
+  //   for (const elem of mainRef.current?.children!) {
+  //     observer.observe(elem);
+  //   }
+  // }, []);
 
   return (
     <>

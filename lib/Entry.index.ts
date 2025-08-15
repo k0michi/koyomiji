@@ -50,5 +50,10 @@ export function mapEntries(entries: Entry[]) {
 }
 
 function getCategory(path: string) {
+  // For novels
+  if (path.split('/').length < 4) {
+    return 'uncategorized';
+  }
+
   return path.split('/')[2];
 }

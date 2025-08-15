@@ -57,8 +57,8 @@ export default function CommonLayout() {
             <li><Menu to="/project">Projects</Menu></li>
             <li><Menu to="/log">Logs</Menu></li>
             {/* <li><Menu to="/reference">Reference</Menu></li>
-            <li><Menu to="/dictionary">Dictionary</Menu></li>
-            <li><Menu to="/novel">Novels</Menu></li> */}
+            <li><Menu to="/dictionary">Dictionary</Menu></li> */}
+            <li><Menu to="/novel">Novels</Menu></li>
             <li><Menu to="/artwork">Artworks</Menu></li>
             <li><Menu to="/photograph">Photographs</Menu></li>
           </ul>

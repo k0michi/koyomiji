@@ -14,7 +14,7 @@ type Data = Awaited<ReturnType<typeof loader>>;
 export const meta: MetaFunction = ({ location }) => getMeta({
   location,
   title: "Novels",
-  description: "🚧 Reserved"
+  description: "艦これSSなど。"
 });
 
 export default function NovelIndexPage() {
@@ -26,7 +26,7 @@ export default function NovelIndexPage() {
     <>
       <header>
         <h1>Novels</h1>
-        <div className="meta">🚧 Reserved</div>
+        <div className="meta">艦これSSなど。</div>
       </header>
       <div id="body">
         {Object.entries(map).map(([k, v]) =>
