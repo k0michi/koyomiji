@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>requestAnimationFrameをPromise化して、ゲームループを書く</title>
+  <id>31684e62-d871-4dda-8884-8c4c29f0e7c0</id>
+  <created>2025-08-21T03:37:43+09:00</created>
+  <modified>2025-08-21T03:37:43+09:00</modified>
+</head>
+
+<body>
+  <p>JavaScriptでは、C/C++を用いたゲームプログラミングで一般的な、いわゆる「ゲームループ」を書くことはできません。ゲームループとは例えば、次のような更新と描画を繰り返すコードです:</p><blockcode lang="ts"><![CDATA[while (true) {
+  update();
+  render();
+}]]></blockcode><p>ブラウザ上のJavaScriptにおいては、上記のようなブロッキングなコードを書くことは許されていません。これは、ブラウザという環境が、本質的に非同期であることに起因しています。</p><p>このようなブロッキングを避けるために、一般的には<code><![CDATA[setTimeout]]></code>や<code><![CDATA[window.requestAnimationFrame]]></code>が用いられます。特に、画面の更新を行う場合は、<code><![CDATA[window.requestAnimationFrame]]></code>を用いることで、ブラウザ側の描画のタイミング（垂直同期）に合わせて処理を実行することができます。</p><blockcode lang="ts"><![CDATA[function frame() {
+  update();
+  render();
+  window.requestAnimationFrame(frame);
+}
+
+window.requestAnimationFrame(frame);]]></blockcode><p>この<code><![CDATA[window.requestAnimationFrame]]></code>を<code><![CDATA[Promise]]></code>でラップすることで、以下のような「非同期な」ゲームループを書くことが可能になります。<code><![CDATA[async]]></code>/<code><![CDATA[await]]></code>のおかげで、再帰的なコールバック呼び出しが不要となるため、コードがより直感的になります:</p><blockcode lang="ts"><![CDATA[function requestAnimationFrame(): Promise<number> {
+  return new Promise((resolve) => {
+    window.requestAnimationFrame((time) => {
+      resolve(time);
+    });
+  });
+}
+
+while (true) {
+  await requestAnimationFrame();
+  update();
+  render();
+}]]></blockcode><p><code><![CDATA[window.requestAnimationFrame]]></code>を<code><![CDATA[Promise]]></code>化する利点は、コードの見栄えだけではありません。次のように<code><![CDATA[Promise.any]]></code>と組み合わせることによって、「次の描画タイミングが訪れるか、または、一定時間が経過する」まで待つ、といったことが可能となります。<code><![CDATA[window.requestAnimationFrame]]></code>は、タブが切り替わってページが非表示になった時（バックグラウンド時）に、コールバックが呼ばれる頻度が低下したり、全く呼び出されなくなるようになっていますが、このように書くことで全く呼び出されなくなる事態を避けることができます（ただし、<code><![CDATA[setTimeout]]></code>もバックグラウンド時には呼び出し頻度が低下するため、指定した間隔になるとは限らないことに注意）。</p><blockcode lang="ts"><![CDATA[function requestAnimationFrame(): Promise<number> {
+  return new Promise((resolve) => {
+    window.requestAnimationFrame((time) => {
+      resolve(time);
+    });
+  });
+}
+
+function timeout(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+while (true) {
+  await Promise.any([requestAnimationFrame(), timeout(1000)]);
+  update();
+  render();
+}]]></blockcode>
+</body>
+
+</ktml>
