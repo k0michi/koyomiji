@@ -44,7 +44,9 @@ export default class KTMLReactTransformer extends XMLNodeVisitor {
       case 'a':
         return new KTMLReactTransformerA(this.nextReact?.visitElement(Link));
       case 'img':
-        return new KTMLReactTransformer(this.nextReact?.visitElement(Image));
+        const imgNode = this.nextReact?.visitElement(Image);
+        imgNode?.visitProp('loading', 'lazy');
+        return new KTMLReactTransformer(imgNode);
       // Prevents ` Whitespace text nodes cannot appear as a child of <table>. Make sure you don't have any extra whitespace between tags on each line of your source code.`
       // isTagValidWithParent
       case 'tr':
