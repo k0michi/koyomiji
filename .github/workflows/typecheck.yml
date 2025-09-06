@@ -1,0 +1,23 @@
+name: Type Check
+
+on:
+  push:
+    branches: [main, develop*]
+  pull_request:
+    branches: [main, develop*]
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: TypeScript type check
+        run: pnpm tsc --noEmit
