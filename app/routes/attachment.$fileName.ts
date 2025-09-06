@@ -1,4 +1,3 @@
-import { LoaderFunctionArgs } from "react-router";
 import * as mimeTypes from 'mime-types';
 import ServerModel from "lib/ServerModel";
 import { Route } from './+types/attachment.$fileName';
