@@ -4,22 +4,21 @@ import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation } fr
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 import DateHelper from 'lib/DateHelper';
+import { Route } from './+types/_common.artwork';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const index = await ServerModel.instance.getEntryIndex();
   return { entries: index };
 }
 
-type Data = Awaited<ReturnType<typeof loader>>;
-
-export const meta: MetaFunction = ({ location }) => getMeta({
+export const meta = ({ location }: Route.MetaArgs) => getMeta({
   location,
   title: "Artworks",
   description: "描いた絵。"
 });
 
 export default function ArtworkIndexPage() {
-  const data = useLoaderData() as Data;
+  const data = useLoaderData<typeof loader>();
   const entries = Object.values(data.entries).filter(e => e.path.startsWith('/artwork'));
   entries.sort((a, b) => DateHelper.compareDates(new Date(b.created), new Date(a.created)));
 

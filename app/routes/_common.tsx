@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link, Outlet, useLoaderData, useLocation } from 'react-router';
 import { Asterisk, GithubIcon, LogoFull, MailIcon, Mastodon, RSS, TwitchIcon, YoutubeIcon } from '../../components/icon';
 import { Handle } from '~/Handle';
-import * as Route from './+types._common';
+import { Route } from './+types/_common';
 import { useDevReload } from '~/Hook.index';
 
 interface MenuProps {
@@ -24,7 +24,7 @@ export const handle: Handle = () => {
   };
 }
 
-export const loader = () => {
+export const loader = ({ }: Route.LoaderArgs) => {
   return { year: (new Date).getFullYear() };
 };
 
@@ -33,7 +33,7 @@ export default function CommonLayout() {
   const location = useLocation();
   const elementMap = React.useRef<Record<string, React.Ref<any>>>({});
   elementMap.current[location.pathname] = elementMap.current[location.pathname] ?? React.createRef<any>();
-  const data = useLoaderData() as Route.LoaderData;
+  const data = useLoaderData<typeof loader>();
   useDevReload();
 
   return (

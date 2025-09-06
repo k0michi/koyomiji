@@ -6,6 +6,7 @@ import { getMeta } from 'lib/meta';
 import { Handle } from '~/Handle';
 import { useDevReload } from '~/Hook.index';
 import KTML from 'components/KTML';
+import { Route } from './+types/novel.$novel.$';
 
 interface NovelStorage {
   locations: Record<string, number | undefined>;
@@ -47,8 +48,7 @@ function saveLocation(pathname: string, location: number) {
 //   return await ServerModel.instance.getEntry(`/novel/${params.novel}/${params.chapter}`);
 // }
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
-  console.log(params);
+export const loader = async ({ params }: Route.LoaderArgs) => {
   let path = `/novel/${params.novel}`;
 
   if (params['*']) {
@@ -58,16 +58,16 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   return await ServerModel.instance.getEntry(path);
 }
 
-type Data = Awaited<ReturnType<typeof loader>>;
-
-export const meta: MetaFunction = ({ location, data }) => getMeta({
-  location,
-  title: (data as Data).title,
-  description: (data as Data).description,
-  type: 'article',
-  published: (data as Data).created,
-  modified: (data as Data).modified,
-});
+export const meta = ({ location, data }: Route.MetaArgs) => {
+  return data ? getMeta({
+    location,
+    title: data.title,
+    description: data.description,
+    type: 'article',
+    published: data.created,
+    modified: data.modified,
+  }) : [];
+};
 
 export const handle: Handle = () => {
   return {
@@ -78,8 +78,7 @@ export const handle: Handle = () => {
 }
 
 export default function NovelPage() {
-  const params = useParams();
-  const data = useLoaderData() as Data;
+  const data = useLoaderData<typeof loader>();
   const entry = data;
   const mainRef = React.useRef<HTMLElement>(null);
   // useDevReload();

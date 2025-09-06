@@ -1,8 +1,9 @@
 import { getMeta } from 'lib/meta';
 import { Link, MetaFunction } from 'react-router';
 import profile from '../../assets/profile.png';
+import { Route } from './+types/_common.about';
 
-export const meta: MetaFunction = ({ location }) => getMeta({
+export const meta = ({ location }: Route.MetaArgs) => getMeta({
   title: "About",
   description: "このサイトについて。",
   location

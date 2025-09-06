@@ -4,22 +4,21 @@ import { getCategory } from '../../lib/SiteConfig';
 import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData } from 'react-router';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
+import { Route } from './+types/_common.reference';
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader = async ({ params }: Route.LoaderArgs) => {
   const index = await ServerModel.instance.getEntryIndex();
   return { entries: index };
 }
 
-type Data = Awaited<ReturnType<typeof loader>>;
-
-export const meta: MetaFunction = ({ location }) => getMeta({
+export const meta = ({ location }: Route.MetaArgs) => getMeta({
   location,
   title: "Reference",
   description: "学んだことの覚書。"
 });
 
 export default function ReferenceIndexPage() {
-  const data = useLoaderData() as Data;
+  const data = useLoaderData<typeof loader>();
   const entries = Object.values(data.entries).filter(e => e.path.startsWith('/reference/'));
   const map = mapEntries(entries);
 

@@ -2,21 +2,20 @@ import { LoaderFunctionArgs, MetaFunction, useLoaderData } from 'react-router';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 import KTML from '../../components/KTML';
+import { Route } from './+types/_common.dictionary';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   return await ServerModel.instance.getDictionary('/dictionary/english');
 }
 
-type Data = Awaited<ReturnType<typeof loader>>;
-
-export const meta: MetaFunction = ({ location }) => getMeta({
+export const meta = ({ location }: Route.MetaArgs) => getMeta({
   location,
   title: "Dictionary",
   description: "私的な英単語帳。"
 });
 
 export default function DictionaryPage() {
-  const dictionaries = useLoaderData() as Data;
+  const dictionaries = useLoaderData<typeof loader>();
   let entries = dictionaries.content!;
   entries = [...entries].reverse();
 

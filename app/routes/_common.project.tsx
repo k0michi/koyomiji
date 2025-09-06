@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Link, MetaFunction } from 'react-router';
 import { getMeta } from 'lib/meta';
+import { Route } from './+types/_common.project';
 
-export const meta: MetaFunction = ({ location }) => getMeta({
+export const meta = ({ location }: Route.MetaArgs) => getMeta({
   title: "Projects",
   description: "開発したもの。",
   location

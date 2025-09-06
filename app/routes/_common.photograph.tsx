@@ -2,22 +2,21 @@ import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation } fr
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 import DateHelper from 'lib/DateHelper';
+import { Route } from './+types/_common.photograph';
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader = async ({ params }: Route.LoaderArgs) => {
   const index = await ServerModel.instance.getEntryIndex();
   return { entries: index };
 }
 
-type Data = Awaited<ReturnType<typeof loader>>;
-
-export const meta: MetaFunction = ({ location }) => getMeta({
+export const meta = ({ location, data }: Route.MetaArgs) => getMeta({
   location,
   title: "Photographs",
   description: "スナップ写真など。"
 });
 
 export default function PhotoIndexPage() {
-  const data = useLoaderData() as Data;
+  const data = useLoaderData<typeof loader>();
   const entries = Object.values(data.entries).filter(e => e.path.startsWith('/photograph'));
   entries.sort((a, b) => DateHelper.compareDates(b.taken!, a.taken!));
 

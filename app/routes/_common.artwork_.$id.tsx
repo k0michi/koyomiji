@@ -4,24 +4,23 @@ import { toDisplayDateString } from '../../lib/DateFormat.index';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 import KTML from '../../components/KTML';
+import { Route } from './+types/_common.artwork_.$id';
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader = async ({ params }: Route.LoaderArgs) => {
   return await ServerModel.instance.getEntry(`/artwork/${params.id}`);
 }
 
-type Data = Awaited<ReturnType<typeof loader>>;
-
-export const meta: MetaFunction = ({ location, data }) => getMeta({
+export const meta = ({ location, data }: Route.MetaArgs) => data ? getMeta({
   location,
-  title: (data as Data).title,
-  description: (data as Data).description,
+  title: data.title,
+  description: data.description,
   type: 'article',
-  published: (data as Data).created,
-  modified: (data as Data).modified,
-});
+  published: data.created,
+  modified: data.modified,
+}) : [];
 
 export default function ArtworkPage() {
-  const data = useLoaderData() as Data;
+  const data = useLoaderData<typeof loader>();
   const params = useParams();
   const entry = data;
 

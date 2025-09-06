@@ -8,19 +8,20 @@ import { Link, LoaderFunction, LoaderFunctionArgs, MetaFunction, useLoaderData }
 import { CalenderIcon, RefreshIcon } from '../../components/icon';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
+import { Route } from './+types/_common._index';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const index = await ServerModel.instance.getEntryIndex();
   return { entries: index };
 }
 
-export const meta: MetaFunction = ({ location }) => getMeta({
+export const meta = ({ location }: Route.MetaArgs) => getMeta({
   location,
   description: "ようこそ。"
 });
 
 export default function IndexPage() {
-  const data = useLoaderData() as Awaited<ReturnType<typeof loader>>;
+  const data = useLoaderData<typeof loader>();
   const entries = Object.values(data.entries);
 
   const now = new Date();
