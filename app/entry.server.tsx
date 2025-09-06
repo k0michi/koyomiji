@@ -7,9 +7,8 @@ import { isbot } from "isbot";
 import type { RenderToPipeableStreamOptions } from "react-dom/server";
 import { renderToPipeableStream } from "react-dom/server";
 import ServerModel from "lib/ServerModel";
-import path from "node:path";
 
-const ABORT_DELAY = 5_000;
+export const streamTimeout = 5_000;
 
 export default function handleRequest(
   request: Request,
@@ -17,23 +16,25 @@ export default function handleRequest(
   responseHeaders: Headers,
   routerContext: EntryContext,
   loadContext: AppLoadContext
+  // If you have middleware enabled:
+  // loadContext: unstable_RouterContextProvider
 ) {
-  // Begin modified
-  for (const [k, v] of Object.entries(routerContext.manifest.routes)) {
-    if (v?.path) {
-      // FIXME: Not checking escape
-      if (!v.path.includes(':') && !v.path.includes('*')) {
-        if (v.path.match(/\..+$/)) {
-          continue;
-        }
+  return new Promise((resolve, reject) => {
+    // Begin modified
+    for (const [k, v] of Object.entries(routerContext.manifest.routes)) {
+      if (v?.path) {
+        // FIXME: Not checking escape
+        if (!v.path.includes(':') && !v.path.includes('*')) {
+          if (v.path.match(/\..+$/)) {
+            continue;
+          }
 
-        ServerModel.instance.sitemap.add('/' + v.path);
+          ServerModel.instance.sitemap.add('/' + v.path);
+        }
       }
     }
-  }
-  // End modified
+    // End modified
 
-  return new Promise((resolve, reject) => {
     let shellRendered = false;
     let userAgent = request.headers.get("user-agent");
 
@@ -45,11 +46,7 @@ export default function handleRequest(
         : "onShellReady";
 
     const { pipe, abort } = renderToPipeableStream(
-      <ServerRouter
-        context={routerContext}
-        url={request.url}
-        abortDelay={ABORT_DELAY}
-      />,
+      <ServerRouter context={routerContext} url={request.url} />,
       {
         [readyOption]() {
           shellRendered = true;
@@ -82,6 +79,8 @@ export default function handleRequest(
       }
     );
 
-    setTimeout(abort, ABORT_DELAY);
+    // Abort the rendering stream after the `streamTimeout` so it has time to
+    // flush down the rejected boundaries
+    setTimeout(abort, streamTimeout + 1000);
   });
 }
