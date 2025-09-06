@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useRef } from 'react';
 import { Link, useLoaderData } from 'react-router';
 import { XIcon } from '../../components/icon';
 import ServerModel from 'lib/ServerModel';
@@ -80,20 +80,24 @@ export const handle: Handle = () => {
 export default function NovelPage() {
   const data = useLoaderData<typeof loader>();
   const entry = data;
-  const mainRef = React.useRef<HTMLElement>(null);
+  const mainRef = useRef<HTMLElement>(null);
   // useDevReload();
 
-  // React.useEffect(() => {
-  //   const h = (e: any) => {
-  //     if (e.deltaX == 0) {
-  //       window.scrollBy(-e.deltaY, 0);
-  //       e.preventDefault()
-  //     }
-  //   };
+  useEffect(() => {
+    const handler = (e: WheelEvent) => {
+      if (e.deltaX == 0) {
+        window.scrollBy(-e.deltaY, 0);
+        e.preventDefault()
+      }
+    };
 
-  //   window.addEventListener('wheel', h, { passive: false });
-  //   return () => window.removeEventListener('wheel', h);
-  // }, []);
+    window.addEventListener('wheel', handler, { passive: false });
+    return () => window.removeEventListener('wheel', handler);
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(document.documentElement.scrollWidth, 0);
+  }, []);
 
   // React.useEffect(() => {
   //   const rLocation = loadLocation(location.pathname) ?? 0;
