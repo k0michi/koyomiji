@@ -4,7 +4,6 @@ import { XIcon } from '../../components/icon';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 import { Handle } from '~/Handle';
-import KTMLHelper from '~/KTMLHelper';
 import { useDevReload } from '~/Hook.index';
 import KTML from 'components/KTML';
 
