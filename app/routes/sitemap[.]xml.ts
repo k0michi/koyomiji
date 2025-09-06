@@ -1,9 +1,9 @@
-import { LoaderFunctionArgs } from "react-router";
 import ServerModel from "lib/ServerModel";
+import { Route } from './+types/sitemap[.]xml';
 
 export async function loader({
   params,
-}: LoaderFunctionArgs) {
+}: Route.LoaderArgs) {
   return new Response(await ServerModel.instance.getSitemapAsString(), {
     status: 200,
     headers: {
