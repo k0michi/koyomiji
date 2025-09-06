@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link, MetaFunction } from 'react-router';
+import { Link } from 'react-router';
 import { getMeta } from 'lib/meta';
 import { Route } from './+types/_common.project';
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation, useParams } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import { XIcon } from '../../components/icon';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';

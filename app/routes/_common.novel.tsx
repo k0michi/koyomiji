@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Entry, mapEntries } from "../../lib/Entry.index";
-import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 import { Route } from './+types/_common.novel';

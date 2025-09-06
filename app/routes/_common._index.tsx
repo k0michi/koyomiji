@@ -4,13 +4,13 @@ import { subDays } from 'date-fns';
 import * as config from '../../lib/SiteConfig';
 import { toDisplayDateString } from '../../lib/DateFormat.index';
 import { getPathSegment } from '../../lib/utils';
-import { Link, LoaderFunction, LoaderFunctionArgs, MetaFunction, useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import { CalenderIcon, RefreshIcon } from '../../components/icon';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 import { Route } from './+types/_common._index';
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader = async ({ params }: Route.LoaderArgs) => {
   const index = await ServerModel.instance.getEntryIndex();
   return { entries: index };
 }

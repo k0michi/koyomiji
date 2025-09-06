@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation, useParams } from 'react-router';
+import { useLoaderData, useParams } from 'react-router';
 import { CalenderIcon, CameraIcon, RefreshIcon } from '../../components/icon';
 import { toDisplayDateString } from '../../lib/DateFormat.index';
 import ServerModel from 'lib/ServerModel';

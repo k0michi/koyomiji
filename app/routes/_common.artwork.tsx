@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Entry } from "../../lib/Entry.index";
-import { Link, LoaderFunctionArgs, MetaFunction, useLoaderData, useLocation } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 import DateHelper from 'lib/DateHelper';
 import { Route } from './+types/_common.artwork';
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader = async ({ params }: Route.LoaderArgs) => {
   const index = await ServerModel.instance.getEntryIndex();
   return { entries: index };
 }

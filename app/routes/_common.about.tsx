@@ -1,5 +1,5 @@
 import { getMeta } from 'lib/meta';
-import { Link, MetaFunction } from 'react-router';
+import { Link } from 'react-router';
 import profile from '../../assets/profile.png';
 import { Route } from './+types/_common.about';
 

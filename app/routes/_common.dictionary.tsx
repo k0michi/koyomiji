@@ -1,10 +1,10 @@
-import { LoaderFunctionArgs, MetaFunction, useLoaderData } from 'react-router';
+import { useLoaderData } from 'react-router';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 import KTML from '../../components/KTML';
 import { Route } from './+types/_common.dictionary';
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader = async ({ params }: Route.LoaderArgs) => {
   return await ServerModel.instance.getDictionary('/dictionary/english');
 }
 
