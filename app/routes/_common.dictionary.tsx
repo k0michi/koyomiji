@@ -1,7 +1,7 @@
 import { LoaderFunctionArgs, MetaFunction, useLoaderData } from 'react-router';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
-import KTMLHelper from '~/KTMLHelper';
+import KTML from '../../components/KTML';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   return await ServerModel.instance.getDictionary('/dictionary/english');
@@ -38,8 +38,8 @@ export default function DictionaryPage() {
               </div>
               <div className='senses'>
                 {e?.senses.map(s => {
-                  const usage = s.usage != null ? KTMLHelper.parseAsReact(s.usage) : null;
-                  const gloss = s.gloss != null ? KTMLHelper.parseAsReact(s.gloss) : null;
+                  const usage = s.usage != null ? <KTML content={s.usage} /> : null;
+                  const gloss = s.gloss != null ? <KTML content={s.gloss} /> : null;
                   // FIXME: Proper key instead of gloss
                   return <div key={s.gloss}><span className='pos'>{s.pos}.</span> <span className='usage'>{usage}</span> <span className='gloss'>{gloss}</span></div>;
                 })}

@@ -6,6 +6,7 @@ import { getMeta } from 'lib/meta';
 import { Handle } from '~/Handle';
 import KTMLHelper from '~/KTMLHelper';
 import { useDevReload } from '~/Hook.index';
+import KTML from 'components/KTML';
 
 interface NovelStorage {
   locations: Record<string, number | undefined>;
@@ -150,7 +151,7 @@ export default function NovelPage() {
         <Link to='/novel'><XIcon /></Link>
       </div>
       <main id="novel-main" ref={mainRef}>
-        {KTMLHelper.parseAsReact(entry.content!)}
+        <KTML content={entry.content!} />
       </main>
     </>
   );

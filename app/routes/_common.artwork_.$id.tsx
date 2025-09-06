@@ -3,7 +3,7 @@ import { CalenderIcon, RefreshIcon } from '../../components/icon';
 import { toDisplayDateString } from '../../lib/DateFormat.index';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
-import KTMLHelper from '~/KTMLHelper';
+import KTML from '../../components/KTML';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   return await ServerModel.instance.getEntry(`/artwork/${params.id}`);
@@ -37,7 +37,7 @@ export default function ArtworkPage() {
         </div>
       </header>
       <div id="body">
-        {KTMLHelper.parseAsReact(entry.content!)}
+        <KTML content={entry.content!} />
       </div>
     </>
   );

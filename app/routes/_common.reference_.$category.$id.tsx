@@ -5,6 +5,7 @@ import { getCategory } from '../../lib/SiteConfig';
 import ServerModel from 'lib/ServerModel';
 import { getMeta } from 'lib/meta';
 import KTMLHelper from '~/KTMLHelper';
+import KTML from 'components/KTML';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   return await ServerModel.instance.getEntry(`/reference/${params.category}/${params.id}`);
@@ -38,7 +39,7 @@ export default function ReferencePage() {
         </div>
       </header>
       <div id="body">
-        {KTMLHelper.parseAsReact(entry.content!)}
+        <KTML content={entry.content!} />
       </div>
     </>
   );
