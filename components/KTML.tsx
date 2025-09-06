@@ -5,8 +5,6 @@ import XMLFragmentParser from 'lib/visitor/XMLFragmentParser';
 
 export type KTMLProps = {
   content: string;
-  className?: string;
-  style?: React.CSSProperties;
 };
 
 function parseAsReact(xml: string) {
@@ -17,7 +15,7 @@ function parseAsReact(xml: string) {
   return writer.toReactNode();
 }
 
-export default function KTML({ content, className, style }: KTMLProps) {
+export default function KTML({ content }: KTMLProps) {
   const parsed = useMemo(() => parseAsReact(content), [content]);
-  return <div className={className} style={style}>{parsed}</div>;
+  return <>{parsed}</>;
 }
