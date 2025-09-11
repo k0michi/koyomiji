@@ -7,11 +7,11 @@ ChatGPTとClaudeでは、今開いているチャットの名称がページの�
 // @name         Gemini Chat Name in Title
 // @name:ja      Geminiチャット名をタイトルに表示
 // @namespace    https://github.com/k0michi/
-// @version      1.0
+// @version      1.1
 // @description  Set the current Gemini chat's name as the page title
 // @description:ja Geminiで現在開いているチャットの名称をページのタイトルに設定するスクリプト
 // @author       k0michi
-// @match        https://gemini.google.com/app*
+// @match        https://gemini.google.com/*
 // @grant        none
 // @license      MIT
 // ==/UserScript==
