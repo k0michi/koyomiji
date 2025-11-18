@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>PythJSON: PythonのためのJSONサブセット</title>
+  <id>286df2e4-b5f7-4d17-988c-4d8aa301f52f</id>
+  <created>2025-11-18T18:09:44+09:00</created>
+  <modified>2025-11-18T18:09:44+09:00</modified>
+</head>
+
+<body>
+  <h2>PythonとJSONは似ている</h2><p>PythonとJSONは似ている——と言っても、どちらも名前が"on"で終わる、という話をしているわけではない。Pythonのオブジェクト記法は、JSONに驚くほど似ている:</p><blockcode lang="py"><![CDATA[{
+  "dict": {},
+  "list": [],
+  "str": "",
+  "int": 0,
+  "float": 0.0,
+  "bool": True,
+  "none": None
+}]]></blockcode><p>つまり、JSONのサブセットをうまく作れば、Pythonとしても、JSONとしても、JavaScriptとしても正当なデータ交換フォーマットを作れるのでは？というのを調べるのが今回の目的。</p><h2>非互換なところ</h2><p>といっても、すべてのJSONデータがPythonのソースコードとして正当であるというわけではない。私が知る限り、4つの非互換な点がある。</p><p>1つ目は、上の例からも分かる通り、Pythonでは、ブール値のリテラルは<code><![CDATA[True]]></code>/<code><![CDATA[False]]></code>である。一方JSONでは、<code><![CDATA[true]]></code>/<code><![CDATA[false]]></code>であるから、ブール値には互換性がない。</p><p>2つ目は、1つ目同様に、「値がないことを表す」値のリテラルは、Pythonでは<code><![CDATA[None]]></code>だが、JSONでは<code><![CDATA[null]]></code>であるため、これに関しても互換性がない。</p><p>3つ目は、文字列中の<code><![CDATA[/]]></code>がエスケープ可能か？というものである。Pythonでは、<code><![CDATA[/]]></code>はエスケープすることができない。<code><![CDATA[/]]></code>をエスケープしようとすると、<code><![CDATA[\/]]></code>というエスケープシーケンスがないため、<code><![CDATA[\]]></code>はそのまま文字列に含まれる:</p><blockcode lang="py"><![CDATA[>>> "\/"
+'\\/']]></blockcode><p>一方、JSON（JavaScript）では<code><![CDATA[/]]></code>をエスケープ可能であるため、<code><![CDATA[\]]></code>は文字列に含まれない:</p><blockcode lang="js"><![CDATA[> "\/"
+'/']]></blockcode><p>4つ目は、先頭の空白文字である。具体的には、JSONでは、次のように最初の非空白文字の前に空白文字が含まれていても問題ない:</p><blockcode lang="json"><![CDATA[  {}]]></blockcode><p>しかし、このような先頭の空白文字は、Pythonでは許容されない:</p><blockcode><![CDATA[% echo "  {}" | python3
+  File "<stdin>", line 1
+    {}
+IndentationError: unexpected indent]]></blockcode><h2>完成形</h2><p>以上のPythonとの非互換性を解消した、PythJSONフォーマットを次のようにMcKeeman Formで定義する。</p><p><a ref="https://www.json.org/json-en.html">JSONのMcKeeman Form</a>からの変更点は次の通り:</p><ul><li><p><code><![CDATA["true"]]></code>/<code><![CDATA["false"]]></code>/<code><![CDATA["null"]]></code>を削除</p></li><li><p><code><![CDATA['/']]></code>を<code><![CDATA[escape]]></code>から削除</p></li><li><p><code><![CDATA[json]]></code>の子を<code><![CDATA[value ws]]></code>に変更</p></li></ul><blockcode><![CDATA[json
+   value ws
+
+value
+   object
+   array
+   string
+   number
+
+object
+    '{' ws '}'
+    '{' members '}'
+
+members
+    member
+    member ',' members
+
+member
+    ws string ws ':' element
+
+array
+    '[' ws ']'
+    '[' elements ']'
+
+elements
+    element
+    element ',' elements
+
+element
+    ws value ws
+
+string
+    '"' characters '"'
+
+characters
+    ""
+    character characters
+
+character
+    '0020' . '10FFFF' - '"' - '\'
+    '\' escape
+
+escape
+    '"'
+    '\'
+    'b'
+    'f'
+    'n'
+    'r'
+    't'
+    'u' hex hex hex hex
+
+hex
+    digit
+    'A' . 'F'
+    'a' . 'f'
+
+number
+    integer fraction exponent
+
+integer
+    digit
+    onenine digits
+    '-' digit
+    '-' onenine digits
+
+digits
+    digit
+    digit digits
+
+digit
+    '0'
+    onenine
+
+onenine
+    '1' . '9'
+
+fraction
+    ""
+    '.' digits
+
+exponent
+    ""
+    'E' sign digits
+    'e' sign digits
+
+sign
+    ""
+    '+'
+    '-'
+
+ws
+    ""
+    '0020' ws
+    '000A' ws
+    '000D' ws
+    '0009' ws]]></blockcode><h2>何の役に立つの？</h2><p>PythJSONは、一見するとつまらないデータ交換フォーマットである。が、このフォーマットは意外な利便性を提供してくれる可能性は否定できない。</p><p>まず、このフォーマットで書かれたデータはPythonコードとしても、JSONデータとしても、JavaScriptコードとしても正当である。JavaScriptで作ったデータを、Jupyter Notebookで処理する、といったシナリオでは、このフォーマットを用いることでデータのやり取りが楽になるだろう。</p><p>また、PythJSONに従っているデータであれば、データを</p><blockcode lang="py"><![CDATA[import json
+
+data = json.loads(r"""
+{
+  "key": "value"
+}    
+""")]]></blockcode><p>のようにJSON文字列でPythonコード上にハードコードする代わりに、</p><blockcode lang="py"><![CDATA[data = {
+  "key": "value"
+}]]></blockcode><p>としてそのままオブジェクトをソースコードに書くことができる。前者のようにJSONを文字列として埋め込む場合、文法エラーは実行時にしかわからないが、後者のように書けば静的解析の恩恵を受けることができる。</p>
+</body>
+
+</ktml>
