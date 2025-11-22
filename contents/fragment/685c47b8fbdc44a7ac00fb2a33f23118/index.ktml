@@ -5,11 +5,11 @@
   <title>ABC 406 C - ~</title>
   <id>d84da659-57de-4865-a727-e06ee34805ef</id>
   <created>2025-11-22T23:11:53+09:00</created>
-  <modified>2025-11-22T23:11:53+09:00</modified>
+  <modified>2025-11-22T23:14:20+09:00</modified>
 </head>
 
 <body>
-  <ul><li><p>AtCoder最近やってなかったので過去問練習</p></li><li><p>問題リンク: <a ref="https://atcoder.jp/contests/abc406/tasks/abc406_c">https://atcoder.jp/contests/abc406/tasks/abc406_c</a></p></li><li><p>この問題のチルダ型とは、上がって下がって上がる部分列のこと</p></li><li><p>単調増加する部分列<math><![CDATA[P]]></math>、単調減少する部分列<math><![CDATA[Q]]></math>、単調増加する部分列<math><![CDATA[R]]></math>、が並んでいるとき、この中のチルダ型部分列の個数は<math><![CDATA[|P|\times|R|]]></math></p></li><li><p>数列の差<math><![CDATA[A_{i+1}-A_i]]></math>の符号に着目して、同じ符号の連続をカウントした列を作ると、この計算を楽に行える</p></li><li><p>数値の符号だけを返す<code><![CDATA[signum]]></code>関数が便利なので作った</p><ul><li><p>Is there a standard sign function (signum, sgn) in C/C++? - Stack Overflow<br/><a ref="https://stackoverflow.com/questions/1903954/is-there-a-standard-sign-function-signum-sgn-in-c-c">https://stackoverflow.com/questions/1903954/is-there-a-standard-sign-function-signum-sgn-in-c-c</a></p></li></ul></li></ul><h2>解答</h2><blockcode lang="cpp"><![CDATA[template <typename T, typename = std::enable_if_t<std::is_integral_v<T>>>
+  <ul><li><p>AtCoder最近やってなかったので過去問練習</p></li><li><p>問題: <a ref="https://atcoder.jp/contests/abc406/tasks/abc406_c">https://atcoder.jp/contests/abc406/tasks/abc406_c</a></p></li><li><p>この問題のチルダ型とは、上がって下がって上がる部分列のこと</p></li><li><p>単調増加する部分列<math><![CDATA[P]]></math>、単調減少する部分列<math><![CDATA[Q]]></math>、単調増加する部分列<math><![CDATA[R]]></math>、が並んでいるとき、この中のチルダ型部分列の個数は<math><![CDATA[|P|\times|R|]]></math></p></li><li><p>数列の差<math><![CDATA[A_{i+1}-A_i]]></math>の符号に着目して、同じ符号の連続をカウントした列を作ると、この計算を楽に行える</p></li><li><p>数値の符号だけを返す<code><![CDATA[signum]]></code>関数が便利なので作った</p><ul><li><p>Is there a standard sign function (signum, sgn) in C/C++? - Stack Overflow<br/><a ref="https://stackoverflow.com/questions/1903954/is-there-a-standard-sign-function-signum-sgn-in-c-c">https://stackoverflow.com/questions/1903954/is-there-a-standard-sign-function-signum-sgn-in-c-c</a></p></li></ul></li></ul><h2>解答</h2><blockcode lang="cpp"><![CDATA[template <typename T, typename = std::enable_if_t<std::is_integral_v<T>>>
 constexpr std::make_signed_t<T> signum(T value) {
   return (std::make_signed_t<T>(0) < std::make_signed_t<T>(value)) -
          (std::make_signed_t<T>(value) < std::make_signed_t<T>(0));
@@ -42,7 +42,7 @@ void answer() {
   }
 
   writeln(count);
-}]]></blockcode>
+}]]></blockcode><ul><li><p>提出: <a ref="https://atcoder.jp/contests/abc406/submissions/71169104">https://atcoder.jp/contests/abc406/submissions/71169104</a></p></li></ul>
 </body>
 
 </ktml>

@@ -1,7 +1,7 @@
 # ABC 406 C - ~
 
 - AtCoder最近やってなかったので過去問練習
-- 問題リンク: https://atcoder.jp/contests/abc406/tasks/abc406_c
+- 問題: https://atcoder.jp/contests/abc406/tasks/abc406_c
 - この問題のチルダ型とは、上がって下がって上がる部分列のこと
 - 単調増加する部分列$P$、単調減少する部分列$Q$、単調増加する部分列$R$、が並んでいるとき、この中のチルダ型部分列の個数は$|P|\times|R|$
 - 数列の差$A_{i+1}-A_i$の符号に着目して、同じ符号の連続をカウントした列を作ると、この計算を楽に行える
@@ -47,3 +47,5 @@ void answer() {
   writeln(count);
 }
 ```
+
+- 提出: https://atcoder.jp/contests/abc406/submissions/71169104
