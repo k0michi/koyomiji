@@ -30,3 +30,5 @@ void answer() {
   writeln(min);
 }
 ```
+
+- 提出: https://atcoder.jp/contests/abc408/submissions/71175111

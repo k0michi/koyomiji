@@ -5,7 +5,7 @@
   <title>ABC 408 C - Not All Covered</title>
   <id>cef4467b-50fb-4b9e-95e7-a518e87bca97</id>
   <created>2025-11-22T23:49:20+09:00</created>
-  <modified>2025-11-22T23:49:20+09:00</modified>
+  <modified>2025-11-23T01:26:07+09:00</modified>
 </head>
 
 <body>
@@ -32,7 +32,7 @@
   }
 
   writeln(min);
-}]]></blockcode>
+}]]></blockcode><ul><li><p>提出: <a ref="https://atcoder.jp/contests/abc408/submissions/71175111">https://atcoder.jp/contests/abc408/submissions/71175111</a></p></li></ul>
 </body>
 
 </ktml>
