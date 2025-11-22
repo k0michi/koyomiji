@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>libuvでHello Worldする</title>
+  <id>32f93041-e2bf-42f6-803e-7633b24a694e</id>
+  <created>2025-11-22T16:54:22+09:00</created>
+  <modified>2025-11-22T16:54:22+09:00</modified>
+</head>
+
+<body>
+  <p><a ref="https://docs.libuv.org/en/v1.x/index.html">libuv</a>とは、Node.jsで用いられている非同期ランタイムであり、C言語で書かれている。libuvを用いることで、C/C++でもNode.jsのような非同期IOを実現することができる。</p><p>今回はlibuvの簡単な例として、"Hello World"を標準出力に非同期に書き込んでみる。使う言語はC++20、libuvのバージョンは1.51.0である。</p><p>ビルドシステムにはCMakeを用いる。<code><![CDATA[FetchContent_Declare]]></code>を用いるとリンクが簡単。</p><blockcode lang="cmake" title="CMakeLists.txt"><![CDATA[cmake_minimum_required(VERSION 3.20)
+project(libuv_hello CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+
+include(FetchContent)
+
+FetchContent_Declare(
+  libuv
+  GIT_REPOSITORY https://github.com/libuv/libuv.git
+  GIT_TAG v1.51.0
+)
+FetchContent_MakeAvailable(libuv)
+
+add_executable(libuv_hello main.cc)
+target_link_libraries(libuv_hello PRIVATE uv)]]></blockcode><p>libuvでHello Worldするには、3つの種類のオブジェクトを用意する必要がある:</p><ul><li><p><code><![CDATA[uv_loop_t]]></code>: イベントループ</p></li><li><p><code><![CDATA[uv_buf_t]]></code>: バッファ</p></li><li><p><code><![CDATA[uv_fs_t]]></code>: コールバックに渡される構造体（ユーザデータを含む）</p></li></ul><p>libuvを使うには、まずイベントループ（<code><![CDATA[uv_loop_t]]></code>）が必要である。イベントループは<code><![CDATA[uv_loop_init()]]></code>で自前で作ることも可能だが、libuvのデフォルトループを使うのが楽である。</p><blockcode lang="cpp"><![CDATA[uv_loop_t *loop = uv_default_loop();]]></blockcode><p>libuvでは、データは<code><![CDATA[uv_buf_t]]></code>というバッファでラップして取り扱う。この構造体はデータの開始地点へのポインタ（<code><![CDATA[base]]></code>）と長さ（<code><![CDATA[len]]></code>）を持つ。<code><![CDATA[uv_buf_t]]></code>は<code><![CDATA[uv_buf_init]]></code>で初期化するが、これはあくまで、引数として受け取った値をセットした構造体を返すだけなので、解放処理は必要ない。ただし、<b><code><![CDATA[base]]></code>は、<code><![CDATA[uv_buf_t]]></code>を渡した関数のコールバックが呼び出されるまで解放してはならない</b>ことに注意。</p><blockcode lang="cpp"><![CDATA[std::string message = "Hello World\n";
+uv_buf_t buf =
+    uv_buf_init(message.data(), static_cast<unsigned int>(message.size()));]]></blockcode><p>最後に、<code><![CDATA[uv_fs_t]]></code>を用意する。これは、ファイルシステムへの操作関数において、コールバックにポインタとして渡されるものであり、1つのファイルシステム操作に対して1つ用意する。こちらも<b>関数のコールバックが呼び出されるまで解放してはならない</b>。今回は、特にユーザデータは渡さないので、単に<code><![CDATA[main]]></code>のローカル変数として置いておく:</p><blockcode lang="cpp"><![CDATA[uv_fs_t writeReq;]]></blockcode><p>ここまでのオブジェクトが用意できたら、ようやく<code><![CDATA[uv_fs_write]]></code>関数を呼び出すことができる。この関数はファイルにデータを非同期に書き込む関数である。非同期、というのがポイントで、<b>処理の完了はコールバックによって通知され、処理を待つことなく制御が即座に呼び出し元に戻る</b>。</p><p><code><![CDATA[uv_fs_write]]></code>は次の引数を取る:</p><blockcode lang="cpp"><![CDATA[UV_EXTERN int uv_fs_write(uv_loop_t* loop, // イベントループ 
+                          uv_fs_t* req, // コールバックに渡される操作情報
+                          uv_file file, // ファイルハンドル
+                          const uv_buf_t bufs[], // バッファ。複数個渡すことができる
+                          unsigned int nbufs, // バッファの個数
+                          int64_t offset, // ファイルの位置。-1で現在の位置から書き進める
+                          uv_fs_cb cb // コールバック
+);]]></blockcode><p><code><![CDATA[uv_fs_write]]></code>では、<code><![CDATA[file]]></code>として<code><![CDATA[1]]></code>を指定することで標準出力に書き込むことができる（これと同様に、<code><![CDATA[0]]></code>は標準入力、<code><![CDATA[2]]></code>は標準エラー出力を指す）。これを用いて、先ほどのバッファを標準出力に書き込むには、次のようにする。コールバック内で、<code><![CDATA[uv_fs_req_cleanup]]></code>を呼び出してリクエスト情報を解放する必要がある点に注意する:</p><blockcode lang="cpp"><![CDATA[uv_fs_write(loop, &writeReq, 1, &buf, 1, -1, [](uv_fs_t *req) {
+  if (req->result < 0) {
+    std::cerr << "Write error: " << uv_strerror(req->result) << std::endl;
+  }
+
+  uv_fs_req_cleanup(req);
+});]]></blockcode><p>最後に、<code><![CDATA[uv_run]]></code>でイベントループを開始する。<code><![CDATA[uv_run]]></code>にはいくつかのモードがあるが、<code><![CDATA[UV_RUN_DEFAULT]]></code>はアクティブな処理・リクエストが無くなるまで実行を行うモードである。これを実行することで初めて、前述の書き込み処理が実行される。</p><blockcode lang="cpp"><![CDATA[uv_run(loop, UV_RUN_DEFAULT);]]></blockcode><p>最終的なコードは次の通り:</p><blockcode lang="cpp" title="main.cc"><![CDATA[#include <iostream>
+#include <string>
+
+#include <uv.h>
+
+int main() {
+  uv_loop_t *loop = uv_default_loop();
+
+  std::string message = "Hello World\n";
+  uv_buf_t buf =
+      uv_buf_init(message.data(), static_cast<unsigned int>(message.size()));
+
+  uv_fs_t writeReq;
+
+  uv_fs_write(loop, &writeReq, 1, &buf, 1, -1, [](uv_fs_t *req) {
+    if (req->result < 0) {
+      std::cerr << "Write error: " << uv_strerror(req->result) << std::endl;
+    }
+
+    uv_fs_req_cleanup(req);
+  });
+
+  uv_run(loop, UV_RUN_DEFAULT);
+  return 0;
+}]]></blockcode><p>CMakeでビルドして実行。何事もなければ、<code><![CDATA[Hello World]]></code>が出力される:</p><blockcode><![CDATA[% cd build
+% cmake .. && cmake --build . --parallel
+% ./libuv_hello
+Hello World]]></blockcode>
+</body>
+
+</ktml>
