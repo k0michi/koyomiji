@@ -25,7 +25,7 @@ export const meta = ({ location, data }: Route.MetaArgs) => getMeta({
 export default function FragmentIndexPage() {
   const data = useLoaderData<typeof loader>();
   const entries = Object.values(data.entries).filter(e => e.path.startsWith('/fragment/'));
-  entries.sort((a, b) => getID(b).localeCompare(getID(a), undefined, { numeric: true }));
+  entries.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
 
   return (
     <>
