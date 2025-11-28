@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>ExcelでBOMなしUTF-8のCSVファイルを開くと文字化けする</title>
+  <id>7d59d6aa-fa9f-44dd-b4bc-138a1a1a4101</id>
+  <created>2025-11-28T14:50:09+09:00</created>
+  <modified>2025-11-28T14:50:09+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>環境</p><ul><li><p>macOS 15.1.1</p></li><li><p>Microsoft® Excel for Mac 16.103.2 (25112216)</p></li></ul></li><li><p>Microsoft Excelで、UTF-8 (BOMなし)で保存されたCSVファイルを開くと文字化けする</p></li><li><img src="./Screenshot%202025-11-28%20at%2014.36.36.png"/></li><li><img src="./Screenshot%202025-11-28%20at%2014.48.02.png"/></li><li><p>文字化けを防ぐには、ファイルをUTF-8 (BOMあり)で保存する必要がある</p></li><li><p>BOMの有無は、<code><![CDATA[file]]></code>コマンドで調べることができる:</p><blockcode><![CDATA[% file Untitled.csv
+Untitled.csv: Unicode text, UTF-8 text, with no line terminators
+% file Untitled_bom.csv
+Untitled_bom.csv: Unicode text, UTF-8 (with BOM) text, with no line terminators]]></blockcode></li><li><p>BOMの追記はテキストエディタでやるのが安全だが、コマンドラインでやる場合は例えば:</p><blockcode><![CDATA[% printf '\xEF\xBB\xBF' | cat - Untitled.csv  > with_bom.csv]]></blockcode></li></ul>
+</body>
+
+</ktml>
