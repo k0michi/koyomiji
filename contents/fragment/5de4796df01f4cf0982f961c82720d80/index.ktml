@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>Java 25で追加されたjava.lang.IOクラス</title>
+  <id>a4ccdcaa-91f2-4298-a8c6-01680ef9bd5a</id>
+  <created>2025-11-29T23:56:57+09:00</created>
+  <modified>2025-11-29T23:56:57+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>Java 25で、<code><![CDATA[java.lang.IO]]></code>という手軽に使えるIOユーティリティが追加されている</p><ul><li><p><a ref="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IO.html">IO (Java SE 25 &amp; JDK 25)</a></p></li></ul></li><li><p>主に、3つの操作が提供されている:</p><ul><li><p><code><![CDATA[print(obj)]]></code>: <code><![CDATA[obj]]></code>を<code><![CDATA[System.out]]></code>に出力</p></li><li><p><code><![CDATA[println(obj)]]></code>: <code><![CDATA[obj]]></code>を<code><![CDATA[System.out]]></code>に出力、改行あり</p></li><li><p><code><![CDATA[readln(prompt)]]></code>: <code><![CDATA[prompt]]></code>文字列をプロンプトとして表示し、<code><![CDATA[System.in]]></code>から一行入力</p></li></ul></li><li><p>jshellでの使用例:</p><blockcode><![CDATA[jshell> IO.print("hello");
+hello
+IO.println("hello");
+hello
+
+jshell> IO.readln("Your name: ");
+Your name: foo
+$8 ==> "foo"]]></blockcode></li><li><p>さらに、Java 25では<a ref="https://openjdk.org/jeps/512">Compact Source Files</a>と呼ばれる書き方も導入されているので、これを組み合わせると、Hello worldプログラムは</p><blockcode lang="java"><![CDATA[void main() {
+  IO.println("Hello world");
+}]]></blockcode><p>と書くことができる</p></li></ul>
+</body>
+
+</ktml>
