@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>ABC 344 D - String Bags</title>
+  <id>1a5422a6-700d-4825-82d3-9119d7e78884</id>
+  <created>2025-11-29T20:56:54+09:00</created>
+  <modified>2025-11-29T20:56:54+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>問題: <a ref="https://atcoder.jp/contests/abc344/tasks/abc344_d">https://atcoder.jp/contests/abc344/tasks/abc344_d</a></p></li><li><p><math><![CDATA[dp[i][j] = j-1]]></math>ステップ目までで、文字列<math><![CDATA[T[0\dots i)]]></math>を構築するコスト、ただしできないなら<math><![CDATA[-1]]></math> と定義</p><ul><li><p>各<math><![CDATA[i]]></math>について、<math><![CDATA[dp[i][0]=0]]></math>、それ以外は<math><![CDATA[-1]]></math>で初期化</p></li><li><p><math><![CDATA[dp[i][j]]]></math>が<math><![CDATA[0]]></math>以上であるとき、<math><![CDATA[dp[i][j+1]]]></math>に追加コストなしで遷移可能</p></li><li><p>各<math><![CDATA[k]]></math>について、<math><![CDATA[dp[i][j]]]></math>が<math><![CDATA[0]]></math>以上かつ、<math><![CDATA[T[i\dots i+|S_{j,k}|)=S_{j,k}]]></math>であるとき、<math><![CDATA[dp[i+|S_{j,k}|][j+1]]]></math>にコスト1で遷移可能</p></li><li><p>答えは<math><![CDATA[dp[|T|,N]]]></math></p></li></ul></li></ul><blockcode lang="cpp"><![CDATA[void answer() {
+  std::string T;
+  llong N;
+  read(T, N);
+  std::vector<std::vector<std::string>> S(N);
+
+  for (llong i = 0; i < N; i++) {
+    llong A_i;
+    read(A_i);
+    S[i].resize(A_i);
+
+    for (llong j = 0; j < A_i; j++) {
+      read(S[i][j]);
+    }
+  }
+
+  std::vector<std::vector<llong>> table(T.size() + 1,
+                                        std::vector<llong>(N + 1, -1));
+
+  for (llong i = 0; i < N + 1; i++) {
+    table[0][i] = 0;
+  }
+
+  for (llong i = 0; i < T.size() + 1; i++) {
+    for (llong j = 0; j < N; j++) {
+      for (llong k = 0; k < S[j].size(); k++) {
+        if (table[i][j] != -1) {
+          if (i + S[j][k].size() < T.size() + 1 && j + 1 < N + 1) {
+            if (T.substr(i).starts_with(S[j][k])) {
+              if (table[i + S[j][k].size()][j + 1] == -1) {
+                table[i + S[j][k].size()][j + 1] =
+                    std::numeric_limits<llong>::max();
+              }
+
+              table[i + S[j][k].size()][j + 1] =
+                  std::min(table[i + S[j][k].size()][j + 1], table[i][j] + 1);
+            }
+          }
+
+          if (j + 1 < N + 1) {
+            if (table[i][j + 1] == -1) {
+              table[i][j + 1] = std::numeric_limits<llong>::max();
+            }
+
+            table[i][j + 1] = std::min(table[i][j + 1], table[i][j]);
+          }
+        }
+      }
+    }
+  }
+
+  writeln(table[T.size()][N]);
+}]]></blockcode><ul><li><p>提出: <a ref="https://atcoder.jp/contests/abc344/submissions/71294767">https://atcoder.jp/contests/abc344/submissions/71294767</a></p></li></ul>
+</body>
+
+</ktml>
