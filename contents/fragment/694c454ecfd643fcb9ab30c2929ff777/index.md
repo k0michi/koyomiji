@@ -20,7 +20,7 @@
 
   FetchContent_MakeAvailable(quickjs)
 
-  add_executable(quickjs_hello main.cpp)
+  add_executable(quickjs_hello main.cc)
   target_link_libraries(quickjs_hello PRIVATE qjs)
   ```
 
