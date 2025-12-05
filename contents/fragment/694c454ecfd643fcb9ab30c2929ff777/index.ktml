@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>QuickJS-NGでC++からJavaScriptを実行する</title>
+  <id>b57aebc6-355b-4d90-a92c-9bcdfefcb2af</id>
+  <created>2025-12-06T01:14:34+09:00</created>
+  <modified>2025-12-06T01:14:34+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>Fabrice Bellard氏らによる軽量JavaScriptエンジン<a ref="https://bellard.org/quickjs/">QuickJS</a>のコミュニティフォークが<a ref="https://quickjs-ng.github.io/quickjs/">QuickJS-NG</a></p><ul><li><p>いずれもC言語で書かれている</p></li><li><p>ES2023など新しめの言語仕様も網羅されている</p></li></ul></li><li><p>QuickJS-NGではCMakeLists.txtが提供されているため、<code><![CDATA[FetchContent]]></code>で導入可能</p><blockcode lang="cmake" title="CMakeLists.txt"><![CDATA[cmake_minimum_required(VERSION 3.20)
+project(quickjs_hello CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+
+include(FetchContent)
+
+FetchContent_Declare(
+  quickjs
+  GIT_REPOSITORY https://github.com/quickjs-ng/quickjs
+  GIT_TAG         v0.11.0
+)
+
+FetchContent_MakeAvailable(quickjs)
+
+add_executable(quickjs_hello main.cpp)
+target_link_libraries(quickjs_hello PRIVATE qjs)]]></blockcode></li><li><p>JavaScriptからC関数を呼び出す例</p><blockcode lang="cpp" title="main.cc"><![CDATA[JSValue print(JSContext *ctx, JSValueConst this_val, int argc,
+              JSValueConst *argv) {
+  for (int i = 0; i < argc; ++i) {
+    const char *str = JS_ToCString(ctx, argv[i]);
+    if (str) {
+      std::cout << str;
+      JS_FreeCString(ctx, str);
+    }
+    if (i < argc - 1) {
+      std::cout << " ";
+    }
+  }
+  std::cout << std::endl;
+  return JS_UNDEFINED;
+}
+
+int main() {
+  JSRuntime *rt = JS_NewRuntime();
+
+  if (!rt) {
+    std::cerr << "Failed to create QuickJS runtime" << std::endl;
+    return 1;
+  }
+
+  JSContext *ctx = JS_NewContext(rt);
+
+  if (!ctx) {
+    std::cerr << "Failed to create QuickJS context" << std::endl;
+    JS_FreeRuntime(rt);
+    return 1;
+  }
+
+  JSValue global = JS_GetGlobalObject(ctx);
+  auto printFunc = JS_NewCFunction(ctx, print, "print", 1);
+  JS_SetPropertyStr(ctx, global, "print", printFunc);
+  JS_FreeValue(ctx, global);
+
+  const char *jsCode = R"(
+    print('Hello', 'World!');
+)";
+
+  JSValue result =
+      JS_Eval(ctx, jsCode, strlen(jsCode), "<input>", JS_EVAL_TYPE_GLOBAL);
+
+  if (JS_IsException(result)) {
+    std::cerr << "JavaScript evaluation failed" << std::endl;
+    JS_FreeValue(ctx, result);
+    JS_FreeContext(ctx);
+    JS_FreeRuntime(rt);
+    return 1;
+  }
+
+  JS_FreeValue(ctx, result);
+  JS_FreeContext(ctx);
+  JS_FreeRuntime(rt);
+  return 0;
+}]]></blockcode></li></ul>
+</body>
+
+</ktml>
