@@ -5,7 +5,7 @@
   <title>QuickJS-NGでC++からJavaScriptを実行する</title>
   <id>b57aebc6-355b-4d90-a92c-9bcdfefcb2af</id>
   <created>2025-12-06T01:14:34+09:00</created>
-  <modified>2025-12-06T01:22:27+09:00</modified>
+  <modified>2025-12-06T01:26:49+09:00</modified>
 </head>
 
 <body>
@@ -25,7 +25,11 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(quickjs)
 
 add_executable(quickjs_hello main.cc)
-target_link_libraries(quickjs_hello PRIVATE qjs)]]></blockcode></li><li><p>JavaScriptからC関数を呼び出す例</p><blockcode lang="cpp" title="main.cc"><![CDATA[JSValue print(JSContext *ctx, JSValueConst this_val, int argc,
+target_link_libraries(quickjs_hello PRIVATE qjs)]]></blockcode></li><li><p>JavaScriptからC関数を呼び出す例</p><blockcode lang="cpp" title="main.cc"><![CDATA[#include <iostream>
+
+#include <quickjs.h>
+
+JSValue print(JSContext *ctx, JSValueConst this_val, int argc,
               JSValueConst *argv) {
   for (int i = 0; i < argc; ++i) {
     const char *str = JS_ToCString(ctx, argv[i]);

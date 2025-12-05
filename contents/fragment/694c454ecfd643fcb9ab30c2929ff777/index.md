@@ -26,6 +26,10 @@
 
 - JavaScriptからC関数を呼び出す例
   ```cpp:main.cc
+  #include <iostream>
+
+  #include <quickjs.h>
+
   JSValue print(JSContext *ctx, JSValueConst this_val, int argc,
                 JSValueConst *argv) {
     for (int i = 0; i < argc; ++i) {
