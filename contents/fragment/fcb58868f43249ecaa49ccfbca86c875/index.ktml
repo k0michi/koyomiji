@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>Node.jsのC++アドオンを作る【CMake.js】</title>
+  <id>02223ab2-7563-4f5e-83dd-f6ff965d9a6b</id>
+  <created>2025-12-06T15:48:38+09:00</created>
+  <modified>2025-12-06T15:48:38+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>Node-APIを使ってC/C++のアドオンを作る、つまり、JavaScriptからC/C++を呼び出したい場合、以下の2つのいずれかのビルドシステムを用いる（少なくとも、<a ref="https://nodejs.org/docs/latest/api/n-api.html">公式ドキュメント</a>を読む限りはこの2つ）</p><ul><li><p><a ref="https://github.com/nodejs/node-gyp">node-gyp</a></p></li><li><p><a ref="https://github.com/cmake-js/cmake-js">CMake.js</a></p></li></ul></li><li><p>node-gypが公式的なものだが、node-gyp固有のビルドスクリプトを用いるため、CMakeを使うことができない</p></li><li><p>CMake.jsでは文字通り、CMakeを使ってNode.jsのC/C++アドオンを作ることができる</p><ul><li><p>プロジェクトで既にCMakeを使っている場合、CMakeで管理されているライブラリを呼びたい場合に便利</p></li></ul></li></ul><h2>使い方の例</h2><ul><li><p>C++で、2つの値を受け取り和を返すアドオンを作るまでのステップ</p></li><li><p>Node.js、CMake、コンパイラは既にインストールされていると仮定</p></li></ul><ol><li><p>npmプロジェクトを初期化</p><blockcode><![CDATA[% npm init]]></blockcode></li><li><p>CMake.jsをインストール</p><blockcode><![CDATA[% npm install cmake-js]]></blockcode></li><li><p>Node-APIはC言語のAPIである。C++で呼び出したい場合は追加で<code><![CDATA[node-addon-api]]></code>が必要となる</p><blockcode><![CDATA[% npm install node-addon-api]]></blockcode></li><li><p>CMake.jsのREADMEを参考に、CMakeLists.txtを作成</p><blockcode lang="cmake" title="CMakeLists.txt"><![CDATA[cmake_minimum_required(VERSION 3.15...3.31)
+project(hello-addon)
+
+add_compile_definitions(NAPI_VERSION=4)
+
+set(SOURCE_FILES
+    src/hello.cc
+)
+
+add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES} ${CMAKE_JS_SRC})
+set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_JS_INC})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${CMAKE_JS_LIB})
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
+
+if(MSVC AND CMAKE_JS_NODELIB_DEF AND CMAKE_JS_NODELIB_TARGET)
+  # Generate node.lib
+  execute_process(COMMAND ${CMAKE_AR} /def:${CMAKE_JS_NODELIB_DEF} /out:${CMAKE_JS_NODELIB_TARGET} ${CMAKE_STATIC_LINKER_FLAGS})
+endif()]]></blockcode></li><li><p><code><![CDATA[package.json]]></code>に以下を追加:</p><blockcode lang="json" title="package.json"><![CDATA["scripts": {
+  "install": "cmake-js compile"
+},
+"binary": {
+  "napi_versions": [
+    7
+  ]
+},]]></blockcode></li><li><p>アドオンのソースコードを追加</p><blockcode lang="cpp" title="src/hello.cc"><![CDATA[#include <napi.h>
+
+Napi::Number Add(const Napi::CallbackInfo &info) {
+  Napi::Env env = info.Env();
+
+  if (info.Length() < 2 || !info[0].IsNumber() || !info[1].IsNumber()) {
+    Napi::TypeError::New(env, "Two numbers expected")
+        .ThrowAsJavaScriptException();
+    return Napi::Number::New(env, 0);
+  }
+
+  double arg0 = info[0].As<Napi::Number>().DoubleValue();
+  double arg1 = info[1].As<Napi::Number>().DoubleValue();
+  Napi::Number sum = Napi::Number::New(env, arg0 + arg1);
+
+  return sum;
+}
+
+Napi::Object Init(Napi::Env env, Napi::Object exports) {
+  exports.Set(Napi::String::New(env, "add"), Napi::Function::New(env, Add));
+  return exports;
+}
+
+NODE_API_MODULE(NODE_GYP_MODULE_NAME, Init)]]></blockcode></li><li><p>コンパイル</p><blockcode><![CDATA[% npm run install]]></blockcode><p>何事もなければ、バイナリが<code><![CDATA[build/Release/{アドオン名}]]></code>に生成される</p></li></ol><ul><li><p>Node.jsからアドオンを呼び出す（CommonJSの場合）</p><blockcode lang="js" title="main.js"><![CDATA[const addon = require('./build/Release/hello-addon');
+
+console.log(addon.add(3, 5)); // 8]]></blockcode></li><li><p>ESModuleの場合、そのまま<code><![CDATA[import]]></code>することはできない。<code><![CDATA[createRequire]]></code>する必要がある</p><blockcode lang="js" title="main.mjs"><![CDATA[import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const addon = require('./build/Release/hello-addon');
+
+console.log(addon.add(3, 5)); // 8]]></blockcode></li></ul>
+</body>
+
+</ktml>
