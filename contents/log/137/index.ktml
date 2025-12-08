@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>ICU4Cを簡単にリンクできるCMakeスクリプト書いた</title>
+  <id>30a2bef0-78a5-45a4-a088-ff31c74ff005</id>
+  <created>2025-12-08T21:32:21+09:00</created>
+  <modified>2025-12-08T21:32:21+09:00</modified>
+</head>
+
+<body>
+  <h2>動機</h2><p>ICU4CはC/C++でUnicodeを扱うためのデファクトスタンダードライブラリです。素のC/C++にはUnicodeを扱う機能がない（！）ため、このようなライブラリはアプリケーション開発では必須です。</p><p>しかし、ビルドがとても複雑で難しいことで有名です（？）。この複雑さは、ICU4C自身にICU4Cが用いるUnicodeデータベース（icudata）を生成するためのプログラムが含まれていることに起因しています。このデータ生成プログラム（<a ref="https://github.com/unicode-org/icu/blob/e945059cbf47e2ef7898472281c59b1c63d37607/icu4c/source/tools/pkgdata/pkgdata.cpp">pkgdata</a>）は、スクリプト言語ではなくC++で記述されているのです。従って、ICU4Cをコンパイルするためには、このC++プログラムをコンパイルし、実行し、データを生成する必要があるのです。</p><p>このように先にプログラムをコンパイルして実行しなくてはならない関係上、クロスコンパイル時に問題が生じます。クロスコンパイルでは、ホスト側、すなわちコンパイルを実行中のアーキテクチャと、ターゲットのアーキテクチャが異なるため、pkgdataなどのツールをコンパイルする時はホストのアーキテクチャに対応したバイナリを吐き出させ、それを実行し、ターゲットのアーキテクチャのバイナリをコンパイルする、という2段階でビルドする必要が生じます。</p><p>また、ICU4CはCMakeでのビルドが公式ではサポートされていません。加えて、ICU4Cのビルドスクリプトはかなり複雑怪奇であるため、CMakeプロジェクトからICUを使おうと思った場合のハードルは非常に高いです。私としては、CMakeの<code><![CDATA[FetchContent]]></code>で手軽にライブラリをリンクできるのが好きなので、<code><![CDATA[FetchContent]]></code>でリンクできるようにICU4Cのビルドをどうにかしなくてはなりませんでした。</p><h2>作ったもの</h2><p>そこで、ICU4CをCMakeで手軽にリンクできるCMakeスクリプトを作りました。</p><ul><li><p><a ref="https://github.com/k0michi/icu-portable">k0michi/icu-portable</a></p></li></ul><p>このスクリプトを用いると、ICU4Cへのリンクが<code><![CDATA[FetchContent]]></code>だけで完結できます。とても簡単。</p><blockcode lang="cmake"><![CDATA[include(FetchContent)
+
+FetchContent_Declare(
+    icu_portable
+    GIT_REPOSITORY "https://github.com/k0michi/icu-portable.git"
+    GIT_TAG        "main"
+)
+
+FetchContent_MakeAvailable(icu_portable)
+
+target_link_libraries(your_target PRIVATE ICU::uc ICU::i18n ICU::io)]]></blockcode><h2>仕組み</h2><p>このスクリプトのポイントは、ビルド済みicudataを公式GitHub Releaseからfetchし、C言語として埋め込めるようにバイト列を変換、icudataとしてビルドするという"ズル"をしていることにあります。つまり、公式のビルド手順を無視して、icudataのビルドをスキップしているのです。</p><p>しかし、この"ズル"はほとんどの場合妥当なはずです。ICU4CをCMakeプロジェクトにリンクしたい場合において、Unicodeのデータベースのビルド自体に手を加えたいということは相当稀ではないでしょうか。なので、単にビルド済みのデータを使えば良くない？というのがこのスクリプトのアイデアです。</p>
+</body>
+
+</ktml>
