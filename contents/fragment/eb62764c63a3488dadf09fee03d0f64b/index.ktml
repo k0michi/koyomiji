@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>git cleanの使い方</title>
+  <id>c854468e-f517-4a60-bcfc-92241b7f3a03</id>
+  <created>2025-12-09T22:56:45+09:00</created>
+  <modified>2025-12-09T22:56:45+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>gitでtrackされていないファイルやignoreされているファイルを一括で消すコマンド</p></li><li><p><code><![CDATA[-n]]></code>でdry run、削除対象のファイルを確認することができる</p></li><li><p><b>trackされていない</b>ファイルを全て消す</p><blockcode><![CDATA[% git clean -fd]]></blockcode><ul><li><p><code><![CDATA[-f]]></code> 強制的に消す（force）</p></li><li><p><code><![CDATA[-d]]></code> ディレクトリも消す</p></li></ul></li><li><p><b>ignoreされている</b>ファイルを全て消す</p><blockcode><![CDATA[% git clean -Xfd]]></blockcode><ul><li><p><code><![CDATA[-X]]></code> ignoredだけを対象とする</p></li></ul></li><li><p><b>trackされていない</b>ファイルと<b>ignoreされている</b>ファイルを全て消す</p><blockcode><![CDATA[% git clean -xfd]]></blockcode><ul><li><p><code><![CDATA[-x]]></code> untracked、ignoredを対象とする</p></li></ul></li></ul>
+</body>
+
+</ktml>
