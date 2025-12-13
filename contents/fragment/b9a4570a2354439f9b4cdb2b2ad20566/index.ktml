@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>Rustの構造体メンバは、メモリ上で順番に並ぶとは限らない</title>
+  <id>8f881d14-b236-4093-a3c1-e5db140d739b</id>
+  <created>2025-12-13T23:28:57+09:00</created>
+  <modified>2025-12-13T23:28:57+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>Rustコンパイラは、構造体のメンバをメモリ効率が良いように自動で並び替える</p></li><li><p>例:</p><blockcode lang="rust"><![CDATA[use std::mem;
+
+struct S {
+    a: u8,
+    b: u64,
+    c: u8,
+}
+
+fn main() {
+    let offset_a = mem::offset_of!(S, a);
+    let offset_b = mem::offset_of!(S, b);
+    let offset_c = mem::offset_of!(S, c);
+
+    println!("offset_of(S, a)!: {}", offset_a);
+    println!("offset_of(S, b)!: {}", offset_b);
+    println!("offset_of(S, c)!: {}", offset_c);
+}]]></blockcode><blockcode><![CDATA[offset_of(S, a)!: 8
+offset_of(S, b)!: 0
+offset_of(S, c)!: 9]]></blockcode></li><li><p>もしこのような並び替えが好ましくない場合、構造体に<code><![CDATA[#[repr(C)]]]></code>を付与することで並び替えを防げる:</p><blockcode lang="rust"><![CDATA[#[repr(C)]
+struct S {
+    a: u8,
+    b: u64,
+    c: u8,
+}]]></blockcode><blockcode><![CDATA[offset_of(S, a)!: 0
+offset_of(S, b)!: 8
+offset_of(S, c)!: 16]]></blockcode></li></ul>
+</body>
+
+</ktml>
