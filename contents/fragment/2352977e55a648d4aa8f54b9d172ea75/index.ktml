@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>C99の複合リテラルはC++にはない</title>
+  <id>5dd5f60d-44de-4599-99b0-d4e81bbae4f7</id>
+  <created>2025-12-16T21:08:49+09:00</created>
+  <modified>2025-12-16T21:08:49+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>C++を書いていたら、GitHub Copilotが関数の引数として</p><blockcode lang="c"><![CDATA[&(int){1}]]></blockcode><p>という見慣れない構文を提案してきた</p></li><li><p><code><![CDATA[(int){1}]]></code>はC99の複合リテラル（Compound literal）というやつらしい。複合リテラルはlvalueなので、<code><![CDATA[&]]></code>でアドレスを取れる</p><ul><li><p><a ref="https://en.cppreference.com/w/c/language/compound_literal.html">Compound literals (since C99) - cppreference.com</a></p></li></ul></li><li><p>しかし複合リテラルはC++には存在していない</p><ul><li><p><a ref="https://stackoverflow.com/questions/28116467/are-compound-literals-standard-c">c++14 - Are compound literals Standard C++? - Stack Overflow</a></p></li></ul></li><li><p>例えば</p><blockcode lang="c"><![CDATA[void f(int *x) {}
+
+int main() {
+  f(&(int){42});
+  return 0;
+}]]></blockcode><p>は、<code><![CDATA[clang]]></code> (AppleClang 16.0.0)では何も言われないが<code><![CDATA[clang++]]></code>でコンパイルすると、次のエラーになる:</p><blockcode><![CDATA[src/main.cc:4:5: error: cannot take the address of an rvalue of type 'int'
+    4 |   f(&(int){42});
+      |]]></blockcode></li><li><p>GCCでは拡張としてC++中でも複合リテラルを使うことができるようだ</p><ul><li><p><a ref="https://gcc.gnu.org/onlinedocs/gcc/Compound-Literals.html">Compound Literals (Using the GNU Compiler Collection (GCC))</a></p></li></ul></li></ul>
+</body>
+
+</ktml>
