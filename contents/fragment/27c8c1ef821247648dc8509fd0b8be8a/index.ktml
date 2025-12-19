@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>GCCの--coverageはデフォルトではスレッドセーフではない</title>
+  <id>bc92b8b9-ab45-4b14-a130-eb71684cff31</id>
+  <created>2025-12-19T15:33:34+09:00</created>
+  <modified>2025-12-19T15:33:34+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>環境</p><ul><li><p>GitHub Actions上の<code><![CDATA[ubuntu-latest]]></code></p></li><li><p>GCC 13.3.0</p></li></ul></li><li><p>C++でスレッドを使うテストを書いたところ、CIで以下のエラーが出た:</p><blockcode><![CDATA[(WARNING) Unrecognized GCOV output for /home/runner/work/augatgatf/augatgatf/internal/keel/test/test_intrusive_ptr.cc
+    branch  1 taken -122 (fallthrough)
+  This is indicative of a gcov output parse error.
+  Please report this to the gcovr developers
+  at <https://github.com/gcovr/gcovr/issues>.
+(WARNING) Exception during parsing:
+  NegativeHits: Got negative hit value in gcov line 'branch  1 taken -122 (fallthrough)' caused by a bug in gcov tool, see https://gcc.gnu.org/bugzilla/show_bug.cgi?id=68080. Use option --gcov-ignore-parse-errors with a value of negative_hits.warn, or negative_hits.warn_once_per_file.
+(ERROR) Exiting because of parse errors.
+  You can run gcovr with --gcov-ignore-parse-errors
+  to continue anyway.]]></blockcode><ul><li><p>カバレッジの値が負の値になっており、GCOVがレポートのパースに失敗している</p></li></ul></li><li><p>カバレッジは次のオプションで取得していた:</p><blockcode lang="cmake"><![CDATA[target_compile_options(coverage_config INTERFACE
+  -O0
+  -g
+  --coverage
+)
+# ...
+target_link_libraries(keel PUBLIC coverage_config)]]></blockcode></li><li><p>Gemini 3 Proに聞いたところ、<code><![CDATA[-fprofile-update=atomic]]></code>オプションを使うことを提案された</p><ul><li><p><code><![CDATA[-fprofile-update]]></code>はデフォルトでは、<code><![CDATA[-pthread]]></code>があるときは<code><![CDATA[prefer-atomic]]></code>、ないときは<code><![CDATA[-single]]></code>である</p></li><li><p><code><![CDATA[-fprofile-update=atomic]]></code>をオプションに加えると、無事エラーは解消された</p><blockcode lang="cmake"><![CDATA[target_compile_options(coverage_config INTERFACE
+  -O0
+  -g
+  --coverage
+  -fprofile-update=atomic # 追加
+)]]></blockcode></li></ul></li><li><p>ただし、GCC公式によれば、<code><![CDATA[-fprofile-update=atomic]]></code>があったとしても全てのスレッドを<code><![CDATA[join]]></code>していない場合、レポートが壊れる可能性があるとのことなので、注意を要する</p><ul><li><p><a ref="https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html">Instrumentation Options (Using the GNU Compiler Collection (GCC))</a></p><blockquote><p><b>Warning:</b> When an application does not properly join all threads (or creates an detached thread), a profile file can be still corrupted.</p></blockquote></li></ul></li><li><p>おそらくより良い解決方法は、スレッドを使っている場合に必ず<code><![CDATA[Threads::Threads]]></code>とリンクして<code><![CDATA[-pthread]]></code>が付与されるようにすることだが、CMakeListsの大幅な書き換えが必要であるため未検証</p><ul><li><p><a ref="https://cmake.org/cmake/help/latest/module/FindThreads.html">FindThreads — CMake 4.2.1 Documentation</a></p></li></ul></li></ul>
+</body>
+
+</ktml>
