@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>Gitで空のInitial commitを作る</title>
+  <id>9b52ff27-2f1a-4a12-9127-5e7177cdf178</id>
+  <created>2025-12-21T22:08:24+09:00</created>
+  <modified>2025-12-21T22:08:24+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>まだフォルダ構成とかは決まってないけど、とりあえずリポジトリを初期化したい場合がある</p></li><li><p><code><![CDATA[git commit]]></code>はデフォルトでは変更がない場合はコミットを作らせてくれない:</p><blockcode><![CDATA[% git init
+Initialized empty Git repository in .../.git/
+% git commit
+On branch main
+
+Initial commit
+
+nothing to commit (create/copy files and use "git add" to track)]]></blockcode></li><li><p><code><![CDATA[--allow-empty]]></code>オプションを使うと、この挙動を回避して空のInitial commitを作ることができる:</p><blockcode><![CDATA[% git commit -m "Initial commit" --allow-empty
+[main (root-commit) f03a945] Initial commit]]></blockcode></li><li><p><code><![CDATA[--allow-empty]]></code>はInitial commitを作る時に限らずいつでも、空コミットを作るために使うことができる</p></li></ul>
+</body>
+
+</ktml>
