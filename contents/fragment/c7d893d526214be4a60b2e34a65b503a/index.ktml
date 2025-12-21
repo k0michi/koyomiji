@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>ローカルサーバー監視ツールBeszelを入れてみる</title>
+  <id>2dfc63cb-12c9-4696-923f-6e8d6334b4f1</id>
+  <created>2025-12-22T01:09:37+09:00</created>
+  <modified>2025-12-22T01:09:37+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>サーバーが増えてきたので、ふとサーバー監視ツールを試したくなった</p></li><li><p><a ref="https://beszel.dev/">Beszel</a>というのが新しくて良さそう、ということでインストール</p></li><li><p>基本的には<a ref="https://beszel.dev/guide/getting-started">Getting Started</a>に従えば良い。Docker Composeで入れてみる</p><ol><li><p>指示通り<code><![CDATA[docker-compose.yml]]></code>を作る。ただし他にもPocketBaseを使ったツールが立ってる場合は、ポートが競合するので変更する</p><blockcode lang="yml" title="docker-compose.yml"><![CDATA[services:
+  beszel:
+    image: henrygd/beszel:latest
+    container_name: beszel
+    restart: unless-stopped
+    ports:
+      - 8090:8090
+    volumes:
+      - ./beszel_data:/beszel_data
+      - ./beszel_socket:/beszel_socket
+
+  beszel-agent:
+    image: henrygd/beszel-agent:latest
+    container_name: beszel-agent
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - ./beszel_agent_data:/var/lib/beszel-agent
+      - ./beszel_socket:/beszel_socket
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      LISTEN: /beszel_socket/beszel.sock
+      HUB_URL: http://localhost:8090
+      TOKEN: <token>
+      KEY: "<key>"]]></blockcode></li><li><p><code><![CDATA[docker compose up]]></code>を実行し、ブラウザで<code><![CDATA[http://localhost:8090]]></code>を開く</p></li><li><p>アカウント作成画面が出るので、作成</p></li><li><p>"Add System"ボタンをクリックして、"Public Key"と"Token"をコピーしておく</p><img src="./Screenshot%202025-12-22%20at%2000-09-15%20All%20Systems%20_%20Beszel.png"/></li><li><p><code><![CDATA[^C]]></code>で一度コンテナを停止。<code><![CDATA[docker-compose.yml]]></code>の<code><![CDATA[<key>]]></code>と<code><![CDATA[<token>]]></code>を先ほどの"Public Key"と"Token"で置き換える</p></li><li><p><code><![CDATA[docker compose up -d]]></code>を実行。Beszelをデーモンとして起動する</p></li><li><p>再び"Add System"をクリック。"Name"には適当な名前、"Host / IP"には"/beszel_socket/beszel.sock"を入力</p><img src="./Screenshot%202025-12-22%20at%2000-09-43%20All%20Systems%20_%20Beszel.png"/></li><li><p>"Add server"を押す。うまくいっていれば、サーバーの状態が確認できるようになる</p><img src="./Screenshot%202025-12-22%20at%2000-10-01%20All%20Systems%20_%20Beszel.png"/></li></ol></li><li><p>サーバー監視画面。直感的で美しい</p><img src="./Screenshot%202025-12-22%20at%2001-01-58%20kaga.local%20_%20Beszel.png"/></li><li><p>リモートサーバーの追加もDocker Composeを用いていれば簡単に行える</p><ol><li><p>"Add System"の"Copy docker compose"を押す</p></li><li><p>追加したいリモートサーバー上で、コピーした<code><![CDATA[docker-compose.yml]]></code>を保存する</p></li><li><p><code><![CDATA[sudo docker compose up -d]]></code>を実行</p></li><li><p>適当な名前と、リモートサーバーのIPアドレスを入力</p><ul><li><p><code><![CDATA[mDNS]]></code>のアドレスは認識しないようなので注意</p></li></ul></li><li><p>"Add server"を押す</p></li></ol></li></ul>
+</body>
+
+</ktml>
