@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>Dockerのボリュームをtarにアーカイブする</title>
+  <id>21ef22b0-fd52-44cb-b86c-e78540ae0484</id>
+  <created>2025-12-29T17:59:21+09:00</created>
+  <modified>2025-12-29T17:59:21+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>ボリュームの中身をマウントし、中身を<code><![CDATA[tar]]></code>で固めて保存するコマンドの例</p></li><li><p>ボリューム名は<code><![CDATA[docker volume ls]]></code>で確認する</p></li><li><p>tar.gzにアーカイブする場合</p><ul><li><p>バックアップ</p><blockcode><![CDATA[# docker run --rm \
+  -v <アーカイブするボリューム名>:/source \
+  -v $(pwd):/backup \
+  alpine \
+  tar czvf /backup/backup_$(date +%Y%m%d_%H%M%S).tar.gz -C /source .]]></blockcode><ul><li><p>カレントディレクトリに<code><![CDATA[backup_<タイムスタンプ>.tar.gz]]></code>として作成される</p></li></ul></li><li><p>復元</p><blockcode><![CDATA[# docker run --rm \
+  -v <復元先ボリューム名>:/dest \
+  -v $(pwd):/backup \
+  alpine \
+  tar xzvf /backup/<バックアップファイル名>.tar.gz -C /dest]]></blockcode></li></ul></li><li><p>tar.zstにアーカイブする場合</p><ul><li><p>alpineにはデフォルトではzstdが入っていないため、fedoraなどのイメージを使う方が楽</p></li><li><p>バックアップ</p><blockcode><![CDATA[# docker run --rm \
+  -v <アーカイブするボリューム名>:/source \
+  -v $(pwd):/backup \
+  fedora \
+  tar cvf --zstd /backup/backup_$(date +%Y%m%d_%H%M%S).tar.zst -C /source .]]></blockcode></li><li><p>復元</p><blockcode><![CDATA[# docker run --rm \
+  -v <復元先ボリューム名>:/dest \
+  -v $(pwd):/backup \
+  fedora \
+  tar xvf --zstd /backup/<バックアップファイル名>.tar.zst -C /dest]]></blockcode></li></ul></li></ul>
+</body>
+
+</ktml>
