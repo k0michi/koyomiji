@@ -3,9 +3,9 @@
 
 <head>
   <title>Dockerのボリュームをtarにアーカイブする</title>
-  <id>21ef22b0-fd52-44cb-b86c-e78540ae0484</id>
-  <created>2025-12-29T17:59:21+09:00</created>
-  <modified>2025-12-29T17:59:21+09:00</modified>
+  <id>7c52588b-e56f-424d-9af3-9a9cbcc06cab</id>
+  <created>2025-12-29T18:13:48+09:00</created>
+  <modified>2025-12-29T18:13:48+09:00</modified>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
   -v <復元先ボリューム名>:/dest \
   -v $(pwd):/backup \
   alpine \
-  tar xzvf /backup/<バックアップファイル名>.tar.gz -C /dest]]></blockcode></li></ul></li><li><p>tar.zstにアーカイブする場合</p><ul><li><p>alpineにはデフォルトではzstdが入っていないため、fedoraなどのイメージを使う方が楽</p></li><li><p>バックアップ</p><blockcode><![CDATA[# docker run --rm \
+  sh -c "find /dest -mindepth 1 -delete && tar xzvf /backup/<バックアップファイル名>.tar.gz -C /dest"]]></blockcode><ul><li><p>ボリュームの中を空にしたのち、アーカイブを展開</p></li></ul></li></ul></li><li><p>tar.zstにアーカイブする場合</p><ul><li><p>alpineにはデフォルトではzstdが入っていないため、fedoraなどのイメージを使う方が楽</p></li><li><p>バックアップ</p><blockcode><![CDATA[# docker run --rm \
   -v <アーカイブするボリューム名>:/source \
   -v $(pwd):/backup \
   fedora \
@@ -25,7 +25,7 @@
   -v <復元先ボリューム名>:/dest \
   -v $(pwd):/backup \
   fedora \
-  tar xvf --zstd /backup/<バックアップファイル名>.tar.zst -C /dest]]></blockcode></li></ul></li></ul>
+  sh -c "find /dest -mindepth 1 -delete && tar xvf --zstd /backup/<バックアップファイル名>.tar.zst -C /dest"]]></blockcode></li></ul></li></ul>
 </body>
 
 </ktml>

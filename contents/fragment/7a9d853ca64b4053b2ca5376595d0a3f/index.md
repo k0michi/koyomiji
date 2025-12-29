@@ -18,8 +18,9 @@
       -v <復元先ボリューム名>:/dest \
       -v $(pwd):/backup \
       alpine \
-      tar xzvf /backup/<バックアップファイル名>.tar.gz -C /dest
+      sh -c "find /dest -mindepth 1 -delete && tar xzvf /backup/<バックアップファイル名>.tar.gz -C /dest"
     ```
+    - ボリュームの中を空にしたのち、アーカイブを展開
 - tar.zstにアーカイブする場合
   - alpineにはデフォルトではzstdが入っていないため、fedoraなどのイメージを使う方が楽
   - バックアップ
@@ -36,5 +37,5 @@
       -v <復元先ボリューム名>:/dest \
       -v $(pwd):/backup \
       fedora \
-      tar xvf --zstd /backup/<バックアップファイル名>.tar.zst -C /dest
+      sh -c "find /dest -mindepth 1 -delete && tar xvf --zstd /backup/<バックアップファイル名>.tar.zst -C /dest"
     ```
