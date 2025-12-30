@@ -29,7 +29,7 @@
       -v <アーカイブするボリューム名>:/source \
       -v $(pwd):/backup \
       fedora \
-      tar cvf --zstd /backup/backup_$(date +%Y%m%d_%H%M%S).tar.zst -C /source .
+      tar cvf /backup/backup_$(date +%Y%m%d_%H%M%S).tar.zst --zstd -C /source .
     ```
   - 復元
     ```
@@ -37,5 +37,5 @@
       -v <復元先ボリューム名>:/dest \
       -v $(pwd):/backup \
       fedora \
-      sh -c "find /dest -mindepth 1 -delete && tar xvf --zstd /backup/<バックアップファイル名>.tar.zst -C /dest"
+      sh -c "find /dest -mindepth 1 -delete && tar xvf /backup/<バックアップファイル名>.tar.zst --zstd -C /dest"
     ```
