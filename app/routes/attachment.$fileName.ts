@@ -6,7 +6,7 @@ export async function loader({
   params,
 }: Route.LoaderArgs) {
   const fileName = params.fileName!;
-  let asset: Uint8Array;
+  let asset;
 
   try {
     asset = await ServerModel.instance.getAttachmentFromExternalPath(`/attachment/${fileName}`);
