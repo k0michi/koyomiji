@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link, Outlet, useLoaderData, useLocation } from 'react-router';
-import { Asterisk, GithubIcon, LogoFull, MailIcon, Mastodon, RSS, TwitchIcon, YoutubeIcon } from '../../components/icon';
+import { Asterisk, Ephemera, GithubIcon, LogoFull, MailIcon, Mastodon, RSS, TwitchIcon, YoutubeIcon } from '../../components/icon';
 import { Handle } from '~/Handle';
 import { Route } from './+types/_common';
 import { useDevReload } from '~/Hook.index';
@@ -64,10 +64,11 @@ export default function CommonLayout() {
             <li><Menu to="/photograph">Photographs</Menu></li>
           </ul>
           <ul id="icons">
-            <li><Link aria-label="RSS" to="https://koyomiji.com/feed.xml"><RSS /></Link></li>
+            <li><Link aria-label="Ephemera" to="https://koyomi.co/w38z7hj_y92xaom9szflo4m653vw_783uya25_2dgh7o5j_ve"><Ephemera /></Link></li>
             <li><Link aria-label="Mail" to="mailto:k0michi@koyomi.co"><MailIcon /></Link></li>
             {/* <li><Link aria-label="Mastodon" rel="me" to="https://koyomi.co/@k0michi"><Mastodon /></Link></li> */}
             <li><Link aria-label="GitHub" rel="me" to="https://github.com/k0michi"><GithubIcon /></Link></li>
+            <li><Link aria-label="RSS" to="https://koyomiji.com/feed.xml"><RSS /></Link></li>
             {/* <li><Link aria-label="YouTube" rel="me" to="https://www.youtube.com/channel/UC_Kxh6WYU9-xQWYrNbT4mfw"><YoutubeIcon /></Link></li> */}
             {/* <li><Link aria-label="Twitch" rel="me" to="https://www.twitch.tv/k0michi"><TwitchIcon /></Link></li> */}
           </ul>

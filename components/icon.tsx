@@ -56,3 +56,7 @@ export function RSS() {
 export function Mastodon() {
   return <SVG loader={async () => (await import('@tabler/icons/outline/brand-mastodon.svg?raw')).default} className="icon"></SVG>;
 }
+
+export function Ephemera() {
+  return <SVG loader={async () => (await import('../assets/ephemera.svg?raw')).default} className="icon"></SVG>;
+}

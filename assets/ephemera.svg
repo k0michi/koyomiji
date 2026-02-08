@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <g>
+    <path d="M200.00,181.56 L159.04,95.74 L200.72,18.66 L240.72,96.15 Z" fill="currentColor"
+      stroke="none"></path>
+    <path d="M214.42,188.50 L255.97,102.97 L342.22,87.50 L306.59,167.09 Z" fill="currentColor"
+      stroke="none"></path>
+    <path d="M217.98,204.10 L310.76,183.27 L376.63,241.05 L292.19,262.81 Z"
+      fill="currentColor" stroke="none"></path>
+    <path d="M208.00,216.61 L282.14,276.16 L278.03,363.69 L208.37,311.24 Z"
+      fill="currentColor" stroke="none"></path>
+    <path d="M192.00,216.61 L191.67,311.70 L120.67,363.07 L118.25,275.90 Z" fill="currentColor"
+      stroke="none"></path>
+    <path d="M182.02,204.10 L107.47,263.13 L23.05,239.65 L89.69,183.41 Z" fill="currentColor"
+      stroke="none"></path>
+    <path d="M185.58,188.50 L92.95,167.02 L58.67,86.38 L144.20,103.41 Z" fill="currentColor"
+      stroke="none"></path>
+  </g>
+</svg>
