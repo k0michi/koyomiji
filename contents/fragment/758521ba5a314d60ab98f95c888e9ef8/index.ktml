@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>exiftoolでGPS情報を削除する</title>
+  <id>42e829c8-e021-4a81-b006-1126f677e4fd</id>
+  <created>2026-04-02T11:49:32+09:00</created>
+  <modified>2026-04-02T11:49:32+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>CLIから画像のEXIFを操作できるツールとして<a ref="https://exiftool.org/">exiftool</a>がある</p></li><li><p>exiftoolで画像のGPS情報を削除するには、<code><![CDATA[-gps:all=]]></code>を指定する</p></li><li><p>カレントディレクトリの全てのJPEGファイルのGPS情報を削除する例:</p><blockcode><![CDATA[% exiftool -gps:all= *.jpeg]]></blockcode><ul><li><p>なお、ファイルのバックアップが<code><![CDATA[(ファイル名)_original]]></code>として保存される</p></li></ul></li><li><p>バックアップが不要な場合は<code><![CDATA[-overwrite_original]]></code>を指定する:</p><blockcode><![CDATA[% exiftool -gps:all= -overwrite_original *.jpeg]]></blockcode></li></ul>
+</body>
+
+</ktml>
