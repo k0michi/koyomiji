@@ -535,26 +535,27 @@ body.common-layout {}
   background-color: var(--color-5);
 }
 
-#main img.img {
-  display: block;
+#body>img.img,
+#body figure {
   margin: 0 auto 16px auto;
   max-width: 75%;
+  width: fit-content;
+}
+
+#body img.img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
   max-height: 75vh;
 }
 
 @media (max-width: 767px) {
-  #main img.img {
+
+  #body>img.img,
+  #body figure {
     max-width: 100%;
   }
-}
-
-#main figure {
-  margin: 0 auto 16px auto;
-  max-width: 80%;
-}
-
-#main figure>img.img {
-  max-width: 100%;
 }
 
 #main .math-block {
