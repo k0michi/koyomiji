@@ -45,4 +45,4 @@ void answer() {
 }
 ```
 
-- 提出: https://atcoder.jp/contests/abc399/submissions/75006293
+- 提出: https://atcoder.jp/contests/abc399/submissions/75006631
