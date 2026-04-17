@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>ABC 399 D - Switch Seats</title>
+  <id>9acb2efb-7e5b-4ce4-b05d-439096c8407e</id>
+  <created>2026-04-17T11:00:58+09:00</created>
+  <modified>2026-04-17T11:00:58+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>問題: <a ref="https://atcoder.jp/contests/abc399/tasks/abc399_d">https://atcoder.jp/contests/abc399/tasks/abc399_d</a></p></li><li><p><code><![CDATA[1 2 3 3 1 2]]></code>の<math><![CDATA[(1,2)]]></math>の例に注目すると、1つ目の1の右隣の要素(2)を1の2つ目の出現とswapすると<code><![CDATA[1 1 3 3 2 2]]></code>となってペアにできることがわかる</p></li><li><p>このことから、ある数字<math><![CDATA[a]]></math>の最初の出現の右隣の要素<math><![CDATA[b]]></math>のもう片方が、<math><![CDATA[a]]></math>の2つ目の出現の左隣または右隣にもあるような場合に、<math><![CDATA[(a,b)]]></math>をペアにできそうと仮説を立てた</p><ul><li><p>最初の<math><![CDATA[a]]></math>の右隣だけを考えるのは、重複ペアをカウントしないため</p></li><li><p>ただし、<math><![CDATA[a]]></math>または<math><![CDATA[b]]></math>が、すでにペアになっている場合は除外する</p></li><li><p>また、最初の<math><![CDATA[a]]></math>の右隣と、2つ目の<math><![CDATA[a]]></math>の左隣が同じ位置であるとswapしても（位置が変化せず）ペアにならないので、そうなっていないことをチェックする必要がある</p></li></ul></li><li><p>出現位置は先に<math><![CDATA[O(N)]]></math>で<code><![CDATA[unordered_map]]></code>に記録しておき、<math><![CDATA[O(1)]]></math>で取得できるようにする</p></li></ul><blockcode lang="cpp"><![CDATA[void answer() {
+  llong T;
+  read(T);
+
+  for (llong i = 0; i < T; i++) {
+    llong N;
+    read(N);
+    std::vector<llong> A(2 * N);
+    read(A);
+    std::unordered_map<llong, std::vector<llong>> indices;
+
+    for (llong j = 0; j < 2 * N; j++) {
+      indices[A[j]].push_back(j);
+    }
+
+    llong count = 0;
+
+    for (llong j = 1; j <= N; j++) {
+      llong first = indices[j][0];
+      llong second = indices[j][1];
+
+      if (first + 1 < 2 * N) {
+        llong leftSecond = indices[A[first + 1]][1];
+        bool adjacent = leftSecond == second - 1 && first + 1 != second - 1 ||
+                        leftSecond == second + 1;
+        bool already = first + 1 == second ||
+                       indices[A[first + 1]][0] + 1 == indices[A[first + 1]][1];
+        count += adjacent && !already;
+      }
+    }
+
+    writeln(count);
+  }
+}]]></blockcode><ul><li><p>提出: <a ref="https://atcoder.jp/contests/abc399/submissions/75006293">https://atcoder.jp/contests/abc399/submissions/75006293</a></p></li></ul>
+</body>
+
+</ktml>
