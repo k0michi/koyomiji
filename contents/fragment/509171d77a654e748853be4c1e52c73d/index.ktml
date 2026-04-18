@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>ABC 402 C - Dislike Foods</title>
+  <id>eacb04e1-b168-4658-b3b9-3f692b5b9b5f</id>
+  <created>2026-04-18T13:33:07+09:00</created>
+  <modified>2026-04-18T13:33:07+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>問題: <a ref="https://atcoder.jp/contests/abc402/tasks/abc402_c">https://atcoder.jp/contests/abc402/tasks/abc402_c</a></p></li><li><p>食材から、それが含まれる料理全てへのマップをあらかじめ計算して、苦手ではなくなった食材を消していくというアプローチ</p></li><li><p>時間計算量が<math><![CDATA[O(N\times (\text{食材}B_i{を含む料理の個数の最大}))]]></math>なので、時間超過することを懸念した</p><ul><li><p>しかし「<math><![CDATA[K_i]]></math>の総和は<math><![CDATA[3\times 10^5]]></math>以下」の制約がある</p></li><li><p>このため最悪ケースになりそうなのは</p><ul><li><p><math><![CDATA[N=M=3\times 10^5,K_1=K_2=\dots=1]]></math>の場合</p></li><li><p><math><![CDATA[N=3\times 10^5,M=K_1=K_2=\dots=\sqrt{3\times 10^5}]]></math>の場合</p></li></ul></li><li><p>だが、いずれにしても<math><![CDATA[10^8]]></math>を超えないので問題なさそうと判断</p></li></ul></li></ul><blockcode lang="cpp"><![CDATA[void answer() {
+  llong N, M;
+  read(N, M);
+
+  std::vector<std::unordered_set<llong>> ings(M);
+  std::vector<std::unordered_set<llong>> toDishes(N);
+
+  for (llong i = 0; i < M; i++) {
+    llong K_i;
+    read(K_i);
+
+    for (llong j = 0; j < K_i; j++) {
+      llong A_ij;
+      read(A_ij);
+      A_ij--;
+
+      ings[i].insert(A_ij);
+      toDishes[A_ij].insert(i);
+    }
+  }
+
+  llong count = 0;
+
+  for (llong i = 0; i < N; i++) {
+    llong B_i;
+    read(B_i);
+    B_i--;
+
+    for (auto d : toDishes[B_i]) {
+      ings[d].erase(B_i);
+      count += ings[d].size() == 0;
+    }
+
+    writeln(count);
+  }
+}]]></blockcode><ul><li><p>提出: <a ref="https://atcoder.jp/contests/abc402/submissions/75024988">https://atcoder.jp/contests/abc402/submissions/75024988</a></p></li></ul>
+</body>
+
+</ktml>
