@@ -5,7 +5,7 @@
   <title>隣接行列から最小全域木を隣接リストとして構築するPrim法の実装</title>
   <id>ec1e01fa-00a3-425b-912b-3d75e620a82a</id>
   <created>2026-04-19T17:11:33+09:00</created>
-  <modified>2026-04-19T17:23:40+09:00</modified>
+  <modified>2026-04-19T19:28:54+09:00</modified>
 </head>
 
 <body>
@@ -16,7 +16,7 @@ using AdjMatrix = std::vector<std::vector<llong>>;
 constexpr llong kInf = 1e18;
 
 std::pair<AdjList, llong> prim(llong nodeCount, const AdjMatrix &matrix) {
-  AdjList mstMatrix(nodeCount);
+  AdjList mstList(nodeCount);
   llong totalWeight = 0;
   std::vector<llong> minCost(nodeCount, kInf);
   std::vector<llong> parents(nodeCount, -1);
@@ -41,8 +41,8 @@ std::pair<AdjList, llong> prim(llong nodeCount, const AdjMatrix &matrix) {
     totalWeight += minCost[u];
 
     if (parents[u] != -1) {
-      mstMatrix[parents[u]].push_back({u, minCost[u]});
-      mstMatrix[u].push_back({parents[u], minCost[u]});
+      mstList[parents[u]].push_back({u, minCost[u]});
+      mstList[u].push_back({parents[u], minCost[u]});
     }
 
     for (llong v = 0; v < nodeCount; ++v) {
@@ -53,7 +53,7 @@ std::pair<AdjList, llong> prim(llong nodeCount, const AdjMatrix &matrix) {
     }
   }
 
-  return {mstMatrix, totalWeight};
+  return {mstList, totalWeight};
 }]]></blockcode><h2>チェック</h2><ul><li><p><a ref="https://atcoder.jp/contests/abc451/submissions/75107745">https://atcoder.jp/contests/abc451/submissions/75107745</a></p></li></ul><h2>参考</h2><ul><li><p><a ref="https://algo-logic.info/prim-mst/">プリム法による最小全域木を求めるアルゴリズム | アルゴリズムロジック</a></p></li></ul>
 </body>
 

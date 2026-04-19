@@ -30,7 +30,7 @@ using AdjMatrix = std::vector<std::vector<llong>>;
 constexpr llong kInf = 1e18;
 
 std::pair<AdjList, llong> prim(llong nodeCount, const AdjMatrix &matrix) {
-  AdjList mstMatrix(nodeCount);
+  AdjList mstList(nodeCount);
   llong totalWeight = 0;
   std::vector<llong> minCost(nodeCount, kInf);
   std::vector<llong> parents(nodeCount, -1);
@@ -55,8 +55,8 @@ std::pair<AdjList, llong> prim(llong nodeCount, const AdjMatrix &matrix) {
     totalWeight += minCost[u];
 
     if (parents[u] != -1) {
-      mstMatrix[parents[u]].push_back({u, minCost[u]});
-      mstMatrix[u].push_back({parents[u], minCost[u]});
+      mstList[parents[u]].push_back({u, minCost[u]});
+      mstList[u].push_back({parents[u], minCost[u]});
     }
 
     for (llong v = 0; v < nodeCount; ++v) {
@@ -67,7 +67,7 @@ std::pair<AdjList, llong> prim(llong nodeCount, const AdjMatrix &matrix) {
     }
   }
 
-  return {mstMatrix, totalWeight};
+  return {mstList, totalWeight};
 }
 ```
 
