@@ -5,11 +5,13 @@
   <title>隣接行列から最小全域木を隣接リストとして構築するPrim法の実装</title>
   <id>ec1e01fa-00a3-425b-912b-3d75e620a82a</id>
   <created>2026-04-19T17:11:33+09:00</created>
-  <modified>2026-04-19T17:11:33+09:00</modified>
+  <modified>2026-04-19T17:23:40+09:00</modified>
 </head>
 
 <body>
-  <h2>概要</h2><ul><li><p>Prim法を用いて、与えられたグラフの最小全域木（MST）を構築する</p></li><li><p>計算量に影響しないため、最小全域木の重みの合計も同時に計算する</p></li><li><p>優先度付きキューを使わないバリエーションのPrim法</p></li></ul><h2>入力</h2><ul><li><p><code><![CDATA[llong nodeCount]]></code>: グラフの頂点数<math><![CDATA[V]]></math></p></li><li><p><code><![CDATA[const AdjMatrix &matrix]]></code>: グラフの隣接行列。辺がない場合は<code><![CDATA[kInf]]></code></p></li></ul><h2>出力</h2><ul><li><p><code><![CDATA[std::pair<AdjList, llong>]]></code></p><ul><li><p><code><![CDATA[first]]></code>: MSTの隣接リスト</p></li><li><p><code><![CDATA[second]]></code>: MSTの重みの合計</p></li></ul></li></ul><h2>計算量</h2><ul><li><p>時間計算量: <math><![CDATA[O(V^2)]]></math></p></li><li><p>空間計算量: <math><![CDATA[O(V^2)]]></math></p></li></ul><blockcode lang="cpp"><![CDATA[using AdjList = std::vector<std::vector<std::pair<llong, llong>>>;
+  <h2>概要</h2><ul><li><p>Prim法を用いて、与えられたグラフの最小全域木（MST）を構築する</p></li><li><p>計算量に影響しないため、最小全域木の重みの合計も同時に計算する</p></li><li><p>優先度付きキューを使わないバリエーションのPrim法</p></li></ul><h2>入力</h2><ul><li><p><code><![CDATA[llong nodeCount]]></code>: グラフの頂点数<math><![CDATA[V]]></math></p></li><li><p><code><![CDATA[const AdjMatrix &matrix]]></code>: グラフの隣接行列。辺がない場合は<code><![CDATA[kInf]]></code></p></li></ul><h2>出力</h2><ul><li><p><code><![CDATA[std::pair<AdjList, llong>]]></code></p><ul><li><p><code><![CDATA[first]]></code>: MSTの隣接リスト</p></li><li><p><code><![CDATA[second]]></code>: MSTの重みの合計</p></li></ul></li></ul><h2>計算量</h2><ul><li><p>時間計算量: <math><![CDATA[O(V^2)]]></math></p></li><li><p>空間計算量: <math><![CDATA[O(V^2)]]></math></p></li></ul><blockcode lang="cpp"><![CDATA[using llong = long long;
+
+using AdjList = std::vector<std::vector<std::pair<llong, llong>>>;
 using AdjMatrix = std::vector<std::vector<llong>>;
 constexpr llong kInf = 1e18;
 

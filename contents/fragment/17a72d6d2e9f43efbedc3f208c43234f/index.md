@@ -23,6 +23,8 @@
 - 空間計算量: $O(V^2)$
 
 ```cpp
+using llong = long long;
+
 using AdjList = std::vector<std::vector<std::pair<llong, llong>>>;
 using AdjMatrix = std::vector<std::vector<llong>>;
 constexpr llong kInf = 1e18;
