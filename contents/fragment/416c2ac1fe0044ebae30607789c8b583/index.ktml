@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>ABC 452 E - You WILL Like Sigma Problem</title>
+  <id>ef114b86-f88e-4548-a329-e0fed9b76461</id>
+  <created>2026-04-19T21:28:39+09:00</created>
+  <modified>2026-04-19T21:28:39+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>問題: <a ref="https://atcoder.jp/contests/abc452/tasks/abc452_e">https://atcoder.jp/contests/abc452/tasks/abc452_e</a></p></li><li><p><math><![CDATA[i\bmod j=i-j\left\lfloor \frac{i}{j} \right\rfloor]]></math>であることを用いて、以下のように式変形する</p><blockmath><![CDATA[\begin{aligned}
+\sum_{i=1}^N\sum_{j=1}^M A_i B_j(i\bmod j)&=\sum_{i=1}^N\sum_{j=1}^M A_i B_j \left(i-j\left\lfloor \frac{i}{j} \right\rfloor\right)\\
+&=\sum_{i=1}^N\sum_{j=1}^M A_iB_ji-\sum_{i=1}^N\sum_{j=1}^M A_iB_jj\left\lfloor \frac{i}{j} \right\rfloor\\
+&=\sum_{i=1}^N \left(A_ii \sum_{j=1}^M B_j\right)-\sum_{j=1}^N\left(B_jj \sum_{i=1}^NA_i \left\lfloor \frac{i}{j} \right\rfloor\right)\\
+&=\left( \sum_{i=1}^N A_ii \right)\left(\sum_{j=1}^M B_j\right)-\sum_{j=1}^N\left(B_jj \sum_{i=1}^NA_i \left\lfloor \frac{i}{j} \right\rfloor\right)\\
+\end{aligned}]]></blockmath></li><li><p>左辺は単に総和同士の積を取れば良い</p></li><li><p>右辺の<math><![CDATA[\sum_{i=1}^NA_i\left\lfloor \frac{i}{j} \right\rfloor]]></math>の部分の高速化を考える</p><ul><li><p><math><![CDATA[\left\lfloor \frac{i}{j} \right\rfloor]]></math>は<math><![CDATA[i]]></math>が<math><![CDATA[j]]></math>増えるごとに1増える関係にある</p></li><li><img src="./Screenshot%202026-04-19%20at%2021.08.28.png"/></li><li><p>このことを使うと</p><blockmath><![CDATA[\sum_{i=1}^NA_i\left\lfloor \frac{i}{j} \right\rfloor=0\times \sum_{i=1}^{j-1}A_i+1\times\sum_{i=j}^{2j-1} A_i+\cdots]]></blockmath><p>と計算できる。これは、累積和を用いると、これは<math><![CDATA[O(N/j)]]></math>で求めることができる</p></li></ul></li><li><p>時間計算量は、<math><![CDATA[\sum_{i=1}^N \frac{N}{j}=N\sum_{i=1}^N\frac{1}{j}]]></math>に対して調和級数の和を用いることで、<math><![CDATA[O(N\log N)]]></math>と評価できる</p></li></ul><blockcode lang="cpp"><![CDATA[void answer() {
+  llong N, M;
+  read(N, M);
+
+  std::vector<llong> A(N);
+  std::vector<llong> B(M);
+  read(A, B);
+
+  std::vector<llong> cumu(N + 1);
+
+  for (llong i = 0; i < N; i++) {
+    cumu[i + 1] = cumu[i] + A[i];
+  }
+
+  ModInt998244353 result = 0;
+
+  {
+    ModInt998244353 temp = 0;
+
+    for (llong i = 0; i < N; i++) {
+      temp += A[i] * (i + 1);
+    }
+
+    result += temp * std::reduce(B.begin(), B.end());
+  }
+
+  for (llong j = 0; j < M; j++) {
+    ModInt998244353 temp = 0;
+    temp += (cumu[std::min(j, N)] - cumu[0]) * ((1) / (j + 1));
+
+    for (llong i = j; i < N; i += j + 1) {
+      temp += (cumu[std::min(i + j + 1, N)] - cumu[i]) * ((i + 1) / (j + 1));
+    }
+
+    result -= temp * B[j] * (j + 1);
+  }
+
+  writeln(result);
+}]]></blockcode><ul><li><p>提出: <a ref="https://atcoder.jp/contests/abc452/submissions/75110067">https://atcoder.jp/contests/abc452/submissions/75110067</a></p></li></ul>
+</body>
+
+</ktml>
