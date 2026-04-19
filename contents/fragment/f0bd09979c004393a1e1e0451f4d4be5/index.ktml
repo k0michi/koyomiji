@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>ABC 454 (A,B,C,D問題)</title>
+  <id>8874519f-ee02-434b-9161-f78dc38c76cc</id>
+  <created>2026-04-19T14:17:36+09:00</created>
+  <modified>2026-04-19T14:17:36+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p><a ref="https://atcoder.jp/contests/abc454">AtCoder Beginner Contest 454</a>の記録</p></li></ul><h2>A問題</h2><blockcode lang="cpp"><![CDATA[void answer() {
+  llong L, R;
+  read(L, R);
+  writeln(R - L + 1);
+}]]></blockcode><h2>B問題</h2><ul><li><p><code><![CDATA[unordered_set]]></code>で一意な服の種類の数を計算すると楽</p></li></ul><blockcode lang="cpp"><![CDATA[void answer() {
+  llong N, M;
+  read(N, M);
+  std::vector<llong> F(N);
+  read(F);
+
+  std::unordered_set<llong> unique(F.begin(), F.end());
+  writeln(F.size() == unique.size() ? "Yes" : "No");
+  writeln(M == unique.size() ? "Yes" : "No");
+}]]></blockcode><h2>C問題</h2><ul><li><p><math><![CDATA[(A_i,B_i)]]></math>をエッジとした有向グラフの、始点ノードからの到達可能ノードの数を答える</p></li><li><p>BFSで実装</p></li><li><p>DFSの方が楽かも</p></li></ul><blockcode lang="cpp"><![CDATA[void answer() {
+  llong N, M;
+  read(N, M);
+  std::vector<llong> A(M), B(M);
+  std::unordered_map<llong, std::vector<llong>> nexts;
+
+  for (llong i = 0; i < M; i++) {
+    read(A[i], B[i]);
+    nexts[A[i]].push_back(B[i]);
+  }
+
+  std::unordered_set<llong> items;
+  std::queue<llong> q;
+  q.push(1);
+
+  while (q.size() > 0) {
+    auto i = q.front();
+    q.pop();
+
+    if (items.contains(i)) {
+      continue;
+    }
+
+    items.insert(i);
+
+    for (auto n : nexts[i]) {
+      q.push(n);
+    }
+  }
+
+  writeln(items.size());
+}]]></blockcode><h2>D問題</h2><ul><li><p><math><![CDATA[A]]></math>の<code><![CDATA[xx]]></code>を<code><![CDATA[(xx)]]></code>に置き換えて<math><![CDATA[A=B]]></math>とできるなら、<math><![CDATA[B]]></math>の<code><![CDATA[(xx)]]></code>を<code><![CDATA[xx]]></code>と置き換えても<math><![CDATA[A=B]]></math>とできる。逆も然り。なので</p><ul><li><p><math><![CDATA[A]]></math>の<code><![CDATA[(xx)]]></code>を<code><![CDATA[xx]]></code>に置き換える操作</p></li><li><p><math><![CDATA[B]]></math>の<code><![CDATA[(xx)]]></code>を<code><![CDATA[xx]]></code>に置き換える操作</p></li></ul><p>の操作体系でも同じ答えが得られる</p></li><li><p>文字列中に<code><![CDATA[(xx)]]></code>がある限り、これを<code><![CDATA[xx]]></code>で置き換える操作を<math><![CDATA[f]]></math>とすると</p><ul><li><p><math><![CDATA[f(A)=f(B)]]></math>なら<code><![CDATA[Yes]]></code>、そうでないなら<code><![CDATA[No]]></code>と答えれば良い</p></li></ul></li><li><p>しかし<code><![CDATA[std::string::replace]]></code>だとTLEしてしまう。後続の要素をずらすコストがかかるため</p></li><li><p>文字列<math><![CDATA[A]]></math>をコードとみなしたスタックマシンを考える</p><ul><li><p><code><![CDATA[)]]></code>を消費した時</p><ul><li><p>スタックの末尾が<code><![CDATA[(xx]]></code>であるならこれらをpopし、<code><![CDATA[xx]]></code>をpush</p></li><li><p>そうでないなら<code><![CDATA[)]]></code>をpush</p></li></ul></li><li><p>それ以外の文字を消費した時はそのままpush</p></li><li><p>すべての文字を消費した後のスタックは<math><![CDATA[f(A)]]></math>と一致する</p></li></ul></li><li><p><math><![CDATA[A,B]]></math>それぞれに適用して<math><![CDATA[f(A)=f(B)]]></math>を見るので、1ケースに対して時間計算量 <math><![CDATA[O(|A|+|B|)]]></math></p></li></ul><blockcode lang="cpp"><![CDATA[std::vector<char> reconstruct(std::string &str) {
+  std::vector<char> s;
+
+  for (auto a : str) {
+    if (a == ')') {
+      if (s.size() >= 3 && s[s.size() - 3] == '(' && s[s.size() - 2] == 'x' &&
+          s[s.size() - 1] == 'x') {
+        s.pop_back();
+        s.pop_back();
+        s.pop_back();
+        s.push_back('x');
+        s.push_back('x');
+      } else {
+        s.push_back(a);
+      }
+    } else {
+      s.push_back(a);
+    }
+  }
+
+  return s;
+}
+
+void answer() {
+  llong T;
+  read(T);
+
+  for (llong i = 0; i < T; i++) {
+    std::string A, B;
+    read(A, B);
+    writeln(reconstruct(A) == reconstruct(B) ? "Yes" : "No");
+  }
+}]]></blockcode>
+</body>
+
+</ktml>
