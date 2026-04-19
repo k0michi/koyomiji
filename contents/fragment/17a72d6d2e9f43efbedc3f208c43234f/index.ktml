@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>隣接行列から最小全域木を隣接リストとして構築するPrim法の実装</title>
+  <id>ec1e01fa-00a3-425b-912b-3d75e620a82a</id>
+  <created>2026-04-19T17:11:33+09:00</created>
+  <modified>2026-04-19T17:11:33+09:00</modified>
+</head>
+
+<body>
+  <h2>概要</h2><ul><li><p>Prim法を用いて、与えられたグラフの最小全域木（MST）を構築する</p></li><li><p>計算量に影響しないため、最小全域木の重みの合計も同時に計算する</p></li><li><p>優先度付きキューを使わないバリエーションのPrim法</p></li></ul><h2>入力</h2><ul><li><p><code><![CDATA[llong nodeCount]]></code>: グラフの頂点数<math><![CDATA[V]]></math></p></li><li><p><code><![CDATA[const AdjMatrix &matrix]]></code>: グラフの隣接行列。辺がない場合は<code><![CDATA[kInf]]></code></p></li></ul><h2>出力</h2><ul><li><p><code><![CDATA[std::pair<AdjList, llong>]]></code></p><ul><li><p><code><![CDATA[first]]></code>: MSTの隣接リスト</p></li><li><p><code><![CDATA[second]]></code>: MSTの重みの合計</p></li></ul></li></ul><h2>計算量</h2><ul><li><p>時間計算量: <math><![CDATA[O(V^2)]]></math></p></li><li><p>空間計算量: <math><![CDATA[O(V^2)]]></math></p></li></ul><blockcode lang="cpp"><![CDATA[using AdjList = std::vector<std::vector<std::pair<llong, llong>>>;
+using AdjMatrix = std::vector<std::vector<llong>>;
+constexpr llong kInf = 1e18;
+
+std::pair<AdjList, llong> prim(llong nodeCount, const AdjMatrix &matrix) {
+  AdjList mstMatrix(nodeCount);
+  llong totalWeight = 0;
+  std::vector<llong> minCost(nodeCount, kInf);
+  std::vector<llong> parents(nodeCount, -1);
+  std::vector<bool> used(nodeCount, false);
+
+  minCost[0] = 0;
+
+  for (llong i = 0; i < nodeCount; ++i) {
+    llong u = -1;
+
+    for (llong v = 0; v < nodeCount; ++v) {
+      if (!used[v] && (u == -1 || minCost[v] < minCost[u])) {
+        u = v;
+      }
+    }
+
+    if (minCost[u] == kInf) {
+      break;
+    }
+
+    used[u] = true;
+    totalWeight += minCost[u];
+
+    if (parents[u] != -1) {
+      mstMatrix[parents[u]].push_back({u, minCost[u]});
+      mstMatrix[u].push_back({parents[u], minCost[u]});
+    }
+
+    for (llong v = 0; v < nodeCount; ++v) {
+      if (!used[v] && matrix[u][v] < minCost[v]) {
+        minCost[v] = matrix[u][v];
+        parents[v] = u;
+      }
+    }
+  }
+
+  return {mstMatrix, totalWeight};
+}]]></blockcode><h2>チェック</h2><ul><li><p><a ref="https://atcoder.jp/contests/abc451/submissions/75107745">https://atcoder.jp/contests/abc451/submissions/75107745</a></p></li></ul><h2>参考</h2><ul><li><p><a ref="https://algo-logic.info/prim-mst/">プリム法による最小全域木を求めるアルゴリズム | アルゴリズムロジック</a></p></li></ul>
+</body>
+
+</ktml>
