@@ -1,0 +1,77 @@
+# ABC 456 E - Endless Holidays
+
+- 問題: https://atcoder.jp/contests/abc456/tasks/abc456_e
+- $(\text{都市},\text{曜日})$を頂点とした有向グラフで考える
+  - $(U_i,w)\to(V_i,(w+1)\bmod W)$をグラフのエッジとする。ただし、$1\le i\le M$、$S_{U_i,w+1}= \mathtt{o}$とする
+    - 移動先の都市が休日であるときだけ、遷移可能
+  - 移動しないことも可能なので、$(1,w)\to(1,(w+1)\bmod W),\dots,(N,w)\to(N,(w+1)\bmod W)$もエッジとする
+- このように有向グラフを作ると、"毎日昼の時点でいる都市が休日であるように移動を続けることが可能"$\iff$ 有向グラフに$(1,1),\dots,(N,1)$のいずれか1つ以上を含むような閉路がある とできる
+  - DFSなどで各都市について閉路をチェックするとこれが答えとなる
+
+```cpp
+void answer() {
+  llong T;
+  read(T);
+
+  for (llong i = 0; i < T; i++) {
+    llong N, M;
+    read(N, M);
+
+    std::vector<std::vector<llong>> adjs(N);
+
+    for (llong i = 0; i < N; i++) {
+      adjs[i].push_back(i);
+    }
+
+    for (llong i = 0; i < M; i++) {
+      llong U_i, V_i;
+      read(U_i, V_i);
+      U_i--, V_i--;
+      adjs[U_i].push_back(V_i);
+      adjs[V_i].push_back(U_i);
+    }
+
+    llong W;
+    read(W);
+    std::vector<std::string> S(N);
+    read(S);
+
+    std::vector<std::vector<llong>> states(N, std::vector<llong>(W));
+
+    auto dfs = [&](auto self, std::pair<llong, llong> v) {
+      states[v.first][v.second] = 1;
+
+      for (llong w : adjs[v.first]) {
+        std::pair<llong, llong> next = {w, (v.second + 1) % W};
+
+        if (S[next.first][next.second] == 'o') {
+          if (states[next.first][next.second] == 1) {
+            return true;
+          }
+
+          if (states[next.first][next.second] == 0) {
+            if (self(self, next)) {
+              return true;
+            }
+          }
+        }
+      }
+
+      states[v.first][v.second] = 2;
+      return false;
+    };
+
+    bool result = false;
+
+    for (llong i = 0; i < N; i++) {
+      if (S[i][0] == 'o' && states[i][0] == 0) {
+        result = result || dfs(dfs, {i, 0});
+      }
+    }
+
+    writeln(result ? "Yes" : "No");
+  }
+}
+```
+
+- 提出: https://atcoder.jp/contests/abc456/submissions/75507095
