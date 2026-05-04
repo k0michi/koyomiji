@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>ABC 455 D - Card Pile Query</title>
+  <id>94e58b7e-ba48-4804-b65d-b57153fdcf32</id>
+  <created>2026-05-04T12:16:10+09:00</created>
+  <modified>2026-05-04T12:16:10+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>問題: <a ref="https://atcoder.jp/contests/abc455/tasks/abc455_d">https://atcoder.jp/contests/abc455/tasks/abc455_d</a></p></li><li><p>グラフのエッジの付け替えのように考える</p><ul><li><p>つまり、カードがノード、積まれているカード同士がエッジで繋がれているように考える</p></li><li><p>便宜上、カードの山をそれぞれ<math><![CDATA[-1,\dots,-N]]></math>で表現する。接続先がないときは<math><![CDATA[0]]></math>とする</p></li><li><p>各クエリに対して<math><![CDATA[O(1)]]></math>の操作でエッジを付け替え、最後に<math><![CDATA[-1,\dots,-N]]></math>からの連結成分の個数を回答する</p></li></ul></li></ul><blockcode lang="cpp"><![CDATA[void answer() {
+  llong N, Q;
+  read(N, Q);
+
+  std::unordered_map<llong, llong> nexts;
+  std::unordered_map<llong, llong> prevs;
+
+  for (llong i = 1; i <= N; i++) {
+    nexts[-i] = i;
+    prevs[i] = -i;
+  }
+
+  for (llong i = 0; i < Q; i++) {
+    llong C_i, P_i;
+    read(C_i, P_i);
+
+    nexts[prevs[C_i]] = 0;
+    prevs[C_i] = P_i;
+    nexts[P_i] = C_i;
+  }
+
+  std::vector<llong> piles(N);
+
+  for (llong i = 1; i <= N; i++) {
+    llong c = nexts[-i];
+
+    while (c != 0) {
+      piles[i - 1]++;
+      c = nexts[c];
+    }
+  }
+
+  writeln(piles);
+}]]></blockcode><ul><li><p>提出: <a ref="https://atcoder.jp/contests/abc455/submissions/75499150">https://atcoder.jp/contests/abc455/submissions/75499150</a></p></li></ul>
+</body>
+
+</ktml>
