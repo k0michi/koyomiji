@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>Fedora 44にcode-serverをセットアップしてLANで公開する</title>
+  <id>ceb91562-e662-4e63-bf9f-cab01d3eabd3</id>
+  <created>2026-06-07T10:43:06+09:00</created>
+  <modified>2026-06-07T10:43:06+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p><a ref="https://github.com/coder/code-server">code-server</a>をセルフホストすると、サーバー上で動くVSCodeをそのままWeb UIとして公開することができる</p><ul><li><p>リモートのブラウザ上からコードを書き換えたり、コマンドを叩いたりできる優れもの</p></li><li><p>VPNと組み合わせると、外からでも重たい処理を自宅サーバーに投げつつ開発できる</p></li></ul></li><li><p>環境</p><ul><li><p>Fedora KDE Plasma Desktop 44</p></li></ul></li><li><p>セットアップ</p><ol><li><p>code-serverをインストール。途中で管理者パスワードを聞かれるので入力</p><blockcode><![CDATA[$ curl -fsSL https://code-server.dev/install.sh | sh]]></blockcode></li><li><p><code><![CDATA[$USER]]></code>の権限で起動する</p><blockcode><![CDATA[$ sudo systemctl restart code-server@$USER]]></blockcode><p>この時点で、<code><![CDATA[127.0.0.1:8080]]></code>を開くとログイン画面が見えるはず
+　　<img src="./Screenshot%202026-06-07%20at%2010-15-19%20code-server%20login.png"/></p></li><li><p>デフォルトでは外からアクセスできないので、設定を変更する</p><blockcode><![CDATA[$ nano ~/.config/code-server/config.yaml]]></blockcode><blockcode><![CDATA[bind-addr: 0.0.0.0:8080
+auth: password
+password: (パスワード)
+cert: false]]></blockcode><p><code><![CDATA[bind-addr]]></code>を<code><![CDATA[127.0.0.1]]></code>から<code><![CDATA[0.0.0.0]]></code>に変更することで、LANに公開されるようになる。パスワードもここで変更できる</p></li><li><p>ポートを開放する</p><blockcode><![CDATA[$ sudo firewall-cmd --add-port=8080/tcp --permanent
+$ sudo firewall-cmd --reload]]></blockcode></li><li><p>再起動する</p><blockcode><![CDATA[$ sudo systemctl restart code-server@$USER]]></blockcode><p><code><![CDATA[(サーバーのホスト):8080]]></code>でパスワードを入力すると、code-serverが開く！
+<img src="./Screenshot%202026-06-07%20at%2010-17-40%20Welcome%20-%20code-server.png"/></p></li></ol></li><li><p>既知の問題</p><ul><li><p>画像が見られない。HTTPS化していないためと思われる</p></li></ul></li><li><p>参考</p><ul><li><p><a ref="https://coder.com/docs/code-server/install">Install code-server: OS Instructions for VS Code | code-server Docs</a></p></li></ul></li></ul>
+</body>
+
+</ktml>
