@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>C言語のenumの大きさは（デフォルトでは）不定</title>
+  <id>392e520e-c3e7-436a-b67d-99662f40b33d</id>
+  <created>2026-06-18T18:02:02+09:00</created>
+  <modified>2026-06-18T18:02:02+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>次のようなenumを考える。この出力はどうなるだろうか:</p><blockcode lang="c" title="example.c"><![CDATA[#include <stdio.h>
+
+typedef enum Theme {
+  LIGHT,
+  DARK,
+  SYSTEM_DEFAULT,
+} Theme;
+
+int main() {
+  printf("sizeof(Theme) = %zu\n", sizeof(Theme));
+  return 0;
+}]]></blockcode></li><li><p>Apple clang (21.0.0)でオプションを与えずにコンパイルして実行すると</p><blockcode><![CDATA[% clang example.c
+% ./a.out 
+sizeof(Theme) = 4]]></blockcode><ul><li><p><code><![CDATA[int]]></code>と同じサイズとなる</p></li></ul></li><li><p>しかし、C23の時点で、enumの型が明示されていない場合、その大きさに関しては具体的な指定がない</p><ul><li><p><a ref="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3096.pdf">N3096</a> p126</p><blockquote><p>All enumerations have an <i>underlying type</i>. The underlying type can be explicitly specified using an enum type specifier and is its <i>fixed underlying type</i>. If it is not explicitly specified, the underlying type is the enumeration’s compatible type, which is either <code><![CDATA[char]]></code> or a standard or extended signed or unsigned integer type.</p></blockquote></li></ul></li><li><p>例えば、clangでは<code><![CDATA[-fshort-enums]]></code>オプションを付与すると、enumのサイズを強制的に小さくできる。C言語の仕様では、このような挙動は許可されている:</p><blockcode><![CDATA[% clang example.c -fshort-enums
+% ./a.out
+sizeof(Theme) = 1]]></blockcode></li><li><p>enumのサイズを固定するために、<code><![CDATA[0x7FFFFFFF]]></code>のような<code><![CDATA[char]]></code>や<code><![CDATA[short]]></code>では表現できないメンバを加え、強制的にenumの大きさを<code><![CDATA[int32_t]]></code>相当にするテクニックがある</p><ul><li><p>例えば</p><blockcode lang="c"><![CDATA[typedef enum Theme {
+  LIGHT,
+  DARK,
+  SYSTEM_DEFAULT,
+  FORCE32 = 0x7FFFFFFF,
+} Theme;]]></blockcode><p>とすると、</p><blockcode><![CDATA[% clang example.c -fshort-enums
+% ./a.out
+sizeof(Theme) = 4]]></blockcode></li><li><p><code><![CDATA[webgpu.h]]></code>などで見られる:</p><ul><li><p><a ref="https://github.com/webgpu-native/webgpu-headers/blob/bf8ddb91dc38ea11ec1b727dae1fa965c4207d22/webgpu.h#L388">https://github.com/webgpu-native/webgpu-headers/blob/bf8ddb91dc38ea11ec1b727dae1fa965c4207d22/webgpu.h#L388</a></p></li></ul></li></ul></li><li><p>なお、C23ではenumに明示的に型を指定することができる:</p><blockcode lang="c"><![CDATA[typedef enum Theme : int {
+  LIGHT,
+  DARK,
+  SYSTEM_DEFAULT,
+} Theme;]]></blockcode><ul><li><p>この場合、enumの大きさは<code><![CDATA[-fshort-enums]]></code>の影響を受けない:</p><blockcode><![CDATA[% clang example.c -fshort-enums
+% ./a.out 
+sizeof(Theme) = 4]]></blockcode></li><li><p>ただし、当然ながらC23対応のコンパイラが必要となる</p></li></ul></li></ul>
+</body>
+
+</ktml>
