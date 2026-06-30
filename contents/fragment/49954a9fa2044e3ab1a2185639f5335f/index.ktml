@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>macOSでカーソル速度を細かく調整する</title>
+  <id>58377302-1d8d-4a46-be27-38c508841866</id>
+  <created>2026-06-30T20:53:29+09:00</created>
+  <modified>2026-06-30T20:53:29+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>環境</p><ul><li><p>macOS 26.4.1</p></li></ul></li><li><p>macOS標準の設定画面では、カーソルの速度を離散的な値からしか選ぶことができない</p><ul><li><p>片方では速すぎるが、片方では遅い、という場合が生じる</p></li></ul></li><li><p><code><![CDATA[defaults]]></code>コマンドを使うことで、より細かなカーソル速度の調整を行える</p></li><li><p>現在のカーソル速度を確認する:</p><blockcode><![CDATA[% defaults read -g com.apple.mouse.scaling
+0.5]]></blockcode><ul><li><p><code><![CDATA[-g]]></code>は<code><![CDATA[NSGlobalDomain]]></code>を意味する。<code><![CDATA[NSGlobalDomain]]></code>または<code><![CDATA[-globalDomain]]></code>でも同様の結果となる</p></li></ul></li><li><p>カーソル速度を変更するには<code><![CDATA[write]]></code>を使う。<code><![CDATA[0.375]]></code>にする場合:</p><blockcode><![CDATA[% defaults write -g com.apple.mouse.scaling 0.375]]></blockcode></li><li><p><b>設定の反映には再ログインが必要。</b></p></li></ul>
+</body>
+
+</ktml>
