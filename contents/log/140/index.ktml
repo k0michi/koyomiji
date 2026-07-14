@@ -5,7 +5,7 @@
   <title>いろんな言語でPrintableインターフェースを後付けしてみた</title>
   <id>35728310-4cbe-43ef-9fee-d41c207de32c</id>
   <created>2026-07-15T00:29:30+09:00</created>
-  <modified>2026-07-15T00:29:30+09:00</modified>
+  <modified>2026-07-15T00:36:35+09:00</modified>
 </head>
 
 <body>
@@ -54,14 +54,14 @@ func processPrintable(_ printable: Printable) {
 
 processPrintable(42)
 processPrintable("Hello")
-]]></blockcode><p>Rustと異なるのは、外部プロトコルを外部の型に実装可能である、という点です。ただし、外部ライブラリが将来的にこのプロトコルを実装した場合衝突するので、警告となります。</p><blockcode><![CDATA[main.swift:3:1: warning: extension declares a conformance of imported type'URL' to imported protocol 'Identifiable'; this will not behave correctly if the owners of 'Foundation' introduce this conformance in the future
+]]></blockcode><p>Rustと異なるのは、外部プロトコルを外部の型に実装可能である、という点です。ただし、外部ライブラリが将来的にこのプロトコルを実装した場合衝突するので、警告となります。</p><blockcode><![CDATA[main.swift:3:1: warning: extension declares a conformance of imported type 'URL' to imported protocol 'Identifiable'; this will not behave correctly if the owners of 'Foundation' introduce this conformance in the future
  1 | import Foundation
  2 | 
  3 | extension URL: Identifiable {
    | |- warning: extension declares a conformance of imported type 'URL' to imported protocol 'Identifiable'; this will not behave correctly if the owners of 'Foundation' introduce this conformance in the future
    | `- note: add '@retroactive' to silence this warning
  4 |     public var id: String {
- 5 |         self.absoluteString ]]></blockcode><h2>Scala</h2><p>ScalaはJVM言語では珍しく、インターフェースの後付けを行うことができます。</p><blockcode lang="scala"><![CDATA[trait Printable[T]:
+ 5 |         self.absoluteString]]></blockcode><h2>Scala</h2><p>ScalaはJVM言語では珍しく、インターフェースの後付けを行うことができます。</p><blockcode lang="scala"><![CDATA[trait Printable[T]:
   extension (x: T) def print(): Unit
 
 given Printable[Int] with
@@ -83,10 +83,10 @@ class Printable a where
   print :: a -> IO ()
 
 instance Printable Int where
-  print n = putStrLn ("Int: " ++ show n)
+  print x = putStrLn ("Int: " ++ show x)
 
 instance Printable String where
-  print s = putStrLn ("String: " ++ s)
+  print x = putStrLn ("String: " ++ x)
   
 processPrintable :: Printable a => a -> IO ()
 processPrintable printable = Main.print printable

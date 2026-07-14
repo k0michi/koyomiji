@@ -68,14 +68,14 @@ processPrintable("Hello")
 Rustと異なるのは、外部プロトコルを外部の型に実装可能である、という点です。ただし、外部ライブラリが将来的にこのプロトコルを実装した場合衝突するので、警告となります。
 
 ```
-main.swift:3:1: warning: extension declares a conformance of imported type'URL' to imported protocol 'Identifiable'; this will not behave correctly if the owners of 'Foundation' introduce this conformance in the future
+main.swift:3:1: warning: extension declares a conformance of imported type 'URL' to imported protocol 'Identifiable'; this will not behave correctly if the owners of 'Foundation' introduce this conformance in the future
  1 | import Foundation
  2 | 
  3 | extension URL: Identifiable {
    | |- warning: extension declares a conformance of imported type 'URL' to imported protocol 'Identifiable'; this will not behave correctly if the owners of 'Foundation' introduce this conformance in the future
    | `- note: add '@retroactive' to silence this warning
  4 |     public var id: String {
- 5 |         self.absoluteString 
+ 5 |         self.absoluteString
 ```
 
 ## Scala
@@ -115,10 +115,10 @@ class Printable a where
   print :: a -> IO ()
 
 instance Printable Int where
-  print n = putStrLn ("Int: " ++ show n)
+  print x = putStrLn ("Int: " ++ show x)
 
 instance Printable String where
-  print s = putStrLn ("String: " ++ s)
+  print x = putStrLn ("String: " ++ x)
   
 processPrintable :: Printable a => a -> IO ()
 processPrintable printable = Main.print printable
