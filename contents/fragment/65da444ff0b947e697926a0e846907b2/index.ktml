@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>CSES Problem Set - Distinct Numbers</title>
+  <id>5a8794f7-bd7a-4a63-845f-77b769f9b2cf</id>
+  <created>2026-08-23T01:50:11+09:00</created>
+  <modified>2026-08-23T01:50:11+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>問題</p><ul><li><p><a ref="https://cses.fi/problemset/task/1621">https://cses.fi/problemset/task/1621</a></p></li></ul></li><li><p>単純に<code><![CDATA[unordered_set]]></code>で集計したらTLEした</p></li><li><p>調べてみると、テストケースがハッシュ衝突するように細工されているらしい</p><ul><li><p><code><![CDATA[unordered_set]]></code>は衝突すると挿入が<math><![CDATA[O(n)]]></math>に近づく</p></li></ul></li><li><p>ハッシュ関数を実行時ランダム+Splitmix64に変えたらACできた</p></li></ul><blockcode lang="cpp"><![CDATA[struct Splitmix64 {
+  static uint64_t splitmix64(uint64_t x) {
+    x += 0x9e3779b97f4a7c15;
+    x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
+    x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
+    return x ^ (x >> 31);
+  }
+
+  size_t operator()(uint64_t x) const {
+    static const uint64_t FIXED_RANDOM =
+        std::chrono::steady_clock::now().time_since_epoch().count();
+    return splitmix64(x + FIXED_RANDOM);
+  }
+};
+
+void answer() {
+  llong n;
+  read(n);
+  std::unordered_set<llong, Splitmix64> x;
+
+  for (llong i = 0; i < n; i++) {
+    llong x_i;
+    read(x_i);
+    x.insert(x_i);
+  }
+
+  writeln(x.size());
+}]]></blockcode><h2>参考</h2><ul><li><p><a ref="https://codeforces.com/blog/entry/62393">Blowing up unordered_map, and how to stop getting hacked on it - Codeforces</a></p></li></ul>
+</body>
+
+</ktml>
