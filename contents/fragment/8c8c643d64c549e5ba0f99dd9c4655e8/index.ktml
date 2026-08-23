@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>CSES Problem Set - Missing Coin Sum</title>
+  <id>44b422ad-5a26-471d-8d9e-41d5ea282428</id>
+  <created>2026-08-23T11:12:05+09:00</created>
+  <modified>2026-08-23T11:12:05+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>問題</p><ul><li><p><a ref="https://cses.fi/problemset/task/2183/">https://cses.fi/problemset/task/2183/</a></p></li></ul></li><li><p>考察</p><ul><li><p>コインの部分集合で作れる範囲が、不連続になる状況を漸化式的に考える</p></li><li><p><math><![CDATA[x]]></math>の最小値が2以上なら明らかに答えは1となる</p></li><li><p><math><![CDATA[x]]></math>の最小値が1の場合を考える</p><ul><li><p>コインのmultiset <math><![CDATA[\{1\}]]></math>に対して、コインの部分集合で作れる範囲は<math><![CDATA[[1,2)]]></math>である</p></li><li><p>1の次に小さいコインを考える</p><ul><li><p><math><![CDATA[\{1,1\}]]></math>に対して可能な範囲は<math><![CDATA[[1,3)]]></math></p></li><li><p><math><![CDATA[\{1,2\}]]></math>に対して可能な範囲は<math><![CDATA[[1,4)]]></math></p></li><li><p>しかし<math><![CDATA[\{1,3\}]]></math>に対しては範囲が不連続となる。答えは2である</p></li></ul></li><li><p>一般に、<math><![CDATA[x]]></math>をソートし、<math><![CDATA[x_1,\dots,x_k]]></math>でちょうど<math><![CDATA[[1,max+1)]]></math>が作れる時に、<math><![CDATA[x_{k+1}>max+1]]></math>ならば、<math><![CDATA[max+1]]></math>は作ることができない最小の整数となる</p></li></ul></li></ul></li></ul><blockcode lang="cpp"><![CDATA[void answer() {
+  llong n;
+  read(n);
+  std::vector<llong> x(n);
+  read(x);
+
+  std::sort(x.begin(), x.end());
+
+  llong max = 0;
+  for (llong i = 0; i < n; i++) {
+    if (x[i] > max + 1) {
+      writeln(max + 1);
+      return;
+    }
+
+    max = max + x[i];
+  }
+
+  writeln(max + 1);
+}]]></blockcode>
+</body>
+
+</ktml>
