@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>C++20で加算・乗算オーバーフローチェック</title>
+  <id>d092cb64-f342-4bd0-bf79-1b8e240a1ff7</id>
+  <created>2026-09-01T15:17:17+09:00</created>
+  <modified>2026-09-01T15:17:17+09:00</modified>
+</head>
+
+<body>
+  <ul><li><p>LeetCodeの<a ref="https://leetcode.com/problems/reverse-integer/description/">7. Reverse Integer</a>をC++で解こうとしたらハマったのでメモ</p></li><li><p>この問題では加算・乗算がオーバーフローして<code><![CDATA[int32_t]]></code>に収まらないならば<code><![CDATA[0]]></code>を返す必要がある</p><ul><li><p>64ビットを使えば簡単だが、使わずにやるのが問題の趣旨</p></li></ul></li><li><p>Rustなら、オーバーフローを考慮した演算を行うライブラリが揃っており、これだけでOK:</p><blockcode lang="rust"><![CDATA[impl Solution {
+    pub fn reverse(mut x: i32) -> i32 {
+        let mut r: i32 = 0;
+
+        while (x != 0) {
+            match r.checked_mul(10).and_then(|v| v.checked_add(x % 10)) {
+                Some(v) => r = v,
+                None => return 0,
+            }
+            x /= 10;
+        }
+        
+        r
+    }
+}]]></blockcode></li><li><p>しかしC++には加算・乗算オーバーフローをチェックする標準ライブラリが用意されていないため、この判定を自作する必要がある</p></li><li><p>注意点として、C++17以前では整数が2の補数表現であることが仕様で保証されていない。今回はC++20を対象としており、2の補数表現である前提</p></li><li><p>Rustの<code><![CDATA[overflowing_add]]></code>, <code><![CDATA[overflowing_mul]]></code>のC++20版をGemini/Codexで実装。ついでに<code><![CDATA[signed]]></code>, <code><![CDATA[unsigned]]></code>混合の演算にも対応</p><ul><li><p><code><![CDATA[overflowingAdd]]></code>: Rust同様、ラップした加算結果と、加算オーバーフローの有無を<code><![CDATA[pair]]></code>で返す。<code><![CDATA[left]]></code>と<code><![CDATA[right]]></code>を<code><![CDATA[unsigned]]></code>経由で加算する。加算結果と<code><![CDATA[left]]></code>の差の正負が、<code><![CDATA[right]]></code>と一致していないならオーバーフローしていると判定する</p></li><li><p><code><![CDATA[overflowingMul]]></code>: ラップした乗算結果と、乗算オーバーフローの有無を<code><![CDATA[pair]]></code>で返す。<code><![CDATA[max()]]></code>を<code><![CDATA[right]]></code>で割って、乗算結果が最大値を超えるならオーバーフローと判定する</p><ul><li><p>割り算があるので、頻繁に呼ぶと定数倍で遅くなる可能性があることに注意</p></li><li><p><code><![CDATA[absDiff]]></code>: Rustの<code><![CDATA[abs_diff]]></code>の移植。<code><![CDATA[unsigned]]></code>で結果を返す<code><![CDATA[abs]]></code>。オーバーフローは起きない</p></li></ul></li></ul><blockcode lang="cpp"><![CDATA[template <std::integral T>
+  requires(!std::same_as<std::remove_cv_t<T>, bool>)
+[[nodiscard]] constexpr std::make_unsigned_t<T> absDiff(T left,
+                                                        T right) noexcept {
+  using U = std::make_unsigned_t<T>;
+  U leftBits = static_cast<U>(left);
+  U rightBits = static_cast<U>(right);
+  return left < right ? rightBits - leftBits : leftBits - rightBits;
+}
+
+template <std::integral T, std::integral U>
+  requires(!std::same_as<std::remove_cv_t<T>, bool> &&
+          !std::same_as<std::remove_cv_t<U>, bool> &&
+          (std::same_as<T, U> || std::same_as<U, std::make_unsigned_t<T>> ||
+            std::same_as<U, std::make_signed_t<T>>))
+[[nodiscard]] constexpr std::pair<T, bool> overflowingAdd(T left,
+                                                          U right) noexcept {
+  using Unsigned = std::make_unsigned_t<T>;
+  const Unsigned bits =
+      static_cast<Unsigned>(left) + static_cast<Unsigned>(right);
+  const T result = static_cast<T>(bits);
+  const bool isNegative = std::is_signed_v<U> && right < 0;
+  return {result, (result < left) != isNegative};
+}
+
+template <std::integral T, std::integral U>
+  requires(!std::same_as<std::remove_cv_t<T>, bool> &&
+          !std::same_as<std::remove_cv_t<U>, bool> &&
+          (std::same_as<T, U> || std::same_as<U, std::make_unsigned_t<T>> ||
+            std::same_as<U, std::make_signed_t<T>>))
+[[nodiscard]] constexpr std::pair<T, bool> overflowingMul(T left,
+                                                          U right) noexcept {
+  using Unsigned = std::make_unsigned_t<T>;
+  Unsigned bits =
+      static_cast<Unsigned>(left) * static_cast<Unsigned>(right);
+  T result = static_cast<T>(bits);
+  if constexpr (std::unsigned_integral<T> && std::unsigned_integral<U>) {
+    return {result,
+            right != 0 && left > std::numeric_limits<T>::max() / right};
+  } else {
+    Unsigned leftMagnitude = absDiff(left, T{});
+    Unsigned rightMagnitude = absDiff(right, U{});
+    if (leftMagnitude == 0 || rightMagnitude == 0) {
+      return {result, false};
+    }
+    bool leftNegative = std::is_signed_v<T> && left < 0;
+    bool rightNegative = std::is_signed_v<U> && right < 0;
+    bool negative = leftNegative != rightNegative;
+    if constexpr (std::unsigned_integral<T>) {
+      if (negative) {
+        return {result, true};
+      }
+      return {result,
+              leftMagnitude >
+                  std::numeric_limits<T>::max() / rightMagnitude};
+    } else {
+      Unsigned limit = static_cast<Unsigned>(std::numeric_limits<T>::max()) +
+                      Unsigned{negative};
+      return {result, leftMagnitude > limit / rightMagnitude};
+    }
+  }
+}
+
+class Solution {
+public:
+    int reverse(int x) {
+        int r = 0;
+
+        while (x != 0) {
+            auto res = overflowingMul(r, 10);
+
+            if (res.second) {
+                return 0;
+            }
+
+            res = overflowingAdd(res.first, x % 10);
+
+            if (res.second) {
+                return 0;
+            }
+
+            r = res.first;
+            x /= 10;
+        }
+
+        return r;
+    }
+};]]></blockcode></li></ul>
+</body>
+
+</ktml>
