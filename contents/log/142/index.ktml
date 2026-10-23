@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ktml version="0.1">
+
+<head>
+  <title>SwiftのEmscriptenサポートを試す</title>
+  <id>312524ba-f890-480c-8fbe-9564f415e283</id>
+  <created>2026-10-23T22:04:04+09:00</created>
+  <modified>2026-10-23T22:04:04+09:00</modified>
+</head>
+
+<body>
+  <p>Swiftでは今年に入ってから、<a ref="https://github.com/MaxDesiatov">@MaxDesiatov</a>氏による一連のEmscripten対応PRがマージされている。Swiftコンパイラのビルドが重たく試せていなかったが、Swift+EmscriptenでHello Worldできることがわかったので、その手順をまとめておく。</p><h2>環境</h2><ul><li><p>macOS 26.4.1</p></li><li><p>Swift <code><![CDATA[351cec786dcd1138616635b9000a0ef37c4f5101]]></code></p></li><li><p>Homebrew 7.0.10-65-g786fc9e</p></li></ul><h2>Swiftをビルドする</h2><p>Swiftには<a ref="https://www.swift.org/documentation/articles/wasm-getting-started.html">Swift SDK for WebAssembly</a>が存在するが、これにはEmscriptenターゲットが含まれていないようなので、自分でビルドする。</p><p>Emscriptenターゲットのみビルドすることも可能なようだが、Swiftのバージョンと合わせたいので今回はSwiftごとビルドする。</p><p>ビルド方法は、基本的には公式のドキュメントに従う:</p><ul><li><p><a ref="https://github.com/swiftlang/swift/blob/main/docs/HowToGuides/GettingStarted.md">GettingStarted.md</a></p></li><li><p><a ref="https://github.com/swiftlang/swift/blob/main/docs/WebAssembly.md">WebAssembly.md</a></p></li></ul><p>リポジトリをクローンする:</p><blockcode><![CDATA[% git clone https://github.com/swiftlang/swift
+% cd swift
+% utils/update-checkout --clone]]></blockcode><p>Python 3、Ninja、Emscriptenが入っていることを確認する。sccacheはオプショナルであるが、今回は使用するという前提:</p><blockcode><![CDATA[% python3 --version
+Python 3.11.9
+% ninja --version
+1.12.1
+% sccache --version
+sccache 0.16.0
+% emcc --version
+emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 6.0.13-git
+Copyright (C) 2026 the Emscripten authors (see AUTHORS.txt)
+This is free and open source software under the MIT license.
+There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.]]></blockcode><p>Emscripten対応でビルドするには、<code><![CDATA[--build-emscripten-stdlib]]></code>をつけてビルドする。<code><![CDATA[--emscripten-path]]></code>で、Emscriptenのパスを指定する:</p><blockcode><![CDATA[% utils/build-script \
+  --swift-darwin-supported-archs "$(uname -m)" \
+  --release-debuginfo \
+  --swift-disable-dead-stripping \
+  --sccache \
+  --build-emscripten-stdlib \
+  --emscripten-path "$(brew --prefix emscripten)/libexec" \
+  --skip-test-emscripten-stdlib \
+  --install-swift \
+  --install-llvm]]></blockcode><p>M1 Proで大体1時間くらいかかった。また、ソースコードと成果物あわせて100GBほどディスクを占有するので注意。</p><p>ビルドでハマった点:</p><ul><li><p>ビルドディレクトリのパスに、空白文字が含まれていると落ちる</p><ul><li><p>日本語も含まれていない方が無難</p></li></ul></li><li><p>Emscriptenのバージョンが古いと落ちる</p><ul><li><p>元々<code><![CDATA[4.0.8]]></code>を使っていた。ドキュメントでは<code><![CDATA[5.0.2]]></code>が使われているので、これより新しければ良さそう</p></li></ul></li></ul><h2>ブラウザ向けにビルドする</h2><p>ビルドしたバイナリを使って、Hello WorldプログラムをEmscripten向けにビルドする。</p><p>表記を簡略化するため、ビルドしたSwiftコンパイラのパスを環境変数に設定する:</p><blockcode><![CDATA[% export SWIFT_EXEC=.../build/Ninja-RelWithDebInfoAssert/toolchain-macosx-arm64/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc # ビルドしたSwiftコンパイラ
+% export SDK_BUNDLE=.../swift-sdk-generator/Bundles/swift-DEVELOPMENT-SNAPSHOT_wasm.artifactbundle # Swift Emscripten SDK
+% export SDK_STORE=... # SDKを保存するディレクトリ。今回は、ホスト側のSwiftと異なる場所に保存する。どこでも良い
+% export SDK_ID=swift-DEVELOPMENT-SNAPSHOT_wasm-emscripten]]></blockcode><p>まず、SDKをインストールする:</p><blockcode><![CDATA[% swift sdk install "$SDK_BUNDLE" --swift-sdks-path "$SDK_STORE"]]></blockcode><p><code><![CDATA[swift-DEVELOPMENT-SNAPSHOT_wasm-emscripten]]></code>が認識されていることを確認する:</p><blockcode><![CDATA[% swift sdk list --swift-sdks-path "$SDK_STORE"
+swift-DEVELOPMENT-SNAPSHOT_wasm-emscripten
+swift-DEVELOPMENT-SNAPSHOT_wasm-emscripten-embedded]]></blockcode><p>適当なプロジェクトを初期化する:</p><blockcode><![CDATA[% mkdir swift-emscripten
+% cd swift-emscripten
+% swift package init --type executable]]></blockcode><p><code><![CDATA[Sources/main.swift]]></code>はこうなっているはず:</p><blockcode lang="swift"><![CDATA[// The Swift Programming Language
+// https://docs.swift.org/swift-book
+
+@main
+struct swift_emscripten {
+    static func main() {
+        print("Hello, world!")
+    }
+}]]></blockcode><p>SDKを指定して、このままビルドしてみる:</p><blockcode><![CDATA[% swift build \
+  --swift-sdks-path "$SDK_STORE" \
+  --swift-sdk "$SDK_ID" \
+  -Xswiftc -Xlinker-driver \
+  -Xswiftc=-sDEFAULT_TO_CXX=1 \
+  -v]]></blockcode><p>何事もなければ、<code><![CDATA[.wasm]]></code>形式で出力される。が、このままだと実行できない:</p><blockcode><![CDATA[% ls ./.build/wasm32-unknown-emscripten/debug 
+ModuleCache                                     swift-emscripten.wasm                           swift_emscriptenPackageTests.build
+description.json                                swift-version-6AC4106290256C38.txt              swift_emscriptenTests.build
+index                                           swift_emscripten.build
+swift-emscripten.product                        swift_emscriptenPackageDiscoveredTests.build]]></blockcode><p>Emscripten自体は、実行可能な<code><![CDATA[.js]]></code>、<code><![CDATA[.html]]></code>の生成に対応しているものの、<code><![CDATA[swift]]></code>コマンド経由ではこれらはおそらく使用できない。そこで、先ほどの<code><![CDATA[swift -v]]></code>が出力した<code><![CDATA[swiftc]]></code>の呼び出しを改変し、<code><![CDATA[-o]]></code>を<code><![CDATA[.html]]></code>に差し替えて、HTMLを生成する。先ほどの<code><![CDATA[swift]]></code>コマンドのビルド成果物があることが前提である。</p><p>実際のコマンドはSwiftのバージョンによって変化する可能性があるので、<code><![CDATA[swift -v]]></code>の出力結果を元に書き換えることを推奨。</p><blockcode><![CDATA[% export BUILD_DIR=.../.build/wasm32-unknown-emscripten/debug
+% export EMSDK_ROOT="$SDK_STORE/swift-DEVELOPMENT-SNAPSHOT_wasm.artifactbundle/swift-DEVELOPMENT-SNAPSHOT_wasm-emscripten/wasm32-unknown-emscripten"
+% "$SWIFT_EXEC" \
+  -L "$BUILD_DIR" \
+  -o "$BUILD_DIR/swift-emscripten.html" \
+  -module-name swift_emscripten \
+  -emit-executable \
+  -resource-dir "$EMSDK_ROOT/swift.xctoolchain/usr/lib/swift_static" \
+  -Xlinker-driver -sDEFAULT_TO_CXX=1 \
+  "$BUILD_DIR/swift_emscripten.build/main.swift.o" \
+  "$BUILD_DIR/swift_emscripten.build/swift_emscripten.swiftmodule.o" \
+  -target wasm32-unknown-emscripten \
+  -static-stdlib \
+  -tools-directory "$EMSDK_ROOT/swift.xctoolchain/usr/bin" \
+  -sdk "$EMSDK_ROOT/Emscripten.sdk" \
+  -v]]></blockcode><p>うまくいけば、<code><![CDATA[.html]]></code>が生成される:</p><blockcode><![CDATA[% ls ./.build/wasm32-unknown-emscripten/debug 
+ModuleCache                                     swift-emscripten.js                             swift_emscripten.build
+description.json                                swift-emscripten.product                        swift_emscriptenPackageDiscoveredTests.build
+index                                           swift-emscripten.wasm                           swift_emscriptenPackageTests.build
+swift-emscripten.html                           swift-version-6AC4106290256C38.txt              swift_emscriptenTests.build]]></blockcode><p><code><![CDATA[serve]]></code>等のサーバーを起動し、ブラウザで開くと、<code><![CDATA[Hello, world!]]></code>が表示されるはず。</p><img src="./emscripten.png"/><h2>参考</h2><ul><li><p><a ref="https://forums.swift.org/t/pitch-emscripten-target-support-for-swift/85310">[Pitch] Emscripten Target Support for Swift - Platform / Swift for WebAssembly - Swift Forums</a></p></li><li><p><a ref="https://github.com/swiftlang/swift/blob/main/docs/HowToGuides/GettingStarted.md">swift/docs/HowToGuides/GettingStarted.md at main · swiftlang/swift</a></p></li><li><p><a ref="https://github.com/swiftlang/swift/blob/main/docs/WebAssembly.md">swift/docs/WebAssembly.md at main · swiftlang/swift</a></p></li><li><p><a ref="https://github.com/emscripten-core/emscripten/pull/27469">Disable C++ linking (DEFAULT_TO_CXX) by default by sbc100 · Pull Request #27469 · emscripten-core/emscripten</a></p></li></ul>
+</body>
+
+</ktml>
