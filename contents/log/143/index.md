@@ -1,0 +1,73 @@
+# Swiftでブラウザゲームを作る
+
+以前、SwiftをEmscripten ABIでビルドしてブラウザ上で実行できることを確かめました。
+
+つまりこれは、Emscriptenで書かれたSDLなどのC/C++ライブラリをブラウザ上で呼べることを意味しています。そこで、SwiftでC/C++ライブラリを活用してブラウザゲームを作れる可能性について模索してみました。
+
+## できたもの
+
+Claude Codeを使って、SwiftでPongゲームなどのシンプルなゲームをいくつか試作してみました。
+
+![](./Screenshot%202026-11-01%20at%2022-21-46%20pong.png)
+
+ブラウザ（Emscripten）と、ネイティブ（macOS/Windows/Linux）対応です。
+
+![](./Screenshot%202026-11-01%20at%2022.28.58.png)
+
+WebGPU対応ブラウザであれば、ここで遊べます:
+
+- [https://k0michi.github.io/swift-game/pong/](https://k0michi.github.io/swift-game/pong/)
+
+## 技術スタック
+
+まず、ウィンドウ作成や入力についてはSDL3を薄くラッパーを使用しています。
+
+```swift
+let system = try `init`(flags: [.audio, .video])
+let window = try createWindow(
+    title: "pong", w: Int32(fieldSize.x), h: Int32(fieldSize.y),
+    flags: platformWindowFlags([.highPixelDensity]))
+try hideCursor()
+```
+
+グラフィックスにはWebGPUを使います。Swiftyな薄いラッパーを作ってあります。ブラウザではemdawnwebgpu、ネイティブではDawnが使われるようになっています。
+
+```swift
+let instance = try createInstance()
+let surface = try instance.createSurface(from: window)
+let adapter = try await instance.requestAdapter(options: platformAdapterOptions())
+let device = try await adapter.requestDevice()
+```
+
+オーディオについてはWeb Audioを使います。ブラウザではブラウザ側のWeb Audioを呼び出し、ネイティブではEchoという自前のWeb Audio実装が呼び出されるようになっています。
+
+```swift
+static func beep(_ frequency: Float, length: Double = 0.08, on audio: AudioContext, to output: AudioNode) throws {
+    guard audio.state == .running else { return }
+    let now = audio.currentTime
+    let oscillator = audio.createOscillator()
+    try oscillator.setType(.square)
+    oscillator.frequency.value = frequency
+    try oscillator.connect(audio.createEnvelope(at: now, peak: 0.15, decayEnd: length)).connect(output)
+    try oscillator.start(now)
+    try oscillator.stop(now + length)
+}
+```
+
+全体として、独自の抽象レイヤーを作らないようにしています。最近はWeb標準でグラフィックス・オーディオ共にAPIが綺麗に整備されているため、独自の抽象レイヤーを作ったりせずにWeb標準に沿って作るのが一番壊れにくく、移植性も高いのではないかと思っています。
+
+## なぜSwift？
+
+私が初めてSwiftに触れたのは、2016年、つまりSwift 2.xの時代でした。OS X El CapitanのPlaygroundでSwiftに入門したことを覚えています。あの頃のSwiftは、まだObjective-Cの雰囲気がかなり色濃く、またクロスプラットフォーム対応も成熟していませんでした。
+
+しかし時代は変わりました。SwiftはもはやAppleエコシステムだけのものではありません。今のSwiftは、LinuxでもWindowsでもブラウザでも動きます。
+
+言語自体も大幅に強化されています。アクターモデルによる構造的並行と、データ競合安全性は特に特筆すべきSwiftの強力な言語機能です。高い表現力を持ちながら、メモリのフットプリントが少なく、メモリ安全性が高く、高速。それがSwiftの魅力です。
+
+そんなSwiftをゲーム開発に使う、というのは私にとっての理想に近いです。
+
+まず、GCによるstop-the-worldがないというのはとても魅力的です。ゲーム開発において、C++やRustが好まれているのは、GCがないことが一つの理由と考えられますが、Swiftもこれらの言語と同様にGCがありません。stop-the-worldによるフレームドロップが発生することはありません。
+
+値セマンティクスと構造体。ゲーム開発では、特にGPUに近いプログラミングをする場合に、構造体をそのままGPUメモリに転送する、という場合があります。Swiftの構造体は、このニーズをちょうど満たす言語機能です。Swiftの構造体がこれほどまでにゲーム開発向きなのはおそらく、Swiftと同時期に誕生したMetalの存在が大きいのでしょう。
+
+C/C++呼び出し。Swiftコンパイラはclangを内蔵しており、C/C++の資産をある程度そのまま呼び出しできます。型についても自動的にSwift側で対応するものに置き換わって見えるため、型チェックもちゃんと行われます。車輪の再発明を避けるという意味で、これは非常に素晴らしい機能です。これのおかげで、SDLやDawnなどといったライブラリ資産をそのまま呼び出してゲームを作れてしまいます。ただ、C/C++ライブラリのメモリ安全性に関しては、もちろんSwift側でうまく担保する必要が生じてきますが。
