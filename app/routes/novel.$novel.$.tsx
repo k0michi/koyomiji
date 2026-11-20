@@ -58,14 +58,14 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
   return await ServerModel.instance.getEntry(path);
 }
 
-export const meta = ({ location, data }: Route.MetaArgs) => {
-  return data ? getMeta({
+export const meta = ({ location, loaderData }: Route.MetaArgs) => {
+  return loaderData ? getMeta({
     location,
-    title: data.title,
-    description: data.description,
+    title: loaderData.title,
+    description: loaderData.description,
     type: 'article',
-    published: data.created,
-    modified: data.modified,
+    published: loaderData.created,
+    modified: loaderData.modified,
   }) : [];
 };
 

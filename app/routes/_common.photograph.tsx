@@ -9,7 +9,7 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
   return { entries: index };
 }
 
-export const meta = ({ location, data }: Route.MetaArgs) => getMeta({
+export const meta = ({ location, loaderData }: Route.MetaArgs) => getMeta({
   location,
   title: "Photographs",
   description: "スナップ写真など。"

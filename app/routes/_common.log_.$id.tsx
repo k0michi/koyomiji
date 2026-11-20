@@ -10,13 +10,13 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
   return await ServerModel.instance.getEntry(`/log/${params.id}`);
 }
 
-export const meta = ({ location, data }: Route.MetaArgs) => data ? getMeta({
+export const meta = ({ location, loaderData }: Route.MetaArgs) => loaderData ? getMeta({
   location,
-  title: data.title,
-  description: data.description,
+  title: loaderData.title,
+  description: loaderData.description,
   type: 'article',
-  published: data.created,
-  modified: data.modified,
+  published: loaderData.created,
+  modified: loaderData.modified,
 }) : [];
 
 export default function LogPage() {

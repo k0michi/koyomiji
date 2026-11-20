@@ -16,7 +16,7 @@ function getID(p: Entry) {
   return p.path.split('/')[2];
 }
 
-export const meta = ({ location, data }: Route.MetaArgs) => getMeta({
+export const meta = ({ location, loaderData }: Route.MetaArgs) => getMeta({
   location,
   title: "Fragments",
   description: "とりあえず書いただけのメモ書き。",
