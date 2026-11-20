@@ -1,5 +1,5 @@
 import PathHelper from "../lib/PathHelper";
-import { describe, expect, test } from '@jest/globals';
+import { describe, expect, test } from 'vitest';
 
 describe('PathHelper', () => {
   test('isPrefixedWithSlash', () => {

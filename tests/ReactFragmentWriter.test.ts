@@ -1,4 +1,4 @@
-import { describe, expect, test } from '@jest/globals';
+import { describe, expect, test } from 'vitest';
 import ReactFragmentWriter from '../lib/visitor/ReactFragmentWriter';
 import ReactNodeWriter from '../lib/visitor/ReactNodeWriter';
 import { ReactNode } from 'react';

@@ -1,4 +1,4 @@
-import { describe, expect, test } from '@jest/globals';
+import { describe, expect, test } from 'vitest';
 import XMLFragmentReader from '../lib/visitor/XMLFragmentReader';
 import XMLFragmentWriter from '../lib/visitor/XMLFragmentWriter';
 import XMLFragmentParser from '../lib/visitor/XMLFragmentParser';

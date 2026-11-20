@@ -1,4 +1,4 @@
-import { describe, expect, test } from '@jest/globals';
+import { describe, expect, test } from 'vitest';
 import XMLFragmentParser from '../lib/visitor/XMLFragmentParser';
 import XMLFragmentSerializer from '../lib/visitor/XMLFragmentSerializer';
 

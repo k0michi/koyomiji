@@ -1,4 +1,4 @@
-import { describe, expect, test } from '@jest/globals';
+import { describe, expect, test } from 'vitest';
 import { JSONValue } from '../lib/visitor/JSON.index';
 import JSONReader from '../lib/visitor/JSONReader';
 import JSONWriter from '../lib/visitor/JSONWriter';
