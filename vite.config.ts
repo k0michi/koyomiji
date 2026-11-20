@@ -1,14 +1,15 @@
 import { reactRouter } from "@react-router/dev/vite";
-import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig, Plugin } from "vite";
 import koyomijiReload from "./plugins/koyomiji-reload";
 
 export default defineConfig({
   plugins: [
     reactRouter(),
-    tsconfigPaths(),
     koyomijiReload()
   ],
+  resolve: {
+    tsconfigPaths: true,
+  },
   server: {
     port: 5432
   }
